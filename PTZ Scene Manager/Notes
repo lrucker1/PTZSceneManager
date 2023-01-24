@@ -1,0 +1,24 @@
+
+https://help.ptzoptics.com/support/solutions/articles/13000066852-ptzoptics-control-and-live-preview-for-android-devices
+
+https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-rtsp-feed-of-a-ptzoptics-camera
+
+ rtsp://[ipaddress]:554/1
+ - option to have the video zoom out to a bigger window, kind of like the Home app
+ 
+Put the green button lock on the other side, by the green button.
+ - can only have one titleaccessory, maybe move the camera image down or have some fun with window icons. Or title-toolbar.
+ 
+ Add the prefs from the other app.
+ 
+ Import settings.ini and transfer to not using their data.
+  - export our data as settings.ini?
+ 
+ Sandbox?
+
+"Set Home" menu item with confirmation. It's scene 0.
+
+Focus and preset recall speed.
+Click twice trick for the editable labels. If Finder can do it so can I.
+
+Make the CameraState all instant-apply.

@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PSMSceneWindowController">
+            <connections>
+                <outlet property="collectionView" destination="6Fy-kw-0Au" id="00C-K8-HzR"/>
+                <outlet property="rtspViewController" destination="ce5-QP-mKm" id="wQM-nt-8Aw"/>
+                <outlet property="titlebarViewController" destination="kQT-rJ-uFB" id="eSb-f0-fy2"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="510" height="330"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="510" height="330"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-r8-LRb">
+                        <rect key="frame" x="10" y="20" width="490" height="160"/>
+                        <clipView key="contentView" id="O1a-J2-dIf">
+                            <rect key="frame" x="1" y="1" width="488" height="158"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <collectionView id="6Fy-kw-0Au">
+                                    <rect key="frame" x="0.0" y="0.0" width="488" height="158"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="5" maximumNumberOfColumns="3" id="kp8-LB-dax">
+                                        <size key="minimumItemSize" width="75" height="75"/>
+                                        <size key="maximumItemSize" width="400" height="300"/>
+                                    </collectionViewGridLayout>
+                                    <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-2" id="i45-vH-UZ4"/>
+                                        <outlet property="delegate" destination="-2" id="YEl-BS-JUv"/>
+                                    </connections>
+                                </collectionView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Bob-Tk-32f">
+                            <rect key="frame" x="-100" y="-100" width="233" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="9th-OK-gf7">
+                            <rect key="frame" x="234" y="1" width="15" height="143"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hfs-ZN-q2C">
+                        <rect key="frame" x="315" y="216" width="178" height="97"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="91" id="DIh-gG-s60"/>
+                            <constraint firstAttribute="width" constant="172" id="Gx7-nG-g2N"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="groove" id="2vU-1k-Gfv"/>
+                    </imageView>
+                    <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
+                        <rect key="frame" x="427" y="187" width="69" height="27"/>
+                        <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Cj-ON-NQ9">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <color key="bezelColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                        <connections>
+                            <binding destination="-2" name="enabled" keyPath="lastRecalledItem" id="5hG-dP-tbZ">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSIsNotNil</string>
+                                </dictionary>
+                            </binding>
+                            <binding destination="-2" name="title" keyPath="lastRecalledItem.buttonTitle" id="buC-Ft-1PK"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rN6-cr-0it">
+                        <rect key="frame" x="316" y="195" width="111" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" priority="750" constant="107" id="bAv-aJ-kai"/>
+                            <constraint firstAttribute="height" constant="16" id="eB4-6f-Hlu"/>
+                        </constraints>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="6cc-cg-cwR">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="lastRecalledItem.sceneName" id="QZD-Wl-gPM"/>
+                        </connections>
+                    </textField>
+                    <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-8a-7PM" userLabel="PanTilt Grid View">
+                        <rect key="frame" x="20" y="215" width="100" height="100"/>
+                        <rows>
+                            <gridRow id="ycb-Z8-gEC"/>
+                            <gridRow id="wmH-NH-T29"/>
+                            <gridRow id="p9K-ol-UUo"/>
+                            <gridRow id="0je-1p-PPu"/>
+                            <gridRow id="oDp-RY-tan"/>
+                        </rows>
+                        <columns>
+                            <gridColumn id="zqt-E8-w4S"/>
+                            <gridColumn id="xam-tK-zOO"/>
+                            <gridColumn id="a8A-c1-pBp"/>
+                            <gridColumn id="VnH-Mb-U4o"/>
+                            <gridColumn id="kTF-3M-NLQ"/>
+                        </columns>
+                        <gridCells>
+                            <gridCell row="ycb-Z8-gEC" column="zqt-E8-w4S" id="WaK-KV-aUx">
+                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0u5-3I-om5" userLabel="UpLeft+">
+                                    <rect key="frame" x="0.0" y="80" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="2RZ-0U-QpM"/>
+                                        <constraint firstAttribute="height" constant="20" id="Mhy-ZC-YoL"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xiD-6L-PwD">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="W37-2u-GXm"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="ycb-Z8-gEC" column="xam-tK-zOO" id="Mav-PQ-1Pf"/>
+                            <gridCell row="ycb-Z8-gEC" column="a8A-c1-pBp" id="ObC-rC-H6W">
+                                <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="2Hr-g4-Drg" userLabel="Up+ ">
+                                    <rect key="frame" x="40" y="80" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="dP4-ej-Jui"/>
+                                        <constraint firstAttribute="width" constant="20" id="eqq-oE-XMU"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Wgo-br-wBc">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="G9L-Hc-VWZ"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="ycb-Z8-gEC" column="VnH-Mb-U4o" id="BbC-4R-jtu"/>
+                            <gridCell row="ycb-Z8-gEC" column="kTF-3M-NLQ" id="48L-uq-nOB">
+                                <button key="contentView" verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="qJa-xH-8dG" userLabel="UpRight+">
+                                    <rect key="frame" x="80" y="80" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="GRj-Vh-GOL"/>
+                                        <constraint firstAttribute="width" constant="20" id="a6F-yW-jpE"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8jM-s2-TuN">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="nxf-3g-V1q"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="wmH-NH-T29" column="zqt-E8-w4S" id="WnR-Cu-m7r"/>
+                            <gridCell row="wmH-NH-T29" column="xam-tK-zOO" id="3Cn-mS-Z7P">
+                                <button key="contentView" verticalHuggingPriority="750" tag="11" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-q7-uEC" userLabel="UpLeft">
+                                    <rect key="frame" x="20" y="60" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="A5z-3R-v8G"/>
+                                        <constraint firstAttribute="height" constant="20" id="rQB-R5-lzs"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="iQu-x0-ZZR">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="yLR-BL-cNa"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="wmH-NH-T29" column="a8A-c1-pBp" id="6BN-bE-HE1">
+                                <button key="contentView" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-Bp-hW7" userLabel="Up">
+                                    <rect key="frame" x="40" y="60" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="PaV-0f-tDS"/>
+                                        <constraint firstAttribute="width" constant="20" id="Sur-GW-pXa"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oXL-7r-L3V">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="EYA-cH-uEh"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="wmH-NH-T29" column="VnH-Mb-U4o" id="hp1-kd-IOu">
+                                <button key="contentView" verticalHuggingPriority="750" tag="13" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-4q-GB3" userLabel="UpRight">
+                                    <rect key="frame" x="60" y="60" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="Pjv-st-il5"/>
+                                        <constraint firstAttribute="height" constant="20" id="dxU-FL-dec"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="43C-6Y-kst">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="Up4-yi-LsK"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="wmH-NH-T29" column="kTF-3M-NLQ" id="jEg-IA-rGr"/>
+                            <gridCell row="p9K-ol-UUo" column="zqt-E8-w4S" id="O5k-1W-Uwo">
+                                <button key="contentView" verticalHuggingPriority="750" tag="20" translatesAutoresizingMaskIntoConstraints="NO" id="v4s-hB-6Km" userLabel="Left+">
+                                    <rect key="frame" x="0.0" y="40" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="bCv-3R-tml"/>
+                                        <constraint firstAttribute="height" constant="20" id="gMz-vM-aPm"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.left" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="gas-ke-H7h">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="373-PP-OTr"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="p9K-ol-UUo" column="xam-tK-zOO" id="MzB-76-ZXt">
+                                <button key="contentView" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="tuK-2E-7TQ" userLabel="Left">
+                                    <rect key="frame" x="20" y="40" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="Vhy-jF-rTT"/>
+                                        <constraint firstAttribute="width" constant="20" id="aG9-fx-fZm"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.left" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5TH-YS-16p">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="lWy-r7-gi0"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="p9K-ol-UUo" column="a8A-c1-pBp" id="Zce-Pn-V9p">
+                                <button key="contentView" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="wwa-92-BzJ" userLabel="Home">
+                                    <rect key="frame" x="40" y="40" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="WnS-Is-GFa"/>
+                                        <constraint firstAttribute="height" constant="20" id="iPb-ft-o0J"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="house.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DwK-tq-CSI">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doHome:" target="-2" id="ige-Uj-Cad"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="p9K-ol-UUo" column="VnH-Mb-U4o" id="Yuu-5p-FwA">
+                                <button key="contentView" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vn4-IM-qVp" userLabel="Right">
+                                    <rect key="frame" x="60" y="40" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="8gp-Gz-DH3"/>
+                                        <constraint firstAttribute="height" constant="20" id="otF-3G-GuT"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.right" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tRx-lh-h8Y">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="GIx-p7-5Tp"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="p9K-ol-UUo" column="kTF-3M-NLQ" id="xvT-HH-PDj">
+                                <button key="contentView" verticalHuggingPriority="750" tag="24" translatesAutoresizingMaskIntoConstraints="NO" id="0xh-Tc-7zp" userLabel="Right+">
+                                    <rect key="frame" x="80" y="40" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="1L4-Ow-5sZ"/>
+                                        <constraint firstAttribute="width" constant="20" id="30r-XN-3el"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.right" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="1ME-48-eV1">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="xWD-in-czr"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="0je-1p-PPu" column="zqt-E8-w4S" id="QVP-lf-Jn1"/>
+                            <gridCell row="0je-1p-PPu" column="xam-tK-zOO" id="Iuh-xC-R9c">
+                                <button key="contentView" verticalHuggingPriority="750" tag="31" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-Fv-pvF" userLabel="DownLeft">
+                                    <rect key="frame" x="20" y="20" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="0Oh-3t-qKQ"/>
+                                        <constraint firstAttribute="width" constant="20" id="ctr-dq-sMq"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="yw0-BI-tLD">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="kCe-aX-03K"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="0je-1p-PPu" column="a8A-c1-pBp" id="1lG-RV-9Fa">
+                                <button key="contentView" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="Wbd-qI-fPh" userLabel="Down">
+                                    <rect key="frame" x="40" y="20" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="Gmb-OF-yxX"/>
+                                        <constraint firstAttribute="width" constant="20" id="feK-60-Mxi"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dee-VE-vdT">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="cDY-k6-Db4"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="0je-1p-PPu" column="VnH-Mb-U4o" id="0Wy-84-bXz">
+                                <button key="contentView" verticalHuggingPriority="750" tag="33" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-fA-Jhy" userLabel="DownRight">
+                                    <rect key="frame" x="60" y="20" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="bWO-sy-CxC"/>
+                                        <constraint firstAttribute="height" constant="20" id="tUU-yR-n9x"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8FO-09-J2b">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="regular"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="jV5-7Z-Jy2"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="0je-1p-PPu" column="kTF-3M-NLQ" id="Y1d-W8-GvG"/>
+                            <gridCell row="oDp-RY-tan" column="zqt-E8-w4S" id="aOf-0c-3x7">
+                                <button key="contentView" verticalHuggingPriority="750" tag="40" translatesAutoresizingMaskIntoConstraints="NO" id="GzQ-ea-se7" userLabel="DownLeft+">
+                                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="vgC-vg-5Hw"/>
+                                        <constraint firstAttribute="width" constant="20" id="yqb-Kl-zLA"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Q0p-sY-igT">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="ezN-zw-6tH"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="oDp-RY-tan" column="xam-tK-zOO" id="NXM-eu-wNE"/>
+                            <gridCell row="oDp-RY-tan" column="a8A-c1-pBp" id="T2b-fX-rUt">
+                                <button key="contentView" verticalHuggingPriority="750" tag="42" translatesAutoresizingMaskIntoConstraints="NO" id="B0q-re-CZV" userLabel="Down+">
+                                    <rect key="frame" x="40" y="0.0" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="YXe-ai-o6J"/>
+                                        <constraint firstAttribute="width" constant="20" id="uMl-q1-5ai"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="PhM-LX-K42">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="gxw-HV-aok"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="oDp-RY-tan" column="VnH-Mb-U4o" id="72b-cS-rZC"/>
+                            <gridCell row="oDp-RY-tan" column="kTF-3M-NLQ" id="4YK-7o-Kvr">
+                                <button key="contentView" verticalHuggingPriority="750" tag="44" translatesAutoresizingMaskIntoConstraints="NO" id="lK1-RF-hMz" userLabel="DownRight+">
+                                    <rect key="frame" x="80" y="0.0" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="ciS-Gw-GFH"/>
+                                        <constraint firstAttribute="height" constant="20" id="fqg-GT-kjP"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="PNk-aO-pJy">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doPanTilt:" target="-2" id="Rfq-zu-rQQ"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                        </gridCells>
+                    </gridView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pAy-1d-2xg">
+                        <rect key="frame" x="355" y="-5" width="112" height="29"/>
+                        <buttonCell key="cell" type="push" title="Reopen Camera" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vxy-QI-Mse">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="reopenCamera:" target="-2" id="KPk-9z-ep0"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Click to edit the scene names" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tek-7C-MDv">
+                        <rect key="frame" x="13" y="181" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="Nng-Oo-9Cb"/>
+                            <constraint firstAttribute="height" constant="14" id="XQz-k4-wiq"/>
+                            <constraint firstAttribute="width" constant="14" id="awv-Zk-4Rf"/>
+                        </constraints>
+                        <buttonCell key="cell" type="bevel" title="Edit Scene Names" bezelStyle="regularSquare" image="pencil.slash" imagePosition="left" alternateImage="pencil" catalog="system" state="on" inset="2" id="MP7-pV-BT5">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="-3" name="value" keyPath="delegate.canEditSceneNames" id="0sn-UN-0uT"/>
+                        </connections>
+                    </button>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="AKA-9N-UDC">
+                        <rect key="frame" x="469" y="3" width="28" height="16"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6o0-Tl-p0W" userLabel="Unreachable Camera Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusUnavailable" id="OpC-xE-ZYf"/>
+                                <connections>
+                                    <binding destination="-2" name="hidden" keyPath="prefCamera.camera.cameraOpen" id="ctV-kB-So5"/>
+                                </connections>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Taf-xD-kBh" userLabel="Reachable Camera Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PTZCameraIcon" id="Doi-BG-oHd"/>
+                                <connections>
+                                    <binding destination="-2" name="hidden" keyPath="prefCamera.camera.cameraOpen" id="xNF-YI-7wT">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="3HB-Cd-vkf"/>
+                            <constraint firstAttribute="height" constant="16" id="R8E-j8-RaB"/>
+                        </constraints>
+                    </customView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QWT-NU-HhO">
+                        <rect key="frame" x="144" y="208" width="112" height="27"/>
+                        <buttonCell key="cell" type="push" title="More Settings..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EjX-Ma-taS">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="showCameraStateWindow:" target="-2" id="pON-TX-Osg"/>
+                        </connections>
+                    </button>
+                    <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Cjf-Dk-7kG" userLabel="Focus Grid View">
+                        <rect key="frame" x="148" y="237" width="104" height="25"/>
+                        <rows>
+                            <gridRow id="p2K-0Y-eMb"/>
+                        </rows>
+                        <columns>
+                            <gridColumn id="ff1-tL-BFv"/>
+                            <gridColumn trailingPadding="4" id="xN1-nI-QNm"/>
+                            <gridColumn id="L5u-h0-QUg"/>
+                            <gridColumn id="LeB-UW-Zci"/>
+                        </columns>
+                        <gridCells>
+                            <gridCell row="p2K-0Y-eMb" column="ff1-tL-BFv" id="nkd-8N-9II">
+                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DmV-3n-FRW" userLabel="FocusFar+">
+                                    <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="BK1-Zc-gcd"/>
+                                        <constraint firstAttribute="width" constant="25" id="FQf-WI-CM2"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Z4h-9U-ePi">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doCameraFocus:" target="-2" id="eJb-g1-dXr"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="p2K-0Y-eMb" column="xN1-nI-QNm" id="5ZH-mU-V0H">
+                                <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="U6v-ud-aFP" userLabel="FocusFar">
+                                    <rect key="frame" x="25" y="0.0" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="IbM-43-IFG"/>
+                                        <constraint firstAttribute="height" constant="25" id="RxS-lh-yr3"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="ruN-Fu-54v">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="light"/>
+                                    <connections>
+                                        <action selector="doCameraFocus:" target="-2" id="RLZ-A2-nsO"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="p2K-0Y-eMb" column="L5u-h0-QUg" id="DY3-OS-AuE">
+                                <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="qFs-nZ-hPb" userLabel="FocusNear">
+                                    <rect key="frame" x="54" y="0.0" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="9bW-27-pNQ"/>
+                                        <constraint firstAttribute="height" constant="25" id="t6n-yi-7EM"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="t8G-io-sTv">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="light"/>
+                                    <connections>
+                                        <action selector="doCameraFocus:" target="-2" id="T4i-6X-LL9"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="p2K-0Y-eMb" column="LeB-UW-Zci" id="Jj0-b5-J6h">
+                                <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="2rc-fD-Pah" userLabel="FocusNear+">
+                                    <rect key="frame" x="79" y="0.0" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="LiD-ob-sdN"/>
+                                        <constraint firstAttribute="width" constant="25" id="WG0-sY-wpb"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="4ly-ha-mCV">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="black"/>
+                                    <connections>
+                                        <action selector="doCameraFocus:" target="-2" id="eVl-ue-01c"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                        </gridCells>
+                    </gridView>
+                    <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" id="qR6-cn-b6Q" userLabel="Zoom Grid View">
+                        <rect key="frame" x="148" y="284" width="104" height="31"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rows>
+                            <gridRow id="Bm6-YR-5xr"/>
+                        </rows>
+                        <columns>
+                            <gridColumn id="lRa-Gk-UAJ"/>
+                            <gridColumn trailingPadding="4" id="Vxw-hj-RBG"/>
+                            <gridColumn id="3DV-Fh-kOf"/>
+                            <gridColumn id="ILE-AB-LQ8"/>
+                        </columns>
+                        <gridCells>
+                            <gridCell row="Bm6-YR-5xr" column="lRa-Gk-UAJ" id="Qrp-3F-6a2">
+                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w0T-s3-fOU" userLabel="In+">
+                                    <rect key="frame" x="0.0" y="6" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="8s2-bd-mAu"/>
+                                        <constraint firstAttribute="height" constant="25" id="XJp-jh-lHC"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xT4-ut-VCl">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="semibold"/>
+                                    <connections>
+                                        <action selector="doCameraZoom:" target="-2" id="pTy-4h-Rac"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="Bm6-YR-5xr" column="Vxw-hj-RBG" id="6bZ-hh-42n">
+                                <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="edX-fE-kTZ" userLabel="In">
+                                    <rect key="frame" x="25" y="6" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="8aG-E0-ppF"/>
+                                        <constraint firstAttribute="height" constant="25" id="SMl-EM-gsG"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="SZP-Lo-YTm">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="light"/>
+                                    <connections>
+                                        <action selector="doCameraZoom:" target="-2" id="VkN-rj-zCs"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="Bm6-YR-5xr" column="3DV-Fh-kOf" id="u9N-RI-19k">
+                                <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="shl-bb-Bob" userLabel="Out">
+                                    <rect key="frame" x="54" y="6" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="8Pv-CI-HbO"/>
+                                        <constraint firstAttribute="height" constant="25" id="INE-9W-FUk"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="z5t-bd-pQz">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="light"/>
+                                    <connections>
+                                        <action selector="doCameraZoom:" target="-2" id="fHf-ML-ITg"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                            <gridCell row="Bm6-YR-5xr" column="ILE-AB-LQ8" id="wx6-W7-F8a">
+                                <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="p35-UC-80g" userLabel="Out+">
+                                    <rect key="frame" x="79" y="6" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="LUN-89-XPv"/>
+                                        <constraint firstAttribute="height" constant="25" id="sJm-EA-CRI"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="YWk-vn-fok">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <symbolConfiguration key="symbolConfiguration" weight="semibold"/>
+                                    <connections>
+                                        <action selector="doCameraZoom:" target="-2" id="Vwq-N1-L4x"/>
+                                    </connections>
+                                </button>
+                            </gridCell>
+                        </gridCells>
+                    </gridView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7zi-n2-SoF">
+                        <rect key="frame" x="147" y="265" width="75" height="16"/>
+                        <buttonCell key="cell" type="check" title="Autofocus" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="1BM-NG-3WF">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="doToggleAutofocus:" target="-2" id="fsU-eO-LRF"/>
+                            <binding destination="-2" name="value" keyPath="prefCamera.camera.autofocus" id="0Fm-rS-5XE"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="ERX-r8-LRb" secondAttribute="bottom" constant="20" symbolic="YES" id="1T4-Cu-Jvb"/>
+                    <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="150" id="1ck-ge-L64"/>
+                    <constraint firstItem="rN6-cr-0it" firstAttribute="top" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="8" symbolic="YES" id="1cl-9R-ZmJ"/>
+                    <constraint firstItem="rN6-cr-0it" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QWT-NU-HhO" secondAttribute="trailing" constant="8" symbolic="YES" id="6eM-Ak-lkX"/>
+                    <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="tek-7C-MDv" secondAttribute="bottom" constant="1" id="8JS-b1-H4d"/>
+                    <constraint firstItem="zuV-8a-7PM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="8Uh-7y-3ag"/>
+                    <constraint firstAttribute="bottom" secondItem="AKA-9N-UDC" secondAttribute="bottom" constant="3" id="8m0-hr-HeX"/>
+                    <constraint firstAttribute="trailing" secondItem="ERX-r8-LRb" secondAttribute="trailing" constant="10" id="AR3-Qb-PLn"/>
+                    <constraint firstItem="7zi-n2-SoF" firstAttribute="top" secondItem="qR6-cn-b6Q" secondAttribute="bottom" constant="4" id="Bgu-Zl-hjc"/>
+                    <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="Gb5-tw-Rl2"/>
+                    <constraint firstItem="QWT-NU-HhO" firstAttribute="bottom" secondItem="zuV-8a-7PM" secondAttribute="bottom" id="LEq-j3-Vz2"/>
+                    <constraint firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" constant="20" symbolic="YES" id="R6m-aC-sY9"/>
+                    <constraint firstItem="AKA-9N-UDC" firstAttribute="leading" secondItem="pAy-1d-2xg" secondAttribute="trailing" constant="8" symbolic="YES" id="Rln-ch-g7N"/>
+                    <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="SGN-0a-SZE"/>
+                    <constraint firstItem="ERX-r8-LRb" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="10" id="WcT-bQ-HoI"/>
+                    <constraint firstItem="QDe-sc-c7e" firstAttribute="leading" secondItem="rN6-cr-0it" secondAttribute="trailing" constant="8" symbolic="YES" id="b74-uQ-HnN"/>
+                    <constraint firstItem="qR6-cn-b6Q" firstAttribute="leading" secondItem="zuV-8a-7PM" secondAttribute="trailing" constant="28" id="bhT-Vf-6os"/>
+                    <constraint firstItem="QDe-sc-c7e" firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" id="c0T-JT-JGk"/>
+                    <constraint firstItem="pAy-1d-2xg" firstAttribute="top" secondItem="ERX-r8-LRb" secondAttribute="bottom" id="gtH-cS-BhJ"/>
+                    <constraint firstItem="QWT-NU-HhO" firstAttribute="top" secondItem="Cjf-Dk-7kG" secondAttribute="bottom" constant="6" id="hoe-Vl-sy7"/>
+                    <constraint firstItem="QDe-sc-c7e" firstAttribute="firstBaseline" secondItem="rN6-cr-0it" secondAttribute="firstBaseline" id="i76-v2-UfX"/>
+                    <constraint firstItem="7zi-n2-SoF" firstAttribute="leading" secondItem="qR6-cn-b6Q" secondAttribute="leading" id="imB-Uy-7mU"/>
+                    <constraint firstItem="rN6-cr-0it" firstAttribute="leading" secondItem="Hfs-ZN-q2C" secondAttribute="leading" id="lR3-KJ-3fD"/>
+                    <constraint firstAttribute="bottom" secondItem="pAy-1d-2xg" secondAttribute="bottom" constant="2" id="pT0-4o-P7t"/>
+                    <constraint firstItem="Cjf-Dk-7kG" firstAttribute="leading" secondItem="qR6-cn-b6Q" secondAttribute="leading" id="pfn-Kx-kSA"/>
+                    <constraint firstItem="zuV-8a-7PM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="15" id="q1s-6m-pwl"/>
+                    <constraint firstItem="Cjf-Dk-7kG" firstAttribute="top" secondItem="7zi-n2-SoF" secondAttribute="bottom" constant="4" id="sg9-Oh-Uds"/>
+                    <constraint firstItem="QWT-NU-HhO" firstAttribute="leading" secondItem="zuV-8a-7PM" secondAttribute="trailing" constant="30" id="uV0-QS-uDl"/>
+                    <constraint firstAttribute="trailing" secondItem="AKA-9N-UDC" secondAttribute="trailing" constant="13" id="vz9-2U-nHR"/>
+                    <constraint firstItem="tek-7C-MDv" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="yYU-v1-YcD"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="12" y="-79"/>
+        </window>
+        <userDefaultsController representsSharedInstance="YES" id="4em-rq-xSx"/>
+        <viewController id="ce5-QP-mKm" userLabel="RTSP View Controller" customClass="RTSPViewController">
+            <connections>
+                <outlet property="imageView" destination="Hfs-ZN-q2C" id="iZD-20-IM2"/>
+                <outlet property="view" destination="Hfs-ZN-q2C" id="GXJ-yE-G0q"/>
+            </connections>
+        </viewController>
+        <viewController id="kQT-rJ-uFB" userLabel="Titlebar View Controller" customClass="NSTitlebarAccessoryViewController">
+            <connections>
+                <outlet property="view" destination="DCg-Ed-6oH" id="6HE-u1-OUe"/>
+            </connections>
+        </viewController>
+        <customView id="DCg-Ed-6oH">
+            <rect key="frame" x="0.0" y="0.0" width="25" height="24"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button toolTip="Toggles locking the window to the current size" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b38-Fm-7NJ">
+                    <rect key="frame" x="3" y="3" width="18" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" alternateImage="lock.rectangle.on.rectangle.fill" catalog="system" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="wOm-ua-lQB">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <imageReference key="image" image="lock.rectangle.on.rectangle" catalog="system" symbolScale="default" variableValue="0.0"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleResizable:" target="-2" id="UKk-bZ-RZi"/>
+                    </connections>
+                </button>
+            </subviews>
+            <point key="canvasLocation" x="4.5" y="172"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSStatusUnavailable" width="16" height="16"/>
+        <image name="PTZCameraIcon" width="512" height="512"/>
+        <image name="arrow.down" catalog="system" width="13" height="14"/>
+        <image name="arrow.down.backward" catalog="system" width="13" height="12"/>
+        <image name="arrow.down.forward" catalog="system" width="13" height="12"/>
+        <image name="arrow.left" catalog="system" width="15" height="12"/>
+        <image name="arrow.right" catalog="system" width="15" height="12"/>
+        <image name="arrow.up" catalog="system" width="13" height="14"/>
+        <image name="arrow.up.backward" catalog="system" width="13" height="12"/>
+        <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
+        <image name="house.fill" catalog="system" width="19" height="16"/>
+        <image name="lock.rectangle.on.rectangle" catalog="system" width="19" height="15"/>
+        <image name="lock.rectangle.on.rectangle.fill" catalog="system" width="19" height="15"/>
+        <image name="minus" catalog="system" width="14" height="4"/>
+        <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="pencil" catalog="system" width="14" height="13"/>
+        <image name="pencil.slash" width="128" height="128"/>
+        <image name="plus" catalog="system" width="14" height="13"/>
+        <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
+    </resources>
+</document>

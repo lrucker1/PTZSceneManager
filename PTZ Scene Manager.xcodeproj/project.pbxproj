@@ -7,72 +7,270 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		94838D6B298099620094785A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94838D6A298099620094785A /* AppDelegate.m */; };
-		94838D6D298099630094785A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94838D6C298099630094785A /* Assets.xcassets */; };
-		94838D70298099630094785A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94838D6E298099630094785A /* MainMenu.xib */; };
-		94838D72298099630094785A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94838D71298099630094785A /* main.m */; };
+		946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */; };
+		946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */; };
+		946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */; };
+		946346C4297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346C2297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m */; };
+		946346CB297F5DE70015BA8F /* NSColorAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346C6297F5DE70015BA8F /* NSColorAdditions.m */; };
+		946346CC297F5DE70015BA8F /* NSWindowAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346C7297F5DE70015BA8F /* NSWindowAdditions.m */; };
+		946346CD297F5DE70015BA8F /* ColorTempSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346C8297F5DE70015BA8F /* ColorTempSliderCell.m */; };
+		946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346CF297F60740015BA8F /* PTZStarButtonCell.m */; };
+		9463826B29807D8E0015BA8F /* liblibRTSPClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463826A29807D8D0015BA8F /* liblibRTSPClient.a */; };
+		9463826E29807DF60015BA8F /* RTSPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9463826C29807DF60015BA8F /* RTSPViewController.m */; };
+		9463827729807F190015BA8F /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827029807F190015BA8F /* libavformat.a */; };
+		9463827829807F190015BA8F /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827129807F190015BA8F /* libavcodec.a */; };
+		9463827929807F1A0015BA8F /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827229807F190015BA8F /* libavfilter.a */; };
+		9463827A29807F1A0015BA8F /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827329807F190015BA8F /* libswresample.a */; };
+		9463827B29807F1A0015BA8F /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827429807F190015BA8F /* libswscale.a */; };
+		9463827C29807F1A0015BA8F /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827529807F190015BA8F /* libavutil.a */; };
+		9463827D29807F1A0015BA8F /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827629807F190015BA8F /* libavdevice.a */; };
+		9463828129807F360015BA8F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463828029807F360015BA8F /* libz.tbd */; };
+		9463828229807F360015BA8F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827F29807F360015BA8F /* libiconv.tbd */; };
+		9463828329807F360015BA8F /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827E29807F360015BA8F /* libbz2.tbd */; };
+		94747E22297B94F800309752 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E21297B94F800309752 /* AppDelegate.m */; };
+		94747E24297B94F900309752 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94747E23297B94F900309752 /* Assets.xcassets */; };
+		94747E27297B94F900309752 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94747E25297B94F900309752 /* MainMenu.xib */; };
+		94747E29297B94F900309752 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E28297B94F900309752 /* main.m */; };
+		94747E33297B951200309752 /* PSMSceneWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E31297B951200309752 /* PSMSceneWindowController.m */; };
+		94747E34297B951200309752 /* PSMSceneWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94747E32297B951200309752 /* PSMSceneWindowController.xib */; };
+		94747E5B297B96F900309752 /* PTZCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E59297B96F900309752 /* PTZCamera.m */; };
+		94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E5C297B970100309752 /* PTZCameraConfig.m */; };
+		94747E61297B971100309752 /* PTZProgressGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E60297B971100309752 /* PTZProgressGroup.m */; };
+		94747E72297B9C5F00309752 /* dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 94747E66297B9C5F00309752 /* dictionary.c */; };
+		94747E73297B9C5F00309752 /* PTZSettingsFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E68297B9C5F00309752 /* PTZSettingsFile.m */; };
+		94747E74297B9C5F00309752 /* iniparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 94747E69297B9C5F00309752 /* iniparser.c */; };
+		94747E75297B9C5F00309752 /* PTZIniParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E6A297B9C5F00309752 /* PTZIniParser.m */; };
+		94747E77297B9C5F00309752 /* ObjCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E70297B9C5F00309752 /* ObjCUtils.m */; };
+		94747E7A297B9D5A00309752 /* PTZPrefCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E78297B9D5A00309752 /* PTZPrefCamera.m */; };
+		94747E80297BB36C00309752 /* PSMSceneCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */; };
+		94747E82297BBD4800309752 /* PSMSceneCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */; };
+		94747E88297BC4F800309752 /* liblibvisca-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94747E87297BC4F800309752 /* liblibvisca-static.a */; };
+		94C55AB7297CE96700D8C1DB /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 94C55AB6297CE96700D8C1DB /* Notes */; };
+		94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		94838D66298099620094785A /* PTZ Scene Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PTZ Scene Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		94838D69298099620094785A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		94838D6A298099620094785A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		94838D6C298099630094785A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		94838D6F298099630094785A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		94838D71298099630094785A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		94838D73298099630094785A /* PTZ_Scene_Manager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PTZ_Scene_Manager.entitlements; sourceTree = "<group>"; };
+		946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSMCameraStateWindowController.xib; sourceTree = "<group>"; };
+		946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraStateWindowController.h; sourceTree = "<group>"; };
+		946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraStateWindowController.m; sourceTree = "<group>"; };
+		946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZCameraStateViewController.m; sourceTree = "<group>"; };
+		946346C0297F5D000015BA8F /* PTZCameraStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZCameraStateViewController.h; sourceTree = "<group>"; };
+		946346C2297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZOutlineViewDictionaryDataSource.m; sourceTree = "<group>"; };
+		946346C3297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZOutlineViewDictionaryDataSource.h; sourceTree = "<group>"; };
+		946346C5297F5DE70015BA8F /* NSWindowAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSWindowAdditions.h; sourceTree = "<group>"; };
+		946346C6297F5DE70015BA8F /* NSColorAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSColorAdditions.m; sourceTree = "<group>"; };
+		946346C7297F5DE70015BA8F /* NSWindowAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSWindowAdditions.m; sourceTree = "<group>"; };
+		946346C8297F5DE70015BA8F /* ColorTempSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorTempSliderCell.m; sourceTree = "<group>"; };
+		946346C9297F5DE70015BA8F /* NSColorAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSColorAdditions.h; sourceTree = "<group>"; };
+		946346CA297F5DE70015BA8F /* ColorTempSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorTempSliderCell.h; sourceTree = "<group>"; };
+		946346CE297F60740015BA8F /* PTZStarButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZStarButtonCell.h; sourceTree = "<group>"; };
+		946346CF297F60740015BA8F /* PTZStarButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZStarButtonCell.m; sourceTree = "<group>"; };
+		9463826A29807D8D0015BA8F /* liblibRTSPClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblibRTSPClient.a; sourceTree = "<group>"; };
+		9463826C29807DF60015BA8F /* RTSPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSPViewController.m; sourceTree = "<group>"; };
+		9463826D29807DF60015BA8F /* RTSPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSPViewController.h; sourceTree = "<group>"; };
+		9463826F29807DFC0015BA8F /* RTSPPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTSPPlayer.h; sourceTree = "<group>"; };
+		9463827029807F190015BA8F /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavformat.a; sourceTree = "<group>"; };
+		9463827129807F190015BA8F /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavcodec.a; sourceTree = "<group>"; };
+		9463827229807F190015BA8F /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavfilter.a; sourceTree = "<group>"; };
+		9463827329807F190015BA8F /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
+		9463827429807F190015BA8F /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
+		9463827529807F190015BA8F /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
+		9463827629807F190015BA8F /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavdevice.a; sourceTree = "<group>"; };
+		9463827E29807F360015BA8F /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libbz2.tbd; sourceTree = DEVELOPER_DIR; };
+		9463827F29807F360015BA8F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
+		9463828029807F360015BA8F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		94747E1D297B94F800309752 /* PTZ Scene Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PTZ Scene Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94747E20297B94F800309752 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		94747E21297B94F800309752 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		94747E23297B94F900309752 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		94747E26297B94F900309752 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		94747E28297B94F900309752 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		94747E2A297B94F900309752 /* PTZ_Scene_Manager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PTZ_Scene_Manager.entitlements; sourceTree = "<group>"; };
+		94747E30297B951200309752 /* PSMSceneWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMSceneWindowController.h; sourceTree = "<group>"; };
+		94747E31297B951200309752 /* PSMSceneWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMSceneWindowController.m; sourceTree = "<group>"; };
+		94747E32297B951200309752 /* PSMSceneWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMSceneWindowController.xib; sourceTree = "<group>"; };
+		94747E57297B96A000309752 /* libvisca.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libvisca.h; path = "../libvisca/libvisca-ip/visca/libvisca.h"; sourceTree = "<group>"; };
+		94747E58297B96F900309752 /* PTZCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZCamera.h; sourceTree = "<group>"; };
+		94747E59297B96F900309752 /* PTZCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZCamera.m; sourceTree = "<group>"; };
+		94747E5A297B96F900309752 /* PTZCameraInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZCameraInt.h; sourceTree = "<group>"; };
+		94747E5C297B970100309752 /* PTZCameraConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZCameraConfig.m; sourceTree = "<group>"; };
+		94747E5D297B970100309752 /* PTZCameraConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZCameraConfig.h; sourceTree = "<group>"; };
+		94747E5F297B971100309752 /* PTZProgressGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZProgressGroup.h; sourceTree = "<group>"; };
+		94747E60297B971100309752 /* PTZProgressGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZProgressGroup.m; sourceTree = "<group>"; };
+		94747E66297B9C5F00309752 /* dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dictionary.c; sourceTree = "<group>"; };
+		94747E68297B9C5F00309752 /* PTZSettingsFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZSettingsFile.m; sourceTree = "<group>"; };
+		94747E69297B9C5F00309752 /* iniparser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iniparser.c; sourceTree = "<group>"; };
+		94747E6A297B9C5F00309752 /* PTZIniParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZIniParser.m; sourceTree = "<group>"; };
+		94747E6B297B9C5F00309752 /* ObjCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCUtils.h; sourceTree = "<group>"; };
+		94747E6C297B9C5F00309752 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dictionary.h; sourceTree = "<group>"; };
+		94747E6D297B9C5F00309752 /* PTZSettingsFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZSettingsFile.h; sourceTree = "<group>"; };
+		94747E6F297B9C5F00309752 /* iniparser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iniparser.h; sourceTree = "<group>"; };
+		94747E70297B9C5F00309752 /* ObjCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUtils.m; sourceTree = "<group>"; };
+		94747E71297B9C5F00309752 /* PTZIniParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZIniParser.h; sourceTree = "<group>"; };
+		94747E78297B9D5A00309752 /* PTZPrefCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZPrefCamera.m; sourceTree = "<group>"; };
+		94747E79297B9D5A00309752 /* PTZPrefCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZPrefCamera.h; sourceTree = "<group>"; };
+		94747E7E297BB36C00309752 /* PSMSceneCollectionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMSceneCollectionItem.h; sourceTree = "<group>"; };
+		94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMSceneCollectionItem.m; sourceTree = "<group>"; };
+		94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMSceneCollectionItem.xib; sourceTree = "<group>"; };
+		94747E87297BC4F800309752 /* liblibvisca-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibvisca-static.a"; sourceTree = "<group>"; };
+		94C55AB6297CE96700D8C1DB /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
+		94C55AB8297D04B300D8C1DB /* LARClickableImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARClickableImageButton.h; sourceTree = "<group>"; };
+		94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARClickableImageButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		94838D63298099620094785A /* Frameworks */ = {
+		94747E1A297B94F800309752 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9463827729807F190015BA8F /* libavformat.a in Frameworks */,
+				9463827B29807F1A0015BA8F /* libswscale.a in Frameworks */,
+				9463827929807F1A0015BA8F /* libavfilter.a in Frameworks */,
+				9463828329807F360015BA8F /* libbz2.tbd in Frameworks */,
+				94747E88297BC4F800309752 /* liblibvisca-static.a in Frameworks */,
+				9463827D29807F1A0015BA8F /* libavdevice.a in Frameworks */,
+				9463826B29807D8E0015BA8F /* liblibRTSPClient.a in Frameworks */,
+				9463827A29807F1A0015BA8F /* libswresample.a in Frameworks */,
+				9463828229807F360015BA8F /* libiconv.tbd in Frameworks */,
+				9463827C29807F1A0015BA8F /* libavutil.a in Frameworks */,
+				9463827829807F190015BA8F /* libavcodec.a in Frameworks */,
+				9463828129807F360015BA8F /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		94838D5D298099620094785A = {
+		94638284298080BF0015BA8F /* ffmpeg RTSP */ = {
 			isa = PBXGroup;
 			children = (
-				94838D68298099620094785A /* PTZ Scene Manager */,
-				94838D67298099620094785A /* Products */,
+			);
+			path = "ffmpeg RTSP";
+			sourceTree = "<group>";
+		};
+		94747E14297B94F800309752 = {
+			isa = PBXGroup;
+			children = (
+				94747E57297B96A000309752 /* libvisca.h */,
+				94747E1F297B94F800309752 /* PTZ Scene Manager */,
+				94747E1E297B94F800309752 /* Products */,
+				94747E35297B952A00309752 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		94838D67298099620094785A /* Products */ = {
+		94747E1E297B94F800309752 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				94838D66298099620094785A /* PTZ Scene Manager.app */,
+				94747E1D297B94F800309752 /* PTZ Scene Manager.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		94838D68298099620094785A /* PTZ Scene Manager */ = {
+		94747E1F297B94F800309752 /* PTZ Scene Manager */ = {
 			isa = PBXGroup;
 			children = (
-				94838D69298099620094785A /* AppDelegate.h */,
-				94838D6A298099620094785A /* AppDelegate.m */,
-				94838D6C298099630094785A /* Assets.xcassets */,
-				94838D6E298099630094785A /* MainMenu.xib */,
-				94838D71298099630094785A /* main.m */,
-				94838D73298099630094785A /* PTZ_Scene_Manager.entitlements */,
+				94C55AB6297CE96700D8C1DB /* Notes */,
+				94747E20297B94F800309752 /* AppDelegate.h */,
+				94747E21297B94F800309752 /* AppDelegate.m */,
+				94747E58297B96F900309752 /* PTZCamera.h */,
+				94747E59297B96F900309752 /* PTZCamera.m */,
+				94747E5A297B96F900309752 /* PTZCameraInt.h */,
+				94747E5D297B970100309752 /* PTZCameraConfig.h */,
+				94747E5C297B970100309752 /* PTZCameraConfig.m */,
+				94747E79297B9D5A00309752 /* PTZPrefCamera.h */,
+				94747E78297B9D5A00309752 /* PTZPrefCamera.m */,
+				94747E30297B951200309752 /* PSMSceneWindowController.h */,
+				94747E31297B951200309752 /* PSMSceneWindowController.m */,
+				94747E32297B951200309752 /* PSMSceneWindowController.xib */,
+				94747E7E297BB36C00309752 /* PSMSceneCollectionItem.h */,
+				94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */,
+				94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */,
+				946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */,
+				946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */,
+				946346C0297F5D000015BA8F /* PTZCameraStateViewController.h */,
+				946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */,
+				946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */,
+				94747E5F297B971100309752 /* PTZProgressGroup.h */,
+				94747E60297B971100309752 /* PTZProgressGroup.m */,
+				94C55AB2297CB6A800D8C1DB /* Custom UI */,
+				94747E87297BC4F800309752 /* liblibvisca-static.a */,
+				9463826A29807D8D0015BA8F /* liblibRTSPClient.a */,
+				9463827129807F190015BA8F /* libavcodec.a */,
+				9463827629807F190015BA8F /* libavdevice.a */,
+				9463827229807F190015BA8F /* libavfilter.a */,
+				9463827029807F190015BA8F /* libavformat.a */,
+				9463827529807F190015BA8F /* libavutil.a */,
+				9463827329807F190015BA8F /* libswresample.a */,
+				9463827429807F190015BA8F /* libswscale.a */,
+				9463827E29807F360015BA8F /* libbz2.tbd */,
+				9463827F29807F360015BA8F /* libiconv.tbd */,
+				9463828029807F360015BA8F /* libz.tbd */,
+				94638284298080BF0015BA8F /* ffmpeg RTSP */,
+				94747E65297B9C5F00309752 /* iniparser */,
+				94747E23297B94F900309752 /* Assets.xcassets */,
+				94747E25297B94F900309752 /* MainMenu.xib */,
+				94747E28297B94F900309752 /* main.m */,
+				94747E2A297B94F900309752 /* PTZ_Scene_Manager.entitlements */,
 			);
 			path = "PTZ Scene Manager";
+			sourceTree = "<group>";
+		};
+		94747E35297B952A00309752 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		94747E65297B9C5F00309752 /* iniparser */ = {
+			isa = PBXGroup;
+			children = (
+				94747E6D297B9C5F00309752 /* PTZSettingsFile.h */,
+				94747E68297B9C5F00309752 /* PTZSettingsFile.m */,
+				94747E71297B9C5F00309752 /* PTZIniParser.h */,
+				94747E6A297B9C5F00309752 /* PTZIniParser.m */,
+				94747E6B297B9C5F00309752 /* ObjCUtils.h */,
+				94747E6C297B9C5F00309752 /* dictionary.h */,
+				94747E66297B9C5F00309752 /* dictionary.c */,
+				94747E6F297B9C5F00309752 /* iniparser.h */,
+				94747E69297B9C5F00309752 /* iniparser.c */,
+				94747E70297B9C5F00309752 /* ObjCUtils.m */,
+			);
+			path = iniparser;
+			sourceTree = "<group>";
+		};
+		94C55AB2297CB6A800D8C1DB /* Custom UI */ = {
+			isa = PBXGroup;
+			children = (
+				94C55AB8297D04B300D8C1DB /* LARClickableImageButton.h */,
+				94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */,
+				946346C3297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.h */,
+				946346C2297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m */,
+				946346CA297F5DE70015BA8F /* ColorTempSliderCell.h */,
+				946346C8297F5DE70015BA8F /* ColorTempSliderCell.m */,
+				946346C9297F5DE70015BA8F /* NSColorAdditions.h */,
+				946346C6297F5DE70015BA8F /* NSColorAdditions.m */,
+				946346C5297F5DE70015BA8F /* NSWindowAdditions.h */,
+				946346C7297F5DE70015BA8F /* NSWindowAdditions.m */,
+				946346CE297F60740015BA8F /* PTZStarButtonCell.h */,
+				946346CF297F60740015BA8F /* PTZStarButtonCell.m */,
+				9463826F29807DFC0015BA8F /* RTSPPlayer.h */,
+				9463826D29807DF60015BA8F /* RTSPViewController.h */,
+				9463826C29807DF60015BA8F /* RTSPViewController.m */,
+			);
+			path = "Custom UI";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		94838D65298099620094785A /* PTZ Scene Manager */ = {
+		94747E1C297B94F800309752 /* PTZ Scene Manager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 94838D76298099630094785A /* Build configuration list for PBXNativeTarget "PTZ Scene Manager" */;
+			buildConfigurationList = 94747E2D297B94F900309752 /* Build configuration list for PBXNativeTarget "PTZ Scene Manager" */;
 			buildPhases = (
-				94838D62298099620094785A /* Sources */,
-				94838D63298099620094785A /* Frameworks */,
-				94838D64298099620094785A /* Resources */,
+				94747E19297B94F800309752 /* Sources */,
+				94747E1A297B94F800309752 /* Frameworks */,
+				94747E1B297B94F800309752 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -80,24 +278,24 @@
 			);
 			name = "PTZ Scene Manager";
 			productName = "PTZ Scene Manager";
-			productReference = 94838D66298099620094785A /* PTZ Scene Manager.app */;
+			productReference = 94747E1D297B94F800309752 /* PTZ Scene Manager.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		94838D5E298099620094785A /* Project object */ = {
+		94747E15297B94F800309752 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
-					94838D65298099620094785A = {
+					94747E1C297B94F800309752 = {
 						CreatedOnToolsVersion = 14.1;
 					};
 				};
 			};
-			buildConfigurationList = 94838D61298099620094785A /* Build configuration list for PBXProject "PTZ Scene Manager" */;
+			buildConfigurationList = 94747E18297B94F800309752 /* Build configuration list for PBXProject "PTZ Scene Manager" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -105,45 +303,69 @@
 				en,
 				Base,
 			);
-			mainGroup = 94838D5D298099620094785A;
-			productRefGroup = 94838D67298099620094785A /* Products */;
+			mainGroup = 94747E14297B94F800309752;
+			productRefGroup = 94747E1E297B94F800309752 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				94838D65298099620094785A /* PTZ Scene Manager */,
+				94747E1C297B94F800309752 /* PTZ Scene Manager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		94838D64298099620094785A /* Resources */ = {
+		94747E1B297B94F800309752 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94838D6D298099630094785A /* Assets.xcassets in Resources */,
-				94838D70298099630094785A /* MainMenu.xib in Resources */,
+				94747E82297BBD4800309752 /* PSMSceneCollectionItem.xib in Resources */,
+				946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */,
+				94C55AB7297CE96700D8C1DB /* Notes in Resources */,
+				94747E34297B951200309752 /* PSMSceneWindowController.xib in Resources */,
+				94747E24297B94F900309752 /* Assets.xcassets in Resources */,
+				94747E27297B94F900309752 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		94838D62298099620094785A /* Sources */ = {
+		94747E19297B94F800309752 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94838D72298099630094785A /* main.m in Sources */,
-				94838D6B298099620094785A /* AppDelegate.m in Sources */,
+				946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */,
+				94747E7A297B9D5A00309752 /* PTZPrefCamera.m in Sources */,
+				94747E33297B951200309752 /* PSMSceneWindowController.m in Sources */,
+				946346C4297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m in Sources */,
+				946346CD297F5DE70015BA8F /* ColorTempSliderCell.m in Sources */,
+				946346CC297F5DE70015BA8F /* NSWindowAdditions.m in Sources */,
+				946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */,
+				94747E61297B971100309752 /* PTZProgressGroup.m in Sources */,
+				946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */,
+				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
+				94747E74297B9C5F00309752 /* iniparser.c in Sources */,
+				946346CB297F5DE70015BA8F /* NSColorAdditions.m in Sources */,
+				94747E73297B9C5F00309752 /* PTZSettingsFile.m in Sources */,
+				94747E80297BB36C00309752 /* PSMSceneCollectionItem.m in Sources */,
+				94747E77297B9C5F00309752 /* ObjCUtils.m in Sources */,
+				94747E29297B94F900309752 /* main.m in Sources */,
+				94747E75297B9C5F00309752 /* PTZIniParser.m in Sources */,
+				94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */,
+				94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */,
+				9463826E29807DF60015BA8F /* RTSPViewController.m in Sources */,
+				94747E72297B9C5F00309752 /* dictionary.c in Sources */,
+				94747E22297B94F800309752 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		94838D6E298099630094785A /* MainMenu.xib */ = {
+		94747E25297B94F900309752 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				94838D6F298099630094785A /* Base */,
+				94747E26297B94F900309752 /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -151,7 +373,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		94838D74298099630094785A /* Debug */ = {
+		94747E2B297B94F900309752 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -209,7 +431,7 @@
 			};
 			name = Debug;
 		};
-		94838D75298099630094785A /* Release */ = {
+		94747E2C297B94F900309752 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -260,7 +482,7 @@
 			};
 			name = Release;
 		};
-		94838D77298099630094785A /* Debug */ = {
+		94747E2E297B94F900309752 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -279,6 +501,19 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -286,7 +521,7 @@
 			};
 			name = Debug;
 		};
-		94838D78298099630094785A /* Release */ = {
+		94747E2F297B94F900309752 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -304,6 +539,19 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
@@ -315,25 +563,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		94838D61298099620094785A /* Build configuration list for PBXProject "PTZ Scene Manager" */ = {
+		94747E18297B94F800309752 /* Build configuration list for PBXProject "PTZ Scene Manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				94838D74298099630094785A /* Debug */,
-				94838D75298099630094785A /* Release */,
+				94747E2B297B94F900309752 /* Debug */,
+				94747E2C297B94F900309752 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		94838D76298099630094785A /* Build configuration list for PBXNativeTarget "PTZ Scene Manager" */ = {
+		94747E2D297B94F900309752 /* Build configuration list for PBXNativeTarget "PTZ Scene Manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				94838D77298099630094785A /* Debug */,
-				94838D78298099630094785A /* Release */,
+				94747E2E297B94F900309752 /* Debug */,
+				94747E2F297B94F900309752 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 94838D5E298099620094785A /* Project object */;
+	rootObject = 94747E15297B94F800309752 /* Project object */;
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PSMSceneCollectionItem">
+            <connections>
+                <outlet property="textField" destination="pwQ-5N-w5Y" id="ejk-er-ERE"/>
+                <outlet property="view" destination="Qiv-eB-Knm" id="5t2-UZ-EPV"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Qiv-eB-Knm" userLabel="Button Based View">
+            <rect key="frame" x="0.0" y="0.0" width="163" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pwQ-5N-w5Y">
+                    <rect key="frame" x="0.0" y="25" width="163" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="33W-Zr-guf"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="center" title="Label" id="yOV-6h-r2b">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-3" name="editable" keyPath="delegate.canEditSceneNames" id="3FP-fo-oBL"/>
+                        <binding destination="-2" name="value" keyPath="sceneName" id="ZNG-nX-nAx"/>
+                        <outlet property="delegate" destination="-2" id="wix-Gk-Ih7"/>
+                    </connections>
+                </textField>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="QXk-dK-V8V">
+                    <rect key="frame" x="2" y="43" width="159" height="95"/>
+                    <subviews>
+                        <button horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6LD-4v-c88" customClass="LARClickableImageButton">
+                            <rect key="frame" x="70" y="38" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="ijl-fV-h1G"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="pw2-cu-my1"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="1nV-fH-WiJ">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <color key="bezelColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <action selector="sceneRecall:" target="-2" id="HnM-WQ-46G"/>
+                                <binding destination="-2" name="image" keyPath="image" id="0sE-nL-mb2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="6LD-4v-c88" firstAttribute="centerX" secondItem="QXk-dK-V8V" secondAttribute="centerX" id="1ud-YF-Vot"/>
+                        <constraint firstItem="6LD-4v-c88" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QXk-dK-V8V" secondAttribute="leading" id="3zL-0i-qta"/>
+                        <constraint firstItem="6LD-4v-c88" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QXk-dK-V8V" secondAttribute="top" id="7p3-rn-W30"/>
+                        <constraint firstItem="6LD-4v-c88" firstAttribute="centerY" secondItem="QXk-dK-V8V" secondAttribute="centerY" id="9uS-Ky-Wap"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6LD-4v-c88" secondAttribute="trailing" id="BGz-3N-hn3"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6LD-4v-c88" secondAttribute="bottom" id="DwY-Nr-snA"/>
+                    </constraints>
+                </customView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iNl-77-SBc">
+                    <rect key="frame" x="59" y="0.0" width="46" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="wud-QA-QG6"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IJF-Z1-Cb2">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                    <color key="bezelColor" name="AccentColor"/>
+                    <connections>
+                        <action selector="sceneSet:" target="-2" id="vcl-bq-3ts"/>
+                        <binding destination="-2" name="title" keyPath="buttonTitle" id="IJt-XY-Z4M"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="pwQ-5N-w5Y" firstAttribute="top" secondItem="QXk-dK-V8V" secondAttribute="bottom" constant="2" id="1L4-9F-rK4"/>
+                <constraint firstItem="iNl-77-SBc" firstAttribute="top" secondItem="pwQ-5N-w5Y" secondAttribute="bottom" constant="2" id="Ghf-sZ-iI6"/>
+                <constraint firstItem="iNl-77-SBc" firstAttribute="centerX" secondItem="Qiv-eB-Knm" secondAttribute="centerX" id="LWM-0d-0Db"/>
+                <constraint firstItem="QXk-dK-V8V" firstAttribute="top" secondItem="Qiv-eB-Knm" secondAttribute="top" constant="2" id="MpN-6N-xuY"/>
+                <constraint firstItem="pwQ-5N-w5Y" firstAttribute="leading" secondItem="Qiv-eB-Knm" secondAttribute="leading" constant="2" id="NHM-us-YVB"/>
+                <constraint firstAttribute="trailing" secondItem="QXk-dK-V8V" secondAttribute="trailing" constant="2" id="Qaf-aO-NjZ"/>
+                <constraint firstAttribute="bottom" secondItem="iNl-77-SBc" secondAttribute="bottom" constant="7" id="Uqo-SE-Zac"/>
+                <constraint firstItem="QXk-dK-V8V" firstAttribute="leading" secondItem="Qiv-eB-Knm" secondAttribute="leading" constant="2" id="ewW-tu-7F6"/>
+                <constraint firstAttribute="trailing" secondItem="pwQ-5N-w5Y" secondAttribute="trailing" constant="2" id="mnW-z3-OrC"/>
+            </constraints>
+            <point key="canvasLocation" x="-34" y="-321"/>
+        </customView>
+    </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
