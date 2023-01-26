@@ -83,6 +83,24 @@
     }
 }
 
+- (void)toggleVideoPaused {
+    if (self.paused) {
+        [self resumeVideo];
+    } else {
+        [self pauseVideo];
+    }
+}
+
+- (BOOL)validateTogglePaused:(NSMenuItem *)menu {
+    BOOL hasVideo = (self.video != nil);
+    if (self.paused && hasVideo) {
+        menu.title = NSLocalizedString(@"Resume Video", @"Resume video menu item");
+    } else {
+        menu.title = NSLocalizedString(@"Pause Video", @"Resume video menu item");
+    }
+    return hasVideo;
+}
+
 - (void)setStaticImage:(NSImage *)image {
     if (self.video != nil && !self.paused && image != nil) {
         [self pauseVideo];

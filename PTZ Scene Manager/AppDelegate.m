@@ -10,6 +10,7 @@
 #import "PTZCameraInt.h"
 #import "PTZSettingsFile.h"
 #import "PTZPrefCamera.h"
+#import "PSMOBSWebSocketController.h"
 
 static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 
@@ -44,6 +45,7 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
         [wc.window orderFront:nil];
         [self.windowControllers addObject:wc];
     }
+    [self connectToOBS];
 }
 
 
@@ -54,6 +56,10 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 
 - (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app {
     return YES;
+}
+
+- (void)connectToOBS {
+    [[PSMOBSWebSocketController defaultController] connectToServer:@"ws://localhost:4455"];
 }
 
 - (NSString *)ptzopticsSettingsFilePath {

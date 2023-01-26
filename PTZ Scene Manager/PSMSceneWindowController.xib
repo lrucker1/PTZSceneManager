@@ -9,6 +9,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PSMSceneWindowController">
             <connections>
+                <outlet property="cameraBox" destination="8yC-Mi-aW4" id="cty-VE-WuM"/>
                 <outlet property="collectionView" destination="6Fy-kw-0Au" id="00C-K8-HzR"/>
                 <outlet property="rtspViewController" destination="ce5-QP-mKm" id="wQM-nt-8Aw"/>
                 <outlet property="titlebarViewController" destination="kQT-rJ-uFB" id="eSb-f0-fy2"/>
@@ -18,7 +19,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="510" height="330"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
@@ -56,16 +57,8 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hfs-ZN-q2C">
-                        <rect key="frame" x="315" y="216" width="178" height="97"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="91" id="DIh-gG-s60"/>
-                            <constraint firstAttribute="width" constant="172" id="Gx7-nG-g2N"/>
-                        </constraints>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="groove" id="2vU-1k-Gfv"/>
-                    </imageView>
                     <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
-                        <rect key="frame" x="427" y="187" width="69" height="27"/>
+                        <rect key="frame" x="425" y="189" width="75" height="27"/>
                         <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Cj-ON-NQ9">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
@@ -80,8 +73,8 @@
                             <binding destination="-2" name="title" keyPath="lastRecalledItem.buttonTitle" id="buC-Ft-1PK"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rN6-cr-0it">
-                        <rect key="frame" x="316" y="195" width="111" height="16"/>
+                    <textField horizontalHuggingPriority="749" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rN6-cr-0it">
+                        <rect key="frame" x="314" y="197" width="111" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" priority="750" constant="107" id="bAv-aJ-kai"/>
                             <constraint firstAttribute="height" constant="16" id="eB4-6f-Hlu"/>
@@ -411,16 +404,6 @@
                             </gridCell>
                         </gridCells>
                     </gridView>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pAy-1d-2xg">
-                        <rect key="frame" x="355" y="-5" width="112" height="29"/>
-                        <buttonCell key="cell" type="push" title="Reopen Camera" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vxy-QI-Mse">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="smallSystem"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="reopenCamera:" target="-2" id="KPk-9z-ep0"/>
-                        </connections>
-                    </button>
                     <button toolTip="Click to edit the scene names" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tek-7C-MDv">
                         <rect key="frame" x="13" y="181" width="14" height="14"/>
                         <constraints>
@@ -428,7 +411,7 @@
                             <constraint firstAttribute="height" constant="14" id="XQz-k4-wiq"/>
                             <constraint firstAttribute="width" constant="14" id="awv-Zk-4Rf"/>
                         </constraints>
-                        <buttonCell key="cell" type="bevel" title="Edit Scene Names" bezelStyle="regularSquare" image="pencil.slash" imagePosition="left" alternateImage="pencil" catalog="system" state="on" inset="2" id="MP7-pV-BT5">
+                        <buttonCell key="cell" type="bevel" title="Edit Scene Names" bezelStyle="regularSquare" image="pencil.slash" catalog="system" imagePosition="left" alternateImage="pencil" state="on" inset="2" id="MP7-pV-BT5">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -439,17 +422,8 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="AKA-9N-UDC">
                         <rect key="frame" x="469" y="3" width="28" height="16"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6o0-Tl-p0W" userLabel="Unreachable Camera Image View">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Taf-xD-kBh" userLabel="Reachable Camera Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusUnavailable" id="OpC-xE-ZYf"/>
-                                <connections>
-                                    <binding destination="-2" name="hidden" keyPath="prefCamera.camera.cameraOpen" id="ctV-kB-So5"/>
-                                </connections>
-                            </imageView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Taf-xD-kBh" userLabel="Reachable Camera Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PTZCameraIcon" id="Doi-BG-oHd"/>
                                 <connections>
                                     <binding destination="-2" name="hidden" keyPath="prefCamera.camera.cameraOpen" id="xNF-YI-7wT">
@@ -459,24 +433,33 @@
                                     </binding>
                                 </connections>
                             </imageView>
+                            <button toolTip="Click to reconnect to camera" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pAy-1d-2xg" userLabel="Unreachable Camera Button">
+                                <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSStatusUnavailable" imagePosition="overlaps" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="vxy-QI-Mse">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="reopenCamera:" target="-2" id="KPk-9z-ep0"/>
+                                    <binding destination="-2" name="hidden" keyPath="prefCamera.camera.cameraOpen" id="V7U-3F-Eer"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="3HB-Cd-vkf"/>
+                            <constraint firstItem="pAy-1d-2xg" firstAttribute="bottom" secondItem="Taf-xD-kBh" secondAttribute="bottom" id="3w8-bT-ibk"/>
                             <constraint firstAttribute="height" constant="16" id="R8E-j8-RaB"/>
+                            <constraint firstItem="Taf-xD-kBh" firstAttribute="leading" secondItem="AKA-9N-UDC" secondAttribute="leading" id="X3o-D0-YQe"/>
+                            <constraint firstItem="pAy-1d-2xg" firstAttribute="top" secondItem="Taf-xD-kBh" secondAttribute="top" id="ZvN-BG-Qxq"/>
+                            <constraint firstAttribute="trailing" secondItem="Taf-xD-kBh" secondAttribute="trailing" id="acU-h6-Pdb"/>
+                            <constraint firstItem="pAy-1d-2xg" firstAttribute="trailing" secondItem="Taf-xD-kBh" secondAttribute="trailing" id="dfy-yw-Kbb"/>
+                            <constraint firstItem="pAy-1d-2xg" firstAttribute="leading" secondItem="Taf-xD-kBh" secondAttribute="leading" id="uCH-ZW-cfX"/>
+                            <constraint firstItem="Taf-xD-kBh" firstAttribute="top" secondItem="AKA-9N-UDC" secondAttribute="top" id="uaR-kZ-f8O"/>
+                            <constraint firstAttribute="bottom" secondItem="Taf-xD-kBh" secondAttribute="bottom" id="yre-QQ-MXG"/>
                         </constraints>
                     </customView>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QWT-NU-HhO">
-                        <rect key="frame" x="144" y="208" width="112" height="27"/>
-                        <buttonCell key="cell" type="push" title="More Settings..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EjX-Ma-taS">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="smallSystem"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="showCameraStateWindow:" target="-2" id="pON-TX-Osg"/>
-                        </connections>
-                    </button>
                     <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Cjf-Dk-7kG" userLabel="Focus Grid View">
-                        <rect key="frame" x="148" y="237" width="104" height="25"/>
+                        <rect key="frame" x="148" y="271" width="104" height="28"/>
                         <rows>
                             <gridRow id="p2K-0Y-eMb"/>
                         </rows>
@@ -558,7 +541,7 @@
                         </gridCells>
                     </gridView>
                     <gridView xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" id="qR6-cn-b6Q" userLabel="Zoom Grid View">
-                        <rect key="frame" x="148" y="284" width="104" height="31"/>
+                        <rect key="frame" x="148" y="207" width="104" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <rows>
                             <gridRow id="Bm6-YR-5xr"/>
@@ -641,7 +624,7 @@
                         </gridCells>
                     </gridView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7zi-n2-SoF">
-                        <rect key="frame" x="147" y="265" width="75" height="16"/>
+                        <rect key="frame" x="147" y="300" width="75" height="16"/>
                         <buttonCell key="cell" type="check" title="Autofocus" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="1BM-NG-3WF">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="smallSystem"/>
@@ -651,40 +634,98 @@
                             <binding destination="-2" name="value" keyPath="prefCamera.camera.autofocus" id="0Fm-rS-5XE"/>
                         </connections>
                     </button>
+                    <box boxType="custom" borderType="none" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="8yC-Mi-aW4">
+                        <rect key="frame" x="310" y="217" width="190" height="109"/>
+                        <view key="contentView" id="SzY-pi-oBM">
+                            <rect key="frame" x="0.0" y="0.0" width="190" height="109"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hfs-ZN-q2C">
+                                    <rect key="frame" x="3" y="3" width="184" height="103"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="groove" id="2vU-1k-Gfv"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="SzY-pi-oBM" secondAttribute="top" constant="6" id="GiQ-2Z-yHc"/>
+                                <constraint firstItem="Hfs-ZN-q2C" firstAttribute="centerX" secondItem="SzY-pi-oBM" secondAttribute="centerX" id="IXC-p3-zVL"/>
+                                <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="6" id="RK1-2U-Cz4"/>
+                                <constraint firstItem="Hfs-ZN-q2C" firstAttribute="centerY" secondItem="SzY-pi-oBM" secondAttribute="centerY" id="imq-m4-NTo"/>
+                            </constraints>
+                        </view>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="109" id="JTM-hX-tkG"/>
+                            <constraint firstAttribute="width" constant="190" id="lMs-Y2-5fk"/>
+                        </constraints>
+                    </box>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RPa-rz-VdU">
+                        <rect key="frame" x="146" y="247" width="70" height="14"/>
+                        <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Motion Sync" id="NeE-44-95N">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pBa-Ly-cZl">
+                        <rect key="frame" x="220" y="246" width="65" height="16"/>
+                        <segmentedCell key="cell" controlSize="mini" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="dRQ-Zc-OMU">
+                            <font key="font" metaFont="miniSystem"/>
+                            <segments>
+                                <segment label="On" width="28"/>
+                                <segment label="Off" width="28" tag="1"/>
+                            </segments>
+                        </segmentedCell>
+                    </segmentedControl>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="rN6-cr-0it" firstAttribute="leading" secondItem="Hfs-ZN-q2C" secondAttribute="leading" id="127-QG-BaQ"/>
                     <constraint firstAttribute="bottom" secondItem="ERX-r8-LRb" secondAttribute="bottom" constant="20" symbolic="YES" id="1T4-Cu-Jvb"/>
                     <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="150" id="1ck-ge-L64"/>
-                    <constraint firstItem="rN6-cr-0it" firstAttribute="top" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="8" symbolic="YES" id="1cl-9R-ZmJ"/>
-                    <constraint firstItem="rN6-cr-0it" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QWT-NU-HhO" secondAttribute="trailing" constant="8" symbolic="YES" id="6eM-Ak-lkX"/>
+                    <constraint firstItem="8yC-Mi-aW4" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="4" id="3gH-Br-imj"/>
+                    <constraint firstAttribute="trailing" secondItem="8yC-Mi-aW4" secondAttribute="trailing" constant="10" id="5Cs-XJ-Qh6"/>
                     <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="tek-7C-MDv" secondAttribute="bottom" constant="1" id="8JS-b1-H4d"/>
                     <constraint firstItem="zuV-8a-7PM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="8Uh-7y-3ag"/>
                     <constraint firstAttribute="bottom" secondItem="AKA-9N-UDC" secondAttribute="bottom" constant="3" id="8m0-hr-HeX"/>
                     <constraint firstAttribute="trailing" secondItem="ERX-r8-LRb" secondAttribute="trailing" constant="10" id="AR3-Qb-PLn"/>
-                    <constraint firstItem="7zi-n2-SoF" firstAttribute="top" secondItem="qR6-cn-b6Q" secondAttribute="bottom" constant="4" id="Bgu-Zl-hjc"/>
-                    <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="Gb5-tw-Rl2"/>
-                    <constraint firstItem="QWT-NU-HhO" firstAttribute="bottom" secondItem="zuV-8a-7PM" secondAttribute="bottom" id="LEq-j3-Vz2"/>
-                    <constraint firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" constant="20" symbolic="YES" id="R6m-aC-sY9"/>
-                    <constraint firstItem="AKA-9N-UDC" firstAttribute="leading" secondItem="pAy-1d-2xg" secondAttribute="trailing" constant="8" symbolic="YES" id="Rln-ch-g7N"/>
-                    <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="SGN-0a-SZE"/>
+                    <constraint firstItem="RPa-rz-VdU" firstAttribute="top" secondItem="Cjf-Dk-7kG" secondAttribute="bottom" constant="10" id="EiL-2k-ltj"/>
+                    <constraint firstItem="7zi-n2-SoF" firstAttribute="top" secondItem="zuV-8a-7PM" secondAttribute="top" id="GdL-HS-Byy"/>
+                    <constraint firstItem="8yC-Mi-aW4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pBa-Ly-cZl" secondAttribute="trailing" constant="20" symbolic="YES" id="H34-9e-kSL"/>
+                    <constraint firstItem="pBa-Ly-cZl" firstAttribute="centerY" secondItem="RPa-rz-VdU" secondAttribute="centerY" id="II3-fn-RbJ"/>
+                    <constraint firstItem="QDe-sc-c7e" firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" id="PmD-7U-VXm"/>
+                    <constraint firstItem="8yC-Mi-aW4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Cjf-Dk-7kG" secondAttribute="trailing" constant="20" symbolic="YES" id="TWg-Yt-T2B"/>
                     <constraint firstItem="ERX-r8-LRb" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="10" id="WcT-bQ-HoI"/>
+                    <constraint firstItem="pBa-Ly-cZl" firstAttribute="leading" secondItem="RPa-rz-VdU" secondAttribute="trailing" constant="8" symbolic="YES" id="XMZ-Hg-dB6"/>
                     <constraint firstItem="QDe-sc-c7e" firstAttribute="leading" secondItem="rN6-cr-0it" secondAttribute="trailing" constant="8" symbolic="YES" id="b74-uQ-HnN"/>
                     <constraint firstItem="qR6-cn-b6Q" firstAttribute="leading" secondItem="zuV-8a-7PM" secondAttribute="trailing" constant="28" id="bhT-Vf-6os"/>
-                    <constraint firstItem="QDe-sc-c7e" firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" id="c0T-JT-JGk"/>
-                    <constraint firstItem="pAy-1d-2xg" firstAttribute="top" secondItem="ERX-r8-LRb" secondAttribute="bottom" id="gtH-cS-BhJ"/>
-                    <constraint firstItem="QWT-NU-HhO" firstAttribute="top" secondItem="Cjf-Dk-7kG" secondAttribute="bottom" constant="6" id="hoe-Vl-sy7"/>
                     <constraint firstItem="QDe-sc-c7e" firstAttribute="firstBaseline" secondItem="rN6-cr-0it" secondAttribute="firstBaseline" id="i76-v2-UfX"/>
                     <constraint firstItem="7zi-n2-SoF" firstAttribute="leading" secondItem="qR6-cn-b6Q" secondAttribute="leading" id="imB-Uy-7mU"/>
-                    <constraint firstItem="rN6-cr-0it" firstAttribute="leading" secondItem="Hfs-ZN-q2C" secondAttribute="leading" id="lR3-KJ-3fD"/>
-                    <constraint firstAttribute="bottom" secondItem="pAy-1d-2xg" secondAttribute="bottom" constant="2" id="pT0-4o-P7t"/>
+                    <constraint firstItem="RPa-rz-VdU" firstAttribute="leading" secondItem="Cjf-Dk-7kG" secondAttribute="leading" id="jvi-z5-KGM"/>
                     <constraint firstItem="Cjf-Dk-7kG" firstAttribute="leading" secondItem="qR6-cn-b6Q" secondAttribute="leading" id="pfn-Kx-kSA"/>
                     <constraint firstItem="zuV-8a-7PM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="15" id="q1s-6m-pwl"/>
-                    <constraint firstItem="Cjf-Dk-7kG" firstAttribute="top" secondItem="7zi-n2-SoF" secondAttribute="bottom" constant="4" id="sg9-Oh-Uds"/>
-                    <constraint firstItem="QWT-NU-HhO" firstAttribute="leading" secondItem="zuV-8a-7PM" secondAttribute="trailing" constant="30" id="uV0-QS-uDl"/>
+                    <constraint firstItem="Cjf-Dk-7kG" firstAttribute="top" secondItem="7zi-n2-SoF" secondAttribute="bottom" constant="2" id="sg9-Oh-Uds"/>
                     <constraint firstAttribute="trailing" secondItem="AKA-9N-UDC" secondAttribute="trailing" constant="13" id="vz9-2U-nHR"/>
+                    <constraint firstItem="rN6-cr-0it" firstAttribute="top" secondItem="8yC-Mi-aW4" secondAttribute="bottom" constant="4" id="w98-Hl-Xbt"/>
+                    <constraint firstItem="qR6-cn-b6Q" firstAttribute="top" secondItem="RPa-rz-VdU" secondAttribute="bottom" constant="9" id="wJ7-K7-SHk"/>
                     <constraint firstItem="tek-7C-MDv" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="yYU-v1-YcD"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="560AA1A6-329F-4C3C-8EB7-44291735BED4" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="BbF-lh-Vza">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="0FA33EB7-EF4C-4D5C-A956-3B64BAAF711A" label="Settings" paletteLabel="Settings" tag="-1" bordered="YES" id="IMg-8c-5TN">
+                        <imageReference key="image" image="camera-toolbar" symbolScale="large"/>
+                        <size key="minSize" width="32" height="25"/>
+                        <size key="maxSize" width="32" height="25"/>
+                        <connections>
+                            <action selector="showCameraStateWindow:" target="-2" id="DVX-zu-Cas"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="che-Nv-Ctc"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="7lA-tS-XhP"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="7lA-tS-XhP"/>
+                    <toolbarItem reference="IMg-8c-5TN"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
@@ -733,13 +774,14 @@
         <image name="arrow.up" catalog="system" width="13" height="14"/>
         <image name="arrow.up.backward" catalog="system" width="13" height="12"/>
         <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
+        <image name="camera-toolbar" width="512" height="512"/>
         <image name="house.fill" catalog="system" width="19" height="16"/>
         <image name="lock.rectangle.on.rectangle" catalog="system" width="19" height="15"/>
         <image name="lock.rectangle.on.rectangle.fill" catalog="system" width="19" height="15"/>
         <image name="minus" catalog="system" width="14" height="4"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="pencil" catalog="system" width="14" height="13"/>
-        <image name="pencil.slash" width="128" height="128"/>
+        <image name="pencil.slash" catalog="system" width="14" height="13"/>
         <image name="plus" catalog="system" width="14" height="13"/>
         <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
     </resources>

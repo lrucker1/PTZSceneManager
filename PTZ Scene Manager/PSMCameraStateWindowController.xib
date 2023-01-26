@@ -31,7 +31,7 @@
                         </constraints>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Camera" identifier="1" id="hMA-Mv-zhY">
+                            <tabViewItem label="Position" identifier="1" id="hMA-Mv-zhY">
                                 <view key="view" id="JL9-I4-rTD">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="360"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,11 @@
                                                         </comboBoxCell>
                                                         <connections>
                                                             <binding destination="MdI-N0-20y" name="contentValues" keyPath="panValues" id="dv0-T8-ObV"/>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.panPlusSpeed" previousBinding="dv0-T8-ObV" id="kaa-C5-Uah"/>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.panPlusSpeed" previousBinding="dv0-T8-ObV" id="7p1-3s-lMa">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                         </connections>
                                                     </comboBox>
                                                 </gridCell>
@@ -131,7 +135,11 @@
                                                         </comboBoxCell>
                                                         <connections>
                                                             <binding destination="MdI-N0-20y" name="contentValues" keyPath="tiltValues" id="EAe-yQ-47D"/>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.tiltPlusSpeed" previousBinding="EAe-yQ-47D" id="eQS-zr-KGW"/>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.tiltPlusSpeed" previousBinding="EAe-yQ-47D" id="dzu-bH-SSs">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                         </connections>
                                                     </comboBox>
                                                 </gridCell>
@@ -160,8 +168,12 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.zoomPlusSpeed" previousBinding="mYx-2h-ZiA" id="2aF-Wv-FQ9">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                             <binding destination="MdI-N0-20y" name="contentValues" keyPath="zoomValues" id="mYx-2h-ZiA"/>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.zoomPlusSpeed" previousBinding="mYx-2h-ZiA" id="o0y-wT-6qv"/>
                                                         </connections>
                                                     </comboBox>
                                                 </gridCell>
@@ -190,8 +202,12 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.focusPlusSpeed" previousBinding="gUz-nx-2c0" id="Lhh-sH-ofI">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                             <binding destination="MdI-N0-20y" name="contentValues" keyPath="zoomValues" id="gUz-nx-2c0"/>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.zoomPlusSpeed" previousBinding="gUz-nx-2c0" id="IFc-8E-tCS"/>
                                                         </connections>
                                                     </comboBox>
                                                 </gridCell>
@@ -213,35 +229,68 @@
                                             </constraints>
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="FastArrows" id="g3W-92-0S6"/>
                                         </imageView>
-                                        <textField toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p7p-R8-8gw">
-                                            <rect key="frame" x="18" y="143" width="124" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Preset recall speed:" id="u9u-DL-XuU">
-                                                <font key="font" usesAppearanceFont="YES"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EkE-cB-aWE">
-                                            <rect key="frame" x="147" y="139" width="64" height="23"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="Ubt-m9-uU3"/>
-                                            </constraints>
-                                            <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="2gZ-Zd-C0W">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                <objectValues>
-                                                    <string>Item 1</string>
-                                                    <string>Item 2</string>
-                                                    <string>Item 3</string>
-                                                </objectValues>
-                                            </comboBoxCell>
-                                            <connections>
-                                                <action selector="applyPresetSpeed:" target="MdI-N0-20y" id="zvk-30-FRf"/>
-                                                <binding destination="MdI-N0-20y" name="contentValues" keyPath="presetSpeedValues" id="oyp-E8-LXA"/>
-                                                <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.presetSpeed" previousBinding="oyp-E8-LXA" id="gbQ-Ie-0nB"/>
-                                            </connections>
-                                        </comboBox>
+                                        <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b3l-2P-Rb8">
+                                            <rect key="frame" x="20" y="141" width="360" height="20"/>
+                                            <rows>
+                                                <gridRow id="3la-Kt-VYM"/>
+                                            </rows>
+                                            <columns>
+                                                <gridColumn id="WB0-UW-p8O"/>
+                                                <gridColumn xPlacement="fill" width="60" id="ZaY-Tc-5Rg"/>
+                                                <gridColumn id="weE-uS-SjD"/>
+                                                <gridColumn xPlacement="trailing" id="tnO-yC-fVq"/>
+                                            </columns>
+                                            <gridCells>
+                                                <gridCell row="3la-Kt-VYM" column="WB0-UW-p8O" id="uUJ-ER-kJ2">
+                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" id="p7p-R8-8gw">
+                                                        <rect key="frame" x="-2" y="0.0" width="124" height="20"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Preset recall speed:" id="u9u-DL-XuU">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </gridCell>
+                                                <gridCell row="3la-Kt-VYM" column="ZaY-Tc-5Rg" id="Qrm-x4-5wI">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="EkE-cB-aWE">
+                                                        <rect key="frame" x="228" y="-2" width="64" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="Ubt-m9-uU3"/>
+                                                        </constraints>
+                                                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="2gZ-Zd-C0W">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <objectValues>
+                                                                <string>Item 1</string>
+                                                                <string>Item 2</string>
+                                                                <string>Item 3</string>
+                                                            </objectValues>
+                                                        </comboBoxCell>
+                                                        <connections>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.presetSpeed" previousBinding="oyp-E8-LXA" id="gbQ-Ie-0nB"/>
+                                                            <binding destination="MdI-N0-20y" name="contentValues" keyPath="presetSpeedValues" id="oyp-E8-LXA"/>
+                                                        </connections>
+                                                    </comboBox>
+                                                </gridCell>
+                                                <gridCell row="3la-Kt-VYM" column="weE-uS-SjD" id="v1f-CU-jKL"/>
+                                                <gridCell row="3la-Kt-VYM" column="tnO-yC-fVq" id="dqO-IY-43p">
+                                                    <button key="contentView" verticalHuggingPriority="750" id="8Hq-U8-mWV">
+                                                        <rect key="frame" x="298" y="-7" width="69" height="32"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Rw6-Zd-ghT">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="applyRecallSpeed:" target="MdI-N0-20y" id="ixT-3K-5ke"/>
+                                                        </connections>
+                                                    </button>
+                                                </gridCell>
+                                            </gridCells>
+                                        </gridView>
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="WqD-5Y-KPT">
                                             <rect key="frame" x="20" y="167" width="360" height="5"/>
                                         </box>
@@ -275,12 +324,10 @@
                                         <constraint firstItem="O2n-su-ysn" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="2vN-fO-p5k"/>
                                         <constraint firstItem="WqD-5Y-KPT" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="54c-Az-Dnb"/>
                                         <constraint firstItem="MRe-yv-l51" firstAttribute="top" secondItem="O2n-su-ysn" secondAttribute="bottom" constant="8" symbolic="YES" id="5FD-Kr-9aK"/>
-                                        <constraint firstItem="p7p-R8-8gw" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="629-cT-rZi"/>
-                                        <constraint firstItem="EkE-cB-aWE" firstAttribute="leading" secondItem="p7p-R8-8gw" secondAttribute="trailing" constant="8" symbolic="YES" id="9LO-6f-b4O"/>
-                                        <constraint firstItem="EkE-cB-aWE" firstAttribute="top" secondItem="WqD-5Y-KPT" secondAttribute="bottom" constant="8" symbolic="YES" id="GAI-Au-ZMV"/>
+                                        <constraint firstAttribute="trailing" secondItem="b3l-2P-Rb8" secondAttribute="trailing" constant="20" symbolic="YES" id="7DP-O0-nbu"/>
                                         <constraint firstItem="TTm-rc-JTh" firstAttribute="top" secondItem="mkZ-UM-Mc3" secondAttribute="bottom" constant="8" symbolic="YES" id="GOq-HY-XY4"/>
+                                        <constraint firstItem="b3l-2P-Rb8" firstAttribute="top" secondItem="WqD-5Y-KPT" secondAttribute="bottom" constant="8" symbolic="YES" id="Hfl-Qu-ecr"/>
                                         <constraint firstItem="MRe-yv-l51" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="32" id="Ivq-Jn-kHE"/>
-                                        <constraint firstItem="EkE-cB-aWE" firstAttribute="firstBaseline" secondItem="p7p-R8-8gw" secondAttribute="firstBaseline" id="JRz-NR-6VE"/>
                                         <constraint firstAttribute="bottom" secondItem="cPT-sh-aez" secondAttribute="bottom" constant="20" symbolic="YES" id="MUd-t0-N9n"/>
                                         <constraint firstAttribute="trailing" secondItem="LCP-hU-E8a" secondAttribute="trailing" constant="25" id="N4g-zU-NmH"/>
                                         <constraint firstAttribute="trailing" secondItem="iwM-28-mTD" secondAttribute="trailing" constant="84" id="NRf-UY-5Bb"/>
@@ -288,19 +335,18 @@
                                         <constraint firstItem="cPT-sh-aez" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="PXc-W9-Vel"/>
                                         <constraint firstItem="O2n-su-ysn" firstAttribute="top" secondItem="Zxu-Tc-05U" secondAttribute="bottom" constant="20" symbolic="YES" id="Pt5-hx-4uq"/>
                                         <constraint firstAttribute="trailing" secondItem="MRe-yv-l51" secondAttribute="trailing" constant="25" id="RIo-Ra-bbS"/>
+                                        <constraint firstItem="Zxu-Tc-05U" firstAttribute="top" secondItem="b3l-2P-Rb8" secondAttribute="bottom" constant="12" id="c7S-RH-c8P"/>
                                         <constraint firstItem="LCP-hU-E8a" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="32" id="cT2-nI-M0x"/>
-                                        <constraint firstItem="Zxu-Tc-05U" firstAttribute="top" secondItem="EkE-cB-aWE" secondAttribute="bottom" constant="12" id="cpA-rH-sG2"/>
                                         <constraint firstItem="Zxu-Tc-05U" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="eQb-Wd-6j2"/>
                                         <constraint firstItem="TTm-rc-JTh" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="32" id="iCV-xR-NXx"/>
                                         <constraint firstItem="MRe-yv-l51" firstAttribute="top" secondItem="O2n-su-ysn" secondAttribute="bottom" constant="8" symbolic="YES" id="iMS-bU-uT4"/>
-                                        <constraint firstItem="EkE-cB-aWE" firstAttribute="leading" secondItem="p7p-R8-8gw" secondAttribute="trailing" constant="8" symbolic="YES" id="iuq-9a-8p0"/>
+                                        <constraint firstItem="b3l-2P-Rb8" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="ieF-9D-DfS"/>
                                         <constraint firstItem="LCP-hU-E8a" firstAttribute="top" secondItem="TTm-rc-JTh" secondAttribute="bottom" constant="8" symbolic="YES" id="joT-Ac-dSs"/>
                                         <constraint firstAttribute="trailing" secondItem="Zxu-Tc-05U" secondAttribute="trailing" constant="20" symbolic="YES" id="kpd-X2-5Ej"/>
                                         <constraint firstItem="iwM-28-mTD" firstAttribute="top" secondItem="JL9-I4-rTD" secondAttribute="top" constant="44" id="l0K-Uf-ySD"/>
                                         <constraint firstItem="WqD-5Y-KPT" firstAttribute="top" secondItem="LCP-hU-E8a" secondAttribute="bottom" constant="8" symbolic="YES" id="mqF-1I-JFD"/>
                                         <constraint firstAttribute="trailing" secondItem="WqD-5Y-KPT" secondAttribute="trailing" constant="20" symbolic="YES" id="y8Q-fI-6gk"/>
                                         <constraint firstItem="mkZ-UM-Mc3" firstAttribute="top" secondItem="JL9-I4-rTD" secondAttribute="top" constant="20" symbolic="YES" id="yGD-Hq-V7x"/>
-                                        <constraint firstItem="p7p-R8-8gw" firstAttribute="baseline" secondItem="EkE-cB-aWE" secondAttribute="baseline" id="zjj-cp-rOu"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -847,7 +893,7 @@
                                             <rect key="frame" x="26" y="171" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
@@ -1303,7 +1349,7 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="81EA62CC-D469-4A65-8925-FF65A93B3E5A" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="fXb-VO-H4a">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="C67226CA-1003-4D2F-84E5-882A5E0C9B5A" label="Camera" paletteLabel="Camera" image="camera-toolbar" bordered="YES" sizingBehavior="auto" id="LxN-6h-i5y">
+                    <toolbarItem implicitItemIdentifier="C67226CA-1003-4D2F-84E5-882A5E0C9B5A" label="Position" paletteLabel="Position" image="camera-toolbar" bordered="YES" sizingBehavior="auto" id="LxN-6h-i5y">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="2AF-Ry-FXt"/>
                         </connections>

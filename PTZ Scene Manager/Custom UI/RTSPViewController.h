@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)openRTSPURL:(NSString *)url onDone:(void (^)(BOOL))doneBlock;
 - (void)pauseVideo;
 - (void)resumeVideo;
+- (void)toggleVideoPaused;
+
+- (BOOL)validateTogglePaused:(NSMenuItem *)menu;
 
 - (void)setStaticImage:(NSImage *)image;
 

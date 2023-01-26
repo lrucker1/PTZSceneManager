@@ -6,19 +6,22 @@ https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-
  rtsp://[ipaddress]:554/1
  - option to have the video zoom out to a bigger window, kind of like the Home app
  
-Put the green button lock on the other side, by the green button.
- - can only have one titleaccessory, maybe move the camera image down or have some fun with window icons. Or title-toolbar.
- 
- Add the prefs from the other app.
- 
  Import settings.ini and transfer to not using their data.
   - export our data as settings.ini?
  
  Sandbox?
 
-"Set Home" menu item with confirmation. It's scene 0.
-
-Focus and preset recall speed.
 Click twice trick for the editable labels. If Finder can do it so can I.
 
-Make the CameraState all instant-apply.
+Yes! obs-websocket to find out which camera is hot.
+
+Make the CameraState all instant-apply? Or apply buttons everywhere? Or is it fine like it is.
+
+Move the connect button to the toolbar, and make it hidden by default? Or a popup on the red dot.
+
+Prefs:
+Configure cameras
+ - Import from PTZOptics settings.ini
+OBS WebSockets - enabled, password, URL.
+
+Pause/Resume video menu item.

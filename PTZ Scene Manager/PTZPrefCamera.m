@@ -10,6 +10,7 @@
 static NSString *PSM_PanPlusSpeed = @"panPlusSpeed";
 static NSString *PSM_TiltPlusSpeed = @"tiltPlusSpeed";
 static NSString *PSM_ZoomPlusSpeed = @"zoomPlusSpeed";
+static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
 
 @implementation PTZPrefCamera
 
@@ -19,6 +20,7 @@ static NSString *PSM_ZoomPlusSpeed = @"zoomPlusSpeed";
      @{PSM_PanPlusSpeed:@(5),
        PSM_TiltPlusSpeed:@(5),
        PSM_ZoomPlusSpeed:@(3),
+       PSM_FocusPlusSpeed:@(3),
        @"resizable":@(YES),
      }];
 }

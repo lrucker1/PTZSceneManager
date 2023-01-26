@@ -302,11 +302,6 @@ typedef enum _ExposureModes {
 }
 
 
-- (IBAction)applyPresetSpeed:(id)sender {
-    // Bindings have already updated the value.
-    [self.cameraState applyPantiltPresetSpeed:nil];
-}
-
 - (IBAction)updateCameraState:(id)sender {
     [self.cameraState updateCameraState:nil];
 }

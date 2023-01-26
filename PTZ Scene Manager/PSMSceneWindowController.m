@@ -11,6 +11,7 @@
 #import "PSMCameraStateWindowController.h"
 #import "PSMSceneCollectionItem.h"
 #import "PTZSettingsFile.h"
+#import "PSMOBSWebSocketController.h"
 #import "RTSPViewController.h"
 #import "AppDelegate.h"
 
@@ -52,6 +53,8 @@ typedef enum {
 @property (strong) PSMCameraStateWindowController *cameraStateWindowController;
 @property IBOutlet RTSPViewController *rtspViewController;
 @property BOOL showStaticSnapshot;
+@property IBOutlet NSBox *cameraBox;
+@property NSColor *boxColor;
 
 @end
 
@@ -108,9 +111,34 @@ typedef enum {
     }
     PTZCamera *camera = self.camera;
     [camera closeAndReload:^(BOOL gotCam) {
-            NSLog(@"Camera!");
         [self.collectionView reloadData];
-        }];
+    }];
+    self.boxColor = self.cameraBox.fillColor;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSSceneInputDidChange object:self.prefCamera];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
+    [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
+}
+
+- (void)onOBSSceneChange:(NSNotification *)note {
+    NSDictionary *dict = note.userInfo;
+    NSDictionary *responseData = dict[@"responseData"];
+    BOOL videoActive = [responseData[@"videoActive"] boolValue];
+    BOOL videoShowing = [responseData[@"videoShowing"] boolValue];
+    if (videoActive) {
+        // Active: Program
+        self.cameraBox.fillColor = [NSColor systemRedColor];
+    } else if (videoShowing) {
+        // Showing: Program or Preview
+        self.cameraBox.fillColor = [NSColor systemGreenColor];
+    } else {
+        self.cameraBox.fillColor = self.boxColor;
+    }
+}
+
+- (void)onOBSSessionDidEnd:(NSNotification *)note {
+    // Warning-orange means we used to know, but now we don't.
+    // The first thing we do on reconnection is ask for scene input state.
+    self.cameraBox.fillColor = [NSColor systemOrangeColor];
 }
 
 - (PTZCamera *)camera {
@@ -141,12 +169,28 @@ typedef enum {
 }
 
 - (IBAction)showCameraStateWindow:(id)sender {
-    // TODO: add window notification stuff.
+    // TODO: add window notification stuff - windowDidClose etc, so we can dispose of the window when not needed.
     if (self.cameraStateWindowController == nil) {
         self.cameraStateWindowController = [[PSMCameraStateWindowController alloc] initWithPrefCamera:self.prefCamera];
     }
     [self.cameraStateWindowController.window orderFront:nil];
 }
+
+- (IBAction)togglePaused:(id)sender {
+    [self.rtspViewController toggleVideoPaused];
+}
+
+- (BOOL)validateUserInterfaceItem:(NSObject<NSValidatedUserInterfaceItem> *)item {
+    
+    if ([item isKindOfClass:[NSMenuItem class]]) {
+        NSMenuItem *menu = (NSMenuItem *)item;
+        if ([menu action] == @selector(togglePaused:)) {
+            return [self.rtspViewController validateTogglePaused:menu];
+        }
+    }
+    return NO;
+}
+
 #pragma mark navigation
 
 - (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {

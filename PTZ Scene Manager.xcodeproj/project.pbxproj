@@ -45,6 +45,8 @@
 		94747E80297BB36C00309752 /* PSMSceneCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */; };
 		94747E82297BBD4800309752 /* PSMSceneCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */; };
 		94747E88297BC4F800309752 /* liblibvisca-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94747E87297BC4F800309752 /* liblibvisca-static.a */; };
+		94890E3C298275ED006EAB75 /* PSMOBSWebSocketController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */; };
+		94890E4029827619006EAB75 /* easywsclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94890E3F29827619006EAB75 /* easywsclient.cpp */; };
 		94C55AB7297CE96700D8C1DB /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 94C55AB6297CE96700D8C1DB /* Notes */; };
 		94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */; };
 /* End PBXBuildFile section */
@@ -113,6 +115,11 @@
 		94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMSceneCollectionItem.m; sourceTree = "<group>"; };
 		94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMSceneCollectionItem.xib; sourceTree = "<group>"; };
 		94747E87297BC4F800309752 /* liblibvisca-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibvisca-static.a"; sourceTree = "<group>"; };
+		94890D5E29809BE0006EAB75 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		94890E3A298275ED006EAB75 /* PSMOBSWebSocketController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMOBSWebSocketController.h; sourceTree = "<group>"; };
+		94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PSMOBSWebSocketController.mm; sourceTree = "<group>"; };
+		94890E3E29827619006EAB75 /* easywsclient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = easywsclient.hpp; sourceTree = "<group>"; };
+		94890E3F29827619006EAB75 /* easywsclient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = easywsclient.cpp; sourceTree = "<group>"; };
 		94C55AB6297CE96700D8C1DB /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		94C55AB8297D04B300D8C1DB /* LARClickableImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARClickableImageButton.h; sourceTree = "<group>"; };
 		94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARClickableImageButton.m; sourceTree = "<group>"; };
@@ -152,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				94747E57297B96A000309752 /* libvisca.h */,
+				94890D5E29809BE0006EAB75 /* .gitignore */,
 				94747E1F297B94F800309752 /* PTZ Scene Manager */,
 				94747E1E297B94F800309752 /* Products */,
 				94747E35297B952A00309752 /* Frameworks */,
@@ -190,6 +198,8 @@
 				946346C0297F5D000015BA8F /* PTZCameraStateViewController.h */,
 				946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */,
 				946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */,
+				94890E3A298275ED006EAB75 /* PSMOBSWebSocketController.h */,
+				94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */,
 				94747E5F297B971100309752 /* PTZProgressGroup.h */,
 				94747E60297B971100309752 /* PTZProgressGroup.m */,
 				94C55AB2297CB6A800D8C1DB /* Custom UI */,
@@ -205,6 +215,7 @@
 				9463827E29807F360015BA8F /* libbz2.tbd */,
 				9463827F29807F360015BA8F /* libiconv.tbd */,
 				9463828029807F360015BA8F /* libz.tbd */,
+				94890E3D29827601006EAB75 /* websocket */,
 				94638284298080BF0015BA8F /* ffmpeg RTSP */,
 				94747E65297B9C5F00309752 /* iniparser */,
 				94747E23297B94F900309752 /* Assets.xcassets */,
@@ -237,6 +248,15 @@
 				94747E70297B9C5F00309752 /* ObjCUtils.m */,
 			);
 			path = iniparser;
+			sourceTree = "<group>";
+		};
+		94890E3D29827601006EAB75 /* websocket */ = {
+			isa = PBXGroup;
+			children = (
+				94890E3F29827619006EAB75 /* easywsclient.cpp */,
+				94890E3E29827619006EAB75 /* easywsclient.hpp */,
+			);
+			name = websocket;
 			sourceTree = "<group>";
 		};
 		94C55AB2297CB6A800D8C1DB /* Custom UI */ = {
@@ -346,6 +366,7 @@
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
 				94747E74297B9C5F00309752 /* iniparser.c in Sources */,
 				946346CB297F5DE70015BA8F /* NSColorAdditions.m in Sources */,
+				94890E4029827619006EAB75 /* easywsclient.cpp in Sources */,
 				94747E73297B9C5F00309752 /* PTZSettingsFile.m in Sources */,
 				94747E80297BB36C00309752 /* PSMSceneCollectionItem.m in Sources */,
 				94747E77297B9C5F00309752 /* ObjCUtils.m in Sources */,
@@ -354,6 +375,7 @@
 				94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */,
 				94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */,
 				9463826E29807DF60015BA8F /* RTSPViewController.m in Sources */,
+				94890E3C298275ED006EAB75 /* PSMOBSWebSocketController.mm in Sources */,
 				94747E72297B9C5F00309752 /* dictionary.c in Sources */,
 				94747E22297B94F800309752 /* AppDelegate.m in Sources */,
 			);
