@@ -18,9 +18,11 @@
 #include <thread>
 #include <chrono>
 #include <atomic>
+#import <PTZ_Scene_Manager-Swift.h>
 
 NSString *PSMOBSSceneInputDidChange = @"PSMOBSSceneInputDidChange";
 NSString *PSMOBSSessionDidEnd = @"PSMOBSSessionDidEnd";
+NSString *PSMOBSSessionAuthorizationFailedKey = @"PSMOBSSessionAuthorizationFailedKey";
 static NSString *PSMOBSBundleID = @"com.obsproject.obs-studio";
 
 // a simple, thread-safe queue with (mostly) non-blocking reads and writes
@@ -106,6 +108,13 @@ typedef enum {
     
 } EventSubscription;
 
+typedef enum {
+    OBSStateNeverConnected = 0,
+    OBSStateWaitingForAuthorization,
+    OBSStateIdentified,
+    OBSStateDisconnected,
+} OBSState;
+
 @interface PSMOBSWebSocketController () {
     non_blocking::Queue<std::string> outgoing;
     non_blocking::Queue<std::string> incoming;
@@ -115,9 +124,17 @@ typedef enum {
 @property NSString *command;
 @property BOOL running;
 @property BOOL isObservingAppLaunch;
+// We don't get an error code, we just get disconnected.
+@property OBSAuthType authType;
+@property OBSState obsState;
+// Let the delegate know which kind of attempt failed
+@property BOOL authorizingWithKeychain;
 @property NSMutableDictionary *obsInputs;
 @property NSString *requestId;
-@property NSString *obsURL;
+@property NSString *obsURLString;
+@property NSURL *obsURL;
+@property NSString *obsAccount;
+@property NSData *obsPasswordData;
 
 @end
 
@@ -137,6 +154,7 @@ typedef enum {
     if (self) {
         // A unique ID for requests when we don't care about matching request with reply.
         _requestId = [[NSUUID new] UUIDString];
+        _obsAccount = @"OBSWebSocket";
         socketQueue = dispatch_queue_create("socketQueue", NULL);
     }
     return self;
@@ -175,12 +193,13 @@ typedef enum {
 
 // Called by AppDelegate at launch.
 - (void)connectToServer:(NSString *)urlString {
-    self.obsURL = urlString;
+    self.obsURLString = urlString;
+    self.obsURL = [NSURL URLWithString:urlString];
     if (self.connected) {
         return;
     }
     if ([self obsIsRunning]) {
-        [self runSocketFromURL:self.obsURL];
+        [self runSocketFromURL:self.obsURLString];
     } else {
         [self startObservingRunningApps];
     }
@@ -205,6 +224,71 @@ typedef enum {
                            @"d":@{@"rpcVersion":@(1),
                                   @"eventSubscriptions":@(ES_General | ES_Scenes)}};
     return [self convertToJSON:dict];
+}
+
+- (NSString *)jsonHelloReplyWithAuth:(NSString *)auth {
+    // This is a simple app; it only listens to scene changes.
+    NSDictionary *dict = @{@"op":@(1),
+                           @"d":@{@"rpcVersion":@(1),
+                                  @"authentication":auth,
+                                  @"eventSubscriptions":@(ES_General | ES_Scenes)}};
+    return [self convertToJSON:dict];
+}
+
+- (void)handleHello:(NSDictionary *)dict {
+    NSDictionary *data = dict[@"d"];
+    NSDictionary *auth = data[@"authentication"];
+    if (auth == nil) {
+        [self sendString:self.jsonHelloReply];
+        return;
+    }
+    NSString *authResponse = nil;
+    if (self.obsState != OBSStateWaitingForAuthorization) {
+        self.authType = OBSAuthTypePromptAttempt;
+        authResponse = [OBSAuth.shared obsSecretFromKeychain:auth url:self.obsURL account:self.obsAccount];
+    };
+    
+    self.obsState = OBSStateWaitingForAuthorization;
+    self.obsPasswordData = nil;
+    if (authResponse) {
+        self.authType = OBSAuthTypeKeychainAttempt;
+        [self sendString:[self jsonHelloReplyWithAuth:authResponse]];
+    } else {
+        if (self.authType == OBSAuthTypeKeychainAttempt || self.authType == OBSAuthTypePromptFailed) {
+            self.authType = OBSAuthTypePromptAttempt;
+        }
+        [self.delegate requestOBSWebSocketPasswordWithPrompt:self.authType onDone:^(NSString *password) {
+            if ([password length] == 0) {
+                return;
+            }
+            NSString *authResponse = [OBSAuth.shared obsSecret:auth password:password];
+
+            if (authResponse != nil) {
+                self.obsPasswordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+                [self sendString:[self jsonHelloReplyWithAuth:authResponse]];
+            }
+        }];
+    }
+}
+
+- (void)handleIdentified:(NSDictionary *)dict {
+    self.obsState = OBSStateIdentified;
+    if ([self.obsInputs count] > 0) {
+        [self getSourceActive];
+    }
+    if (self.obsPasswordData != nil) {
+        [self.delegate requestOBSWebSocketKeychainPermission:^(BOOL allowed) {
+            if (!allowed) {
+                self.obsPasswordData = nil;
+                return;
+            }
+            dispatch_queue_t temp = dispatch_queue_create("temp", NULL);
+            dispatch_async(temp, ^() {
+                [OBSAuth.shared setPassword:self.obsPasswordData url:self.obsURL account:self.obsAccount];
+                self.obsPasswordData = nil;
+            });
+        }];
+    }
 }
 
 - (NSString *)jsonGetSourceActive:(NSString *)sourceName {
@@ -297,12 +381,10 @@ typedef enum {
     switch ([opObj integerValue]) {
         case Op_Hello:
             self.connected = YES;
-            [self sendString:self.jsonHelloReply];
+            [self handleHello:dict];
             break;
         case Op_Identified:
-            if ([self.obsInputs count] > 0) {
-                [self getSourceActive];
-            }
+            [self handleIdentified:dict];
             break;
         case Op_Event:
             [self handleEventResponse:dict];
@@ -325,7 +407,7 @@ typedef enum {
     NSDictionary *dict = note.userInfo;
     NSRunningApplication *app = dict[NSWorkspaceApplicationKey];
     if ([app.bundleIdentifier isEqualToString:PSMOBSBundleID]) {
-        [self runSocketFromURL:self.obsURL];
+        [self runSocketFromURL:self.obsURLString];
     }
 }
 
@@ -351,11 +433,23 @@ typedef enum {
 - (void)connectionDidEnd {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.connected = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:PSMOBSSessionDidEnd
-                                        object:nil
-                                      userInfo:nil];
-        // OBS may be quitting, so don't check if it's currently running.
-        [self startObservingRunningApps];
+        if (self.obsState == OBSStateWaitingForAuthorization) {
+            if (self.authType == OBSAuthTypeKeychainAttempt) {
+                self.authType = OBSAuthTypeKeychainFailed;
+            } else {
+                self.authType = OBSAuthTypePromptFailed;
+            }
+            [self.delegate authorizeOBSWebSocketFailed];
+        } else {
+            // We weren't waiting for auth, so assume a disconnect.
+            self.obsState = OBSStateDisconnected;
+            // TODO: Can we test whether it's running, or do we need a delay?
+            [self startObservingRunningApps];
+        }
+        [[NSNotificationCenter defaultCenter]
+             postNotificationName:PSMOBSSessionDidEnd
+             object:nil
+             userInfo:@{PSMOBSSessionAuthorizationFailedKey : @(self.obsState)}];
     });
 }
 

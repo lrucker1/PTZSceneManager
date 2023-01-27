@@ -15,13 +15,12 @@ Click twice trick for the editable labels. If Finder can do it so can I.
 
 Yes! obs-websocket to find out which camera is hot.
 
-Make the CameraState all instant-apply? Or apply buttons everywhere? Or is it fine like it is.
-
-Move the connect button to the toolbar, and make it hidden by default? Or a popup on the red dot.
+The extra controls prefs are not per-camera, because the nib binds directly to userDefaults. Maybe use the magic prefCamera defaults.
 
 Prefs:
 Configure cameras
  - Import from PTZOptics settings.ini
-OBS WebSockets - enabled, password, URL.
+OBS WebSockets - enabled, password, URL, "account" (optional), delete keychain.
 
-Pause/Resume video menu item.
+Menu item for connecting to OBS.
+

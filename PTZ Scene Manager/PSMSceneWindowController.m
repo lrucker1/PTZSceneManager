@@ -60,6 +60,14 @@ typedef enum {
 
 @implementation PSMSceneWindowController
 
++ (void)initialize {
+    [super initialize];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:
+     @{@"showAutofocusControls":@(YES),
+       @"showMotionSyncControls":@(NO),
+     }];
+}
+
 + (NSSet *)keyPathsForValuesAffectingValueForKey: (NSString *)key // IN
 {
     NSMutableSet *keyPaths = [NSMutableSet set];
@@ -187,11 +195,14 @@ typedef enum {
         if ([menu action] == @selector(togglePaused:)) {
             return [self.rtspViewController validateTogglePaused:menu];
         }
+    } else if ([item isKindOfClass:[NSToolbarItem class]]) {
+        // We have one toolbar item and it's always on.
+        return YES;
     }
-    return NO;
+   return NO;
 }
 
-#pragma mark navigation
+#pragma mark camera
 
 - (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {
     NSMutableArray *array = [NSMutableArray array];
@@ -351,6 +362,15 @@ typedef enum {
 - (IBAction)doToggleAutofocus:(id)sender {
     // Bindings have already updated the value.
     [self.camera applyFocusMode:nil];
+}
+
+- (IBAction)doMotionSyncOnOff:(id)sender {
+    NSSegmentedControl *control = (NSSegmentedControl *)sender;
+    if (control.indexOfSelectedItem == 0) {
+        [self.camera applyMotionSyncOn:nil];
+    } else {
+        [self.camera applyMotionSyncOff:nil];
+    }
 }
 
 #pragma mark collection

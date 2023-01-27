@@ -58,7 +58,43 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
     return YES;
 }
 
+#pragma mark OBS connection
+
 - (void)connectToOBS {
+    [[PSMOBSWebSocketController defaultController] setDelegate:self];
+    [[PSMOBSWebSocketController defaultController] connectToServer:@"ws://localhost:4455"];
+}
+
+- (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock {
+    NSAlert *alert = [[NSAlert alloc] init];
+    // TODO: Use the authType to customize the message type:
+    // prompt attempt (no previous errors), keychain attempt failed, previous prompt failed.
+    [alert setMessageText:@"Enter your OBS WebSockets password"];
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK button")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
+
+    NSTextField *input = [[NSSecureTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+    [input setStringValue:@""];
+
+    [alert setAccessoryView:input];
+    NSInteger button = [alert runModal];
+    if (button == NSAlertFirstButtonReturn) {
+        doneBlock([input stringValue]);
+    }
+}
+
+- (void)requestOBSWebSocketKeychainPermission:(void (^)(BOOL))doneBlock {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:NSLocalizedString(@"Would you like to save this password in your Keychain?", @"Ask for Keychain permission")];
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK button")];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
+    
+    NSInteger button = [alert runModal];
+    doneBlock((button == NSAlertFirstButtonReturn));
+}
+
+- (void)authorizeOBSWebSocketFailed {
+    // Try again; on the second try it'll ignore Keychain and prompt.
     [[PSMOBSWebSocketController defaultController] connectToServer:@"ws://localhost:4455"];
 }
 

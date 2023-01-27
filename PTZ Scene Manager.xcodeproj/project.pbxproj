@@ -49,6 +49,8 @@
 		94890E4029827619006EAB75 /* easywsclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94890E3F29827619006EAB75 /* easywsclient.cpp */; };
 		94C55AB7297CE96700D8C1DB /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 94C55AB6297CE96700D8C1DB /* Notes */; };
 		94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */; };
+		94CEBAEE2983494A00D3C8DC /* LARContextualActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */; };
+		94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +125,10 @@
 		94C55AB6297CE96700D8C1DB /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		94C55AB8297D04B300D8C1DB /* LARClickableImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARClickableImageButton.h; sourceTree = "<group>"; };
 		94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARClickableImageButton.m; sourceTree = "<group>"; };
+		94CEBAEC2983494A00D3C8DC /* LARContextualActionButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARContextualActionButton.h; sourceTree = "<group>"; };
+		94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARContextualActionButton.m; sourceTree = "<group>"; };
+		94CEBAF32983BF6500D3C8DC /* PTZ Scene Manager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PTZ Scene Manager-Bridging-Header.h"; sourceTree = "<group>"; };
+		94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBSAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +208,7 @@
 				94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */,
 				94747E5F297B971100309752 /* PTZProgressGroup.h */,
 				94747E60297B971100309752 /* PTZProgressGroup.m */,
+				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
 				94C55AB2297CB6A800D8C1DB /* Custom UI */,
 				94747E87297BC4F800309752 /* liblibvisca-static.a */,
 				9463826A29807D8D0015BA8F /* liblibRTSPClient.a */,
@@ -277,6 +284,9 @@
 				9463826F29807DFC0015BA8F /* RTSPPlayer.h */,
 				9463826D29807DF60015BA8F /* RTSPViewController.h */,
 				9463826C29807DF60015BA8F /* RTSPViewController.m */,
+				94CEBAEC2983494A00D3C8DC /* LARContextualActionButton.h */,
+				94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */,
+				94CEBAF32983BF6500D3C8DC /* PTZ Scene Manager-Bridging-Header.h */,
 			);
 			path = "Custom UI";
 			sourceTree = "<group>";
@@ -312,6 +322,7 @@
 				TargetAttributes = {
 					94747E1C297B94F800309752 = {
 						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1410;
 					};
 				};
 			};
@@ -364,6 +375,7 @@
 				94747E61297B971100309752 /* PTZProgressGroup.m in Sources */,
 				946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */,
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
+				94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */,
 				94747E74297B9C5F00309752 /* iniparser.c in Sources */,
 				946346CB297F5DE70015BA8F /* NSColorAdditions.m in Sources */,
 				94890E4029827619006EAB75 /* easywsclient.cpp in Sources */,
@@ -374,6 +386,7 @@
 				94747E75297B9C5F00309752 /* PTZIniParser.m in Sources */,
 				94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */,
 				94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */,
+				94CEBAEE2983494A00D3C8DC /* LARContextualActionButton.m in Sources */,
 				9463826E29807DF60015BA8F /* RTSPViewController.m in Sources */,
 				94890E3C298275ED006EAB75 /* PSMOBSWebSocketController.mm in Sources */,
 				94747E72297B9C5F00309752 /* dictionary.c in Sources */,
@@ -509,10 +522,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "PTZ Scene Manager/PTZ_Scene_Manager.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 92RP9V4XB5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -540,6 +555,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "PTZ Scene Manager/Custom UI/PTZ Scene Manager-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -548,10 +566,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "PTZ Scene Manager/PTZ_Scene_Manager.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 92RP9V4XB5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -579,6 +599,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "PTZ Scene Manager/Custom UI/PTZ Scene Manager-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

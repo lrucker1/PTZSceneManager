@@ -124,6 +124,8 @@ typedef void (^PTZSnapshotFetchDoneBlock)( NSData * _Nullable imageData);
 - (void)applyFocusNearWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
 - (void)applyFocusMode:(PTZDoneBlock _Nullable)doneBlock;
 - (void)applyFocusValue:(PTZDoneBlock _Nullable)doneBlock;
+- (void)applyMotionSyncOn:(PTZDoneBlock _Nullable)doneBlock;
+- (void)applyMotionSyncOff:(PTZDoneBlock _Nullable)doneBlock;
 - (void)pantiltHome:(PTZDoneBlock _Nullable)doneBlock;
 - (void)pantiltReset:(PTZDoneBlock _Nullable)doneBlock;
 - (void)memoryRecall:(NSInteger)scene onDone:(PTZDoneBlock _Nullable)doneBlock;

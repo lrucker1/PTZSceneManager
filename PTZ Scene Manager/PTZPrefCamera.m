@@ -83,6 +83,22 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
     [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
 }
 
+- (BOOL)showAutofocusControls {
+    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
+}
+
+- (void)setShowAutofocusControls:(BOOL)value {
+    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
+}
+
+- (BOOL)showMotionSyncControls {
+    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
+}
+
+- (void)setShowMotionSyncControls:(BOOL)value {
+    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
+}
+
 - (NSString *)prefKeyForKey:(NSString *)key {
     return [NSString stringWithFormat:@"[%@].%@", self.cameraname, key];
 }

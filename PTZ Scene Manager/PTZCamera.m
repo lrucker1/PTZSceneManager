@@ -380,6 +380,32 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
+- (void)applyMotionSyncOn:(PTZDoneBlock _Nullable)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = VISCA_set_motionsync_on(&self->_iface, &self->_camera) == VISCA_SUCCESS;
+            [self callDoneBlock:doneBlock success:success];
+        });
+    }];
+}
+
+- (void)applyMotionSyncOff:(PTZDoneBlock _Nullable)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = VISCA_set_motionsync_off(&self->_iface, &self->_camera) == VISCA_SUCCESS;
+            [self callDoneBlock:doneBlock success:success];
+        });
+    }];
+}
+
 // libvisca's example CLI enforces a range (1000-40959), which I can only find in Sony doc. Also Sony defines it as 0x1000-0x9FFF, and while 0x9fff is 40959, 0x1000 is not 1000, so...
 - (void)applyFocusValue:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {

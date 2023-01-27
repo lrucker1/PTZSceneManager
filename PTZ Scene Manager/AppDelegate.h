@@ -6,12 +6,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PSMOBSWebSocketController.h"
 
 @class PTZSettingsFile;
 
 void PTZLog(NSString *format, ...);
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate>
 
 @property (strong) PTZSettingsFile *sourceSettings;
 @property NSString *ptzopticsSettingsFilePath;
