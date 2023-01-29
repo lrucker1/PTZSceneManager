@@ -442,6 +442,7 @@
         </window>
         <userDefaultsController representsSharedInstance="YES" id="osl-3m-Fqe"/>
         <arrayController objectClassName="PTZPrefCamera" id="HlL-0u-lFM" userLabel="Camera Array">
+            <classReference key="objectClass" className="PTZPrefCamera"/>
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="cameras" id="ze8-Md-mc7"/>
             </connections>

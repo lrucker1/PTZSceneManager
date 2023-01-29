@@ -53,6 +53,7 @@
 		94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */; };
 		94CEBAFB2984934200D3C8DC /* PSMAppPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAF92984934200D3C8DC /* PSMAppPreferencesWindowController.m */; };
 		94CEBAFC2984934200D3C8DC /* PSMAppPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */; };
+		94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,6 +135,8 @@
 		94CEBAF82984934200D3C8DC /* PSMAppPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMAppPreferencesWindowController.h; sourceTree = "<group>"; };
 		94CEBAF92984934200D3C8DC /* PSMAppPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMAppPreferencesWindowController.m; sourceTree = "<group>"; };
 		94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMAppPreferencesWindowController.xib; sourceTree = "<group>"; };
+		94CEBAFD2986256C00D3C8DC /* PTZCameraSceneRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZCameraSceneRange.h; sourceTree = "<group>"; };
+		94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTZCameraSceneRange.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +201,8 @@
 				94747E5C297B970100309752 /* PTZCameraConfig.m */,
 				94747E79297B9D5A00309752 /* PTZPrefCamera.h */,
 				94747E78297B9D5A00309752 /* PTZPrefCamera.m */,
+				94CEBAFD2986256C00D3C8DC /* PTZCameraSceneRange.h */,
+				94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */,
 				94747E30297B951200309752 /* PSMSceneWindowController.h */,
 				94747E31297B951200309752 /* PSMSceneWindowController.m */,
 				94747E32297B951200309752 /* PSMSceneWindowController.xib */,
@@ -384,6 +389,7 @@
 				946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */,
 				94747E61297B971100309752 /* PTZProgressGroup.m in Sources */,
 				946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */,
+				94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */,
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
 				94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */,
 				94747E74297B9C5F00309752 /* iniparser.c in Sources */,

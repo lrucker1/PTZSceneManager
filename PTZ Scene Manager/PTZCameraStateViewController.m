@@ -9,6 +9,7 @@
 #import "PTZCamera.h"
 #import "PTZPrefCamera.h"
 #import "PTZCameraConfig.h"
+#import "PTZCameraSceneRange.h"
 #import "NSWindowAdditions.h"
 #import "PTZOutlineViewDictionaryDataSource.h"
 #import "libvisca.h"
@@ -69,6 +70,8 @@ typedef enum _ExposureModes {
 @property (strong) PTZOutlineViewDictionary *outlineData;
 @property NSArray *panValues, *tiltValues, *zoomValues, *focusValues, *presetSpeedValues;
 @property NSInteger firstVisibleScene, lastVisibleScene;
+@property IBOutlet NSArrayController *sceneRangeController;
+@property IBOutlet NSTableView *sceneRangeTableView;
 
 @end
 
@@ -93,10 +96,7 @@ typedef enum _ExposureModes {
     [self generateArrays];
     [self loadLocalWBPrefs];
     [self loadLocalExposurePrefs];
-    [self addObserver:self
-           forKeyPath:@"cameraState.exposureMode"
-              options:0
-              context:&selfType];
+    [self loadSceneRangeFromPrefs];
     self.outlineData = [[PTZOutlineViewDictionary alloc]
                         initWithDictionary:@{}
                                      target:self
@@ -105,6 +105,12 @@ typedef enum _ExposureModes {
     [self.exposureDataOutlineView setDelegate:_outlineData];
     self.firstVisibleScene = self.prefCamera.firstVisibleScene;
     self.lastVisibleScene = self.prefCamera.lastVisibleScene;
+//    self.sceneRangeTableView.doubleAction = @selector(applySceneRange:);
+    [self addObserver:self
+           forKeyPath:@"cameraState.exposureMode"
+              options:0
+              context:&selfType];
+    [self addObserver:self forKeyPath:@"sceneRangeController.arrangedObjects" options:0 context:&selfType];
 }
 
 - (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {
@@ -952,6 +958,10 @@ MAKE_CAN_SET_METHOD(BWMode)
 
 #pragma mark Scenes
 
+- (void)mocDidChangeNotification:(NSNotification *)note {
+    NSLog(@"delta %@", [note object]);
+}
+
 - (IBAction)applySceneRange:(id)sender {
     // Force an active textfield to end editing so we get the current value, then put it back when we're done.
     NSView *view = (NSView *)sender;
@@ -1004,6 +1014,46 @@ MAKE_CAN_SET_METHOD(BWMode)
     self.prefCamera.lastVisibleScene = max;
 }
 
+- (IBAction)addSceneRange:(id)sender {
+    PTZCameraSceneRange *csRange = [PTZCameraSceneRange new];
+    NSInteger len = self.lastVisibleScene - self.firstVisibleScene + 1;
+    csRange.range = NSMakeRange(self.firstVisibleScene, len);
+    [self.sceneRangeController addObject:csRange];
+}
+
+- (IBAction)applySelectedSceneRange:(id)sender {
+    PTZCameraSceneRange *csRange = [[self.sceneRangeController selectedObjects] firstObject];
+    if (csRange) {
+        NSInteger start = csRange.range.location;
+        self.prefCamera.firstVisibleScene = start;
+        self.prefCamera.lastVisibleScene = start + csRange.range.length + 1;
+        // TODO: observe and update
+        self.firstVisibleScene = self.prefCamera.firstVisibleScene;
+        self.lastVisibleScene = self.prefCamera.lastVisibleScene;
+    }
+}
+
+- (void)saveSceneRangeToPrefs {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self.sceneRangeController arrangedObjects] requiringSecureCoding:YES error:nil];
+    if (data != nil) {
+        [self.prefCamera setPrefValue:data forKey:@"SceneRangeArray"];
+    }
+}
+
+- (void)loadSceneRangeFromPrefs {
+    NSData *data = [self.prefCamera prefValueForKey:@"SceneRangeArray"];
+    if (data == nil) {
+        return;
+    }
+    NSArray *array = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:[PTZCameraSceneRange class] fromData:data error:nil];
+    if (array != nil) {
+        [self.sceneRangeController addObjects:array];
+    }
+}
+
+- (IBAction)sceneRangeNameChanged:(id)sender {
+    [self saveSceneRangeToPrefs];
+}
 #pragma mark KVO
 
 /*
@@ -1022,6 +1072,8 @@ MAKE_CAN_SET_METHOD(BWMode)
                             context:context];
    } else if ([keyPath isEqualToString:@"cameraState.exposureMode"]) {
        [self updateExposureDictionary];
+   } else if ([keyPath isEqualToString:@"sceneRangeController.arrangedObjects"]) {
+               [self saveSceneRangeToPrefs];
    }
 }
 

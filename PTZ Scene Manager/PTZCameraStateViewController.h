@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class PTZPrefCamera;
 
-@interface PTZCameraStateViewController : NSViewController <PTZCameraWBModeDelegate, PTZOutlineViewTarget>
+@interface PTZCameraStateViewController : NSViewController <PTZCameraWBModeDelegate, PTZOutlineViewTarget, NSTableViewDelegate>
 
 @property PTZCamera *cameraState;
 @property PTZPrefCamera *prefCamera;

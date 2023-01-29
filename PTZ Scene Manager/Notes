@@ -20,6 +20,7 @@ The extra controls prefs are not per-camera, because the nib binds directly to u
 Prefs:
 Configure cameras
  - Import from PTZOptics settings.ini
+ - set PTZOptics brand or not.
 
 Should localhost be saved as an "Internet" password?
 
