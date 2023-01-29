@@ -45,9 +45,10 @@
 #endif
 
 - (BOOL)isValidSceneIndex:(NSInteger)index {
+    // 0 is reserved for Home.
     if (self.cameratype == VISCA_IFACE_CAM_PTZOPTICS) {
-        if ((index >= 0 && index < 90) ||
-            (index > 100 && index < 255) ) {
+        if ((index > 0 && index < 90) ||
+            (index > 100 && index <= self.maxSceneIndex) ) {
             return YES;
         }
         return NO;

@@ -61,6 +61,8 @@ import CryptoKit
     @objc func setPassword(_ password: Data, url: URL, account: String) {
         guard let server = url.host else {return}
         guard let port = url.port else {return}
+        // Try to delete, because set will fail if it exists.
+        deletePassword(url, account: account)
         let query: [String: Any] = [
             kSecClass as String: kSecClassInternetPassword,
             kSecAttrServer as String: server,
@@ -75,6 +77,7 @@ import CryptoKit
         guard status == errSecDuplicateItem || status == errSecSuccess else {
             return
         }
+        NSLog("setPassword error %d", status)
     }
 
     func getPassword(url: URL, account: String) -> Data? {
@@ -121,7 +124,7 @@ import CryptoKit
         return extractedData as? Data
     }
 
-    func delete(service: String, account: String) throws {
+    func deletePassword(service: String, account: String) throws {
         // 1. create the query dictionary
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -134,7 +137,7 @@ import CryptoKit
         // 3. handle the result
     }
  
-    func delete(url: URL, account: String) {
+    @objc func deletePassword(_ url: URL, account: String) {
         guard let server = url.host else {return}
         guard let port = url.port else {return}
         // 1. create the query dictionary
@@ -153,6 +156,8 @@ import CryptoKit
 }
 
 extension String {
+    //  Yes, it probably should use CryptoKit, but the doc for CryptoKit assumes you know CryptoKit.
+    
     var sha256:String? {
         guard let stringData = self.data(using: String.Encoding.utf8) else { return nil }
         return digest(input: stringData as NSData).base64EncodedString(options: [])

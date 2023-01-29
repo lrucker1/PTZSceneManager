@@ -24,13 +24,14 @@ typedef enum {
 
 - (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock;
 - (void)requestOBSWebSocketKeychainPermission:(void (^)(BOOL))doneBlock;
-- (void)authorizeOBSWebSocketFailed;
 
 @end
 
 extern NSString *PSMOBSSceneInputDidChange;
 extern NSString *PSMOBSSessionDidEnd;
 extern NSString *PSMOBSSessionAuthorizationFailedKey;
+extern NSString *PSMOBSAutoConnect;
+extern NSString *PSMOBSURLString;
 
 @interface PSMOBSWebSocketController : NSObject
 
@@ -40,7 +41,8 @@ extern NSString *PSMOBSSessionAuthorizationFailedKey;
 + (PSMOBSWebSocketController *)defaultController;
 
 - (void)requestNotificationsForCamera:(PTZPrefCamera *)camera;
-- (void)connectToServer:(NSString *)urlString;
+- (void)connectToServer;
+- (void)deleteKeychainPasswords;
 
 @end
 

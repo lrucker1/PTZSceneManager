@@ -21,6 +21,9 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
        PSM_TiltPlusSpeed:@(5),
        PSM_ZoomPlusSpeed:@(3),
        PSM_FocusPlusSpeed:@(3),
+       @"firstVisibleScene":@(1),
+       @"lastVisibleScene":@(9),
+       @"maxColumnCount":@(3),
        @"resizable":@(YES),
      }];
 }
@@ -51,38 +54,28 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
 
 #pragma mark defaults
 
-- (NSInteger)panPlusSpeed {
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
+// Macros go through the KeyWithSelector variants because we know they have prefixes, and "remove" is not a special word like "set" is.
+
+#define PREF_VALUE_NSINT_ACCESSORS(_prop, _Prop) \
+- (NSInteger)_prop {  \
+    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue]; \
+} \
+- (void)set##_Prop:(NSInteger)value { \
+    [self setPrefValue:@(value) forKeyWithSelector:NSStringFromSelector(_cmd)]; \
+} \
+- (void)remove##_Prop { \
+    [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
 }
 
-- (void)setPanPlusSpeed:(NSInteger)value {
-    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
-}
+PREF_VALUE_NSINT_ACCESSORS(panPlusSpeed, PanPlusSpeed)
+PREF_VALUE_NSINT_ACCESSORS(tiltPlusSpeed, TiltPlusSpeed)
+PREF_VALUE_NSINT_ACCESSORS(zoomPlusSpeed, ZoomPlusSpeed)
+PREF_VALUE_NSINT_ACCESSORS(focusPlusSpeed, FocusPlusSpeed)
+PREF_VALUE_NSINT_ACCESSORS(firstVisibleScene, FirstVisibleScene)
+PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
+PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 
-- (NSInteger)tiltPlusSpeed {
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
-}
-
-- (void)setTiltPlusSpeed:(NSInteger)value {
-    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
-}
-
-- (NSInteger)zoomPlusSpeed {
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
-}
-
-- (void)setZoomPlusSpeed:(NSInteger)value {
-    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
-}
-
-- (NSInteger)focusPlusSpeed {
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
-}
-
-- (void)setFocusPlusSpeed:(NSInteger)value {
-    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
-}
-
+#undef PREF_VALUE_NSINT_ACCESSORS
 - (BOOL)showAutofocusControls {
     return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
 }
@@ -108,17 +101,46 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
     return [[NSUserDefaults standardUserDefaults] objectForKey:camKey] ?: [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 
-- (void)setPrefValue:(id)obj forKey:(NSString *)key {
-    // Convert setFoo: to foo
-    if ([key hasPrefix:@"set"] && [key hasSuffix:@":"] && [key length] > 5) {
-        // Take off the "setF" and ":", convert the F to f.
-        NSString *prefix = [key substringToIndex:4];
-        NSString *firstChar = [prefix substringFromIndex:3];
-        NSString *suffix = [key substringWithRange:NSMakeRange(4, [key length] - 5)];
-        key = [NSString stringWithFormat:@"%@%@", [firstChar lowercaseString], suffix];
+// Convert prefixFoo/prefixFoo: to foo. foo: is returned unchanged.
+- (NSString *)removePrefix:(NSString *)basePrefix fromKey:(NSString *)key {
+    NSInteger len = [basePrefix length];
+    BOOL hasPrefix = [key hasPrefix:basePrefix];
+    if (!hasPrefix) {
+        return key;
     }
+    BOOL hasColon = [key hasSuffix:@":"];
+    NSInteger testLength = len + 1 + (hasColon ? 1 : 0);
+    // Take off the "setF" and ":", convert the F to f.
+    NSString *prefix = [key substringToIndex:len+1];
+    NSString *firstChar = [prefix substringFromIndex:len];
+    NSString *suffix = [key substringWithRange:NSMakeRange(len+1, [key length] - testLength)];
+    key = [NSString stringWithFormat:@"%@%@", [firstChar lowercaseString], suffix];
+    return key;
+}
+
+- (void)setPrefValue:(id)obj forKeyWithSelector:(NSString *)key {
+    // Convert setFoo: to foo
+    key = [self removePrefix:@"set" fromKey:key];
     NSString *camKey = [self prefKeyForKey:key];
     [[NSUserDefaults standardUserDefaults] setObject:obj forKey:camKey];
+}
+
+- (void)setPrefValue:(id)obj forKey:(NSString *)key {
+     NSString *camKey = [self prefKeyForKey:key];
+    [[NSUserDefaults standardUserDefaults] setObject:obj forKey:camKey];
+}
+
+- (void)removePrefValueForKeyWithSelector:(NSString *)key {
+    // Convert removeFoo to foo
+    key = [self removePrefix:@"remove" fromKey:key];
+    [self removePrefValueForKey:key];
+}
+
+- (void)removePrefValueForKey:(NSString *)key {
+    NSString *camKey = [self prefKeyForKey:key];
+    [self willChangeValueForKey:camKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:camKey];
+    [self didChangeValueForKey:camKey];
 }
 
 @end

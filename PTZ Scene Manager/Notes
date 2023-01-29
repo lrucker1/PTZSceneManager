@@ -20,7 +20,11 @@ The extra controls prefs are not per-camera, because the nib binds directly to u
 Prefs:
 Configure cameras
  - Import from PTZOptics settings.ini
-OBS WebSockets - enabled, password, URL, "account" (optional), delete keychain.
 
-Menu item for connecting to OBS.
+Should localhost be saved as an "Internet" password?
 
+Named ranges: "Christmas: C1:70-80, C2:70-73, C3:1-9"
+ - aha, that's what NSRange to/from string is for.
+Per-camera and global
+
+Add Export to PacketSender to this app.

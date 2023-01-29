@@ -23,6 +23,10 @@
 NSString *PSMOBSSceneInputDidChange = @"PSMOBSSceneInputDidChange";
 NSString *PSMOBSSessionDidEnd = @"PSMOBSSessionDidEnd";
 NSString *PSMOBSSessionAuthorizationFailedKey = @"PSMOBSSessionAuthorizationFailedKey";
+NSString *PSMOBSAutoConnect = @"OBSAutoConnect";
+NSString *PSMOBSURLString = @"OBSURLString";
+NSString *PSMOBSAccountName = @"OBSAccountName";
+
 static NSString *PSMOBSBundleID = @"com.obsproject.obs-studio";
 
 // a simple, thread-safe queue with (mostly) non-blocking reads and writes
@@ -109,7 +113,7 @@ typedef enum {
 } EventSubscription;
 
 typedef enum {
-    OBSStateNeverConnected = 0,
+    OBSStateWaitingToConnect = 0,
     OBSStateWaitingForAuthorization,
     OBSStateIdentified,
     OBSStateDisconnected,
@@ -170,8 +174,27 @@ typedef enum {
     return NO;
 }
 
+- (void)updateAccountInfo {
+    NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+    NSString *urlString = [defs stringForKey:PSMOBSURLString];
+    self.obsURLString = urlString;
+    self.obsURL = [NSURL URLWithString:urlString];
+    self.obsAccount = [defs stringForKey:PSMOBSAccountName];
+    if ([self.obsAccount length] == 0) {
+        self.obsAccount = @"WebSockets";
+    }
+}
+
+- (void)deleteKeychainPasswords {
+    [self updateAccountInfo];
+    dispatch_queue_t temp = dispatch_queue_create("temp", NULL);
+    dispatch_async(temp, ^() {
+        [OBSAuth.shared deletePassword:self.obsURL account:self.obsAccount];
+    });
+}
+
 - (void)startObservingRunningApps {
-    if (!self.isObservingAppLaunch) {
+    if (!self.isObservingAppLaunch && ![self obsIsRunning]) {
         [[[NSWorkspace sharedWorkspace] notificationCenter]
          addObserver:self
          selector:@selector(onSomeApplicationDidLaunch:)
@@ -191,10 +214,11 @@ typedef enum {
     }
 }
 
-// Called by AppDelegate at launch.
-- (void)connectToServer:(NSString *)urlString {
-    self.obsURLString = urlString;
-    self.obsURL = [NSURL URLWithString:urlString];
+// Called by AppDelegate. Clears the state machine, fetches latest account info.
+- (void)connectToServer {
+    [self updateAccountInfo];
+    self.authType = OBSAuthTypeUnknown;
+    self.obsState = OBSStateWaitingToConnect;
     if (self.connected) {
         return;
     }
@@ -434,17 +458,19 @@ typedef enum {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.connected = NO;
         if (self.obsState == OBSStateWaitingForAuthorization) {
+            NSLog(@"Connection ended while waiting for auth; retrying with prompt");
             if (self.authType == OBSAuthTypeKeychainAttempt) {
                 self.authType = OBSAuthTypeKeychainFailed;
             } else {
                 self.authType = OBSAuthTypePromptFailed;
             }
-            [self.delegate authorizeOBSWebSocketFailed];
+            // Try to reconnect without clearing state machine, which tells us why we are retrying.
+            [self runSocketFromURL:self.obsURLString];
         } else {
             // We weren't waiting for auth, so assume a disconnect.
             self.obsState = OBSStateDisconnected;
-            // TODO: Can we test whether it's running, or do we need a delay?
-            [self startObservingRunningApps];
+            // Give it time to quit
+            [self performSelector:@selector(startObservingRunningApps) withObject:nil afterDelay:1];
         }
         [[NSNotificationCenter defaultCenter]
              postNotificationName:PSMOBSSessionDidEnd

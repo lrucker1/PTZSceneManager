@@ -8,6 +8,7 @@
 #import "PSMSceneWindowController.h"
 #import "PTZCameraInt.h"
 #import "PTZPrefCamera.h"
+#import "PTZCameraConfig.h"
 #import "PSMCameraStateWindowController.h"
 #import "PSMSceneCollectionItem.h"
 #import "PTZSettingsFile.h"
@@ -55,7 +56,8 @@ typedef enum {
 @property BOOL showStaticSnapshot;
 @property IBOutlet NSBox *cameraBox;
 @property NSColor *boxColor;
-
+@property NSInteger itemCount;
+@property NSArray *sceneIndexes;
 @end
 
 @implementation PSMSceneWindowController
@@ -90,6 +92,9 @@ typedef enum {
     [self.collectionView registerClass:[PSMSceneCollectionItem class] forItemWithIdentifier:@"scene"];
     NSNib *nib = [[NSNib alloc] initWithNibNamed:@"PSMSceneCollectionItem" bundle:nil];
     [self.collectionView registerNib:nib forItemWithIdentifier:@"scene"];
+    [self updateColumnCount];
+    [self updateVisibleSceneRange];
+
     self.titlebarViewController.layoutAttribute = NSLayoutAttributeLeft;
     // Don't show static snapshots until we know whether we'll have a video.
     [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.cameraIP] onDone:^(BOOL success) {
@@ -100,10 +105,16 @@ typedef enum {
         }
     }];
     [self.window addTitlebarAccessoryViewController:self.titlebarViewController];
-    [self addObserver:self
-           forKeyPath:@"lastRecalledItem"
-              options:0
-              context:&selfType];
+    NSArray *keys = @[@"prefCamera.maxColumnCount",
+                      @"prefCamera.firstVisibleScene",
+                      @"prefCamera.lastVisibleScene",
+                      @"lastRecalledItem"];
+    for (NSString *key in keys) {
+        [self addObserver:self
+               forKeyPath:key
+                  options:0
+                  context:&selfType];
+    }
     [super awakeFromNib];
 }
 
@@ -144,9 +155,11 @@ typedef enum {
 }
 
 - (void)onOBSSessionDidEnd:(NSNotification *)note {
-    // Warning-orange means we used to know, but now we don't.
+    // Warning color means we used to know, but now we don't.
+    // Orange is too close to red. Grays don't stand out enough.
+    // Magenta stands out nicely while being distinct.
     // The first thing we do on reconnection is ask for scene input state.
-    self.cameraBox.fillColor = [NSColor systemOrangeColor];
+    self.cameraBox.fillColor = [NSColor magentaColor];
 }
 
 - (PTZCamera *)camera {
@@ -156,7 +169,6 @@ typedef enum {
 - (IBAction)reopenCamera:(id)sender {
     PTZCamera *camera = self.camera;
     [camera closeAndReload:^(BOOL gotCam) {
-            NSLog(@"Camera!");
         [self.collectionView reloadData];
         }];
 }
@@ -181,7 +193,7 @@ typedef enum {
     if (self.cameraStateWindowController == nil) {
         self.cameraStateWindowController = [[PSMCameraStateWindowController alloc] initWithPrefCamera:self.prefCamera];
     }
-    [self.cameraStateWindowController.window orderFront:nil];
+    [self.cameraStateWindowController.window makeKeyAndOrderFront:nil];
 }
 
 - (IBAction)togglePaused:(id)sender {
@@ -194,6 +206,9 @@ typedef enum {
         NSMenuItem *menu = (NSMenuItem *)item;
         if ([menu action] == @selector(togglePaused:)) {
             return [self.rtspViewController validateTogglePaused:menu];
+        }
+        if ([menu action] == @selector(showCameraStateWindow:)) {
+            return YES;
         }
     } else if ([item isKindOfClass:[NSToolbarItem class]]) {
         // We have one toolbar item and it's always on.
@@ -375,19 +390,50 @@ typedef enum {
 
 #pragma mark collection
 
+- (void)updateVisibleSceneRange {
+    NSInteger first = self.prefCamera.firstVisibleScene;
+    NSInteger last = self.prefCamera.lastVisibleScene;
+
+    if (last < first) {
+        NSLog(@"Bad scene range: %ld to %ld", first, last);
+        return;
+    }
+    NSMutableArray *array = [NSMutableArray array];
+    PTZCameraConfig *config = self.camera.cameraConfig;
+    for (NSInteger i = first; i <= last; i++) {
+        if ([config isValidSceneIndex:i]) {
+            [array addObject:@(i)];
+        }
+    }
+    // TODO: some UI to explain what happened if itemCount is zero.
+    NSInteger itemCount = [array count];
+    self.sceneIndexes = [NSArray arrayWithArray:array];
+    self.itemCount = itemCount;
+    [self.collectionView reloadData];
+}
+
+- (void)updateColumnCount {
+    NSInteger count = self.prefCamera.maxColumnCount;
+    if (count < 1) {
+        return;
+    }
+    NSCollectionViewGridLayout *layout = self.collectionView.collectionViewLayout;
+    layout.maximumNumberOfColumns = count;
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(NSCollectionView *)collectionView {
     return 1;
 }
 
 - (NSInteger)collectionView:(NSCollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return (section == 0) ? 9 : 0;
+    return (section == 0) ? self.itemCount : 0;
 }
 
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView
      itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger index = indexPath.item + 1;
-    NSString *devicename = self.prefCamera.devicename;
+    NSInteger index = [self.sceneIndexes[indexPath.item] integerValue];
+    NSString *devicename = self.prefCamera.devicename ;
     NSString *rootPath = [self.appDelegate ptzopticsDownloadsDirectory];
     NSString *filename = [NSString stringWithFormat:@"snapshot_%@%d.jpg", devicename, (int)index];
     NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
@@ -415,6 +461,11 @@ typedef enum {
                                change:change
                               context:context];
         return;
+    } else if (   [keyPath isEqualToString:@"prefCamera.firstVisibleScene"]
+               || [keyPath isEqualToString:@"prefCamera.lastVisibleScene"]) {
+        [self updateVisibleSceneRange];
+    } else if ([keyPath isEqualToString:@"prefCamera.maxColumnCount"]) {
+        [self updateColumnCount];
     } else if ([keyPath isEqualToString:@"lastRecalledItem"]) {
         if (self.showStaticSnapshot) {
             [self.rtspViewController setStaticImage:self.lastRecalledItem.image];

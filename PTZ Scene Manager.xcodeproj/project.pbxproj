@@ -51,6 +51,8 @@
 		94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */; };
 		94CEBAEE2983494A00D3C8DC /* LARContextualActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */; };
 		94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */; };
+		94CEBAFB2984934200D3C8DC /* PSMAppPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAF92984934200D3C8DC /* PSMAppPreferencesWindowController.m */; };
+		94CEBAFC2984934200D3C8DC /* PSMAppPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +131,9 @@
 		94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARContextualActionButton.m; sourceTree = "<group>"; };
 		94CEBAF32983BF6500D3C8DC /* PTZ Scene Manager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PTZ Scene Manager-Bridging-Header.h"; sourceTree = "<group>"; };
 		94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBSAuth.swift; sourceTree = "<group>"; };
+		94CEBAF82984934200D3C8DC /* PSMAppPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMAppPreferencesWindowController.h; sourceTree = "<group>"; };
+		94CEBAF92984934200D3C8DC /* PSMAppPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMAppPreferencesWindowController.m; sourceTree = "<group>"; };
+		94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMAppPreferencesWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +211,9 @@
 				946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */,
 				94890E3A298275ED006EAB75 /* PSMOBSWebSocketController.h */,
 				94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */,
+				94CEBAF82984934200D3C8DC /* PSMAppPreferencesWindowController.h */,
+				94CEBAF92984934200D3C8DC /* PSMAppPreferencesWindowController.m */,
+				94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */,
 				94747E5F297B971100309752 /* PTZProgressGroup.h */,
 				94747E60297B971100309752 /* PTZProgressGroup.m */,
 				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
@@ -355,6 +363,7 @@
 				94747E34297B951200309752 /* PSMSceneWindowController.xib in Resources */,
 				94747E24297B94F900309752 /* Assets.xcassets in Resources */,
 				94747E27297B94F900309752 /* MainMenu.xib in Resources */,
+				94CEBAFC2984934200D3C8DC /* PSMAppPreferencesWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */,
+				94CEBAFB2984934200D3C8DC /* PSMAppPreferencesWindowController.m in Sources */,
 				94747E7A297B9D5A00309752 /* PTZPrefCamera.m in Sources */,
 				94747E33297B951200309752 /* PSMSceneWindowController.m in Sources */,
 				946346C4297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m in Sources */,

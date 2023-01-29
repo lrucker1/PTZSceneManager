@@ -4,6 +4,12 @@
 //
 //  Created by Lee Ann Rucker on 1/20/23.
 //
+// Credits:
+// Icon <a href="https://www.flaticon.com/free-icons/ptz-camera" title="ptz camera icons">Ptz camera icons created by Freepik - Flaticon</a>
+// https://www.svgrepo.com/svg/51316/camera-viewfinder?edit=true
+//
+// TCP version of visca: https://github.com/norihiro/libvisca-ip
+// iniparser: https://github.com/ndevilla/iniparser
 
 #import "AppDelegate.h"
 #import "PSMSceneWindowController.h"
@@ -11,6 +17,7 @@
 #import "PTZSettingsFile.h"
 #import "PTZPrefCamera.h"
 #import "PSMOBSWebSocketController.h"
+#import "PSMAppPreferencesWindowController.h"
 
 static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 
@@ -18,6 +25,7 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 
 @property (strong) IBOutlet NSWindow *window;
 @property (strong) NSMutableSet *windowControllers;
+@property (strong) PSMAppPreferencesWindowController *prefsController;
 
 @end
 
@@ -25,6 +33,11 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 
 + (void)initialize {
     [super initialize];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:
+     @{PSMOBSAutoConnect:@(NO),
+       PSMOBSURLString:@"ws://localhost:4455",
+       @"WebSockets":@"WebSockets", // Prefs window textfield "Null Placeholder" key.
+     }];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:PTZ_SettingsFilePathKey] == nil) {
         NSString *path = [@"~/Library/Application Support/PTZOptics/settings.ini" stringByExpandingTildeInPath];
         if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
@@ -45,7 +58,10 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
         [wc.window orderFront:nil];
         [self.windowControllers addObject:wc];
     }
-    [self connectToOBS];
+    [[PSMOBSWebSocketController defaultController] setDelegate:self];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
+        [[PSMOBSWebSocketController defaultController] connectToServer];
+    }
 }
 
 
@@ -58,16 +74,24 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
     return YES;
 }
 
+- (IBAction)showPrefs:(id)sender {
+    if (self.prefsController == nil) {
+        self.prefsController = [PSMAppPreferencesWindowController new];
+    }
+    [self.prefsController.window makeKeyAndOrderFront:sender];
+  //  self.prefsController.window.restorationClass = [self class];
+}
+
 #pragma mark OBS connection
 
-- (void)connectToOBS {
-    [[PSMOBSWebSocketController defaultController] setDelegate:self];
-    [[PSMOBSWebSocketController defaultController] connectToServer:@"ws://localhost:4455"];
+- (IBAction)connectToOBS:(id)sender {
+    // TODO: make it a toggle item connect/disconnect?
+    [[PSMOBSWebSocketController defaultController] connectToServer];
 }
 
 - (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock {
     NSAlert *alert = [[NSAlert alloc] init];
-    // TODO: Use the authType to customize the message type:
+    // TODO: Use the authType to customize the message text:
     // prompt attempt (no previous errors), keychain attempt failed, previous prompt failed.
     [alert setMessageText:@"Enter your OBS WebSockets password"];
     [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK button")];
@@ -93,10 +117,7 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
     doneBlock((button == NSAlertFirstButtonReturn));
 }
 
-- (void)authorizeOBSWebSocketFailed {
-    // Try again; on the second try it'll ignore Keychain and prompt.
-    [[PSMOBSWebSocketController defaultController] connectToServer:@"ws://localhost:4455"];
-}
+#pragma mark PTZOptics
 
 - (NSString *)ptzopticsSettingsFilePath {
     return [[NSUserDefaults standardUserDefaults] stringForKey:PTZ_SettingsFilePathKey];
@@ -138,6 +159,10 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
     }
 
     self.sourceSettings = [[PTZSettingsFile alloc] initWithPath:path];
+}
+
+- (void)applyPrefChanges {
+    // TODO: modify camera list.
 }
 
 - (NSArray *)cameraList {

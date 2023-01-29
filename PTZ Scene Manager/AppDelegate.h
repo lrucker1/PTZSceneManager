@@ -21,6 +21,9 @@ void PTZLog(NSString *format, ...);
 - (NSString *)ptzopticsSettingsDirectory;
 - (NSString *)ptzopticsDownloadsDirectory;
 
+- (NSArray *)cameraList;
+
+- (void)applyPrefChanges;
 
 @end
 

@@ -7,6 +7,7 @@
 
 #import "PTZCameraStateViewController.h"
 #import "PTZCamera.h"
+#import "PTZPrefCamera.h"
 #import "PTZCameraConfig.h"
 #import "NSWindowAdditions.h"
 #import "PTZOutlineViewDictionaryDataSource.h"
@@ -67,6 +68,8 @@ typedef enum _ExposureModes {
 
 @property (strong) PTZOutlineViewDictionary *outlineData;
 @property NSArray *panValues, *tiltValues, *zoomValues, *focusValues, *presetSpeedValues;
+@property NSInteger firstVisibleScene, lastVisibleScene;
+
 @end
 
 @implementation PTZCameraStateViewController
@@ -100,6 +103,8 @@ typedef enum _ExposureModes {
                                    delegate:self];
     [self.exposureDataOutlineView setDataSource:_outlineData];
     [self.exposureDataOutlineView setDelegate:_outlineData];
+    self.firstVisibleScene = self.prefCamera.firstVisibleScene;
+    self.lastVisibleScene = self.prefCamera.lastVisibleScene;
 }
 
 - (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {
@@ -943,6 +948,60 @@ MAKE_CAN_SET_METHOD(BWMode)
 
 - (IBAction)updateImageCameraValues:(id)sender {
     [self.cameraState updateImageCameraValues:YES onDone:nil];
+}
+
+#pragma mark Scenes
+
+- (IBAction)applySceneRange:(id)sender {
+    // Force an active textfield to end editing so we get the current value, then put it back when we're done.
+    NSView *view = (NSView *)sender;
+    NSWindow *window = view.window;
+    NSView *first = [window ptz_currentEditingView];
+    if (first != nil) {
+        [window makeFirstResponder:window.contentView];
+    }
+    [self validateAndSetSceneRange];
+    if (first != nil) {
+        [window makeFirstResponder:first];
+    }
+}
+
+- (IBAction)resetSceneRange:(id)sender {
+    [self.prefCamera removeFirstVisibleScene];
+    [self.prefCamera removeLastVisibleScene];
+    // Reload the global/registered defaults.
+    self.firstVisibleScene = self.prefCamera.firstVisibleScene;
+    self.lastVisibleScene = self.prefCamera.lastVisibleScene;
+}
+
+- (void)validateAndSetSceneRange {
+    PTZCameraConfig *config = self.cameraState.cameraConfig;
+    NSInteger min = self.firstVisibleScene;
+    NSInteger max = self.lastVisibleScene;
+    BOOL isBad = NO;
+    if (min < 1) {
+        min = 1;
+        isBad = YES;
+    }
+    if (max < min) {
+        max = min;
+        isBad = YES;
+    }
+    if (min > max) {
+        min = max;
+        isBad = YES;
+    }
+    if (max > config.maxSceneIndex) {
+        max = config.maxSceneIndex;
+        isBad = YES;
+    }
+    if (isBad) {
+        NSBeep();
+        self.firstVisibleScene = min;
+        self.lastVisibleScene = max;
+    }
+    self.prefCamera.firstVisibleScene = min;
+    self.prefCamera.lastVisibleScene = max;
 }
 
 #pragma mark KVO

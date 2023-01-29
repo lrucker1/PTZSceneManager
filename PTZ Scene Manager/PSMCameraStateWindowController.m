@@ -27,8 +27,8 @@
     return self;
 }
 
-- (void)windowDidLoad {
-    [super windowDidLoad];
+- (void)awakeFromNib {
+    [super awakeFromNib];
     self.cameraStateViewController.cameraState = self.prefCamera.camera;
     self.cameraStateViewController.prefCamera = self.prefCamera;
     self.prefCamera.camera.delegate = self.cameraStateViewController;

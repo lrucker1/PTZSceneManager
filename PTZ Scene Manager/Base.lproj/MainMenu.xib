@@ -26,7 +26,11 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                <connections>
+                                    <action selector="showPrefs:" target="Voe-Tx-rLC" id="a44-n3-odq"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Camera Settings…" keyEquivalent="," id="aPu-RW-INn">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
@@ -626,6 +630,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mbL-60-Yyn"/>
+                            <menuItem title="Connect to OBS…" id="0Lc-bL-ceY">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="connectToOBS:" target="Voe-Tx-rLC" id="Zcn-ZF-TDj"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Pause Video" id="3T2-mr-C9N">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

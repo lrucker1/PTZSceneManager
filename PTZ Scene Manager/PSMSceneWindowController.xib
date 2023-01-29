@@ -36,9 +36,9 @@
                                 <collectionView id="6Fy-kw-0Au">
                                     <rect key="frame" x="0.0" y="0.0" width="488" height="158"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                    <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="5" maximumNumberOfColumns="3" id="kp8-LB-dax">
+                                    <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="100" maximumNumberOfColumns="3" id="kp8-LB-dax">
                                         <size key="minimumItemSize" width="75" height="75"/>
-                                        <size key="maximumItemSize" width="400" height="300"/>
+                                        <size key="maximumItemSize" width="1000" height="1000"/>
                                     </collectionViewGridLayout>
                                     <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
@@ -760,6 +760,17 @@
                             <outlet property="menu" destination="klU-rS-Arv" id="uuv-5d-18y"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W6n-RS-l9m">
+                        <rect key="frame" x="11" y="0.0" width="270" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="No scenes are available in the current range" id="Wor-Eg-1V7">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="hidden" keyPath="itemCount" id="QiO-pf-4Fn"/>
+                        </connections>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rN6-cr-0it" firstAttribute="leading" secondItem="Hfs-ZN-q2C" secondAttribute="leading" id="127-QG-BaQ"/>
@@ -775,12 +786,15 @@
                     <constraint firstItem="ERX-r8-LRb" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="10" id="WcT-bQ-HoI"/>
                     <constraint firstItem="aMY-R4-QWH" firstAttribute="top" secondItem="6XE-2j-qG2" secondAttribute="top" id="Xv0-0Y-gwM"/>
                     <constraint firstItem="QDe-sc-c7e" firstAttribute="leading" secondItem="rN6-cr-0it" secondAttribute="trailing" constant="8" symbolic="YES" id="b74-uQ-HnN"/>
+                    <constraint firstAttribute="bottom" secondItem="W6n-RS-l9m" secondAttribute="bottom" id="d7W-GS-JJS"/>
+                    <constraint firstItem="W6n-RS-l9m" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="gmY-hu-ghY"/>
                     <constraint firstItem="QDe-sc-c7e" firstAttribute="firstBaseline" secondItem="rN6-cr-0it" secondAttribute="firstBaseline" id="i76-v2-UfX"/>
                     <constraint firstItem="aMY-R4-QWH" firstAttribute="leading" secondItem="6XE-2j-qG2" secondAttribute="trailing" constant="8" id="jrw-4W-al9"/>
                     <constraint firstItem="6XE-2j-qG2" firstAttribute="top" secondItem="zuV-8a-7PM" secondAttribute="top" id="or1-Dn-ke5"/>
                     <constraint firstItem="6XE-2j-qG2" firstAttribute="leading" secondItem="zuV-8a-7PM" secondAttribute="trailing" constant="28" id="pPe-yh-fDg"/>
                     <constraint firstItem="zuV-8a-7PM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="15" id="q1s-6m-pwl"/>
                     <constraint firstAttribute="trailing" secondItem="AKA-9N-UDC" secondAttribute="trailing" constant="13" id="vz9-2U-nHR"/>
+                    <constraint firstItem="W6n-RS-l9m" firstAttribute="top" secondItem="ERX-r8-LRb" secondAttribute="bottom" constant="4" id="w5m-W4-ffZ"/>
                     <constraint firstItem="rN6-cr-0it" firstAttribute="top" secondItem="8yC-Mi-aW4" secondAttribute="bottom" constant="4" id="w98-Hl-Xbt"/>
                     <constraint firstItem="8yC-Mi-aW4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aMY-R4-QWH" secondAttribute="trailing" constant="20" symbolic="YES" id="xES-SM-0DU"/>
                     <constraint firstItem="tek-7C-MDv" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="yYU-v1-YcD"/>
