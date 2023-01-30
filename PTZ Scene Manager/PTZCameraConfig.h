@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property uint8_t cameratype;
 @property uint8_t protocol;
 @property NSInteger maxSceneIndex;
+@property (readonly) NSIndexSet *reservedSet;
 
 - (BOOL)isValidSceneIndex:(NSInteger)index;
 - (NSInteger)validateRangeOffset:(NSInteger)offset;

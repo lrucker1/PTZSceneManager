@@ -25,7 +25,14 @@ Configure cameras
 Should localhost be saved as an "Internet" password?
 
 Named ranges: "Christmas: C1:70-80, C2:70-73, C3:1-9"
- - aha, that's what NSRange to/from string is for.
 Per-camera and global
 
 Add Export to PacketSender to this app.
+
+Shrink the ui - scenes on left, controls on right, toggle control view visibility?
+
+Recall last selected scene option
+
+Text on the images.
+
+Home: Actual Home command, or recall last set scene?

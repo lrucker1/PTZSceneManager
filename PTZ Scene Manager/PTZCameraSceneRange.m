@@ -21,7 +21,7 @@
 }
 
 - (NSString *)prettyRange {
-    return NSStringFromRange(self.range);
+    return [NSString stringWithFormat:@"%ld–%ld", self.range.location, NSMaxRange(self.range) - 1];
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {

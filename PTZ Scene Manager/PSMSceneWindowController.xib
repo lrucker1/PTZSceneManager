@@ -29,7 +29,7 @@
                 <subviews>
                     <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-r8-LRb">
                         <rect key="frame" x="10" y="20" width="490" height="160"/>
-                        <clipView key="contentView" id="O1a-J2-dIf">
+                        <clipView key="contentView" drawsBackground="NO" id="O1a-J2-dIf">
                             <rect key="frame" x="1" y="1" width="488" height="158"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -40,7 +40,7 @@
                                         <size key="minimumItemSize" width="75" height="75"/>
                                         <size key="maximumItemSize" width="1000" height="1000"/>
                                     </collectionViewGridLayout>
-                                    <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="primaryBackgroundColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-2" id="i45-vH-UZ4"/>
                                         <outlet property="delegate" destination="-2" id="YEl-BS-JUv"/>
@@ -57,37 +57,25 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
-                        <rect key="frame" x="425" y="189" width="75" height="27"/>
-                        <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Cj-ON-NQ9">
+                    <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="pkd-fi-9pm">
+                        <rect key="frame" x="304" y="189" width="60" height="27"/>
+                        <buttonCell key="cell" type="push" title="Recall" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IIi-f9-PPF">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
-                        <color key="bezelColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                         <connections>
-                            <binding destination="-2" name="enabled" keyPath="lastRecalledItem" id="5hG-dP-tbZ">
+                            <binding destination="-2" name="enabled" keyPath="lastRecalledItem" id="s4d-Yd-SHb">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NSIsNotNil</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="-2" name="title" keyPath="lastRecalledItem.buttonTitle" id="buC-Ft-1PK"/>
+                            <binding destination="-2" name="title" keyPath="lastRecalledItem.sceneRecallButtonTitle" id="QXp-Cy-Lam">
+                                <dictionary key="options">
+                                    <string key="NSNullPlaceholder">Recall</string>
+                                </dictionary>
+                            </binding>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="749" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rN6-cr-0it">
-                        <rect key="frame" x="314" y="197" width="111" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="width" priority="750" constant="107" id="bAv-aJ-kai"/>
-                            <constraint firstAttribute="height" constant="16" id="eB4-6f-Hlu"/>
-                        </constraints>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="6cc-cg-cwR">
-                            <font key="font" usesAppearanceFont="YES"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                        <connections>
-                            <binding destination="-2" name="value" keyPath="lastRecalledItem.sceneName" id="QZD-Wl-gPM"/>
-                        </connections>
-                    </textField>
                     <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-8a-7PM" userLabel="PanTilt Grid View">
                         <rect key="frame" x="20" y="215" width="100" height="100"/>
                         <rows>
@@ -771,31 +759,50 @@
                             <binding destination="-2" name="hidden" keyPath="itemCount" id="QiO-pf-4Fn"/>
                         </connections>
                     </textField>
+                    <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
+                        <rect key="frame" x="454" y="189" width="46" height="27"/>
+                        <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Cj-ON-NQ9">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <color key="bezelColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                        <connections>
+                            <binding destination="-2" name="enabled" keyPath="lastRecalledItem" id="5hG-dP-tbZ">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSIsNotNil</string>
+                                </dictionary>
+                            </binding>
+                            <binding destination="-2" name="title" keyPath="lastRecalledItem.sceneSetButtonTitle" id="64B-Nv-Pq9">
+                                <dictionary key="options">
+                                    <string key="NSNullPlaceholder">Set</string>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="rN6-cr-0it" firstAttribute="leading" secondItem="Hfs-ZN-q2C" secondAttribute="leading" id="127-QG-BaQ"/>
                     <constraint firstAttribute="bottom" secondItem="ERX-r8-LRb" secondAttribute="bottom" constant="20" symbolic="YES" id="1T4-Cu-Jvb"/>
                     <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="150" id="1ck-ge-L64"/>
                     <constraint firstItem="8yC-Mi-aW4" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="4" id="3gH-Br-imj"/>
                     <constraint firstAttribute="trailing" secondItem="8yC-Mi-aW4" secondAttribute="trailing" constant="10" id="5Cs-XJ-Qh6"/>
+                    <constraint firstItem="pkd-fi-9pm" firstAttribute="leading" secondItem="8yC-Mi-aW4" secondAttribute="leading" id="6VP-vt-v2T"/>
                     <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="tek-7C-MDv" secondAttribute="bottom" constant="1" id="8JS-b1-H4d"/>
                     <constraint firstItem="zuV-8a-7PM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="8Uh-7y-3ag"/>
                     <constraint firstAttribute="bottom" secondItem="AKA-9N-UDC" secondAttribute="bottom" constant="3" id="8m0-hr-HeX"/>
                     <constraint firstAttribute="trailing" secondItem="ERX-r8-LRb" secondAttribute="trailing" constant="10" id="AR3-Qb-PLn"/>
+                    <constraint firstItem="QDe-sc-c7e" firstAttribute="top" secondItem="8yC-Mi-aW4" secondAttribute="bottom" constant="5" id="Nki-VI-yha"/>
                     <constraint firstItem="QDe-sc-c7e" firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" id="PmD-7U-VXm"/>
                     <constraint firstItem="ERX-r8-LRb" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="10" id="WcT-bQ-HoI"/>
                     <constraint firstItem="aMY-R4-QWH" firstAttribute="top" secondItem="6XE-2j-qG2" secondAttribute="top" id="Xv0-0Y-gwM"/>
-                    <constraint firstItem="QDe-sc-c7e" firstAttribute="leading" secondItem="rN6-cr-0it" secondAttribute="trailing" constant="8" symbolic="YES" id="b74-uQ-HnN"/>
                     <constraint firstAttribute="bottom" secondItem="W6n-RS-l9m" secondAttribute="bottom" id="d7W-GS-JJS"/>
+                    <constraint firstItem="QDe-sc-c7e" firstAttribute="firstBaseline" secondItem="pkd-fi-9pm" secondAttribute="firstBaseline" id="f6O-1b-Wqu"/>
                     <constraint firstItem="W6n-RS-l9m" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="gmY-hu-ghY"/>
-                    <constraint firstItem="QDe-sc-c7e" firstAttribute="firstBaseline" secondItem="rN6-cr-0it" secondAttribute="firstBaseline" id="i76-v2-UfX"/>
                     <constraint firstItem="aMY-R4-QWH" firstAttribute="leading" secondItem="6XE-2j-qG2" secondAttribute="trailing" constant="8" id="jrw-4W-al9"/>
                     <constraint firstItem="6XE-2j-qG2" firstAttribute="top" secondItem="zuV-8a-7PM" secondAttribute="top" id="or1-Dn-ke5"/>
                     <constraint firstItem="6XE-2j-qG2" firstAttribute="leading" secondItem="zuV-8a-7PM" secondAttribute="trailing" constant="28" id="pPe-yh-fDg"/>
                     <constraint firstItem="zuV-8a-7PM" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="15" id="q1s-6m-pwl"/>
                     <constraint firstAttribute="trailing" secondItem="AKA-9N-UDC" secondAttribute="trailing" constant="13" id="vz9-2U-nHR"/>
                     <constraint firstItem="W6n-RS-l9m" firstAttribute="top" secondItem="ERX-r8-LRb" secondAttribute="bottom" constant="4" id="w5m-W4-ffZ"/>
-                    <constraint firstItem="rN6-cr-0it" firstAttribute="top" secondItem="8yC-Mi-aW4" secondAttribute="bottom" constant="4" id="w98-Hl-Xbt"/>
                     <constraint firstItem="8yC-Mi-aW4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aMY-R4-QWH" secondAttribute="trailing" constant="20" symbolic="YES" id="xES-SM-0DU"/>
                     <constraint firstItem="tek-7C-MDv" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="yYU-v1-YcD"/>
                 </constraints>

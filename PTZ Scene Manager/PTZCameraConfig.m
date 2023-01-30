@@ -10,6 +10,10 @@
 
 //static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
 
+@interface PTZCameraConfig ()
+@property NSRange reservedRange;
+@end
+
 @implementation PTZCameraConfig
 
 + (instancetype)ptzOpticsConfig {
@@ -29,6 +33,7 @@
         _maxSceneIndex = 254;
         _cameratype = VISCA_IFACE_CAM_PTZOPTICS;
         _protocol = VISCA_PROTOCOL_TCP;
+        _reservedRange = NSMakeRange(90, 10);
     }
     return self;
 }
@@ -46,12 +51,13 @@
 
 - (BOOL)isValidSceneIndex:(NSInteger)index {
     // 0 is reserved for Home.
-    if (self.cameratype == VISCA_IFACE_CAM_PTZOPTICS) {
-        if ((index > 0 && index < 90) ||
-            (index > 100 && index <= self.maxSceneIndex) ) {
-            return YES;
-        }
+    if (index < 1 || index > self.maxSceneIndex) {
         return NO;
+    }
+    if (self.cameratype == VISCA_IFACE_CAM_PTZOPTICS) {
+        if (NSLocationInRange(index, self.reservedRange)) {
+            return NO;
+        }
     }
     return YES;
 }
@@ -63,6 +69,13 @@
         }
     }
     return offset;
+}
+
+- (NSIndexSet *)reservedSet {
+    if (self.cameratype == VISCA_IFACE_CAM_PTZOPTICS) {
+        return [NSIndexSet indexSetWithIndexesInRange:self.reservedRange];
+    }
+    return nil;
 }
 
 @end

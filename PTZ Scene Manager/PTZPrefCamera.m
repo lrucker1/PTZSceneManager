@@ -76,21 +76,22 @@ PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 
 #undef PREF_VALUE_NSINT_ACCESSORS
-- (BOOL)showAutofocusControls {
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
+
+#define PREF_VALUE_BOOL_ACCESSORS(_prop, _Prop) \
+- (BOOL)_prop {  \
+    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue]; \
+} \
+- (void)set##_Prop:(BOOL)value { \
+    [self setPrefValue:@(value) forKeyWithSelector:NSStringFromSelector(_cmd)]; \
+} \
+- (void)remove##_Prop { \
+    [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
 }
 
-- (void)setShowAutofocusControls:(BOOL)value {
-    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
-}
+PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
+PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
 
-- (BOOL)showMotionSyncControls {
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue];
-}
-
-- (void)setShowMotionSyncControls:(BOOL)value {
-    [self setPrefValue:@(value) forKey:NSStringFromSelector(_cmd)];
-}
+#undef PREF_VALUE_BOOL_ACCESSORS
 
 - (NSString *)prefKeyForKey:(NSString *)key {
     return [NSString stringWithFormat:@"[%@].%@", self.cameraname, key];
@@ -138,9 +139,10 @@ PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 
 - (void)removePrefValueForKey:(NSString *)key {
     NSString *camKey = [self prefKeyForKey:key];
-    [self willChangeValueForKey:camKey];
+    // camKey has the camera-specific prefix. key is what KVO is watching.
+    [self willChangeValueForKey:key];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:camKey];
-    [self didChangeValueForKey:camKey];
+    [self didChangeValueForKey:key];
 }
 
 @end

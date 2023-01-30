@@ -86,9 +86,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="8Pe-nT-iaX" column="C5H-Mm-wl8" id="nSa-v1-z3J">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="cPa-w3-Lkn">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPa-w3-Lkn">
                                                         <rect key="frame" x="42" y="76" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="jnb-c4-uTt">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -120,9 +119,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="ijs-p3-5c1" column="C5H-Mm-wl8" id="sty-TW-rC5">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="Ozw-0R-K26">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-0R-K26">
                                                         <rect key="frame" x="42" y="50" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="R3S-ab-qmB">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -134,12 +132,12 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
-                                                            <binding destination="MdI-N0-20y" name="contentValues" keyPath="tiltValues" id="EAe-yQ-47D"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.tiltPlusSpeed" previousBinding="EAe-yQ-47D" id="dzu-bH-SSs">
                                                                 <dictionary key="options">
                                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                                 </dictionary>
                                                             </binding>
+                                                            <binding destination="MdI-N0-20y" name="contentValues" keyPath="tiltValues" id="EAe-yQ-47D"/>
                                                         </connections>
                                                     </comboBox>
                                                 </gridCell>
@@ -154,9 +152,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="Nhj-tH-r7X" column="C5H-Mm-wl8" id="XZC-QF-wM4">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="du6-Cc-cJO">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="du6-Cc-cJO">
                                                         <rect key="frame" x="42" y="24" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="YPj-7T-qg3">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -188,9 +185,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="gP0-H8-kN4" column="C5H-Mm-wl8" id="Eol-k6-BSv">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="JSk-NA-UC3">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JSk-NA-UC3">
                                                         <rect key="frame" x="42" y="-2" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="50o-yt-hSY">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -242,9 +238,8 @@
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="3la-Kt-VYM" column="WB0-UW-p8O" id="uUJ-ER-kJ2">
-                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" id="p7p-R8-8gw">
+                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p7p-R8-8gw">
                                                         <rect key="frame" x="-2" y="0.0" width="124" height="20"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Preset recall speed:" id="u9u-DL-XuU">
                                                             <font key="font" usesAppearanceFont="YES"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -253,9 +248,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="3la-Kt-VYM" column="ZaY-Tc-5Rg" id="Qrm-x4-5wI">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="EkE-cB-aWE">
-                                                        <rect key="frame" x="127" y="-2" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EkE-cB-aWE">
+                                                        <rect key="frame" x="228" y="-2" width="64" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="Ubt-m9-uU3"/>
                                                         </constraints>
@@ -277,9 +271,8 @@
                                                 </gridCell>
                                                 <gridCell row="3la-Kt-VYM" column="weE-uS-SjD" id="v1f-CU-jKL"/>
                                                 <gridCell row="3la-Kt-VYM" column="tnO-yC-fVq" id="dqO-IY-43p">
-                                                    <button key="contentView" verticalHuggingPriority="750" id="8Hq-U8-mWV">
+                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Hq-U8-mWV">
                                                         <rect key="frame" x="298" y="-7" width="69" height="32"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Rw6-Zd-ghT">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -1539,7 +1532,7 @@
                                                 </subviews>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kC5-TW-Ruf">
-                                                <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                                <rect key="frame" x="1" y="119" width="317" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cbE-Yc-nV5">
@@ -1600,6 +1593,24 @@
                                                 </binding>
                                             </connections>
                                         </button>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YpR-Jo-c4S" userLabel="- Square">
+                                            <rect key="frame" x="194" y="93" width="108" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="hov-UP-Q8r"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="smallSquare" title="Show range map" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kFQ-DE-unr">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="onSceneRangeMapButtonClicked:" target="MdI-N0-20y" id="wCF-Ra-yE1"/>
+                                                <binding destination="CrC-WE-HaH" name="enabled" keyPath="selection.self" id="BOz-XC-ZwL">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="GSg-4r-duD" secondAttribute="bottom" constant="20" symbolic="YES" id="1P1-Wh-iTZ"/>
@@ -1614,9 +1625,11 @@
                                         <constraint firstItem="G3l-mo-tUH" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="W23-XP-8f4"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G3l-mo-tUH" secondAttribute="trailing" constant="20" symbolic="YES" id="a9z-I2-M8M"/>
                                         <constraint firstItem="GSg-4r-duD" firstAttribute="top" secondItem="1NN-xw-9Oe" secondAttribute="bottom" constant="8" symbolic="YES" id="b2I-3z-JQa"/>
+                                        <constraint firstItem="YpR-Jo-c4S" firstAttribute="top" secondItem="eNe-iY-me3" secondAttribute="bottom" id="csh-Kn-Zif"/>
                                         <constraint firstItem="eNe-iY-me3" firstAttribute="top" secondItem="G3l-mo-tUH" secondAttribute="bottom" constant="18" id="d7b-Gb-4GR"/>
                                         <constraint firstItem="hMy-2H-0Wa" firstAttribute="top" secondItem="5xH-Pt-plH" secondAttribute="top" id="et9-Ao-1IQ"/>
                                         <constraint firstItem="GSg-4r-duD" firstAttribute="top" secondItem="1NN-xw-9Oe" secondAttribute="bottom" constant="8" symbolic="YES" id="ie7-jd-2DE"/>
+                                        <constraint firstItem="YpR-Jo-c4S" firstAttribute="leading" secondItem="VNQ-Fq-qYb" secondAttribute="trailing" id="jHA-t5-LIt"/>
                                         <constraint firstItem="1NN-xw-9Oe" firstAttribute="top" secondItem="5xH-Pt-plH" secondAttribute="bottom" constant="14" id="lvm-a7-DWQ"/>
                                         <constraint firstItem="5xH-Pt-plH" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="nA1-d9-jI2"/>
                                         <constraint firstItem="VNQ-Fq-qYb" firstAttribute="leading" secondItem="hMy-2H-0Wa" secondAttribute="trailing" id="o1F-3X-l2J"/>
@@ -1692,6 +1705,8 @@
             <connections>
                 <outlet property="exposureDataOutlineView" destination="7Ut-fL-r64" id="242-Vt-GI6"/>
                 <outlet property="sceneRangeController" destination="CrC-WE-HaH" id="big-9a-X5P"/>
+                <outlet property="sceneRangeMapPopover" destination="GTB-AQ-Lnv" id="Cwf-af-CGc"/>
+                <outlet property="sceneRangeMapView" destination="GSb-50-KSc" id="fwa-cp-lsV"/>
                 <outlet property="sceneRangeTableView" destination="lXZ-xj-42m" id="q8K-5y-FWo"/>
                 <outlet property="tabView" destination="41s-gU-oQx" id="cKt-Xv-hYj"/>
                 <outlet property="view" destination="I7c-h6-brQ" id="qqA-Nd-6eo"/>
@@ -1705,6 +1720,54 @@
             </items>
             <point key="canvasLocation" x="-160" y="228"/>
         </menu>
+        <viewController id="Sit-g7-A6c" userLabel="Popover View Controller">
+            <connections>
+                <outlet property="view" destination="Reu-c8-ato" id="nuL-xG-otY"/>
+            </connections>
+        </viewController>
+        <popover behavior="t" id="GTB-AQ-Lnv">
+            <connections>
+                <outlet property="contentViewController" destination="Sit-g7-A6c" id="LcW-3V-gt5"/>
+            </connections>
+        </popover>
+        <customView id="Reu-c8-ato">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="GSb-50-KSc" customClass="LARIndexSetVisualizerView">
+                    <rect key="frame" x="5" y="5" width="160" height="160"/>
+                    <subviews>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qgu-e6-Qja">
+                            <rect key="frame" x="125" y="0.0" width="37" height="16"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="X7h-n2-90T" customClass="VVWShadowTextFieldCell">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="MdI-N0-20y" name="value" keyPath="sceneRangeMapView.cellIndex" id="lwT-7c-akV"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="160" id="77L-Og-ytJ"/>
+                        <constraint firstAttribute="bottom" secondItem="Qgu-e6-Qja" secondAttribute="bottom" id="jkb-Ks-IDY"/>
+                        <constraint firstAttribute="width" constant="160" id="jo5-DX-HLm"/>
+                        <constraint firstAttribute="trailing" secondItem="Qgu-e6-Qja" secondAttribute="trailing" id="uAo-lW-AGE"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="popover" destination="GTB-AQ-Lnv" id="dqc-ln-scA"/>
+                    </connections>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="GSb-50-KSc" secondAttribute="trailing" constant="5" id="M2v-ca-6VB"/>
+                <constraint firstItem="GSb-50-KSc" firstAttribute="leading" secondItem="Reu-c8-ato" secondAttribute="leading" constant="5" id="NvF-vI-7jF"/>
+                <constraint firstItem="GSb-50-KSc" firstAttribute="top" secondItem="Reu-c8-ato" secondAttribute="top" constant="5" id="XWl-EK-Dhk"/>
+                <constraint firstAttribute="bottom" secondItem="GSb-50-KSc" secondAttribute="bottom" constant="5" id="ahK-Y6-reD"/>
+            </constraints>
+            <point key="canvasLocation" x="478" y="148"/>
+        </customView>
     </objects>
     <resources>
         <image name="FastArrows" width="202" height="200"/>

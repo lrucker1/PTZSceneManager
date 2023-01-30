@@ -54,6 +54,7 @@
 		94CEBAFB2984934200D3C8DC /* PSMAppPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAF92984934200D3C8DC /* PSMAppPreferencesWindowController.m */; };
 		94CEBAFC2984934200D3C8DC /* PSMAppPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */; };
 		94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */; };
+		94CEBB242986B73900D3C8DC /* LARIndexSetVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +138,8 @@
 		94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMAppPreferencesWindowController.xib; sourceTree = "<group>"; };
 		94CEBAFD2986256C00D3C8DC /* PTZCameraSceneRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZCameraSceneRange.h; sourceTree = "<group>"; };
 		94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTZCameraSceneRange.m; sourceTree = "<group>"; };
+		94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LARIndexSetVisualizerView.m; sourceTree = "<group>"; };
+		94CEBB232986B73900D3C8DC /* LARIndexSetVisualizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LARIndexSetVisualizerView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +302,8 @@
 				9463826C29807DF60015BA8F /* RTSPViewController.m */,
 				94CEBAEC2983494A00D3C8DC /* LARContextualActionButton.h */,
 				94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */,
+				94CEBB232986B73900D3C8DC /* LARIndexSetVisualizerView.h */,
+				94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */,
 				94CEBAF32983BF6500D3C8DC /* PTZ Scene Manager-Bridging-Header.h */,
 			);
 			path = "Custom UI";
@@ -401,6 +406,7 @@
 				94747E29297B94F900309752 /* main.m in Sources */,
 				94747E75297B9C5F00309752 /* PTZIniParser.m in Sources */,
 				94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */,
+				94CEBB242986B73900D3C8DC /* LARIndexSetVisualizerView.m in Sources */,
 				94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */,
 				94CEBAEE2983494A00D3C8DC /* LARContextualActionButton.m in Sources */,
 				9463826E29807DF60015BA8F /* RTSPViewController.m in Sources */,

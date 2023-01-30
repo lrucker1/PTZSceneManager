@@ -12,6 +12,7 @@
 #import "PTZCameraSceneRange.h"
 #import "NSWindowAdditions.h"
 #import "PTZOutlineViewDictionaryDataSource.h"
+#import "LARIndexSetVisualizerView.h"
 #import "libvisca.h"
 
 static PTZCameraStateViewController *selfType;
@@ -72,6 +73,9 @@ typedef enum _ExposureModes {
 @property NSInteger firstVisibleScene, lastVisibleScene;
 @property IBOutlet NSArrayController *sceneRangeController;
 @property IBOutlet NSTableView *sceneRangeTableView;
+@property IBOutlet NSButton *sceneRangeMapButton;
+@property IBOutlet LARIndexSetVisualizerView *sceneRangeMapView;
+@property IBOutlet NSPopover *sceneRangeMapPopover;
 
 @end
 
@@ -1026,7 +1030,7 @@ MAKE_CAN_SET_METHOD(BWMode)
     if (csRange) {
         NSInteger start = csRange.range.location;
         self.prefCamera.firstVisibleScene = start;
-        self.prefCamera.lastVisibleScene = start + csRange.range.length + 1;
+        self.prefCamera.lastVisibleScene = NSMaxRange(csRange.range) - 1;
         // TODO: observe and update
         self.firstVisibleScene = self.prefCamera.firstVisibleScene;
         self.lastVisibleScene = self.prefCamera.lastVisibleScene;
@@ -1045,15 +1049,34 @@ MAKE_CAN_SET_METHOD(BWMode)
     if (data == nil) {
         return;
     }
-    NSArray *array = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:[PTZCameraSceneRange class] fromData:data error:nil];
+    NSArray *array = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:[NSSet setWithArray:@[[PTZCameraSceneRange class], [NSString class]]] fromData:data error:nil];
     if (array != nil) {
         [self.sceneRangeController addObjects:array];
+        [self.sceneRangeController setSelectionIndex:0];
     }
 }
 
 - (IBAction)sceneRangeNameChanged:(id)sender {
     [self saveSceneRangeToPrefs];
 }
+
+- (IBAction)onSceneRangeMapButtonClicked:(id)sender {
+    NSPopover *popover = self.sceneRangeMapPopover;
+    if (popover.shown) {
+        [popover close];
+    } else {
+        NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+        for (PTZCameraSceneRange *csRange in [self.sceneRangeController arrangedObjects]) {
+            [set addIndexesInRange:csRange.range];
+        }
+        self.sceneRangeMapView.activeSet = set;
+        self.sceneRangeMapView.reservedSet = self.cameraState.cameraConfig.reservedSet;
+        [popover showRelativeToRect:[sender bounds]
+                             ofView:sender
+                      preferredEdge:NSMaxYEdge];
+    }
+}
+
 #pragma mark KVO
 
 /*

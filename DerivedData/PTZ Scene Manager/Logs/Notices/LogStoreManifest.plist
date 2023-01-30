@@ -34,6 +34,34 @@
 			<key>uniqueIdentifier</key>
 			<string>0038EA77-ABE5-465D-B1E4-8326B2F9B36F</string>
 		</dict>
+		<key>007EDCB3-7841-48CD-B3B7-4EDF0563DC96</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>007EDCB3-7841-48CD-B3B7-4EDF0563DC96.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696720483.98573303</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>007EDCB3-7841-48CD-B3B7-4EDF0563DC96</string>
+		</dict>
 		<key>008216D1-CD79-4E98-8E34-7A72075943C2</key>
 		<dict>
 			<key>className</key>
@@ -89,6 +117,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>0149B3F8-8739-4BB8-92B7-40D92027999D</string>
+		</dict>
+		<key>01E563C2-F447-442A-85D4-CF5415D8DE0B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>01E563C2-F447-442A-85D4-CF5415D8DE0B.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696741227.49235594</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>01E563C2-F447-442A-85D4-CF5415D8DE0B</string>
 		</dict>
 		<key>02B38E71-A66A-46D5-B4F4-2A1FF09265D7</key>
 		<dict>
@@ -230,6 +286,34 @@
 			<key>uniqueIdentifier</key>
 			<string>0491A34C-48EA-4A7B-8CF9-1F67B003B393</string>
 		</dict>
+		<key>050D5FFA-70A4-4037-B038-C87FEE4A098A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>050D5FFA-70A4-4037-B038-C87FEE4A098A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745915.22789097</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>050D5FFA-70A4-4037-B038-C87FEE4A098A</string>
+		</dict>
 		<key>05469FF4-53AD-4E48-9A81-E4A68B62AC71</key>
 		<dict>
 			<key>className</key>
@@ -313,6 +397,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>062E1F5C-6869-4CC2-A3B2-6C92ABBDC9F4</string>
+		</dict>
+		<key>06310398-5A1F-4DA2-8C3F-51B29F4A5EE8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>06310398-5A1F-4DA2-8C3F-51B29F4A5EE8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696742077.94083595</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>06310398-5A1F-4DA2-8C3F-51B29F4A5EE8</string>
 		</dict>
 		<key>06AAECD7-FA93-40E1-A88A-2B2609628DCC</key>
 		<dict>
@@ -1462,6 +1574,34 @@
 			<key>uniqueIdentifier</key>
 			<string>14765F9A-0AFA-4A62-B963-354BE6143744</string>
 		</dict>
+		<key>149189E8-32C2-46E2-B8A4-75CDB6EAA7D5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>149189E8-32C2-46E2-B8A4-75CDB6EAA7D5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696693662.46860003</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>149189E8-32C2-46E2-B8A4-75CDB6EAA7D5</string>
+		</dict>
 		<key>14941CC8-8DC6-4052-8272-86442020A03F</key>
 		<dict>
 			<key>className</key>
@@ -2218,6 +2358,62 @@
 			<key>uniqueIdentifier</key>
 			<string>1DDFA7E0-BE6D-4F9B-AB3C-E14E5DE90092</string>
 		</dict>
+		<key>1E5CAE3F-FBEF-465F-85A5-91009DC1A730</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1E5CAE3F-FBEF-465F-85A5-91009DC1A730.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696740979.40651095</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>1E5CAE3F-FBEF-465F-85A5-91009DC1A730</string>
+		</dict>
+		<key>1E7F7260-9DAF-414B-A1EB-4025C99FC0FA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>1E7F7260-9DAF-414B-A1EB-4025C99FC0FA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695478.12921202</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>1E7F7260-9DAF-414B-A1EB-4025C99FC0FA</string>
+		</dict>
 		<key>2006E7F7-0613-443F-95AC-02849CE6760B</key>
 		<dict>
 			<key>className</key>
@@ -2330,6 +2526,34 @@
 			<key>uniqueIdentifier</key>
 			<string>20885AF6-642C-4E6A-A1D6-CBAA65C19116</string>
 		</dict>
+		<key>21C993D1-CFA7-48AF-806A-5FC71E271001</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>21C993D1-CFA7-48AF-806A-5FC71E271001.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696740938.70429206</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>21C993D1-CFA7-48AF-806A-5FC71E271001</string>
+		</dict>
 		<key>21DE6B34-A6E4-4324-8DD3-198162138D74</key>
 		<dict>
 			<key>className</key>
@@ -2357,6 +2581,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>21DE6B34-A6E4-4324-8DD3-198162138D74</string>
+		</dict>
+		<key>21FB0560-4CB4-40BC-BA10-7583D4E9B3C3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>21FB0560-4CB4-40BC-BA10-7583D4E9B3C3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696694036.03919601</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>21FB0560-4CB4-40BC-BA10-7583D4E9B3C3</string>
 		</dict>
 		<key>223B78B4-E237-4496-9D97-1F35DE6AA973</key>
 		<dict>
@@ -2554,6 +2806,34 @@
 			<key>uniqueIdentifier</key>
 			<string>24041771-2632-4BEC-A412-DF578ACDACAA</string>
 		</dict>
+		<key>241E27F0-24C1-474B-834D-5BEDEE2A43ED</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>241E27F0-24C1-474B-834D-5BEDEE2A43ED.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696694332.45059395</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>241E27F0-24C1-474B-834D-5BEDEE2A43ED</string>
+		</dict>
 		<key>24201F62-9AF5-4F57-B71F-105D61306720</key>
 		<dict>
 			<key>className</key>
@@ -2638,6 +2918,34 @@
 			<key>uniqueIdentifier</key>
 			<string>2483A100-792F-414E-B36C-A8C2F0FA4411</string>
 		</dict>
+		<key>24A2F594-DC35-4419-9488-DAE3A5C42C71</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>24A2F594-DC35-4419-9488-DAE3A5C42C71.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696720394.45226204</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>24A2F594-DC35-4419-9488-DAE3A5C42C71</string>
+		</dict>
 		<key>24E54ED9-2978-4F95-9F01-A89EE3242D44</key>
 		<dict>
 			<key>className</key>
@@ -2693,6 +3001,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>25C7FDBC-3365-4C83-A0F0-E0F8E5957583</string>
+		</dict>
+		<key>27818392-8FD4-4138-BA9E-163F705B180A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>27818392-8FD4-4138-BA9E-163F705B180A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696733028.68734801</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>27818392-8FD4-4138-BA9E-163F705B180A</string>
 		</dict>
 		<key>27E794B4-529D-4E57-8FB4-58BE99AB37BF</key>
 		<dict>
@@ -2778,6 +3114,34 @@
 			<key>uniqueIdentifier</key>
 			<string>2837D499-1966-4A0F-A2B1-5AC996F03151</string>
 		</dict>
+		<key>28D46EEC-1095-4E0C-9D7A-A4CF8EFCB98F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>28D46EEC-1095-4E0C-9D7A-A4CF8EFCB98F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740183.94371903</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>28D46EEC-1095-4E0C-9D7A-A4CF8EFCB98F</string>
+		</dict>
 		<key>28F39EF1-6031-4431-9F2C-7CB3DA519E98</key>
 		<dict>
 			<key>className</key>
@@ -2833,6 +3197,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>29216D2A-421D-4538-BC49-5B3F660807C6</string>
+		</dict>
+		<key>29312B3E-FEF7-43A8-BD79-49016219F08F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>29312B3E-FEF7-43A8-BD79-49016219F08F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745788.23557901</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>29312B3E-FEF7-43A8-BD79-49016219F08F</string>
 		</dict>
 		<key>298F3A80-0543-4C1C-9DA3-3B27ED06459C</key>
 		<dict>
@@ -2918,6 +3310,34 @@
 			<key>uniqueIdentifier</key>
 			<string>2A2CA8D8-3C28-463B-BA5E-5F08D8654D00</string>
 		</dict>
+		<key>2A60CAB3-C8C8-4937-AFD6-8D7CE73EF896</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2A60CAB3-C8C8-4937-AFD6-8D7CE73EF896.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696720394.45226204</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>2A60CAB3-C8C8-4937-AFD6-8D7CE73EF896</string>
+		</dict>
 		<key>2AA65CE6-DE0F-4E8D-BAE1-C05185952A9F</key>
 		<dict>
 			<key>className</key>
@@ -3001,6 +3421,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>2AFF2200-21EF-4923-9CEE-1E96176717ED</string>
+		</dict>
+		<key>2B19E129-3188-4922-968D-A1B614D6B9B1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2B19E129-3188-4922-968D-A1B614D6B9B1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696730359.98213899</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>2B19E129-3188-4922-968D-A1B614D6B9B1</string>
 		</dict>
 		<key>2B6B73D5-4DCB-452B-8DB3-BE32E5AD73CB</key>
 		<dict>
@@ -3142,6 +3590,34 @@
 			<key>uniqueIdentifier</key>
 			<string>2DC4AE35-E81F-486D-A35C-4287F6D13AF9</string>
 		</dict>
+		<key>2DC4D9C4-B71E-407E-ADCD-436F5D886F45</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2DC4D9C4-B71E-407E-ADCD-436F5D886F45.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745915.22789097</real>
+			<key>timeStoppedRecording</key>
+			<real>696745915.42688596</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>2DC4D9C4-B71E-407E-ADCD-436F5D886F45</string>
+		</dict>
 		<key>2E14268D-4123-4A6B-A4B3-40C6A2D95049</key>
 		<dict>
 			<key>className</key>
@@ -3197,6 +3673,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>2E667D22-100B-474D-9C70-D27C24358824</string>
+		</dict>
+		<key>2E6B4A9B-021F-4FA8-8B9F-BC8979A18C68</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2E6B4A9B-021F-4FA8-8B9F-BC8979A18C68.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695855.07904696</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>2E6B4A9B-021F-4FA8-8B9F-BC8979A18C68</string>
 		</dict>
 		<key>2E70B45A-0B26-4325-9F07-4860BF77493A</key>
 		<dict>
@@ -3534,6 +4038,62 @@
 			<key>uniqueIdentifier</key>
 			<string>30CB1B7C-5A19-481E-9DB7-848738FEAB87</string>
 		</dict>
+		<key>30D0CD07-C8C4-4980-B281-76AEEE427A4D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>30D0CD07-C8C4-4980-B281-76AEEE427A4D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745675.21336198</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>30D0CD07-C8C4-4980-B281-76AEEE427A4D</string>
+		</dict>
+		<key>3127F075-F570-4B31-BFC3-3C7C8B0C60A5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3127F075-F570-4B31-BFC3-3C7C8B0C60A5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696695855.07904696</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>3127F075-F570-4B31-BFC3-3C7C8B0C60A5</string>
+		</dict>
 		<key>316FB190-E8C8-4509-9D3E-FFC0AE506381</key>
 		<dict>
 			<key>className</key>
@@ -3561,6 +4121,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>316FB190-E8C8-4509-9D3E-FFC0AE506381</string>
+		</dict>
+		<key>31BA1522-9F47-4174-9B04-826EDFCF0B42</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>31BA1522-9F47-4174-9B04-826EDFCF0B42.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696693662.46860003</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>31BA1522-9F47-4174-9B04-826EDFCF0B42</string>
 		</dict>
 		<key>322559D1-3704-43C1-9A9B-49420DEF8A78</key>
 		<dict>
@@ -3618,6 +4206,34 @@
 			<key>uniqueIdentifier</key>
 			<string>3297F406-DF45-49B5-8E58-7FD9CD2E6BF5</string>
 		</dict>
+		<key>32D63932-5C85-443D-9B88-2A3128A2EEA6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>32D63932-5C85-443D-9B88-2A3128A2EEA6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695478.12921202</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>32D63932-5C85-443D-9B88-2A3128A2EEA6</string>
+		</dict>
 		<key>32D92629-B388-4D7B-BB7C-02A885B8C37C</key>
 		<dict>
 			<key>className</key>
@@ -3645,6 +4261,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>32D92629-B388-4D7B-BB7C-02A885B8C37C</string>
+		</dict>
+		<key>3326BF92-3117-4445-8A5F-8F528B50C1AA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3326BF92-3117-4445-8A5F-8F528B50C1AA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696746054.12510896</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>3326BF92-3117-4445-8A5F-8F528B50C1AA</string>
 		</dict>
 		<key>33DF0315-27D6-4FB1-AC80-4161ABE5A4A0</key>
 		<dict>
@@ -3758,6 +4402,34 @@
 			<key>uniqueIdentifier</key>
 			<string>344F50EA-A6EF-4891-B87B-CF304D506438</string>
 		</dict>
+		<key>36FE6D58-3308-4535-9468-A78A043E03F0</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>36FE6D58-3308-4535-9468-A78A043E03F0.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694086.47110403</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>36FE6D58-3308-4535-9468-A78A043E03F0</string>
+		</dict>
 		<key>37163FD0-44C9-41EC-A718-870491B4E097</key>
 		<dict>
 			<key>className</key>
@@ -3813,6 +4485,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>3830B002-5C50-4F34-9AF5-FF7D74BEA5AD</string>
+		</dict>
+		<key>38FCC340-C405-4C5F-AAC4-5EB6AE753D2E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>38FCC340-C405-4C5F-AAC4-5EB6AE753D2E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696744367.71438706</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>38FCC340-C405-4C5F-AAC4-5EB6AE753D2E</string>
 		</dict>
 		<key>394FC0E5-C119-4103-AC20-12EA5D367493</key>
 		<dict>
@@ -4150,6 +4850,34 @@
 			<key>uniqueIdentifier</key>
 			<string>3E4F1C5C-EDF0-4EC7-BCBA-CB02D5B0D90D</string>
 		</dict>
+		<key>3E916D41-3F44-4EDD-9AE5-C73A625FC199</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3E916D41-3F44-4EDD-9AE5-C73A625FC199.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694086.47110403</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>3E916D41-3F44-4EDD-9AE5-C73A625FC199</string>
+		</dict>
 		<key>3EA54069-1F48-4366-BF91-74A912A126DD</key>
 		<dict>
 			<key>className</key>
@@ -4177,6 +4905,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>3EA54069-1F48-4366-BF91-74A912A126DD</string>
+		</dict>
+		<key>3EDC4E23-3933-4AA5-AD0B-8B3D781E72EB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3EDC4E23-3933-4AA5-AD0B-8B3D781E72EB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696697684.10501599</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>3EDC4E23-3933-4AA5-AD0B-8B3D781E72EB</string>
 		</dict>
 		<key>3F502EC3-B1F9-4A8F-A9D2-6402D525E79B</key>
 		<dict>
@@ -4261,6 +5017,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>404163AF-A845-402F-A101-EE810B373228</string>
+		</dict>
+		<key>40AC430B-B6E9-4E95-A69C-4AD3C354F8BA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>40AC430B-B6E9-4E95-A69C-4AD3C354F8BA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696730673.61589599</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>40AC430B-B6E9-4E95-A69C-4AD3C354F8BA</string>
 		</dict>
 		<key>40F4D065-47DD-4919-8961-B3D9223E5AAB</key>
 		<dict>
@@ -4402,6 +5186,62 @@
 			<key>uniqueIdentifier</key>
 			<string>41719E46-F6FE-46E9-85EB-3418FFA81607</string>
 		</dict>
+		<key>41F0FFFC-6F08-47E4-8E59-5B7FB4CC20C6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>41F0FFFC-6F08-47E4-8E59-5B7FB4CC20C6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694259.13096499</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>41F0FFFC-6F08-47E4-8E59-5B7FB4CC20C6</string>
+		</dict>
+		<key>4331D228-7BEF-4F06-B5B3-CE9651DC23F8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4331D228-7BEF-4F06-B5B3-CE9651DC23F8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694492.96852899</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4331D228-7BEF-4F06-B5B3-CE9651DC23F8</string>
+		</dict>
 		<key>438B1288-12A6-4FF0-A4AE-8C1492E2BA8B</key>
 		<dict>
 			<key>className</key>
@@ -4429,6 +5269,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>438B1288-12A6-4FF0-A4AE-8C1492E2BA8B</string>
+		</dict>
+		<key>43B25DB7-0438-4F70-BF09-A4C54ACAAC74</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>43B25DB7-0438-4F70-BF09-A4C54ACAAC74.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696733028.68734801</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>43B25DB7-0438-4F70-BF09-A4C54ACAAC74</string>
 		</dict>
 		<key>4414B276-3C34-4009-9102-5EFE185270AA</key>
 		<dict>
@@ -4486,6 +5354,34 @@
 			<key>uniqueIdentifier</key>
 			<string>44361611-3973-46A5-A6E5-8651D37D23BF</string>
 		</dict>
+		<key>44F053E6-2536-411D-A3C4-F05A44EAD38E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>44F053E6-2536-411D-A3C4-F05A44EAD38E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696730673.61589599</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>44F053E6-2536-411D-A3C4-F05A44EAD38E</string>
+		</dict>
 		<key>45378D22-3FA7-474E-B994-19A04C856D71</key>
 		<dict>
 			<key>className</key>
@@ -4514,6 +5410,34 @@
 			<key>uniqueIdentifier</key>
 			<string>45378D22-3FA7-474E-B994-19A04C856D71</string>
 		</dict>
+		<key>454605F2-BFAC-4907-80F1-D84BFBA6D7B8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>454605F2-BFAC-4907-80F1-D84BFBA6D7B8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696732587.59870803</real>
+			<key>timeStoppedRecording</key>
+			<real>696732588.02085495</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>454605F2-BFAC-4907-80F1-D84BFBA6D7B8</string>
+		</dict>
 		<key>4611E28B-7FFD-4080-8EFA-ED04ADA8A96C</key>
 		<dict>
 			<key>className</key>
@@ -4541,6 +5465,62 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>4611E28B-7FFD-4080-8EFA-ED04ADA8A96C</string>
+		</dict>
+		<key>4624455B-BC39-4F41-AADF-34A61371CCFE</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4624455B-BC39-4F41-AADF-34A61371CCFE.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745152.74044704</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4624455B-BC39-4F41-AADF-34A61371CCFE</string>
+		</dict>
+		<key>470EE88C-A2ED-4D3D-A5AF-7D5B03C48166</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>470EE88C-A2ED-4D3D-A5AF-7D5B03C48166.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740938.70429206</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>470EE88C-A2ED-4D3D-A5AF-7D5B03C48166</string>
 		</dict>
 		<key>471B78DC-CF42-40D9-A18C-FB5A7C424807</key>
 		<dict>
@@ -4625,6 +5605,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>48384E65-2D7A-4284-AD1B-694D4FDA113E</string>
+		</dict>
+		<key>48CE9666-3D6C-4BA0-9769-407F40B9577C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>48CE9666-3D6C-4BA0-9769-407F40B9577C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696733028.68734801</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>48CE9666-3D6C-4BA0-9769-407F40B9577C</string>
 		</dict>
 		<key>490C173F-0576-4923-8F5A-F17146D04C35</key>
 		<dict>
@@ -4737,6 +5745,90 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>49CDEBA1-FFF9-4FFA-A082-5A9A45AD5DCF</string>
+		</dict>
+		<key>49FB6CD5-A1D0-4639-A861-6DA617E55B0B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>49FB6CD5-A1D0-4639-A861-6DA617E55B0B.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696695550.54121006</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>49FB6CD5-A1D0-4639-A861-6DA617E55B0B</string>
+		</dict>
+		<key>4A3AE19A-D5CA-4C02-B63B-558201F40140</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4A3AE19A-D5CA-4C02-B63B-558201F40140.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745788.23557901</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4A3AE19A-D5CA-4C02-B63B-558201F40140</string>
+		</dict>
+		<key>4A6FCD01-CF6B-4D2A-89A4-6CB78171255C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4A6FCD01-CF6B-4D2A-89A4-6CB78171255C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696740183.94371903</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4A6FCD01-CF6B-4D2A-89A4-6CB78171255C</string>
 		</dict>
 		<key>4AB25073-F39C-4D93-BB37-975D6A67D984</key>
 		<dict>
@@ -4934,6 +6026,34 @@
 			<key>uniqueIdentifier</key>
 			<string>4C3027B6-5F37-4A91-B8A2-F61F7704E542</string>
 		</dict>
+		<key>4C768852-976A-4823-90A6-74B11625C4A2</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4C768852-976A-4823-90A6-74B11625C4A2.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696741331.68122005</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4C768852-976A-4823-90A6-74B11625C4A2</string>
+		</dict>
 		<key>4C8A7CB4-EA87-48CF-B96D-D1D4AA2DA283</key>
 		<dict>
 			<key>className</key>
@@ -5074,6 +6194,34 @@
 			<key>uniqueIdentifier</key>
 			<string>4D30ED7C-182E-43F6-BD17-1665D4F36223</string>
 		</dict>
+		<key>4D3C4FEB-44D0-4C7D-A1A2-9A0DB26E263D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4D3C4FEB-44D0-4C7D-A1A2-9A0DB26E263D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696746054.12510896</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4D3C4FEB-44D0-4C7D-A1A2-9A0DB26E263D</string>
+		</dict>
 		<key>4DEA652B-85BF-4C38-9929-9571529EC95C</key>
 		<dict>
 			<key>className</key>
@@ -5157,6 +6305,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>4E4930B9-2882-4833-993A-B05264E2EA7C</string>
+		</dict>
+		<key>4EB9986B-1BCF-46AF-8048-A100F0249EE4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4EB9986B-1BCF-46AF-8048-A100F0249EE4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696744422.79219103</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4EB9986B-1BCF-46AF-8048-A100F0249EE4</string>
 		</dict>
 		<key>4F4A7229-FABF-4522-A681-D1A7DED40329</key>
 		<dict>
@@ -5242,6 +6418,34 @@
 			<key>uniqueIdentifier</key>
 			<string>4FD13AE8-26CD-4395-ACEC-8C5CC693CB38</string>
 		</dict>
+		<key>4FD20E98-A68D-4020-8D90-DA357371963E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4FD20E98-A68D-4020-8D90-DA357371963E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696694492.96852899</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4FD20E98-A68D-4020-8D90-DA357371963E</string>
+		</dict>
 		<key>4FFBED06-4CBF-4CEE-9475-CDF2FA0BEC13</key>
 		<dict>
 			<key>className</key>
@@ -5325,6 +6529,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>50BCDF1F-5FD7-4D8A-9754-685D23FF1A9F</string>
+		</dict>
+		<key>510A153B-FDA2-4741-B718-30A2BBC7F78E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>510A153B-FDA2-4741-B718-30A2BBC7F78E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741331.68122005</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>510A153B-FDA2-4741-B718-30A2BBC7F78E</string>
 		</dict>
 		<key>51354834-3489-4AF4-BA75-9CB5C13BC050</key>
 		<dict>
@@ -5550,6 +6782,34 @@
 			<key>uniqueIdentifier</key>
 			<string>53375F6F-D331-4979-BB81-F5F69DB32A2C</string>
 		</dict>
+		<key>533E7800-D0F3-4F86-A05F-B09FA51184D2</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>533E7800-D0F3-4F86-A05F-B09FA51184D2.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696741537.44027495</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>533E7800-D0F3-4F86-A05F-B09FA51184D2</string>
+		</dict>
 		<key>53DDFA51-AC20-40EE-A427-F2F6586D6A34</key>
 		<dict>
 			<key>className</key>
@@ -5577,6 +6837,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>53DDFA51-AC20-40EE-A427-F2F6586D6A34</string>
+		</dict>
+		<key>54545FBB-7B6C-4847-BAA4-904023C88A35</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>54545FBB-7B6C-4847-BAA4-904023C88A35.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741331.68122005</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>54545FBB-7B6C-4847-BAA4-904023C88A35</string>
 		</dict>
 		<key>54D20A95-4CF6-4A0B-86F8-AFA945E7C89E</key>
 		<dict>
@@ -5718,6 +7006,62 @@
 			<key>uniqueIdentifier</key>
 			<string>575243BB-4CFC-437A-98F1-8424AFF703BE</string>
 		</dict>
+		<key>578AD30C-DC2F-494D-9683-D6D29089A5B3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>578AD30C-DC2F-494D-9683-D6D29089A5B3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695420.80805397</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>578AD30C-DC2F-494D-9683-D6D29089A5B3</string>
+		</dict>
+		<key>5828AC15-A077-4077-BA80-52EBEE5FDD3D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5828AC15-A077-4077-BA80-52EBEE5FDD3D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696745152.74044704</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>5828AC15-A077-4077-BA80-52EBEE5FDD3D</string>
+		</dict>
 		<key>5947E347-D514-439E-9A9C-153D9452A798</key>
 		<dict>
 			<key>className</key>
@@ -5830,6 +7174,34 @@
 			<key>uniqueIdentifier</key>
 			<string>5998F4D3-3374-446A-823C-0E08C20DC20E</string>
 		</dict>
+		<key>599995A2-05D0-4FCB-838B-7A1EE9E0459D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>599995A2-05D0-4FCB-838B-7A1EE9E0459D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696693570.6523</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>599995A2-05D0-4FCB-838B-7A1EE9E0459D</string>
+		</dict>
 		<key>5B3FA313-8CE8-426D-BF46-2CE88F1DA560</key>
 		<dict>
 			<key>className</key>
@@ -5857,6 +7229,62 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>5B3FA313-8CE8-426D-BF46-2CE88F1DA560</string>
+		</dict>
+		<key>5D242781-2BED-490C-AA13-32EAAA697B3F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5D242781-2BED-490C-AA13-32EAAA697B3F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694332.45059395</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>5D242781-2BED-490C-AA13-32EAAA697B3F</string>
+		</dict>
+		<key>5D8E30E3-E8D5-4685-8F70-459A0317EE3C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5D8E30E3-E8D5-4685-8F70-459A0317EE3C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696693662.46860003</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>5D8E30E3-E8D5-4685-8F70-459A0317EE3C</string>
 		</dict>
 		<key>5DBA9324-44C9-472D-8D1F-CC048E0BCEF5</key>
 		<dict>
@@ -5886,6 +7314,34 @@
 			<key>uniqueIdentifier</key>
 			<string>5DBA9324-44C9-472D-8D1F-CC048E0BCEF5</string>
 		</dict>
+		<key>5E8519CA-F3D7-4AE0-A5C1-45E9C1579862</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5E8519CA-F3D7-4AE0-A5C1-45E9C1579862.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744422.79219103</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>5E8519CA-F3D7-4AE0-A5C1-45E9C1579862</string>
+		</dict>
 		<key>5EB8275D-0132-4A0C-B05B-57444552D3AB</key>
 		<dict>
 			<key>className</key>
@@ -5913,6 +7369,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>5EB8275D-0132-4A0C-B05B-57444552D3AB</string>
+		</dict>
+		<key>5F41AD0E-8E93-4A7A-85B2-5450DC7CE0D5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5F41AD0E-8E93-4A7A-85B2-5450DC7CE0D5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696742077.94083595</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>5F41AD0E-8E93-4A7A-85B2-5450DC7CE0D5</string>
 		</dict>
 		<key>5F5F119A-51C8-471A-9043-D88EC72BFA50</key>
 		<dict>
@@ -6026,6 +7510,34 @@
 			<key>uniqueIdentifier</key>
 			<string>60694D11-D23F-4840-B1B6-1BBD8EF914DC</string>
 		</dict>
+		<key>60AA9DA2-A242-4504-B772-F8A675BD2EBD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>60AA9DA2-A242-4504-B772-F8A675BD2EBD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694036.03919601</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>60AA9DA2-A242-4504-B772-F8A675BD2EBD</string>
+		</dict>
 		<key>6176ABC0-1624-41D0-B198-B98C3C96A10D</key>
 		<dict>
 			<key>className</key>
@@ -6053,6 +7565,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>6176ABC0-1624-41D0-B198-B98C3C96A10D</string>
+		</dict>
+		<key>61F40EC1-523F-4EA5-8227-3A238E8395F9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>61F40EC1-523F-4EA5-8227-3A238E8395F9.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696745675.21336198</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>61F40EC1-523F-4EA5-8227-3A238E8395F9</string>
 		</dict>
 		<key>620F6CBF-9A99-4846-AAE5-2DAB0F54CD73</key>
 		<dict>
@@ -6137,6 +7677,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>6315F8BD-720C-4382-94C1-7DA4B605B972</string>
+		</dict>
+		<key>634EBAE2-1C92-4003-83E8-B234A59557FB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>634EBAE2-1C92-4003-83E8-B234A59557FB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696696141.15597296</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>634EBAE2-1C92-4003-83E8-B234A59557FB</string>
 		</dict>
 		<key>63B6617B-3201-4BF3-9749-1A53377CD285</key>
 		<dict>
@@ -6474,6 +8042,34 @@
 			<key>uniqueIdentifier</key>
 			<string>665B89F0-27BC-41AA-9587-885F9D830FB3</string>
 		</dict>
+		<key>66D6BA7F-7C49-4661-9525-7C66F28AABA6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>66D6BA7F-7C49-4661-9525-7C66F28AABA6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696669035.61568403</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>66D6BA7F-7C49-4661-9525-7C66F28AABA6</string>
+		</dict>
 		<key>67480251-DCC5-4F47-B7B9-48E4E4D69BD8</key>
 		<dict>
 			<key>className</key>
@@ -6529,6 +8125,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>68424396-CFB5-4CF4-A73B-D9F27B4952C5</string>
+		</dict>
+		<key>68FC1353-6827-4446-83F8-D01F0539335D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>68FC1353-6827-4446-83F8-D01F0539335D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744367.71438706</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>68FC1353-6827-4446-83F8-D01F0539335D</string>
 		</dict>
 		<key>695E94A8-2DAE-4570-B813-13CCA0590FCF</key>
 		<dict>
@@ -6754,6 +8378,34 @@
 			<key>uniqueIdentifier</key>
 			<string>6BBC69D3-BC94-4E9E-A745-3A539387DBEC</string>
 		</dict>
+		<key>6BC29207-10D3-427E-93A5-A3384769AEC6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>6BC29207-10D3-427E-93A5-A3384769AEC6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740340.39128304</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>6BC29207-10D3-427E-93A5-A3384769AEC6</string>
+		</dict>
 		<key>6C3FB5F4-4064-4208-B6F5-70D314A4A477</key>
 		<dict>
 			<key>className</key>
@@ -6781,6 +8433,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>6C3FB5F4-4064-4208-B6F5-70D314A4A477</string>
+		</dict>
+		<key>6C86ABA5-F176-48E8-BBF6-B5C6ED8182AC</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>6C86ABA5-F176-48E8-BBF6-B5C6ED8182AC.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745864.41447496</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>6C86ABA5-F176-48E8-BBF6-B5C6ED8182AC</string>
 		</dict>
 		<key>6C977CC2-E47C-4F2A-A68A-FDD20A923F21</key>
 		<dict>
@@ -7286,6 +8966,62 @@
 			<key>uniqueIdentifier</key>
 			<string>70E06389-C25C-4C46-8632-6B1ECF9C626F</string>
 		</dict>
+		<key>714E6190-FCCC-4BDF-93AD-A15FBA0FDB15</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>714E6190-FCCC-4BDF-93AD-A15FBA0FDB15.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694051.48357296</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>714E6190-FCCC-4BDF-93AD-A15FBA0FDB15</string>
+		</dict>
+		<key>7191AA33-13AA-45C1-8EBB-F696C99A5F22</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7191AA33-13AA-45C1-8EBB-F696C99A5F22.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696696622.425192</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>7191AA33-13AA-45C1-8EBB-F696C99A5F22</string>
+		</dict>
 		<key>71E14AE3-BB15-4348-8D45-0C72EF4D9492</key>
 		<dict>
 			<key>className</key>
@@ -7426,6 +9162,34 @@
 			<key>uniqueIdentifier</key>
 			<string>7330907A-8AB8-4F3B-8A20-6335286A20E4</string>
 		</dict>
+		<key>733399EE-F1AD-4604-A795-5AD33C9B2BA1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>733399EE-F1AD-4604-A795-5AD33C9B2BA1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696746200.11477995</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>733399EE-F1AD-4604-A795-5AD33C9B2BA1</string>
+		</dict>
 		<key>7348E5FB-88AB-4649-BDEF-7ED31DFE79C2</key>
 		<dict>
 			<key>className</key>
@@ -7453,6 +9217,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>7348E5FB-88AB-4649-BDEF-7ED31DFE79C2</string>
+		</dict>
+		<key>734F0F42-7766-4B63-BEA1-76DD4618C95D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>734F0F42-7766-4B63-BEA1-76DD4618C95D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696746200.11477995</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>734F0F42-7766-4B63-BEA1-76DD4618C95D</string>
 		</dict>
 		<key>73E4663F-5B45-4EF8-B9DF-79DB77A799C5</key>
 		<dict>
@@ -7650,6 +9442,34 @@
 			<key>uniqueIdentifier</key>
 			<string>7693BD86-0D30-4B25-BF18-DF4AA409F99D</string>
 		</dict>
+		<key>76E28FBB-BCD0-49C3-8E37-1BBB85448266</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>76E28FBB-BCD0-49C3-8E37-1BBB85448266.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696720489.62160206</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>76E28FBB-BCD0-49C3-8E37-1BBB85448266</string>
+		</dict>
 		<key>7802BF91-2195-40CB-B001-8E57B4A41F3B</key>
 		<dict>
 			<key>className</key>
@@ -7705,6 +9525,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>788A9F19-EB65-48C9-9D2B-3C279EAF8D5D</string>
+		</dict>
+		<key>789B9862-D8EF-4AA1-8316-5F94407C00EF</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>789B9862-D8EF-4AA1-8316-5F94407C00EF.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695420.80805397</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>789B9862-D8EF-4AA1-8316-5F94407C00EF</string>
 		</dict>
 		<key>78D247A3-EBA7-44AB-916C-38AA7F5F7F9A</key>
 		<dict>
@@ -7930,6 +9778,34 @@
 			<key>uniqueIdentifier</key>
 			<string>7AD75D20-48F1-4429-A9E8-3689654C99F8</string>
 		</dict>
+		<key>7B0D0922-411D-4149-BE12-211C4C916F43</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7B0D0922-411D-4149-BE12-211C4C916F43.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694051.48357296</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>7B0D0922-411D-4149-BE12-211C4C916F43</string>
+		</dict>
 		<key>7B500882-A1FA-4966-95FD-D02697D9DF05</key>
 		<dict>
 			<key>className</key>
@@ -8126,6 +10002,62 @@
 			<key>uniqueIdentifier</key>
 			<string>7DB8B021-F8B1-42D7-8147-094843C6A31D</string>
 		</dict>
+		<key>7E417E7A-08C4-4C00-AFB6-CB905B64E0C7</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7E417E7A-08C4-4C00-AFB6-CB905B64E0C7.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696693854.48937595</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>7E417E7A-08C4-4C00-AFB6-CB905B64E0C7</string>
+		</dict>
+		<key>7EA65D38-C015-4EFF-A013-8EF3BF74D501</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7EA65D38-C015-4EFF-A013-8EF3BF74D501.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696693854.48937595</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>7EA65D38-C015-4EFF-A013-8EF3BF74D501</string>
+		</dict>
 		<key>7F80C01D-5015-4BA4-BBD7-56F01F825918</key>
 		<dict>
 			<key>className</key>
@@ -8154,6 +10086,34 @@
 			<key>uniqueIdentifier</key>
 			<string>7F80C01D-5015-4BA4-BBD7-56F01F825918</string>
 		</dict>
+		<key>7FC9EDBA-3AFE-49FA-B184-0E1D4E69C8D0</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7FC9EDBA-3AFE-49FA-B184-0E1D4E69C8D0.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696740862.73763204</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>7FC9EDBA-3AFE-49FA-B184-0E1D4E69C8D0</string>
+		</dict>
 		<key>80280634-C4B5-449E-95A8-76E71B38379E</key>
 		<dict>
 			<key>className</key>
@@ -8181,6 +10141,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>80280634-C4B5-449E-95A8-76E71B38379E</string>
+		</dict>
+		<key>816569A0-0B93-4904-9BAC-B793C291DBD5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>816569A0-0B93-4904-9BAC-B793C291DBD5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696746200.11477995</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>816569A0-0B93-4904-9BAC-B793C291DBD5</string>
 		</dict>
 		<key>825C30A9-C317-4D16-86B4-198B8036438A</key>
 		<dict>
@@ -8321,6 +10309,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>84C1C6CD-8CD9-4D97-A0A4-465899E527D7</string>
+		</dict>
+		<key>84DA5B64-530B-4BE3-8C16-D511B6BA9B0C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>84DA5B64-530B-4BE3-8C16-D511B6BA9B0C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740340.39128304</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>84DA5B64-530B-4BE3-8C16-D511B6BA9B0C</string>
 		</dict>
 		<key>84F7B9A3-95A6-4624-95CA-C270C9EF4C1B</key>
 		<dict>
@@ -8490,6 +10506,34 @@
 			<key>uniqueIdentifier</key>
 			<string>878A1F33-94F4-437F-A9C9-BE8B5D74E9AE</string>
 		</dict>
+		<key>88005B71-F37F-48B8-A2E9-3546925535C9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>88005B71-F37F-48B8-A2E9-3546925535C9.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696695420.80805397</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>88005B71-F37F-48B8-A2E9-3546925535C9</string>
+		</dict>
 		<key>888D5B7E-4722-4382-B7CF-8D70890EA4B1</key>
 		<dict>
 			<key>className</key>
@@ -8546,6 +10590,34 @@
 			<key>uniqueIdentifier</key>
 			<string>8964C2BE-A306-4F06-A565-5FE7ADD6EF7D</string>
 		</dict>
+		<key>89BD00FC-3897-4433-AB06-BE6F6E2F2710</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>89BD00FC-3897-4433-AB06-BE6F6E2F2710.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696745788.23557901</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>89BD00FC-3897-4433-AB06-BE6F6E2F2710</string>
+		</dict>
 		<key>8AB5DDBA-B326-4F71-808E-2B38444E198E</key>
 		<dict>
 			<key>className</key>
@@ -8601,6 +10673,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>8AFDD605-1831-4564-AF2F-1DCE615F50C3</string>
+		</dict>
+		<key>8B9A920E-8D29-4DB8-88DA-FA17B44AB23F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8B9A920E-8D29-4DB8-88DA-FA17B44AB23F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696669035.61568403</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>8B9A920E-8D29-4DB8-88DA-FA17B44AB23F</string>
 		</dict>
 		<key>8BB4A2C8-1C5A-4742-97AB-340D79B97A2B</key>
 		<dict>
@@ -8769,6 +10869,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>8D5F52CA-5E5D-41D8-BFA9-3D5925D7AC12</string>
+		</dict>
+		<key>8DB632F3-584E-4D35-B7A0-0F691D557CE8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>8DB632F3-584E-4D35-B7A0-0F691D557CE8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744257.08794904</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>8DB632F3-584E-4D35-B7A0-0F691D557CE8</string>
 		</dict>
 		<key>8DBCE8AF-5CD0-4CB3-88F7-8CD9C8542029</key>
 		<dict>
@@ -8994,6 +11122,34 @@
 			<key>uniqueIdentifier</key>
 			<string>904E6F2A-03C2-4934-9915-67B9778A6EF2</string>
 		</dict>
+		<key>9060D61D-CDF2-40B1-8F57-007D34877B21</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9060D61D-CDF2-40B1-8F57-007D34877B21.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740862.73763204</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>9060D61D-CDF2-40B1-8F57-007D34877B21</string>
+		</dict>
 		<key>907F8D86-72B1-432A-8851-1BA616D43C20</key>
 		<dict>
 			<key>className</key>
@@ -9021,6 +11177,62 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>907F8D86-72B1-432A-8851-1BA616D43C20</string>
+		</dict>
+		<key>913BA479-FE6E-4095-B918-8A783699B9ED</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>913BA479-FE6E-4095-B918-8A783699B9ED.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741264.00332999</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>913BA479-FE6E-4095-B918-8A783699B9ED</string>
+		</dict>
+		<key>914DF912-4B48-4EBB-B49C-49CEC90DF1D7</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>914DF912-4B48-4EBB-B49C-49CEC90DF1D7.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744673.54683197</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>914DF912-4B48-4EBB-B49C-49CEC90DF1D7</string>
 		</dict>
 		<key>91F4107C-7849-4FA9-AF5D-09A1D2F2AA82</key>
 		<dict>
@@ -9246,6 +11458,34 @@
 			<key>uniqueIdentifier</key>
 			<string>9544711B-95AE-456E-A7C1-67BE534095CC</string>
 		</dict>
+		<key>95887BBC-CE26-4786-99D6-1D70FB55DE18</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>95887BBC-CE26-4786-99D6-1D70FB55DE18.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696720489.62160206</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>95887BBC-CE26-4786-99D6-1D70FB55DE18</string>
+		</dict>
 		<key>95E002C8-148D-44DE-A0AE-760DA56D938D</key>
 		<dict>
 			<key>className</key>
@@ -9273,6 +11513,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>95E002C8-148D-44DE-A0AE-760DA56D938D</string>
+		</dict>
+		<key>9617D3F0-DAFB-4BBB-82AF-3D543757F1A3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9617D3F0-DAFB-4BBB-82AF-3D543757F1A3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696720483.98573303</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>9617D3F0-DAFB-4BBB-82AF-3D543757F1A3</string>
 		</dict>
 		<key>96C21729-858C-47B1-A96D-76BE973CEE55</key>
 		<dict>
@@ -9610,6 +11878,34 @@
 			<key>uniqueIdentifier</key>
 			<string>99244C26-4A49-46B5-A8F3-473646A807A2</string>
 		</dict>
+		<key>9A1DF622-4331-460F-8FDA-40C2628EEE9B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9A1DF622-4331-460F-8FDA-40C2628EEE9B.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696693854.48937595</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>9A1DF622-4331-460F-8FDA-40C2628EEE9B</string>
+		</dict>
 		<key>9B9B6170-856B-4DBE-B88E-4827D7883266</key>
 		<dict>
 			<key>className</key>
@@ -9721,6 +12017,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>9C81EFC4-D25F-481B-A101-A075561B73EE</string>
+		</dict>
+		<key>9C8CFCD2-1670-41F9-A0A9-769D5D14178F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9C8CFCD2-1670-41F9-A0A9-769D5D14178F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696697684.10501599</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>9C8CFCD2-1670-41F9-A0A9-769D5D14178F</string>
 		</dict>
 		<key>9CABE816-4C94-4780-AA52-F7D87C93D54C</key>
 		<dict>
@@ -9918,6 +12242,34 @@
 			<key>uniqueIdentifier</key>
 			<string>9F3FAE58-8582-4252-A662-F2A002568743</string>
 		</dict>
+		<key>9F64F947-9858-4DD2-A4C1-CED469373ADE</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>9F64F947-9858-4DD2-A4C1-CED469373ADE.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694036.03919601</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>9F64F947-9858-4DD2-A4C1-CED469373ADE</string>
+		</dict>
 		<key>9F6F817A-2133-499C-AB88-5DA28F5C39AC</key>
 		<dict>
 			<key>className</key>
@@ -10030,6 +12382,34 @@
 			<key>uniqueIdentifier</key>
 			<string>A0A9247D-56AC-49A3-92F7-76F63D42448E</string>
 		</dict>
+		<key>A129F6BD-1D12-4078-ABEF-BA58AFCD8A83</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A129F6BD-1D12-4078-ABEF-BA58AFCD8A83.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696693570.6523</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A129F6BD-1D12-4078-ABEF-BA58AFCD8A83</string>
+		</dict>
 		<key>A13B37AE-BB21-4608-802C-B1996C41451D</key>
 		<dict>
 			<key>className</key>
@@ -10113,6 +12493,62 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>A1C3E4BB-7C73-4A38-A9F3-16653E050474</string>
+		</dict>
+		<key>A26D850C-4E95-4127-8902-C858343B80AD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A26D850C-4E95-4127-8902-C858343B80AD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696732587.59870803</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A26D850C-4E95-4127-8902-C858343B80AD</string>
+		</dict>
+		<key>A2776BA6-4CE3-4247-9830-7DA63760B21F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A2776BA6-4CE3-4247-9830-7DA63760B21F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696695478.12921202</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A2776BA6-4CE3-4247-9830-7DA63760B21F</string>
 		</dict>
 		<key>A285E0E7-E997-4F03-8A29-E63632FF3398</key>
 		<dict>
@@ -10281,6 +12717,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>A2FC8223-44FD-48DD-A61A-9FD2F445FC2F</string>
+		</dict>
+		<key>A3006A41-AC96-45A5-BD3E-C62D6499D7B9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A3006A41-AC96-45A5-BD3E-C62D6499D7B9.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696746054.12510896</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A3006A41-AC96-45A5-BD3E-C62D6499D7B9</string>
 		</dict>
 		<key>A3761806-9AA7-4313-BE12-2B5ECE52CA4F</key>
 		<dict>
@@ -10506,6 +12970,34 @@
 			<key>uniqueIdentifier</key>
 			<string>A4FA72C4-52B9-4A9D-B8E9-55B0D8C2AD81</string>
 		</dict>
+		<key>A585C2EF-46E9-4DCD-BABA-73C9E37C16C4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A585C2EF-46E9-4DCD-BABA-73C9E37C16C4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696694051.48357296</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A585C2EF-46E9-4DCD-BABA-73C9E37C16C4</string>
+		</dict>
 		<key>A636DC02-80F1-4069-A064-13F23061080C</key>
 		<dict>
 			<key>className</key>
@@ -10646,6 +13138,34 @@
 			<key>uniqueIdentifier</key>
 			<string>A7D12186-E92D-4889-9EF9-EBAAB246C1CB</string>
 		</dict>
+		<key>A7D679B1-5DEB-4617-9587-DF8561D2E6E8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A7D679B1-5DEB-4617-9587-DF8561D2E6E8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696744257.08794904</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A7D679B1-5DEB-4617-9587-DF8561D2E6E8</string>
+		</dict>
 		<key>A827E54E-B90B-4C68-827E-60482B553B3B</key>
 		<dict>
 			<key>className</key>
@@ -10702,6 +13222,62 @@
 			<key>uniqueIdentifier</key>
 			<string>A886B5AB-5A05-4BDB-BEEE-3E0DCCED5AAC</string>
 		</dict>
+		<key>A8E75983-4207-4D77-B1B3-88ADC405BF62</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A8E75983-4207-4D77-B1B3-88ADC405BF62.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744673.54683197</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A8E75983-4207-4D77-B1B3-88ADC405BF62</string>
+		</dict>
+		<key>AA19A1FE-2660-4DFB-9E36-D02EB7077260</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AA19A1FE-2660-4DFB-9E36-D02EB7077260.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696720489.62160206</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>AA19A1FE-2660-4DFB-9E36-D02EB7077260</string>
+		</dict>
 		<key>AA2508E0-47E1-4F42-947B-B5A3A8A3ACA2</key>
 		<dict>
 			<key>className</key>
@@ -10757,6 +13333,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>AA8F20AB-1DED-4F64-88F7-4C0ECF5042A6</string>
+		</dict>
+		<key>AAA05124-0C4F-430C-AA08-6C6645060DA5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AAA05124-0C4F-430C-AA08-6C6645060DA5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696697684.10501599</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>AAA05124-0C4F-430C-AA08-6C6645060DA5</string>
 		</dict>
 		<key>AAE883FF-EB75-4FCF-ABF3-D7339CBA74BA</key>
 		<dict>
@@ -10925,6 +13529,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>AD925E5D-42EF-45ED-A210-CAA00FD63089</string>
+		</dict>
+		<key>AED91505-797E-4818-AB6E-1591138E4D34</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AED91505-797E-4818-AB6E-1591138E4D34.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696696141.15597296</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>AED91505-797E-4818-AB6E-1591138E4D34</string>
 		</dict>
 		<key>AF008A23-F68E-4420-A47C-2ACF2414496A</key>
 		<dict>
@@ -11290,6 +13922,34 @@
 			<key>uniqueIdentifier</key>
 			<string>B27133D5-90E8-4A77-86AE-CC74338F05E9</string>
 		</dict>
+		<key>B3111DCE-1F7A-4889-9968-947DD6EF2AF2</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B3111DCE-1F7A-4889-9968-947DD6EF2AF2.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744288.88248301</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>B3111DCE-1F7A-4889-9968-947DD6EF2AF2</string>
+		</dict>
 		<key>B47E974D-9EB2-4282-A883-DEBA1396AB48</key>
 		<dict>
 			<key>className</key>
@@ -11430,6 +14090,118 @@
 			<key>uniqueIdentifier</key>
 			<string>B5A06CAD-DC3D-464F-BC99-34FCCABCF69B</string>
 		</dict>
+		<key>B5B24639-E8FE-4B65-AACA-4924F510D142</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B5B24639-E8FE-4B65-AACA-4924F510D142.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696720394.45226204</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>B5B24639-E8FE-4B65-AACA-4924F510D142</string>
+		</dict>
+		<key>B5ECFF51-8741-468E-886D-30CCC081550D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B5ECFF51-8741-468E-886D-30CCC081550D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696669035.61568403</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>B5ECFF51-8741-468E-886D-30CCC081550D</string>
+		</dict>
+		<key>B66B2F4B-12D0-430C-A6DB-FF196F93CC27</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B66B2F4B-12D0-430C-A6DB-FF196F93CC27.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696730359.98213899</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>B66B2F4B-12D0-430C-A6DB-FF196F93CC27</string>
+		</dict>
+		<key>B6F2E3C0-315A-41B4-BE0E-CE853C47CF3C</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B6F2E3C0-315A-41B4-BE0E-CE853C47CF3C.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744422.79219103</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>B6F2E3C0-315A-41B4-BE0E-CE853C47CF3C</string>
+		</dict>
 		<key>B746C518-3EE7-4264-91CB-BB41DC4B8D63</key>
 		<dict>
 			<key>className</key>
@@ -11541,6 +14313,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>B8C420F5-E824-4527-8176-634F50333097</string>
+		</dict>
+		<key>B93D6839-C58F-4D79-BCB5-DF68F3924029</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B93D6839-C58F-4D79-BCB5-DF68F3924029.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696745915.22789097</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>B93D6839-C58F-4D79-BCB5-DF68F3924029</string>
 		</dict>
 		<key>B956E799-9012-4F73-BA59-AFB8A9DC7811</key>
 		<dict>
@@ -11654,6 +14454,34 @@
 			<key>uniqueIdentifier</key>
 			<string>B9CEAC7E-E46D-4E65-B15D-6CA11E33C659</string>
 		</dict>
+		<key>B9E226AD-3BD1-421B-85AC-A15C02363336</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B9E226AD-3BD1-421B-85AC-A15C02363336.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696696622.425192</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>B9E226AD-3BD1-421B-85AC-A15C02363336</string>
+		</dict>
 		<key>BA0F5F3F-FDEE-4812-A4C0-AFB7CE87A6E5</key>
 		<dict>
 			<key>className</key>
@@ -11681,6 +14509,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>BA0F5F3F-FDEE-4812-A4C0-AFB7CE87A6E5</string>
+		</dict>
+		<key>BA4840F8-7C96-4A00-9F99-73119CC8AE1A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>BA4840F8-7C96-4A00-9F99-73119CC8AE1A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694492.96852899</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>BA4840F8-7C96-4A00-9F99-73119CC8AE1A</string>
 		</dict>
 		<key>BAC47E79-BE74-4C6E-A7EC-22CFB39276CD</key>
 		<dict>
@@ -12046,6 +14902,34 @@
 			<key>uniqueIdentifier</key>
 			<string>BE03330B-E6DB-4D8F-8F15-9C74678F16A1</string>
 		</dict>
+		<key>BE1555C1-0D69-44CD-8FA9-0E9B1A1277DD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>BE1555C1-0D69-44CD-8FA9-0E9B1A1277DD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740862.73763204</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>BE1555C1-0D69-44CD-8FA9-0E9B1A1277DD</string>
+		</dict>
 		<key>BECAAA96-A0F0-4677-AA3A-9613372D7F3B</key>
 		<dict>
 			<key>className</key>
@@ -12102,6 +14986,34 @@
 			<key>uniqueIdentifier</key>
 			<string>BF0CF14B-EE2B-442B-B9D9-0B323DCF7E2D</string>
 		</dict>
+		<key>BF67984D-F581-41B6-9C0E-537032A8FA30</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>BF67984D-F581-41B6-9C0E-537032A8FA30.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744288.88248301</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>BF67984D-F581-41B6-9C0E-537032A8FA30</string>
+		</dict>
 		<key>C01B62E4-89B7-48D3-BFDC-BA047EBCDACA</key>
 		<dict>
 			<key>className</key>
@@ -12129,6 +15041,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>C01B62E4-89B7-48D3-BFDC-BA047EBCDACA</string>
+		</dict>
+		<key>C0A99975-7F70-4B20-AC9D-11E68E1B8768</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C0A99975-7F70-4B20-AC9D-11E68E1B8768.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696732587.59870803</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>C0A99975-7F70-4B20-AC9D-11E68E1B8768</string>
 		</dict>
 		<key>C0C8E3A2-6FA8-49E0-B913-CA9C7BFA0FA2</key>
 		<dict>
@@ -12242,6 +15182,34 @@
 			<key>uniqueIdentifier</key>
 			<string>C1D01C20-F140-4A6D-BFE2-D8DD029FE1DB</string>
 		</dict>
+		<key>C1DCD20B-6C65-4DA7-BA19-6BED43F43361</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C1DCD20B-6C65-4DA7-BA19-6BED43F43361.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740979.40651095</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>C1DCD20B-6C65-4DA7-BA19-6BED43F43361</string>
+		</dict>
 		<key>C215D6B0-D8CD-420A-9CC1-8B988574A4D4</key>
 		<dict>
 			<key>className</key>
@@ -12270,6 +15238,34 @@
 			<key>uniqueIdentifier</key>
 			<string>C215D6B0-D8CD-420A-9CC1-8B988574A4D4</string>
 		</dict>
+		<key>C237CDD2-14DD-4C3D-8E38-E8E6E0B8EED8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C237CDD2-14DD-4C3D-8E38-E8E6E0B8EED8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740183.94371903</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>C237CDD2-14DD-4C3D-8E38-E8E6E0B8EED8</string>
+		</dict>
 		<key>C27BBA6E-28E3-42E0-94BC-6A1D05C3309F</key>
 		<dict>
 			<key>className</key>
@@ -12297,6 +15293,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>C27BBA6E-28E3-42E0-94BC-6A1D05C3309F</string>
+		</dict>
+		<key>C2BD1FA9-3E5E-4583-AA0B-6F7DD3A42408</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C2BD1FA9-3E5E-4583-AA0B-6F7DD3A42408.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694259.13096499</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>C2BD1FA9-3E5E-4583-AA0B-6F7DD3A42408</string>
 		</dict>
 		<key>C32576E3-4F84-40DB-B2A1-7D8838F7DF87</key>
 		<dict>
@@ -12578,6 +15602,34 @@
 			<key>uniqueIdentifier</key>
 			<string>C59FC2B5-EF1A-42D7-9B48-7C5BD150CD2A</string>
 		</dict>
+		<key>C6323846-4282-4965-A526-ECB4FFA0FC93</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C6323846-4282-4965-A526-ECB4FFA0FC93.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745675.21336198</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>C6323846-4282-4965-A526-ECB4FFA0FC93</string>
+		</dict>
 		<key>C6E6ABA4-386B-4B79-A5E2-59FC0C38072A</key>
 		<dict>
 			<key>className</key>
@@ -12634,6 +15686,34 @@
 			<key>uniqueIdentifier</key>
 			<string>C73A4371-AE53-4E16-A6CA-EC84421F8FDE</string>
 		</dict>
+		<key>C98029B9-7139-41C7-BB34-23EDF2A284C6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C98029B9-7139-41C7-BB34-23EDF2A284C6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695550.54121006</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>C98029B9-7139-41C7-BB34-23EDF2A284C6</string>
+		</dict>
 		<key>C9C4BAAA-3517-43EB-BFE7-F811876373D2</key>
 		<dict>
 			<key>className</key>
@@ -12689,6 +15769,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>C9E22ADF-DE12-4D32-820E-41A0B9CFC141</string>
+		</dict>
+		<key>CA57CCC2-3F0C-4403-8CD4-1105104518E6</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>CA57CCC2-3F0C-4403-8CD4-1105104518E6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745853.78118098</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>CA57CCC2-3F0C-4403-8CD4-1105104518E6</string>
 		</dict>
 		<key>CB0FD81E-DC51-46D3-8318-87B574FB702D</key>
 		<dict>
@@ -12998,6 +16106,34 @@
 			<key>uniqueIdentifier</key>
 			<string>CE6A428A-842B-4C06-8E6C-09FB9DA3AF76</string>
 		</dict>
+		<key>CE6FCED8-1561-4095-8CF8-A7ED2ADCA3E1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>CE6FCED8-1561-4095-8CF8-A7ED2ADCA3E1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696740340.39128304</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>CE6FCED8-1561-4095-8CF8-A7ED2ADCA3E1</string>
+		</dict>
 		<key>CE9A029B-1C11-4D51-B06C-29E40628A1EB</key>
 		<dict>
 			<key>className</key>
@@ -13109,6 +16245,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>D04BC450-F5DA-461E-915A-B2C80EDCD9F4</string>
+		</dict>
+		<key>D070413B-2012-4E96-BD22-1257BCB4645B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D070413B-2012-4E96-BD22-1257BCB4645B.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696742077.94083595</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>D070413B-2012-4E96-BD22-1257BCB4645B</string>
 		</dict>
 		<key>D0AD8A4E-4FDE-48B7-8259-2199EBE93A39</key>
 		<dict>
@@ -13222,6 +16386,62 @@
 			<key>uniqueIdentifier</key>
 			<string>D115F3F5-0CD2-4937-907D-EE6B0905EBAA</string>
 		</dict>
+		<key>D1B707C6-9669-4B2F-89B1-7735F19659BD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D1B707C6-9669-4B2F-89B1-7735F19659BD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745853.78118098</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>D1B707C6-9669-4B2F-89B1-7735F19659BD</string>
+		</dict>
+		<key>D1F53BBA-D32B-43BF-AEC9-5616744C2BE4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D1F53BBA-D32B-43BF-AEC9-5616744C2BE4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696694332.45059395</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>D1F53BBA-D32B-43BF-AEC9-5616744C2BE4</string>
+		</dict>
 		<key>D221B16D-7408-4CC0-BE26-4D22288B45A5</key>
 		<dict>
 			<key>className</key>
@@ -13305,6 +16525,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>D2A0CD2D-2402-40F5-82CB-60F27A8B35EE</string>
+		</dict>
+		<key>D2A8962C-9A07-4F50-B48A-F46AD6041EB9</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D2A8962C-9A07-4F50-B48A-F46AD6041EB9.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696730359.98213899</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>D2A8962C-9A07-4F50-B48A-F46AD6041EB9</string>
 		</dict>
 		<key>D2D92EB5-632F-48CB-B2DB-5338F9544356</key>
 		<dict>
@@ -13445,6 +16693,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>D3E1A50B-FB9C-4F78-94CE-E6122399AB06</string>
+		</dict>
+		<key>D3E6A601-8DBC-413F-9DB4-74F3768F9717</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D3E6A601-8DBC-413F-9DB4-74F3768F9717.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696696141.15597296</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>D3E6A601-8DBC-413F-9DB4-74F3768F9717</string>
 		</dict>
 		<key>D4766B70-A3E2-49CC-8F25-4E9F7E3FCB69</key>
 		<dict>
@@ -13726,6 +17002,34 @@
 			<key>uniqueIdentifier</key>
 			<string>D7AD0C6B-A637-4A7C-9691-57B7F5C11D34</string>
 		</dict>
+		<key>D8480A7E-2DD4-4BAD-B8BC-9A81ADA92B28</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D8480A7E-2DD4-4BAD-B8BC-9A81ADA92B28.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741227.49235594</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>D8480A7E-2DD4-4BAD-B8BC-9A81ADA92B28</string>
+		</dict>
 		<key>D929FBF8-91C6-48EE-B69D-0847AE158464</key>
 		<dict>
 			<key>className</key>
@@ -13837,6 +17141,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>D9D1FAC1-6770-45B6-8772-9252B209BC4C</string>
+		</dict>
+		<key>DA09B359-A64C-407A-97A1-5C0A36DE9418</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DA09B359-A64C-407A-97A1-5C0A36DE9418.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695550.54121006</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>DA09B359-A64C-407A-97A1-5C0A36DE9418</string>
 		</dict>
 		<key>DA90B587-0D01-4C23-B050-DC26D4EE3512</key>
 		<dict>
@@ -14090,6 +17422,62 @@
 			<key>uniqueIdentifier</key>
 			<string>DD8AF663-DF1E-4ED6-A904-838BE39A3FCB</string>
 		</dict>
+		<key>DD91660F-C55A-4737-8EC4-B5F0399F0677</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DD91660F-C55A-4737-8EC4-B5F0399F0677.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744257.08794904</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>DD91660F-C55A-4737-8EC4-B5F0399F0677</string>
+		</dict>
+		<key>DDD18632-7B80-44FA-9B8A-87ED58BFDC4D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DDD18632-7B80-44FA-9B8A-87ED58BFDC4D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696741264.00332999</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>DDD18632-7B80-44FA-9B8A-87ED58BFDC4D</string>
+		</dict>
 		<key>DE1793CC-FD31-49DC-BA93-B1B0C40333C3</key>
 		<dict>
 			<key>className</key>
@@ -14285,6 +17673,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>E066119B-3D60-47EC-9962-E76C0E9B52CC</string>
+		</dict>
+		<key>E1F6C457-2FF5-44D9-AEA7-89BCC618DAB5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E1F6C457-2FF5-44D9-AEA7-89BCC618DAB5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696694259.13096499</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>E1F6C457-2FF5-44D9-AEA7-89BCC618DAB5</string>
 		</dict>
 		<key>E248A854-01E0-4014-BAE8-12BC05B8FC37</key>
 		<dict>
@@ -14510,6 +17926,34 @@
 			<key>uniqueIdentifier</key>
 			<string>E430E649-F3BE-4D5B-A27F-C09CB6CEF147</string>
 		</dict>
+		<key>E480FC4A-686B-447E-8F22-98AAB5C77534</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E480FC4A-686B-447E-8F22-98AAB5C77534.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741227.49235594</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>E480FC4A-686B-447E-8F22-98AAB5C77534</string>
+		</dict>
 		<key>E50B5CE0-1AC6-49F7-81BF-6C95BB1608F0</key>
 		<dict>
 			<key>className</key>
@@ -14537,6 +17981,62 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>E50B5CE0-1AC6-49F7-81BF-6C95BB1608F0</string>
+		</dict>
+		<key>E5797E1A-83FA-4B86-9FFA-B808E922E724</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E5797E1A-83FA-4B86-9FFA-B808E922E724.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696744673.54683197</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>E5797E1A-83FA-4B86-9FFA-B808E922E724</string>
+		</dict>
+		<key>E69717C0-1159-4267-A96E-B711FE67FA73</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E69717C0-1159-4267-A96E-B711FE67FA73.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696730673.61589599</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>E69717C0-1159-4267-A96E-B711FE67FA73</string>
 		</dict>
 		<key>E6C6CB4D-7E96-4425-ACEA-A5DA97A778F9</key>
 		<dict>
@@ -14762,6 +18262,34 @@
 			<key>uniqueIdentifier</key>
 			<string>E9937EDC-99A8-48B1-AFAD-82A63E8AE563</string>
 		</dict>
+		<key>E9F3624B-A9A1-41D5-96CD-C181E6DB7350</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E9F3624B-A9A1-41D5-96CD-C181E6DB7350.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740938.70429206</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>E9F3624B-A9A1-41D5-96CD-C181E6DB7350</string>
+		</dict>
 		<key>EA013A9A-8FAF-45AE-B93D-EF84DB12727F</key>
 		<dict>
 			<key>className</key>
@@ -14790,6 +18318,62 @@
 			<key>uniqueIdentifier</key>
 			<string>EA013A9A-8FAF-45AE-B93D-EF84DB12727F</string>
 		</dict>
+		<key>EA0E3E8B-ECFB-415D-B85C-258EE7E15BBF</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EA0E3E8B-ECFB-415D-B85C-258EE7E15BBF.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696745864.41447496</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>EA0E3E8B-ECFB-415D-B85C-258EE7E15BBF</string>
+		</dict>
+		<key>EA5AAA2B-14F0-44B6-B084-549594F41AEB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EA5AAA2B-14F0-44B6-B084-549594F41AEB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741264.00332999</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>EA5AAA2B-14F0-44B6-B084-549594F41AEB</string>
+		</dict>
 		<key>EB70EF74-5DDF-4CC3-A317-98BC8C219DD9</key>
 		<dict>
 			<key>className</key>
@@ -14817,6 +18401,90 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>EB70EF74-5DDF-4CC3-A317-98BC8C219DD9</string>
+		</dict>
+		<key>EBB3B9C3-A6C0-4955-BBEB-162829F80771</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EBB3B9C3-A6C0-4955-BBEB-162829F80771.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696696622.425192</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>EBB3B9C3-A6C0-4955-BBEB-162829F80771</string>
+		</dict>
+		<key>EBD679A4-C35F-4B5C-9353-DE093DAB3284</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EBD679A4-C35F-4B5C-9353-DE093DAB3284.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696693570.6523</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>EBD679A4-C35F-4B5C-9353-DE093DAB3284</string>
+		</dict>
+		<key>EC3975E5-53F2-47A2-9847-2D508FC7F42E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EC3975E5-53F2-47A2-9847-2D508FC7F42E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696720483.98573303</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>EC3975E5-53F2-47A2-9847-2D508FC7F42E</string>
 		</dict>
 		<key>EC3A7302-3E49-49D1-92D1-E89A5FA3296E</key>
 		<dict>
@@ -15602,6 +19270,62 @@
 			<key>uniqueIdentifier</key>
 			<string>F69C073C-3661-4236-A57E-3E7A1FF39D6F</string>
 		</dict>
+		<key>F6DFDF01-4BAE-46C5-AC91-E03A37544BCB</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F6DFDF01-4BAE-46C5-AC91-E03A37544BCB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696744367.71438706</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>F6DFDF01-4BAE-46C5-AC91-E03A37544BCB</string>
+		</dict>
+		<key>F785F6F8-C738-4412-BCD8-969785D68F4D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F785F6F8-C738-4412-BCD8-969785D68F4D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696695855.07904696</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>F785F6F8-C738-4412-BCD8-969785D68F4D</string>
+		</dict>
 		<key>F7879EE5-06EE-4805-B58A-ECC1A900746E</key>
 		<dict>
 			<key>className</key>
@@ -15629,6 +19353,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>F7879EE5-06EE-4805-B58A-ECC1A900746E</string>
+		</dict>
+		<key>F7C29525-3EAC-497F-8B0E-A5EB2B9CE438</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F7C29525-3EAC-497F-8B0E-A5EB2B9CE438.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745152.74044704</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>F7C29525-3EAC-497F-8B0E-A5EB2B9CE438</string>
 		</dict>
 		<key>F897EE2A-9894-44CF-A658-43D688791B4D</key>
 		<dict>
@@ -15741,6 +19493,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>F959899F-3773-4C4D-AE29-897AB5D8AF91</string>
+		</dict>
+		<key>F9D41A40-F64D-4645-ABEB-29727487FA53</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F9D41A40-F64D-4645-ABEB-29727487FA53.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJsdWVwcmludFByb3ZpZGVyIjp7fX0sImJsdWVwcmludFByb3ZpZGVyX3Byb3ZpZGVyRmlsZVBhdGhTdHJpbmciOiJcL1VzZXJzXC9scnVja2VyXC9NaWNyb2NvZGVcL1BUWiBTY2VuZSBNYW5hZ2VyXC9QVFogU2NlbmUgTWFuYWdlci54Y29kZXByb2oifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741537.44027495</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>F9D41A40-F64D-4645-ABEB-29727487FA53</string>
 		</dict>
 		<key>FA03C87C-7B29-4997-9A3F-441299E8CBF4</key>
 		<dict>
@@ -15938,6 +19718,146 @@
 			<key>uniqueIdentifier</key>
 			<string>FCE5D322-236F-44D7-B596-3D20E8B3FDCB</string>
 		</dict>
+		<key>FD3A1EEF-59A8-4A0B-B952-B454FA0DD080</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FD3A1EEF-59A8-4A0B-B952-B454FA0DD080.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696745864.41447496</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>FD3A1EEF-59A8-4A0B-B952-B454FA0DD080</string>
+		</dict>
+		<key>FD8B3FBC-7551-4BFF-ADC3-1622F8CEBA0F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FD8B3FBC-7551-4BFF-ADC3-1622F8CEBA0F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696740979.40651095</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>FD8B3FBC-7551-4BFF-ADC3-1622F8CEBA0F</string>
+		</dict>
+		<key>FE33486B-615C-481E-B582-1455B659CD6F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FE33486B-615C-481E-B582-1455B659CD6F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696744288.88248301</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>FE33486B-615C-481E-B582-1455B659CD6F</string>
+		</dict>
+		<key>FE4C84FC-741C-41DA-9375-0DF34CDBEF00</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FE4C84FC-741C-41DA-9375-0DF34CDBEF00.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696745853.78118098</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>FE4C84FC-741C-41DA-9375-0DF34CDBEF00</string>
+		</dict>
+		<key>FED53795-AA4D-461A-9E62-1ADDA422FD56</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FED53795-AA4D-461A-9E62-1ADDA422FD56.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJibHVlcHJpbnRfYmx1ZXByaW50VmFyaWFudCI6eyJnZW5lcmljIjp7fX0sImJsdWVwcmludF9wcm92aWRlckZpbGVQYXRoU3RyaW5nIjoiXC9Vc2Vyc1wvbHJ1Y2tlclwvTWljcm9jb2RlXC9QVFogU2NlbmUgTWFuYWdlclwvUFRaIFNjZW5lIE1hbmFnZXIueGNvZGVwcm9qIiwidHlwZSI6eyJibHVlcHJpbnQiOnt9fSwiYmx1ZXByaW50X2JsdWVwcmludElkZW50aWZpZXIiOiI5NDc0N0UxQzI5N0I5NEY4MDAzMDk3NTIifQ==</string>
+			<key>timeStartedRecording</key>
+			<real>696741537.44027495</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>FED53795-AA4D-461A-9E62-1ADDA422FD56</string>
+		</dict>
 		<key>FF27E6FF-C5C5-48C1-BD39-88102E97D6A0</key>
 		<dict>
 			<key>className</key>
@@ -15965,6 +19885,34 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>FF27E6FF-C5C5-48C1-BD39-88102E97D6A0</string>
+		</dict>
+		<key>FF4700F1-153F-4336-8B03-B94851C78AD8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FF4700F1-153F-4336-8B03-B94851C78AD8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>signature</key>
+			<string>eyJ0eXBlIjp7ImJ1aWxkU3lzdGVtVGFzayI6e319LCJidWlsZFN5c3RlbVRhc2tfYnVpbGRUYXNrIjoiUHJlcGFyZSBidWlsZCJ9</string>
+			<key>timeStartedRecording</key>
+			<real>696694086.47110403</real>
+			<key>timeStoppedRecording</key>
+			<real>63113904000</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>FF4700F1-153F-4336-8B03-B94851C78AD8</string>
 		</dict>
 		<key>FFB9960E-2F15-4769-B92E-B848E076067A</key>
 		<dict>

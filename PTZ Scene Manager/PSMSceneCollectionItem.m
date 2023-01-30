@@ -29,12 +29,20 @@ static PSMSceneCollectionItem *selfType;
     return keyPaths;
 }
 
-- (NSString *)buttonTitle {
+- (NSString *)sceneSetButtonTitle {
     if (self.sceneNumber > 0) {
         NSString *fmt = NSLocalizedString(@"Set %ld", @"Set scene button");
         return [NSString localizedStringWithFormat:fmt, self.sceneNumber];
     }
     return NSLocalizedString(@"Set Home", @"Set home scene button");
+}
+
+- (NSString *)sceneRecallButtonTitle {
+    if (self.sceneNumber > 0) {
+        NSString *fmt = NSLocalizedString(@"Recall %ld", @"Recall scene button");
+        return [NSString localizedStringWithFormat:fmt, self.sceneNumber];
+    }
+    return NSLocalizedString(@"Recall Home", @"Recall home scene button");
 }
 
 - (IBAction)sceneRecall:(id)sender {
