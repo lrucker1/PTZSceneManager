@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTZPrefCamera;
 @class PSMSceneCollectionItem;
 
-@interface PSMSceneWindowController : NSWindowController <NSCollectionViewDataSource>
+@interface PSMSceneWindowController : NSWindowController <NSCollectionViewDataSource, NSSplitViewDelegate>
 
 @property PSMSceneCollectionItem *lastRecalledItem;
 

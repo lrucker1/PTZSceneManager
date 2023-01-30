@@ -55,6 +55,7 @@ typedef enum {
 @property IBOutlet RTSPViewController *rtspViewController;
 @property BOOL showStaticSnapshot;
 @property IBOutlet NSBox *cameraBox;
+@property IBOutlet NSBox *sceneCollectionBox;
 @property NSColor *boxColor;
 @property NSInteger itemCount;
 @property NSArray *sceneIndexes;
@@ -146,11 +147,14 @@ typedef enum {
     if (videoActive) {
         // Active: Program
         self.cameraBox.fillColor = [NSColor systemRedColor];
+        self.sceneCollectionBox.borderColor = [NSColor systemRedColor];
     } else if (videoShowing) {
         // Showing: Program or Preview
         self.cameraBox.fillColor = [NSColor systemGreenColor];
+        self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
     } else {
         self.cameraBox.fillColor = self.boxColor;
+        self.sceneCollectionBox.borderColor = self.boxColor;
     }
 }
 
@@ -160,6 +164,7 @@ typedef enum {
     // Magenta stands out nicely while being distinct.
     // The first thing we do on reconnection is ask for scene input state.
     self.cameraBox.fillColor = [NSColor magentaColor];
+    self.sceneCollectionBox.borderColor = [NSColor magentaColor];
 }
 
 - (PTZCamera *)camera {
@@ -446,6 +451,15 @@ typedef enum {
     item.sceneNumber = index;
     item.camera = self.camera;
     return item;
+}
+
+#pragma mark split view
+- (BOOL)splitView:(NSSplitView *)splitView
+canCollapseSubview:(NSView *)subview {
+    if ([subview.identifier isEqualToString:@"Controls"]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark observation
