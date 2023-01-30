@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class PTZCamera;
 
-@interface PSMSceneCollectionItem : NSCollectionViewItem <NSControlTextEditingDelegate>
+@interface PSMSceneCollectionItem : NSCollectionViewItem
 
 @property NSImage *image;
 @property NSString *imagePath;

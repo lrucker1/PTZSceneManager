@@ -75,8 +75,7 @@ static LARIndexSetVisualizerView *selfType;
     NSRect bounds = self.bounds;
     CGFloat stepX = bounds.size.width / _columnCount;
     CGFloat stepY = bounds.size.height / _rowCount;
-    NSPoint event_location = theEvent.locationInWindow;
-    NSPoint point = [self convertPoint:event_location fromView:nil];
+    NSPoint point = [self convertPoint:theEvent.locationInWindow fromView:nil];
     NSInteger x = (NSInteger)point.x / stepX;
     NSInteger y = (NSInteger)point.y / stepY;
     self.cellIndex = x + (y * _columnCount);
@@ -163,6 +162,20 @@ static LARIndexSetVisualizerView *selfType;
 @end
 
 @implementation VVWShadowTextFieldCell
+#if 0
+- (NSAttributedString *)attributedTitle {
+    NSColor *color = [NSColor whiteColor];
+    NSShadow *shadow = [[NSShadow alloc] init];
+
+    [shadow setShadowColor:[NSColor blackColor]];
+    [shadow setShadowOffset:NSMakeSize(0.5, -0.5)];
+    [shadow setShadowBlurRadius:5];
+    NSDictionary *attributes = @{ NSFontAttributeName : self.font,
+                                  NSForegroundColorAttributeName : color,
+                                  NSShadowAttributeName : shadow};
+    return [[NSAttributedString alloc] initWithString:self.stringValue attributes:attributes];
+}
+#else
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     [NSGraphicsContext saveGraphicsState];
 
@@ -172,5 +185,5 @@ static LARIndexSetVisualizerView *selfType;
     [super drawInteriorWithFrame:cellFrame inView:controlView];
     [NSGraphicsContext restoreGraphicsState];
 }
-
+#endif
 @end

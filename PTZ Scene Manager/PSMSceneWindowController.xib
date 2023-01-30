@@ -26,7 +26,7 @@
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="510" height="470"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="AKA-9N-UDC" userLabel="Camera Available">
                         <rect key="frame" x="469" y="3" width="28" height="16"/>
@@ -67,7 +67,7 @@
                             <constraint firstAttribute="bottom" secondItem="Taf-xD-kBh" secondAttribute="bottom" id="yre-QQ-MXG"/>
                         </constraints>
                     </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W6n-RS-l9m">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W6n-RS-l9m">
                         <rect key="frame" x="11" y="0.0" width="270" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="No scenes are available in the current range" id="Wor-Eg-1V7">
                             <font key="font" usesAppearanceFont="YES"/>
@@ -79,25 +79,26 @@
                         </connections>
                     </textField>
                     <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PtN-SX-hVF">
-                        <rect key="frame" x="0.0" y="19" width="510" height="431"/>
+                        <rect key="frame" x="0.0" y="19" width="510" height="451"/>
                         <subviews>
                             <customView id="Y3c-Ay-dYM">
-                                <rect key="frame" x="0.0" y="0.0" width="226" height="431"/>
+                                <rect key="frame" x="0.0" y="0.0" width="226" height="451"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <box boxType="custom" borderType="line" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-GK-es2">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="431"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="451"/>
                                         <view key="contentView" id="Ykz-oX-6gR">
-                                            <rect key="frame" x="3" y="3" width="220" height="425"/>
+                                            <rect key="frame" x="3" y="3" width="220" height="445"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView identifier="Scenes" wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-r8-LRb">
-                                                    <rect key="frame" x="4" y="4" width="2" height="2"/>
+                                                    <rect key="frame" x="4" y="4" width="212" height="437"/>
                                                     <clipView key="contentView" drawsBackground="NO" id="O1a-J2-dIf">
-                                                        <rect key="frame" x="1" y="1" width="0.0" height="0.0"/>
+                                                        <rect key="frame" x="1" y="1" width="210" height="435"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView id="6Fy-kw-0Au">
+                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="435"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="100" maximumNumberOfColumns="3" id="kp8-LB-dax">
                                                                     <size key="minimumItemSize" width="75" height="75"/>
@@ -141,14 +142,14 @@
                                 </constraints>
                             </customView>
                             <customView identifier="Controls" id="aqd-Mf-Y30">
-                                <rect key="frame" x="236" y="0.0" width="274" height="431"/>
+                                <rect key="frame" x="236" y="0.0" width="274" height="451"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="pQm-I7-fbP" userLabel="Live Cam View">
-                                        <rect key="frame" x="0.0" y="301" width="190" height="130"/>
+                                        <rect key="frame" x="0.0" y="254" width="274" height="197"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
-                                                <rect key="frame" x="144" y="-7" width="46" height="27"/>
+                                                <rect key="frame" x="228" y="-7" width="46" height="27"/>
                                                 <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Cj-ON-NQ9">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="smallSystem"/>
@@ -168,27 +169,28 @@
                                                 </connections>
                                             </button>
                                             <box boxType="custom" borderType="none" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="8yC-Mi-aW4" userLabel="Live Cam Box">
-                                                <rect key="frame" x="0.0" y="21" width="190" height="109"/>
+                                                <rect key="frame" x="0.0" y="21" width="274" height="176"/>
                                                 <view key="contentView" id="SzY-pi-oBM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="109"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="274" height="176"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hfs-ZN-q2C">
-                                                            <rect key="frame" x="3" y="3" width="184" height="103"/>
+                                                            <rect key="frame" x="3" y="3" width="268" height="170"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Hfs-ZN-q2C" secondAttribute="height" multiplier="480:300" priority="750" id="9jN-2g-PXL"/>
+                                                            </constraints>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="groove" id="2vU-1k-Gfv"/>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="SzY-pi-oBM" secondAttribute="top" constant="6" id="GiQ-2Z-yHc"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" constant="6" id="H9Z-cH-Mii"/>
                                                         <constraint firstItem="Hfs-ZN-q2C" firstAttribute="centerX" secondItem="SzY-pi-oBM" secondAttribute="centerX" id="IXC-p3-zVL"/>
                                                         <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="6" id="RK1-2U-Cz4"/>
-                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="centerY" secondItem="SzY-pi-oBM" secondAttribute="centerY" id="imq-m4-NTo"/>
+                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="6" id="kGD-xL-raS"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="6" id="mpd-FO-BpP"/>
                                                     </constraints>
                                                 </view>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="109" id="JTM-hX-tkG"/>
-                                                    <constraint firstAttribute="width" constant="190" id="lMs-Y2-5fk"/>
-                                                </constraints>
                                             </box>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="pkd-fi-9pm">
                                                 <rect key="frame" x="-6" y="-7" width="60" height="27"/>
@@ -212,9 +214,8 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="pkd-fi-9pm" firstAttribute="leading" secondItem="8yC-Mi-aW4" secondAttribute="leading" id="KNc-SA-zoR"/>
+                                            <constraint firstItem="QDe-sc-c7e" firstAttribute="top" secondItem="8yC-Mi-aW4" secondAttribute="bottom" constant="5" id="Vqa-8U-Ldx"/>
                                             <constraint firstItem="QDe-sc-c7e" firstAttribute="top" secondItem="8yC-Mi-aW4" secondAttribute="bottom" constant="5" id="aUw-WM-Lgq"/>
-                                            <constraint firstAttribute="height" constant="130" id="bxO-4Z-qnR"/>
-                                            <constraint firstAttribute="width" constant="190" id="eaD-ds-IOm"/>
                                             <constraint firstItem="8yC-Mi-aW4" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="top" id="iI4-Ni-Zge"/>
                                             <constraint firstItem="8yC-Mi-aW4" firstAttribute="leading" secondItem="pQm-I7-fbP" secondAttribute="leading" id="l5j-Ff-MyU"/>
                                             <constraint firstItem="QDe-sc-c7e" firstAttribute="firstBaseline" secondItem="pkd-fi-9pm" secondAttribute="firstBaseline" id="lSh-6q-hzK"/>
@@ -224,7 +225,7 @@
                                         </constraints>
                                     </customView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aMY-R4-QWH" userLabel="More Controls Menu Button" customClass="LARContextualActionButton">
-                                        <rect key="frame" x="191" y="164" width="20" height="22"/>
+                                        <rect key="frame" x="191" y="110" width="20" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="kP6-JX-D8H"/>
                                             <constraint firstAttribute="height" constant="20" id="zhW-f6-UGJ"/>
@@ -238,7 +239,7 @@
                                         </connections>
                                     </button>
                                     <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-8a-7PM" userLabel="PanTilt Grid View">
-                                        <rect key="frame" x="87" y="193" width="100" height="100"/>
+                                        <rect key="frame" x="87" y="146" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="P2s-sA-zQu"/>
                                             <constraint firstAttribute="width" constant="100" id="XNi-Fi-QDb"/>
@@ -558,7 +559,7 @@
                                         </gridCells>
                                     </gridView>
                                     <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-2j-qG2" userLabel="More Controls View">
-                                        <rect key="frame" x="87" y="60" width="104" height="125"/>
+                                        <rect key="frame" x="87" y="6" width="104" height="125"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="YGQ-XG-efI" userLabel="Zoom View">
                                                 <rect key="frame" x="0.0" y="100" width="104" height="25"/>
@@ -576,9 +577,8 @@
                                                         </columns>
                                                         <gridCells>
                                                             <gridCell row="Bm6-YR-5xr" column="lRa-Gk-UAJ" id="Qrp-3F-6a2">
-                                                                <button key="contentView" verticalHuggingPriority="750" id="w0T-s3-fOU" userLabel="In+">
+                                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w0T-s3-fOU" userLabel="In+">
                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="8s2-bd-mAu"/>
                                                                         <constraint firstAttribute="height" constant="25" id="XJp-jh-lHC"/>
@@ -594,9 +594,8 @@
                                                                 </button>
                                                             </gridCell>
                                                             <gridCell row="Bm6-YR-5xr" column="Vxw-hj-RBG" id="6bZ-hh-42n">
-                                                                <button key="contentView" verticalHuggingPriority="750" tag="1" id="edX-fE-kTZ" userLabel="In">
+                                                                <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="edX-fE-kTZ" userLabel="In">
                                                                     <rect key="frame" x="25" y="0.0" width="25" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="8aG-E0-ppF"/>
                                                                         <constraint firstAttribute="height" constant="25" id="SMl-EM-gsG"/>
@@ -629,9 +628,8 @@
                                                                 </button>
                                                             </gridCell>
                                                             <gridCell row="Bm6-YR-5xr" column="ILE-AB-LQ8" id="wx6-W7-F8a">
-                                                                <button key="contentView" verticalHuggingPriority="750" tag="3" id="p35-UC-80g" userLabel="Out+">
+                                                                <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="p35-UC-80g" userLabel="Out+">
                                                                     <rect key="frame" x="79" y="0.0" width="25" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="LUN-89-XPv"/>
                                                                         <constraint firstAttribute="height" constant="25" id="sJm-EA-CRI"/>
@@ -689,9 +687,8 @@
                                                                 </button>
                                                             </gridCell>
                                                             <gridCell row="p2K-0Y-eMb" column="xN1-nI-QNm" id="5ZH-mU-V0H">
-                                                                <button key="contentView" verticalHuggingPriority="750" tag="1" id="U6v-ud-aFP" userLabel="FocusFar">
+                                                                <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="U6v-ud-aFP" userLabel="FocusFar">
                                                                     <rect key="frame" x="25" y="0.0" width="25" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="IbM-43-IFG"/>
                                                                         <constraint firstAttribute="height" constant="25" id="RxS-lh-yr3"/>
@@ -707,9 +704,8 @@
                                                                 </button>
                                                             </gridCell>
                                                             <gridCell row="p2K-0Y-eMb" column="L5u-h0-QUg" id="DY3-OS-AuE">
-                                                                <button key="contentView" verticalHuggingPriority="750" tag="2" id="qFs-nZ-hPb" userLabel="FocusNear">
+                                                                <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="qFs-nZ-hPb" userLabel="FocusNear">
                                                                     <rect key="frame" x="54" y="0.0" width="25" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="9bW-27-pNQ"/>
                                                                         <constraint firstAttribute="height" constant="25" id="t6n-yi-7EM"/>
@@ -725,9 +721,8 @@
                                                                 </button>
                                                             </gridCell>
                                                             <gridCell row="p2K-0Y-eMb" column="LeB-UW-Zci" id="Jj0-b5-J6h">
-                                                                <button key="contentView" verticalHuggingPriority="750" tag="3" id="2rc-fD-Pah" userLabel="FocusNear+">
+                                                                <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="2rc-fD-Pah" userLabel="FocusNear+">
                                                                     <rect key="frame" x="79" y="0.0" width="25" height="25"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="LiD-ob-sdN"/>
                                                                         <constraint firstAttribute="width" constant="25" id="WG0-sY-wpb"/>
@@ -823,13 +818,17 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="2OS-mi-coq"/>
                                     <constraint firstItem="6XE-2j-qG2" firstAttribute="leading" secondItem="zuV-8a-7PM" secondAttribute="leading" id="BAA-cF-fMZ"/>
                                     <constraint firstItem="zuV-8a-7PM" firstAttribute="centerX" secondItem="aqd-Mf-Y30" secondAttribute="centerX" id="HfU-Nu-d9f"/>
-                                    <constraint firstItem="6XE-2j-qG2" firstAttribute="top" secondItem="zuV-8a-7PM" secondAttribute="bottom" constant="8" symbolic="YES" id="Lnu-aG-9F2"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="JEF-JZ-tFD"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aMY-R4-QWH" secondAttribute="trailing" constant="1" id="LME-mU-SJI"/>
+                                    <constraint firstItem="6XE-2j-qG2" firstAttribute="top" secondItem="zuV-8a-7PM" secondAttribute="bottom" constant="15" id="Lnu-aG-9F2"/>
                                     <constraint firstItem="aMY-R4-QWH" firstAttribute="top" secondItem="6XE-2j-qG2" secondAttribute="top" id="Wis-Vo-06P"/>
                                     <constraint firstItem="pQm-I7-fbP" firstAttribute="top" secondItem="aqd-Mf-Y30" secondAttribute="top" id="Wz0-yJ-xUk"/>
                                     <constraint firstItem="pQm-I7-fbP" firstAttribute="leading" secondItem="aqd-Mf-Y30" secondAttribute="leading" id="fPH-kf-tEd"/>
                                     <constraint firstItem="aMY-R4-QWH" firstAttribute="leading" secondItem="6XE-2j-qG2" secondAttribute="trailing" id="gyD-1X-Hga"/>
+                                    <constraint firstItem="zuV-8a-7PM" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="bottom" constant="8" symbolic="YES" id="oGF-dy-4hb"/>
                                     <constraint firstItem="zuV-8a-7PM" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="bottom" constant="8" symbolic="YES" id="rWP-80-iQU"/>
                                     <constraint firstAttribute="trailing" secondItem="pQm-I7-fbP" secondAttribute="trailing" id="xLu-RG-ueO"/>
                                 </constraints>
@@ -843,31 +842,15 @@
                             <outlet property="delegate" destination="-2" id="dlq-ql-lnO"/>
                         </connections>
                     </splitView>
-                    <button toolTip="Click to edit the scene names" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aGs-Ak-QrY">
-                        <rect key="frame" x="0.0" y="456" width="14" height="14"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="14" id="YRm-xc-FRz"/>
-                            <constraint firstAttribute="width" constant="14" id="zVg-YO-2pJ"/>
-                        </constraints>
-                        <buttonCell key="cell" type="bevel" title="Edit Scene Names" bezelStyle="regularSquare" image="pencil.slash" catalog="system" imagePosition="left" alternateImage="pencil" state="on" inset="2" id="Uf8-ck-CxK">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <binding destination="-3" name="value" keyPath="delegate.canEditSceneNames" id="cAY-ce-bVM"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="AKA-9N-UDC" secondAttribute="bottom" constant="3" id="8m0-hr-HeX"/>
+                    <constraint firstItem="PtN-SX-hVF" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Jn6-EP-gOB"/>
                     <constraint firstAttribute="trailing" secondItem="PtN-SX-hVF" secondAttribute="trailing" id="MyS-Zz-wne"/>
-                    <constraint firstItem="aGs-Ak-QrY" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="Qnl-VA-8Va"/>
                     <constraint firstItem="AKA-9N-UDC" firstAttribute="top" secondItem="PtN-SX-hVF" secondAttribute="bottom" id="Um8-D3-M16"/>
                     <constraint firstItem="PtN-SX-hVF" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="Voh-RP-ZAp"/>
-                    <constraint firstItem="aGs-Ak-QrY" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="X8R-y9-8Kw"/>
                     <constraint firstAttribute="bottom" secondItem="W6n-RS-l9m" secondAttribute="bottom" id="d7W-GS-JJS"/>
                     <constraint firstItem="W6n-RS-l9m" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="gmY-hu-ghY"/>
-                    <constraint firstItem="PtN-SX-hVF" firstAttribute="top" secondItem="aGs-Ak-QrY" secondAttribute="bottom" constant="6" id="qHl-cR-rtj"/>
                     <constraint firstAttribute="trailing" secondItem="AKA-9N-UDC" secondAttribute="trailing" constant="13" id="vz9-2U-nHR"/>
                 </constraints>
             </view>
@@ -959,8 +942,6 @@
         <image name="lock.rectangle.on.rectangle.fill" catalog="system" width="19" height="15"/>
         <image name="minus" catalog="system" width="14" height="4"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
-        <image name="pencil" catalog="system" width="14" height="13"/>
-        <image name="pencil.slash" catalog="system" width="14" height="13"/>
         <image name="plus" catalog="system" width="14" height="13"/>
         <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
     </resources>

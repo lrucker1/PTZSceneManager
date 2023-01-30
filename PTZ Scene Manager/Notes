@@ -33,6 +33,8 @@ Shrink the ui - scenes on left, controls on right, toggle control view visibilit
 
 Recall last selected scene option
 
-Text on the images.
+Text on the images. Lock name editing - part of the whole UI lock?
 
 Home: Actual Home command, or recall last set scene?
+
+Get the camera's actual aspect ratio for the live view constraint.

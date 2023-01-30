@@ -63,12 +63,4 @@ static PSMSceneCollectionItem *selfType;
     }];
 }
 
-- (void)controlTextDidEndEditing:(NSNotification *)notification {
-    AppDelegate *del = (AppDelegate*)[NSApp delegate];
-    // We get this on clicks. We don't want didChange, it fires on every key.
-    if (del.canEditSceneNames) {
-        [del.sourceSettings setName:self.sceneName forScene:self.sceneNumber camera:self.camera.cameraIP];
-    }
-}
-
 @end
