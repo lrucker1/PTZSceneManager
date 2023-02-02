@@ -38,6 +38,10 @@
     return self;
 }
 
+- (BOOL)isPTZOptics {
+    return self.cameratype == VISCA_IFACE_CAM_PTZOPTICS;
+}
+
 #if 0
 // TODO: save to defaults with cameratype-specific keys.
 - (NSInteger)maxSceneIndex {
@@ -54,7 +58,7 @@
     if (index < 1 || index > self.maxSceneIndex) {
         return NO;
     }
-    if (self.cameratype == VISCA_IFACE_CAM_PTZOPTICS) {
+    if (self.isPTZOptics) {
         if (NSLocationInRange(index, self.reservedRange)) {
             return NO;
         }
@@ -63,7 +67,7 @@
 }
 
 - (NSInteger)validateRangeOffset:(NSInteger)offset {
-    if (self.cameratype == VISCA_IFACE_CAM_PTZOPTICS) {
+    if (self.isPTZOptics) {
         if (offset >= 81 && offset <= 99) {
             offset = 100;
         }
@@ -72,7 +76,7 @@
 }
 
 - (NSIndexSet *)reservedSet {
-    if (self.cameratype == VISCA_IFACE_CAM_PTZOPTICS) {
+    if (self.isPTZOptics) {
         return [NSIndexSet indexSetWithIndexesInRange:self.reservedRange];
     }
     return nil;

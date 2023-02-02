@@ -140,6 +140,7 @@ typedef void (^PTZSnapshotFetchDoneBlock)( NSData * _Nullable imageData);
 - (void)updateWBModeValues:(BOOL)fetchAll onDone:(PTZDoneBlock _Nullable)doneBlock;
 - (void)updateExposureModeValues:(BOOL)fetchAll onDone:(PTZDoneBlock _Nullable)doneBlock;
 - (void)updateImageCameraValues:(BOOL)fetchAll onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)updateAutofocusState:(PTZDoneBlock _Nullable)doneBlock;
 
 - (void)prepareForProgressOperationFrom:(NSInteger)start to:(NSInteger)end;
 - (void)backupRestoreWithParent:(PTZProgressGroup *)parent delay:(NSInteger)batchDelay isBackup:(BOOL)isBackup onDone:(PTZDoneBlock _Nullable)doneBlock;
@@ -155,6 +156,11 @@ typedef void (^PTZSnapshotFetchDoneBlock)( NSData * _Nullable imageData);
 - (void)applyImageCameraValues:(PTZDoneBlock _Nullable)doneBlock;
 - (void)saveLocalImageCameraPrefs;
 - (void)loadLocalImageCameraPrefs;
+
+- (void)toggleOSDMenu:(PTZDoneBlock _Nullable)doneBlock;
+- (void)osdMenuReturn:(PTZDoneBlock _Nullable)doneBlock;
+- (void)osdMenuEnter:(PTZDoneBlock _Nullable)doneBlock;
+- (void)closeOSDMenu:(PTZDoneBlock _Nullable)doneBlock;
 
 @end
 

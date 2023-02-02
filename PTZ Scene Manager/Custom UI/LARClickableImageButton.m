@@ -23,6 +23,10 @@ RectUtil_CenterRect(NSRect rect, CGFloat width, CGFloat height)
 
 // I have no idea why I have to check flipped in hitTest but not mouseDown, unless convertPoint does some extra work for me.
 - (NSView *)hitTest:(NSPoint)point {
+    // Autolayout and aspect ratio do some interesting things to origin.
+    NSPoint origin = self.frame.origin;
+    point.x -= origin.x;
+    point.y -= origin.y;
     if ([self isFlipped]) {
         point.y = NSMaxY(self.bounds) - point.y;
     }
@@ -54,13 +58,6 @@ RectUtil_CenterRect(NSRect rect, CGFloat width, CGFloat height)
     }
 }
 
-- (void)controlTextDidEndEditing:(NSNotification *)notification {
-    NSPopover *popover = self.popover;
-    if (popover.shown) {
-        [popover close];
-    }
-}
-
 @end
 
 @implementation LARClickableImageButtonCell
@@ -82,8 +79,11 @@ RectUtil_CenterRect(NSRect rect, CGFloat width, CGFloat height)
     NSRect rect = [super titleRectForBounds:bounds];
     NSRect imgRect = [self imageRectForBounds:bounds];
     NSSize size = [self.attributedTitle size];
-    rect = RectUtil_CenterRect(rect, size.width + 6, size.height);
+    rect = RectUtil_CenterRect(rect, size.width, size.height);
     rect.origin.y = imgRect.origin.y;
+    if (rect.size.width > bounds.size.width) {
+        rect.origin.x = 0; rect.size.width = bounds.size.width;
+    }
     if ([[self controlView] isFlipped]) {
         rect.origin.y = NSMaxY(imgRect) - size.height;
     }
@@ -97,7 +97,9 @@ RectUtil_CenterRect(NSRect rect, CGFloat width, CGFloat height)
     if ([self.controlView isKindOfClass:[NSButton class]]) {
         [NSGraphicsContext saveGraphicsState];
         [[(NSButton *)self.controlView bezelColor] set];
-        [[NSBezierPath bezierPathWithRoundedRect:frame xRadius:4 yRadius:4] fill];
+        // This rect may be clipped if the text is wider than the button; that's what we want, so the text takes up all the space with no visible round corners.
+        NSRect bgFrame = NSInsetRect(frame, -3, 0);
+        [[NSBezierPath bezierPathWithRoundedRect:bgFrame xRadius:4 yRadius:4] fill];
         [NSGraphicsContext restoreGraphicsState];
     }
 

@@ -36,15 +36,12 @@
 		94747E5B297B96F900309752 /* PTZCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E59297B96F900309752 /* PTZCamera.m */; };
 		94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E5C297B970100309752 /* PTZCameraConfig.m */; };
 		94747E61297B971100309752 /* PTZProgressGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E60297B971100309752 /* PTZProgressGroup.m */; };
-		94747E72297B9C5F00309752 /* dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 94747E66297B9C5F00309752 /* dictionary.c */; };
 		94747E73297B9C5F00309752 /* PTZSettingsFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E68297B9C5F00309752 /* PTZSettingsFile.m */; };
-		94747E74297B9C5F00309752 /* iniparser.c in Sources */ = {isa = PBXBuildFile; fileRef = 94747E69297B9C5F00309752 /* iniparser.c */; };
 		94747E75297B9C5F00309752 /* PTZIniParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E6A297B9C5F00309752 /* PTZIniParser.m */; };
 		94747E77297B9C5F00309752 /* ObjCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E70297B9C5F00309752 /* ObjCUtils.m */; };
 		94747E7A297B9D5A00309752 /* PTZPrefCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E78297B9D5A00309752 /* PTZPrefCamera.m */; };
 		94747E80297BB36C00309752 /* PSMSceneCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */; };
 		94747E82297BBD4800309752 /* PSMSceneCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */; };
-		94747E88297BC4F800309752 /* liblibvisca-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94747E87297BC4F800309752 /* liblibvisca-static.a */; };
 		94890E3C298275ED006EAB75 /* PSMOBSWebSocketController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */; };
 		94890E4029827619006EAB75 /* easywsclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94890E3F29827619006EAB75 /* easywsclient.cpp */; };
 		94C55AB7297CE96700D8C1DB /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 94C55AB6297CE96700D8C1DB /* Notes */; };
@@ -55,6 +52,12 @@
 		94CEBAFC2984934200D3C8DC /* PSMAppPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */; };
 		94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */; };
 		94CEBB242986B73900D3C8DC /* LARIndexSetVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */; };
+		94CEBB292989B8CE00D3C8DC /* PTZAltKeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB282989B8CE00D3C8DC /* PTZAltKeyButton.m */; };
+		94CEBB2F2989D38400D3C8DC /* liblibvisca-all.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */; };
+		94CEBB38298A0CCE00D3C8DC /* DraggingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB37298A0CCE00D3C8DC /* DraggingStackView.swift */; };
+		94CEBB40298B58CF00D3C8DC /* PSMRangeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB3E298B58CF00D3C8DC /* PSMRangeCollectionViewController.m */; };
+		94CEBB45298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB43298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.m */; };
+		94CEBB46298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CEBB44298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,7 +123,6 @@
 		94747E7E297BB36C00309752 /* PSMSceneCollectionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMSceneCollectionItem.h; sourceTree = "<group>"; };
 		94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMSceneCollectionItem.m; sourceTree = "<group>"; };
 		94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMSceneCollectionItem.xib; sourceTree = "<group>"; };
-		94747E87297BC4F800309752 /* liblibvisca-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibvisca-static.a"; sourceTree = "<group>"; };
 		94890D5E29809BE0006EAB75 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		94890E3A298275ED006EAB75 /* PSMOBSWebSocketController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMOBSWebSocketController.h; sourceTree = "<group>"; };
 		94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PSMOBSWebSocketController.mm; sourceTree = "<group>"; };
@@ -140,6 +142,16 @@
 		94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTZCameraSceneRange.m; sourceTree = "<group>"; };
 		94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LARIndexSetVisualizerView.m; sourceTree = "<group>"; };
 		94CEBB232986B73900D3C8DC /* LARIndexSetVisualizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LARIndexSetVisualizerView.h; sourceTree = "<group>"; };
+		94CEBB272989B8CE00D3C8DC /* PTZAltKeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZAltKeyButton.h; sourceTree = "<group>"; };
+		94CEBB282989B8CE00D3C8DC /* PTZAltKeyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZAltKeyButton.m; sourceTree = "<group>"; };
+		94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibvisca-all.a"; sourceTree = "<group>"; };
+		94CEBB37298A0CCE00D3C8DC /* DraggingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggingStackView.swift; sourceTree = "<group>"; };
+		94CEBB3C298AE6DE00D3C8DC /* DraggingStackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DraggingStackView.h; sourceTree = "<group>"; };
+		94CEBB3D298B58CF00D3C8DC /* PSMRangeCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMRangeCollectionViewController.h; sourceTree = "<group>"; };
+		94CEBB3E298B58CF00D3C8DC /* PSMRangeCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMRangeCollectionViewController.m; sourceTree = "<group>"; };
+		94CEBB42298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMRangeCollectionWindowController.h; sourceTree = "<group>"; };
+		94CEBB43298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMRangeCollectionWindowController.m; sourceTree = "<group>"; };
+		94CEBB44298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMRangeCollectionWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,9 +161,9 @@
 			files = (
 				9463827729807F190015BA8F /* libavformat.a in Frameworks */,
 				9463827B29807F1A0015BA8F /* libswscale.a in Frameworks */,
+				94CEBB2F2989D38400D3C8DC /* liblibvisca-all.a in Frameworks */,
 				9463827929807F1A0015BA8F /* libavfilter.a in Frameworks */,
 				9463828329807F360015BA8F /* libbz2.tbd in Frameworks */,
-				94747E88297BC4F800309752 /* liblibvisca-static.a in Frameworks */,
 				9463827D29807F1A0015BA8F /* libavdevice.a in Frameworks */,
 				9463826B29807D8E0015BA8F /* liblibRTSPClient.a in Frameworks */,
 				9463827A29807F1A0015BA8F /* libswresample.a in Frameworks */,
@@ -194,6 +206,7 @@
 		94747E1F297B94F800309752 /* PTZ Scene Manager */ = {
 			isa = PBXGroup;
 			children = (
+				94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */,
 				94C55AB6297CE96700D8C1DB /* Notes */,
 				94747E20297B94F800309752 /* AppDelegate.h */,
 				94747E21297B94F800309752 /* AppDelegate.m */,
@@ -211,12 +224,16 @@
 				94747E32297B951200309752 /* PSMSceneWindowController.xib */,
 				94747E7E297BB36C00309752 /* PSMSceneCollectionItem.h */,
 				94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */,
-				94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */,
 				946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */,
 				946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */,
 				946346C0297F5D000015BA8F /* PTZCameraStateViewController.h */,
 				946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */,
 				946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */,
+				94CEBB3D298B58CF00D3C8DC /* PSMRangeCollectionViewController.h */,
+				94CEBB3E298B58CF00D3C8DC /* PSMRangeCollectionViewController.m */,
+				94CEBB42298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.h */,
+				94CEBB43298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.m */,
+				94CEBB44298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.xib */,
 				94890E3A298275ED006EAB75 /* PSMOBSWebSocketController.h */,
 				94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */,
 				94CEBAF82984934200D3C8DC /* PSMAppPreferencesWindowController.h */,
@@ -226,8 +243,8 @@
 				94747E60297B971100309752 /* PTZProgressGroup.m */,
 				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
 				94C55AB2297CB6A800D8C1DB /* Custom UI */,
-				94747E87297BC4F800309752 /* liblibvisca-static.a */,
 				9463826A29807D8D0015BA8F /* liblibRTSPClient.a */,
+				94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */,
 				9463827129807F190015BA8F /* libavcodec.a */,
 				9463827629807F190015BA8F /* libavdevice.a */,
 				9463827229807F190015BA8F /* libavfilter.a */,
@@ -285,10 +302,14 @@
 		94C55AB2297CB6A800D8C1DB /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				94CEBB37298A0CCE00D3C8DC /* DraggingStackView.swift */,
+				94CEBB3C298AE6DE00D3C8DC /* DraggingStackView.h */,
 				94C55AB8297D04B300D8C1DB /* LARClickableImageButton.h */,
 				94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */,
 				946346C3297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.h */,
 				946346C2297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m */,
+				94CEBB272989B8CE00D3C8DC /* PTZAltKeyButton.h */,
+				94CEBB282989B8CE00D3C8DC /* PTZAltKeyButton.m */,
 				946346CA297F5DE70015BA8F /* ColorTempSliderCell.h */,
 				946346C8297F5DE70015BA8F /* ColorTempSliderCell.m */,
 				946346C9297F5DE70015BA8F /* NSColorAdditions.h */,
@@ -368,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94747E82297BBD4800309752 /* PSMSceneCollectionItem.xib in Resources */,
+				94CEBB46298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.xib in Resources */,
 				946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */,
 				94C55AB7297CE96700D8C1DB /* Notes in Resources */,
 				94747E34297B951200309752 /* PSMSceneWindowController.xib in Resources */,
@@ -388,21 +410,24 @@
 				94CEBAFB2984934200D3C8DC /* PSMAppPreferencesWindowController.m in Sources */,
 				94747E7A297B9D5A00309752 /* PTZPrefCamera.m in Sources */,
 				94747E33297B951200309752 /* PSMSceneWindowController.m in Sources */,
+				94CEBB45298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.m in Sources */,
 				946346C4297F5DBA0015BA8F /* PTZOutlineViewDictionaryDataSource.m in Sources */,
 				946346CD297F5DE70015BA8F /* ColorTempSliderCell.m in Sources */,
 				946346CC297F5DE70015BA8F /* NSWindowAdditions.m in Sources */,
 				946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */,
 				94747E61297B971100309752 /* PTZProgressGroup.m in Sources */,
 				946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */,
+				94CEBB292989B8CE00D3C8DC /* PTZAltKeyButton.m in Sources */,
 				94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */,
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
 				94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */,
-				94747E74297B9C5F00309752 /* iniparser.c in Sources */,
 				946346CB297F5DE70015BA8F /* NSColorAdditions.m in Sources */,
 				94890E4029827619006EAB75 /* easywsclient.cpp in Sources */,
 				94747E73297B9C5F00309752 /* PTZSettingsFile.m in Sources */,
+				94CEBB40298B58CF00D3C8DC /* PSMRangeCollectionViewController.m in Sources */,
 				94747E80297BB36C00309752 /* PSMSceneCollectionItem.m in Sources */,
 				94747E77297B9C5F00309752 /* ObjCUtils.m in Sources */,
+				94CEBB38298A0CCE00D3C8DC /* DraggingStackView.swift in Sources */,
 				94747E29297B94F900309752 /* main.m in Sources */,
 				94747E75297B9C5F00309752 /* PTZIniParser.m in Sources */,
 				94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */,
@@ -411,7 +436,6 @@
 				94CEBAEE2983494A00D3C8DC /* LARContextualActionButton.m in Sources */,
 				9463826E29807DF60015BA8F /* RTSPViewController.m in Sources */,
 				94890E3C298275ED006EAB75 /* PSMOBSWebSocketController.mm in Sources */,
-				94747E72297B9C5F00309752 /* dictionary.c in Sources */,
 				94747E22297B94F800309752 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,7 +596,10 @@
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -616,7 +643,10 @@
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";

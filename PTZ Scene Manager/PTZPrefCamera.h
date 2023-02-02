@@ -4,6 +4,7 @@
 //
 //  Created by Lee Ann Rucker on 12/30/22.
 //
+// PTZPrefCamera manages camera-specific NSUserDefaults.
 
 #import <Foundation/Foundation.h>
 

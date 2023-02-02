@@ -15,8 +15,10 @@
 #import "PSMOBSWebSocketController.h"
 #import "RTSPViewController.h"
 #import "AppDelegate.h"
+#import "DraggingStackView.h"
 
 static PSMSceneWindowController *selfType;
+static NSString *PTZControlStackOrderKey = @"ControlStackOrder";
 
 // enum: row * 10 + column
 typedef enum {
@@ -59,19 +61,15 @@ typedef enum {
 @property NSColor *boxColor;
 @property NSInteger itemCount;
 @property NSArray *sceneIndexes;
+@property IBOutlet NSPopover *remoteControlPopover;
+@property IBOutlet DraggingStackView *controlStackView;
+
 @end
 
 @implementation PSMSceneWindowController
 
-+ (void)initialize {
-    [super initialize];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:
-     @{@"showAutofocusControls":@(YES),
-       @"showMotionSyncControls":@(NO),
-     }];
-}
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey: (NSString *)key // IN
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
 {
     NSMutableSet *keyPaths = [NSMutableSet set];
     
@@ -95,6 +93,7 @@ typedef enum {
     [self.collectionView registerNib:nib forItemWithIdentifier:@"scene"];
     [self updateColumnCount];
     [self updateVisibleSceneRange];
+    [self updateControlStackOrder];
 
     self.titlebarViewController.layoutAttribute = NSLayoutAttributeLeft;
     // Don't show static snapshots until we know whether we'll have a video.
@@ -121,7 +120,9 @@ typedef enum {
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    self.window.title = [NSString stringWithFormat:@"%@ - %@", self.prefCamera.cameraname, self.prefCamera.devicename];
+    // Yes, this does need L10N. Because France.
+    NSString *fmt = NSLocalizedString(@"%@ - %@", @"Window title showing [cameraname - devicename]");
+    self.window.title = [NSString localizedStringWithFormat:fmt, self.prefCamera.cameraname, self.prefCamera.devicename];
     // This will update the window frame.
     self.window.frameAutosaveName = self.prefCamera.devicename;
     BOOL isResizable = self.window.resizable;
@@ -129,10 +130,7 @@ typedef enum {
     if (isResizable != wantsResizable) {
         [self toggleResizable:nil];
     }
-    PTZCamera *camera = self.camera;
-    [camera closeAndReload:^(BOOL gotCam) {
-        [self.collectionView reloadData];
-    }];
+    [self loadCamera];
     self.boxColor = self.cameraBox.fillColor;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSSceneInputDidChange object:self.prefCamera];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
@@ -171,11 +169,18 @@ typedef enum {
     return self.prefCamera.camera;
 }
 
-- (IBAction)reopenCamera:(id)sender {
+- (void)loadCamera {
     PTZCamera *camera = self.camera;
     [camera closeAndReload:^(BOOL gotCam) {
         [self.collectionView reloadData];
-        }];
+        // Update any values that are displayed in this window. Don't spam the camera; users can hit Fetch in Camera State.
+        // There is no Inq for MotionState.
+        [camera updateAutofocusState:nil];
+    }];
+}
+
+- (IBAction)reopenCamera:(id)sender {
+    [self loadCamera];
 }
 
 - (AppDelegate *)appDelegate {
@@ -212,14 +217,22 @@ typedef enum {
         if ([menu action] == @selector(togglePaused:)) {
             return [self.rtspViewController validateTogglePaused:menu];
         }
-        if ([menu action] == @selector(showCameraStateWindow:)) {
+//        - (IBAction)toggleControlVisibilityFromKey:(id)sender {
+//            NSString *key = [sender representedObject];
+//            BOOL oldValue = [[self.prefCamera prefValueForKey:key] boolValue];
+//            [self.prefCamera setPrefValue:@(!oldValue) forKey:key];
+        if ([menu action] == @selector(toggleControlVisibilityFromKey:)) {
+            NSString *key = [menu representedObject];
+            if (key == nil) {
+                NSLog(@"Missing toggleControlVisibilityFromKey on menu %@", menu.title);
+                return NO;
+            }
+            BOOL oldValue = [[self.prefCamera prefValueForKey:key] boolValue];
+            menu.state = oldValue ? NSControlStateValueOn : NSControlStateValueOff;
             return YES;
         }
-    } else if ([item isKindOfClass:[NSToolbarItem class]]) {
-        // We have one toolbar item and it's always on.
-        return YES;
     }
-   return NO;
+    return YES;
 }
 
 #pragma mark camera
@@ -376,7 +389,25 @@ typedef enum {
 }
 
 - (IBAction)doHome:(id)sender {
+    // I am undecided on whether recalling home should change lastRecalledItem. There's other UI to set a Home scene. It's not a common action.
+    /*^(BOOL success) {
+        if (success && (self.lastRecalledItem == nil || self.lastRecalledItem.sceneNumber != 0)) {
+            PSMSceneCollectionItem *item = [PSMSceneCollectionItem new];
+            item.sceneNumber = 0;
+            item.camera = self.camera;
+            self.lastRecalledItem = item;
+        }
+    }*/
     [self.camera pantiltHome:nil];
+}
+
+- (IBAction)doHomeOrRecallLast:(id)sender {
+    BOOL isAltKey = ([NSEvent modifierFlags] & NSEventModifierFlagOption) != 0;
+    if (isAltKey) {
+        [self doHome:sender];
+    } else {
+        [self sceneRecall:self];
+    }
 }
 
 - (IBAction)doToggleAutofocus:(id)sender {
@@ -391,6 +422,14 @@ typedef enum {
     } else {
         [self.camera applyMotionSyncOff:nil];
     }
+}
+
+- (IBAction)sceneRecall:(id)sender {
+    [self.lastRecalledItem sceneRecall:sender];
+}
+
+- (IBAction)sceneSet:(id)sender {
+    [self.lastRecalledItem sceneSet:sender];
 }
 
 #pragma mark collection
@@ -438,7 +477,7 @@ typedef enum {
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView
      itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = [self.sceneIndexes[indexPath.item] integerValue];
-    NSString *devicename = self.prefCamera.devicename ;
+    NSString *devicename = self.prefCamera.devicename;
     NSString *rootPath = [self.appDelegate ptzopticsDownloadsDirectory];
     NSString *filename = [NSString stringWithFormat:@"snapshot_%@%d.jpg", devicename, (int)index];
     NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
@@ -450,7 +489,51 @@ typedef enum {
     item.image = [[NSImage alloc] initWithContentsOfFile:path];
     item.sceneNumber = index;
     item.camera = self.camera;
+    item.devicename = devicename;
+    item.sourceSettings = sourceSettings;
     return item;
+}
+
+#pragma mark control pane
+
+- (IBAction)toggleControlVisibilityFromKey:(id)sender {
+    NSString *key = [sender representedObject];
+    BOOL oldValue = [[self.prefCamera prefValueForKey:key] boolValue];
+    [self.prefCamera setPrefValue:@(!oldValue) forKey:key];
+}
+
+- (void)stackView:(NSStackView *)stackView didReorderViews:(NSArray<NSView *> *)views {
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSView *view in views) {
+        if (view.identifier != nil) {
+            [array addObject:view.identifier];
+        }
+    }
+    [self.prefCamera setPrefValue:array forKey:PTZControlStackOrderKey];
+}
+
+- (void)updateControlStackOrder {
+    NSArray *viewIDs = [self.prefCamera prefValueForKey:PTZControlStackOrderKey];
+    if ([viewIDs count] == 0) {
+        return;
+    }
+    NSArray *subviews = self.controlStackView.arrangedSubviews;
+    NSMutableArray *untested = [NSMutableArray arrayWithArray:subviews];
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSString *viewID in viewIDs) {
+        for (NSView *view in untested) {
+            if ([view.identifier isEqualToString:viewID]) {
+                [array addObject:view];
+                [untested removeObject:view];
+                break;
+            }
+        }
+    }
+    if ([untested count] > 0) {
+        NSLog(@"Views without identifier in stack view: %@", untested);
+        [array addObjectsFromArray:untested];
+    }
+    [self.controlStackView reorderSubviews:array];
 }
 
 #pragma mark split view
@@ -460,6 +543,40 @@ canCollapseSubview:(NSView *)subview {
         return YES;
     }
     return NO;
+}
+
+#pragma mark menu remote
+
+// Menu navigation is the same as doPanTilt; the camera is modal.
+- (IBAction)remoteOpen:(id)sender {
+    if (self.remoteControlPopover.shown) {
+        return;
+    }
+    [self.camera toggleOSDMenu:nil];
+    [self.remoteControlPopover showRelativeToRect:[sender bounds]
+                                           ofView:sender
+                                    preferredEdge:NSMaxYEdge];
+
+}
+
+- (IBAction)remoteBack:(id)sender {
+    [self.camera osdMenuReturn:nil];
+}
+
+- (IBAction)remoteEnter:(id)sender {
+    [self.camera osdMenuEnter:nil];
+}
+
+- (IBAction)remoteToggle:(id)sender {
+    [self.camera toggleOSDMenu:nil];
+}
+
+- (BOOL)popoverShouldDetach:(NSPopover *)popover {
+    return YES;
+}
+
+- (void)popoverWillClose:(NSNotification *)notification {
+    [self.camera closeOSDMenu:nil];
 }
 
 #pragma mark observation

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,7 +73,7 @@
                                             </rows>
                                             <columns>
                                                 <gridColumn id="x49-nI-gaw"/>
-                                                <gridColumn width="60" id="C5H-Mm-wl8"/>
+                                                <gridColumn xPlacement="fill" width="60" id="C5H-Mm-wl8"/>
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="8Pe-nT-iaX" column="x49-nI-gaw" id="ehq-nL-0zn">
@@ -86,8 +87,9 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="8Pe-nT-iaX" column="C5H-Mm-wl8" id="nSa-v1-z3J">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPa-w3-Lkn">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="cPa-w3-Lkn">
                                                         <rect key="frame" x="42" y="76" width="64" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="jnb-c4-uTt">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -99,6 +101,7 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="9pa-3S-BDt" id="dIu-yn-zoa"/>
                                                             <binding destination="MdI-N0-20y" name="contentValues" keyPath="panValues" id="dv0-T8-ObV"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.panPlusSpeed" previousBinding="dv0-T8-ObV" id="7p1-3s-lMa">
                                                                 <dictionary key="options">
@@ -119,8 +122,9 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="ijs-p3-5c1" column="C5H-Mm-wl8" id="sty-TW-rC5">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-0R-K26">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="Ozw-0R-K26">
                                                         <rect key="frame" x="42" y="50" width="64" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="R3S-ab-qmB">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -132,6 +136,7 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="r8v-P0-yCm" id="x6j-Mc-XSb"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.tiltPlusSpeed" previousBinding="EAe-yQ-47D" id="dzu-bH-SSs">
                                                                 <dictionary key="options">
                                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
@@ -152,8 +157,9 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="Nhj-tH-r7X" column="C5H-Mm-wl8" id="XZC-QF-wM4">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="du6-Cc-cJO">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="du6-Cc-cJO">
                                                         <rect key="frame" x="42" y="24" width="64" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="YPj-7T-qg3">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -165,6 +171,7 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="sKQ-pK-YPs" id="d5X-Wv-5RF"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.zoomPlusSpeed" previousBinding="mYx-2h-ZiA" id="2aF-Wv-FQ9">
                                                                 <dictionary key="options">
                                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
@@ -185,8 +192,9 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="gP0-H8-kN4" column="C5H-Mm-wl8" id="Eol-k6-BSv">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JSk-NA-UC3">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="JSk-NA-UC3">
                                                         <rect key="frame" x="42" y="-2" width="64" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="50o-yt-hSY">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -198,6 +206,7 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="7Df-xz-kpY" id="sPn-wy-A7o"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.focusPlusSpeed" previousBinding="gUz-nx-2c0" id="Lhh-sH-ofI">
                                                                 <dictionary key="options">
                                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
@@ -224,6 +233,7 @@
                                                 <constraint firstAttribute="width" constant="89" id="eRw-n6-s1a"/>
                                             </constraints>
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="FastArrows" id="g3W-92-0S6"/>
+                                            <accessibility description="Image showing the arrow buttons from the pan tilt pane that will use the alternative speeds"/>
                                         </imageView>
                                         <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b3l-2P-Rb8">
                                             <rect key="frame" x="20" y="141" width="360" height="20"/>
@@ -232,8 +242,8 @@
                                             </rows>
                                             <columns>
                                                 <gridColumn id="WB0-UW-p8O"/>
-                                                <gridColumn xPlacement="fill" width="60" id="ZaY-Tc-5Rg"/>
-                                                <gridColumn id="weE-uS-SjD"/>
+                                                <gridColumn xPlacement="leading" id="ZaY-Tc-5Rg"/>
+                                                <gridColumn width="50" id="weE-uS-SjD"/>
                                                 <gridColumn xPlacement="trailing" id="tnO-yC-fVq"/>
                                             </columns>
                                             <gridCells>
@@ -248,8 +258,9 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="3la-Kt-VYM" column="ZaY-Tc-5Rg" id="Qrm-x4-5wI">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EkE-cB-aWE">
-                                                        <rect key="frame" x="228" y="-2" width="64" height="23"/>
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="EkE-cB-aWE">
+                                                        <rect key="frame" x="178" y="-2" width="64" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="Ubt-m9-uU3"/>
                                                         </constraints>
@@ -264,6 +275,7 @@
                                                             </objectValues>
                                                         </comboBoxCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="p7p-R8-8gw" id="54k-MM-edf"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.presetSpeed" previousBinding="oyp-E8-LXA" id="gbQ-Ie-0nB"/>
                                                             <binding destination="MdI-N0-20y" name="contentValues" keyPath="presetSpeedValues" id="oyp-E8-LXA"/>
                                                         </connections>
@@ -335,6 +347,7 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <accessibilityConnection property="title" destination="Nb7-z2-xU2" id="ptr-M0-0X3"/>
                                                 <binding destination="MdI-N0-20y" name="selectedTag" keyPath="cameraState.wbMode" id="d4O-xz-8fg"/>
                                             </connections>
                                         </popUpButton>
@@ -381,6 +394,7 @@
                                                 <imageReference key="image" image="camera.circle" catalog="system" symbolScale="large"/>
                                             </buttonCell>
                                             <connections>
+                                                <accessibilityConnection property="title" destination="Nb7-z2-xU2" id="wLk-gG-mEp"/>
                                                 <binding destination="MdI-N0-20y" name="value" keyPath="selectWBMode" id="1Mm-J3-3Hb"/>
                                             </connections>
                                         </button>
@@ -411,6 +425,7 @@
                                                             <imageReference key="image" image="camera.circle" catalog="system" symbolScale="large"/>
                                                         </buttonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="PM5-Jr-wvI" id="bBz-Zl-yiA"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="selectRG" id="q1A-HP-e7E"/>
                                                         </connections>
                                                     </button>
@@ -424,6 +439,7 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="zc2-Wx-gMS" id="0Xn-gZ-7cT"/>
                                                             <binding destination="MdI-N0-20y" name="textColor" keyPath="enableRG" id="elq-Kq-Idh">
                                                                 <dictionary key="options">
                                                                     <string key="NSValueTransformerName">NSColorFromEnabledState</string>
@@ -442,6 +458,9 @@
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <connections>
+                                                                <accessibilityConnection property="title" destination="PM5-Jr-wvI" id="Eqr-ce-mRd"/>
+                                                            </connections>
                                                         </textFieldCell>
                                                         <connections>
                                                             <accessibilityConnection property="title" destination="PM5-Jr-wvI" id="ezg-2l-iT9"/>
@@ -462,6 +481,7 @@
                                                             <imageReference key="image" image="camera.circle" catalog="system" symbolScale="large"/>
                                                         </buttonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="qUm-BJ-0Ze" id="N0h-le-rNr"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="selectBG" id="pFk-W8-NXs"/>
                                                         </connections>
                                                     </button>
@@ -513,6 +533,7 @@
                                                             <imageReference key="image" image="camera.circle" catalog="system" symbolScale="large"/>
                                                         </buttonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="xdH-Ct-lJH" id="R7e-tf-hKw"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="selectColorTemp" id="urt-GV-Mds"/>
                                                         </connections>
                                                     </button>
@@ -547,6 +568,7 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="xdH-Ct-lJH" id="rQr-43-4jM"/>
                                                             <action selector="changeColorTemp:" target="MdI-N0-20y" id="1EJ-Uc-ZKu"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.colorTemp" id="uYW-Ch-e2t"/>
                                                             <binding destination="MdI-N0-20y" name="enabled" keyPath="enableColorTemp" id="zM7-Oe-1cF"/>
@@ -558,6 +580,7 @@
                                                         <rect key="frame" x="190" y="80" width="15" height="22"/>
                                                         <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="55" valueWraps="YES" id="MT7-J1-t9x"/>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="xdH-Ct-lJH" id="BKA-pi-w04"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.colorTempIndex" id="6Gi-HI-4Tn"/>
                                                         </connections>
                                                     </stepper>
@@ -571,6 +594,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </sliderCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="xdH-Ct-lJH" id="S5A-EC-hfw"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.colorTemp" previousBinding="JSk-p8-59K" id="Sof-uY-kC9"/>
                                                             <binding destination="MdI-N0-20y" name="maxValue" keyPath="colorTempMax" id="uPd-N4-Ryt"/>
                                                             <binding destination="MdI-N0-20y" name="minValue" keyPath="colorTempMin" previousBinding="uPd-N4-Ryt" id="JSk-p8-59K"/>
@@ -586,6 +610,7 @@
                                                             <imageReference key="image" image="camera.circle" catalog="system" symbolScale="large"/>
                                                         </buttonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="qrt-JB-Bj0" id="mNz-hl-uEF"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="selectAWBSens" id="7rE-SK-nnh"/>
                                                         </connections>
                                                     </button>
@@ -628,6 +653,7 @@
                                                             </menu>
                                                         </popUpButtonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="qrt-JB-Bj0" id="DdT-H6-aty"/>
                                                             <binding destination="MdI-N0-20y" name="selectedIndex" keyPath="cameraState.awbSens" id="z3d-jf-uqw"/>
                                                             <binding destination="MdI-N0-20y" name="enabled" keyPath="enableAWBSens" id="ga4-TZ-XAh"/>
                                                         </connections>
@@ -644,6 +670,7 @@
                                                             <imageReference key="image" image="camera.circle" catalog="system" symbolScale="large"/>
                                                         </buttonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="GmN-q4-jMg" id="qee-4E-IoW"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="selectSaturation" id="Gmg-y2-5cl"/>
                                                         </connections>
                                                     </button>
@@ -680,6 +707,7 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="GmN-q4-jMg" id="oSa-nq-eJl"/>
                                                             <action selector="changeSaturation:" target="MdI-N0-20y" id="dRc-25-fmX"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.saturation" id="yq8-Dv-2AD"/>
                                                             <binding destination="MdI-N0-20y" name="enabled" keyPath="enableSaturation" id="wZu-zm-CGf"/>
@@ -691,6 +719,7 @@
                                                         <rect key="frame" x="190" y="26" width="15" height="22"/>
                                                         <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="14" valueWraps="YES" id="AZq-Wd-dT0"/>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="GmN-q4-jMg" id="av0-GR-kqO"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.saturationIndex" id="SyP-2D-dec"/>
                                                         </connections>
                                                     </stepper>
@@ -705,6 +734,7 @@
                                                             <imageReference key="image" image="camera.circle" catalog="system" symbolScale="large"/>
                                                         </buttonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="YMi-bt-Qmm" id="8pv-Jd-fbI"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="selectHue" id="4md-rB-oph"/>
                                                         </connections>
                                                     </button>
@@ -738,6 +768,7 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="YMi-bt-Qmm" id="kK9-V3-yef"/>
                                                             <action selector="changeHue:" target="MdI-N0-20y" id="PMp-Jf-Qdn"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.hue" id="yFl-KA-qhl"/>
                                                             <binding destination="MdI-N0-20y" name="enabled" keyPath="enableHue" id="DXD-vF-v0p"/>
@@ -749,6 +780,7 @@
                                                         <rect key="frame" x="190" y="-1" width="15" height="22"/>
                                                         <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="14" valueWraps="YES" id="A7Z-V0-eMu"/>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="UZI-Jk-pWi" id="dkj-jK-wZE"/>
                                                             <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.hueIndex" id="KGB-f5-MWg"/>
                                                         </connections>
                                                     </stepper>
@@ -853,7 +885,7 @@
                                             <rect key="frame" x="26" y="171" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
@@ -1042,11 +1074,18 @@
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <connections>
+                                                                <accessibilityConnection property="title" destination="NNL-6d-ONh" id="l82-b4-Xfa"/>
+                                                            </connections>
                                                         </textFieldCell>
                                                         <connections>
                                                             <accessibilityConnection property="title" destination="NNL-6d-ONh" id="PBS-0m-gaU"/>
                                                             <action selector="changeRedGain:" target="MdI-N0-20y" id="EQw-di-es5"/>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.luminance" id="fZl-jd-rtm"/>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.luminance" id="ONy-5U-qli">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                         </connections>
                                                     </textField>
                                                 </gridCell>
@@ -1087,7 +1126,11 @@
                                                         <connections>
                                                             <accessibilityConnection property="title" destination="Rhb-EW-RVk" id="2Ei-Oj-R0M"/>
                                                             <action selector="changeBlueGain:" target="MdI-N0-20y" id="kgY-hp-jj7"/>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.contrast" id="1ul-L6-dbr"/>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.contrast" id="qSU-15-FFK">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                         </connections>
                                                     </textField>
                                                 </gridCell>
@@ -1107,7 +1150,7 @@
                                                 <gridCell row="tU8-g2-Axq" column="nt0-Ig-Shl" id="efw-d0-YO8">
                                                     <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="hzB-uc-eog">
                                                         <rect key="frame" x="24" y="82" width="104" height="16"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Aperture" id="480-eD-yul">
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Sharpness" id="480-eD-yul">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1127,8 +1170,13 @@
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="hzB-uc-eog" id="Fyl-dp-QWV"/>
                                                             <action selector="changeColorTemp:" target="MdI-N0-20y" id="e5O-2p-fg8"/>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.aperture" id="kIA-3z-OHU"/>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="cameraState.aperture" id="qZr-nZ-Y36">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                                                </dictionary>
+                                                            </binding>
                                                         </connections>
                                                     </textField>
                                                 </gridCell>
@@ -1173,6 +1221,7 @@
                                                             </menu>
                                                         </popUpButtonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="8ok-8j-Mu7" id="6J3-cw-9dk"/>
                                                             <binding destination="MdI-N0-20y" name="selectedTag" keyPath="cameraState.flipH" id="Bxc-X5-QXc"/>
                                                         </connections>
                                                     </popUpButton>
@@ -1218,6 +1267,7 @@
                                                             </menu>
                                                         </popUpButtonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="B9Z-5x-xXb" id="0d2-bN-l7l"/>
                                                             <binding destination="MdI-N0-20y" name="selectedTag" keyPath="cameraState.flipV" id="U1o-CI-QIJ"/>
                                                         </connections>
                                                     </popUpButton>
@@ -1263,6 +1313,7 @@
                                                             </menu>
                                                         </popUpButtonCell>
                                                         <connections>
+                                                            <accessibilityConnection property="title" destination="26R-Ef-aya" id="BuV-gM-EBi"/>
                                                             <binding destination="MdI-N0-20y" name="selectedIndex" keyPath="cameraState.bwMode" id="2d5-7K-Zee"/>
                                                         </connections>
                                                     </popUpButton>
@@ -1430,19 +1481,19 @@
                                             </gridCells>
                                         </gridView>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNe-iY-me3">
-                                            <rect key="frame" x="20" y="112" width="319" height="135"/>
+                                            <rect key="frame" x="20" y="112" width="360" height="135"/>
                                             <clipView key="contentView" id="UaS-pQ-7gM">
-                                                <rect key="frame" x="1" y="1" width="317" height="133"/>
+                                                <rect key="frame" x="1" y="1" width="358" height="133"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="B1C-5d-bJL" viewBased="YES" id="lXZ-xj-42m">
-                                                        <rect key="frame" x="0.0" y="0.0" width="317" height="105"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="358" height="105"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <size key="intercellSpacing" width="17" height="0.0"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
-                                                            <tableColumn identifier="SceneRangeName" width="116" minWidth="40" maxWidth="1000" id="Vzz-WT-3Gl">
+                                                            <tableColumn identifier="SceneRangeName" width="161" minWidth="40" maxWidth="1000" id="Vzz-WT-3Gl">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1455,11 +1506,11 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="ptq-5l-6nG">
-                                                                        <rect key="frame" x="8" y="0.0" width="114" height="24"/>
+                                                                        <rect key="frame" x="8" y="0.0" width="159" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
-                                                                                <rect key="frame" x="0.0" y="4" width="114" height="16"/>
+                                                                                <rect key="frame" x="0.0" y="4" width="159" height="16"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="dSX-MG-wNY">
                                                                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1481,7 +1532,7 @@
                                                                     <binding destination="CrC-WE-HaH" name="value" keyPath="arrangedObjects.selectedObject" id="37T-fz-Vrb"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn identifier="SceneRange" editable="NO" width="172" minWidth="40" maxWidth="1000" id="dZf-uB-Daz">
+                                                            <tableColumn identifier="SceneRange" editable="NO" width="168" minWidth="80" maxWidth="200" id="dZf-uB-Daz">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Range">
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1494,11 +1545,11 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="9pH-cA-Dad">
-                                                                        <rect key="frame" x="139" y="0.0" width="169" height="24"/>
+                                                                        <rect key="frame" x="184" y="0.0" width="165" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
-                                                                                <rect key="frame" x="0.0" y="4" width="169" height="16"/>
+                                                                                <rect key="frame" x="0.0" y="4" width="165" height="16"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="rzz-ma-CM2">
                                                                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1540,7 +1591,7 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <tableHeaderView key="headerView" wantsLayer="YES" id="B1C-5d-bJL">
-                                                <rect key="frame" x="0.0" y="0.0" width="317" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="358" height="28"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
@@ -1615,7 +1666,7 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="GSg-4r-duD" secondAttribute="bottom" constant="20" symbolic="YES" id="1P1-Wh-iTZ"/>
                                         <constraint firstItem="hMy-2H-0Wa" firstAttribute="top" secondItem="eNe-iY-me3" secondAttribute="bottom" id="2Hl-iC-RxW"/>
-                                        <constraint firstAttribute="trailing" secondItem="eNe-iY-me3" secondAttribute="trailing" constant="61" id="311-JX-SjT"/>
+                                        <constraint firstAttribute="trailing" secondItem="eNe-iY-me3" secondAttribute="trailing" constant="20" symbolic="YES" id="311-JX-SjT"/>
                                         <constraint firstItem="VNQ-Fq-qYb" firstAttribute="top" secondItem="eNe-iY-me3" secondAttribute="bottom" id="4l6-NV-Bpa"/>
                                         <constraint firstItem="5xH-Pt-plH" firstAttribute="top" secondItem="eNe-iY-me3" secondAttribute="bottom" id="8q3-na-3ry"/>
                                         <constraint firstItem="1NN-xw-9Oe" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="Eth-cZ-OGh"/>

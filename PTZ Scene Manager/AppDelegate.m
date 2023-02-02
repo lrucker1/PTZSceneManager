@@ -7,6 +7,7 @@
 // Credits:
 // Icon <a href="https://www.flaticon.com/free-icons/ptz-camera" title="ptz camera icons">Ptz camera icons created by Freepik - Flaticon</a>
 // https://www.svgrepo.com/svg/51316/camera-viewfinder?edit=true
+// https://www.flaticon.com/free-icon/remote-control_1865152
 //
 // TCP version of visca: https://github.com/norihiro/libvisca-ip
 // iniparser: https://github.com/ndevilla/iniparser
@@ -58,6 +59,9 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
         [wc.window orderFront:nil];
         [self.windowControllers addObject:wc];
     }
+    if ([self.windowControllers count] == 0) {
+        [self showPrefs:nil];
+    }
     [[PSMOBSWebSocketController defaultController] setDelegate:self];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
         [[PSMOBSWebSocketController defaultController] connectToServer];
@@ -82,6 +86,19 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
   //  self.prefsController.window.restorationClass = [self class];
 }
 
+- (void)loadAllCameras {
+    NSArray *cameraList = [self cameraList];
+    self.windowControllers = [NSMutableSet set];
+
+    for (NSDictionary *cameraInfo in cameraList) {
+        PTZPrefCamera *prefCamera = [[PTZPrefCamera alloc] initWithDictionary:cameraInfo];
+        prefCamera.camera = [[PTZCamera alloc] initWithIP:prefCamera.devicename];
+        PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
+        [wc.window orderFront:nil];
+        [self.windowControllers addObject:wc];
+    }
+}
+
 #pragma mark OBS connection
 
 - (IBAction)connectToOBS:(id)sender {
@@ -91,9 +108,9 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 
 - (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock {
     NSAlert *alert = [[NSAlert alloc] init];
-    // TODO: Use the authType to customize the message text:
+    // TODO: Use the authType to customize the message/informative text:
     // prompt attempt (no previous errors), keychain attempt failed, previous prompt failed.
-    [alert setMessageText:@"Enter your OBS WebSockets password"];
+    [alert setMessageText:NSLocalizedString(@"Enter your OBS WebSockets password", @"OBS password alert prompt")];
     [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK button")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
 
@@ -162,7 +179,11 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 }
 
 - (void)applyPrefChanges {
-    // TODO: modify camera list.
+    if (self.windowControllers == nil) {
+        [self loadAllCameras];
+        return;
+    }
+    // TODO: handle camera list changes.
 }
 
 - (NSArray *)cameraList {

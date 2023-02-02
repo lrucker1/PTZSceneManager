@@ -10,16 +10,19 @@
 #import "PSMSceneWindowController.h"
 #import "PTZCamera.h"
 #import "PTZSettingsFile.h"
+#import "LARClickableImageButton.h"
 
 static PSMSceneCollectionItem *selfType;
 
 @interface PSMSceneCollectionItem ()
 
+@property IBOutlet LARClickableImageButton *imageButton;
+
 @end
 
 @implementation PSMSceneCollectionItem
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey: (NSString *)key // IN
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
 {
     NSMutableSet *keyPaths = [NSMutableSet set];
     
@@ -61,6 +64,27 @@ static PSMSceneCollectionItem *selfType;
             }];
         }
     }];
+}
+
+- (void)controlTextDidBeginEditing:(NSNotification *)note {
+    
+}
+
+- (void)controlTextDidEndEditing:(NSNotification *)notification {
+    NSPopover *popover = self.imageButton.popover;
+    if (popover.shown) {
+        [popover close];
+    }
+    [self.sourceSettings setName:self.sceneName forScene:self.sceneNumber camera:self.devicename];
+}
+
+- (IBAction)cancelEditing:(id)sender {
+    [self.textField abortEditing];
+    self.sceneName = [self.sourceSettings nameForScene:self.sceneNumber camera:self.devicename];
+    NSPopover *popover = self.imageButton.popover;
+    if (popover.shown) {
+        [popover close];
+    }
 }
 
 @end

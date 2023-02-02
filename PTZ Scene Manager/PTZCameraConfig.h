@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property uint8_t protocol;
 @property NSInteger maxSceneIndex;
 @property (readonly) NSIndexSet *reservedSet;
+@property (readonly) BOOL isPTZOptics;
 
 - (BOOL)isValidSceneIndex:(NSInteger)index;
 - (NSInteger)validateRangeOffset:(NSInteger)offset;

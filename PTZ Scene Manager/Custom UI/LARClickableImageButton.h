@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface LARClickableImageButton : NSButton  <NSControlTextEditingDelegate>
+@interface LARClickableImageButton : NSButton
 
 @property IBOutlet NSPopover *popover;
 

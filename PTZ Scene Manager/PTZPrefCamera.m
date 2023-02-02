@@ -25,7 +25,9 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
        @"lastVisibleScene":@(9),
        @"maxColumnCount":@(3),
        @"resizable":@(YES),
-     }];
+       @"showAutofocusControls":@(YES),
+       @"showMotionSyncControls":@(YES),
+    }];
 }
 
 - (instancetype)init {
@@ -122,13 +124,14 @@ PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
 - (void)setPrefValue:(id)obj forKeyWithSelector:(NSString *)key {
     // Convert setFoo: to foo
     key = [self removePrefix:@"set" fromKey:key];
-    NSString *camKey = [self prefKeyForKey:key];
-    [[NSUserDefaults standardUserDefaults] setObject:obj forKey:camKey];
+    [self setPrefValue:obj forKey:key];
 }
 
 - (void)setPrefValue:(id)obj forKey:(NSString *)key {
      NSString *camKey = [self prefKeyForKey:key];
+    [self willChangeValueForKey:key];
     [[NSUserDefaults standardUserDefaults] setObject:obj forKey:camKey];
+    [self didChangeValueForKey:key];
 }
 
 - (void)removePrefValueForKeyWithSelector:(NSString *)key {

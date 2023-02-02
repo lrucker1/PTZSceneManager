@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,152 +18,22 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" toolbarStyle="preference" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="291"/>
+            <rect key="contentRect" x="196" y="240" width="562" height="263"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
-            <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="291"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <view key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="562" height="291"/>
                 <subviews>
                     <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="SDw-NS-CPr">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="291"/>
+                        <rect key="frame" x="0.0" y="0.0" width="562" height="291"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="562" id="2NV-cE-SRE"/>
+                            <constraint firstAttribute="height" constant="291" id="knc-YP-GWp"/>
+                        </constraints>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="OBS" identifier="" id="Gh4-wA-XWj">
-                                <view key="view" id="fkT-tL-KsI">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="291"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OHB-Ph-BWN">
-                                            <rect key="frame" x="18" y="254" width="286" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Automatically connect to OBS WebSockets" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Lao-nu-Way">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <binding destination="osl-3m-Fqe" name="value" keyPath="values.OBSAutoConnect" id="XNo-DX-oni"/>
-                                            </connections>
-                                        </button>
-                                        <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="nvl-EC-zq0">
-                                            <rect key="frame" x="20" y="119" width="440" height="128"/>
-                                            <constraints>
-                                                <constraint firstItem="52Z-3W-zSb" firstAttribute="leading" secondItem="e4P-zb-BM6" secondAttribute="trailing" constant="6" id="6hi-sJ-KaF"/>
-                                                <constraint firstAttribute="trailing" secondItem="BHv-OT-VjQ" secondAttribute="trailing" constant="20" symbolic="YES" id="Ddl-9t-Gus"/>
-                                                <constraint firstItem="H05-t7-Vg5" firstAttribute="top" secondItem="BHv-OT-VjQ" secondAttribute="bottom" constant="8" symbolic="YES" id="XUr-db-bRw"/>
-                                                <constraint firstItem="BHv-OT-VjQ" firstAttribute="top" secondItem="Di8-nV-PWQ" secondAttribute="bottom" constant="8" symbolic="YES" id="i9X-Xd-0IY"/>
-                                                <constraint firstAttribute="trailing" secondItem="52Z-3W-zSb" secondAttribute="trailing" constant="20" symbolic="YES" id="rv2-gw-eGh"/>
-                                                <constraint firstItem="52Z-3W-zSb" firstAttribute="top" secondItem="nvl-EC-zq0" secondAttribute="top" id="z01-Ux-qAJ"/>
-                                            </constraints>
-                                            <rows>
-                                                <gridRow rowAlignment="firstBaseline" id="jsL-FA-pck"/>
-                                                <gridRow id="5PC-lB-hRT"/>
-                                                <gridRow rowAlignment="firstBaseline" id="axr-FZ-8J1"/>
-                                                <gridRow id="zwY-zn-Jxp"/>
-                                            </rows>
-                                            <columns>
-                                                <gridColumn xPlacement="trailing" id="TSw-X1-fO2"/>
-                                                <gridColumn id="jwn-a9-H28"/>
-                                            </columns>
-                                            <gridCells>
-                                                <gridCell row="jsL-FA-pck" column="TSw-X1-fO2" id="WZR-w6-PEk">
-                                                    <textField key="contentView" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e4P-zb-BM6">
-                                                        <rect key="frame" x="8" y="109" width="30" height="16"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="URL" id="rlj-Ea-m4n">
-                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                </gridCell>
-                                                <gridCell row="jsL-FA-pck" column="jwn-a9-H28" id="UjX-xM-e4n">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="52Z-3W-zSb">
-                                                        <rect key="frame" x="42" y="107" width="378" height="21"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="ws://localhost:4455" placeholderString="ws://localhost:4455" drawsBackground="YES" id="lkH-22-Rpw">
-                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                        <connections>
-                                                            <binding destination="osl-3m-Fqe" name="value" keyPath="values.OBSURLString" id="VXl-pE-j2N"/>
-                                                        </connections>
-                                                    </textField>
-                                                </gridCell>
-                                                <gridCell row="5PC-lB-hRT" column="TSw-X1-fO2" id="Khw-wu-Gk8"/>
-                                                <gridCell row="5PC-lB-hRT" column="jwn-a9-H28" id="NS5-hB-wfR">
-                                                    <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Di8-nV-PWQ">
-                                                        <rect key="frame" x="40" y="69" width="402" height="32"/>
-                                                        <textFieldCell key="cell" selectable="YES" title="Enter the URL in the format &quot;ws://[address]:[port]&quot; to access OBS WebSockets." id="w3w-T1-tfO">
-                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                </gridCell>
-                                                <gridCell row="axr-FZ-8J1" column="TSw-X1-fO2" id="Du0-hp-HqP">
-                                                    <textField key="contentView" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bk0-4H-lDF">
-                                                        <rect key="frame" x="-2" y="42" width="40" height="16"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Name" id="JU0-f1-H2i">
-                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                </gridCell>
-                                                <gridCell row="axr-FZ-8J1" column="jwn-a9-H28" id="Y56-8W-U6b">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BHv-OT-VjQ">
-                                                        <rect key="frame" x="42" y="40" width="378" height="21"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="WebSockets" drawsBackground="YES" id="HNH-zS-MGU">
-                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                        <connections>
-                                                            <binding destination="osl-3m-Fqe" name="value" keyPath="values.OBSAccountName" id="g1u-Py-Chg">
-                                                                <dictionary key="options">
-                                                                    <string key="NSNullPlaceholder">WebSockets</string>
-                                                                </dictionary>
-                                                            </binding>
-                                                        </connections>
-                                                    </textField>
-                                                </gridCell>
-                                                <gridCell row="zwY-zn-Jxp" column="TSw-X1-fO2" id="zpu-6W-kKL"/>
-                                                <gridCell row="zwY-zn-Jxp" column="jwn-a9-H28" id="6Ps-Xp-Eq4">
-                                                    <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="H05-t7-Vg5">
-                                                        <rect key="frame" x="40" y="0.0" width="402" height="32"/>
-                                                        <textFieldCell key="cell" selectable="YES" title="Optional name to identify your credentials when saved in Keychain. OBS WebSockets does not use the account name." id="RBd-Z1-D3Y">
-                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                </gridCell>
-                                            </gridCells>
-                                        </gridView>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="01H-HX-y08">
-                                            <rect key="frame" x="13" y="72" width="234" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Remove password from Keychain" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6b1-1E-sBY">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="deleteOBSPasswords:" target="-2" id="XHI-cr-ebn"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="01H-HX-y08" firstAttribute="leading" secondItem="fkT-tL-KsI" secondAttribute="leading" constant="20" symbolic="YES" id="5xQ-vV-M6R"/>
-                                        <constraint firstAttribute="trailing" secondItem="nvl-EC-zq0" secondAttribute="trailing" constant="20" symbolic="YES" id="BQs-C7-WFG"/>
-                                        <constraint firstItem="01H-HX-y08" firstAttribute="top" secondItem="nvl-EC-zq0" secondAttribute="bottom" constant="20" symbolic="YES" id="LsZ-DF-ptd"/>
-                                        <constraint firstItem="nvl-EC-zq0" firstAttribute="top" secondItem="OHB-Ph-BWN" secondAttribute="bottom" constant="8" symbolic="YES" id="Nmh-xg-T1d"/>
-                                        <constraint firstItem="nvl-EC-zq0" firstAttribute="leading" secondItem="fkT-tL-KsI" secondAttribute="leading" constant="20" symbolic="YES" id="iEO-1a-UMJ"/>
-                                        <constraint firstItem="OHB-Ph-BWN" firstAttribute="leading" secondItem="nvl-EC-zq0" secondAttribute="leading" id="kA3-Iw-SNn"/>
-                                        <constraint firstItem="OHB-Ph-BWN" firstAttribute="top" secondItem="fkT-tL-KsI" secondAttribute="top" constant="20" symbolic="YES" id="kYC-9B-nuX"/>
-                                    </constraints>
-                                </view>
-                            </tabViewItem>
                             <tabViewItem label="Cameras" identifier="" id="vOK-8v-NrF">
-                                <view key="view" id="Wxd-76-BQS">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="291"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="Wxd-76-BQS">
+                                    <rect key="frame" x="0.0" y="0.0" width="419" height="291"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="bm1-Hs-piz">
                                             <rect key="frame" x="0.0" y="2" width="419" height="289"/>
@@ -398,6 +269,296 @@
                                     <constraints>
                                         <constraint firstItem="bm1-Hs-piz" firstAttribute="leading" secondItem="Wxd-76-BQS" secondAttribute="leading" id="2Uh-8P-x7j"/>
                                         <constraint firstItem="bm1-Hs-piz" firstAttribute="top" secondItem="Wxd-76-BQS" secondAttribute="top" id="bi1-tQ-3bh"/>
+                                        <constraint firstAttribute="trailing" secondItem="bm1-Hs-piz" secondAttribute="trailing" id="cZm-yd-7Dj"/>
+                                        <constraint firstAttribute="bottom" secondItem="bm1-Hs-piz" secondAttribute="bottom" constant="2" id="oLz-J1-NIE"/>
+                                    </constraints>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="OBS" identifier="" id="Gh4-wA-XWj">
+                                <view key="view" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-tL-KsI">
+                                    <rect key="frame" x="0.0" y="0.0" width="562" height="291"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHB-Ph-BWN">
+                                            <rect key="frame" x="18" y="254" width="286" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Automatically connect to OBS WebSockets" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Lao-nu-Way">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="osl-3m-Fqe" name="value" keyPath="values.OBSAutoConnect" id="XNo-DX-oni"/>
+                                            </connections>
+                                        </button>
+                                        <gridView ambiguous="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="nvl-EC-zq0">
+                                            <rect key="frame" x="20" y="135" width="522" height="112"/>
+                                            <constraints>
+                                                <constraint firstItem="52Z-3W-zSb" firstAttribute="leading" secondItem="e4P-zb-BM6" secondAttribute="trailing" constant="6" id="6hi-sJ-KaF"/>
+                                                <constraint firstAttribute="trailing" secondItem="BHv-OT-VjQ" secondAttribute="trailing" constant="20" symbolic="YES" id="Ddl-9t-Gus"/>
+                                                <constraint firstItem="H05-t7-Vg5" firstAttribute="top" secondItem="BHv-OT-VjQ" secondAttribute="bottom" constant="8" symbolic="YES" id="XUr-db-bRw"/>
+                                                <constraint firstAttribute="width" constant="522" id="htp-g8-AA9"/>
+                                                <constraint firstItem="BHv-OT-VjQ" firstAttribute="top" secondItem="Di8-nV-PWQ" secondAttribute="bottom" constant="8" symbolic="YES" id="i9X-Xd-0IY"/>
+                                                <constraint firstAttribute="trailing" secondItem="52Z-3W-zSb" secondAttribute="trailing" constant="20" symbolic="YES" id="rv2-gw-eGh"/>
+                                                <constraint firstItem="52Z-3W-zSb" firstAttribute="top" secondItem="nvl-EC-zq0" secondAttribute="top" id="z01-Ux-qAJ"/>
+                                            </constraints>
+                                            <rows>
+                                                <gridRow rowAlignment="firstBaseline" id="jsL-FA-pck"/>
+                                                <gridRow id="5PC-lB-hRT"/>
+                                                <gridRow rowAlignment="firstBaseline" id="axr-FZ-8J1"/>
+                                                <gridRow id="zwY-zn-Jxp"/>
+                                            </rows>
+                                            <columns>
+                                                <gridColumn xPlacement="trailing" id="TSw-X1-fO2"/>
+                                                <gridColumn id="jwn-a9-H28"/>
+                                            </columns>
+                                            <gridCells>
+                                                <gridCell row="jsL-FA-pck" column="TSw-X1-fO2" id="WZR-w6-PEk">
+                                                    <textField key="contentView" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e4P-zb-BM6">
+                                                        <rect key="frame" x="8" y="93" width="30" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="URL" id="rlj-Ea-m4n">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </gridCell>
+                                                <gridCell row="jsL-FA-pck" column="jwn-a9-H28" id="UjX-xM-e4n">
+                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="52Z-3W-zSb">
+                                                        <rect key="frame" x="42" y="91" width="460" height="21"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="ws://localhost:4455" placeholderString="ws://localhost:4455" drawsBackground="YES" id="lkH-22-Rpw">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="osl-3m-Fqe" name="value" keyPath="values.OBSURLString" id="VXl-pE-j2N"/>
+                                                        </connections>
+                                                    </textField>
+                                                </gridCell>
+                                                <gridCell row="5PC-lB-hRT" column="TSw-X1-fO2" id="Khw-wu-Gk8"/>
+                                                <gridCell row="5PC-lB-hRT" column="jwn-a9-H28" id="NS5-hB-wfR">
+                                                    <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Di8-nV-PWQ">
+                                                        <rect key="frame" x="40" y="69" width="484" height="16"/>
+                                                        <textFieldCell key="cell" selectable="YES" title="Enter the URL in the format &quot;ws://[address]:[port]&quot; to access OBS WebSockets." id="w3w-T1-tfO">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </gridCell>
+                                                <gridCell row="axr-FZ-8J1" column="TSw-X1-fO2" id="Du0-hp-HqP">
+                                                    <textField key="contentView" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bk0-4H-lDF">
+                                                        <rect key="frame" x="-2" y="42" width="40" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Name" id="JU0-f1-H2i">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </gridCell>
+                                                <gridCell row="axr-FZ-8J1" column="jwn-a9-H28" id="Y56-8W-U6b">
+                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BHv-OT-VjQ">
+                                                        <rect key="frame" x="42" y="40" width="460" height="21"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="WebSockets" drawsBackground="YES" id="HNH-zS-MGU">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="osl-3m-Fqe" name="value" keyPath="values.OBSAccountName" id="g1u-Py-Chg">
+                                                                <dictionary key="options">
+                                                                    <string key="NSNullPlaceholder">WebSockets</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
+                                                    </textField>
+                                                </gridCell>
+                                                <gridCell row="zwY-zn-Jxp" column="TSw-X1-fO2" id="zpu-6W-kKL"/>
+                                                <gridCell row="zwY-zn-Jxp" column="jwn-a9-H28" id="6Ps-Xp-Eq4">
+                                                    <textField key="contentView" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="H05-t7-Vg5">
+                                                        <rect key="frame" x="40" y="0.0" width="484" height="32"/>
+                                                        <textFieldCell key="cell" selectable="YES" title="Optional name to identify your credentials when saved in Keychain. OBS WebSockets does not use the account name." id="RBd-Z1-D3Y">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </gridCell>
+                                            </gridCells>
+                                        </gridView>
+                                        <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="01H-HX-y08">
+                                            <rect key="frame" x="13" y="88" width="234" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Remove password from Keychain" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6b1-1E-sBY">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="deleteOBSPasswords:" target="-2" id="XHI-cr-ebn"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="01H-HX-y08" firstAttribute="leading" secondItem="fkT-tL-KsI" secondAttribute="leading" constant="20" symbolic="YES" id="5xQ-vV-M6R"/>
+                                        <constraint firstAttribute="trailing" secondItem="nvl-EC-zq0" secondAttribute="trailing" constant="20" symbolic="YES" id="BQs-C7-WFG"/>
+                                        <constraint firstItem="01H-HX-y08" firstAttribute="top" secondItem="nvl-EC-zq0" secondAttribute="bottom" constant="20" symbolic="YES" id="LsZ-DF-ptd"/>
+                                        <constraint firstItem="nvl-EC-zq0" firstAttribute="top" secondItem="OHB-Ph-BWN" secondAttribute="bottom" constant="8" symbolic="YES" id="Nmh-xg-T1d"/>
+                                        <constraint firstItem="nvl-EC-zq0" firstAttribute="leading" secondItem="fkT-tL-KsI" secondAttribute="leading" constant="20" symbolic="YES" id="iEO-1a-UMJ"/>
+                                        <constraint firstItem="OHB-Ph-BWN" firstAttribute="leading" secondItem="nvl-EC-zq0" secondAttribute="leading" id="kA3-Iw-SNn"/>
+                                        <constraint firstItem="OHB-Ph-BWN" firstAttribute="top" secondItem="fkT-tL-KsI" secondAttribute="top" constant="20" symbolic="YES" id="kYC-9B-nuX"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="01H-HX-y08" secondAttribute="bottom" constant="20" symbolic="YES" id="zvs-mW-g1s"/>
+                                    </constraints>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Scenes" identifier="" id="der-Jg-cem">
+                                <view key="view" id="5jp-jJ-aXp">
+                                    <rect key="frame" x="0.0" y="0.0" width="434" height="263"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxH-UO-6bh">
+                                            <rect key="frame" x="20" y="34" width="394" height="197"/>
+                                            <clipView key="contentView" id="893-CZ-ZtZ">
+                                                <rect key="frame" x="1" y="1" width="392" height="195"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" usesAutomaticRowHeights="YES" headerView="caB-eM-Xvx" viewBased="YES" id="rqL-ne-hTJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="392" height="167"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <size key="intercellSpacing" width="17" height="0.0"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                        <tableColumns>
+                                                            <tableColumn identifier="SceneRangeName" width="116" minWidth="40" maxWidth="1000" id="ISK-6o-DGI">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="WSf-Tn-Oja">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView id="5pS-9B-uoY">
+                                                                        <rect key="frame" x="8" y="0.0" width="114" height="30"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vAr-uJ-L6X">
+                                                                                <rect key="frame" x="0.0" y="7" width="114" height="16"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="y98-v5-7eZ">
+                                                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="5pS-9B-uoY" name="value" keyPath="objectValue.name" id="TYS-09-4hr"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="vAr-uJ-L6X" firstAttribute="leading" secondItem="5pS-9B-uoY" secondAttribute="leading" constant="2" id="hHI-vN-po8"/>
+                                                                            <constraint firstItem="vAr-uJ-L6X" firstAttribute="centerX" secondItem="5pS-9B-uoY" secondAttribute="centerX" id="vhB-CL-5ty"/>
+                                                                            <constraint firstItem="vAr-uJ-L6X" firstAttribute="centerY" secondItem="5pS-9B-uoY" secondAttribute="centerY" id="yut-7D-Nug"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="vAr-uJ-L6X" id="2So-mK-LfU"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                            <tableColumn identifier="SceneRange" editable="NO" width="247" minWidth="40" maxWidth="1000" id="D8Y-ie-oa4">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Range">
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="VKs-XJ-jtq">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView id="AwC-G9-50x">
+                                                                        <rect key="frame" x="139" y="0.0" width="244" height="30"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="JSG-Sz-lWQ">
+                                                                                <rect key="frame" x="0.0" y="7" width="244" height="16"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ZLk-5M-GGe">
+                                                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                                <connections>
+                                                                                    <binding destination="AwC-G9-50x" name="value" keyPath="objectValue.prettyRange" id="3X6-eI-izz"/>
+                                                                                </connections>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="JSG-Sz-lWQ" firstAttribute="centerX" secondItem="AwC-G9-50x" secondAttribute="centerX" id="90r-IQ-beI"/>
+                                                                            <constraint firstItem="JSG-Sz-lWQ" firstAttribute="centerY" secondItem="AwC-G9-50x" secondAttribute="centerY" id="p4r-9D-EYZ"/>
+                                                                            <constraint firstItem="JSG-Sz-lWQ" firstAttribute="leading" secondItem="AwC-G9-50x" secondAttribute="leading" constant="2" id="sWx-2u-nXl"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="JSG-Sz-lWQ" id="yVH-qH-96f"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                        </tableColumns>
+                                                    </tableView>
+                                                </subviews>
+                                            </clipView>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="197" id="TnN-SV-xgv"/>
+                                            </constraints>
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="3Gc-CP-MDb">
+                                                <rect key="frame" x="1" y="181" width="392" height="15"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="huI-WU-pbN">
+                                                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <tableHeaderView key="headerView" wantsLayer="YES" id="caB-eM-Xvx">
+                                                <rect key="frame" x="0.0" y="0.0" width="392" height="28"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </tableHeaderView>
+                                        </scrollView>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g0c-rC-Geu" userLabel="- Square">
+                                            <rect key="frame" x="40" y="14" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="BBd-lo-3Yq"/>
+                                                <constraint firstAttribute="width" constant="20" id="kYZ-Yk-RjS"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q32-eN-vLX">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QAu-cw-zSA" userLabel="+ Square">
+                                            <rect key="frame" x="20" y="14" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="kYZ-YC-ltl"/>
+                                                <constraint firstAttribute="width" constant="20" id="ux6-mU-WCg"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tdx-o0-GjE">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="addSceneCollection:" target="-2" id="Aql-gy-GBz"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="QAu-cw-zSA" firstAttribute="leading" secondItem="pxH-UO-6bh" secondAttribute="leading" id="3Zc-nZ-ilB"/>
+                                        <constraint firstItem="g0c-rC-Geu" firstAttribute="leading" secondItem="QAu-cw-zSA" secondAttribute="trailing" id="SXE-FA-7Sd"/>
+                                        <constraint firstItem="pxH-UO-6bh" firstAttribute="leading" secondItem="5jp-jJ-aXp" secondAttribute="leading" constant="20" symbolic="YES" id="UpE-O9-Prs"/>
+                                        <constraint firstItem="g0c-rC-Geu" firstAttribute="leading" secondItem="QAu-cw-zSA" secondAttribute="trailing" id="hfF-Rs-IDi"/>
+                                        <constraint firstAttribute="trailing" secondItem="pxH-UO-6bh" secondAttribute="trailing" constant="20" symbolic="YES" id="j9M-hU-Nvm"/>
+                                        <constraint firstItem="QAu-cw-zSA" firstAttribute="top" secondItem="pxH-UO-6bh" secondAttribute="bottom" constant="1" id="mWl-nF-PnT"/>
+                                        <constraint firstItem="g0c-rC-Geu" firstAttribute="top" secondItem="QAu-cw-zSA" secondAttribute="top" id="nMw-3Y-Ocf"/>
+                                        <constraint firstItem="pxH-UO-6bh" firstAttribute="top" secondItem="5jp-jJ-aXp" secondAttribute="top" constant="32" id="qfx-71-848"/>
+                                        <constraint firstAttribute="bottom" secondItem="pxH-UO-6bh" secondAttribute="bottom" constant="34" id="ykC-5f-GwW"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -418,27 +579,32 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="g1q-75-Va2"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="jGC-Iy-n9a"/>
-                    <toolbarItem implicitItemIdentifier="A1B9E7B9-EF6C-4EC2-A076-55D994381CF8" label="OBS" paletteLabel="OBS" image="OBS" bordered="YES" sizingBehavior="auto" id="9Vi-xY-7Qt">
-                        <connections>
-                            <action selector="switchToTab:" target="-2" id="EfD-sk-6QM"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="D2C02F1C-383B-4734-B4FB-60ADE37E5F86" label="Cameras" paletteLabel="Cameras" tag="1" image="ptz-toolbar-camera" bordered="YES" sizingBehavior="auto" id="cLW-Mb-dB1">
+                    <toolbarItem implicitItemIdentifier="FD2AC0C9-A518-427D-AC58-E1ADE19064C4" label="Cameras" paletteLabel="Cameras" image="ptz-toolbar-camera" bordered="YES" sizingBehavior="auto" id="cLW-Mb-dB1">
                         <connections>
                             <action selector="switchToTab:" target="-2" id="Cvr-pM-9dg"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="A1B9E7B9-EF6C-4EC2-A076-55D994381CF8" label="OBS" paletteLabel="OBS" tag="1" image="OBS" bordered="YES" sizingBehavior="auto" id="9Vi-xY-7Qt">
+                        <connections>
+                            <action selector="switchToTab:" target="-2" id="EfD-sk-6QM"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="86F63CD9-5BB3-42BD-A103-006194648167" label="Scenes" paletteLabel="Scenes" tag="2" image="camera-viewfinder" bordered="YES" sizingBehavior="auto" id="OYm-JY-LNG">
+                        <connections>
+                            <action selector="switchToTab:" target="-2" id="Hhx-YJ-0dN"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="jGC-Iy-n9a"/>
-                    <toolbarItem reference="9Vi-xY-7Qt"/>
                     <toolbarItem reference="cLW-Mb-dB1"/>
+                    <toolbarItem reference="9Vi-xY-7Qt"/>
+                    <toolbarItem reference="OYm-JY-LNG"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="42" y="114.5"/>
+            <point key="canvasLocation" x="222" y="507.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="osl-3m-Fqe"/>
         <arrayController objectClassName="PTZPrefCamera" id="HlL-0u-lFM" userLabel="Camera Array">
@@ -452,6 +618,7 @@
         <image name="NSAddTemplate" width="18" height="17"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="OBS" width="128" height="128"/>
+        <image name="camera-viewfinder" width="800" height="800"/>
         <image name="ptz-toolbar-camera" width="512" height="512"/>
     </resources>
 </document>

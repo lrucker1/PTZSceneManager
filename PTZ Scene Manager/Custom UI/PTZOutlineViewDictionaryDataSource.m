@@ -449,7 +449,7 @@ doCommandBySelector:(SEL)commandSelector
     [super keyDown:event];
 }
 
-- (void)doCommandBySelector: (SEL)aSelector // IN
+- (void)doCommandBySelector:(SEL)aSelector
 {
     BOOL handled = NO;
     if ([[self delegate] respondsToSelector:@selector(outlineView:doCommandBySelector:)]) {

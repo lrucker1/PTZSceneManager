@@ -136,10 +136,10 @@ static LARIndexSetVisualizerView *selfType;
     [path stroke];
 }
 
-- (void)observeValueForKeyPath: (NSString *)keyPath    // IN
-                      ofObject: (id)object             // IN
-                        change: (NSDictionary *)change // IN
-                       context: (void *)context        // IN
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
    if (context != &selfType) {
       [super observeValueForKeyPath:keyPath

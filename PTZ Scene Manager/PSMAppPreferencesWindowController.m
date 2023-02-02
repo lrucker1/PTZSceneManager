@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "PTZPrefCamera.h"
 #import "PTZSettingsFile.h"
+#import "PSMRangeCollectionWindowController.h"
 
 static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
@@ -31,6 +32,17 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 - (IBAction)switchToTab:(id)sender {
     NSToolbarItem *item = (NSToolbarItem *)sender;
     [self.tabView selectTabViewItemAtIndex:item.tag];
+}
+
+- (BOOL)validateUserInterfaceItem:(NSMenuItem *)menuItem {
+    if (menuItem.action == @selector(toggleToolbarShown:)) {
+        return NO;
+    }
+    return YES;
+}
+
+- (IBAction)toggleToolbarShown:(id)sender {
+    // no-op
 }
 
 #pragma mark OBS
@@ -126,4 +138,9 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     self.cameras = cams;
 }
 
+#pragma mark scene collections
+
+- (IBAction)addSceneCollection:(id)sender {
+    [[[[PSMRangeCollectionWindowController alloc] init] window] makeKeyAndOrderFront:nil];
+}
 @end

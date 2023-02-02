@@ -28,6 +28,9 @@ const NSString *PTZProgressEndKey = @"PTZProgressEnd";
 // Utility to log bool values.
 #define B2S(b) ((b) ? @"Y" : @"N")
 
+#define BOOL_TO_ONOFF(b) ((b) ? VISCA_FOCUS_AUTO_ON : VISCA_FOCUS_AUTO_OFF)
+#define ONOFF_TO_BOOL(b) ((b) == VISCA_FOCUS_AUTO_ON)
+
 BOOL open_interface(VISCAInterface_t *iface, VISCACamera_t *camera, const char *hostname, int port);
 void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOffset, uint32_t delaySecs, bool isBackup, PTZCamera *ptzCamera, PTZDoneBlock doneBlock);
 
@@ -282,7 +285,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (BOOL)visca_set_focus_manual {
+- (BOOL)unchecked_visca_set_focus_manual {
     BOOL success = YES;
     if (self.autofocus) {
         success = VISCA_set_focus_auto(&self->_iface, &self->_camera, VISCA_FOCUS_AUTO_OFF) == VISCA_SUCCESS;
@@ -302,7 +305,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = [self visca_set_focus_manual];
+            BOOL success = [self unchecked_visca_set_focus_manual];
             if (success && VISCA_set_focus_far(&self->_iface, &self->_camera) == VISCA_SUCCESS) {
                 VISCA_set_focus_stop(&self->_iface, &self->_camera);
                 success = YES;
@@ -319,7 +322,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = [self visca_set_focus_manual];
+            BOOL success = [self unchecked_visca_set_focus_manual];
             if (success && VISCA_set_focus_near(&self->_iface, &self->_camera) == VISCA_SUCCESS) {
                 VISCA_set_focus_stop(&self->_iface, &self->_camera);
                 success = YES;
@@ -336,7 +339,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = [self visca_set_focus_manual];
+            BOOL success = [self unchecked_visca_set_focus_manual];
             if (success && VISCA_set_focus_far_speed(&self->_iface, &self->_camera, (uint32_t)speed) == VISCA_SUCCESS) {
                 VISCA_set_focus_stop(&self->_iface, &self->_camera);
                 success = YES;
@@ -353,7 +356,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = [self visca_set_focus_manual];
+            BOOL success = [self unchecked_visca_set_focus_manual];
             if (success && VISCA_set_focus_near_speed(&self->_iface, &self->_camera, (uint32_t)speed) == VISCA_SUCCESS) {
                 VISCA_set_focus_stop(&self->_iface, &self->_camera);
                 success = YES;
@@ -423,6 +426,8 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
+#pragma mark validation and value mapping
+
 // The zero-based camera values, mapped from the user-friendly properties or other fun stuff like asymmetric values
 // 2500-8000 mapped to 0-0x37
 - (NSInteger)colorTempIndex {
@@ -440,6 +445,15 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 
 - (void)setHueIndex:(NSInteger)index {
     self.hue = (index * 2) - 14;
+}
+
+// -7 to 7, mapped to 0-0xE?
+- (NSInteger)expcompIndex {
+    return self.expcomp + 7;
+}
+
+- (void)setExpcompIndex:(NSInteger)index {
+    self.expcomp = index - 7;
 }
 
 // 60%-200%, mapped to 0-0xE
@@ -473,9 +487,6 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     self.bwMode = (value == VISCA_PICTURE_EFFECT_BW);
 }
 
-#define BOOL_TO_ONOFF(b) ((b) ? VISCA_FOCUS_AUTO_ON : VISCA_FOCUS_AUTO_OFF)
-#define ONOFF_TO_BOOL(b) ((b) == VISCA_FOCUS_AUTO_ON)
-
 - (NSInteger)autofocusIndex {
     return BOOL_TO_ONOFF(self.autofocus);
 }
@@ -484,8 +495,46 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     self.autofocus = ONOFF_TO_BOOL(value);
 }
 
+// Backlight: ONOFF directly from UI tag
+
+//validate<Key>:error:
+- (BOOL)pin:(inout id  _Nullable *)ioValue toMin:(NSInteger)min max:(NSInteger)max {
+    NSInteger value = [*ioValue integerValue];
+    if (value < min) {
+        *ioValue = @(min);
+    } else if (value > max) {
+        *ioValue = @(max);
+    }
+    return YES;
+}
+
+#define VALIDATE_KEY_MINMAX(_key, _min, _max) \
+- (BOOL)validate##_key:(inout id  _Nullable *)ioValue error:(out NSError * _Nullable *)outError { \
+    return [self pin:ioValue toMin:(_min) max:(_max)]; \
+}
+
+VALIDATE_KEY_MINMAX(PanSpeed, 1, 24)
+VALIDATE_KEY_MINMAX(TiltSpeed, 1, 20)
+VALIDATE_KEY_MINMAX(PresetSpeed, 1, 24)
+
+VALIDATE_KEY_MINMAX(RedGain, 0, 255)
+VALIDATE_KEY_MINMAX(BlueGain, 0, 255)
+// RG Tuning: Red gain tuning, optional items: -10 ~ +10.
+// BG Tuning: Blue gain tuning, optional items: -10 ~ +10.
+VALIDATE_KEY_MINMAX(Hue, 0, 14)
+
+VALIDATE_KEY_MINMAX(Bright, 0, 17)
+VALIDATE_KEY_MINMAX(GainLimit, 0, 15)
+
+VALIDATE_KEY_MINMAX(Luminance, 0, 14)
+VALIDATE_KEY_MINMAX(Contrast, 0, 14)
+VALIDATE_KEY_MINMAX(Aperture, 0, 14)
+
+#undef VALIDATE_KEY_MINMAX
+
+#pragma mark send to camera
 // The non-thread-safe calls to VISCA_set, called from single-set and batch mode.
-- (BOOL)visca_set_WBMode_values {
+- (BOOL)unchecked_visca_set_WBMode_values {
     NSObject<PTZCameraWBModeDelegate> *delegate = self.delegate;
     BOOL success = YES;
     // Unless we're exporting to a file, failure stops the whole thing, so we don't spin if something goes wrong.
@@ -518,7 +567,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     return success;
 }
 
-- (BOOL)visca_set_exposure_values {
+- (BOOL)unchecked_visca_set_exposure_values {
     NSObject<PTZCameraWBModeDelegate> *delegate = self.delegate;
     BOOL success = YES;
     // One failure stops the whole thing, so we don't spin if something goes wrong. Export should always succeed.
@@ -562,7 +611,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     return success;
 }
 
-- (BOOL)visca_set_image_values {
+- (BOOL)unchecked_visca_set_image_values {
     NSObject<PTZCameraWBModeDelegate> *delegate = self.delegate;
     BOOL success = YES;
     // One failure stops the whole thing, so we don't spin if something goes wrong. Export should always succeed.
@@ -601,7 +650,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = [self visca_set_WBMode_values];
+            BOOL success = [self unchecked_visca_set_WBMode_values];
             [self callDoneBlock:doneBlock success:success];
         });
     }];
@@ -615,7 +664,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = [self visca_set_exposure_values];
+            BOOL success = [self unchecked_visca_set_exposure_values];
             [self callDoneBlock:doneBlock success:success];
         });
     }];
@@ -678,18 +727,18 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)visca_set_extended_values:(nullable NSString *)log {
+- (void)unchecked_visca_set_extended_values:(nullable NSString *)log {
     BOOL applyToAll = self.isExportingHomeScene;
     if (APPLY_TO_ALL_CHECK(self.delegate.applyWBValuesWithPreset)) {
-        BOOL success = [self visca_set_WBMode_values];
+        BOOL success = [self unchecked_visca_set_WBMode_values];
         log = [log stringByAppendingFormat:@" (set WB values %@)", success ? @"succeeded" : @"failed"];
     }
     if (APPLY_TO_ALL_CHECK(self.delegate.applyExposureValuesWithPreset)) {
-        BOOL success = [self visca_set_exposure_values];
+        BOOL success = [self unchecked_visca_set_exposure_values];
         log = [log stringByAppendingFormat:@" (set exposure values %@)", success ? @"succeeded" : @"failed"];
     }
     if (APPLY_TO_ALL_CHECK(self.delegate.applyImageValuesWithPreset)) {
-        BOOL success = [self visca_set_image_values];
+        BOOL success = [self unchecked_visca_set_image_values];
         log = [log stringByAppendingFormat:@" (set image values %@)", success ? @"succeeded" : @"failed"];
     }
 }
@@ -701,7 +750,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            [self visca_set_extended_values:nil];
+            [self unchecked_visca_set_extended_values:nil];
             BOOL success = VISCA_memory_set(&self->_iface, &self->_camera, scene) == VISCA_SUCCESS;
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self callDoneBlock:doneBlock success:success];
@@ -722,6 +771,88 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
      - but sending it a cancel does interrupt the operation, even if the camera is just wondering what that strange request was.
      */
     VISCA_cancel(&self->_iface, &self->_camera);
+}
+
+- (BOOL)unchecked_visca_toggle_menu {
+    BOOL success = YES;
+    if (self.cameraConfig.isPTZOptics) {
+        success = VISCA_memory_recall(&self->_iface, &self->_camera, 95) == VISCA_SUCCESS;
+    } else {
+        success = VISCA_set_datascreen_onoff(&self->_iface, &self->_camera);
+    }
+    return success;
+}
+
+- (void)toggleOSDMenu:(PTZDoneBlock)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = [self unchecked_visca_toggle_menu];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self callDoneBlock:doneBlock success:success];
+            });
+        });
+    }];
+}
+
+- (void)osdMenuEnter:(PTZDoneBlock)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = VISCA_set_datascreen_enter(&self->_iface, &self->_camera) == VISCA_SUCCESS;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self callDoneBlock:doneBlock success:success];
+            });
+        });
+    }];
+}
+
+- (void)closeOSDMenu:(PTZDoneBlock)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = NO;
+            if (self.cameraConfig.isPTZOptics) {
+                uint8_t status;
+                if (VISCA_get_datascreen(&self->_iface, &self->_camera, &status) == VISCA_SUCCESS) {
+                    if (status == VISCA_ON) {
+                        success = [self unchecked_visca_toggle_menu];
+                    } else {
+                        success = YES;
+                    }
+                }
+            } else {
+                success = VISCA_set_datascreen_off(&self->_iface, &self->_camera);
+            }
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self callDoneBlock:doneBlock success:success];
+            });
+        });
+    }];
+}
+
+- (void)osdMenuReturn:(PTZDoneBlock)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = VISCA_set_datascreen_return(&self->_iface, &self->_camera) == VISCA_SUCCESS;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self callDoneBlock:doneBlock success:success];
+            });
+        });
+    }];
 }
 
 #pragma mark batch
@@ -831,6 +962,27 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     [self updateImageCameraValues:self.isExportingHomeScene onDone:doneBlock];
 }
 
+- (void)updateAutofocusState:(PTZDoneBlock _Nullable)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                uint8_t afModeValue;
+                BOOL success = VISCA_get_focus_auto(&self->_iface, &self->_camera, &afModeValue) == VISCA_SUCCESS;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (success) {
+                        self.autofocus = ONOFF_TO_BOOL(afModeValue);
+                    }
+                    [self callDoneBlock:doneBlock success:YES];
+                });
+            });
+        });
+    }];
+}
+
 - (void)updateCameraState:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraOpen) {
@@ -860,8 +1012,8 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
                     self.zoom = zoomValue;
                 }
                 if (afModeSuccess) {
-                    // 0x02 : Auto, 0x03 : Manual
-                    self.autofocus = (afModeValue == VISCA_FOCUS_AUTO_ON);
+                    // 0x02 : Auto, 0x03 : Manual, so use the ONOFF macro.
+                    self.autofocus = ONOFF_TO_BOOL(afModeValue);
                 }
                 if (fSuccess) {
                     self.focus = afValue;
@@ -1173,7 +1325,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = [self visca_set_image_values];
+            BOOL success = [self unchecked_visca_set_image_values];
             [self callDoneBlock:doneBlock success:success];
         });
     }];
@@ -1224,7 +1376,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             log = [log stringByAppendingFormat:@" Cancelled recall at scene %d\n", sceneIndex + fromOffset];
             break;
         }
-        [ptzCamera visca_set_extended_values:log];
+        [ptzCamera unchecked_visca_set_extended_values:log];
         log = [log stringByAppendingFormat:@" set %d", sceneIndex + toOffset];
         if (VISCA_memory_set(iface, camera, sceneIndex + toOffset) != VISCA_SUCCESS) {
             log = [log stringByAppendingFormat:@"failed to send set command %d\n", sceneIndex + toOffset];

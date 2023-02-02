@@ -18,7 +18,7 @@
 static PTZCameraStateViewController *selfType;
 
 // Use a macro to auto-generate these and not worry about copypaste errors.
-#define MAKE_CAN_SET_MODE_CHECK_METHOD(_name)                    \
+#define MAKE_CAN_SET_MODE_CHECK_METHOD(_name)         \
 - (BOOL)canSet##_name                                 \
 {                                                     \
    return self.enable##_name && self.select##_name;   \
@@ -81,10 +81,10 @@ typedef enum _ExposureModes {
 
 @implementation PTZCameraStateViewController
 
-+ (NSSet *)keyPathsForValuesAffectingValueForKey: (NSString *)key // IN
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
 {
     NSMutableSet *keyPaths = [NSMutableSet set];
-    // enableRG, enableBG, enableColorTemp, enableAWBSens, enableHue
+    // enableRG, enableBG, enableColorTemp, enableAWBSens
     
     if (   [key isEqualToString:@"enableRG"]
         || [key isEqualToString:@"enableBG"]
@@ -109,12 +109,17 @@ typedef enum _ExposureModes {
     [self.exposureDataOutlineView setDelegate:_outlineData];
     self.firstVisibleScene = self.prefCamera.firstVisibleScene;
     self.lastVisibleScene = self.prefCamera.lastVisibleScene;
-//    self.sceneRangeTableView.doubleAction = @selector(applySceneRange:);
-    [self addObserver:self
-           forKeyPath:@"cameraState.exposureMode"
-              options:0
-              context:&selfType];
-    [self addObserver:self forKeyPath:@"sceneRangeController.arrangedObjects" options:0 context:&selfType];
+    self.sceneRangeTableView.doubleAction = @selector(applySceneRange:);
+    NSArray *keyPaths = @[@"cameraState.exposureMode",
+                          @"sceneRangeController.arrangedObjects",
+                          @"prefCamera.firstVisibleScene",
+                          @"prefCamera.lastVisibleScene"];
+    for (NSString *key in keyPaths) {
+        [self addObserver:self
+               forKeyPath:key
+                  options:0
+                  context:&selfType];
+    }
 }
 
 - (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {
@@ -962,10 +967,6 @@ MAKE_CAN_SET_METHOD(BWMode)
 
 #pragma mark Scenes
 
-- (void)mocDidChangeNotification:(NSNotification *)note {
-    NSLog(@"delta %@", [note object]);
-}
-
 - (IBAction)applySceneRange:(id)sender {
     // Force an active textfield to end editing so we get the current value, then put it back when we're done.
     NSView *view = (NSView *)sender;
@@ -983,9 +984,6 @@ MAKE_CAN_SET_METHOD(BWMode)
 - (IBAction)resetSceneRange:(id)sender {
     [self.prefCamera removeFirstVisibleScene];
     [self.prefCamera removeLastVisibleScene];
-    // Reload the global/registered defaults.
-    self.firstVisibleScene = self.prefCamera.firstVisibleScene;
-    self.lastVisibleScene = self.prefCamera.lastVisibleScene;
 }
 
 - (void)validateAndSetSceneRange {
@@ -1011,8 +1009,6 @@ MAKE_CAN_SET_METHOD(BWMode)
     }
     if (isBad) {
         NSBeep();
-        self.firstVisibleScene = min;
-        self.lastVisibleScene = max;
     }
     self.prefCamera.firstVisibleScene = min;
     self.prefCamera.lastVisibleScene = max;
@@ -1031,9 +1027,6 @@ MAKE_CAN_SET_METHOD(BWMode)
         NSInteger start = csRange.range.location;
         self.prefCamera.firstVisibleScene = start;
         self.prefCamera.lastVisibleScene = NSMaxRange(csRange.range) - 1;
-        // TODO: observe and update
-        self.firstVisibleScene = self.prefCamera.firstVisibleScene;
-        self.lastVisibleScene = self.prefCamera.lastVisibleScene;
     }
 }
 
@@ -1083,10 +1076,10 @@ MAKE_CAN_SET_METHOD(BWMode)
  IMAGE : LUMINANCE CONTRAST SHARPNESS FLIP-H FLIP-V B&W-MODE GAMMA STYLE
  */
 
-- (void)observeValueForKeyPath: (NSString *)keyPath    // IN
-                      ofObject: (id)object             // IN
-                        change: (NSDictionary *)change // IN
-                       context: (void *)context        // IN
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
    if (context != &selfType) {
       [super observeValueForKeyPath:keyPath
@@ -1097,6 +1090,10 @@ MAKE_CAN_SET_METHOD(BWMode)
        [self updateExposureDictionary];
    } else if ([keyPath isEqualToString:@"sceneRangeController.arrangedObjects"]) {
                [self saveSceneRangeToPrefs];
+   } else if ([keyPath isEqualToString:@"prefCamera.firstVisibleScene"]) {
+       self.firstVisibleScene = self.prefCamera.firstVisibleScene;
+   } else if ([keyPath isEqualToString:@"prefCamera.lastVisibleScene"]) {
+       self.lastVisibleScene = self.prefCamera.lastVisibleScene;
    }
 }
 

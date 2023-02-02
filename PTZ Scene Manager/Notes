@@ -4,18 +4,13 @@ https://help.ptzoptics.com/support/solutions/articles/13000066852-ptzoptics-cont
 https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-rtsp-feed-of-a-ptzoptics-camera
 
  rtsp://[ipaddress]:554/1
- - option to have the video zoom out to a bigger window, kind of like the Home app
  
  Import settings.ini and transfer to not using their data.
   - export our data as settings.ini?
  
  Sandbox?
 
-Click twice trick for the editable labels. If Finder can do it so can I.
-
 Yes! obs-websocket to find out which camera is hot.
-
-The extra controls prefs are not per-camera, because the nib binds directly to userDefaults. Maybe use the magic prefCamera defaults.
 
 Prefs:
 Configure cameras
@@ -29,12 +24,10 @@ Per-camera and global
 
 Add Export to PacketSender to this app.
 
-Shrink the ui - scenes on left, controls on right, toggle control view visibility?
-
-Recall last selected scene option
-
-Text on the images. Lock name editing - part of the whole UI lock?
-
-Home: Actual Home command, or recall last set scene?
+Lock name editing - part of the whole UI lock?
 
 Get the camera's actual aspect ratio for the live view constraint.
+snapshot.jpg resolution options: 1920x1080 960x600 480x300
+
+Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles"
+Auto sharpness?
