@@ -9,8 +9,11 @@
 #import "PSMOBSWebSocketController.h"
 #import "AppDelegate.h"
 #import "PTZPrefCamera.h"
+#import "PTZCameraSceneRange.h"
 #import "PTZSettingsFile.h"
 #import "PSMRangeCollectionWindowController.h"
+
+static PSMAppPreferencesWindowController *selfType;
 
 static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
@@ -19,6 +22,8 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 @property IBOutlet NSTabView *tabView;
 @property IBOutlet NSPathControl *iniFilePathControl;
 @property NSMutableArray *cameras;
+@property NSMutableArray *collectionsArray;
+@property (strong) PSMRangeCollectionWindowController *rangeCollectionWindowController;
 
 @end
 
@@ -27,6 +32,27 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 - (instancetype)init {
     self = [super initWithWindowNibName:@"PSMAppPreferencesWindowController"];
     return self;
+}
+
+- (void)windowDidLoad {
+    [super windowDidLoad];
+    
+    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    NSString *path = [(AppDelegate *)[NSApp delegate] ptzopticsSettingsFilePath];
+    if (path) {
+        self.iniFilePathControl.URL = [NSURL fileURLWithPath:path];
+    }
+    NSMutableArray *prefCams = [NSMutableArray array];
+    NSArray *defCams = [[NSUserDefaults standardUserDefaults] objectForKey:PTZ_LocalCamerasKey];
+    for (NSDictionary *cam in defCams) {
+        [prefCams addObject:[[PTZPrefCamera alloc] initWithDictionary:cam]];
+    }
+    self.cameras = prefCams;
+    [[NSUserDefaults standardUserDefaults] addObserver:self
+                                            forKeyPath:PSMSceneCollectionKey
+                                               options:NSKeyValueObservingOptionNew
+                                               context:&selfType];
+    [self reloadCollectionData];
 }
 
 - (IBAction)switchToTab:(id)sender {
@@ -60,23 +86,6 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 }
 
 #pragma mark Camera / PTZOptics app
-
-- (void)windowDidLoad {
-    [super windowDidLoad];
-//    self.window.backgroundColor = NSColor.whiteColor;
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    NSString *path = [(AppDelegate *)[NSApp delegate] ptzopticsSettingsFilePath];
-    if (path) {
-        self.iniFilePathControl.URL = [NSURL fileURLWithPath:path];
-    }
-    NSMutableArray *prefCams = [NSMutableArray array];
-    NSArray *defCams = [[NSUserDefaults standardUserDefaults] objectForKey:PTZ_LocalCamerasKey];
-    for (NSDictionary *cam in defCams) {
-        [prefCams addObject:[[PTZPrefCamera alloc] initWithDictionary:cam]];
-    }
-    self.cameras = prefCams;
-}
 
 - (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url {
     // Wouldn't it be nice if we didn't have to check directories, given that we've only enabled canChooseFiles?
@@ -140,7 +149,49 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
 #pragma mark scene collections
 
-- (IBAction)addSceneCollection:(id)sender {
-    [[[[PSMRangeCollectionWindowController alloc] init] window] makeKeyAndOrderFront:nil];
+- (void)reloadCollectionData {
+    NSDictionary *collections = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSString *collectionName in [collections allKeys]) {
+        NSDictionary *dict = collections[collectionName];
+        NSMutableArray *csRanges = [NSMutableArray array];
+        for (NSString *cameraname in [dict allKeys]) {
+            NSData *data = dict[cameraname];
+            NSError *error;
+            PTZCameraSceneRange *csRange = [PTZCameraSceneRange sceneRangeFromEncodedData:data error:&error];
+            if (csRange == nil) {
+                NSLog(@"Error dearchiving csRange %@", error);
+            } else {
+                [csRanges addObject:[csRange prettyRangeWithName:cameraname]];
+            }
+        }
+        [array addObject:@{@"name":collectionName, @"csRanges":csRanges}];
+    }
+    NSLog(@"%@", array);
+    self.collectionsArray = array;
 }
+
+- (IBAction)addSceneCollection:(id)sender {
+    // TODO: Observe the window so we can dispose of the WC on close
+    self.rangeCollectionWindowController = [[PSMRangeCollectionWindowController alloc] init];
+    [[self.rangeCollectionWindowController window] makeKeyAndOrderFront:nil];
+}
+
+#pragma mark kvo
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+   if (context != &selfType) {
+      [super observeValueForKeyPath:keyPath
+                           ofObject:object
+                             change:change
+                            context:context];
+   } else if ([keyPath isEqualToString:PSMSceneCollectionKey]) {
+       [self reloadCollectionData];
+   }
+}
+
 @end

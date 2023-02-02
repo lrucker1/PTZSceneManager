@@ -6,6 +6,7 @@
 //
 
 #import "PTZPrefCamera.h"
+#import "PTZCameraSceneRange.h"
 
 static NSString *PSM_PanPlusSpeed = @"panPlusSpeed";
 static NSString *PSM_TiltPlusSpeed = @"tiltPlusSpeed";
@@ -75,6 +76,7 @@ PREF_VALUE_NSINT_ACCESSORS(zoomPlusSpeed, ZoomPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(focusPlusSpeed, FocusPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(firstVisibleScene, FirstVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
+PREF_VALUE_NSINT_ACCESSORS(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 
 #undef PREF_VALUE_NSINT_ACCESSORS
@@ -95,6 +97,39 @@ PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
 
 #undef PREF_VALUE_BOOL_ACCESSORS
 
+- (NSArray<PTZCameraSceneRange *> *)sceneRangeArray {
+    NSData *data = [self prefValueForKey:@"SceneRangeArray"];
+    if (data == nil) {
+        return nil;
+    }
+    return [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:[NSSet setWithArray:@[[PTZCameraSceneRange class], [NSString class]]] fromData:data error:nil];
+}
+
+// Global, not camera-specific
+- (NSInteger)defaultFirstVisibleScene {
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"firstVisibleScene"] integerValue];
+}
+
+- (NSInteger)defaultLastVisibleScene {
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"lastVisibleScene"] integerValue];
+}
+
+- (PTZCameraSceneRange*)defaultRange {
+    PTZCameraSceneRange *csRange = [PTZCameraSceneRange new];
+    csRange.name = NSLocalizedString(@"Default", @"name for default scene range");
+    NSInteger len = self.defaultLastVisibleScene - self.defaultFirstVisibleScene + 1;
+    csRange.range = NSMakeRange(self.firstVisibleScene, len);
+    return csRange;
+}
+
+- (void)setSceneRangeArray:(NSArray<PTZCameraSceneRange *> *)array {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array requiringSecureCoding:YES error:nil];
+    if (data != nil) {
+        [self setPrefValue:data forKey:@"SceneRangeArray"];
+    }
+}
+
+#pragma mark wrappers
 - (NSString *)prefKeyForKey:(NSString *)key {
     return [NSString stringWithFormat:@"[%@].%@", self.cameraname, key];
 }

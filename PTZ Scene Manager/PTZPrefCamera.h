@@ -11,12 +11,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class PTZCamera;
+@class PTZCameraSceneRange;
 
 @interface PTZPrefCamera : NSObject
 @property NSString *cameraname;
 @property NSString *devicename;
 @property NSString *originalDeviceName;
 @property (strong) PTZCamera *camera;
+@property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
+
+- (PTZCameraSceneRange*)defaultRange;
 
 #define PREF_VALUE_NSINT_PROPERTIES(_prop, _Prop) \
 @property NSInteger _prop; \
@@ -28,6 +32,7 @@ PREF_VALUE_NSINT_PROPERTIES(zoomPlusSpeed, ZoomPlusSpeed)
 PREF_VALUE_NSINT_PROPERTIES(focusPlusSpeed, FocusPlusSpeed)
 PREF_VALUE_NSINT_PROPERTIES(firstVisibleScene, FirstVisibleScene)
 PREF_VALUE_NSINT_PROPERTIES(lastVisibleScene, LastVisibleScene)
+PREF_VALUE_NSINT_PROPERTIES(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_PROPERTIES(maxColumnCount, MaxColumnCount)
 
 #undef PREF_VALUE_NSINT_PROPERTIES

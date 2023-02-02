@@ -1027,25 +1027,19 @@ MAKE_CAN_SET_METHOD(BWMode)
         NSInteger start = csRange.range.location;
         self.prefCamera.firstVisibleScene = start;
         self.prefCamera.lastVisibleScene = NSMaxRange(csRange.range) - 1;
+        self.prefCamera.selectedSceneRange = self.sceneRangeController.selectionIndex;
     }
 }
 
 - (void)saveSceneRangeToPrefs {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self.sceneRangeController arrangedObjects] requiringSecureCoding:YES error:nil];
-    if (data != nil) {
-        [self.prefCamera setPrefValue:data forKey:@"SceneRangeArray"];
-    }
+    [self.prefCamera setSceneRangeArray:[self.sceneRangeController arrangedObjects]];
 }
 
 - (void)loadSceneRangeFromPrefs {
-    NSData *data = [self.prefCamera prefValueForKey:@"SceneRangeArray"];
-    if (data == nil) {
-        return;
-    }
-    NSArray *array = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:[NSSet setWithArray:@[[PTZCameraSceneRange class], [NSString class]]] fromData:data error:nil];
+    NSArray *array = self.prefCamera.sceneRangeArray;
     if (array != nil) {
         [self.sceneRangeController addObjects:array];
-        [self.sceneRangeController setSelectionIndex:0];
+        self.sceneRangeController.selectionIndex = self.prefCamera.selectedSceneRange;
     }
 }
 

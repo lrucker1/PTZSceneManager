@@ -9,6 +9,9 @@
 #import "PSMOBSWebSocketController.h"
 
 @class PTZSettingsFile;
+@class PTZPrefCamera;
+
+extern NSString *PSMSceneCollectionKey;
 
 void PTZLog(NSString *format, ...);
 
@@ -22,6 +25,7 @@ void PTZLog(NSString *format, ...);
 - (NSString *)ptzopticsDownloadsDirectory;
 
 - (NSArray *)cameraList;
+- (NSArray<PTZPrefCamera *> *)prefCameras;
 
 - (void)applyPrefChanges;
 

@@ -66,6 +66,9 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="Ht4-C5-HHT" name="value" keyPath="objectValue.cameraname" id="HPx-6m-Smf"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
@@ -78,6 +81,9 @@
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="g18-Jo-smD" name="value" keyPath="arrangedObjects.selectedObject" id="aLy-2w-Fue"/>
+                                                    </connections>
                                                 </tableColumn>
                                                 <tableColumn identifier="SceneRanges" width="161" minWidth="40" maxWidth="1000" id="cFi-83-fdC">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
@@ -96,7 +102,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q0k-uW-Yc7">
-                                                                    <rect key="frame" x="0.0" y="1" width="166" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="158" height="25"/>
                                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="at0-3g-4So" id="V4f-6a-Kmj">
                                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="menu"/>
@@ -107,18 +113,35 @@
                                                                                 <menuItem title="Item 3" id="Thd-NI-V1j"/>
                                                                             </items>
                                                                         </menu>
+                                                                        <connections>
+                                                                            <binding destination="g18-Jo-smD" name="contentValues" keyPath="arrangedObjects.sceneRangeArray" id="k57-yQ-ZWN"/>
+                                                                        </connections>
                                                                     </popUpButtonCell>
+                                                                    <connections>
+                                                                        <binding destination="nGA-CF-CyA" name="content" keyPath="objectValue.sceneRangeArray" id="I6c-XF-wJg">
+                                                                            <dictionary key="options">
+                                                                                <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                            </dictionary>
+                                                                        </binding>
+                                                                        <binding destination="nGA-CF-CyA" name="selectedIndex" keyPath="objectValue.selectedIndex" previousBinding="I6c-XF-wJg" id="QaP-Hd-h2J"/>
+                                                                    </connections>
                                                                 </popUpButton>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="Q0k-uW-Yc7" firstAttribute="leading" secondItem="nGA-CF-CyA" secondAttribute="leading" constant="3" id="9Ik-ut-aNO"/>
                                                                 <constraint firstItem="Q0k-uW-Yc7" firstAttribute="centerY" secondItem="nGA-CF-CyA" secondAttribute="centerY" id="OFS-VN-k3g"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Q0k-uW-Yc7" secondAttribute="trailing" constant="-4" id="wD7-VZ-YCQ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Q0k-uW-Yc7" secondAttribute="trailing" constant="4" id="wD7-VZ-YCQ"/>
                                                             </constraints>
                                                         </tableCellView>
                                                     </prototypeCellViews>
+                                                    <connections>
+                                                        <binding destination="g18-Jo-smD" name="value" keyPath="arrangedObjects.selectedObject" id="xd4-GT-gr4"/>
+                                                    </connections>
                                                 </tableColumn>
                                             </tableColumns>
+                                            <connections>
+                                                <binding destination="g18-Jo-smD" name="content" keyPath="arrangedObjects" id="JLq-EG-gHX"/>
+                                            </connections>
                                         </tableView>
                                     </subviews>
                                 </clipView>
@@ -141,6 +164,14 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="saveCollection:" target="PUA-nK-faT" id="mGP-WA-Wap"/>
+                                    <binding destination="PUA-nK-faT" name="enabled" keyPath="collectionName" id="w1r-j1-kUw">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IMt-0y-W9A">
                                 <rect key="frame" x="130" y="228" width="198" height="21"/>
@@ -152,6 +183,13 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="PUA-nK-faT" name="value" keyPath="collectionName" id="Pck-My-RyW">
+                                        <dictionary key="options">
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wX0-fm-sAe">
                                 <rect key="frame" x="13" y="13" width="76" height="32"/>
@@ -162,6 +200,9 @@
 Gw
 </string>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="cancel:" target="PUA-nK-faT" id="uD9-RX-jj8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -186,8 +227,10 @@ Gw
         </window>
         <viewController id="PUA-nK-faT" customClass="PSMRangeCollectionViewController">
             <connections>
+                <outlet property="arrayController" destination="g18-Jo-smD" id="MRM-2k-oUK"/>
                 <outlet property="view" destination="pPF-DW-n5K" id="EFg-Z1-smx"/>
             </connections>
         </viewController>
+        <arrayController id="g18-Jo-smD"/>
     </objects>
 </document>

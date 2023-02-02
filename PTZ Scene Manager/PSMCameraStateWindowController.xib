@@ -87,9 +87,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="8Pe-nT-iaX" column="C5H-Mm-wl8" id="nSa-v1-z3J">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="cPa-w3-Lkn">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPa-w3-Lkn">
                                                         <rect key="frame" x="42" y="76" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="jnb-c4-uTt">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -122,9 +121,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="ijs-p3-5c1" column="C5H-Mm-wl8" id="sty-TW-rC5">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="Ozw-0R-K26">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-0R-K26">
                                                         <rect key="frame" x="42" y="50" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="R3S-ab-qmB">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -157,9 +155,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="Nhj-tH-r7X" column="C5H-Mm-wl8" id="XZC-QF-wM4">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="du6-Cc-cJO">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du6-Cc-cJO">
                                                         <rect key="frame" x="42" y="24" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="YPj-7T-qg3">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -192,9 +189,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="gP0-H8-kN4" column="C5H-Mm-wl8" id="Eol-k6-BSv">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" id="JSk-NA-UC3">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JSk-NA-UC3">
                                                         <rect key="frame" x="42" y="-2" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="50o-yt-hSY">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -258,9 +254,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="3la-Kt-VYM" column="ZaY-Tc-5Rg" id="Qrm-x4-5wI">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="EkE-cB-aWE">
+                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EkE-cB-aWE">
                                                         <rect key="frame" x="178" y="-2" width="64" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="Ubt-m9-uU3"/>
                                                         </constraints>
@@ -885,7 +880,7 @@
                                             <rect key="frame" x="26" y="171" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
@@ -1377,7 +1372,7 @@
                                             </rows>
                                             <columns>
                                                 <gridColumn xPlacement="trailing" id="dLK-Dr-jsO"/>
-                                                <gridColumn width="60" id="g8H-Ee-g1m"/>
+                                                <gridColumn xPlacement="fill" width="60" id="g8H-Ee-g1m"/>
                                                 <gridColumn xPlacement="trailing" id="ZvZ-Mn-2NM"/>
                                             </columns>
                                             <gridCells>
@@ -1392,9 +1387,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="pjt-yL-ONO" column="g8H-Ee-g1m" id="nEF-nX-sxM">
-                                                    <textField key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="pGx-uc-pp4">
+                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pGx-uc-pp4">
                                                         <rect key="frame" x="123" y="54" width="60" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="4nW-sz-IdL">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1428,9 +1422,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="5BP-v1-xGv" column="g8H-Ee-g1m" id="6T1-9Z-oLF">
-                                                    <textField key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="prQ-Ii-tZj">
+                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="prQ-Ii-tZj">
                                                         <rect key="frame" x="123" y="27" width="60" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="9" drawsBackground="YES" id="FSX-mo-4nj">
                                                             <font key="font" usesAppearanceFont="YES"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1464,9 +1457,8 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="8yH-FF-EVa" column="g8H-Ee-g1m" id="T9t-i8-UcU">
-                                                    <textField key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="JP2-qX-f85">
+                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JP2-qX-f85">
                                                         <rect key="frame" x="123" y="0.0" width="60" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="3" drawsBackground="YES" id="UYb-CW-m2g">
                                                             <font key="font" usesAppearanceFont="YES"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1583,7 +1575,7 @@
                                                 </subviews>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kC5-TW-Ruf">
-                                                <rect key="frame" x="1" y="119" width="317" height="15"/>
+                                                <rect key="frame" x="1" y="119" width="358" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cbE-Yc-nV5">

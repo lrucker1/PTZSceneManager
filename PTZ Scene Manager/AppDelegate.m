@@ -21,12 +21,14 @@
 #import "PSMAppPreferencesWindowController.h"
 
 static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
+NSString *PSMSceneCollectionKey = @"SceneCollections";
 
 @interface AppDelegate ()
 
 @property (strong) IBOutlet NSWindow *window;
 @property (strong) NSMutableSet *windowControllers;
 @property (strong) PSMAppPreferencesWindowController *prefsController;
+@property (strong) NSMutableDictionary<NSString *, PTZPrefCamera *> *mutablePrefCameras;
 
 @end
 
@@ -49,16 +51,7 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    NSArray *cameraList = [self cameraList];
-    self.windowControllers = [NSMutableSet set];
-
-    for (NSDictionary *cameraInfo in cameraList) {
-        PTZPrefCamera *prefCamera = [[PTZPrefCamera alloc] initWithDictionary:cameraInfo];
-        prefCamera.camera = [[PTZCamera alloc] initWithIP:prefCamera.devicename];
-        PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
-        [wc.window orderFront:nil];
-        [self.windowControllers addObject:wc];
-    }
+    [self loadAllCameras];
     if ([self.windowControllers count] == 0) {
         [self showPrefs:nil];
     }
@@ -89,14 +82,22 @@ static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 - (void)loadAllCameras {
     NSArray *cameraList = [self cameraList];
     self.windowControllers = [NSMutableSet set];
+    self.mutablePrefCameras = [NSMutableDictionary dictionary];
 
     for (NSDictionary *cameraInfo in cameraList) {
         PTZPrefCamera *prefCamera = [[PTZPrefCamera alloc] initWithDictionary:cameraInfo];
+        if ([prefCamera.cameraname length] > 0) {
+            self.mutablePrefCameras[prefCamera.cameraname] = prefCamera;
+        }
         prefCamera.camera = [[PTZCamera alloc] initWithIP:prefCamera.devicename];
         PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
         [wc.window orderFront:nil];
         [self.windowControllers addObject:wc];
     }
+}
+
+- (NSArray<PTZPrefCamera *> *)prefCameras {
+    return [self.mutablePrefCameras allValues];
 }
 
 #pragma mark OBS connection

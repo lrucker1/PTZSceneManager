@@ -12,6 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PTZCameraSceneRange : NSObject <NSSecureCoding>
 @property NSString *name;
 @property NSRange range;
+
++ (instancetype)sceneRangeFromEncodedData:(NSData *)data error:(NSError **)error;
+
+- (NSData *)encodedData;
+- (NSString *)prettyRangeWithName:(NSString *)name;
+
 @end
 
 NS_ASSUME_NONNULL_END
