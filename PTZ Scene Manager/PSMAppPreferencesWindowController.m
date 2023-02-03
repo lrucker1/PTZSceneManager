@@ -20,9 +20,11 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 @interface PSMAppPreferencesWindowController ()
 
 @property IBOutlet NSTabView *tabView;
+@property IBOutlet NSTableView *rangeCollectionTableView;
 @property IBOutlet NSPathControl *iniFilePathControl;
 @property NSMutableArray *cameras;
 @property NSMutableArray *collectionsArray;
+@property IBOutlet NSArrayController *collectionsArrayController;
 @property (strong) PSMRangeCollectionWindowController *rangeCollectionWindowController;
 
 @end
@@ -149,12 +151,25 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
 #pragma mark scene collections
 
+/*
+ In Prefs:
+  Dictionary[collectionName] contains
+    Dictionary[cameraname] = PTZCameraSceneRange encodedData
+ In array controller:
+ Array of
+    Dictionary[name] = collectionName
+    Dictionary[csRangeDescriptions] = array of strings
+    Dictionary[csRangeDictionary]
+        Dictionary[cameraname] = PTZCameraSceneRange object
+
+ */
 - (void)reloadCollectionData {
     NSDictionary *collections = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
     NSMutableArray *array = [NSMutableArray array];
     for (NSString *collectionName in [collections allKeys]) {
         NSDictionary *dict = collections[collectionName];
-        NSMutableArray *csRanges = [NSMutableArray array];
+        NSMutableArray *csRangeDescriptions = [NSMutableArray array];
+        NSMutableDictionary *csRangeDict = [NSMutableDictionary dictionary];
         for (NSString *cameraname in [dict allKeys]) {
             NSData *data = dict[cameraname];
             NSError *error;
@@ -162,12 +177,12 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
             if (csRange == nil) {
                 NSLog(@"Error dearchiving csRange %@", error);
             } else {
-                [csRanges addObject:[csRange prettyRangeWithName:cameraname]];
-            }
+                [csRangeDescriptions addObject:[csRange prettyRangeWithName:cameraname]];
+                csRangeDict[cameraname] = csRange;
+           }
         }
-        [array addObject:@{@"name":collectionName, @"csRanges":csRanges}];
+        [array addObject:@{@"name":collectionName, @"csRangeDictionary":csRangeDict, @"csRangeDescriptions":csRangeDescriptions}];
     }
-    NSLog(@"%@", array);
     self.collectionsArray = array;
 }
 
@@ -177,6 +192,20 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     [[self.rangeCollectionWindowController window] makeKeyAndOrderFront:nil];
 }
 
+- (IBAction)applySceneRangeCollection:(id)sender {
+    NSInteger row = [self.rangeCollectionTableView rowForView:sender];
+    if (row < 0) {
+        return;
+    }
+    NSDictionary *dict = [self.collectionsArrayController.arrangedObjects objectAtIndex:row];
+    NSDictionary *csRanges = dict[@"csRangeDictionary"];
+    for (PTZPrefCamera *camera in self.appDelegate.prefCameras) {
+        PTZCameraSceneRange *csRange = csRanges[camera.cameraname];
+        if (csRange != nil) {
+            [camera applySceneRange:csRange];
+        }
+    }
+}
 #pragma mark kvo
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

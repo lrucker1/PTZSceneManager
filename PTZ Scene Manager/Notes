@@ -31,3 +31,5 @@ snapshot.jpg resolution options: 1920x1080 960x600 480x300
 
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles"
 Auto sharpness?
+
+A popupbutton is not the best ui for the scene range collection.

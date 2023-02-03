@@ -866,7 +866,7 @@
                     <toolbarItem implicitItemIdentifier="F9660E9B-CBE5-4795-B0C7-CE58FE55F1BB" label="OSD Remote" paletteLabel="OSD Remote" toolTip="OSD remote. Drag to detatch." image="remote-control" sizingBehavior="auto" id="GbI-AY-n7U">
                         <button key="view" verticalHuggingPriority="750" id="jRn-jo-5ck">
                             <rect key="frame" x="21" y="14" width="32" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="remote-control" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="lHH-YR-2MG">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -970,9 +970,8 @@
                     <gridCells>
                         <gridCell row="KKL-gX-iVk" column="278-1q-YiK" id="eun-br-R64"/>
                         <gridCell row="KKL-gX-iVk" column="3xo-Bk-nDW" id="GeT-am-Qy9">
-                            <button key="contentView" toolTip="Up" verticalHuggingPriority="750" tag="12" id="dDE-lm-ee8" userLabel="Up">
+                            <button key="contentView" toolTip="Up" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="dDE-lm-ee8" userLabel="Up">
                                 <rect key="frame" x="35" y="70" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mzg-2e-RIq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

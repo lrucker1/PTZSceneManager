@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PSMAppPreferencesWindowController : NSWindowController <NSOpenSavePanelDelegate>
+@interface PSMAppPreferencesWindowController : NSWindowController <NSOpenSavePanelDelegate, NSTableViewDelegate>
 
 @end
 

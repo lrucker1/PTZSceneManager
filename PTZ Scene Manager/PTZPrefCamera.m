@@ -129,6 +129,12 @@ PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
     }
 }
 
+- (void)applySceneRange:(PTZCameraSceneRange *)csRange {
+    NSInteger start = csRange.range.location;
+    self.firstVisibleScene = start;
+    self.lastVisibleScene = NSMaxRange(csRange.range) - 1;
+}
+
 #pragma mark wrappers
 - (NSString *)prefKeyForKey:(NSString *)key {
     return [NSString stringWithFormat:@"[%@].%@", self.cameraname, key];

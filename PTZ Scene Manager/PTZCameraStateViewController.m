@@ -1024,9 +1024,7 @@ MAKE_CAN_SET_METHOD(BWMode)
 - (IBAction)applySelectedSceneRange:(id)sender {
     PTZCameraSceneRange *csRange = [[self.sceneRangeController selectedObjects] firstObject];
     if (csRange) {
-        NSInteger start = csRange.range.location;
-        self.prefCamera.firstVisibleScene = start;
-        self.prefCamera.lastVisibleScene = NSMaxRange(csRange.range) - 1;
+        [self.prefCamera applySceneRange:csRange];
         self.prefCamera.selectedSceneRange = self.sceneRangeController.selectionIndex;
     }
 }

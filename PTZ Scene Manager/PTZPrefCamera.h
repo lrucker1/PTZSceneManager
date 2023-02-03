@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
 
 - (PTZCameraSceneRange*)defaultRange;
+- (void)applySceneRange:(PTZCameraSceneRange *)csRange;
 
 #define PREF_VALUE_NSINT_PROPERTIES(_prop, _Prop) \
 @property NSInteger _prop; \
