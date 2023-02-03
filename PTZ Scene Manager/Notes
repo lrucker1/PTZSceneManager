@@ -11,6 +11,7 @@ https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-
  Sandbox?
 
 Yes! obs-websocket to find out which camera is hot.
+.. now to figure out how to install it in 2.7.
 
 Prefs:
 Configure cameras
@@ -18,9 +19,6 @@ Configure cameras
  - set PTZOptics brand or not.
 
 Should localhost be saved as an "Internet" password?
-
-Named ranges: "Christmas: C1:70-80, C2:70-73, C3:1-9"
-Per-camera and global
 
 Add Export to PacketSender to this app.
 
@@ -31,5 +29,13 @@ snapshot.jpg resolution options: 1920x1080 960x600 480x300
 
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles"
 Auto sharpness?
+And the other things you can do in PTZ advanced view.
 
 A popupbutton is not the best ui for the scene range collection.
+Multiline text, with disclosure triangle?
+
+Put an Apply button in the camera prefs scene range table.
+
+Edit button in the scene range collection.
+
+Undo on collection item removal.

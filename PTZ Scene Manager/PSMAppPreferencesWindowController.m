@@ -17,6 +17,17 @@ static PSMAppPreferencesWindowController *selfType;
 
 static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
+@interface PSMRangeCollectionInfo : NSObject
+@property NSString *name;
+@property NSString *shortDescription;
+@property NSString *longDescription;
+@property NSDictionary *sceneRangeDictionary; /* <cameraname,PTZCameraSceneRange> */
+@property BOOL expanded;
+
+@end
+@implementation PSMRangeCollectionInfo
+@end
+
 @interface PSMAppPreferencesWindowController ()
 
 @property IBOutlet NSTabView *tabView;
@@ -153,14 +164,11 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
 /*
  In Prefs:
-  Dictionary[collectionName] contains
-    Dictionary[cameraname] = PTZCameraSceneRange encodedData
+  Dictionary<collectionName, Dictionary<cameraname,encodedData> >
  In array controller:
- Array of
-    Dictionary[name] = collectionName
-    Dictionary[csRangeDescriptions] = array of strings
-    Dictionary[csRangeDictionary]
-        Dictionary[cameraname] = PTZCameraSceneRange object
+ Array of PSMRangeCollectionInfo
+    name = collectionName
+    sceneRangeDictionary = Dictionary<cameraname,PTZCameraSceneRange>
 
  */
 - (void)reloadCollectionData {
@@ -181,7 +189,14 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
                 csRangeDict[cameraname] = csRange;
            }
         }
-        [array addObject:@{@"name":collectionName, @"csRangeDictionary":csRangeDict, @"csRangeDescriptions":csRangeDescriptions}];
+        NSString *csString = [csRangeDescriptions componentsJoinedByString:@"\n"];
+        PSMRangeCollectionInfo *info = [PSMRangeCollectionInfo new];
+        info.name = collectionName;
+        info.shortDescription = [NSString stringWithFormat:@"%@ …", [csRangeDescriptions firstObject]];
+        info.longDescription = csString;
+        info.sceneRangeDictionary = csRangeDict;
+        info.expanded = YES;
+        [array addObject:info];
     }
     self.collectionsArray = array;
 }
@@ -192,13 +207,24 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     [[self.rangeCollectionWindowController window] makeKeyAndOrderFront:nil];
 }
 
+- (IBAction)removeSceneCollection:(id)sender {
+    // Get the keys (collectionName) for the selected objects, remove them from defaults, save defaults, and reload.
+    NSDictionary *oldPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
+    NSMutableDictionary *newPrefs = [NSMutableDictionary dictionaryWithDictionary:oldPrefs];
+    for (PSMRangeCollectionInfo *info in [self.collectionsArrayController selectedObjects]) {
+        [newPrefs removeObjectForKey:info.name];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:newPrefs forKey:PSMSceneCollectionKey];
+    [self reloadCollectionData];
+}
+
 - (IBAction)applySceneRangeCollection:(id)sender {
     NSInteger row = [self.rangeCollectionTableView rowForView:sender];
     if (row < 0) {
         return;
     }
-    NSDictionary *dict = [self.collectionsArrayController.arrangedObjects objectAtIndex:row];
-    NSDictionary *csRanges = dict[@"csRangeDictionary"];
+    PSMRangeCollectionInfo *info = [self.collectionsArrayController.arrangedObjects objectAtIndex:row];
+    NSDictionary *csRanges = info.sceneRangeDictionary;
     for (PTZPrefCamera *camera in self.appDelegate.prefCameras) {
         PTZCameraSceneRange *csRange = csRanges[camera.cameraname];
         if (csRange != nil) {

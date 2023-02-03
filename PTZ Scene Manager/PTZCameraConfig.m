@@ -8,13 +8,22 @@
 #import "PTZCameraConfig.h"
 #import "libvisca.h"
 
-//static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
+static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
 
 @interface PTZCameraConfig ()
 @property NSRange reservedRange;
+@property NSString *brandname;
 @end
 
 @implementation PTZCameraConfig
+
++ (void)initialize {
+    [super initialize];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:
+     @{@"PTZOptics.MaxSceneIndex":@(254),
+       @"Sony.MaxSceneIndex":@(254),
+     }];
+}
 
 + (instancetype)ptzOpticsConfig {
     return [PTZCameraConfig new];
@@ -23,6 +32,7 @@
 + (instancetype)sonyConfig {
     PTZCameraConfig *result = [PTZCameraConfig new];
     result.cameratype = VISCA_IFACE_CAM_SONY;
+    result.brandname = @"Sony";
     return result;
 }
 
@@ -30,10 +40,10 @@
     self = [super init];
     if (self) {
         _port = 5678;
-        _maxSceneIndex = 254;
         _cameratype = VISCA_IFACE_CAM_PTZOPTICS;
         _protocol = VISCA_PROTOCOL_TCP;
         _reservedRange = NSMakeRange(90, 10);
+        _brandname = @"PTZOptics";
     }
     return self;
 }
@@ -42,16 +52,20 @@
     return self.cameratype == VISCA_IFACE_CAM_PTZOPTICS;
 }
 
-#if 0
-// TODO: save to defaults with cameratype-specific keys.
+- (NSString *)prefKeyForKey:(NSString *)key {
+    return [NSString stringWithFormat:@"%@.%@", self.brandname, key];
+}
+
+
 - (NSInteger)maxSceneIndex {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:PTZ_MaxSceneIndexKey];
+    NSString *camKey = [self prefKeyForKey:PTZ_MaxSceneIndexKey];
+    return [[NSUserDefaults standardUserDefaults] integerForKey:camKey];
 }
 
 - (void)setMaxSceneIndex:(NSInteger)value {
-    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:PTZ_MaxSceneIndexKey];
+    NSString *camKey = [self prefKeyForKey:PTZ_MaxSceneIndexKey];
+    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:camKey];
 }
-#endif
 
 - (BOOL)isValidSceneIndex:(NSInteger)index {
     // 0 is reserved for Home.
