@@ -9,7 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PSMRangeCollectionWindowController"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="rcY-wT-IRF">
+        <window title="Add Range Collection" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="RangeCollection" animationBehavior="default" id="rcY-wT-IRF">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="109" y="130" width="348" height="270"/>
@@ -191,19 +191,6 @@
                                     </binding>
                                 </connections>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wX0-fm-sAe">
-                                <rect key="frame" x="13" y="13" width="76" height="32"/>
-                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SOf-sD-kh9">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="cancel:" target="PUA-nK-faT" id="uD9-RX-jj8"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1o5-l6-2U3" firstAttribute="top" secondItem="txc-Ob-gqS" secondAttribute="bottom" constant="20" symbolic="YES" id="0dT-Gs-s6w"/>
@@ -212,10 +199,8 @@ Gw
                             <constraint firstItem="txc-Ob-gqS" firstAttribute="leading" secondItem="pPF-DW-n5K" secondAttribute="leading" constant="20" symbolic="YES" id="3g9-vw-qf5"/>
                             <constraint firstItem="IMt-0y-W9A" firstAttribute="leading" secondItem="azz-QN-GNg" secondAttribute="trailing" constant="8" symbolic="YES" id="AQe-Yw-Nyb"/>
                             <constraint firstAttribute="trailing" secondItem="1o5-l6-2U3" secondAttribute="trailing" constant="20" symbolic="YES" id="DXk-tz-yhP"/>
-                            <constraint firstAttribute="bottom" secondItem="wX0-fm-sAe" secondAttribute="bottom" constant="20" symbolic="YES" id="Ggi-em-x9F"/>
                             <constraint firstItem="txc-Ob-gqS" firstAttribute="top" secondItem="azz-QN-GNg" secondAttribute="bottom" constant="8" symbolic="YES" id="hfq-Bf-Pvm"/>
                             <constraint firstAttribute="trailing" secondItem="txc-Ob-gqS" secondAttribute="trailing" constant="20" symbolic="YES" id="kkf-ZH-3xE"/>
-                            <constraint firstItem="wX0-fm-sAe" firstAttribute="leading" secondItem="pPF-DW-n5K" secondAttribute="leading" constant="20" symbolic="YES" id="nWi-oL-fD8"/>
                             <constraint firstAttribute="bottom" secondItem="1o5-l6-2U3" secondAttribute="bottom" constant="20" symbolic="YES" id="on8-kp-bv5"/>
                             <constraint firstItem="azz-QN-GNg" firstAttribute="leading" secondItem="pPF-DW-n5K" secondAttribute="leading" constant="20" symbolic="YES" id="pbP-NG-2fK"/>
                             <constraint firstItem="azz-QN-GNg" firstAttribute="top" secondItem="pPF-DW-n5K" secondAttribute="top" constant="20" symbolic="YES" id="t7e-XJ-8tM"/>

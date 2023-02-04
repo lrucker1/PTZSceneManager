@@ -27,15 +27,26 @@ Lock name editing - part of the whole UI lock?
 Get the camera's actual aspect ratio for the live view constraint.
 snapshot.jpg resolution options: 1920x1080 960x600 480x300
 
+Pluggable controls:
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles"
 Auto sharpness?
-And the other things you can do in PTZ advanced view.
+Preset speed?
+PTZ Advanced View:
+ Pan/Tilt Speed Lock (?)
+ Exposure mode dependent:
+    Shutter speed up/down
+    Iris brighter/darker
+    Brightness up/down
+ Image Color: Luminance Contrast Hue
+ Image flip & mirror
 
-A popupbutton is not the best ui for the scene range collection.
-Multiline text, with disclosure triangle?
-
-Put an Apply button in the camera prefs scene range table.
+Camera controls: Pan/Tilt limit
+Click here to visit website: [ipaddress]:8080
 
 Edit button in the scene range collection.
+Confirm giving one a name that already exists (if not edit mode)
 
 Undo on collection item removal.
+
+Refresh the "Add/Edit" window
+

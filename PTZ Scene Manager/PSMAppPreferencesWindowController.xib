@@ -17,7 +17,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" toolbarStyle="preference" id="F0z-JX-Cv5">
+        <window title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="AppPreferences" animationBehavior="default" toolbarStyle="preference" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="562" height="263"/>
@@ -442,7 +442,7 @@
                                                                 <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="name"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView translatesAutoresizingMaskIntoConstraints="NO" id="5pS-9B-uoY">
+                                                                    <tableCellView translatesAutoresizingMaskIntoConstraints="NO" id="5pS-9B-uoY" userLabel="collection name">
                                                                         <rect key="frame" x="8" y="0.0" width="186" height="30"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vAr-uJ-L6X">
@@ -483,9 +483,8 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="AwC-G9-50x">
-                                                                        <rect key="frame" x="211" y="0.0" width="196" height="30"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <tableCellView translatesAutoresizingMaskIntoConstraints="NO" id="AwC-G9-50x" userLabel="scene descriptions">
+                                                                        <rect key="frame" x="211" y="0.0" width="196" height="34"/>
                                                                         <subviews>
                                                                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lsn-tK-xF5">
                                                                                 <rect key="frame" x="3" y="19" width="13" height="13"/>
@@ -545,7 +544,7 @@
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="mwR-Ee-pPQ" firstAttribute="leading" secondItem="Lsn-tK-xF5" secondAttribute="trailing" constant="8" symbolic="YES" id="8LQ-nS-zAR"/>
-                                                                            <constraint firstItem="mwR-Ee-pPQ" firstAttribute="top" secondItem="AwC-G9-50x" secondAttribute="top" constant="4" id="EyB-sa-eOM"/>
+                                                                            <constraint firstItem="mwR-Ee-pPQ" firstAttribute="top" secondItem="AwC-G9-50x" secondAttribute="top" constant="2" id="EyB-sa-eOM"/>
                                                                             <constraint firstAttribute="trailing" secondItem="mwR-Ee-pPQ" secondAttribute="trailing" constant="20" symbolic="YES" id="G78-hu-Vct"/>
                                                                             <constraint firstItem="Lsn-tK-xF5" firstAttribute="leading" secondItem="AwC-G9-50x" secondAttribute="leading" constant="3" id="LUL-fh-y7g"/>
                                                                             <constraint firstItem="mwR-Ee-pPQ" firstAttribute="top" secondItem="Lsn-tK-xF5" secondAttribute="top" id="Ve1-Ne-ChA"/>

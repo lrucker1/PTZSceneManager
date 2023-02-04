@@ -383,31 +383,32 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyMotionSyncOn:(PTZDoneBlock _Nullable)doneBlock {
-    [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
-            [self callDoneBlock:doneBlock success:NO];
-            return;
-        }
-        dispatch_async(self.cameraQueue, ^{
-            BOOL success = VISCA_set_motionsync_on(&self->_iface, &self->_camera) == VISCA_SUCCESS;
-            [self callDoneBlock:doneBlock success:success];
-        });
-    }];
+// No parameters, no second action, just a simple function call
+
+#define SIMPLE_VISCA_FN_CALL(_selector, _function)      \
+- (void)_selector:(PTZDoneBlock _Nullable)doneBlock {   \
+    [self loadCameraWithCompletionHandler:^() {         \
+        if (!self.cameraOpen) {                         \
+            [self callDoneBlock:doneBlock success:NO];  \
+            return;                                     \
+        }                                               \
+        dispatch_async(self.cameraQueue, ^{             \
+            BOOL success = _function(&self->_iface, &self->_camera) == VISCA_SUCCESS;         \
+            [self callDoneBlock:doneBlock success:success]; \
+        });                                             \
+    }];                                                 \
 }
 
-- (void)applyMotionSyncOff:(PTZDoneBlock _Nullable)doneBlock {
-    [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
-            [self callDoneBlock:doneBlock success:NO];
-            return;
-        }
-        dispatch_async(self.cameraQueue, ^{
-            BOOL success = VISCA_set_motionsync_off(&self->_iface, &self->_camera) == VISCA_SUCCESS;
-            [self callDoneBlock:doneBlock success:success];
-        });
-    }];
-}
+SIMPLE_VISCA_FN_CALL(applyMotionSyncOn, VISCA_set_motionsync_on)
+SIMPLE_VISCA_FN_CALL(applyMotionSyncOff, VISCA_set_motionsync_off)
+SIMPLE_VISCA_FN_CALL(applyApertureUp, VISCA_set_aperture_up)
+SIMPLE_VISCA_FN_CALL(applyApertureDown, VISCA_set_aperture_down)
+SIMPLE_VISCA_FN_CALL(pantiltHome, VISCA_set_pantilt_home)
+SIMPLE_VISCA_FN_CALL(pantiltReset, VISCA_set_pantilt_reset)
+SIMPLE_VISCA_FN_CALL(osdMenuEnter, VISCA_set_datascreen_enter)
+SIMPLE_VISCA_FN_CALL(osdMenuReturn, VISCA_set_datascreen_return)
+
+#undef SIMPLE_VISCA_FN_CALL
 
 // libvisca's example CLI enforces a range (1000-40959), which I can only find in Sony doc. Also Sony defines it as 0x1000-0x9FFF, and while 0x9fff is 40959, 0x1000 is not 1000, so...
 - (void)applyFocusValue:(PTZDoneBlock _Nullable)doneBlock {
@@ -670,32 +671,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     }];
 }
 
-- (void)pantiltHome:(PTZDoneBlock)doneBlock {
-    [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
-            [self callDoneBlock:doneBlock success:NO];
-            return;
-        }
-        dispatch_async(self.cameraQueue, ^{
-            BOOL success = VISCA_set_pantilt_home(&self->_iface, &self->_camera) == VISCA_SUCCESS;
-            [self callDoneBlock:doneBlock success:success];
-        });
-    }];
-}
-
-- (void)pantiltReset:(PTZDoneBlock)doneBlock {
-    [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
-            [self callDoneBlock:doneBlock success:NO];
-            return;
-        }
-        dispatch_async(self.cameraQueue, ^{
-            BOOL success = VISCA_set_pantilt_reset(&self->_iface, &self->_camera) == VISCA_SUCCESS;
-            [self callDoneBlock:doneBlock success:success];
-        });
-    }];
-}
-
 - (void)callDoneBlock:(PTZDoneBlock)doneBlock success:(BOOL)success {
     if (doneBlock) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -798,20 +773,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     }];
 }
 
-- (void)osdMenuEnter:(PTZDoneBlock)doneBlock {
-    [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
-            [self callDoneBlock:doneBlock success:NO];
-            return;
-        }
-        dispatch_async(self.cameraQueue, ^{
-            BOOL success = VISCA_set_datascreen_enter(&self->_iface, &self->_camera) == VISCA_SUCCESS;
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self callDoneBlock:doneBlock success:success];
-            });
-        });
-    }];
-}
 
 - (void)closeOSDMenu:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
@@ -840,20 +801,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     }];
 }
 
-- (void)osdMenuReturn:(PTZDoneBlock)doneBlock {
-    [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
-            [self callDoneBlock:doneBlock success:NO];
-            return;
-        }
-        dispatch_async(self.cameraQueue, ^{
-            BOOL success = VISCA_set_datascreen_return(&self->_iface, &self->_camera) == VISCA_SUCCESS;
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self callDoneBlock:doneBlock success:success];
-            });
-        });
-    }];
-}
 
 #pragma mark batch
 

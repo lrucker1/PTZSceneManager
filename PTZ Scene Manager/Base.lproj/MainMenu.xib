@@ -406,6 +406,15 @@
                                     <action selector="toggleControlVisibilityFromKey:" target="-1" id="1o4-1s-g6q"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Show Sharpness Controls" id="KFU-5h-Ylz">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="representedObject" value="showSharpnessControls"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="toggleControlVisibilityFromKey:" target="-1" id="ZVo-If-PoL"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="aez-bW-Ymo"/>
                             <menuItem title="Pause Video" id="3T2-mr-C9N">
                                 <modifierMask key="keyEquivalentModifierMask"/>

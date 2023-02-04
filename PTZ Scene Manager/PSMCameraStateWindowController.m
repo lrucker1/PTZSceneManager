@@ -32,6 +32,8 @@
     self.cameraStateViewController.cameraState = self.prefCamera.camera;
     self.cameraStateViewController.prefCamera = self.prefCamera;
     self.prefCamera.camera.delegate = self.cameraStateViewController;
+    self.window.frameAutosaveName = [NSString stringWithFormat:@"[%@] state", self.prefCamera.devicename];
+
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 

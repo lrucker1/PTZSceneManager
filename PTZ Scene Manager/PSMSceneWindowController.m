@@ -60,6 +60,7 @@ typedef enum {
 @property IBOutlet NSBox *sceneCollectionBox;
 @property NSColor *boxColor;
 @property NSInteger itemCount;
+@property BOOL badRangeWarningVisible;
 @property NSArray *sceneIndexes;
 @property IBOutlet NSPopover *remoteControlPopover;
 @property IBOutlet DraggingStackView *controlStackView;
@@ -121,10 +122,10 @@ typedef enum {
 - (void)windowDidLoad {
     [super windowDidLoad];
     // Yes, this does need L10N. Because France.
-    NSString *fmt = NSLocalizedString(@"%@ - %@", @"Window title showing [cameraname - devicename]");
-    self.window.title = [NSString localizedStringWithFormat:fmt, self.prefCamera.cameraname, self.prefCamera.devicename];
+//    NSString *fmt = NSLocalizedString(@"%@ - %@", @"Window title showing [cameraname - devicename]");
+    self.window.title = self.prefCamera.cameraname;
     // This will update the window frame.
-    self.window.frameAutosaveName = self.prefCamera.devicename;
+    self.window.frameAutosaveName = [NSString stringWithFormat:@"[%@] main", self.prefCamera.devicename];
     BOOL isResizable = self.window.resizable;
     BOOL wantsResizable = [[self.prefCamera prefValueForKey:@"resizable"] integerValue];
     if (isResizable != wantsResizable) {
@@ -424,6 +425,17 @@ typedef enum {
     }
 }
 
+- (IBAction)doSharpnessUpDown:(id)sender {
+    NSStepper *stepper = (NSStepper *)sender;
+    if (stepper.integerValue == 1) {
+        NSLog(@"up");
+        [self.camera applyApertureUp:nil];
+    } else if (stepper.integerValue == -1) {
+        NSLog(@"down");
+        [self.camera applyApertureDown:nil];
+    }
+}
+
 - (IBAction)sceneRecall:(id)sender {
     [self.lastRecalledItem sceneRecall:sender];
 }
@@ -449,10 +461,10 @@ typedef enum {
             [array addObject:@(i)];
         }
     }
-    // TODO: some UI to explain what happened if itemCount is zero.
     NSInteger itemCount = [array count];
     self.sceneIndexes = [NSArray arrayWithArray:array];
     self.itemCount = itemCount;
+    self.badRangeWarningVisible = itemCount == 0;
     [self.collectionView reloadData];
 }
 

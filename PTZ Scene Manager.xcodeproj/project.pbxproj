@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940FCB23298E0D83008FD02F /* LARUpDownStepper.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCB22298E0D83008FD02F /* LARUpDownStepper.m */; };
 		946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */; };
 		946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */; };
 		946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */; };
@@ -61,6 +62,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		940FCB21298E0D83008FD02F /* LARUpDownStepper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARUpDownStepper.h; sourceTree = "<group>"; };
+		940FCB22298E0D83008FD02F /* LARUpDownStepper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARUpDownStepper.m; sourceTree = "<group>"; };
 		946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSMCameraStateWindowController.xib; sourceTree = "<group>"; };
 		946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraStateWindowController.h; sourceTree = "<group>"; };
 		946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraStateWindowController.m; sourceTree = "<group>"; };
@@ -177,13 +180,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		94638284298080BF0015BA8F /* ffmpeg RTSP */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "ffmpeg RTSP";
-			sourceTree = "<group>";
-		};
 		94747E14297B94F800309752 = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +202,6 @@
 		94747E1F297B94F800309752 /* PTZ Scene Manager */ = {
 			isa = PBXGroup;
 			children = (
-				94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */,
 				94C55AB6297CE96700D8C1DB /* Notes */,
 				94747E20297B94F800309752 /* AppDelegate.h */,
 				94747E21297B94F800309752 /* AppDelegate.m */,
@@ -224,6 +219,7 @@
 				94747E32297B951200309752 /* PSMSceneWindowController.xib */,
 				94747E7E297BB36C00309752 /* PSMSceneCollectionItem.h */,
 				94747E7F297BB36C00309752 /* PSMSceneCollectionItem.m */,
+				94747E81297BBD4800309752 /* PSMSceneCollectionItem.xib */,
 				946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */,
 				946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */,
 				946346C0297F5D000015BA8F /* PTZCameraStateViewController.h */,
@@ -256,7 +252,6 @@
 				9463827F29807F360015BA8F /* libiconv.tbd */,
 				9463828029807F360015BA8F /* libz.tbd */,
 				94890E3D29827601006EAB75 /* websocket */,
-				94638284298080BF0015BA8F /* ffmpeg RTSP */,
 				94747E65297B9C5F00309752 /* iniparser */,
 				94747E23297B94F900309752 /* Assets.xcassets */,
 				94747E25297B94F900309752 /* MainMenu.xib */,
@@ -325,6 +320,8 @@
 				94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */,
 				94CEBB232986B73900D3C8DC /* LARIndexSetVisualizerView.h */,
 				94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */,
+				940FCB21298E0D83008FD02F /* LARUpDownStepper.h */,
+				940FCB22298E0D83008FD02F /* LARUpDownStepper.m */,
 				94CEBAF32983BF6500D3C8DC /* PTZ Scene Manager-Bridging-Header.h */,
 			);
 			path = "Custom UI";
@@ -418,6 +415,7 @@
 				94747E61297B971100309752 /* PTZProgressGroup.m in Sources */,
 				946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */,
 				94CEBB292989B8CE00D3C8DC /* PTZAltKeyButton.m in Sources */,
+				940FCB23298E0D83008FD02F /* LARUpDownStepper.m in Sources */,
 				94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */,
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
 				94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */,

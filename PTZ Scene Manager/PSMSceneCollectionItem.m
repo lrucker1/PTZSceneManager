@@ -17,6 +17,7 @@ static PSMSceneCollectionItem *selfType;
 @interface PSMSceneCollectionItem ()
 
 @property IBOutlet LARClickableImageButton *imageButton;
+@property IBOutlet NSLayoutConstraint *aspectRatioConstraint;
 
 @end
 

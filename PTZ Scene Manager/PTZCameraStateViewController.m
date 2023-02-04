@@ -1022,7 +1022,12 @@ MAKE_CAN_SET_METHOD(BWMode)
 }
 
 - (IBAction)applySelectedSceneRange:(id)sender {
-    PTZCameraSceneRange *csRange = [[self.sceneRangeController selectedObjects] firstObject];
+    NSInteger row = [self.sceneRangeTableView rowForView:sender];
+    if (row < 0) {
+        return;
+    }
+     PTZCameraSceneRange *csRange = [self.sceneRangeController.arrangedObjects objectAtIndex:row];
+
     if (csRange) {
         [self.prefCamera applySceneRange:csRange];
         self.prefCamera.selectedSceneRange = self.sceneRangeController.selectionIndex;

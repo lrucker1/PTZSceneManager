@@ -68,7 +68,4 @@
     [[NSUserDefaults standardUserDefaults] setObject:newPrefs forKey:PSMSceneCollectionKey];
 }
 
-- (IBAction)cancel:(id)sender {
-    
-}
 @end

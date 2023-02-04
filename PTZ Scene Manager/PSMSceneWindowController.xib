@@ -25,83 +25,33 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="510" height="470"/>
+            <rect key="contentRect" x="196" y="240" width="510" height="636"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="510" height="470"/>
+                <rect key="frame" x="0.0" y="0.0" width="510" height="636"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="AKA-9N-UDC" userLabel="Camera Available">
-                        <rect key="frame" x="469" y="3" width="28" height="16"/>
-                        <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Taf-xD-kBh" userLabel="Reachable Camera Image View">
-                                <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PTZCameraIcon" id="Doi-BG-oHd"/>
-                                <connections>
-                                    <binding destination="-2" name="hidden" keyPath="prefCamera.camera.cameraOpen" id="xNF-YI-7wT">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </imageView>
-                            <button toolTip="Click to reconnect to camera" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pAy-1d-2xg" userLabel="Unreachable Camera Button">
-                                <rect key="frame" x="0.0" y="0.0" width="28" height="16"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSStatusUnavailable" imagePosition="overlaps" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="vxy-QI-Mse">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="smallSystem"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="reopenCamera:" target="-2" id="KPk-9z-ep0"/>
-                                    <binding destination="-2" name="hidden" keyPath="prefCamera.camera.cameraOpen" id="V7U-3F-Eer"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="28" id="3HB-Cd-vkf"/>
-                            <constraint firstItem="pAy-1d-2xg" firstAttribute="bottom" secondItem="Taf-xD-kBh" secondAttribute="bottom" id="3w8-bT-ibk"/>
-                            <constraint firstAttribute="height" constant="16" id="R8E-j8-RaB"/>
-                            <constraint firstItem="Taf-xD-kBh" firstAttribute="leading" secondItem="AKA-9N-UDC" secondAttribute="leading" id="X3o-D0-YQe"/>
-                            <constraint firstItem="pAy-1d-2xg" firstAttribute="top" secondItem="Taf-xD-kBh" secondAttribute="top" id="ZvN-BG-Qxq"/>
-                            <constraint firstAttribute="trailing" secondItem="Taf-xD-kBh" secondAttribute="trailing" id="acU-h6-Pdb"/>
-                            <constraint firstItem="pAy-1d-2xg" firstAttribute="trailing" secondItem="Taf-xD-kBh" secondAttribute="trailing" id="dfy-yw-Kbb"/>
-                            <constraint firstItem="pAy-1d-2xg" firstAttribute="leading" secondItem="Taf-xD-kBh" secondAttribute="leading" id="uCH-ZW-cfX"/>
-                            <constraint firstItem="Taf-xD-kBh" firstAttribute="top" secondItem="AKA-9N-UDC" secondAttribute="top" id="uaR-kZ-f8O"/>
-                            <constraint firstAttribute="bottom" secondItem="Taf-xD-kBh" secondAttribute="bottom" id="yre-QQ-MXG"/>
-                        </constraints>
-                    </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W6n-RS-l9m">
-                        <rect key="frame" x="11" y="0.0" width="270" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="No scenes are available in the current range" id="Wor-Eg-1V7">
-                            <font key="font" usesAppearanceFont="YES"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                        <connections>
-                            <binding destination="-2" name="hidden" keyPath="itemCount" id="QiO-pf-4Fn"/>
-                        </connections>
-                    </textField>
                     <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PtN-SX-hVF">
-                        <rect key="frame" x="0.0" y="19" width="510" height="451"/>
+                        <rect key="frame" x="0.0" y="0.0" width="510" height="636"/>
                         <subviews>
                             <customView id="Y3c-Ay-dYM">
-                                <rect key="frame" x="0.0" y="0.0" width="226" height="451"/>
+                                <rect key="frame" x="0.0" y="0.0" width="226" height="636"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <box boxType="custom" borderType="line" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-GK-es2">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="451"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="636"/>
                                         <view key="contentView" id="Ykz-oX-6gR">
-                                            <rect key="frame" x="3" y="3" width="220" height="445"/>
+                                            <rect key="frame" x="3" y="3" width="220" height="630"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView identifier="Scenes" wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-r8-LRb">
-                                                    <rect key="frame" x="4" y="4" width="212" height="437"/>
+                                                    <rect key="frame" x="4" y="4" width="212" height="622"/>
                                                     <clipView key="contentView" drawsBackground="NO" id="O1a-J2-dIf">
-                                                        <rect key="frame" x="1" y="1" width="210" height="435"/>
+                                                        <rect key="frame" x="1" y="1" width="210" height="620"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView id="6Fy-kw-0Au">
-                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="435"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="620"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="100" maximumNumberOfColumns="3" id="kp8-LB-dax">
                                                                     <size key="minimumItemSize" width="75" height="75"/>
@@ -124,8 +74,25 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                 </scrollView>
+                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PBu-5q-5op">
+                                                    <rect key="frame" x="64" y="291" width="92" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="88" id="ULz-Ze-29t"/>
+                                                        <constraint firstAttribute="height" constant="48" id="lOB-GK-Lv5"/>
+                                                    </constraints>
+                                                    <textFieldCell key="cell" selectable="YES" alignment="center" title="No scenes available in current range" id="ytb-ry-sUW">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="-2" name="hidden" keyPath="itemCount" id="yxU-Dj-CqL"/>
+                                                    </connections>
+                                                </textField>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="PBu-5q-5op" firstAttribute="centerY" secondItem="Ykz-oX-6gR" secondAttribute="centerY" id="Lmh-8y-GGT"/>
+                                                <constraint firstItem="PBu-5q-5op" firstAttribute="centerX" secondItem="Ykz-oX-6gR" secondAttribute="centerX" id="XfG-wg-hAc"/>
                                                 <constraint firstAttribute="trailing" secondItem="ERX-r8-LRb" secondAttribute="trailing" constant="4" id="YV6-0d-s4y"/>
                                                 <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="Ykz-oX-6gR" secondAttribute="top" constant="4" id="aLS-LI-riR"/>
                                                 <constraint firstItem="ERX-r8-LRb" firstAttribute="leading" secondItem="Ykz-oX-6gR" secondAttribute="leading" constant="4" id="vcA-8E-ZKf"/>
@@ -145,11 +112,11 @@
                                 </constraints>
                             </customView>
                             <customView identifier="Controls" id="aqd-Mf-Y30">
-                                <rect key="frame" x="236" y="0.0" width="274" height="451"/>
+                                <rect key="frame" x="236" y="0.0" width="274" height="636"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="pQm-I7-fbP" userLabel="Live Cam View">
-                                        <rect key="frame" x="0.0" y="256" width="274" height="195"/>
+                                        <rect key="frame" x="0.0" y="441" width="274" height="195"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
                                                 <rect key="frame" x="228" y="-7" width="46" height="27"/>
@@ -196,9 +163,9 @@
                                                     </constraints>
                                                 </view>
                                             </box>
-                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="UoW-QO-NIa">
+                                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoW-QO-NIa">
                                                 <rect key="frame" x="4" y="1" width="224" height="14"/>
-                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="left" title="Label" id="FS2-VR-Oqt">
+                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="FS2-VR-Oqt">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -221,7 +188,7 @@
                                         </constraints>
                                     </customView>
                                     <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-8a-7PM" userLabel="PanTilt Grid View">
-                                        <rect key="frame" x="87" y="141" width="100" height="100"/>
+                                        <rect key="frame" x="87" y="326" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="P2s-sA-zQu"/>
                                             <constraint firstAttribute="width" constant="100" id="XNi-Fi-QDb"/>
@@ -536,7 +503,7 @@
                                         </gridCells>
                                     </gridView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="YGQ-XG-efI" userLabel="Zoom View">
-                                        <rect key="frame" x="85" y="104" width="104" height="25"/>
+                                        <rect key="frame" x="85" y="289" width="104" height="25"/>
                                         <subviews>
                                             <gridView verticalHuggingPriority="750" xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qR6-cn-b6Q" userLabel="Zoom Grid View">
                                                 <rect key="frame" x="0.0" y="0.0" width="104" height="25"/>
@@ -630,13 +597,13 @@
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="aUA-lC-s2h" userLabel="More View">
-                                        <rect key="frame" x="85" y="-3" width="104" height="95"/>
+                                        <rect key="frame" x="85" y="133" width="104" height="144"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-2j-qG2" userLabel="More Controls View" customClass="DraggingStackView" customModule="PTZ_Scene_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="2" width="104" height="91"/>
+                                                <rect key="frame" x="0.0" y="2" width="104" height="140"/>
                                                 <subviews>
                                                     <customView identifier="FocusControls" verticalHuggingPriority="750" verticalCompressionResistancePriority="250" id="g0R-EG-TQZ" userLabel="Focus View">
-                                                        <rect key="frame" x="0.0" y="41" width="104" height="50"/>
+                                                        <rect key="frame" x="0.0" y="66" width="104" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <subviews>
                                                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Cjf-Dk-7kG" userLabel="Focus Grid View">
@@ -750,7 +717,7 @@
                                                         </connections>
                                                     </customView>
                                                     <customView identifier="MotionSyncControls" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D9e-1S-ted" userLabel="Motion Sync View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="104" height="32"/>
+                                                        <rect key="frame" x="0.0" y="25" width="104" height="32"/>
                                                         <subviews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RPa-rz-VdU">
                                                                 <rect key="frame" x="-2" y="18" width="70" height="14"/>
@@ -790,18 +757,59 @@
                                                             </binding>
                                                         </connections>
                                                     </customView>
+                                                    <customView identifier="SharpnessControls" translatesAutoresizingMaskIntoConstraints="NO" id="ERD-Fa-ms9" userLabel="Sharpness View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="104" height="16"/>
+                                                        <subviews>
+                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G2x-hP-1Qa">
+                                                                <rect key="frame" x="-2" y="2" width="60" height="14"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="14" id="zzy-7H-JAH"/>
+                                                                </constraints>
+                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Sharpness" id="y8m-M3-IFL">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                            </textField>
+                                                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sc0-VI-fML" customClass="LARUpDownStepper">
+                                                                <rect key="frame" x="56" y="-4" width="15" height="22"/>
+                                                                <stepperCell key="cell" controlSize="small" alignment="left" minValue="-1" maxValue="1" autorepeat="NO" id="yXy-J4-nMp"/>
+                                                                <connections>
+                                                                    <action selector="doSharpnessUpDown:" target="-2" id="dR3-Js-RmD"/>
+                                                                </connections>
+                                                            </stepper>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="Sc0-VI-fML" secondAttribute="bottom" id="AE1-kI-0SV"/>
+                                                            <constraint firstItem="G2x-hP-1Qa" firstAttribute="top" secondItem="ERD-Fa-ms9" secondAttribute="top" id="Ire-Zs-wKC"/>
+                                                            <constraint firstItem="Sc0-VI-fML" firstAttribute="top" secondItem="ERD-Fa-ms9" secondAttribute="top" id="ZXO-y3-wAj"/>
+                                                            <constraint firstItem="Sc0-VI-fML" firstAttribute="leading" secondItem="G2x-hP-1Qa" secondAttribute="trailing" constant="2" id="ptB-IX-GQC"/>
+                                                            <constraint firstItem="G2x-hP-1Qa" firstAttribute="leading" secondItem="ERD-Fa-ms9" secondAttribute="leading" id="xzy-Wq-RhV"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <binding destination="-2" name="hidden" keyPath="prefCamera.showSharpnessControls" id="QKo-8M-MsD">
+                                                                <dictionary key="options">
+                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                        </connections>
+                                                    </customView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="D9e-1S-ted" firstAttribute="leading" secondItem="6XE-2j-qG2" secondAttribute="leading" id="JxW-Sk-cku"/>
+                                                    <constraint firstItem="ERD-Fa-ms9" firstAttribute="leading" secondItem="6XE-2j-qG2" secondAttribute="leading" id="4Bk-n3-Tq3"/>
+                                                    <constraint firstItem="D9e-1S-ted" firstAttribute="leading" secondItem="6XE-2j-qG2" secondAttribute="leading" id="Ik9-5I-7vD"/>
                                                     <constraint firstAttribute="trailing" secondItem="D9e-1S-ted" secondAttribute="trailing" id="LdV-Kb-mYM"/>
                                                     <constraint firstAttribute="width" constant="104" id="a0N-GG-vBu"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="gG4-aF-9Ga"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ERD-Fa-ms9" secondAttribute="trailing" id="ikJ-f3-1bP"/>
                                                 </constraints>
                                                 <visibilityPriorities>
                                                     <integer value="1000"/>
                                                     <integer value="1000"/>
+                                                    <integer value="1000"/>
                                                 </visibilityPriorities>
                                                 <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                 </customSpacing>
@@ -843,17 +851,13 @@
                     </splitView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="AKA-9N-UDC" secondAttribute="bottom" constant="3" id="8m0-hr-HeX"/>
                     <constraint firstItem="PtN-SX-hVF" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Jn6-EP-gOB"/>
                     <constraint firstAttribute="trailing" secondItem="PtN-SX-hVF" secondAttribute="trailing" id="MyS-Zz-wne"/>
-                    <constraint firstItem="AKA-9N-UDC" firstAttribute="top" secondItem="PtN-SX-hVF" secondAttribute="bottom" id="Um8-D3-M16"/>
                     <constraint firstItem="PtN-SX-hVF" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="Voh-RP-ZAp"/>
-                    <constraint firstAttribute="bottom" secondItem="W6n-RS-l9m" secondAttribute="bottom" id="d7W-GS-JJS"/>
-                    <constraint firstItem="W6n-RS-l9m" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="13" id="gmY-hu-ghY"/>
-                    <constraint firstAttribute="trailing" secondItem="AKA-9N-UDC" secondAttribute="trailing" constant="13" id="vz9-2U-nHR"/>
+                    <constraint firstAttribute="bottom" secondItem="PtN-SX-hVF" secondAttribute="bottom" id="sX3-CH-mHh"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="560AA1A6-329F-4C3C-8EB7-44291735BED4" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="BbF-lh-Vza">
+            <toolbar key="toolbar" implicitIdentifier="560AA1A6-329F-4C3C-8EB7-44291735BED4" explicitIdentifier="SceneWindow" displayMode="iconAndLabel" sizeMode="regular" id="BbF-lh-Vza">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="0FA33EB7-EF4C-4D5C-A956-3B64BAAF711A" label="Settings" paletteLabel="Settings" tag="-1" bordered="YES" sizingBehavior="auto" id="IMg-8c-5TN">
                         <imageReference key="image" image="camera-toolbar" symbolScale="large"/>
@@ -886,7 +890,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="12" y="-9"/>
+            <point key="canvasLocation" x="13" y="-65"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="4em-rq-xSx"/>
         <viewController id="ce5-QP-mKm" userLabel="RTSP View Controller" customClass="RTSPViewController">
@@ -1072,8 +1076,6 @@
     </objects>
     <resources>
         <image name="NSRefreshTemplate" width="18" height="21"/>
-        <image name="NSStatusUnavailable" width="16" height="16"/>
-        <image name="PTZCameraIcon" width="512" height="512"/>
         <image name="arrow.down" catalog="system" width="13" height="14"/>
         <image name="arrow.down.backward" catalog="system" width="13" height="12"/>
         <image name="arrow.down.forward" catalog="system" width="13" height="12"/>

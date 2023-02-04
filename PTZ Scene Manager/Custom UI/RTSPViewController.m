@@ -4,6 +4,16 @@
 //
 //  Created by Lee Ann Rucker on 1/24/23.
 //
+/*
+ Different cameras have different streaming URL formats, some are http instead of rtsp.  https://www.ptzcontroller.com/2022/05/control-ptz-network-camera-with-ptz-controller/
+     ex: http://192.168.1.17/-wvhttp-01-/video.cgi?=vjpg:640×480:3:10000
+    maybe tossing it in a webkit view will work.
+  Sony
+     https://community.boschsecurity.com/t5/Security-Video/Which-are-the-RTSP-request-URLs-of-the-SONY-cameras-for-getting/ta-p/22057
+   rtsp://IP/media/video1
+ or for Stream 2: rtsp://IP/media/video2
+ or in case credentials are needed: rtsp://user:password@IP/media/video1
+ */
 
 #import "RTSPViewController.h"
 #import "RTSPPlayer.h"

@@ -28,6 +28,7 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
        @"resizable":@(YES),
        @"showAutofocusControls":@(YES),
        @"showMotionSyncControls":@(YES),
+       @"showSharpnessControls":@(YES),
     }];
 }
 
@@ -94,6 +95,7 @@ PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 
 PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
 PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
+PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
 
 #undef PREF_VALUE_BOOL_ACCESSORS
 
