@@ -88,10 +88,11 @@
     NSMutableArray *cameras = [NSMutableArray new];
     int size = [[self stringForKey:@"cameraslist:size"] intValue];
     for (int i = 1; i <= size; i++) {
+        NSInteger cameratype = [self integerForKey:[NSString stringWithFormat:@"cameraslist:%d\\cameratype", i]];
         NSString *devicename = [self stringForKey:[NSString stringWithFormat:@"cameraslist:%d\\devicename", i]];
         if ([devicename length] > 0 && ![devicename isEqualToString:noCamera]) {
             NSString *cameraname = [self stringForKey:[NSString stringWithFormat:@"cameraslist:%d\\cameraname", i]];
-            [cameras addObject:@{@"cameraname":cameraname, @"devicename":devicename, @"original":devicename}];
+            [cameras addObject:@{@"cameraname":cameraname, @"devicename":devicename, @"original":devicename, @"cameratype":@(cameratype)}];
         }
     }
     return cameras;

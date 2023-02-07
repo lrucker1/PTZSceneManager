@@ -28,15 +28,14 @@
                     <tabView horizontalHuggingPriority="750" verticalHuggingPriority="1000" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="SDw-NS-CPr">
                         <rect key="frame" x="0.0" y="0.0" width="562" height="291"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="562" id="2NV-cE-SRE"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="291" id="knc-YP-GWp"/>
                             <constraint firstAttribute="height" constant="291" placeholder="YES" id="rHc-eY-d7Q"/>
                         </constraints>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Cameras" identifier="Cameras" id="vOK-8v-NrF">
-                                <view key="view" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wxd-76-BQS">
-                                    <rect key="frame" x="0.0" y="0.0" width="562" height="291"/>
+                                <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="Wxd-76-BQS">
+                                    <rect key="frame" x="0.0" y="0.0" width="419" height="291"/>
                                     <subviews>
                                         <view translatesAutoresizingMaskIntoConstraints="NO" id="bm1-Hs-piz">
                                             <rect key="frame" x="0.0" y="2" width="419" height="289"/>
@@ -279,10 +278,10 @@
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="OBS" identifier="OBS" id="Gh4-wA-XWj">
-                                <view key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-tL-KsI">
+                                <view key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-tL-KsI">
                                     <rect key="frame" x="0.0" y="0.0" width="562" height="291"/>
                                     <subviews>
-                                        <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHB-Ph-BWN">
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OHB-Ph-BWN">
                                             <rect key="frame" x="18" y="254" width="286" height="18"/>
                                             <buttonCell key="cell" type="check" title="Automatically connect to OBS WebSockets" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Lao-nu-Way">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -292,7 +291,7 @@
                                                 <binding destination="osl-3m-Fqe" name="value" keyPath="values.OBSAutoConnect" id="XNo-DX-oni"/>
                                             </connections>
                                         </button>
-                                        <gridView ambiguous="YES" xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="nvl-EC-zq0">
+                                        <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="nvl-EC-zq0">
                                             <rect key="frame" x="20" y="135" width="522" height="112"/>
                                             <constraints>
                                                 <constraint firstItem="52Z-3W-zSb" firstAttribute="leading" secondItem="e4P-zb-BM6" secondAttribute="trailing" constant="6" id="6hi-sJ-KaF"/>
@@ -388,7 +387,7 @@
                                                 </gridCell>
                                             </gridCells>
                                         </gridView>
-                                        <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="01H-HX-y08">
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="01H-HX-y08">
                                             <rect key="frame" x="13" y="88" width="234" height="32"/>
                                             <buttonCell key="cell" type="push" title="Remove password from Keychain" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6b1-1E-sBY">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -413,7 +412,7 @@
                             </tabViewItem>
                             <tabViewItem label="Scenes" identifier="Scenes" id="der-Jg-cem">
                                 <view key="view" id="5jp-jJ-aXp">
-                                    <rect key="frame" x="0.0" y="0.0" width="562" height="291"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="542" height="291"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxH-UO-6bh">

@@ -463,10 +463,13 @@ MAKE_CAN_SET_MODE_CHECK_METHOD(Hue)
 
 #pragma mark Exposure
 
-static NSArray *PTZ_onoffTags = @[@(VISCA_OFF), @(VISCA_ON)];
 - (NSArray *)onoffStrings {
     return @[NSLocalizedString(@"Off", @"VISCA_OFF"),
              NSLocalizedString(@"On", @"VISCA_ON")];
+}
+
+- (NSArray *)onoffTags {
+    return @[@(VISCA_OFF), @(VISCA_ON)];
 }
 
 // CAM_ExpComp On/Off
@@ -477,7 +480,7 @@ static NSArray *PTZ_onoffTags = @[@(VISCA_OFF), @(VISCA_ON)];
             @"selectExpcompmode",    LAR_OUTLINE_KVC_SELECT_NAME_KEY,
             LAR_OUTLINE_TYPE_ENUM, LAR_OUTLINE_TYPE_KEY,
             [self onoffStrings], LAR_OUTLINE_ENUM_TITLES_KEY,
-            PTZ_onoffTags, LAR_OUTLINE_ENUM_TAG_VALUES_KEY,
+            [self onoffTags], LAR_OUTLINE_ENUM_TAG_VALUES_KEY,
             @(self.cameraState.expcompmode), LAR_OUTLINE_TAG_VALUE_KEY,
             @(self.selectExpcompmode), LAR_OUTLINE_SELECT_KEY,
             nil];
@@ -505,7 +508,7 @@ static NSArray *PTZ_onoffTags = @[@(VISCA_OFF), @(VISCA_ON)];
             @"selectBacklight",    LAR_OUTLINE_KVC_SELECT_NAME_KEY,
             LAR_OUTLINE_TYPE_ENUM, LAR_OUTLINE_TYPE_KEY,
             [self onoffStrings], LAR_OUTLINE_ENUM_TITLES_KEY,
-            PTZ_onoffTags, LAR_OUTLINE_ENUM_TAG_VALUES_KEY,
+            [self onoffTags], LAR_OUTLINE_ENUM_TAG_VALUES_KEY,
             @(self.cameraState.backlight), LAR_OUTLINE_TAG_VALUE_KEY,
             @(self.selectBacklight), LAR_OUTLINE_SELECT_KEY,
             nil];

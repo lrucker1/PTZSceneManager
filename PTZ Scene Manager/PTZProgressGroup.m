@@ -90,22 +90,12 @@ static PTZProgressGroup *selfType;
 
 @implementation PTZProgressGroup
 
-static NSArray *PTZKeyPaths = @[@"cancelled", @"completedUnitCount", @"cancellable", @"totalUnitCount", @"finished", @"localizedDescription", @"localizedAdditionalDescription"];
-
 - (instancetype)init {
     self = [super init];
     if (self) {
         _children = [NSMutableSet set];
     }
     return self;
-}
-
-- (void)dealloc {
-    for (PTZProgress *child in _children) {
-        for (NSString *key in PTZKeyPaths) {
-            [child removeObserver:self forKeyPath:key];
-        }
-    }
 }
 
 #pragma mark property consolidation
@@ -149,6 +139,7 @@ static NSArray *PTZKeyPaths = @[@"cancelled", @"completedUnitCount", @"cancellab
 - (void)addChild:(PTZProgress *)progress {
     if (![self.children containsObject:progress]) {
         [self.children addObject:progress];
+        NSArray *PTZKeyPaths = @[@"cancelled", @"completedUnitCount", @"cancellable", @"totalUnitCount", @"finished", @"localizedDescription", @"localizedAdditionalDescription"];
         for (NSString *key in PTZKeyPaths) {
             [progress addObserver:self
                        forKeyPath:key

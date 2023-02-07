@@ -19,6 +19,9 @@ extern const NSString *PTZProgressEndKey;
 @property dispatch_queue_t cameraQueue;
 @property BOOL isExportingHomeScene;
 
+- (VISCAInterface_t*)pIface;
+- (VISCACamera_t*)pCamera;
+
 // The zero-based camera values, mapped from the user-friendly properties
 - (NSInteger)colorTempIndex;
 - (NSInteger)hueIndex;

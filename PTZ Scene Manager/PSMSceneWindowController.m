@@ -9,6 +9,7 @@
 #import "PTZCameraInt.h"
 #import "PTZPrefCamera.h"
 #import "PTZCameraConfig.h"
+#import "PTZStartStopButton.h"
 #import "PSMCameraStateWindowController.h"
 #import "PSMSceneCollectionItem.h"
 #import "PTZSettingsFile.h"
@@ -16,6 +17,7 @@
 #import "RTSPViewController.h"
 #import "AppDelegate.h"
 #import "DraggingStackView.h"
+#import "LARSplitViewController.h"
 
 static PSMSceneWindowController *selfType;
 static NSString *PTZControlStackOrderKey = @"ControlStackOrder";
@@ -64,6 +66,7 @@ typedef enum {
 @property NSArray *sceneIndexes;
 @property IBOutlet NSPopover *remoteControlPopover;
 @property IBOutlet DraggingStackView *controlStackView;
+@property IBOutlet NSSplitViewController *splitViewController;
 
 @end
 
@@ -98,13 +101,18 @@ typedef enum {
 
     self.titlebarViewController.layoutAttribute = NSLayoutAttributeLeft;
     // Don't show static snapshots until we know whether we'll have a video.
-    [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.cameraIP] onDone:^(BOOL success) {
-        self.showStaticSnapshot = (success == NO);
-        if (self.showStaticSnapshot && self.lastRecalledItem != nil) {
-            // Picked up anything we missed.
-            [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
-        }
-    }];
+    if (self.camera.isSerial) {
+        // No snapshot, no live view :(
+        self.showStaticSnapshot = NO;
+    } else {
+        [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.deviceAddr] onDone:^(BOOL success) {
+            self.showStaticSnapshot = (success == NO);
+            if (self.showStaticSnapshot && self.lastRecalledItem != nil) {
+                // Picked up anything we missed.
+                [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
+            }
+        }];
+    }
     [self.window addTitlebarAccessoryViewController:self.titlebarViewController];
     NSArray *keys = @[@"prefCamera.maxColumnCount",
                       @"prefCamera.firstVisibleScene",
@@ -132,7 +140,7 @@ typedef enum {
         [self toggleResizable:nil];
     }
     [self loadCamera];
-    self.boxColor = self.cameraBox.fillColor;
+    self.boxColor = self.cameraBox.borderColor;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSSceneInputDidChange object:self.prefCamera];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
     [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
@@ -145,14 +153,14 @@ typedef enum {
     BOOL videoShowing = [responseData[@"videoShowing"] boolValue];
     if (videoActive) {
         // Active: Program
-        self.cameraBox.fillColor = [NSColor systemRedColor];
+        self.cameraBox.borderColor = [NSColor systemRedColor];
         self.sceneCollectionBox.borderColor = [NSColor systemRedColor];
     } else if (videoShowing) {
         // Showing: Program or Preview
-        self.cameraBox.fillColor = [NSColor systemGreenColor];
+        self.cameraBox.borderColor = [NSColor systemGreenColor];
         self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
     } else {
-        self.cameraBox.fillColor = self.boxColor;
+        self.cameraBox.borderColor = self.boxColor;
         self.sceneCollectionBox.borderColor = self.boxColor;
     }
 }
@@ -162,7 +170,7 @@ typedef enum {
     // Orange is too close to red. Grays don't stand out enough.
     // Magenta stands out nicely while being distinct.
     // The first thing we do on reconnection is ask for scene input state.
-    self.cameraBox.fillColor = [NSColor magentaColor];
+    self.cameraBox.borderColor = [NSColor magentaColor];
     self.sceneCollectionBox.borderColor = [NSColor magentaColor];
 }
 
@@ -176,7 +184,7 @@ typedef enum {
         [self.collectionView reloadData];
         // Update any values that are displayed in this window. Don't spam the camera; users can hit Fetch in Camera State.
         // There is no Inq for MotionState.
-        [camera updateAutofocusState:nil];
+//        [camera updateAutofocusState:nil];
     }];
 }
 
@@ -217,12 +225,13 @@ typedef enum {
         NSMenuItem *menu = (NSMenuItem *)item;
         if ([menu action] == @selector(togglePaused:)) {
             return [self.rtspViewController validateTogglePaused:menu];
-        }
-//        - (IBAction)toggleControlVisibilityFromKey:(id)sender {
-//            NSString *key = [sender representedObject];
-//            BOOL oldValue = [[self.prefCamera prefValueForKey:key] boolValue];
-//            [self.prefCamera setPrefValue:@(!oldValue) forKey:key];
-        if ([menu action] == @selector(toggleControlVisibilityFromKey:)) {
+        } else if (menu.action == @selector(lar_toggleSidebar:)) {
+            NSMenuItem *temp = [[NSMenuItem alloc] initWithTitle:menu.title action:@selector(toggleSidebar:) keyEquivalent:menu.keyEquivalent];
+            // This will get the right string.
+            [self.splitViewController validateUserInterfaceItem:temp];
+            menu.title = temp.title;
+            return YES;
+        } else if ([menu action] == @selector(toggleControlVisibilityFromKey:)) {
             NSString *key = [menu representedObject];
             if (key == nil) {
                 NSLog(@"Missing toggleControlVisibilityFromKey on menu %@", menu.title);
@@ -234,6 +243,11 @@ typedef enum {
         }
     }
     return YES;
+}
+
+// No, I do not know why I can't just bind to toggleSidebar.
+- (IBAction)lar_toggleSidebar:(id)sender {
+    [self.splitViewController toggleSidebar:sender];
 }
 
 #pragma mark camera
@@ -256,12 +270,27 @@ typedef enum {
 }
 
 - (IBAction)doPanTilt:(id)sender {
-    NSButton *button = (NSButton *)sender;
-
+    PTZStartStopButton *button = (PTZStartStopButton *)sender;
+    if (button.doStopAction) {
+        [self.camera stopPantiltDirection];
+        return;
+    }
     NSInteger tag = button.tag;
+    [self doPanTiltForTag:tag withBaseSpeed:1];
+}
+
+// Do the cameras recognize the magic speed? Does it need a "stop"? We'll find out!
+- (IBAction)doMenuPanTilt:(id)sender {
+    NSButton *button = (NSButton *)sender;
+    NSInteger tag = button.tag;
+    [self doPanTiltForTag:tag withBaseSpeed:0x0E];
+    [self.camera stopPantiltDirection];
+}
+
+- (void)doPanTiltForTag:(NSInteger)tag withBaseSpeed:(NSInteger)baseSpeed {
     PTZCameraPanTiltParams params;
-    params.panSpeed = 0;
-    params.tiltSpeed = 0;
+    params.panSpeed = baseSpeed;
+    params.tiltSpeed = baseSpeed;
     params.horiz = VISCA_PT_DRIVE_HORIZ_STOP;
     params.vert = VISCA_PT_DRIVE_VERT_STOP;
     NSInteger panPlus = self.prefCamera.panPlusSpeed, tiltPlus = self.prefCamera.tiltPlusSpeed;
@@ -348,43 +377,51 @@ typedef enum {
             params.tiltSpeed = tiltPlus;
             break;
     }
-    [self.camera applyPantiltDirection:params onDone:nil];
+    [self.camera startPantiltDirection:params onDone:nil];
 }
 
 - (IBAction)doCameraZoom:(id)sender {
-    NSButton *button = (NSButton *)sender;
+    PTZStartStopButton *button = (PTZStartStopButton *)sender;
+    if (button.doStopAction) {
+        [self.camera stopZoom];
+        return;
+    }
     NSInteger tag = button.tag;
     switch (tag) {
         case PSMInPlus:
-            [self.camera applyZoomInWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
+            [self.camera startZoomInWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
             break;
         case PSMIn:
-            [self.camera applyZoomIn:nil];
+            [self.camera startZoomIn:nil];
             break;
         case PSMOut:
-            [self.camera applyZoomOut:nil];
+            [self.camera startZoomOut:nil];
             break;
         case PSMOutPlus:
-            [self.camera applyZoomOutWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
+            [self.camera startZoomOutWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
             break;
    }
 }
 
 - (IBAction)doCameraFocus:(id)sender {
-    NSButton *button = (NSButton *)sender;
+    PTZStartStopButton *button = (PTZStartStopButton *)sender;
+    if (button.doStopAction) {
+        [self.camera stopFocus];
+        return;
+    }
     NSInteger tag = button.tag;
     switch (tag) {
         case PSMInPlus:
-            [self.camera applyFocusFarWithSpeed:self.prefCamera.focusPlusSpeed onDone:nil];
+            [self.camera startFocusFarWithSpeed:self.prefCamera.focusPlusSpeed onDone:nil];
             break;
         case PSMIn:
-            [self.camera applyFocusFar:nil];
+            [self.camera startFocusFar:nil];
             break;
         case PSMOut:
-            [self.camera applyFocusNear:nil];
+            [self.camera startFocusNear:nil];
             break;
         case PSMOutPlus:
-            [self.camera applyFocusNearWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
+            [self.camera startFocusNearWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
             break;
    }
 }
@@ -499,6 +536,9 @@ typedef enum {
     item.imagePath = path;
     item.sceneName = [sourceSettings nameForScene:index camera:devicename];
     item.image = [[NSImage alloc] initWithContentsOfFile:path];
+    if (item.image == nil) {
+        item.image = [NSImage imageNamed:@"Placeholder"];
+    }
     item.sceneNumber = index;
     item.camera = self.camera;
     item.devicename = devicename;
@@ -547,16 +587,6 @@ typedef enum {
     }
     [self.controlStackView reorderSubviews:array];
 }
-
-#pragma mark split view
-- (BOOL)splitView:(NSSplitView *)splitView
-canCollapseSubview:(NSView *)subview {
-    if ([subview.identifier isEqualToString:@"Controls"]) {
-        return YES;
-    }
-    return NO;
-}
-
 #pragma mark menu remote
 
 // Menu navigation is the same as doPanTilt; the camera is modal.

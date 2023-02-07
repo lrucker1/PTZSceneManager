@@ -10,13 +10,14 @@ https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-
  
  Sandbox?
 
-Yes! obs-websocket to find out which camera is hot.
-.. now to figure out how to install it in 2.7.
+Yes! obs-websocket to find out which camera is hot. And works with the plugin in 2.7.
 
 Prefs:
 Configure cameras
  - Import from PTZOptics settings.ini
  - set PTZOptics brand or not.
+ - URL for live video.
+ - "Click here to visit website": [ipaddress]:8080
 
 Should localhost be saved as an "Internet" password?
 
@@ -41,7 +42,6 @@ PTZ Advanced View:
  Image flip & mirror
 
 Camera controls: Pan/Tilt limit
-Click here to visit website: [ipaddress]:8080
 
 Edit button in the scene range collection.
 Confirm giving one a name that already exists (if not edit mode)
@@ -50,3 +50,8 @@ Undo on collection item removal.
 
 Refresh the "Add/Edit" window
 
+menu item to bring up osd
+
+Pause the video when the view isn't visible
+
+Placeholder image in all 3? aspect ratios. Esp for the poor serial camera with no snapshots.

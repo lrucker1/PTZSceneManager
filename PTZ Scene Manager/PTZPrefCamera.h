@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *cameraname;
 @property NSString *devicename;
 @property NSString *originalDeviceName;
+@property (readonly) BOOL isSerial;
 @property (strong) PTZCamera *camera;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
 
@@ -40,6 +41,8 @@ PREF_VALUE_NSINT_PROPERTIES(maxColumnCount, MaxColumnCount)
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryValue;
+
+- (PTZCamera *)loadCameraIfNeeded;
 
 - (id)prefValueForKey:(NSString *)key;
 - (void)setPrefValue:(id)obj forKey:(NSString *)key;

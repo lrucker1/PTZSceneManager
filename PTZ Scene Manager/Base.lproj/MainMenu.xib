@@ -388,13 +388,23 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mbL-60-Yyn"/>
-                            <menuItem title="Show Focus Controls" id="sR4-wU-dcA">
+                            <menuItem title="Show Sidebar" keyEquivalent="s" id="sR4-wU-dcA">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="representedObject" value="showAutofocusControls"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="lar_toggleSidebar:" target="-1" id="pHg-Vt-p7a"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="gW6-Nk-ZNL"/>
+                            <menuItem title="Show Focus Controls" id="NC3-De-hd8">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="representedObject" value="showAutofocusControls"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="toggleControlVisibilityFromKey:" target="-1" id="3Aq-KP-VKD"/>
+                                    <action selector="toggleControlVisibilityFromKey:" target="-1" id="Yut-ZO-Nt5"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Motion Sync Controls" id="fnq-t1-dNK">

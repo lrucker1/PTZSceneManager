@@ -78,4 +78,12 @@ static int _error_callback(const char *format, ...)
     return iniparser_set(self.ini, [key UTF8String], [string UTF8String]) == 0;
 }
 
+- (NSInteger)integerForKey:(NSString *)aKey {
+    return iniparser_getint(self.ini, [aKey UTF8String], 0);
+}
+
+- (BOOL)setInteger:(NSInteger)value forKey:(NSString *)aKey {
+    return [self setString:[NSString stringWithFormat:@"%ld", value] forKey:aKey];
+}
+
 @end

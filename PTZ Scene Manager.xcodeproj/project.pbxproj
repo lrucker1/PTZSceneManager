@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		940FCB23298E0D83008FD02F /* LARUpDownStepper.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCB22298E0D83008FD02F /* LARUpDownStepper.m */; };
+		940FCB42298F079F008FD02F /* LARSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCB41298F079F008FD02F /* LARSplitViewController.m */; };
+		940FCC4A29918A1B008FD02F /* PTZCameraOpener.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC4829918A1A008FD02F /* PTZCameraOpener.m */; };
+		940FCC5029922346008FD02F /* PTZStartStopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC4F29922346008FD02F /* PTZStartStopButton.m */; };
 		946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */; };
 		946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */; };
 		946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */; };
@@ -64,6 +67,12 @@
 /* Begin PBXFileReference section */
 		940FCB21298E0D83008FD02F /* LARUpDownStepper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARUpDownStepper.h; sourceTree = "<group>"; };
 		940FCB22298E0D83008FD02F /* LARUpDownStepper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARUpDownStepper.m; sourceTree = "<group>"; };
+		940FCB40298F079F008FD02F /* LARSplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARSplitViewController.h; sourceTree = "<group>"; };
+		940FCB41298F079F008FD02F /* LARSplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARSplitViewController.m; sourceTree = "<group>"; };
+		940FCC4829918A1A008FD02F /* PTZCameraOpener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZCameraOpener.m; sourceTree = "<group>"; };
+		940FCC4929918A1A008FD02F /* PTZCameraOpener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZCameraOpener.h; sourceTree = "<group>"; };
+		940FCC4E29922345008FD02F /* PTZStartStopButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZStartStopButton.h; sourceTree = "<group>"; };
+		940FCC4F29922346008FD02F /* PTZStartStopButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZStartStopButton.m; sourceTree = "<group>"; };
 		946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSMCameraStateWindowController.xib; sourceTree = "<group>"; };
 		946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraStateWindowController.h; sourceTree = "<group>"; };
 		946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraStateWindowController.m; sourceTree = "<group>"; };
@@ -206,8 +215,10 @@
 				94747E20297B94F800309752 /* AppDelegate.h */,
 				94747E21297B94F800309752 /* AppDelegate.m */,
 				94747E58297B96F900309752 /* PTZCamera.h */,
-				94747E59297B96F900309752 /* PTZCamera.m */,
 				94747E5A297B96F900309752 /* PTZCameraInt.h */,
+				94747E59297B96F900309752 /* PTZCamera.m */,
+				940FCC4929918A1A008FD02F /* PTZCameraOpener.h */,
+				940FCC4829918A1A008FD02F /* PTZCameraOpener.m */,
 				94747E5D297B970100309752 /* PTZCameraConfig.h */,
 				94747E5C297B970100309752 /* PTZCameraConfig.m */,
 				94747E79297B9D5A00309752 /* PTZPrefCamera.h */,
@@ -238,6 +249,7 @@
 				94747E5F297B971100309752 /* PTZProgressGroup.h */,
 				94747E60297B971100309752 /* PTZProgressGroup.m */,
 				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
+				94747E25297B94F900309752 /* MainMenu.xib */,
 				94C55AB2297CB6A800D8C1DB /* Custom UI */,
 				9463826A29807D8D0015BA8F /* liblibRTSPClient.a */,
 				94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */,
@@ -254,7 +266,6 @@
 				94890E3D29827601006EAB75 /* websocket */,
 				94747E65297B9C5F00309752 /* iniparser */,
 				94747E23297B94F900309752 /* Assets.xcassets */,
-				94747E25297B94F900309752 /* MainMenu.xib */,
 				94747E28297B94F900309752 /* main.m */,
 				94747E2A297B94F900309752 /* PTZ_Scene_Manager.entitlements */,
 			);
@@ -313,6 +324,8 @@
 				946346C7297F5DE70015BA8F /* NSWindowAdditions.m */,
 				946346CE297F60740015BA8F /* PTZStarButtonCell.h */,
 				946346CF297F60740015BA8F /* PTZStarButtonCell.m */,
+				940FCC4E29922345008FD02F /* PTZStartStopButton.h */,
+				940FCC4F29922346008FD02F /* PTZStartStopButton.m */,
 				9463826F29807DFC0015BA8F /* RTSPPlayer.h */,
 				9463826D29807DF60015BA8F /* RTSPViewController.h */,
 				9463826C29807DF60015BA8F /* RTSPViewController.m */,
@@ -322,6 +335,8 @@
 				94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */,
 				940FCB21298E0D83008FD02F /* LARUpDownStepper.h */,
 				940FCB22298E0D83008FD02F /* LARUpDownStepper.m */,
+				940FCB40298F079F008FD02F /* LARSplitViewController.h */,
+				940FCB41298F079F008FD02F /* LARSplitViewController.m */,
 				94CEBAF32983BF6500D3C8DC /* PTZ Scene Manager-Bridging-Header.h */,
 			);
 			path = "Custom UI";
@@ -414,6 +429,7 @@
 				946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */,
 				94747E61297B971100309752 /* PTZProgressGroup.m in Sources */,
 				946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */,
+				940FCB42298F079F008FD02F /* LARSplitViewController.m in Sources */,
 				94CEBB292989B8CE00D3C8DC /* PTZAltKeyButton.m in Sources */,
 				940FCB23298E0D83008FD02F /* LARUpDownStepper.m in Sources */,
 				94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */,
@@ -432,9 +448,11 @@
 				94CEBB242986B73900D3C8DC /* LARIndexSetVisualizerView.m in Sources */,
 				94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */,
 				94CEBAEE2983494A00D3C8DC /* LARContextualActionButton.m in Sources */,
+				940FCC4A29918A1B008FD02F /* PTZCameraOpener.m in Sources */,
 				9463826E29807DF60015BA8F /* RTSPViewController.m in Sources */,
 				94890E3C298275ED006EAB75 /* PSMOBSWebSocketController.mm in Sources */,
 				94747E22297B94F800309752 /* AppDelegate.m in Sources */,
+				940FCC5029922346008FD02F /* PTZStartStopButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,7 +615,7 @@
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -644,7 +662,7 @@
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "lrucker.PTZ-Scene-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";

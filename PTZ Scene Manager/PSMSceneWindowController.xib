@@ -16,6 +16,7 @@
                 <outlet property="remoteControlPopover" destination="dzC-IL-mBm" id="lKM-Ik-7x5"/>
                 <outlet property="rtspViewController" destination="ce5-QP-mKm" id="wQM-nt-8Aw"/>
                 <outlet property="sceneCollectionBox" destination="Gws-GK-es2" id="bq2-qR-ALw"/>
+                <outlet property="splitViewController" destination="NHN-Ow-8DL" id="sAN-cU-U3O"/>
                 <outlet property="titlebarViewController" destination="kQT-rJ-uFB" id="eSb-f0-fy2"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -65,6 +66,9 @@
                                                             </collectionView>
                                                         </subviews>
                                                     </clipView>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="2im-7q-hjb"/>
+                                                    </constraints>
                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Bob-Tk-32f">
                                                         <rect key="frame" x="-100" y="-100" width="233" height="15"/>
                                                         <autoresizingMask key="autoresizingMask"/>
@@ -106,7 +110,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Gws-GK-es2" secondAttribute="trailing" id="8Zh-Vn-gSk"/>
                                     <constraint firstItem="Gws-GK-es2" firstAttribute="leading" secondItem="Y3c-Ay-dYM" secondAttribute="leading" id="FF9-mr-3ev"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="HDE-Bq-GpR"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="f3H-wC-QnO"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="f3H-wC-QnO"/>
                                     <constraint firstItem="Gws-GK-es2" firstAttribute="top" secondItem="Y3c-Ay-dYM" secondAttribute="top" id="tAX-tw-eit"/>
                                     <constraint firstAttribute="bottom" secondItem="Gws-GK-es2" secondAttribute="bottom" id="uP7-CN-9uC"/>
                                 </constraints>
@@ -116,10 +120,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="pQm-I7-fbP" userLabel="Live Cam View">
-                                        <rect key="frame" x="0.0" y="441" width="274" height="195"/>
+                                        <rect key="frame" x="0.0" y="443" width="274" height="193"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
-                                                <rect key="frame" x="228" y="-7" width="46" height="27"/>
+                                                <rect key="frame" x="227" y="-7" width="46" height="27"/>
                                                 <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Cj-ON-NQ9">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="smallSystem"/>
@@ -139,14 +143,14 @@
                                                     </binding>
                                                 </connections>
                                             </button>
-                                            <box boxType="custom" borderType="none" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="8yC-Mi-aW4" userLabel="Live Cam Box">
-                                                <rect key="frame" x="0.0" y="19" width="274" height="176"/>
+                                            <box boxType="custom" borderType="line" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="8yC-Mi-aW4" userLabel="Live Cam Box">
+                                                <rect key="frame" x="2" y="19" width="270" height="172"/>
                                                 <view key="contentView" id="SzY-pi-oBM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="274" height="176"/>
+                                                    <rect key="frame" x="3" y="3" width="264" height="166"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hfs-ZN-q2C">
-                                                            <rect key="frame" x="3" y="3" width="268" height="170"/>
+                                                            <rect key="frame" x="-1" y="-1" width="266" height="168"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Hfs-ZN-q2C" secondAttribute="height" multiplier="480:300" priority="750" id="9jN-2g-PXL"/>
                                                             </constraints>
@@ -154,17 +158,16 @@
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="SzY-pi-oBM" secondAttribute="top" constant="6" id="GiQ-2Z-yHc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" constant="6" id="H9Z-cH-Mii"/>
+                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="SzY-pi-oBM" secondAttribute="top" constant="2" id="GiQ-2Z-yHc"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" constant="2" id="H9Z-cH-Mii"/>
                                                         <constraint firstItem="Hfs-ZN-q2C" firstAttribute="centerX" secondItem="SzY-pi-oBM" secondAttribute="centerX" id="IXC-p3-zVL"/>
-                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="6" id="RK1-2U-Cz4"/>
-                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="6" id="kGD-xL-raS"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="6" id="mpd-FO-BpP"/>
+                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="2" id="RK1-2U-Cz4"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="2" id="mpd-FO-BpP"/>
                                                     </constraints>
                                                 </view>
                                             </box>
                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoW-QO-NIa">
-                                                <rect key="frame" x="4" y="1" width="224" height="14"/>
+                                                <rect key="frame" x="5" y="1" width="222" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="FS2-VR-Oqt">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -179,16 +182,16 @@
                                             <constraint firstItem="QDe-sc-c7e" firstAttribute="firstBaseline" secondItem="UoW-QO-NIa" secondAttribute="firstBaseline" id="AvN-B8-Ph6"/>
                                             <constraint firstItem="UoW-QO-NIa" firstAttribute="leading" secondItem="Hfs-ZN-q2C" secondAttribute="leading" id="Jb4-a3-LfH"/>
                                             <constraint firstItem="QDe-sc-c7e" firstAttribute="top" secondItem="8yC-Mi-aW4" secondAttribute="bottom" constant="3" id="Vqa-8U-Ldx"/>
-                                            <constraint firstItem="8yC-Mi-aW4" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="top" id="iI4-Ni-Zge"/>
-                                            <constraint firstItem="8yC-Mi-aW4" firstAttribute="leading" secondItem="pQm-I7-fbP" secondAttribute="leading" id="l5j-Ff-MyU"/>
+                                            <constraint firstItem="8yC-Mi-aW4" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="top" constant="2" id="iI4-Ni-Zge"/>
+                                            <constraint firstItem="8yC-Mi-aW4" firstAttribute="leading" secondItem="pQm-I7-fbP" secondAttribute="leading" constant="2" id="l5j-Ff-MyU"/>
                                             <constraint firstItem="QDe-sc-c7e" firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" id="nKk-9V-v3T"/>
                                             <constraint firstAttribute="bottom" secondItem="QDe-sc-c7e" secondAttribute="bottom" id="pbM-Im-uUu"/>
-                                            <constraint firstAttribute="trailing" secondItem="8yC-Mi-aW4" secondAttribute="trailing" id="r9b-iW-l0i"/>
+                                            <constraint firstAttribute="trailing" secondItem="8yC-Mi-aW4" secondAttribute="trailing" constant="2" id="r9b-iW-l0i"/>
                                             <constraint firstItem="QDe-sc-c7e" firstAttribute="leading" secondItem="UoW-QO-NIa" secondAttribute="trailing" constant="8" symbolic="YES" id="xu1-HK-ksN"/>
                                         </constraints>
                                     </customView>
                                     <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-8a-7PM" userLabel="PanTilt Grid View">
-                                        <rect key="frame" x="87" y="326" width="100" height="100"/>
+                                        <rect key="frame" x="87" y="328" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="P2s-sA-zQu"/>
                                             <constraint firstAttribute="width" constant="100" id="XNi-Fi-QDb"/>
@@ -209,14 +212,14 @@
                                         </columns>
                                         <gridCells>
                                             <gridCell row="ycb-Z8-gEC" column="zqt-E8-w4S" id="WaK-KV-aUx">
-                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0u5-3I-om5" userLabel="UpLeft+">
+                                                <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0u5-3I-om5" userLabel="UpLeft+" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="0.0" y="80" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="2RZ-0U-QpM"/>
                                                         <constraint firstAttribute="height" constant="20" id="Mhy-ZC-YoL"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xiD-6L-PwD">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -227,10 +230,10 @@
                                             </gridCell>
                                             <gridCell row="ycb-Z8-gEC" column="xam-tK-zOO" id="Mav-PQ-1Pf"/>
                                             <gridCell row="ycb-Z8-gEC" column="a8A-c1-pBp" id="ObC-rC-H6W">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="2Hr-g4-Drg" userLabel="Up+ ">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="2Hr-g4-Drg" userLabel="Up+ " customClass="PTZStartStopButton">
                                                     <rect key="frame" x="40" y="80" width="20" height="20"/>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Wgo-br-wBc">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -241,14 +244,14 @@
                                             </gridCell>
                                             <gridCell row="ycb-Z8-gEC" column="VnH-Mb-U4o" id="BbC-4R-jtu"/>
                                             <gridCell row="ycb-Z8-gEC" column="kTF-3M-NLQ" id="48L-uq-nOB">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="qJa-xH-8dG" userLabel="UpRight+">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="qJa-xH-8dG" userLabel="UpRight+" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="80" y="80" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="GRj-Vh-GOL"/>
                                                         <constraint firstAttribute="width" constant="20" id="a6F-yW-jpE"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8jM-s2-TuN">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -259,14 +262,14 @@
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="zqt-E8-w4S" id="WnR-Cu-m7r"/>
                                             <gridCell row="wmH-NH-T29" column="xam-tK-zOO" id="3Cn-mS-Z7P">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="11" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-q7-uEC" userLabel="UpLeft">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="11" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-q7-uEC" userLabel="UpLeft" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="20" y="60" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="A5z-3R-v8G"/>
                                                         <constraint firstAttribute="height" constant="20" id="rQB-R5-lzs"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="iQu-x0-ZZR">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -276,14 +279,14 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="a8A-c1-pBp" id="6BN-bE-HE1">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-Bp-hW7" userLabel="Up">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-Bp-hW7" userLabel="Up" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="40" y="60" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="PaV-0f-tDS"/>
                                                         <constraint firstAttribute="width" constant="20" id="Sur-GW-pXa"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oXL-7r-L3V">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -293,14 +296,14 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="VnH-Mb-U4o" id="hp1-kd-IOu">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="13" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-4q-GB3" userLabel="UpRight">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="13" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-4q-GB3" userLabel="UpRight" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="60" y="60" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="Pjv-st-il5"/>
                                                         <constraint firstAttribute="height" constant="20" id="dxU-FL-dec"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="43C-6Y-kst">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -311,14 +314,14 @@
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="kTF-3M-NLQ" id="jEg-IA-rGr"/>
                                             <gridCell row="p9K-ol-UUo" column="zqt-E8-w4S" id="O5k-1W-Uwo">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="20" translatesAutoresizingMaskIntoConstraints="NO" id="v4s-hB-6Km" userLabel="Left+">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="20" translatesAutoresizingMaskIntoConstraints="NO" id="v4s-hB-6Km" userLabel="Left+" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="0.0" y="40" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="bCv-3R-tml"/>
                                                         <constraint firstAttribute="height" constant="20" id="gMz-vM-aPm"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.left" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="gas-ke-H7h">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -328,14 +331,14 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="xam-tK-zOO" id="MzB-76-ZXt">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="tuK-2E-7TQ" userLabel="Left">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="tuK-2E-7TQ" userLabel="Left" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="20" y="40" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Vhy-jF-rTT"/>
                                                         <constraint firstAttribute="width" constant="20" id="aG9-fx-fZm"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.left" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5TH-YS-16p">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -361,14 +364,14 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="VnH-Mb-U4o" id="Yuu-5p-FwA">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vn4-IM-qVp" userLabel="Right">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vn4-IM-qVp" userLabel="Right" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="60" y="40" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="8gp-Gz-DH3"/>
                                                         <constraint firstAttribute="height" constant="20" id="otF-3G-GuT"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.right" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tRx-lh-h8Y">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -378,14 +381,14 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="kTF-3M-NLQ" id="xvT-HH-PDj">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="24" translatesAutoresizingMaskIntoConstraints="NO" id="0xh-Tc-7zp" userLabel="Right+">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="24" translatesAutoresizingMaskIntoConstraints="NO" id="0xh-Tc-7zp" userLabel="Right+" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="80" y="40" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="1L4-Ow-5sZ"/>
                                                         <constraint firstAttribute="width" constant="20" id="30r-XN-3el"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.right" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="1ME-48-eV1">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -396,14 +399,14 @@
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="zqt-E8-w4S" id="QVP-lf-Jn1"/>
                                             <gridCell row="0je-1p-PPu" column="xam-tK-zOO" id="Iuh-xC-R9c">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="31" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-Fv-pvF" userLabel="DownLeft">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="31" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-Fv-pvF" userLabel="DownLeft" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="20" y="20" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="0Oh-3t-qKQ"/>
                                                         <constraint firstAttribute="width" constant="20" id="ctr-dq-sMq"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="yw0-BI-tLD">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -413,14 +416,14 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="a8A-c1-pBp" id="1lG-RV-9Fa">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="Wbd-qI-fPh" userLabel="Down">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="Wbd-qI-fPh" userLabel="Down" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="40" y="20" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Gmb-OF-yxX"/>
                                                         <constraint firstAttribute="width" constant="20" id="feK-60-Mxi"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dee-VE-vdT">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -430,14 +433,14 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="VnH-Mb-U4o" id="0Wy-84-bXz">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="33" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-fA-Jhy" userLabel="DownRight">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="33" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-fA-Jhy" userLabel="DownRight" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="60" y="20" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="bWO-sy-CxC"/>
                                                         <constraint firstAttribute="height" constant="20" id="tUU-yR-n9x"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8FO-09-J2b">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
@@ -448,14 +451,14 @@
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="kTF-3M-NLQ" id="Y1d-W8-GvG"/>
                                             <gridCell row="oDp-RY-tan" column="zqt-E8-w4S" id="aOf-0c-3x7">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="40" translatesAutoresizingMaskIntoConstraints="NO" id="GzQ-ea-se7" userLabel="DownLeft+">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="40" translatesAutoresizingMaskIntoConstraints="NO" id="GzQ-ea-se7" userLabel="DownLeft+" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="vgC-vg-5Hw"/>
                                                         <constraint firstAttribute="width" constant="20" id="yqb-Kl-zLA"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Q0p-sY-igT">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -466,14 +469,14 @@
                                             </gridCell>
                                             <gridCell row="oDp-RY-tan" column="xam-tK-zOO" id="NXM-eu-wNE"/>
                                             <gridCell row="oDp-RY-tan" column="a8A-c1-pBp" id="T2b-fX-rUt">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="42" translatesAutoresizingMaskIntoConstraints="NO" id="B0q-re-CZV" userLabel="Down+">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="42" translatesAutoresizingMaskIntoConstraints="NO" id="B0q-re-CZV" userLabel="Down+" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="40" y="0.0" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="YXe-ai-o6J"/>
                                                         <constraint firstAttribute="width" constant="20" id="uMl-q1-5ai"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="PhM-LX-K42">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -484,14 +487,14 @@
                                             </gridCell>
                                             <gridCell row="oDp-RY-tan" column="VnH-Mb-U4o" id="72b-cS-rZC"/>
                                             <gridCell row="oDp-RY-tan" column="kTF-3M-NLQ" id="4YK-7o-Kvr">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="44" translatesAutoresizingMaskIntoConstraints="NO" id="lK1-RF-hMz" userLabel="DownRight+">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="44" translatesAutoresizingMaskIntoConstraints="NO" id="lK1-RF-hMz" userLabel="DownRight+" customClass="PTZStartStopButton">
                                                     <rect key="frame" x="80" y="0.0" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="ciS-Gw-GFH"/>
                                                         <constraint firstAttribute="height" constant="20" id="fqg-GT-kjP"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="PNk-aO-pJy">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -503,7 +506,7 @@
                                         </gridCells>
                                     </gridView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="YGQ-XG-efI" userLabel="Zoom View">
-                                        <rect key="frame" x="85" y="289" width="104" height="25"/>
+                                        <rect key="frame" x="85" y="291" width="104" height="25"/>
                                         <subviews>
                                             <gridView verticalHuggingPriority="750" xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qR6-cn-b6Q" userLabel="Zoom Grid View">
                                                 <rect key="frame" x="0.0" y="0.0" width="104" height="25"/>
@@ -518,14 +521,14 @@
                                                 </columns>
                                                 <gridCells>
                                                     <gridCell row="Bm6-YR-5xr" column="lRa-Gk-UAJ" id="Qrp-3F-6a2">
-                                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w0T-s3-fOU" userLabel="In+">
+                                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w0T-s3-fOU" userLabel="In+" customClass="PTZStartStopButton">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="8s2-bd-mAu"/>
                                                                 <constraint firstAttribute="height" constant="25" id="XJp-jh-lHC"/>
                                                             </constraints>
                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="xT4-ut-VCl">
-                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <symbolConfiguration key="symbolConfiguration" weight="semibold"/>
@@ -535,14 +538,14 @@
                                                         </button>
                                                     </gridCell>
                                                     <gridCell row="Bm6-YR-5xr" column="Vxw-hj-RBG" id="6bZ-hh-42n">
-                                                        <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="edX-fE-kTZ" userLabel="In">
+                                                        <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="edX-fE-kTZ" userLabel="In" customClass="PTZStartStopButton">
                                                             <rect key="frame" x="25" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="8aG-E0-ppF"/>
                                                                 <constraint firstAttribute="height" constant="25" id="SMl-EM-gsG"/>
                                                             </constraints>
                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="SZP-Lo-YTm">
-                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <symbolConfiguration key="symbolConfiguration" weight="light"/>
@@ -552,14 +555,14 @@
                                                         </button>
                                                     </gridCell>
                                                     <gridCell row="Bm6-YR-5xr" column="3DV-Fh-kOf" id="u9N-RI-19k">
-                                                        <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="shl-bb-Bob" userLabel="Out">
+                                                        <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="shl-bb-Bob" userLabel="Out" customClass="PTZStartStopButton">
                                                             <rect key="frame" x="54" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="8Pv-CI-HbO"/>
                                                                 <constraint firstAttribute="height" constant="25" id="INE-9W-FUk"/>
                                                             </constraints>
                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="z5t-bd-pQz">
-                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <symbolConfiguration key="symbolConfiguration" weight="light"/>
@@ -569,14 +572,14 @@
                                                         </button>
                                                     </gridCell>
                                                     <gridCell row="Bm6-YR-5xr" column="ILE-AB-LQ8" id="wx6-W7-F8a">
-                                                        <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="p35-UC-80g" userLabel="Out+">
+                                                        <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="p35-UC-80g" userLabel="Out+" customClass="PTZStartStopButton">
                                                             <rect key="frame" x="79" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="LUN-89-XPv"/>
                                                                 <constraint firstAttribute="height" constant="25" id="sJm-EA-CRI"/>
                                                             </constraints>
                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus.magnifyingglass" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="YWk-vn-fok">
-                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <symbolConfiguration key="symbolConfiguration" weight="semibold"/>
@@ -597,7 +600,7 @@
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="aUA-lC-s2h" userLabel="More View">
-                                        <rect key="frame" x="85" y="133" width="104" height="144"/>
+                                        <rect key="frame" x="85" y="135" width="104" height="144"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-2j-qG2" userLabel="More Controls View" customClass="DraggingStackView" customModule="PTZ_Scene_Manager" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="2" width="104" height="140"/>
@@ -619,14 +622,14 @@
                                                                 </columns>
                                                                 <gridCells>
                                                                     <gridCell row="p2K-0Y-eMb" column="ff1-tL-BFv" id="nkd-8N-9II">
-                                                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DmV-3n-FRW" userLabel="FocusFar+">
+                                                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DmV-3n-FRW" userLabel="FocusFar+" customClass="PTZStartStopButton">
                                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="25" id="BK1-Zc-gcd"/>
                                                                                 <constraint firstAttribute="width" constant="25" id="FQf-WI-CM2"/>
                                                                             </constraints>
                                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="Z4h-9U-ePi">
-                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
                                                                             <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -636,14 +639,14 @@
                                                                         </button>
                                                                     </gridCell>
                                                                     <gridCell row="p2K-0Y-eMb" column="xN1-nI-QNm" id="5ZH-mU-V0H">
-                                                                        <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="U6v-ud-aFP" userLabel="FocusFar">
+                                                                        <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="U6v-ud-aFP" userLabel="FocusFar" customClass="PTZStartStopButton">
                                                                             <rect key="frame" x="25" y="0.0" width="25" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="25" id="IbM-43-IFG"/>
                                                                                 <constraint firstAttribute="height" constant="25" id="RxS-lh-yr3"/>
                                                                             </constraints>
                                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="ruN-Fu-54v">
-                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
                                                                             <symbolConfiguration key="symbolConfiguration" weight="light"/>
@@ -653,14 +656,14 @@
                                                                         </button>
                                                                     </gridCell>
                                                                     <gridCell row="p2K-0Y-eMb" column="L5u-h0-QUg" id="DY3-OS-AuE">
-                                                                        <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="qFs-nZ-hPb" userLabel="FocusNear">
+                                                                        <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="qFs-nZ-hPb" userLabel="FocusNear" customClass="PTZStartStopButton">
                                                                             <rect key="frame" x="54" y="0.0" width="25" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="25" id="9bW-27-pNQ"/>
                                                                                 <constraint firstAttribute="height" constant="25" id="t6n-yi-7EM"/>
                                                                             </constraints>
                                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="t8G-io-sTv">
-                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
                                                                             <symbolConfiguration key="symbolConfiguration" weight="light"/>
@@ -670,14 +673,14 @@
                                                                         </button>
                                                                     </gridCell>
                                                                     <gridCell row="p2K-0Y-eMb" column="LeB-UW-Zci" id="Jj0-b5-J6h">
-                                                                        <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="2rc-fD-Pah" userLabel="FocusNear+">
+                                                                        <button key="contentView" verticalHuggingPriority="750" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="2rc-fD-Pah" userLabel="FocusNear+" customClass="PTZStartStopButton">
                                                                             <rect key="frame" x="79" y="0.0" width="25" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="25" id="LiD-ob-sdN"/>
                                                                                 <constraint firstAttribute="width" constant="25" id="WG0-sY-wpb"/>
                                                                             </constraints>
                                                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="4ly-ha-mCV">
-                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
+                                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
                                                                             <symbolConfiguration key="symbolConfiguration" weight="black"/>
@@ -738,6 +741,7 @@
                                                                 </segmentedCell>
                                                                 <connections>
                                                                     <accessibilityConnection property="title" destination="RPa-rz-VdU" id="3Gx-7S-mua"/>
+                                                                    <action selector="doMotionSyncOnOff:" target="-2" id="Frq-T9-kCZ"/>
                                                                 </connections>
                                                             </segmentedControl>
                                                         </subviews>
@@ -830,7 +834,6 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="2OS-mi-coq"/>
                                     <constraint firstItem="aUA-lC-s2h" firstAttribute="centerX" secondItem="zuV-8a-7PM" secondAttribute="centerX" id="DtJ-GV-SzT"/>
                                     <constraint firstItem="zuV-8a-7PM" firstAttribute="centerX" secondItem="aqd-Mf-Y30" secondAttribute="centerX" id="HfU-Nu-d9f"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="JEF-JZ-tFD"/>
                                     <constraint firstItem="YGQ-XG-efI" firstAttribute="top" secondItem="zuV-8a-7PM" secondAttribute="bottom" constant="12" id="OEp-t6-0DB"/>
                                     <constraint firstItem="pQm-I7-fbP" firstAttribute="top" secondItem="aqd-Mf-Y30" secondAttribute="top" id="Wz0-yJ-xUk"/>
                                     <constraint firstItem="YGQ-XG-efI" firstAttribute="centerX" secondItem="zuV-8a-7PM" secondAttribute="centerX" id="Z3n-hf-hXp"/>
@@ -841,13 +844,14 @@
                                 </constraints>
                             </customView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="A72-Wi-b1v"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="XI9-1y-K1O"/>
+                        </constraints>
                         <holdingPriorities>
                             <real value="250"/>
                             <real value="250"/>
                         </holdingPriorities>
-                        <connections>
-                            <outlet property="delegate" destination="-2" id="dlq-ql-lnO"/>
-                        </connections>
                     </splitView>
                 </subviews>
                 <constraints>
@@ -880,11 +884,18 @@
                             <action selector="remoteOpen:" target="-2" id="1x8-w2-IKR"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="EC130710-B420-4F41-A2F3-D162C803E434" label="Sidebar" paletteLabel="Sidebar" tag="-1" bordered="YES" visibilityPriority="4" sizingBehavior="auto" id="d8u-t8-nAF">
+                        <imageReference key="image" image="sidebar.squares.right" catalog="system" symbolScale="medium"/>
+                        <connections>
+                            <action selector="lar_toggleSidebar:" target="NHN-Ow-8DL" id="3Oa-Jt-5Ik"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="7lA-tS-XhP"/>
                     <toolbarItem reference="GbI-AY-n7U"/>
                     <toolbarItem reference="IMg-8c-5TN"/>
+                    <toolbarItem reference="d8u-t8-nAF"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
@@ -893,6 +904,24 @@
             <point key="canvasLocation" x="13" y="-65"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="4em-rq-xSx"/>
+        <viewController id="NHN-Ow-8DL" customClass="LARSplitViewController">
+            <connections>
+                <outlet property="bodyViewController" destination="7Ms-9b-48a" id="mR8-8B-SDK"/>
+                <outlet property="sidebarViewController" destination="80S-x1-C0r" id="KRD-oU-CRE"/>
+                <outlet property="splitView" destination="PtN-SX-hVF" id="94F-1R-0YK"/>
+                <outlet property="view" destination="PtN-SX-hVF" id="PMf-jy-CiM"/>
+            </connections>
+        </viewController>
+        <viewController id="7Ms-9b-48a" userLabel="Split Body View Controller">
+            <connections>
+                <outlet property="view" destination="6Fy-kw-0Au" id="jL9-Ur-zL0"/>
+            </connections>
+        </viewController>
+        <viewController id="80S-x1-C0r" userLabel="Split Sidebar View Controller">
+            <connections>
+                <outlet property="view" destination="aqd-Mf-Y30" id="4or-Du-d0U"/>
+            </connections>
+        </viewController>
         <viewController id="ce5-QP-mKm" userLabel="RTSP View Controller" customClass="RTSPViewController">
             <connections>
                 <outlet property="imageView" destination="Hfs-ZN-q2C" id="iZD-20-IM2"/>
@@ -976,13 +1005,13 @@
                         <gridCell row="KKL-gX-iVk" column="3xo-Bk-nDW" id="GeT-am-Qy9">
                             <button key="contentView" toolTip="Up" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="dDE-lm-ee8" userLabel="Up">
                                 <rect key="frame" x="35" y="70" width="25" height="25"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mzg-2e-RIq">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.up.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mzg-2e-RIq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
-                                    <action selector="doPanTilt:" target="-2" id="mae-RF-i0J"/>
+                                    <action selector="doMenuPanTilt:" target="-2" id="h8c-uu-spf"/>
                                 </connections>
                             </button>
                         </gridCell>
@@ -990,20 +1019,20 @@
                         <gridCell row="CGi-3I-W8s" column="278-1q-YiK" id="a9x-WP-lka">
                             <button key="contentView" toolTip="Left" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="Qlk-WH-1fR" userLabel="Left">
                                 <rect key="frame" x="0.0" y="35" width="25" height="25"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.left" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M2c-JQ-hlH">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.left.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M2c-JQ-hlH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
-                                    <action selector="doPanTilt:" target="-2" id="YDw-Vd-pTN"/>
+                                    <action selector="doMenuPanTilt:" target="-2" id="bZ2-7g-77V"/>
                                 </connections>
                             </button>
                         </gridCell>
                         <gridCell row="CGi-3I-W8s" column="3xo-Bk-nDW" id="oaD-Qk-6Zs">
                             <button key="contentView" toolTip="Enter" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="lbJ-bC-Mcv" userLabel="Enter">
                                 <rect key="frame" x="35" y="35" width="25" height="25"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="rectangle.center.inset.filled" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SZz-QF-QON">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="rectangle.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SZz-QF-QON">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1015,13 +1044,13 @@
                         <gridCell row="CGi-3I-W8s" column="C5n-If-4iE" id="7Qu-dx-D0H">
                             <button key="contentView" toolTip="Right" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="tKp-8r-h3f" userLabel="Right">
                                 <rect key="frame" x="70" y="35" width="25" height="25"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.right" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LcW-Fg-A1n">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.right.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LcW-Fg-A1n">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
-                                    <action selector="doPanTilt:" target="-2" id="bP8-X4-uDb"/>
+                                    <action selector="doMenuPanTilt:" target="-2" id="gcD-wx-5gu"/>
                                 </connections>
                             </button>
                         </gridCell>
@@ -1040,13 +1069,13 @@
                         <gridCell row="i8i-GH-5NI" column="3xo-Bk-nDW" id="t21-eC-mYD">
                             <button key="contentView" toolTip="Down" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="H5i-3v-THY" userLabel="Down">
                                 <rect key="frame" x="35" y="0.0" width="25" height="25"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cGW-OI-Mhi">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.down.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cGW-OI-Mhi">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
-                                    <action selector="doPanTilt:" target="-2" id="T5o-fh-zTh"/>
+                                    <action selector="doMenuPanTilt:" target="-2" id="83G-gh-LV4"/>
                                 </connections>
                             </button>
                         </gridCell>
@@ -1085,6 +1114,10 @@
         <image name="arrow.up.backward" catalog="system" width="13" height="12"/>
         <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
         <image name="arrow.uturn.left" catalog="system" width="15" height="14"/>
+        <image name="arrowtriangle.down.fill" catalog="system" width="14" height="13"/>
+        <image name="arrowtriangle.left.fill" catalog="system" width="14" height="13"/>
+        <image name="arrowtriangle.right.fill" catalog="system" width="14" height="13"/>
+        <image name="arrowtriangle.up.fill" catalog="system" width="14" height="13"/>
         <image name="camera-toolbar" width="512" height="512"/>
         <image name="camera.metering.center.weighted" catalog="system" width="18" height="14"/>
         <image name="house.fill" catalog="system" width="19" height="16"/>
@@ -1094,7 +1127,8 @@
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="plus" catalog="system" width="14" height="13"/>
         <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
-        <image name="rectangle.center.inset.filled" catalog="system" width="18" height="14"/>
+        <image name="rectangle.fill" catalog="system" width="18" height="14"/>
         <image name="remote-control" width="32" height="32"/>
+        <image name="sidebar.squares.right" catalog="system" width="18" height="14"/>
     </resources>
 </document>

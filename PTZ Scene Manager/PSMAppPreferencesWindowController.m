@@ -203,7 +203,7 @@ static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
 - (IBAction)addSceneCollection:(id)sender {
     // TODO: Observe the window so we can dispose of the WC on close
-    if (self.rangeCollectionWindowController != nil) {
+    if (self.rangeCollectionWindowController == nil) {
         self.rangeCollectionWindowController = [[PSMRangeCollectionWindowController alloc] init];
     }
     [[self.rangeCollectionWindowController window] makeKeyAndOrderFront:nil];

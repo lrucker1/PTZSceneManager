@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)stringForKey:(NSString *)aKey;
 - (NSString *)stringForKeyValidation:(NSString *)aKey;
 - (BOOL)setString:(NSString *)string forKey:(NSString *)key;
+- (NSInteger)integerForKey:(NSString *)aKey;
+- (BOOL)setInteger:(NSInteger)value forKey:(NSString *)aKey;
 
 - (BOOL)writeToFile:(NSString *)file;
 

@@ -10,6 +10,7 @@
 #import "PTZCameraInt.h"
 #import "PTZCameraConfig.h"
 #import "PTZProgressGroup.h"
+#import "PTZCameraOpener.h"
 #import "AppDelegate.h"
 #import "libvisca.h"
 
@@ -31,7 +32,6 @@ const NSString *PTZProgressEndKey = @"PTZProgressEnd";
 #define BOOL_TO_ONOFF(b) ((b) ? VISCA_FOCUS_AUTO_ON : VISCA_FOCUS_AUTO_OFF)
 #define ONOFF_TO_BOOL(b) ((b) == VISCA_FOCUS_AUTO_ON)
 
-BOOL open_interface(VISCAInterface_t *iface, VISCACamera_t *camera, const char *hostname, int port);
 void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOffset, uint32_t delaySecs, bool isBackup, PTZCamera *ptzCamera, PTZDoneBlock doneBlock);
 
 @interface NSDictionary (PTZ_Sim_Extras)
@@ -47,11 +47,15 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 
 @interface PTZCamera ()
 
-@property NSString *cameraIP;
+@property NSString *deviceAddr;
 @property BOOL batchOperationInProgress;
 @property BOOL ptzStateValid;
+@property PTZCameraOpener *cameraOpener;
 
 @property VISCACamera_t camera;
+
+// Continuous PT has a minimum time it should be allowed to run.
+@property dispatch_time_t pantilt_stop_time;
 
 @end
 
@@ -75,6 +79,18 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }
 
     return keyPaths;
+}
+
++ (instancetype)cameraWithDeviceName:(NSString *)devicename isSerial:(BOOL)isSerial {
+    if (isSerial) {
+        NSString *serialPortAddr = [PTZCameraOpener serialPortForDevice:devicename];
+        if (serialPortAddr) {
+            return [[self alloc] initWithTTY:serialPortAddr];
+        }
+    } else {
+        return [[self alloc] initWithIP:devicename];
+    }
+    return nil;
 }
 
 - (instancetype)init {
@@ -101,15 +117,25 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 - (instancetype)initWithIP:(NSString *)ipAddr {
     self = [self init];
     if (self) {
-        _cameraIP = ipAddr;
+        _deviceAddr = ipAddr;
+        _cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddr port:_cameraConfig.port];
+    }
+    return self;
+}
+
+- (instancetype)initWithTTY:(NSString *)ttydev {
+    self = [self init];
+    if (self) {
+        _deviceAddr = ttydev;
+        _cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self ttydev:ttydev];
     }
     return self;
 }
 
 - (void)dealloc {
-    if (_cameraOpen) {
+    if (_cameraIsOpen) {
         VISCA_close(&_iface);
-        _cameraOpen = NO;
+        _cameraIsOpen = NO;
     }
 }
 
@@ -117,41 +143,46 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     return &_iface;
 }
 
+- (VISCACamera_t*)pCamera {
+    return &_camera;
+}
+
+- (BOOL)isSerial {
+    return self.cameraOpener.isSerial;
+}
+
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock {
     [self closeCamera];
     [self loadCameraWithCompletionHandler:^() {
-        [self callDoneBlock:doneBlock success:self.cameraOpen];
+        [self callDoneBlock:doneBlock success:self.cameraIsOpen];
     }];
 }
 
 - (void)loadCameraWithCompletionHandler:(PTZCommandBlock)handler {
-    if (self.cameraOpen) {
+    if (self.cameraIsOpen) {
         handler();
         return;
     }
     self.connectingBusy = YES;
-    dispatch_async(self.cameraQueue, ^{
-        BOOL success = open_interface(&self->_iface, &self->_camera, [self.cameraIP UTF8String], self.cameraConfig.port);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.connectingBusy = NO;
-            if (success) {
-                self.cameraOpen = YES;
-            }
-            handler();
-        });
-    });
+    [self.cameraOpener loadCameraWithCompletionHandler:^(BOOL success) {
+        self.connectingBusy = NO;
+        if (success) {
+            self.cameraIsOpen = YES;
+        }
+        handler();
+    }];
 }
 
 - (void)closeCamera {
-    if (self.cameraOpen) {
+    if (self.cameraIsOpen) {
         VISCA_close(&_iface);
-        self.cameraOpen = NO;
+        self.cameraIsOpen = NO;
     }
 }
 
 - (void)applyPantiltPresetSpeed:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -164,7 +195,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 
 - (void)applyPantiltAbsolutePosition:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -172,7 +203,6 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
         dispatch_async(self.cameraQueue, ^{
             BOOL success = NO;
             if (VISCA_set_pantilt_absolute_position(&self->_iface, &self->_camera, (uint32_t)self.panSpeed, (uint32_t)self.tiltSpeed, (int)self.pan, (int)self.tilt) == VISCA_SUCCESS) {
-                VISCA_set_pantilt_stop(&self->_iface, &self->_camera, (uint32_t)self.panSpeed, (uint32_t)self.tiltSpeed);
                 success = YES;
             }
             [self callDoneBlock:doneBlock success:success recallBusy:NO];
@@ -180,29 +210,40 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
+- (void)stopPantiltDirection {
+    // I think an unexpected stop should be fine?
+    if (self.cameraIsOpen /*&& self.pantilt_stop_time > 0*/) {
+        dispatch_after(self.pantilt_stop_time, self.cameraQueue, ^{
+            VISCA_set_pantilt_stop(&self->_iface, &self->_camera, (uint32_t)self.panSpeed, (uint32_t)self.tiltSpeed);
+        });
+    }
+    self.pantilt_stop_time = 0;
+}
 
-- (void)applyPantiltDirection:(PTZCameraPanTiltParams)params onDone:(PTZDoneBlock)doneBlock {
+- (void)startPantiltDirection:(PTZCameraPanTiltParams)params onDone:(PTZDoneBlock)doneBlock {
     
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
         self.recallBusy = YES;
         dispatch_async(self.cameraQueue, ^{
             BOOL success = NO;
-            if (VISCA_set_pantilt(&self->_iface, &self->_camera, (uint32_t)params.panSpeed, (uint32_t)params.tiltSpeed, params.horiz, params.vert) == VISCA_SUCCESS) {
-                VISCA_set_pantilt_stop(&self->_iface, &self->_camera, (uint32_t)self.panSpeed, (uint32_t)self.tiltSpeed);
+            if (VISCA_set_pantilt(&self->_iface, &self->_camera, params.panSpeed, params.tiltSpeed, params.horiz, params.vert) == VISCA_SUCCESS) {
                 success = YES;
+                // To cancel a command when VISCA PAN-TILT Drive (page 17) is being executed, wait at least 200 msec after executing. Then send a cancel command to ensure that PAN-TILT Drive stops effectively.
+                self.pantilt_stop_time = dispatch_time(DISPATCH_TIME_NOW, 200 * NSEC_PER_MSEC);
             }
             [self callDoneBlock:doneBlock success:success recallBusy:NO];
         });
     }];
 }
 
+// Absolute zoom
 - (void)applyZoom:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -217,16 +258,23 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyZoomIn:(PTZDoneBlock)doneBlock {
+- (void)stopZoom {
+    if (self.cameraIsOpen) {
+        dispatch_async(self.cameraQueue, ^{
+            VISCA_set_zoom_stop(&self->_iface, &self->_camera);
+        });
+    }
+}
+
+- (void)startZoomIn:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
             BOOL success = NO;
             if (VISCA_set_zoom_tele(&self->_iface, &self->_camera) == VISCA_SUCCESS) {
-                VISCA_set_zoom_stop(&self->_iface, &self->_camera);
                 success = YES;
             }
             [self callDoneBlock:doneBlock success:success];
@@ -234,16 +282,15 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyZoomOut:(PTZDoneBlock)doneBlock {
+- (void)startZoomOut:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
             BOOL success = NO;
             if (VISCA_set_zoom_wide(&self->_iface, &self->_camera) == VISCA_SUCCESS) {
-                VISCA_set_zoom_stop(&self->_iface, &self->_camera);
                 success = YES;
             }
             [self callDoneBlock:doneBlock success:success];
@@ -251,16 +298,15 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyZoomInWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
+- (void)startZoomInWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
             BOOL success = NO;
             if (VISCA_set_zoom_tele_speed(&self->_iface, &self->_camera, (uint32_t)speed) == VISCA_SUCCESS) {
-                VISCA_set_zoom_stop(&self->_iface, &self->_camera);
                 success = YES;
             }
             [self callDoneBlock:doneBlock success:success];
@@ -268,16 +314,15 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyZoomOutWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
+- (void)startZoomOutWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
             BOOL success = NO;
             if (VISCA_set_zoom_wide_speed(&self->_iface, &self->_camera, (uint32_t)speed) == VISCA_SUCCESS) {
-                VISCA_set_zoom_stop(&self->_iface, &self->_camera);
                 success = YES;
             }
             [self callDoneBlock:doneBlock success:success];
@@ -298,9 +343,17 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     return success;
 }
 
-- (void)applyFocusFar:(PTZDoneBlock)doneBlock {
+- (void)stopFocus {
+    if (self.cameraIsOpen) {
+        dispatch_async(self.cameraQueue, ^{
+            VISCA_set_focus_stop(&self->_iface, &self->_camera);
+        });
+    }
+}
+
+- (void)startFocusFar:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -315,9 +368,9 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyFocusNear:(PTZDoneBlock)doneBlock {
+- (void)startFocusNear:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -332,9 +385,9 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyFocusFarWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
+- (void)startFocusFarWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -349,9 +402,9 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     }];
 }
 
-- (void)applyFocusNearWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
+- (void)startFocusNearWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -368,7 +421,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 
 - (void)applyFocusMode:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -388,7 +441,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 #define SIMPLE_VISCA_FN_CALL(_selector, _function)      \
 - (void)_selector:(PTZDoneBlock _Nullable)doneBlock {   \
     [self loadCameraWithCompletionHandler:^() {         \
-        if (!self.cameraOpen) {                         \
+        if (!self.cameraIsOpen) {                       \
             [self callDoneBlock:doneBlock success:NO];  \
             return;                                     \
         }                                               \
@@ -413,7 +466,7 @@ SIMPLE_VISCA_FN_CALL(osdMenuReturn, VISCA_set_datascreen_return)
 // libvisca's example CLI enforces a range (1000-40959), which I can only find in Sony doc. Also Sony defines it as 0x1000-0x9FFF, and while 0x9fff is 40959, 0x1000 is not 1000, so...
 - (void)applyFocusValue:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -523,7 +576,11 @@ VALIDATE_KEY_MINMAX(BlueGain, 0, 255)
 // RG Tuning: Red gain tuning, optional items: -10 ~ +10.
 // BG Tuning: Blue gain tuning, optional items: -10 ~ +10.
 VALIDATE_KEY_MINMAX(Hue, 0, 14)
+// Saturation: optional items: 60% ~ 200%. - indexed
 
+//@property NSInteger backlight;
+// ExpComp: Exposure Compensation value. Options include: -7 ~ +7
+//
 VALIDATE_KEY_MINMAX(Bright, 0, 17)
 VALIDATE_KEY_MINMAX(GainLimit, 0, 15)
 
@@ -646,7 +703,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 // Apply only the requested and applicable values.
 - (void)applyWBModeValues:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -660,7 +717,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 // Apply only the requested and applicable values.
 - (void)applyExposureModeValues:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -690,7 +747,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)memoryRecall:(NSInteger)scene onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -720,7 +777,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)memorySet:(NSInteger)scene onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -735,7 +792,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 }
 
 - (void)cancelCommand {
-    if (!self.cameraOpen) {
+    if (!self.cameraIsOpen) {
         return;
     }
     // Send from main thread to interrupt camera operation. Reply will be handled by the operation being cancelled.
@@ -760,7 +817,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)toggleOSDMenu:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -776,7 +833,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)closeOSDMenu:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -824,12 +881,12 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     };
     NSInteger rangeOffset = [self.progress.userInfo[PTZProgressStartKey] integerValue];
     self.progress.cancellable = NO;
-    self.progress.localizedAdditionalDescription = [NSString stringWithFormat:@"Connecting to camera %@…", self.cameraIP];
+    self.progress.localizedAdditionalDescription = [NSString stringWithFormat:@"Connecting to camera %@…", self.deviceAddr];
     [self loadCameraWithCompletionHandler:^() {
         self.progress.localizedAdditionalDescription = nil;
         self.progress.cancellable = YES;
         self.progress.completedUnitCount = 1;
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -841,7 +898,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (NSString *)snapshotURL {
     // I do know this is not the recommended way to make an URL! :)
-    return [NSString stringWithFormat:@"http://%@:80/snapshot.jpg", [self cameraIP]];
+    return [NSString stringWithFormat:@"http://%@:80/snapshot.jpg", [self deviceAddr]];
 }
 
 - (AppDelegate *)appDelegate {
@@ -860,7 +917,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)fetchSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
     // snapshot.jpg is generated on demand. If index >= 0, write the scene snapshot to the downloads folder.
     NSString *url = [self snapshotURL];
-    NSString *cameraIP = [self cameraIP];
+    NSString *cameraIP = [self deviceAddr];
     NSString *rootPath = (index >= 0) ? [self.appDelegate ptzopticsDownloadsDirectory] : nil;
     // Just say no to caching; even though the cameras tell us not to cache (the whole "on demand" bit), that's an extra query we can avoid. Also works around an intermittent localhost bug that was returning very very stale cached images.
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
@@ -911,20 +968,18 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)updateAutofocusState:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
+            uint8_t afModeValue;
+            BOOL success = VISCA_get_focus_auto(&self->_iface, &self->_camera, &afModeValue) == VISCA_SUCCESS;
             dispatch_async(dispatch_get_main_queue(), ^{
-                uint8_t afModeValue;
-                BOOL success = VISCA_get_focus_auto(&self->_iface, &self->_camera, &afModeValue) == VISCA_SUCCESS;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (success) {
-                        self.autofocus = ONOFF_TO_BOOL(afModeValue);
-                    }
-                    [self callDoneBlock:doneBlock success:YES];
-                });
+                if (success) {
+                    self.autofocus = ONOFF_TO_BOOL(afModeValue);
+                }
+                [self callDoneBlock:doneBlock success:YES];
             });
         });
     }];
@@ -932,7 +987,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)updateCameraState:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -976,7 +1031,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)updateWBModeValues:(BOOL)applyToAll onDone:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -1063,7 +1118,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)updateExposureModeValues:(BOOL)applyToAll onDone:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -1172,7 +1227,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)updateImageCameraValues:(BOOL)applyToAll onDone:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -1267,7 +1322,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 // Apply only the requested and applicable values.
 - (void)applyImageCameraValues:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
-        if (!self.cameraOpen) {
+        if (!self.cameraIsOpen) {
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
@@ -1279,21 +1334,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 }
 
 @end
-
-BOOL open_interface(VISCAInterface_t *iface, VISCACamera_t *camera, const char *hostname, int port)
-{
-    if (VISCA_open_tcp(iface, hostname, port) != VISCA_SUCCESS) {
-        PTZLog(@"unable to open tcp device %s:%d", hostname, port);
-        return NO;
-    }
-
-    iface->broadcast = 0;
-    camera->address = 1; // Because we are using IP
-    iface->cameratype = VISCA_IFACE_CAM_PTZOPTICS;
-
-    PTZLog(@"%s : initialization successful.", hostname);
-    return YES;
-}
 
 void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOffset, uint32_t delaySecs, bool isBackup, PTZCamera *ptzCamera, PTZDoneBlock doneBlock)
 {
@@ -1314,7 +1354,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             // For "continue" log statements.
             fprintf(stdout, "%s", [log UTF8String]);
         }
-        log = [NSString stringWithFormat:@"%@ : ", ptzCamera.cameraIP];
+        log = [NSString stringWithFormat:@"%@ : ", ptzCamera.deviceAddr];
         log = [log stringByAppendingFormat:@"recall %d", sceneIndex + fromOffset];
         if (VISCA_memory_recall(iface, camera, sceneIndex + fromOffset) != VISCA_SUCCESS) {
             log = [log stringByAppendingFormat:@" failed to send recall command %d\n", sceneIndex + fromOffset];

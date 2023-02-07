@@ -6,12 +6,17 @@
 //
 
 #import "PTZPrefCamera.h"
+#import "PTZCamera.h"
 #import "PTZCameraSceneRange.h"
 
 static NSString *PSM_PanPlusSpeed = @"panPlusSpeed";
 static NSString *PSM_TiltPlusSpeed = @"tiltPlusSpeed";
 static NSString *PSM_ZoomPlusSpeed = @"zoomPlusSpeed";
 static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
+
+@interface PTZPrefCamera ()
+@property BOOL isSerial;
+@end
 
 @implementation PTZPrefCamera
 
@@ -48,12 +53,20 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
         _cameraname = dict[@"cameraname"];
         _devicename = dict[@"devicename"];
         _originalDeviceName = dict[@"original"] ?: _devicename;
+        _isSerial = [dict[@"cameratype"] boolValue];
     }
     return self;
 }
 
 - (NSDictionary *)dictionaryValue {
-    return @{@"cameraname":_cameraname, @"devicename":_devicename, @"original": _originalDeviceName};
+    return @{@"cameraname":_cameraname, @"devicename":_devicename, @"original": _originalDeviceName, @"cameratype":@(_isSerial)};
+}
+
+- (PTZCamera *)loadCameraIfNeeded {
+    if (!self.camera) {
+        self.camera = [PTZCamera cameraWithDeviceName:self.devicename isSerial:self.isSerial];
+    }
+    return self.camera;
 }
 
 #pragma mark defaults
@@ -104,7 +117,12 @@ PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
     if (data == nil) {
         return nil;
     }
-    return [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:[NSSet setWithArray:@[[PTZCameraSceneRange class], [NSString class]]] fromData:data error:nil];
+    if (@available(macOS 11.0, *)) {
+        return [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:[NSSet setWithArray:@[[PTZCameraSceneRange class], [NSString class]]] fromData:data error:nil];
+    } else {
+        // Fallback on earlier versions
+        return nil;
+    }
 }
 
 // Global, not camera-specific

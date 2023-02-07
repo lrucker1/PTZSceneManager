@@ -80,17 +80,26 @@
 }
 
 - (BOOL)isLightAppearance {
-    NSAppearanceName name = [[NSAppearance currentDrawingAppearance] name];
-    return (name == NSAppearanceNameAqua || name == NSAppearanceNameVibrantLight);
+    if (@available(macOS 11.0, *)) {
+        NSAppearanceName name = [[NSAppearance currentDrawingAppearance] name];
+        return (name == NSAppearanceNameAqua || name == NSAppearanceNameVibrantLight);
+    } else {
+        return NO;
+    }
 }
 // Call super for everything if it's using an AX appearance (NSAppearanceNameAccessibilityHighContrast*). There is *no* way this will ever have a high contrast mode.
 
 - (BOOL)isAXAppearance {
-    NSAppearanceName name = [[NSAppearance currentDrawingAppearance] name];
-    return (   name == NSAppearanceNameAccessibilityHighContrastAqua
-            || name == NSAppearanceNameAccessibilityHighContrastDarkAqua
-            || name == NSAppearanceNameAccessibilityHighContrastVibrantDark
-            ||  name == NSAppearanceNameAccessibilityHighContrastVibrantLight);
+    if (@available(macOS 11.0, *)) {
+        NSAppearanceName name = [[NSAppearance currentDrawingAppearance] name];
+        return (   name == NSAppearanceNameAccessibilityHighContrastAqua
+                || name == NSAppearanceNameAccessibilityHighContrastDarkAqua
+                || name == NSAppearanceNameAccessibilityHighContrastVibrantDark
+                ||  name == NSAppearanceNameAccessibilityHighContrastVibrantLight);
+    } else {
+        // Fallback on earlier versions
+        return NO;
+    }
 }
 
 // Make the nice round-rect ends

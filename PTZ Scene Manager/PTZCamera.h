@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTZProgressGroup;
 @class PTZProgress;
 
+typedef enum {
+    PTZRestore = 0,
+    PTZCheck = 1,
+    PTZBackup = 2
+} PTZMode;
+
 @protocol PTZCameraWBModeDelegate
 // WB
 - (BOOL)canSetWBMode;
@@ -50,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 typedef struct  {
-    NSInteger panSpeed, tiltSpeed;
+    uint8_t panSpeed, tiltSpeed;
     uint8_t horiz, vert;
 } PTZCameraPanTiltParams;
 
@@ -92,36 +98,42 @@ typedef void (^PTZSnapshotFetchDoneBlock)( NSData * _Nullable imageData);
 @property NSInteger luminance, contrast, aperture;
 @property NSInteger flipH, flipV, bwMode;
 
-@property (readonly) NSString *cameraIP;
+@property (readonly) NSString *deviceAddr;
 @property (readonly) PTZCameraConfig *cameraConfig;
 @property (nullable) PTZProgress *progress;
 
-@property BOOL cameraOpen;
+@property BOOL cameraIsOpen;
 @property (strong) NSImage *snapshotImage;
 @property BOOL connectingBusy, recallBusy;
 
 @property VISCAInterface_t iface;
 @property (readonly) int port;
 
-- (instancetype)initWithIP:(NSString *)ipAddr;
++ (instancetype)cameraWithDeviceName:(NSString *)devicename isSerial:(BOOL)isSerial;
 
-- (VISCAInterface_t*)pIface;
+- (instancetype)initWithIP:(NSString *)ipAddr;
+- (instancetype)initWithTTY:(NSString *)ttydev;
+
+- (BOOL)isSerial;
 
 - (void)closeCamera;
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock;
 
 - (void)applyPantiltPresetSpeed:(PTZDoneBlock _Nullable)doneBlock;
 - (void)applyPantiltAbsolutePosition:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyPantiltDirection:(PTZCameraPanTiltParams)params onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)startPantiltDirection:(PTZCameraPanTiltParams)params onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)stopPantiltDirection;
 - (void)applyZoom:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyZoomIn:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyZoomOut:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyZoomInWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyZoomOutWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyFocusFar:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyFocusNear:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyFocusFarWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
-- (void)applyFocusNearWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)startZoomIn:(PTZDoneBlock _Nullable)doneBlock;
+- (void)startZoomOut:(PTZDoneBlock _Nullable)doneBlock;
+- (void)startZoomInWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)startZoomOutWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)stopZoom;
+- (void)startFocusFar:(PTZDoneBlock _Nullable)doneBlock;
+- (void)startFocusNear:(PTZDoneBlock _Nullable)doneBlock;
+- (void)startFocusFarWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)stopFocus;
+- (void)startFocusNearWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock _Nullable)doneBlock;
 - (void)applyFocusMode:(PTZDoneBlock _Nullable)doneBlock;
 - (void)applyFocusValue:(PTZDoneBlock _Nullable)doneBlock;
 - (void)applyMotionSyncOn:(PTZDoneBlock _Nullable)doneBlock;

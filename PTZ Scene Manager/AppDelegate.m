@@ -89,7 +89,7 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
         if ([prefCamera.cameraname length] > 0) {
             self.mutablePrefCameras[prefCamera.cameraname] = prefCamera;
         }
-        prefCamera.camera = [[PTZCamera alloc] initWithIP:prefCamera.devicename];
+        prefCamera.camera = [prefCamera loadCameraIfNeeded];;
         PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
         [wc.window orderFront:nil];
         [self.windowControllers addObject:wc];
