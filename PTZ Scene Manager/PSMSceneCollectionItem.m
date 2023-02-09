@@ -57,10 +57,11 @@ static PSMSceneCollectionItem *selfType;
 
 - (IBAction)sceneSet:(id)sender {
     [self.camera memorySet:self.sceneNumber onDone:^(BOOL success) {
-        if (success && self.imagePath) {
+        if (success) {
             [self.camera fetchSnapshotAtIndex:self.sceneNumber onDone:^(NSData *data, NSInteger index) {
                 if (data != nil && index == self.sceneNumber) {
                     self.image = [[NSImage alloc] initWithData:data];
+                    [self.prefCamera saveSnapshotAtIndex:self.sceneNumber  withData:data];
                 }
             }];
         }

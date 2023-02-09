@@ -59,3 +59,11 @@ Stop using camera name as key.
   scene range collection.
   drop the settings.ini file. It uses IP address as key!
   Window frame names
+
+Export the settings to something readable. Even if that turns out to be settings.ini.
+
+Restoration: stuff like sidebar.
+
+titlebar accessory either needs to go, or needs a RTL check like the OSD.
+
+Reopen Camera - done block, report failure.

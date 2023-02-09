@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PSMSceneCollectionItem : NSCollectionViewItem  <NSControlTextEditingDelegate>
 
 @property NSImage *image;
-@property NSString *imagePath;
 @property NSString *devicename;
 @property NSString * _Nullable sceneName;
 @property NSInteger sceneNumber;

@@ -19,13 +19,13 @@ void PTZLog(NSString *format, ...);
 @property NSString *ptzopticsSettingsFilePath;
 @property BOOL canEditSceneNames;
 
-- (NSString *)ptzopticsSettingsDirectory;
-- (NSString *)ptzopticsDownloadsDirectory;
+- (NSString *)applicationSupportDirectory;
+- (NSString *)snapshotsDirectory;
 
 - (NSArray *)cameraList;
 - (NSArray<PTZPrefCamera *> *)prefCameras;
 
-- (void)applyPrefChanges;
+- (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras;
 
 @end
 

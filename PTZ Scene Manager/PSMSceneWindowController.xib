@@ -505,6 +505,11 @@
                                                 </button>
                                             </gridCell>
                                         </gridCells>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="userInterfaceLayoutDirection">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </gridView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="YGQ-XG-efI" userLabel="Zoom View">
                                         <rect key="frame" x="85" y="291" width="104" height="25"/>
@@ -1093,6 +1098,11 @@
                             </button>
                         </gridCell>
                     </gridCells>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="userInterfaceLayoutDirection">
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </gridView>
             </subviews>
             <constraints>

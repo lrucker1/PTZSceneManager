@@ -132,7 +132,7 @@ typedef enum {
 //    NSString *fmt = NSLocalizedString(@"%@ - %@", @"Window title showing [cameraname - devicename]");
     self.window.title = self.prefCamera.cameraname;
     // This will update the window frame.
-    self.window.frameAutosaveName = [NSString stringWithFormat:@"[%@] main", self.prefCamera.devicename];
+    self.window.frameAutosaveName = [NSString stringWithFormat:@"[%@] main", self.prefCamera.camerakey];
     BOOL isResizable = self.window.resizable;
     BOOL wantsResizable = [[self.prefCamera prefValueForKey:@"resizable"] integerValue];
     if (isResizable != wantsResizable) {
@@ -543,18 +543,14 @@ typedef enum {
      itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = [self.sceneIndexes[indexPath.item] integerValue];
     NSString *devicename = self.prefCamera.devicename;
-    NSString *rootPath = [self.appDelegate ptzopticsDownloadsDirectory];
-    NSString *filename = [NSString stringWithFormat:@"snapshot_%@%d.jpg", devicename, (int)index];
-    NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
 
     PSMSceneCollectionItem *item = [PSMSceneCollectionItem new];
-    item.imagePath = path;
     item.sceneName = [self.prefCamera sceneNameAtIndex:index];
     if ([item.sceneName length] == 0) {
         // show the null placeholder.
         item.sceneName = nil;
     }
-    item.image = [[NSImage alloc] initWithContentsOfFile:path];
+    item.image = [self.prefCamera snapshotAtIndex:index];
     if (item.image == nil) {
         item.image = [NSImage imageNamed:@"Placeholder"];
     }
@@ -613,10 +609,34 @@ typedef enum {
     if (self.remoteControlPopover.shown) {
         return;
     }
+    NSView *view = (NSView *)sender;
+    NSRectEdge edge = NSMaxYEdge;
+    NSRect bounds = NSZeroRect;
+    if ([sender isKindOfClass:NSMenuItem.class]) {
+        view = self.window.contentView;
+        bounds = view.bounds;
+        // I assume a menu item in the menubar will have a parent.
+        if ([(NSMenuItem *)sender parentItem] == nil) {
+            // Rough guess at where the toolbar is.
+            if (view.userInterfaceLayoutDirection == NSUserInterfaceLayoutDirectionRightToLeft) {
+                bounds.origin.x = NSMinX(bounds) + 30;
+            } else {
+                bounds.origin.x = NSMaxX(bounds) - 30;
+            }
+        } else {
+            bounds.origin.x = NSMidX(bounds) - 10;
+        }
+        bounds.size.width = 20;
+        bounds.origin.y = NSMaxY(bounds) - 2;
+        bounds.size.height = 2;
+        edge = NSMaxYEdge;
+    } else {
+        bounds = view.bounds;
+    }
     [self.camera toggleOSDMenu:nil];
-    [self.remoteControlPopover showRelativeToRect:[sender bounds]
-                                           ofView:sender
-                                    preferredEdge:NSMaxYEdge];
+    [self.remoteControlPopover showRelativeToRect:bounds
+                                           ofView:view
+                                    preferredEdge:edge];
 
 }
 

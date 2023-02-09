@@ -926,26 +926,13 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         NSData *data = userInfo[PSMOBSImageDataKey];
         if (data) {
             NSInteger index = [userInfo[PSMOBSSnapshotIndexKey] integerValue];
-            [self writeSnapshotImageData:data atIndex:index];
+            self.snapshotImage = [[NSImage alloc] initWithData:data];
             if (self.obsSnapshotDoneBlock) {
                 self.obsSnapshotDoneBlock(data, index);
             }
             self.obsSnapshotDoneBlock = nil;
         }
     }
-}
-
-- (void)writeSnapshotImageData:(NSData *)data atIndex:(NSInteger)index {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *rootPath = (index >= 0) ? [self.appDelegate ptzopticsDownloadsDirectory] : nil;
-        if ([rootPath length] > 0) {
-            NSString *filename = [NSString stringWithFormat:@"snapshot_%@%@.jpg", [self deviceName], (index >= 0) ? @(index) : @""];
-            NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
-            //PTZLog(@"saving snapshot to %@", path);
-            [data writeToFile:path atomically:YES];
-        }
-        self.snapshotImage = [[NSImage alloc] initWithData:data];
-    });
 }
 
 - (void)fetchSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
@@ -978,7 +965,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     [[[NSURLSession sharedSession] dataTaskWithRequest:request
                                  completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data != nil) {
-            [self writeSnapshotImageData:data atIndex:index];
+            self.snapshotImage = [[NSImage alloc] initWithData:data];
             if (doneBlock) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     doneBlock(data, index);

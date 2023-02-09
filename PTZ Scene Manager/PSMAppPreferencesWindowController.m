@@ -65,7 +65,15 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
                                             forKeyPath:PSMSceneCollectionKey
                                                options:NSKeyValueObservingOptionNew
                                                context:&selfType];
+    [[NSUserDefaults standardUserDefaults] addObserver:self
+                                            forKeyPath:PSMOBSAutoConnect
+                                               options:NSKeyValueObservingOptionNew
+                                               context:&selfType];
     [self reloadCollectionData];
+}
+
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[NSApp delegate];
 }
 
 - (IBAction)switchToTab:(id)sender {
@@ -96,68 +104,6 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     if (button == NSAlertFirstButtonReturn) {
         [[PSMOBSWebSocketController defaultController] deleteKeychainPasswords];
     }
-}
-
-#pragma mark Camera / PTZOptics app
-
-- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url {
-    // Wouldn't it be nice if we didn't have to check directories, given that we've only enabled canChooseFiles?
-    BOOL isDirectory;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&isDirectory] && isDirectory) {
-        return YES;
-    }
-    if ([[url lastPathComponent] isEqualToString:@"settings.ini"]) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)panel:(id)sender
-  validateURL:(NSURL *)url
-        error:(NSError * _Nullable *)outError {
-    return [PTZSettingsFile validateFileWithPath:[url path] error:outError];
-}
-
-- (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel {
-    if (pathControl.URL == nil) {
-        // NSApplicationSupportDirectory
-        openPanel.directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:NULL create:NO error:NULL];
-    }
-    openPanel.delegate = self;
-    openPanel.canChooseFiles = YES;
-    openPanel.canChooseDirectories = NO;
-    openPanel.allowsMultipleSelection = NO;
-}
-
-- (AppDelegate *)appDelegate {
-    return (AppDelegate *)[NSApp delegate];
-}
-
-- (IBAction)showIniFileInFinder:(id)sender {
-    NSURL *url = self.iniFilePathControl.URL;
-    [[NSWorkspace sharedWorkspace] selectFile:[url path]
-                     inFileViewerRootedAtPath:[url path]];
-}
-
-- (IBAction)applyChanges:(id)sender {
-    NSURL *url = self.iniFilePathControl.URL;
-    NSString *path = [url path];
-    [self.appDelegate setPtzopticsSettingsFilePath:path];
-    NSMutableArray *prefCams = [NSMutableArray array];
-    for (PTZPrefCamera *cam in self.cameras) {
-        [prefCams addObject:[cam dictionaryValue]];
-    }
-    [[NSUserDefaults standardUserDefaults] setObject:prefCams forKey:PTZ_LocalCamerasKey];
-    [self.appDelegate applyPrefChanges];
-}
-
-- (IBAction)loadFromSettingsFile:(id)sender {
-    NSArray *iniCameras = self.appDelegate.cameraList;
-    NSMutableArray *cams = [NSMutableArray array];
-    for (NSDictionary *cam in iniCameras) {
-        [cams addObject:[[PTZPrefCamera alloc] initWithDictionary:cam]];
-    }
-    self.cameras = cams;
 }
 
 #pragma mark scene collections
@@ -248,6 +194,10 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
                             context:context];
    } else if ([keyPath isEqualToString:PSMSceneCollectionKey]) {
        [self reloadCollectionData];
+   } else if ([keyPath isEqualToString:PSMOBSAutoConnect]) {
+       if ([[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
+           [[PSMOBSWebSocketController defaultController] connectToServer];
+       }
    }
 }
 

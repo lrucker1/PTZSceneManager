@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PSMCameraCollectionWindowController : NSWindowController <NSCollectionViewDataSource>
+@interface PSMCameraCollectionWindowController : NSWindowController <NSCollectionViewDataSource, NSOpenSavePanelDelegate>
 
 @end
 

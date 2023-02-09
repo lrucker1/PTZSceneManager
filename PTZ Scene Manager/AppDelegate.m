@@ -20,7 +20,6 @@
 #import "PSMOBSWebSocketController.h"
 #import "PSMAppPreferencesWindowController.h"
 
-static NSString *PTZ_SettingsFilePathKey = @"PTZSettingsFilePath";
 NSString *PSMSceneCollectionKey = @"SceneCollections";
 
 @interface AppDelegate ()
@@ -42,19 +41,13 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
        PSMOBSURLString:@"ws://localhost:4455",
        @"WebSockets":@"WebSockets", // Prefs window textfield "Null Placeholder" key.
     }];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:PTZ_SettingsFilePathKey] == nil) {
-        NSString *path = [@"~/Library/Application Support/PTZOptics/settings.ini" stringByExpandingTildeInPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-            [[NSUserDefaults standardUserDefaults] setObject:path forKey:PTZ_SettingsFilePathKey];
-        }
-    }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     [self loadAllCameras];
     if ([self.windowControllers count] == 0) {
-        [self showPrefs:nil];
+        [self showCameraCollection:nil];
     }
     [[PSMOBSWebSocketController defaultController] setDelegate:self];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
@@ -70,6 +63,40 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
 
 - (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app {
     return YES;
+}
+
+- (NSString *)applicationSupportDirectory {
+    NSString *executableName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
+    NSError *error;
+    
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    if ([paths count] == 0) {
+        NSLog(@"NSSearchPathForDirectoriesInDomains failed");
+        return nil;
+    }
+    
+    NSString *resolvedPath = [paths objectAtIndex:0];
+    resolvedPath = [resolvedPath
+                    stringByAppendingPathComponent:executableName];
+    
+    // Create the whole path, down to Snapshots, if needed.
+    NSString *pathToCreate = [resolvedPath stringByAppendingPathComponent:@"snapshots"];
+    // Create the path if it doesn't exist
+    BOOL success = [[NSFileManager defaultManager]
+                    createDirectoryAtPath:pathToCreate
+                    withIntermediateDirectories:YES
+                    attributes:nil
+                    error:&error];
+    if (!success)  {
+        NSLog(@"Error creating app directory %@", error);
+        return nil;
+    }
+    
+    return resolvedPath;
+}
+
+- (NSString *)snapshotsDirectory {
+    return [[self applicationSupportDirectory] stringByAppendingPathComponent:@"snapshots"];
 }
 
 - (IBAction)showPrefs:(id)sender {
@@ -88,22 +115,51 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
   //  self.prefsController.window.restorationClass = [self class];
 }
 
+#pragma mark cameras
+
+- (void)createWindowForCamera:(PTZPrefCamera *)prefCamera {
+    self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
+    prefCamera.camera = [prefCamera loadCameraIfNeeded];
+    PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
+    [wc.window orderFront:nil];
+    [self.windowControllers addObject:wc];
+}
+
+// Load cameras from prefs.
 - (void)loadAllCameras {
-    NSArray *cameraList = [self cameraList];
-    self.windowControllers = [NSMutableSet set];
-    self.mutablePrefCameras = [NSMutableDictionary dictionary];
+    NSArray *cameraList = [[NSUserDefaults standardUserDefaults] arrayForKey:PTZ_LocalCamerasKey];
+    
+    if (self.windowControllers == nil) {
+        self.windowControllers = [NSMutableSet set];
+    }
+    if (self.mutablePrefCameras == nil) {
+        self.mutablePrefCameras = [NSMutableDictionary dictionary];
+    }
 
     for (NSDictionary *cameraInfo in cameraList) {
         PTZPrefCamera *prefCamera = [[PTZPrefCamera alloc] initWithDictionary:cameraInfo];
-        if ([prefCamera.cameraname length] > 0) {
-            self.mutablePrefCameras[prefCamera.cameraname] = prefCamera;
-        }
-        prefCamera.camera = [prefCamera loadCameraIfNeeded];;
-        PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
-        [wc.window orderFront:nil];
-        [self.windowControllers addObject:wc];
+        self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
+        [self createWindowForCamera:prefCamera];
     }
-    // Save the defaults to pick up any additions to the dictionary.
+    // Save the defaults to pick up any changes to the dictionary.
+    [self savePrefCameras];
+}
+
+// Sync with the prefs from Camera Collection, which may include cameras that already exist.
+- (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras {
+    if (self.windowControllers == nil) {
+        [self loadAllCameras];
+        return;
+    }
+    if (self.mutablePrefCameras == nil) {
+        self.mutablePrefCameras = [NSMutableDictionary dictionary];
+    }
+    for (PTZPrefCamera *prefCamera in importedPrefCameras) {
+        if (self.mutablePrefCameras[prefCamera.camerakey] == nil) {
+            self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
+            [self createWindowForCamera:prefCamera];
+        }
+    }
     [self savePrefCameras];
 }
 
@@ -123,7 +179,11 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
 
 - (IBAction)connectToOBS:(id)sender {
     // TODO: make it a toggle item connect/disconnect?
-    [[PSMOBSWebSocketController defaultController] connectToServer];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
+        [self showPrefs:nil]; // TODO: and open the OBS panel. Standard rant here.
+    } else {
+        [[PSMOBSWebSocketController defaultController] connectToServer];
+    }
 }
 
 - (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock {
@@ -154,53 +214,6 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
     doneBlock((button == NSAlertFirstButtonReturn));
 }
 
-#pragma mark PTZOptics
-
-- (NSString *)ptzopticsSettingsFilePath {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:PTZ_SettingsFilePathKey];
-}
-
-// path/to/settings.ini. Should be a subdir of ~/Library/Application Support/PTZOptics, not OBS - that's the wrong format!
-- (void)setPtzopticsSettingsFilePath:(NSString *)newPath {
-    NSString *oldPath = self.ptzopticsSettingsFilePath;
-    if (![oldPath isEqualToString:newPath]) {
-        [[NSUserDefaults standardUserDefaults] setObject:newPath forKey:PTZ_SettingsFilePathKey];
-    }
-}
-
-// should contain settings.ini, downloads folder, and backup settingsXX.ini
-- (NSString *)ptzopticsSettingsDirectory {
-    return [[self ptzopticsSettingsFilePath] stringByDeletingLastPathComponent];
-}
-
-// Although you can set a custom downloads path in PTZOptics ("General:snapshotpath"), the app ignores it and always uses the hardcoded #define value.
-- (NSString *)ptzopticsDownloadsDirectory {
-    NSString *rootPath = self.ptzopticsSettingsDirectory;
-    if (rootPath != nil) {
-        return [NSString pathWithComponents:@[rootPath, @"downloads"]];
-    }
-    return nil;
-}
-
-#pragma mark PTZOptics settings
-
-- (void)applyPrefChanges {
-    if (self.windowControllers == nil) {
-        [self loadAllCameras];
-        return;
-    }
-    // TODO: handle camera list changes.
-}
-
-- (NSArray *)cameraList {
-    NSArray *cameras = [[NSUserDefaults standardUserDefaults] arrayForKey:PTZ_LocalCamerasKey];
-    
-    if ([cameras count] > 0) {
-        return cameras;
-    }
-
-    return nil;
-}
 
 @end
 

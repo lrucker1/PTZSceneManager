@@ -8,6 +8,7 @@
 #import "PTZPrefCamera.h"
 #import "PTZCamera.h"
 #import "PTZCameraSceneRange.h"
+#import "AppDelegate.h"
 
 static NSString *PSM_PanPlusSpeed = @"panPlusSpeed";
 static NSString *PSM_TiltPlusSpeed = @"tiltPlusSpeed";
@@ -166,7 +167,35 @@ PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
     self.lastVisibleScene = NSMaxRange(csRange.range) - 1;
 }
 
+#pragma mark images
+
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[NSApp delegate];
+}
+
+- (NSImage *)snapshotAtIndex:(NSInteger)index {
+    NSString *rootPath = [self.appDelegate snapshotsDirectory];
+    NSString *filename = [NSString stringWithFormat:@"snapshot_%@_%d.jpg", self.camerakey, (int)index];
+    NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
+    return [[NSImage alloc] initWithContentsOfFile:path];
+}
+
+- (void)saveSnapshotAtIndex:(NSInteger)index withData:(NSData *)imgData {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *rootPath = [self.appDelegate snapshotsDirectory];
+        NSString *filename = nil;
+        if (index >= 0) {
+            filename = [NSString stringWithFormat:@"snapshot_%@_%ld.jpg", self.camerakey, index];
+        } else {
+            filename = [NSString stringWithFormat:@"snapshot_%@.jpg", self.camerakey];
+        }
+        NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
+        [imgData writeToFile:path atomically:YES];
+    });
+}
+
 #pragma mark wrappers
+
 - (NSString *)prefKeyForKey:(NSString *)key {
     return [NSString stringWithFormat:@"[%@].%@", self.camerakey, key];
 }
