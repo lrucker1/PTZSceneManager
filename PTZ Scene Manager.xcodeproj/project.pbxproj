@@ -11,6 +11,10 @@
 		940FCB42298F079F008FD02F /* LARSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCB41298F079F008FD02F /* LARSplitViewController.m */; };
 		940FCC4A29918A1B008FD02F /* PTZCameraOpener.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC4829918A1A008FD02F /* PTZCameraOpener.m */; };
 		940FCC5029922346008FD02F /* PTZStartStopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC4F29922346008FD02F /* PTZStartStopButton.m */; };
+		940FCC542992EDE5008FD02F /* PSMCameraCollectionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC522992EDE5008FD02F /* PSMCameraCollectionWindowController.m */; };
+		940FCC552992EDE5008FD02F /* PSMCameraCollectionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 940FCC532992EDE5008FD02F /* PSMCameraCollectionWindowController.xib */; };
+		940FCC592992F0A3008FD02F /* PSMCameraCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC572992F0A3008FD02F /* PSMCameraCollectionItem.m */; };
+		940FCC5A2992F0A3008FD02F /* PSMCameraCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 940FCC582992F0A3008FD02F /* PSMCameraCollectionItem.xib */; };
 		946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */; };
 		946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */; };
 		946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */; };
@@ -73,6 +77,12 @@
 		940FCC4929918A1A008FD02F /* PTZCameraOpener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZCameraOpener.h; sourceTree = "<group>"; };
 		940FCC4E29922345008FD02F /* PTZStartStopButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZStartStopButton.h; sourceTree = "<group>"; };
 		940FCC4F29922346008FD02F /* PTZStartStopButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZStartStopButton.m; sourceTree = "<group>"; };
+		940FCC512992EDE5008FD02F /* PSMCameraCollectionWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraCollectionWindowController.h; sourceTree = "<group>"; };
+		940FCC522992EDE5008FD02F /* PSMCameraCollectionWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraCollectionWindowController.m; sourceTree = "<group>"; };
+		940FCC532992EDE5008FD02F /* PSMCameraCollectionWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMCameraCollectionWindowController.xib; sourceTree = "<group>"; };
+		940FCC562992F0A3008FD02F /* PSMCameraCollectionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraCollectionItem.h; sourceTree = "<group>"; };
+		940FCC572992F0A3008FD02F /* PSMCameraCollectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraCollectionItem.m; sourceTree = "<group>"; };
+		940FCC582992F0A3008FD02F /* PSMCameraCollectionItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMCameraCollectionItem.xib; sourceTree = "<group>"; };
 		946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSMCameraStateWindowController.xib; sourceTree = "<group>"; };
 		946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraStateWindowController.h; sourceTree = "<group>"; };
 		946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraStateWindowController.m; sourceTree = "<group>"; };
@@ -246,6 +256,12 @@
 				94CEBAF82984934200D3C8DC /* PSMAppPreferencesWindowController.h */,
 				94CEBAF92984934200D3C8DC /* PSMAppPreferencesWindowController.m */,
 				94CEBAFA2984934200D3C8DC /* PSMAppPreferencesWindowController.xib */,
+				940FCC512992EDE5008FD02F /* PSMCameraCollectionWindowController.h */,
+				940FCC522992EDE5008FD02F /* PSMCameraCollectionWindowController.m */,
+				940FCC532992EDE5008FD02F /* PSMCameraCollectionWindowController.xib */,
+				940FCC562992F0A3008FD02F /* PSMCameraCollectionItem.h */,
+				940FCC572992F0A3008FD02F /* PSMCameraCollectionItem.m */,
+				940FCC582992F0A3008FD02F /* PSMCameraCollectionItem.xib */,
 				94747E5F297B971100309752 /* PTZProgressGroup.h */,
 				94747E60297B971100309752 /* PTZProgressGroup.m */,
 				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
@@ -400,6 +416,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				940FCC5A2992F0A3008FD02F /* PSMCameraCollectionItem.xib in Resources */,
 				94747E82297BBD4800309752 /* PSMSceneCollectionItem.xib in Resources */,
 				94CEBB46298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.xib in Resources */,
 				946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */,
@@ -407,6 +424,7 @@
 				94747E34297B951200309752 /* PSMSceneWindowController.xib in Resources */,
 				94747E24297B94F900309752 /* Assets.xcassets in Resources */,
 				94747E27297B94F900309752 /* MainMenu.xib in Resources */,
+				940FCC552992EDE5008FD02F /* PSMCameraCollectionWindowController.xib in Resources */,
 				94CEBAFC2984934200D3C8DC /* PSMAppPreferencesWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +453,8 @@
 				94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */,
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
 				94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */,
+				940FCC592992F0A3008FD02F /* PSMCameraCollectionItem.m in Sources */,
+				940FCC542992EDE5008FD02F /* PSMCameraCollectionWindowController.m in Sources */,
 				946346CB297F5DE70015BA8F /* NSColorAdditions.m in Sources */,
 				94890E4029827619006EAB75 /* easywsclient.cpp in Sources */,
 				94747E73297B9C5F00309752 /* PTZSettingsFile.m in Sources */,

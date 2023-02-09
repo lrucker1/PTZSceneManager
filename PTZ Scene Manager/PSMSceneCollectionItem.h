@@ -10,17 +10,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class PTZCamera;
-@class PTZSettingsFile;
+@class PTZPrefCamera;
 
 @interface PSMSceneCollectionItem : NSCollectionViewItem  <NSControlTextEditingDelegate>
 
 @property NSImage *image;
 @property NSString *imagePath;
 @property NSString *devicename;
-@property NSString *sceneName;
+@property NSString * _Nullable sceneName;
 @property NSInteger sceneNumber;
 @property PTZCamera *camera;
-@property PTZSettingsFile *sourceSettings;
+@property PTZPrefCamera *prefCamera;
 
 - (IBAction)sceneSet:(id)sender;
 - (IBAction)sceneRecall:(id)sender;

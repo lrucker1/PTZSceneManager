@@ -122,10 +122,10 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
 
 @implementation PTZCameraOpener_Serial
 
-- (instancetype)initWithCamera:(PTZCamera *)camera ttydev:(NSString *)ttydev {
+- (instancetype)initWithCamera:(PTZCamera *)camera devicename:(NSString *)devicename {
     self = [super initWithCamera:camera];
     if (self) {
-        _ttydev = ttydev;
+        _devicename = devicename;
     }
     return self;
 }
@@ -135,6 +135,17 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
 }
 
 - (void)loadCameraWithCompletionHandler:(PTZDoneBlock)handler {
+    if (self.ttydev == nil) {
+        self.ttydev = [PTZCameraOpener serialPortForDevice:self.devicename];
+    }
+    if (self.ttydev == nil) {
+        if (handler) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                handler(NO);
+            });
+        }
+        return;
+    }
     dispatch_async(self.cameraQueue, ^{
         BOOL success = (VISCA_open_serial(self->_pIface, [self.ttydev UTF8String]) == VISCA_SUCCESS);
         if (success) {

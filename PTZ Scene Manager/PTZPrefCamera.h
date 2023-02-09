@@ -48,6 +48,10 @@ PREF_VALUE_NSINT_PROPERTIES(maxColumnCount, MaxColumnCount)
 - (void)setPrefValue:(id)obj forKey:(NSString *)key;
 - (void)removePrefValueForKey:(NSString *)key;
 
+- (NSString *)sceneNameAtIndex:(NSInteger)index;
+- (void)setSceneName:(NSString *)name atIndex:(NSInteger)index;
+- (void)setSceneNames:(NSArray *)names startingIndex:(NSInteger)index;
+
 @end
 
 NS_ASSUME_NONNULL_END

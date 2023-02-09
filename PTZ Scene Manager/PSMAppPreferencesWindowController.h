@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString *PTZ_LocalCamerasKey;
+
 @interface PSMAppPreferencesWindowController : NSWindowController <NSOpenSavePanelDelegate, NSTableViewDelegate>
 
 @end

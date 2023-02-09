@@ -15,7 +15,7 @@
 
 static PSMAppPreferencesWindowController *selfType;
 
-static NSString *PTZ_LocalCamerasKey = @"LocalCameras";
+NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
 @interface PSMRangeCollectionInfo : NSObject
 @property NSString *name;

@@ -28,10 +28,15 @@ typedef enum {
 @end
 
 extern NSString *PSMOBSSceneInputDidChange;
+extern NSString *PSMOBSSessionDidBegin;
 extern NSString *PSMOBSSessionDidEnd;
 extern NSString *PSMOBSSessionAuthorizationFailedKey;
 extern NSString *PSMOBSAutoConnect;
 extern NSString *PSMOBSURLString;
+extern NSString *PSMOBSGetSourceSnapshotNotification;
+extern NSString *PSMOBSImageDataKey;
+extern NSString *PSMOBSSourceNameKey;
+extern NSString *PSMOBSSnapshotIndexKey;
 
 @interface PSMOBSWebSocketController : NSObject
 
@@ -41,6 +46,8 @@ extern NSString *PSMOBSURLString;
 + (PSMOBSWebSocketController *)defaultController;
 
 - (void)requestNotificationsForCamera:(PTZPrefCamera *)camera;
+// Posts PSMOBSGetSourceSnapshotNotification on success.
+- (BOOL)requestSnapshotForCameraName:(NSString *)cameraName index:(NSInteger)index preferredWidth:(NSInteger)width;
 - (void)connectToServer;
 - (void)deleteKeychainPasswords;
 

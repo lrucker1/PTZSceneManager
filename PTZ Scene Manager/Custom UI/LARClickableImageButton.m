@@ -79,6 +79,8 @@ RectUtil_CenterRect(NSRect rect, CGFloat width, CGFloat height)
     NSRect rect = [super titleRectForBounds:bounds];
     NSRect imgRect = [self imageRectForBounds:bounds];
     NSSize size = [self.attributedTitle size];
+    // Make it hittable even for short strings.
+    rect.size.width = MAX(30, rect.size.width);
     rect = RectUtil_CenterRect(rect, size.width, size.height);
     rect.origin.y = imgRect.origin.y;
     if (rect.size.width > bounds.size.width) {

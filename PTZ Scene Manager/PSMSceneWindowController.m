@@ -12,7 +12,6 @@
 #import "PTZStartStopButton.h"
 #import "PSMCameraStateWindowController.h"
 #import "PSMSceneCollectionItem.h"
-#import "PTZSettingsFile.h"
 #import "PSMOBSWebSocketController.h"
 #import "RTSPViewController.h"
 #import "AppDelegate.h"
@@ -102,10 +101,10 @@ typedef enum {
     self.titlebarViewController.layoutAttribute = NSLayoutAttributeLeft;
     // Don't show static snapshots until we know whether we'll have a video.
     if (self.camera.isSerial) {
-        // No snapshot, no live view :(
-        self.showStaticSnapshot = NO;
+        // No live view, but we can get snapshots from OBS and save them.
+        self.showStaticSnapshot = YES;
     } else {
-        [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.deviceAddr] onDone:^(BOOL success) {
+        [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.deviceName] onDone:^(BOOL success) {
             self.showStaticSnapshot = (success == NO);
             if (self.showStaticSnapshot && self.lastRecalledItem != nil) {
                 // Picked up anything we missed.
@@ -143,6 +142,11 @@ typedef enum {
     self.boxColor = self.cameraBox.borderColor;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSSceneInputDidChange object:self.prefCamera];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
+    if ([[PSMOBSWebSocketController defaultController] connected]) {
+        [self onOBSSessionDidBegin:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidBegin:) name:PSMOBSSessionDidBegin object:nil];
+    }
     [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
 }
 
@@ -165,6 +169,18 @@ typedef enum {
     }
 }
 
+
+- (void)onOBSSessionDidBegin:(NSNotification *)note {
+    if (self.showStaticSnapshot && self.lastRecalledItem.image == nil) {
+        [self.camera fetchSnapshotAtIndex:-1 onDone:^(NSData *data, NSInteger index) {
+            if (data != nil) {
+                NSImage *image = [[NSImage alloc] initWithData:data];
+                [self.rtspViewController setStaticImage:image];
+            }
+        }];
+    }
+}
+
 - (void)onOBSSessionDidEnd:(NSNotification *)note {
     // Warning color means we used to know, but now we don't.
     // Orange is too close to red. Grays don't stand out enough.
@@ -184,7 +200,7 @@ typedef enum {
         [self.collectionView reloadData];
         // Update any values that are displayed in this window. Don't spam the camera; users can hit Fetch in Camera State.
         // There is no Inq for MotionState.
-//        [camera updateAutofocusState:nil];
+        [camera updateAutofocusState:nil];
     }];
 }
 
@@ -530,11 +546,14 @@ typedef enum {
     NSString *rootPath = [self.appDelegate ptzopticsDownloadsDirectory];
     NSString *filename = [NSString stringWithFormat:@"snapshot_%@%d.jpg", devicename, (int)index];
     NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
-    PTZSettingsFile *sourceSettings = self.appDelegate.sourceSettings;
 
     PSMSceneCollectionItem *item = [PSMSceneCollectionItem new];
     item.imagePath = path;
-    item.sceneName = [sourceSettings nameForScene:index camera:devicename];
+    item.sceneName = [self.prefCamera sceneNameAtIndex:index];
+    if ([item.sceneName length] == 0) {
+        // show the null placeholder.
+        item.sceneName = nil;
+    }
     item.image = [[NSImage alloc] initWithContentsOfFile:path];
     if (item.image == nil) {
         item.image = [NSImage imageNamed:@"Placeholder"];
@@ -542,7 +561,7 @@ typedef enum {
     item.sceneNumber = index;
     item.camera = self.camera;
     item.devicename = devicename;
-    item.sourceSettings = sourceSettings;
+    item.prefCamera = self.prefCamera;
     return item;
 }
 
@@ -640,7 +659,7 @@ typedef enum {
     } else if ([keyPath isEqualToString:@"prefCamera.maxColumnCount"]) {
         [self updateColumnCount];
     } else if ([keyPath isEqualToString:@"lastRecalledItem"]) {
-        if (self.showStaticSnapshot) {
+        if (self.showStaticSnapshot && self.lastRecalledItem.image != nil) {
             [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
         }
     }

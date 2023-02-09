@@ -8,7 +8,6 @@
 #import <Cocoa/Cocoa.h>
 #import "PSMOBSWebSocketController.h"
 
-@class PTZSettingsFile;
 @class PTZPrefCamera;
 
 extern NSString *PSMSceneCollectionKey;
@@ -17,7 +16,6 @@ void PTZLog(NSString *format, ...);
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate>
 
-@property (strong) PTZSettingsFile *sourceSettings;
 @property NSString *ptzopticsSettingsFilePath;
 @property BOOL canEditSceneNames;
 

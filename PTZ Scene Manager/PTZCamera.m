@@ -11,6 +11,7 @@
 #import "PTZCameraConfig.h"
 #import "PTZProgressGroup.h"
 #import "PTZCameraOpener.h"
+#import "PSMOBSWebSocketController.h"
 #import "AppDelegate.h"
 #import "libvisca.h"
 
@@ -47,10 +48,13 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 
 @interface PTZCamera ()
 
-@property NSString *deviceAddr;
+@property NSString *deviceName;
 @property BOOL batchOperationInProgress;
 @property BOOL ptzStateValid;
 @property PTZCameraOpener *cameraOpener;
+// Note: Properly, this should be an array.
+@property PTZSnapshotFetchDoneBlock obsSnapshotDoneBlock;
+@property BOOL useOBSSnapshot;
 
 @property VISCACamera_t camera;
 
@@ -83,10 +87,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 
 + (instancetype)cameraWithDeviceName:(NSString *)devicename isSerial:(BOOL)isSerial {
     if (isSerial) {
-        NSString *serialPortAddr = [PTZCameraOpener serialPortForDevice:devicename];
-        if (serialPortAddr) {
-            return [[self alloc] initWithTTY:serialPortAddr];
-        }
+        return [[self alloc] initWithDeviceName:devicename];
     } else {
         return [[self alloc] initWithIP:devicename];
     }
@@ -117,17 +118,18 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 - (instancetype)initWithIP:(NSString *)ipAddr {
     self = [self init];
     if (self) {
-        _deviceAddr = ipAddr;
+        _deviceName = ipAddr;
         _cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddr port:_cameraConfig.port];
     }
     return self;
 }
 
-- (instancetype)initWithTTY:(NSString *)ttydev {
+- (instancetype)initWithDeviceName:(NSString *)devicename {
     self = [self init];
     if (self) {
-        _deviceAddr = ttydev;
-        _cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self ttydev:ttydev];
+        _deviceName = devicename;
+        _cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename];
+        [self configUSBSnapshot];
     }
     return self;
 }
@@ -149,6 +151,11 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 
 - (BOOL)isSerial {
     return self.cameraOpener.isSerial;
+}
+
+- (void)configUSBSnapshot {
+    _useOBSSnapshot = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSnapshot:) name:PSMOBSGetSourceSnapshotNotification object:nil];
 }
 
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock {
@@ -881,7 +888,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     };
     NSInteger rangeOffset = [self.progress.userInfo[PTZProgressStartKey] integerValue];
     self.progress.cancellable = NO;
-    self.progress.localizedAdditionalDescription = [NSString stringWithFormat:@"Connecting to camera %@…", self.deviceAddr];
+    self.progress.localizedAdditionalDescription = [NSString stringWithFormat:@"Connecting to camera %@…", self.deviceName];
     [self loadCameraWithCompletionHandler:^() {
         self.progress.localizedAdditionalDescription = nil;
         self.progress.cancellable = YES;
@@ -898,7 +905,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (NSString *)snapshotURL {
     // I do know this is not the recommended way to make an URL! :)
-    return [NSString stringWithFormat:@"http://%@:80/snapshot.jpg", [self deviceAddr]];
+    return [NSString stringWithFormat:@"http://%@:80/snapshot.jpg", [self deviceName]];
 }
 
 - (AppDelegate *)appDelegate {
@@ -909,41 +916,79 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     [self fetchSnapshotAtIndex:-1];
 }
 
-// Camera does not need to be open; this doesn't use sockets.
 - (void)fetchSnapshotAtIndex:(NSInteger)index {
     [self fetchSnapshotAtIndex:index onDone:nil];
 }
 
+- (void)onOBSSnapshot:(NSNotification *)note {
+    NSDictionary *userInfo = [note userInfo];
+    if ([self.obsSourceName isEqualToString:userInfo[PSMOBSSourceNameKey]]) {
+        NSData *data = userInfo[PSMOBSImageDataKey];
+        if (data) {
+            NSInteger index = [userInfo[PSMOBSSnapshotIndexKey] integerValue];
+            [self writeSnapshotImageData:data atIndex:index];
+            if (self.obsSnapshotDoneBlock) {
+                self.obsSnapshotDoneBlock(data, index);
+            }
+            self.obsSnapshotDoneBlock = nil;
+        }
+    }
+}
+
+- (void)writeSnapshotImageData:(NSData *)data atIndex:(NSInteger)index {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *rootPath = (index >= 0) ? [self.appDelegate ptzopticsDownloadsDirectory] : nil;
+        if ([rootPath length] > 0) {
+            NSString *filename = [NSString stringWithFormat:@"snapshot_%@%@.jpg", [self deviceName], (index >= 0) ? @(index) : @""];
+            NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
+            //PTZLog(@"saving snapshot to %@", path);
+            [data writeToFile:path atomically:YES];
+        }
+        self.snapshotImage = [[NSImage alloc] initWithData:data];
+    });
+}
+
 - (void)fetchSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
+    if (self.useOBSSnapshot) {
+        [self fetchOBSSnapshotAtIndex:index onDone:doneBlock];
+     } else {
+        [self fetchIPSnapshotAtIndex:index onDone:doneBlock];
+    }
+}
+
+- (void)fetchOBSSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
+    if (self.obsSnapshotDoneBlock) {
+        self.obsSnapshotDoneBlock(nil, -1);
+    }
+    self.obsSnapshotDoneBlock = doneBlock;
+    [[PSMOBSWebSocketController defaultController] requestSnapshotForCameraName:self.obsSourceName index:index preferredWidth:480];
+}
+
+// IP Camera does not need to be open; this doesn't use sockets.
+- (void)fetchIPSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
+    if (self.useOBSSnapshot) {
+        NSLog(@"fetchIPSnapshot called on OBS snapshot camera");
+        return;
+    }
     // snapshot.jpg is generated on demand. If index >= 0, write the scene snapshot to the downloads folder.
     NSString *url = [self snapshotURL];
-    NSString *cameraIP = [self deviceAddr];
-    NSString *rootPath = (index >= 0) ? [self.appDelegate ptzopticsDownloadsDirectory] : nil;
     // Just say no to caching; even though the cameras tell us not to cache (the whole "on demand" bit), that's an extra query we can avoid. Also works around an intermittent localhost bug that was returning very very stale cached images.
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
 
     [[[NSURLSession sharedSession] dataTaskWithRequest:request
                                  completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data != nil) {
-            // PTZ app only shows 6, but being able to see what got saved is useful.
-            if ([rootPath length] > 0) {
-                NSString *filename = [NSString stringWithFormat:@"snapshot_%@%d.jpg", cameraIP, (int)index];
-                NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
-                //PTZLog(@"saving snapshot to %@", path);
-                [data writeToFile:path atomically:YES];
+            [self writeSnapshotImageData:data atIndex:index];
+            if (doneBlock) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.snapshotImage = [[NSImage alloc] initWithData:data];
-                    if (doneBlock) {
-                        doneBlock(data);
-                    }
+                    doneBlock(data, index);
                 });
-           }
+            }
         } else {
-            NSLog(@"Failed to get snapshot: error %@", error);
+            NSLog(@"Failed to get snapshot: trying OBS %@", error);
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (doneBlock) {
-                    doneBlock(nil);
-                }
+                [self configUSBSnapshot];
+                [self fetchOBSSnapshotAtIndex:index onDone:doneBlock];
             });
         }
 
@@ -1354,7 +1399,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             // For "continue" log statements.
             fprintf(stdout, "%s", [log UTF8String]);
         }
-        log = [NSString stringWithFormat:@"%@ : ", ptzCamera.deviceAddr];
+        log = [NSString stringWithFormat:@"%@ : ", ptzCamera.deviceName];
         log = [log stringByAppendingFormat:@"recall %d", sceneIndex + fromOffset];
         if (VISCA_memory_recall(iface, camera, sceneIndex + fromOffset) != VISCA_SUCCESS) {
             log = [log stringByAppendingFormat:@" failed to send recall command %d\n", sceneIndex + fromOffset];

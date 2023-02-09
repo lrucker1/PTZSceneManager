@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)validateFileWithPath:(NSString *)path error:(NSError * _Nullable *)error;
 
-- (NSArray *)cameraInfo;
+- (NSArray<NSDictionary *> *)cameraInfo;
 - (NSString *)nameForScene:(NSInteger)scene camera:(NSString *)ipAddr;
 - (void)setName:(NSString *)name forScene:(NSInteger)scene camera:(NSString *)ipAddr;
 

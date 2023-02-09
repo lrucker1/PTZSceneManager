@@ -19,6 +19,22 @@ static int _error_callback(const char *format, ...)
     return ret;
 }
 
+// Only for values, not keys, which should be in the proper format already.
+@interface NSString (PTZIniParser)
++ (instancetype) ptz_stringWithINIString:(const char *)cString;
+- (const char *)ptz_INIString;
+@end
+
+@implementation NSString (PTZIniParser)
++ (instancetype) ptz_stringWithINIString:(const char *)cString {
+    return [self stringWithCString:cString encoding:NSNonLossyASCIIStringEncoding];
+}
+
+- (const char *)ptz_INIString {
+    return [self cStringUsingEncoding:NSNonLossyASCIIStringEncoding];
+}
+@end
+
 @implementation PTZIniParser
 
 + (void)initialize {
@@ -62,7 +78,7 @@ static int _error_callback(const char *format, ...)
 // Returns @"" if key is missing. @"" is also a valid result.
 - (NSString *)stringForKey:(NSString *)aKey {
     const char *result = iniparser_getstring(self.ini, [aKey UTF8String], "");
-    return [NSString stringWithUTF8String:result];
+    return [NSString ptz_stringWithINIString:result];
 }
 
 // Returns nil if key is missing.
@@ -71,11 +87,11 @@ static int _error_callback(const char *format, ...)
     if (result == NULL) {
         return nil;
     }
-    return [NSString stringWithUTF8String:result];
+    return [NSString ptz_stringWithINIString:result];
 }
 
 - (BOOL)setString:(NSString *)string forKey:(NSString *)key {
-    return iniparser_set(self.ini, [key UTF8String], [string UTF8String]) == 0;
+    return iniparser_set(self.ini, [key UTF8String], [string ptz_INIString]) == 0;
 }
 
 - (NSInteger)integerForKey:(NSString *)aKey {

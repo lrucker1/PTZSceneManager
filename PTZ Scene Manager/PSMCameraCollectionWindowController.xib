@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PSMCameraCollectionWindowController">
+            <connections>
+                <outlet property="collectionView" destination="86i-No-Ik7" id="KpD-5r-dxd"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Cameras" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="287"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpe-BU-pqn">
+                        <rect key="frame" x="-1" y="-1" width="482" height="250"/>
+                        <clipView key="contentView" drawsBackground="NO" id="3b0-wQ-dxd">
+                            <rect key="frame" x="1" y="1" width="480" height="248"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <collectionView translatesAutoresizingMaskIntoConstraints="NO" id="86i-No-Ik7">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="248"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="4" maximumNumberOfColumns="4" id="gLe-5K-AEx">
+                                        <size key="minimumItemSize" width="300" height="156"/>
+                                        <size key="maximumItemSize" width="300" height="156"/>
+                                    </collectionViewGridLayout>
+                                    <color key="primaryBackgroundColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="secondaryBackgroundColor" name="alternatingContentBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-2" id="dVV-pG-21h"/>
+                                    </connections>
+                                </collectionView>
+                            </subviews>
+                        </clipView>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="250" id="DyD-BU-jT5"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="lX0-kA-OKV"/>
+                        </constraints>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Mcg-Bg-YvV">
+                            <rect key="frame" x="-100" y="-100" width="233" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="fbH-Og-CsI">
+                            <rect key="frame" x="234" y="1" width="15" height="143"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="efr-xh-46C">
+                        <rect key="frame" x="13" y="250" width="227" height="32"/>
+                        <buttonCell key="cell" type="push" title="Import from PTZOptics Settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="06d-DC-gf4">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="importFromPTZOptics:" target="-2" id="ehV-Gi-Ece"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XSq-m0-c1N">
+                        <rect key="frame" x="238" y="250" width="136" height="32"/>
+                        <buttonCell key="cell" type="push" title="Import from OBS" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q3T-WH-k65">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="importFromOBS:" target="-2" id="dYp-ix-z3F"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="efr-xh-46C" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="10" id="F2D-3o-aJk"/>
+                    <constraint firstAttribute="trailing" secondItem="qpe-BU-pqn" secondAttribute="trailing" constant="-1" id="Fpt-Ki-DBC"/>
+                    <constraint firstItem="efr-xh-46C" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="W05-Vd-GIU"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XSq-m0-c1N" secondAttribute="trailing" constant="20" symbolic="YES" id="bca-jQ-MvS"/>
+                    <constraint firstItem="qpe-BU-pqn" firstAttribute="top" secondItem="efr-xh-46C" secondAttribute="bottom" constant="8" id="clS-VV-ON3"/>
+                    <constraint firstItem="XSq-m0-c1N" firstAttribute="firstBaseline" secondItem="efr-xh-46C" secondAttribute="firstBaseline" id="d15-rm-rP4"/>
+                    <constraint firstAttribute="bottom" secondItem="qpe-BU-pqn" secondAttribute="bottom" constant="-1" id="g0Z-eC-aCH"/>
+                    <constraint firstItem="qpe-BU-pqn" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="38" id="gSt-a2-xBz"/>
+                    <constraint firstItem="qpe-BU-pqn" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="-1" id="jSf-mb-eqB"/>
+                    <constraint firstItem="XSq-m0-c1N" firstAttribute="leading" secondItem="efr-xh-46C" secondAttribute="trailing" constant="12" symbolic="YES" id="y79-aH-zV5"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-80" y="114"/>
+        </window>
+    </objects>
+</document>

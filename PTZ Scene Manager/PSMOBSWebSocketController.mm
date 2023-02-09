@@ -21,11 +21,16 @@
 #import <PTZ_Scene_Manager-Swift.h>
 
 NSString *PSMOBSSceneInputDidChange = @"PSMOBSSceneInputDidChange";
+NSString *PSMOBSSessionDidBegin = @"PSMOBSSessionDidBegin";
 NSString *PSMOBSSessionDidEnd = @"PSMOBSSessionDidEnd";
 NSString *PSMOBSSessionAuthorizationFailedKey = @"PSMOBSSessionAuthorizationFailedKey";
 NSString *PSMOBSAutoConnect = @"OBSAutoConnect";
 NSString *PSMOBSURLString = @"OBSURLString";
 NSString *PSMOBSAccountName = @"OBSAccountName";
+NSString *PSMOBSGetSourceSnapshotNotification = @"PSMOBSGetSourceSnapshotNotification";
+NSString *PSMOBSImageDataKey = @"PSMOBSImageDataKey";
+NSString *PSMOBSSourceNameKey = @"PSMOBSSourceNameKey";
+NSString *PSMOBSSnapshotIndexKey = @"PSMOBSSnapshotIndexKey";
 
 static NSString *PSMOBSBundleID = @"com.obsproject.obs-studio";
 
@@ -315,6 +320,45 @@ typedef enum {
     }
 }
 
+- (void)handleSourceScreenshot:(NSDictionary *)dict {
+    NSString *requestID = dict[@"requestId"];
+    NSDictionary *responseData = dict[@"responseData"];
+    NSString *imageJsonData = responseData[@"imageData"];
+    if (imageJsonData) {
+        // Strip the prefix, it's not base64
+        NSArray *parts = [imageJsonData componentsSeparatedByString:@","];
+        NSData *data = [[NSData alloc] initWithBase64EncodedString:[parts lastObject] options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        if (data) {
+            parts = [requestID componentsSeparatedByString:@","];
+            NSString *sourceName = requestID;
+            NSInteger index = -1;
+            if ([parts count] == 2) {
+                sourceName = [parts lastObject];
+                index = [[parts firstObject] integerValue];
+            }
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:PSMOBSGetSourceSnapshotNotification
+             object:nil
+             userInfo:@{PSMOBSImageDataKey : data, PSMOBSSourceNameKey : sourceName, PSMOBSSnapshotIndexKey : @(index)}];
+        }
+    }
+}
+
+// TODO: Run GetVersion to make sure we can get a jpg.
+- (NSString *)jsonGetSourceScreenshot:(NSString *)sourceName requestID:(NSString *)requestID imageWidth:(NSInteger)imageWidth {
+    // options: 1920x1080 (1.777) 960x600 (1.6) 480x300 (1.6)
+    // imageWidth: ">= 8, <= 4096"
+    imageWidth = MAX(8, MIN(imageWidth, 4096));
+    NSDictionary *dict = @{@"op":@(6),
+                           @"d": @{@"requestType": @"GetSourceScreenshot",
+                                   @"requestId": requestID,
+                                   @"requestData": @{
+                                       @"sourceName": sourceName,
+                                       @"imageFormat": @"jpg",
+                                       @"imageWidth":@(imageWidth)}}};
+    return [self convertToJSON:dict];
+}
+
 - (NSString *)jsonGetSourceActive:(NSString *)sourceName {
     NSDictionary *dict = @{@"op":@(6),
                            @"d": @{@"requestType": @"GetSourceActive",
@@ -339,6 +383,16 @@ typedef enum {
     [self getSourceActive];
 }
 
+- (BOOL)requestSnapshotForCameraName:(NSString *)cameraName index:(NSInteger)index preferredWidth:(NSInteger)width {
+    if (!self.connected) {
+        return NO;
+    }
+    NSString *requestID = [NSString stringWithFormat:@"%ld,%@", index, cameraName];
+    NSString *json = [self jsonGetSourceScreenshot:cameraName requestID:requestID imageWidth:width];
+    [self sendString:json];
+    return YES;
+}
+
 - (void)handleInputList:(NSDictionary *)dict {
     [self getSourceActive];
 }
@@ -358,6 +412,10 @@ typedef enum {
         [self handleInputList:data[@"responseData"]];
     } else if ([type isEqualToString:@"GetSourceActive"]) {
         [self handleSourceActive:data];
+    } else if ([type isEqualToString:@"GetVersion"]) {
+        // supportedImageFormats
+    } else if ([type isEqualToString:@"GetSourceScreenshot"]) {
+        [self handleSourceScreenshot:data];
     }
 }
 
@@ -435,6 +493,7 @@ typedef enum {
     }
 }
 
+// WARNING! If you send anything before the identification is complete, OBS will drop you. Any user-facing methods (like the requests) need to be careful
 - (void)sendString:(NSString *)str {
     outgoing.push([str UTF8String]);
 }
@@ -451,6 +510,15 @@ typedef enum {
                                error:&error];
             [self handleJSON:msgObj];
         }
+    });
+}
+
+- (void)connectionDidBegin {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:PSMOBSSessionDidBegin
+         object:nil
+         userInfo:nil];
     });
 }
 
@@ -492,6 +560,7 @@ typedef enum {
             return;
         }
         self.running = YES;
+        [self connectionDidBegin];
         [self stopObservingRunningApps];
         while (self.running) {
             if (ws->getReadyState() == WebSocket::CLOSED)

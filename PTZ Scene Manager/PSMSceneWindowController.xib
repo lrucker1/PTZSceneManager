@@ -165,6 +165,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="2" id="mpd-FO-BpP"/>
                                                     </constraints>
                                                 </view>
+                                                <color key="fillColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoW-QO-NIa">
                                                 <rect key="frame" x="5" y="1" width="222" height="14"/>

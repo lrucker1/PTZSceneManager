@@ -13,9 +13,11 @@ static NSString *PSM_PanPlusSpeed = @"panPlusSpeed";
 static NSString *PSM_TiltPlusSpeed = @"tiltPlusSpeed";
 static NSString *PSM_ZoomPlusSpeed = @"zoomPlusSpeed";
 static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
+static NSString *PSM_SceneNamesKey = @"sceneNames";
 
 @interface PTZPrefCamera ()
 @property BOOL isSerial;
+@property NSString *camerakey;
 @end
 
 @implementation PTZPrefCamera
@@ -37,11 +39,18 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
     }];
 }
 
++ (NSString *)generateKey {
+    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"PTZPrefCameraNextKeyIndex"];
+    [[NSUserDefaults standardUserDefaults] setInteger:index+1 forKey:@"PTZPrefCameraNextKeyIndex"];
+    return [NSString stringWithFormat:@"CameraKey_%ld", index];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
         _cameraname = @"Camera";
         _devicename = @"0.0.0.0";
+        _camerakey = [self.class generateKey];
         _originalDeviceName = _devicename;
     }
     return self;
@@ -51,6 +60,7 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
     self = [super init];
     if (self) {
         _cameraname = dict[@"cameraname"];
+        _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
         _devicename = dict[@"devicename"];
         _originalDeviceName = dict[@"original"] ?: _devicename;
         _isSerial = [dict[@"cameratype"] boolValue];
@@ -59,12 +69,13 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
 }
 
 - (NSDictionary *)dictionaryValue {
-    return @{@"cameraname":_cameraname, @"devicename":_devicename, @"original": _originalDeviceName, @"cameratype":@(_isSerial)};
+    return @{@"cameraname":_cameraname, @"camerakey":_camerakey, @"devicename":_devicename, @"original":_originalDeviceName, @"cameratype":@(_isSerial)};
 }
 
 - (PTZCamera *)loadCameraIfNeeded {
     if (!self.camera) {
         self.camera = [PTZCamera cameraWithDeviceName:self.devicename isSerial:self.isSerial];
+        self.camera.obsSourceName = self.cameraname;
     }
     return self.camera;
 }
@@ -157,7 +168,7 @@ PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
 
 #pragma mark wrappers
 - (NSString *)prefKeyForKey:(NSString *)key {
-    return [NSString stringWithFormat:@"[%@].%@", self.cameraname, key];
+    return [NSString stringWithFormat:@"[%@].%@", self.camerakey, key];
 }
 
 - (id)prefValueForKey:(NSString *)key {
@@ -207,6 +218,38 @@ PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
     [self willChangeValueForKey:key];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:camKey];
     [self didChangeValueForKey:key];
+}
+
+- (NSString *)sceneNameAtIndex:(NSInteger)index {
+    NSDictionary *dict = [self prefValueForKey:PSM_SceneNamesKey];
+    NSString *key = [@(index) stringValue];
+    return dict[key];
+}
+
+- (void)setSceneName:(NSString *)name atIndex:(NSInteger)index {
+    NSDictionary *dict = [self prefValueForKey:PSM_SceneNamesKey];
+    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    NSString *key = [@(index) stringValue];
+    if ([name length] > 0) {
+        mutableDict[key] = name;
+    } else {
+        [mutableDict removeObjectForKey:key];
+    }
+    [self setPrefValue:mutableDict forKey:PSM_SceneNamesKey];
+}
+
+// Import utility.
+- (void)setSceneNames:(NSArray *)names startingIndex:(NSInteger)index {
+    NSDictionary *dict = [self prefValueForKey:PSM_SceneNamesKey];
+    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    for (NSString *name in names) {
+        if ([name length] > 0) {
+            NSString *key = [@(index) stringValue];
+            mutableDict[key] = name;
+        }
+        index++;
+    }
+    [self setPrefValue:mutableDict forKey:PSM_SceneNamesKey];
 }
 
 @end

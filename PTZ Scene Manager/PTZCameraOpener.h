@@ -36,8 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PTZCameraOpener_Serial : PTZCameraOpener
 
 @property NSString *ttydev;
+@property NSString *devicename;
 
-- (instancetype)initWithCamera:(PTZCamera *)camera ttydev:(NSString *)ttydev;
+- (instancetype)initWithCamera:(PTZCamera *)camera devicename:(NSString *)devicename;
 
 @end
 

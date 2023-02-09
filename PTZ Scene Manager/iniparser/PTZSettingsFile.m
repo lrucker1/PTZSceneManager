@@ -8,6 +8,8 @@
 #import "PTZSettingsFile.h"
 #import "ObjCUtils.h"
 
+static NSCharacterSet *PTZSettings_iniKeyCharacterSet;
+
 @interface PTZSettingsFile ()
 
 
@@ -15,6 +17,16 @@
 
 
 @implementation PTZSettingsFile
+
++ (void)initialize {
+    [super initialize];
+    // Keys should only include alphanumeric characters plus '.' (period), '_' (underscore), and '-' (hyphen)
+    // USB device names can have spaces. Maybe even non-ASCII, I don't know who names them.
+    PTZSettings_iniKeyCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789.-_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+    
+    // Section names should only include alphanumeric characters plus '.' (period), '_' (underscore), and '-' (hyphen)
+    // Not adding sections, so we're good.
+}
 
 + (BOOL)validateFileWithPath:(NSString *)path error:(NSError * _Nullable *)error {
     PTZSettingsFile *testFile = [[PTZSettingsFile alloc] initWithPath:path];
@@ -41,7 +53,7 @@
     int size = [sizeObj intValue];
     if (size <= 0) {
         if (error != nil) {
-            NSString *formatStr = NSLocalizedString(@"cameraslist:size contains unexpected value %@", @"cameralist:size has a bad value");
+            NSString *formatStr = NSLocalizedString(@"cameraslist:size contains unexpected value %@", @"cameraslist:size has a bad value");
              *error = OCUtilErrorWithDescription([NSString localizedStringWithFormat:formatStr, sizeObj], checkVersion, @"PTZSettingsFile", 103);
         }
         return NO;
@@ -62,27 +74,33 @@
     return YES;
 }
 
+// Note that this applies to key subcomponents, which is why we do it here; super deals with full keys including the ':' for lists.
+- (NSString *)fixKey:(NSString *)key {
+    return [key stringByAddingPercentEncodingWithAllowedCharacters:PTZSettings_iniKeyCharacterSet];
+}
+
 
 - (NSString *)stringFromList:(NSString *)list key:(NSString *)key {
     NSString *iniKey = [NSString stringWithFormat:@"%@:%@", list, key];
     return [self stringForKey:iniKey];
 }
 
-- (void)setName:(NSString *)name forScene:(NSInteger)scene camera:(NSString *)ipAddr {
+- (void)setName:(NSString *)name forScene:(NSInteger)scene camera:(NSString *)devname {
     // list General "mem" + index + ip
-    NSString *key = [NSString stringWithFormat:@"%@:mem%d%@", @"General", (int)scene, ipAddr];
+    NSString *key = [NSString stringWithFormat:@"%@:mem%d%@", @"General", (int)scene, [self fixKey:devname]];
     if ([self setString:name forKey:key]) {
         [self writeToFile:self.path];
     }
 }
 
-- (NSString *)nameForScene:(NSInteger)scene camera:(NSString *)ipAddr {
+- (NSString *)nameForScene:(NSInteger)scene camera:(NSString *)devname {
     // list General "mem" + index + ip
-    NSString *key = [NSString stringWithFormat:@"mem%d%@", (int)scene, ipAddr];
+    
+    NSString *key = [NSString stringWithFormat:@"mem%d%@", (int)scene, [self fixKey:devname]];
     return [self stringFromList:@"General" key:key];
 }
 
-- (NSArray *)cameraInfo {
+- (NSArray<NSDictionary *> *)cameraInfo {
     static NSString *noCamera = @"0.0.0.0";
 
     NSMutableArray *cameras = [NSMutableArray new];

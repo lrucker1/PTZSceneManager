@@ -9,7 +9,7 @@
 #import "PSMSceneCollectionItem.h"
 #import "PSMSceneWindowController.h"
 #import "PTZCamera.h"
-#import "PTZSettingsFile.h"
+#import "PTZPrefCamera.h"
 #import "LARClickableImageButton.h"
 
 static PSMSceneCollectionItem *selfType;
@@ -58,8 +58,8 @@ static PSMSceneCollectionItem *selfType;
 - (IBAction)sceneSet:(id)sender {
     [self.camera memorySet:self.sceneNumber onDone:^(BOOL success) {
         if (success && self.imagePath) {
-            [self.camera fetchSnapshotAtIndex:self.sceneNumber onDone:^(NSData *data){
-                if (data) {
+            [self.camera fetchSnapshotAtIndex:self.sceneNumber onDone:^(NSData *data, NSInteger index) {
+                if (data != nil && index == self.sceneNumber) {
                     self.image = [[NSImage alloc] initWithData:data];
                 }
             }];
@@ -76,12 +76,12 @@ static PSMSceneCollectionItem *selfType;
     if (popover.shown) {
         [popover close];
     }
-    [self.sourceSettings setName:self.sceneName forScene:self.sceneNumber camera:self.devicename];
+    [self.prefCamera setSceneName:self.sceneName atIndex:self.sceneNumber];
 }
 
 - (IBAction)cancelEditing:(id)sender {
     [self.textField abortEditing];
-    self.sceneName = [self.sourceSettings nameForScene:self.sceneNumber camera:self.devicename];
+    self.sceneName = [self.prefCamera sceneNameAtIndex:self.sceneNumber];
     NSPopover *popover = self.imageButton.popover;
     if (popover.shown) {
         [popover close];

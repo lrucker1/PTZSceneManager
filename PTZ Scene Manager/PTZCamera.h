@@ -61,7 +61,7 @@ typedef struct  {
 } PTZCameraPanTiltParams;
 
 typedef void (^PTZDoneBlock )(BOOL success);
-typedef void (^PTZSnapshotFetchDoneBlock)( NSData * _Nullable imageData);
+typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSInteger index);
 
 @interface PTZCamera : NSObject
 
@@ -98,9 +98,10 @@ typedef void (^PTZSnapshotFetchDoneBlock)( NSData * _Nullable imageData);
 @property NSInteger luminance, contrast, aperture;
 @property NSInteger flipH, flipV, bwMode;
 
-@property (readonly) NSString *deviceAddr;
+@property (readonly) NSString *deviceName;
 @property (readonly) PTZCameraConfig *cameraConfig;
 @property (nullable) PTZProgress *progress;
+@property NSString *obsSourceName;
 
 @property BOOL cameraIsOpen;
 @property (strong) NSImage *snapshotImage;
@@ -110,9 +111,6 @@ typedef void (^PTZSnapshotFetchDoneBlock)( NSData * _Nullable imageData);
 @property (readonly) int port;
 
 + (instancetype)cameraWithDeviceName:(NSString *)devicename isSerial:(BOOL)isSerial;
-
-- (instancetype)initWithIP:(NSString *)ipAddr;
-- (instancetype)initWithTTY:(NSString *)ttydev;
 
 - (BOOL)isSerial;
 

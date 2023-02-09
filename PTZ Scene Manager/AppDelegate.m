@@ -14,8 +14,8 @@
 
 #import "AppDelegate.h"
 #import "PSMSceneWindowController.h"
+#import "PSMCameraCollectionWindowController.h"
 #import "PTZCameraInt.h"
-#import "PTZSettingsFile.h"
 #import "PTZPrefCamera.h"
 #import "PSMOBSWebSocketController.h"
 #import "PSMAppPreferencesWindowController.h"
@@ -28,6 +28,7 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
 @property (strong) IBOutlet NSWindow *window;
 @property (strong) NSMutableSet *windowControllers;
 @property (strong) PSMAppPreferencesWindowController *prefsController;
+@property (strong) PSMCameraCollectionWindowController *cameraCollectionController;
 @property (strong) NSMutableDictionary<NSString *, PTZPrefCamera *> *mutablePrefCameras;
 
 @end
@@ -40,7 +41,7 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
      @{PSMOBSAutoConnect:@(NO),
        PSMOBSURLString:@"ws://localhost:4455",
        @"WebSockets":@"WebSockets", // Prefs window textfield "Null Placeholder" key.
-     }];
+    }];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:PTZ_SettingsFilePathKey] == nil) {
         NSString *path = [@"~/Library/Application Support/PTZOptics/settings.ini" stringByExpandingTildeInPath];
         if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
@@ -79,6 +80,14 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
   //  self.prefsController.window.restorationClass = [self class];
 }
 
+- (IBAction)showCameraCollection:(id)sender {
+    if (self.cameraCollectionController == nil) {
+        self.cameraCollectionController = [PSMCameraCollectionWindowController new];
+    }
+    [self.cameraCollectionController.window makeKeyAndOrderFront:sender];
+  //  self.prefsController.window.restorationClass = [self class];
+}
+
 - (void)loadAllCameras {
     NSArray *cameraList = [self cameraList];
     self.windowControllers = [NSMutableSet set];
@@ -94,6 +103,16 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
         [wc.window orderFront:nil];
         [self.windowControllers addObject:wc];
     }
+    // Save the defaults to pick up any additions to the dictionary.
+    [self savePrefCameras];
+}
+
+- (void)savePrefCameras {
+    NSMutableArray *prefCams = [NSMutableArray array];
+    for (PTZPrefCamera *cam in self.prefCameras) {
+        [prefCams addObject:[cam dictionaryValue]];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:prefCams forKey:PTZ_LocalCamerasKey];
 }
 
 - (NSArray<PTZPrefCamera *> *)prefCameras {
@@ -165,20 +184,6 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
 
 #pragma mark PTZOptics settings
 
-- (void)loadSourceSettings {
-    NSString *path = [self ptzopticsSettingsFilePath];
-    if (path == nil) {
-        PTZLog(@"PTZOptics settings.ini file path not set");
-        return;
-    }
-    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        PTZLog(@"%@ not found", path);
-        return;
-    }
-
-    self.sourceSettings = [[PTZSettingsFile alloc] initWithPath:path];
-}
-
 - (void)applyPrefChanges {
     if (self.windowControllers == nil) {
         [self loadAllCameras];
@@ -188,16 +193,12 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
 }
 
 - (NSArray *)cameraList {
-    if (self.sourceSettings == nil) {
-        [self loadSourceSettings];
-    }
-    NSArray *cameras = [self.sourceSettings cameraInfo];
+    NSArray *cameras = [[NSUserDefaults standardUserDefaults] arrayForKey:PTZ_LocalCamerasKey];
+    
     if ([cameras count] > 0) {
         return cameras;
     }
 
-    PTZLog(@"No valid cameras found in %@", [self ptzopticsSettingsFilePath]);
-    [self.sourceSettings logDictionary];
     return nil;
 }
 

@@ -23,10 +23,11 @@ Should localhost be saved as an "Internet" password?
 
 Add Export to PacketSender to this app.
 
-Lock name editing - part of the whole UI lock?
+Lock scene name editing - part of the whole UI lock?
 
 Get the camera's actual aspect ratio for the live view constraint.
-snapshot.jpg resolution options: 1920x1080 960x600 480x300
+snapshot.jpg resolution options: 1920x1080 (1.777) 960x600 (1.6) 480x300 (1.6)
+Placeholder image in both aspect ratios. Esp for the poor serial camera with no snapshots.
 
 Pluggable controls:
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles"
@@ -54,4 +55,7 @@ menu item to bring up osd
 
 Pause the video when the view isn't visible
 
-Placeholder image in all 3? aspect ratios. Esp for the poor serial camera with no snapshots.
+Stop using camera name as key.
+  scene range collection.
+  drop the settings.ini file. It uses IP address as key!
+  Window frame names
