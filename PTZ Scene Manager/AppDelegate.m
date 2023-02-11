@@ -22,6 +22,14 @@
 
 NSString *PSMSceneCollectionKey = @"SceneCollections";
 
+static NSString *PSMAutosavePrefsWindowID = @"prefswindow";
+static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow";
+
+@interface PTZWindowsMenuItem : NSMenuItem
+@end
+@implementation PTZWindowsMenuItem
+@end
+
 @interface AppDelegate ()
 
 @property (strong) IBOutlet NSWindow *window;
@@ -43,9 +51,31 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
     }];
 }
 
+// Autosave frame saves the frame, but doesn't save the open state; we have to do restoration for that.
++ (void)restoreWindowWithIdentifier:(NSUserInterfaceItemIdentifier)identifier
+                              state:(NSCoder *)state
+                  completionHandler:(void (^)(NSWindow *, NSError *))completionHandler {
+    AppDelegate *delegate = (AppDelegate *)[NSApp delegate];
+    NSWindow *window = nil;
+    if ([identifier isEqualToString:PSMAutosavePrefsWindowID]) {
+        [delegate showPrefs:nil];
+        window = delegate.prefsController.window;
+    } else if ([identifier isEqualToString:PSMAutosaveCameraCollectionWindowID]) {
+        [delegate showCameraCollection:nil];
+        window = delegate.cameraCollectionController.window;
+    }
+    [window makeKeyAndOrderFront:nil];
+    completionHandler(window, nil);
+}
+
+- (void)applicationWillFinishLaunching:(NSNotification *)aNotification {
+    // Insert code here to initialize your application
+    // Must happen before window restoration.
+    [self loadAllCameras];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    [self loadAllCameras];
     if ([self.windowControllers count] == 0) {
         [self showCameraCollection:nil];
     }
@@ -99,12 +129,28 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
     return [[self applicationSupportDirectory] stringByAppendingPathComponent:@"snapshots"];
 }
 
+- (void)observeAndRestore:(NSWindow *)inWindow {
+    inWindow.restorationClass = [self class];
+#if 0 // This causes crashes! Hi Mark!
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:inWindow queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSWindow *window = (NSWindow *)note.object;
+        NSString *windowID = window.identifier;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowWillCloseNotification object:window];
+        if ([windowID isEqualToString:PSMAutosavePrefsWindowID]) {
+            self.prefsController = nil;
+        } else if ([windowID isEqualToString:PSMAutosaveCameraCollectionWindowID]) {
+            self.cameraCollectionController = nil;
+        }
+    }];
+#endif
+}
+
 - (IBAction)showPrefs:(id)sender {
     if (self.prefsController == nil) {
         self.prefsController = [PSMAppPreferencesWindowController new];
     }
     [self.prefsController.window makeKeyAndOrderFront:sender];
-  //  self.prefsController.window.restorationClass = [self class];
+    [self observeAndRestore:self.prefsController.window];
 }
 
 - (IBAction)showCameraCollection:(id)sender {
@@ -112,17 +158,37 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
         self.cameraCollectionController = [PSMCameraCollectionWindowController new];
     }
     [self.cameraCollectionController.window makeKeyAndOrderFront:sender];
-  //  self.prefsController.window.restorationClass = [self class];
+    [self observeAndRestore:self.cameraCollectionController.window];
 }
 
 #pragma mark cameras
 
-- (void)createWindowForCamera:(PTZPrefCamera *)prefCamera {
+- (void)createWindowForCamera:(PTZPrefCamera *)prefCamera menuShortcut:(NSInteger)shortcut {
     self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
     prefCamera.camera = [prefCamera loadCameraIfNeeded];
     PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
-    [wc.window orderFront:nil];
+    wc.window.excludedFromWindowsMenu = YES;
+    [wc.window makeKeyAndOrderFront:nil];
     [self.windowControllers addObject:wc];
+    NSMenu *windowsMenu = [NSApp windowsMenu];
+    NSInteger nextIndex = [windowsMenu indexOfItemWithRepresentedObject:@"PTZWindowMenuSep"] + 1;
+    NSInteger lastIndex = [windowsMenu indexOfItemWithRepresentedObject:@"PTZWindowMenuSepEnd"];
+    if (lastIndex == -1) {
+        // The Windows menu management will collapse adjacent separators but won't add its own if there's one already. But just in case...
+        lastIndex = nextIndex;
+        for (lastIndex = nextIndex; lastIndex < windowsMenu.numberOfItems; lastIndex++) {
+            if ([[windowsMenu itemAtIndex:lastIndex] isSeparatorItem]) {
+                break;
+            }
+        }
+    }
+    PTZWindowsMenuItem *item = [[PTZWindowsMenuItem alloc] initWithTitle:wc.window.title action:@selector(makeKeyAndOrderFront:) keyEquivalent:(shortcut > 0 && shortcut < 10) ? [@(shortcut) stringValue] : @""];
+    item.target = wc.window;
+    if (lastIndex > 0) {
+        [windowsMenu insertItem:item atIndex:lastIndex];
+    } else {
+        [windowsMenu addItem:item];
+    }
 }
 
 // Load cameras from prefs.
@@ -139,7 +205,7 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
     for (NSDictionary *cameraInfo in cameraList) {
         PTZPrefCamera *prefCamera = [[PTZPrefCamera alloc] initWithDictionary:cameraInfo];
         self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
-        [self createWindowForCamera:prefCamera];
+        [self createWindowForCamera:prefCamera menuShortcut:prefCamera.menuIndex];
     }
     // Save the defaults to pick up any changes to the dictionary.
     [self savePrefCameras];
@@ -157,7 +223,7 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
     for (PTZPrefCamera *prefCamera in importedPrefCameras) {
         if (self.mutablePrefCameras[prefCamera.camerakey] == nil) {
             self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
-            [self createWindowForCamera:prefCamera];
+            [self createWindowForCamera:prefCamera menuShortcut:prefCamera.menuIndex];
         }
     }
     [self savePrefCameras];
@@ -175,12 +241,16 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
     return [self.mutablePrefCameras allValues];
 }
 
+- (PTZPrefCamera *)prefCameraForKey:(NSString *)camerakey {
+    return self.mutablePrefCameras[camerakey];
+}
 #pragma mark OBS connection
 
 - (IBAction)connectToOBS:(id)sender {
     // TODO: make it a toggle item connect/disconnect?
     if (![[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
-        [self showPrefs:nil]; // TODO: and open the OBS panel. Standard rant here.
+        [self showPrefs:nil];
+        [self.prefsController selectTabViewItemWithIdentifier:@"OBS"];
     } else {
         [[PSMOBSWebSocketController defaultController] connectToServer];
     }
@@ -214,6 +284,12 @@ NSString *PSMSceneCollectionKey = @"SceneCollections";
     doneBlock((button == NSAlertFirstButtonReturn));
 }
 
+- (BOOL)validateUserInterfaceItem:(NSObject<NSValidatedUserInterfaceItem> *)item {
+    if (item.action == @selector(connectToOBS:)) {
+        return [[PSMOBSWebSocketController defaultController] connected] == NO;
+    }
+    return YES;
+}
 
 @end
 

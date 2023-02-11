@@ -13,6 +13,8 @@ extern NSString *PTZ_LocalCamerasKey;
 
 @interface PSMAppPreferencesWindowController : NSWindowController <NSOpenSavePanelDelegate, NSTableViewDelegate>
 
+- (void)selectTabViewItemWithIdentifier:(id)identifier;
+
 @end
 
 NS_ASSUME_NONNULL_END

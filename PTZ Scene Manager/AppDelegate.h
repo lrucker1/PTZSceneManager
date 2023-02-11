@@ -14,7 +14,7 @@ extern NSString *PSMSceneCollectionKey;
 
 void PTZLog(NSString *format, ...);
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate, NSWindowRestoration>
 
 @property NSString *ptzopticsSettingsFilePath;
 @property BOOL canEditSceneNames;
@@ -22,8 +22,8 @@ void PTZLog(NSString *format, ...);
 - (NSString *)applicationSupportDirectory;
 - (NSString *)snapshotsDirectory;
 
-- (NSArray *)cameraList;
 - (NSArray<PTZPrefCamera *> *)prefCameras;
+- (PTZPrefCamera *)prefCameraForKey:(NSString *)camerakey;
 
 - (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras;
 

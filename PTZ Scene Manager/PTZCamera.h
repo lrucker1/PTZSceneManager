@@ -20,6 +20,12 @@ typedef enum {
     PTZBackup = 2
 } PTZMode;
 
+typedef enum {
+    PTZVideoOff = 0,
+    PTZVideoPreview = 1,
+    PTZVideoProgram = 2
+} PTZVideoMode;
+
 @protocol PTZCameraWBModeDelegate
 // WB
 - (BOOL)canSetWBMode;
@@ -66,6 +72,9 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSIntege
 @interface PTZCamera : NSObject
 
 @property (weak) NSObject<PTZCameraWBModeDelegate> *delegate;
+
+// Video
+@property PTZVideoMode videoMode;
 
 // R/W camera values
 @property NSInteger tilt;

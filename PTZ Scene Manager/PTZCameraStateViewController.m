@@ -1064,6 +1064,8 @@ MAKE_CAN_SET_METHOD(BWMode)
         }
         self.sceneRangeMapView.activeSet = set;
         self.sceneRangeMapView.reservedSet = self.cameraState.cameraConfig.reservedSet;
+        NSInteger len = self.lastVisibleScene - self.firstVisibleScene + 1;
+        self.sceneRangeMapView.currentSet = [NSIndexSet indexSetWithIndexesInRange: NSMakeRange(self.firstVisibleScene, len)];
         [popover showRelativeToRect:[sender bounds]
                              ofView:sender
                       preferredEdge:NSMaxYEdge];

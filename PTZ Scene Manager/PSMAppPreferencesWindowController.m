@@ -81,22 +81,15 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     [self.tabView selectTabViewItemAtIndex:item.tag];
 }
 
-- (BOOL)validateUserInterfaceItem:(NSMenuItem *)menuItem {
-    if (menuItem.action == @selector(toggleToolbarShown:)) {
-        return NO;
-    }
-    return YES;
-}
-
-- (IBAction)toggleToolbarShown:(id)sender {
-    // no-op
+- (void)selectTabViewItemWithIdentifier:(id)identifier {
+    [self.tabView selectTabViewItemWithIdentifier:identifier];
 }
 
 #pragma mark OBS
 - (IBAction)deleteOBSPasswords:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:NSLocalizedString(@"Are you sure you want to delete your OBS WebObjects password?", @"Ask for Keychain permission")];
-    [alert setInformativeText:NSLocalizedString(@"You can always get a new copy of the password from OBS WebSocket Server Settings", @"Info message for deleting OBS password confirmation")];
+    [alert setInformativeText:NSLocalizedString(@"You can get the password from OBS WebSocket Server Settings", @"Info message for deleting OBS password confirmation")];
     [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK button")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
     
@@ -124,15 +117,16 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
         NSDictionary *dict = collections[collectionName];
         NSMutableArray *csRangeDescriptions = [NSMutableArray array];
         NSMutableDictionary *csRangeDict = [NSMutableDictionary dictionary];
-        for (NSString *cameraname in [dict allKeys]) {
-            NSData *data = dict[cameraname];
+        for (NSString *camerakey in [dict allKeys]) {
+            NSData *data = dict[camerakey];
             NSError *error;
             PTZCameraSceneRange *csRange = [PTZCameraSceneRange sceneRangeFromEncodedData:data error:&error];
             if (csRange == nil) {
                 NSLog(@"Error dearchiving csRange %@", error);
             } else {
+                NSString *cameraname = [[self.appDelegate prefCameraForKey:camerakey] cameraname];
                 [csRangeDescriptions addObject:[csRange prettyRangeWithName:cameraname]];
-                csRangeDict[cameraname] = csRange;
+                csRangeDict[camerakey] = csRange;
            }
         }
         NSString *csString = [csRangeDescriptions componentsJoinedByString:@"\n"];
@@ -174,7 +168,7 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     PSMRangeCollectionInfo *info = [self.collectionsArrayController.arrangedObjects objectAtIndex:row];
     NSDictionary *csRanges = info.sceneRangeDictionary;
     for (PTZPrefCamera *camera in self.appDelegate.prefCameras) {
-        PTZCameraSceneRange *csRange = csRanges[camera.cameraname];
+        PTZCameraSceneRange *csRange = csRanges[camera.camerakey];
         if (csRange != nil) {
             [camera applySceneRange:csRange];
         }

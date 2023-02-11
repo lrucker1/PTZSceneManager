@@ -12,6 +12,7 @@
 
 @interface PSMRangeInfo : NSObject
 @property NSString *cameraname;
+@property NSString *camerakey;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
 @property NSInteger selectedIndex;
 @end
@@ -36,6 +37,7 @@
     for (PTZPrefCamera *camera in appDelegate.prefCameras) {
         PSMRangeInfo *info = [PSMRangeInfo new];
         info.cameraname = camera.cameraname;
+        info.camerakey = camera.camerakey;
         NSArray *sceneRangeArray = camera.sceneRangeArray;
         NSArray *defaultArray = @[camera.defaultRange];
         if ([sceneRangeArray count] > 0) {
@@ -60,7 +62,7 @@
     for (PSMRangeInfo *info in self.arrayController.arrangedObjects) {
         NSInteger index = info.selectedIndex;
         PTZCameraSceneRange *csRange = info.sceneRangeArray[index];
-        dict[info.cameraname] = [csRange encodedData];
+        dict[info.camerakey] = [csRange encodedData];
     }
     NSDictionary *oldPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
     NSMutableDictionary *newPrefs = (oldPrefs != nil) ? [NSMutableDictionary dictionaryWithDictionary:oldPrefs] : [NSMutableDictionary dictionary];

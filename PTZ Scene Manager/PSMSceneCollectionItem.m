@@ -50,9 +50,13 @@ static PSMSceneCollectionItem *selfType;
 }
 
 - (IBAction)sceneRecall:(id)sender {
-    [self.camera memoryRecall:self.sceneNumber onDone:nil];
     PSMSceneWindowController *wc = (PSMSceneWindowController *)self.view.window.windowController;
     wc.lastRecalledItem = self;
+    [self.camera memoryRecall:self.sceneNumber onDone:^(BOOL gotCam) {
+        // This only applies to cameras that don't provide live feeds, like USB camera. Which happens to return immediately and keep moving.
+        // What this means for a recall/set cycle on IP cams, I don't know. I thought I'd confirmed they don't return until done.
+        [wc performSelector:@selector(fetchStaticSnapshot) withObject:nil afterDelay:2];
+    }];
 }
 
 - (IBAction)sceneSet:(id)sender {
@@ -62,6 +66,8 @@ static PSMSceneCollectionItem *selfType;
                 if (data != nil && index == self.sceneNumber) {
                     self.image = [[NSImage alloc] initWithData:data];
                     [self.prefCamera saveSnapshotAtIndex:self.sceneNumber  withData:data];
+                    PSMSceneWindowController *wc = (PSMSceneWindowController *)self.view.window.windowController;
+                    [wc updateStaticSnapshot:self.image];
                 }
             }];
         }

@@ -24,7 +24,11 @@
 @property RTSPPlayer *video;
 @property NSTimer *timer;
 @property BOOL paused;
+@property BOOL hidden;
 @property dispatch_queue_t videoQueue;
+
+- (void)viewDidHide;
+- (void)viewDidUnhide;
 
 @end
 
@@ -60,8 +64,11 @@
 }
 
 - (void)timerUpdate:(NSTimer *)timer {
+    NSSize size = self.imageView.frame.size;
     dispatch_async(self.videoQueue, ^{
         // async because stepFrame can be slow.
+        self.video.outputWidth = size.width;
+        self.video.outputHeight = size.height;
         if (![self.video stepFrame]) {
             [timer invalidate];
             self.timer = nil;
@@ -78,19 +85,27 @@
     });
 }
 
-- (void)pauseVideo {
-    self.paused = YES;
+- (void)stopTimer {
     [self.timer invalidate];
     self.timer = nil;
 }
 
-- (void)resumeVideo {
-    self.paused = NO;
-    if (self.video != nil) {
+- (void)startTimer {
+    if (!self.paused && self.video != nil) {
         // We could ask the camera what its shutter speed is.
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0/30 target:self selector:@selector(timerUpdate:) userInfo:nil repeats:YES];
         [self.timer fire];
     }
+}
+
+- (void)pauseVideo {
+    self.paused = YES;
+    [self stopTimer];
+}
+
+- (void)resumeVideo {
+    self.paused = NO;
+    [self startTimer];
 }
 
 - (void)toggleVideoPaused {
@@ -99,6 +114,16 @@
     } else {
         [self pauseVideo];
     }
+}
+
+// Start and stop video without changing self.paused.
+- (void)viewDidHide {
+    self.hidden = YES;
+    [self stopTimer];
+}
+- (void)viewDidUnhide {
+    self.hidden = NO;
+    [self startTimer];
 }
 
 - (BOOL)validateTogglePaused:(NSMenuItem *)menu {
@@ -116,6 +141,16 @@
         [self pauseVideo];
     }
     self.imageView.image = image;
+}
+
+@end
+
+@implementation RTSPView
+- (void)viewDidHide {
+    [self.delegate viewDidHide];
+}
+- (void)viewDidUnhide {
+    [self.delegate viewDidUnhide];
 }
 
 @end

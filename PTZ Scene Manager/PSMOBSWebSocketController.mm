@@ -21,7 +21,7 @@
 #import <PTZ_Scene_Manager-Swift.h>
 
 NSString *PSMOBSSceneInputDidChange = @"PSMOBSSceneInputDidChange";
-NSString *PSMOBSSessionDidBegin = @"PSMOBSSessionDidBegin";
+NSString *PSMOBSSessionIsReady = @"PSMOBSSessionDidBegin";
 NSString *PSMOBSSessionDidEnd = @"PSMOBSSessionDidEnd";
 NSString *PSMOBSSessionAuthorizationFailedKey = @"PSMOBSSessionAuthorizationFailedKey";
 NSString *PSMOBSAutoConnect = @"OBSAutoConnect";
@@ -130,6 +130,7 @@ typedef enum {
     dispatch_queue_t socketQueue;
 }
 @property (readwrite) BOOL connected;
+@property (readwrite) BOOL isReady;
 @property NSString *command;
 @property BOOL running;
 @property BOOL isObservingAppLaunch;
@@ -384,7 +385,7 @@ typedef enum {
 }
 
 - (BOOL)requestSnapshotForCameraName:(NSString *)cameraName index:(NSInteger)index preferredWidth:(NSInteger)width {
-    if (!self.connected) {
+    if (!self.isReady) {
         return NO;
     }
     NSString *requestID = [NSString stringWithFormat:@"%ld,%@", index, cameraName];
@@ -420,7 +421,7 @@ typedef enum {
 }
 
 - (void)getSourceActive {
-    if (self.connected) {
+    if (self.isReady) {
         for (NSString *input in self.obsInputs) {
             NSString *json = [self jsonGetSourceActive:input];
             [self sendString:json];
@@ -466,7 +467,9 @@ typedef enum {
             [self handleHello:dict];
             break;
         case Op_Identified:
+            self.isReady = YES;
             [self handleIdentified:dict];
+            [self connectionIsReady];
             break;
         case Op_Event:
             [self handleEventResponse:dict];
@@ -513,10 +516,10 @@ typedef enum {
     });
 }
 
-- (void)connectionDidBegin {
+- (void)connectionIsReady {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter]
-         postNotificationName:PSMOBSSessionDidBegin
+         postNotificationName:PSMOBSSessionIsReady
          object:nil
          userInfo:nil];
     });
@@ -525,6 +528,7 @@ typedef enum {
 - (void)connectionDidEnd {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.connected = NO;
+        self.isReady = NO;
         if (self.obsState == OBSStateWaitingForAuthorization) {
             NSLog(@"Connection ended while waiting for auth; retrying with prompt");
             if (self.authType == OBSAuthTypeKeychainAttempt) {
@@ -560,7 +564,6 @@ typedef enum {
             return;
         }
         self.running = YES;
-        [self connectionDidBegin];
         [self stopObservingRunningApps];
         while (self.running) {
             if (ws->getReadyState() == WebSocket::CLOSED)

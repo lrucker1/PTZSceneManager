@@ -110,7 +110,7 @@ static NSCharacterSet *PTZSettings_iniKeyCharacterSet;
         NSString *devicename = [self stringForKey:[NSString stringWithFormat:@"cameraslist:%d\\devicename", i]];
         if ([devicename length] > 0 && ![devicename isEqualToString:noCamera]) {
             NSString *cameraname = [self stringForKey:[NSString stringWithFormat:@"cameraslist:%d\\cameraname", i]];
-            [cameras addObject:@{@"cameraname":cameraname, @"devicename":devicename, @"original":devicename, @"cameratype":@(cameratype)}];
+            [cameras addObject:@{@"cameraname":cameraname, @"devicename":devicename, @"original":devicename, @"cameratype":@(cameratype), @"menuIndex":@(i)}];
         }
     }
     return cameras;

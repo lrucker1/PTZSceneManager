@@ -9,6 +9,8 @@
 
 @interface PSMCameraCollectionItem ()
 
+@property IBOutlet NSBox *box;
+
 @end
 
 @implementation PSMCameraCollectionItem
@@ -32,5 +34,37 @@
 //    [self.textField abortEditing];
 //    self.whatever = [self.prefCamera ...];
 }
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    [self updateFillColor];
+}
+
+- (void)setHighlightState:(NSCollectionViewItemHighlightState)highlightState {
+    [super setHighlightState:highlightState];
+    [self updateFillColor];
+}
+
+- (void)updateFillColor {
+    if (self.selected) {
+        _box.fillColor = [NSColor selectedControlColor];
+    }else {
+        switch (self.highlightState) {
+            case NSCollectionViewItemHighlightNone:
+                _box.fillColor = [NSColor quaternaryLabelColor];
+                break;
+
+            case NSCollectionViewItemHighlightAsDropTarget:
+            case NSCollectionViewItemHighlightForSelection:
+                // It selects even if you move off the item before release, so just use selected color.
+                _box.fillColor = [NSColor selectedControlColor];
+                break;
+            case NSCollectionViewItemHighlightForDeselection:
+                _box.fillColor = [NSColor tertiaryLabelColor];
+                break;
+        }
+    }
+}
+
 
 @end

@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="System colors introduced in macOS 10.13" minToolsVersion="9.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,13 +18,12 @@
                 <outlet property="rtspViewController" destination="ce5-QP-mKm" id="wQM-nt-8Aw"/>
                 <outlet property="sceneCollectionBox" destination="Gws-GK-es2" id="bq2-qR-ALw"/>
                 <outlet property="splitViewController" destination="NHN-Ow-8DL" id="sAN-cU-U3O"/>
-                <outlet property="titlebarViewController" destination="kQT-rJ-uFB" id="eSb-f0-fy2"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" tabbingIdentifier="CameraWindow" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="510" height="636"/>
@@ -39,20 +39,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="226" height="636"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <box boxType="custom" borderType="line" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-GK-es2">
+                                    <box boxType="custom" borderType="line" borderWidth="2" cornerRadius="2" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-GK-es2">
                                         <rect key="frame" x="0.0" y="0.0" width="226" height="636"/>
                                         <view key="contentView" id="Ykz-oX-6gR">
-                                            <rect key="frame" x="3" y="3" width="220" height="630"/>
+                                            <rect key="frame" x="2" y="2" width="222" height="632"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView identifier="Scenes" wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-r8-LRb">
-                                                    <rect key="frame" x="4" y="4" width="212" height="622"/>
+                                                <scrollView identifier="Scenes" wantsLayer="YES" borderType="groove" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-r8-LRb">
+                                                    <rect key="frame" x="-3" y="-1" width="227" height="633"/>
                                                     <clipView key="contentView" drawsBackground="NO" id="O1a-J2-dIf">
-                                                        <rect key="frame" x="1" y="1" width="210" height="620"/>
+                                                        <rect key="frame" x="2" y="2" width="223" height="629"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView id="6Fy-kw-0Au">
-                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="620"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="223" height="629"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="100" maximumNumberOfColumns="3" id="kp8-LB-dax">
                                                                     <size key="minimumItemSize" width="75" height="75"/>
@@ -79,7 +79,7 @@
                                                     </scroller>
                                                 </scrollView>
                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PBu-5q-5op">
-                                                    <rect key="frame" x="64" y="291" width="92" height="48"/>
+                                                    <rect key="frame" x="65" y="292" width="92" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="88" id="ULz-Ze-29t"/>
                                                         <constraint firstAttribute="height" constant="48" id="lOB-GK-Lv5"/>
@@ -97,13 +97,13 @@
                                             <constraints>
                                                 <constraint firstItem="PBu-5q-5op" firstAttribute="centerY" secondItem="Ykz-oX-6gR" secondAttribute="centerY" id="Lmh-8y-GGT"/>
                                                 <constraint firstItem="PBu-5q-5op" firstAttribute="centerX" secondItem="Ykz-oX-6gR" secondAttribute="centerX" id="XfG-wg-hAc"/>
-                                                <constraint firstAttribute="trailing" secondItem="ERX-r8-LRb" secondAttribute="trailing" constant="4" id="YV6-0d-s4y"/>
-                                                <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="Ykz-oX-6gR" secondAttribute="top" constant="4" id="aLS-LI-riR"/>
-                                                <constraint firstItem="ERX-r8-LRb" firstAttribute="leading" secondItem="Ykz-oX-6gR" secondAttribute="leading" constant="4" id="vcA-8E-ZKf"/>
-                                                <constraint firstAttribute="bottom" secondItem="ERX-r8-LRb" secondAttribute="bottom" constant="4" id="vxo-PL-uuA"/>
+                                                <constraint firstAttribute="trailing" secondItem="ERX-r8-LRb" secondAttribute="trailing" constant="-2" id="YV6-0d-s4y"/>
+                                                <constraint firstItem="ERX-r8-LRb" firstAttribute="top" secondItem="Ykz-oX-6gR" secondAttribute="top" id="aLS-LI-riR"/>
+                                                <constraint firstItem="ERX-r8-LRb" firstAttribute="leading" secondItem="Ykz-oX-6gR" secondAttribute="leading" constant="-3" id="vcA-8E-ZKf"/>
+                                                <constraint firstAttribute="bottom" secondItem="ERX-r8-LRb" secondAttribute="bottom" constant="-1" id="vxo-PL-uuA"/>
                                             </constraints>
                                         </view>
-                                        <color key="borderColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="borderColor" name="findHighlightColor" catalog="System" colorSpace="catalog"/>
                                     </box>
                                 </subviews>
                                 <constraints>
@@ -119,11 +119,11 @@
                                 <rect key="frame" x="236" y="0.0" width="274" height="636"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="pQm-I7-fbP" userLabel="Live Cam View">
-                                        <rect key="frame" x="0.0" y="443" width="274" height="193"/>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="pQm-I7-fbP" userLabel="Live Cam View" customClass="RTSPView">
+                                        <rect key="frame" x="0.0" y="460" width="274" height="176"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
-                                                <rect key="frame" x="227" y="-7" width="46" height="27"/>
+                                                <rect key="frame" x="228" y="-7" width="46" height="27"/>
                                                 <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Cj-ON-NQ9">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="smallSystem"/>
@@ -144,31 +144,30 @@
                                                 </connections>
                                             </button>
                                             <box boxType="custom" borderType="line" borderWidth="3" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="8yC-Mi-aW4" userLabel="Live Cam Box">
-                                                <rect key="frame" x="2" y="19" width="270" height="172"/>
+                                                <rect key="frame" x="2" y="19" width="270" height="155"/>
                                                 <view key="contentView" id="SzY-pi-oBM">
-                                                    <rect key="frame" x="3" y="3" width="264" height="166"/>
+                                                    <rect key="frame" x="3" y="3" width="264" height="149"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hfs-ZN-q2C">
-                                                            <rect key="frame" x="-1" y="-1" width="266" height="168"/>
+                                                            <rect key="frame" x="-2" y="-2" width="268" height="153"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="Hfs-ZN-q2C" secondAttribute="height" multiplier="480:300" priority="750" id="9jN-2g-PXL"/>
+                                                                <constraint firstAttribute="width" secondItem="Hfs-ZN-q2C" secondAttribute="height" multiplier="16:9" priority="750" id="9jN-2g-PXL"/>
                                                             </constraints>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="groove" id="2vU-1k-Gfv"/>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="SzY-pi-oBM" secondAttribute="top" constant="2" id="GiQ-2Z-yHc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Hfs-ZN-q2C" secondAttribute="trailing" constant="2" id="H9Z-cH-Mii"/>
+                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="top" secondItem="SzY-pi-oBM" secondAttribute="top" constant="1" id="GiQ-2Z-yHc"/>
                                                         <constraint firstItem="Hfs-ZN-q2C" firstAttribute="centerX" secondItem="SzY-pi-oBM" secondAttribute="centerX" id="IXC-p3-zVL"/>
-                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="2" id="RK1-2U-Cz4"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="2" id="mpd-FO-BpP"/>
+                                                        <constraint firstItem="Hfs-ZN-q2C" firstAttribute="leading" secondItem="SzY-pi-oBM" secondAttribute="leading" constant="1" id="RK1-2U-Cz4"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Hfs-ZN-q2C" secondAttribute="bottom" constant="1" id="mpd-FO-BpP"/>
                                                     </constraints>
                                                 </view>
                                                 <color key="fillColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoW-QO-NIa">
-                                                <rect key="frame" x="5" y="1" width="222" height="14"/>
+                                                <rect key="frame" x="4" y="1" width="224" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="FS2-VR-Oqt">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -190,9 +189,12 @@
                                             <constraint firstAttribute="trailing" secondItem="8yC-Mi-aW4" secondAttribute="trailing" constant="2" id="r9b-iW-l0i"/>
                                             <constraint firstItem="QDe-sc-c7e" firstAttribute="leading" secondItem="UoW-QO-NIa" secondAttribute="trailing" constant="8" symbolic="YES" id="xu1-HK-ksN"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="ce5-QP-mKm" id="k5f-wP-ta5"/>
+                                        </connections>
                                     </customView>
                                     <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-8a-7PM" userLabel="PanTilt Grid View">
-                                        <rect key="frame" x="87" y="328" width="100" height="100"/>
+                                        <rect key="frame" x="87" y="345" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="P2s-sA-zQu"/>
                                             <constraint firstAttribute="width" constant="100" id="XNi-Fi-QDb"/>
@@ -512,7 +514,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </gridView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="YGQ-XG-efI" userLabel="Zoom View">
-                                        <rect key="frame" x="85" y="291" width="104" height="25"/>
+                                        <rect key="frame" x="85" y="308" width="104" height="25"/>
                                         <subviews>
                                             <gridView verticalHuggingPriority="750" xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qR6-cn-b6Q" userLabel="Zoom Grid View">
                                                 <rect key="frame" x="0.0" y="0.0" width="104" height="25"/>
@@ -606,7 +608,7 @@
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="aUA-lC-s2h" userLabel="More View">
-                                        <rect key="frame" x="85" y="135" width="104" height="144"/>
+                                        <rect key="frame" x="85" y="152" width="104" height="144"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-2j-qG2" userLabel="More Controls View" customClass="DraggingStackView" customModule="PTZ_Scene_Manager" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="2" width="104" height="140"/>
@@ -920,7 +922,7 @@
         </viewController>
         <viewController id="7Ms-9b-48a" userLabel="Split Body View Controller">
             <connections>
-                <outlet property="view" destination="6Fy-kw-0Au" id="jL9-Ur-zL0"/>
+                <outlet property="view" destination="Ykz-oX-6gR" id="P1g-xE-Zb4"/>
             </connections>
         </viewController>
         <viewController id="80S-x1-C0r" userLabel="Split Sidebar View Controller">
@@ -931,33 +933,9 @@
         <viewController id="ce5-QP-mKm" userLabel="RTSP View Controller" customClass="RTSPViewController">
             <connections>
                 <outlet property="imageView" destination="Hfs-ZN-q2C" id="iZD-20-IM2"/>
-                <outlet property="view" destination="Hfs-ZN-q2C" id="GXJ-yE-G0q"/>
+                <outlet property="view" destination="pQm-I7-fbP" id="yLf-5i-CqW"/>
             </connections>
         </viewController>
-        <viewController id="kQT-rJ-uFB" userLabel="Titlebar View Controller" customClass="NSTitlebarAccessoryViewController">
-            <connections>
-                <outlet property="view" destination="DCg-Ed-6oH" id="6HE-u1-OUe"/>
-            </connections>
-        </viewController>
-        <customView id="DCg-Ed-6oH" userLabel="Titlebar Accessory View">
-            <rect key="frame" x="0.0" y="0.0" width="25" height="24"/>
-            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <button toolTip="Toggles locking the window to the current size" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b38-Fm-7NJ">
-                    <rect key="frame" x="3" y="3" width="18" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" alternateImage="lock.rectangle.on.rectangle.fill" catalog="system" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="wOm-ua-lQB">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <imageReference key="image" image="lock.rectangle.on.rectangle" catalog="system" symbolScale="default" variableValue="0.0"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleResizable:" target="-2" id="UKk-bZ-RZi"/>
-                    </connections>
-                </button>
-            </subviews>
-            <point key="canvasLocation" x="4.5" y="172"/>
-        </customView>
         <viewController id="zvG-js-rXM" userLabel="Popover View Controller">
             <connections>
                 <outlet property="view" destination="1Kv-TT-M85" id="FUI-u2-SDL"/>
@@ -1132,8 +1110,6 @@
         <image name="camera-toolbar" width="512" height="512"/>
         <image name="camera.metering.center.weighted" catalog="system" width="18" height="14"/>
         <image name="house.fill" catalog="system" width="19" height="16"/>
-        <image name="lock.rectangle.on.rectangle" catalog="system" width="19" height="15"/>
-        <image name="lock.rectangle.on.rectangle.fill" catalog="system" width="19" height="15"/>
         <image name="minus" catalog="system" width="14" height="4"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="plus" catalog="system" width="14" height="13"/>

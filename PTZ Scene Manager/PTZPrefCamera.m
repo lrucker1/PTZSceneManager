@@ -43,7 +43,7 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
 + (NSString *)generateKey {
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"PTZPrefCameraNextKeyIndex"];
     [[NSUserDefaults standardUserDefaults] setInteger:index+1 forKey:@"PTZPrefCameraNextKeyIndex"];
-    return [NSString stringWithFormat:@"CameraKey_%ld", index];
+    return [NSString stringWithFormat:@"CameraKey%ld", index];
 }
 
 - (instancetype)init {
@@ -61,7 +61,13 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
     self = [super init];
     if (self) {
         _cameraname = dict[@"cameraname"];
-        _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
+        if (dict[@"menuIndex"]) {
+            _menuIndex = [dict[@"menuIndex"] integerValue];
+            _camerakey = dict[@"camerakey"] ?: [NSString stringWithFormat:@"CameraKey%ld", _menuIndex];
+        } else {
+            _menuIndex = -1;
+            _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
+        }
         _devicename = dict[@"devicename"];
         _originalDeviceName = dict[@"original"] ?: _devicename;
         _isSerial = [dict[@"cameratype"] boolValue];
@@ -70,7 +76,7 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
 }
 
 - (NSDictionary *)dictionaryValue {
-    return @{@"cameraname":_cameraname, @"camerakey":_camerakey, @"devicename":_devicename, @"original":_originalDeviceName, @"cameratype":@(_isSerial)};
+    return @{@"cameraname":_cameraname, @"camerakey":_camerakey, @"devicename":_devicename, @"original":_originalDeviceName, @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex)};
 }
 
 - (PTZCamera *)loadCameraIfNeeded {

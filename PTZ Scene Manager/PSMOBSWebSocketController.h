@@ -28,7 +28,7 @@ typedef enum {
 @end
 
 extern NSString *PSMOBSSceneInputDidChange;
-extern NSString *PSMOBSSessionDidBegin;
+extern NSString *PSMOBSSessionIsReady;
 extern NSString *PSMOBSSessionDidEnd;
 extern NSString *PSMOBSSessionAuthorizationFailedKey;
 extern NSString *PSMOBSAutoConnect;
@@ -41,6 +41,7 @@ extern NSString *PSMOBSSnapshotIndexKey;
 @interface PSMOBSWebSocketController : NSObject
 
 @property (readonly) BOOL connected;
+@property (readonly) BOOL isReady;
 @property (weak) NSObject<PSMOBSWebSocketDelegate> *delegate;
 
 + (PSMOBSWebSocketController *)defaultController;

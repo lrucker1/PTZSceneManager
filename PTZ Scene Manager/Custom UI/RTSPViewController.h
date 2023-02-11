@@ -22,4 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface RTSPView : NSView
+@property (weak) IBOutlet RTSPViewController *delegate;
+@end
+
 NS_ASSUME_NONNULL_END

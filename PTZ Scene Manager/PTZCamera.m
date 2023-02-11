@@ -936,6 +936,8 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 }
 
 - (void)fetchSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
+    // If IP fails we switch to OBS and retry. If OBS fails that's the end.
+    // Never retry an OBS failure with IP, that way lies infinite loops.
     if (self.useOBSSnapshot) {
         [self fetchOBSSnapshotAtIndex:index onDone:doneBlock];
      } else {
@@ -948,6 +950,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         self.obsSnapshotDoneBlock(nil, -1);
     }
     self.obsSnapshotDoneBlock = doneBlock;
+    // This silently fails if OBS isn't connected. That's fine. Snapshots are optional.
     [[PSMOBSWebSocketController defaultController] requestSnapshotForCameraName:self.obsSourceName index:index preferredWidth:480];
 }
 

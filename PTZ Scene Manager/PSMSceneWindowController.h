@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithPrefCamera:(PTZPrefCamera *)camera;
 
+- (void)fetchStaticSnapshot;
+- (void)updateStaticSnapshot:(NSImage *)image;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PSMCameraCollectionItem">
             <connections>
+                <outlet property="box" destination="TY6-nH-dIh" id="yxU-As-OXx"/>
                 <outlet property="usbDeviceButton" destination="lgN-6d-viV" id="cim-Hm-PtF"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -17,14 +18,14 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="300" height="156"/>
             <subviews>
-                <box borderType="line" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="TY6-nH-dIh">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="154"/>
+                <box boxType="custom" borderType="none" borderWidth="6" cornerRadius="6" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="TY6-nH-dIh">
+                    <rect key="frame" x="3" y="4" width="294" height="148"/>
                     <view key="contentView" id="Ufn-50-5Op">
-                        <rect key="frame" x="4" y="5" width="292" height="146"/>
+                        <rect key="frame" x="0.0" y="0.0" width="294" height="148"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ekK-KR-xRm">
-                                <rect key="frame" x="106" y="101" width="169" height="25"/>
+                                <rect key="frame" x="106" y="103" width="171" height="25"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="YOf-fX-CKy">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -35,7 +36,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Voj-qs-LDQ">
-                                <rect key="frame" x="18" y="101" width="84" height="25"/>
+                                <rect key="frame" x="18" y="103" width="84" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="mRW-WR-sHl"/>
                                 </constraints>
@@ -46,7 +47,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FMF-dB-8Hv" userLabel="IP Address">
-                                <rect key="frame" x="17" y="62" width="87" height="30"/>
+                                <rect key="frame" x="17" y="64" width="87" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="12o-Wz-SIV"/>
                                 </constraints>
@@ -65,7 +66,7 @@
                                 </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="lgN-6d-viV" userLabel="USB Device">
-                                <rect key="frame" x="103" y="62" width="176" height="30"/>
+                                <rect key="frame" x="103" y="64" width="178" height="30"/>
                                 <popUpButtonCell key="cell" type="push" title="USB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bZz-Ut-n5e" id="6J5-Eo-6Ab" userLabel="USB Device">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -88,7 +89,7 @@
                                 </connections>
                             </popUpButton>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dc2-9t-FKQ">
-                                <rect key="frame" x="106" y="66" width="169" height="25"/>
+                                <rect key="frame" x="106" y="68" width="171" height="25"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="taQ-3g-o0l">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -100,7 +101,7 @@
                                 </connections>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6q1-io-Zht">
-                                <rect key="frame" x="103" y="27" width="176" height="30"/>
+                                <rect key="frame" x="103" y="27" width="178" height="32"/>
                                 <popUpButtonCell key="cell" type="push" title="PTZOptics" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Ehn-nW-aeZ" id="eGM-og-Vxu">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -114,7 +115,7 @@
                                 </popUpButtonCell>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VYZ-l5-c9F">
-                                <rect key="frame" x="18" y="31" width="84" height="25"/>
+                                <rect key="frame" x="18" y="31" width="84" height="27"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Camera Type" id="0Xh-Wo-dzd">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -154,6 +155,8 @@
                         <constraint firstAttribute="width" constant="294" id="7Y5-fB-Pla"/>
                         <constraint firstAttribute="height" constant="148" id="OPV-9R-e5f"/>
                     </constraints>
+                    <color key="borderColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                 </box>
             </subviews>
             <constraints>

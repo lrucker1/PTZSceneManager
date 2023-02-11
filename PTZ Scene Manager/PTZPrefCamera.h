@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSString *camerakey;
 @property (strong) PTZCamera *camera;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
+@property NSInteger menuIndex;
 
 - (PTZCameraSceneRange*)defaultRange;
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange;

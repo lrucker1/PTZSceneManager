@@ -53,6 +53,10 @@ static LARIndexSetVisualizerView *selfType;
               options:0
               context:&selfType];
     [self addObserver:self
+           forKeyPath:@"currentSet"
+              options:0
+              context:&selfType];
+    [self addObserver:self
            forKeyPath:@"popover.shown"
               options:0
               context:&selfType];
@@ -99,17 +103,26 @@ static LARIndexSetVisualizerView *selfType;
     if (_activeSet != nil || _reservedSet != nil) {
         for (NSInteger i = 1; i <= _rangeMax; i++) {
             BOOL isReserved = [_reservedSet containsIndex:i];
+            BOOL isCurrent = [_currentSet containsIndex:i];
             BOOL isInSet = [_activeSet containsIndex:i];
-            if (isReserved || isInSet) {
+            if (isReserved || isCurrent || isInSet) {
                 NSInteger y = i / _columnCount;
                 NSInteger x = i - (y * _columnCount);
                 NSRect rect = NSMakeRect(x * stepX, y * stepY, stepX, stepY);
+                // TODO: overlaps.
+                if (isCurrent) {
+                    [[NSColor selectedControlColor] set];
+                    NSRectFill(rect);
+                }
                 if (isReserved) {
                     [[NSColor systemRedColor] set];
-                } else {
-                    [[NSColor blackColor] set];
+                    NSRectFill(rect);
+               } else if (isInSet) {
+                   // I want stripes!
+                   NSColor *altColor = [[NSColor selectedControlColor] blendedColorWithFraction:0.25 ofColor:[NSColor blackColor]];
+                   [(isCurrent ? altColor : [NSColor blackColor]) set];
+                   NSRectFill(rect);
                 }
-                NSRectFill(rect);
             }
         }
     }

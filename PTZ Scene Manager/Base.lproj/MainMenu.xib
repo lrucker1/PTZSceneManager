@@ -38,6 +38,12 @@
                                     <action selector="showCameraStateWindow:" target="-1" id="30c-yX-TS7"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Camera " id="Ff3-5z-P3o" userLabel="Cameras">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showCameraCollection:" target="-1" id="ol6-an-Zrn"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                             <menuItem title="Services" id="NMo-om-nkz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -463,19 +469,25 @@
                                     <action selector="performZoom:" target="-1" id="DIl-cC-cCs"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
-                            <menuItem title="Camera Items Window" id="Ff3-5z-P3o">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showCameraCollection:" target="-1" id="ol6-an-Zrn"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="SZM-VV-S2D"/>
                             <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="arrangeInFront:" target="-1" id="DRN-fu-gQh"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="wTS-pO-lAY">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="representedObject" value="PTZWindowMenuSep"/>
+                                </userDefinedRuntimeAttributes>
+                            </menuItem>
+                            <menuItem title="&lt;Placeholder&gt;" hidden="YES" id="cWC-bN-7KR">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="P1H-7y-11E">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="representedObject" value="PTZWindowMenuSepEnd"/>
+                                </userDefinedRuntimeAttributes>
                             </menuItem>
                         </items>
                     </menu>
@@ -496,5 +508,6 @@
             <point key="canvasLocation" x="200" y="121"/>
         </menu>
         <userDefaultsController representsSharedInstance="YES" id="9kW-Gi-5wQ"/>
+        <customObject id="nhy-9A-CVP" customClass="PSMOBSWebSocketController"/>
     </objects>
 </document>

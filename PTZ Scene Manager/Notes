@@ -13,21 +13,28 @@ https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-
 Yes! obs-websocket to find out which camera is hot. And works with the plugin in 2.7.
 
 Prefs:
-Configure cameras
- - Import from PTZOptics settings.ini
- - set PTZOptics brand or not.
- - URL for live video.
- - "Click here to visit website": [ipaddress]:8080
+   Brand/Model specific stuff:
+   max preset, reserved presets
+   has livestream, livestream URL
+      and if it's html?
+   has website, ditto.
+      PTZOptics [ipaddress]:8080
+   any other notable divergence from Sony, like OSD toggle.
 
+Configure cameras
+ - make the setters work.
+ - update Windows menu on name change. changeWindowsItem:title:filename:
+ - set PTZOptics brand or not.
+ 
 Should localhost be saved as an "Internet" password?
+  It looks like it's not propagated to other Macs, so yes?
 
 Add Export to PacketSender to this app.
 
 Lock scene name editing - part of the whole UI lock?
 
-Get the camera's actual aspect ratio for the live view constraint.
-snapshot.jpg resolution options: 1920x1080 (1.777) 960x600 (1.6) 480x300 (1.6)
-Placeholder image in both aspect ratios. Esp for the poor serial camera with no snapshots.
+Get the camera's actual aspect ratio for the live view constraint?
+snapshot.jpg resolution options: 1920x1080 (16:9, 1.777) 960x600 (8:5, 1.6) 480x300 (1.6)
 
 Pluggable controls:
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles"
@@ -40,30 +47,32 @@ PTZ Advanced View:
     Iris brighter/darker
     Brightness up/down
  Image Color: Luminance Contrast Hue
+    and show meaningful values, sheesh.
  Image flip & mirror
 
-Camera controls: Pan/Tilt limit
+Camera controls: Pan/Tilt limit?
 
 Edit button in the scene range collection.
 Confirm giving one a name that already exists (if not edit mode)
+"Save" should close the window. 
 
 Undo on collection item removal.
 
 Refresh the "Add/Edit" window
 
 menu item to bring up osd
-
-Pause the video when the view isn't visible
-
-Stop using camera name as key.
-  scene range collection.
-  drop the settings.ini file. It uses IP address as key!
-  Window frame names
+"Lock UI" menu item.
 
 Export the settings to something readable. Even if that turns out to be settings.ini.
 
-Restoration: stuff like sidebar.
+Range copy (recall/set) in Camera Scenes. Also range overlap check - intersectsIndexesInRange
 
-titlebar accessory either needs to go, or needs a RTL check like the OSD.
+Write up the Mark bug - cleaning up the WindowControllers causes crash.
 
-Reopen Camera - done block, report failure.
+Observe USB device add/remove - only if we have one.
+
+Where is the initial window size coming from?
+
+Disable "connect to obs" if it's connected.
+
+Show current range in a different color, stripy (or other indicator) on overlaps.

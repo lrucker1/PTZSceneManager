@@ -53,19 +53,21 @@ typedef enum {
 
 @property (strong) PTZPrefCamera *prefCamera;
 @property IBOutlet NSCollectionView *collectionView;
-@property IBOutlet NSTitlebarAccessoryViewController *titlebarViewController;
 @property (strong) PSMCameraStateWindowController *cameraStateWindowController;
 @property IBOutlet RTSPViewController *rtspViewController;
 @property BOOL showStaticSnapshot;
 @property IBOutlet NSBox *cameraBox;
 @property IBOutlet NSBox *sceneCollectionBox;
 @property NSColor *boxColor;
+@property NSArray *collectionColors;
 @property NSInteger itemCount;
 @property BOOL badRangeWarningVisible;
 @property NSArray *sceneIndexes;
 @property IBOutlet NSPopover *remoteControlPopover;
 @property IBOutlet DraggingStackView *controlStackView;
 @property IBOutlet NSSplitViewController *splitViewController;
+@property NSTimer *timer;
+@property dispatch_queue_t timerQueue;
 
 @end
 
@@ -97,8 +99,14 @@ typedef enum {
     [self updateColumnCount];
     [self updateVisibleSceneRange];
     [self updateControlStackOrder];
+    self.shouldCascadeWindows = NO;
+    self.window.frameAutosaveName = [NSString stringWithFormat:@"[%@] main", self.prefCamera.camerakey];
+    self.window.toolbar.autosavesConfiguration = NO;
+    NSDictionary *toolbarConfig = [self.prefCamera prefValueForKey:@"Toolbar"];
+    if (toolbarConfig) {
+        [self.window.toolbar setConfigurationFromDictionary: toolbarConfig];
+    }
 
-    self.titlebarViewController.layoutAttribute = NSLayoutAttributeLeft;
     // Don't show static snapshots until we know whether we'll have a video.
     if (self.camera.isSerial) {
         // No live view, but we can get snapshots from OBS and save them.
@@ -112,7 +120,6 @@ typedef enum {
             }
         }];
     }
-    [self.window addTitlebarAccessoryViewController:self.titlebarViewController];
     NSArray *keys = @[@"prefCamera.maxColumnCount",
                       @"prefCamera.firstVisibleScene",
                       @"prefCamera.lastVisibleScene",
@@ -132,22 +139,34 @@ typedef enum {
 //    NSString *fmt = NSLocalizedString(@"%@ - %@", @"Window title showing [cameraname - devicename]");
     self.window.title = self.prefCamera.cameraname;
     // This will update the window frame.
-    self.window.frameAutosaveName = [NSString stringWithFormat:@"[%@] main", self.prefCamera.camerakey];
+    self.splitViewController.splitView.autosaveName = self.prefCamera.camerakey;
+#if 0
+    // Disabled until new UI is added.
     BOOL isResizable = self.window.resizable;
-    BOOL wantsResizable = [[self.prefCamera prefValueForKey:@"resizable"] integerValue];
+    BOOL wantsResizable = [[self.prefCamera prefValueForKey:@"resizable"] boolValue];
     if (isResizable != wantsResizable) {
         [self toggleResizable:nil];
     }
-    [self loadCamera];
+#endif
+    [self loadCamera:NO];
     self.boxColor = self.cameraBox.borderColor;
+    self.collectionColors = self.collectionView.backgroundColors;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSSceneInputDidChange object:self.prefCamera];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
     if ([[PSMOBSWebSocketController defaultController] connected]) {
         [self onOBSSessionDidBegin:nil];
     } else {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidBegin:) name:PSMOBSSessionDidBegin object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidBegin:) name:PSMOBSSessionIsReady object:nil];
     }
     [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
+}
+
+- (void)windowWillClose:(NSNotification *)notification {
+    NSDictionary *toolbarConfig = self.window.toolbar.configurationDictionary;;
+    if (toolbarConfig) {
+        [self.prefCamera setPrefValue:toolbarConfig forKey:@"Toolbar"];
+    }
+
 }
 
 - (void)onOBSSceneChange:(NSNotification *)note {
@@ -159,25 +178,26 @@ typedef enum {
         // Active: Program
         self.cameraBox.borderColor = [NSColor systemRedColor];
         self.sceneCollectionBox.borderColor = [NSColor systemRedColor];
+        NSColor *bgRed = [[NSColor systemPinkColor] blendedColorWithFraction:0.75 ofColor:[NSColor whiteColor]];
+        self.collectionView.backgroundColors = @[bgRed];
+        self.camera.videoMode = PTZVideoProgram;
     } else if (videoShowing) {
         // Showing: Program or Preview
         self.cameraBox.borderColor = [NSColor systemGreenColor];
-        self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
+        self.sceneCollectionBox.borderColor = self.boxColor;
+        self.collectionView.backgroundColors = self.collectionColors;
+        self.camera.videoMode = PTZVideoPreview;
     } else {
         self.cameraBox.borderColor = self.boxColor;
         self.sceneCollectionBox.borderColor = self.boxColor;
+        self.collectionView.backgroundColors = self.collectionColors;
+        self.camera.videoMode = PTZVideoOff;
     }
 }
 
-
 - (void)onOBSSessionDidBegin:(NSNotification *)note {
-    if (self.showStaticSnapshot && self.lastRecalledItem.image == nil) {
-        [self.camera fetchSnapshotAtIndex:-1 onDone:^(NSData *data, NSInteger index) {
-            if (data != nil) {
-                NSImage *image = [[NSImage alloc] initWithData:data];
-                [self.rtspViewController setStaticImage:image];
-            }
-        }];
+    if (self.lastRecalledItem.image == nil) {
+        [self fetchStaticSnapshot];
     }
 }
 
@@ -194,24 +214,36 @@ typedef enum {
     return self.prefCamera.camera;
 }
 
-- (void)loadCamera {
+- (void)loadCamera:(BOOL)interactive {
     PTZCamera *camera = self.camera;
     [camera closeAndReload:^(BOOL gotCam) {
         [self.collectionView reloadData];
         // Update any values that are displayed in this window. Don't spam the camera; users can hit Fetch in Camera State.
         // There is no Inq for MotionState.
-        [camera updateAutofocusState:nil];
+        if (gotCam) {
+            if ([self.prefCamera prefValueForKey:@"showAutoFocusControls"]) {
+                [camera updateAutofocusState:nil];
+            }
+        } else if (interactive) {
+            NSAlert *alert = [NSAlert new];
+
+            alert.messageText = NSLocalizedString(@"Could not connect to camera", @"Camera connection failed alert message");
+            alert.informativeText = NSLocalizedString(@"Check your camera and try again", @"Camera connection failed alert info");
+            [alert beginSheetModalForWindow:self.window
+                          completionHandler:nil];
+        }
     }];
 }
 
 - (IBAction)reopenCamera:(id)sender {
-    [self loadCamera];
+    [self loadCamera:YES];
 }
 
 - (AppDelegate *)appDelegate {
     return (AppDelegate *)[NSApp delegate];
 }
 
+// TODO: Menu item "Lock UI" and also make the scene names non-editable.
 - (IBAction)toggleResizable:(id)sender {
     NSWindowStyleMask mask = self.window.styleMask;
     if (self.window.isResizable) {
@@ -266,6 +298,48 @@ typedef enum {
     [self.splitViewController toggleSidebar:sender];
 }
 
+#pragma mark static snapshot
+
+- (void)stopTimer {
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)startTimer {
+    if (self.showStaticSnapshot && self.timer == nil) {
+        if (self.timerQueue == nil) {
+            NSString *name = [NSString stringWithFormat:@"timerQueue_0x%p", self];
+            self.timerQueue = dispatch_queue_create([name UTF8String], NULL);
+        }
+        self.timer = [NSTimer timerWithTimeInterval:0.1 target:self selector:@selector(timerUpdate:) userInfo:nil repeats:YES];
+        dispatch_sync(self.timerQueue, ^{
+            [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSEventTrackingRunLoopMode];
+            [self.timer fire];
+        });
+    }
+}
+
+- (void)timerUpdate:(NSTimer *)timer {
+    [self fetchStaticSnapshot];
+}
+
+- (void)fetchStaticSnapshot {
+    if (self.showStaticSnapshot) {
+        [self.camera fetchSnapshotAtIndex:-1 onDone:^(NSData *data, NSInteger index) {
+            if (data != nil) {
+                NSImage *image = [[NSImage alloc] initWithData:data];
+                [self.rtspViewController setStaticImage:image];
+            }
+        }];
+    }
+}
+
+- (void)updateStaticSnapshot:(NSImage *)image {
+    if (self.showStaticSnapshot) {
+        [self.rtspViewController setStaticImage:image];
+    }
+}
+
 #pragma mark camera
 
 - (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {
@@ -289,10 +363,12 @@ typedef enum {
     PTZStartStopButton *button = (PTZStartStopButton *)sender;
     if (button.doStopAction) {
         [self.camera stopPantiltDirection];
+        [self stopTimer];
         return;
     }
     NSInteger tag = button.tag;
     [self doPanTiltForTag:tag withBaseSpeed:1];
+    [self startTimer];
 }
 
 // Do the cameras recognize the magic speed? Does it need a "stop"? We'll find out!
@@ -400,6 +476,7 @@ typedef enum {
     PTZStartStopButton *button = (PTZStartStopButton *)sender;
     if (button.doStopAction) {
         [self.camera stopZoom];
+        [self stopTimer];
         return;
     }
     NSInteger tag = button.tag;
@@ -416,13 +493,15 @@ typedef enum {
         case PSMOutPlus:
             [self.camera startZoomOutWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
             break;
-   }
+    }
+    [self startTimer];
 }
 
 - (IBAction)doCameraFocus:(id)sender {
     PTZStartStopButton *button = (PTZStartStopButton *)sender;
     if (button.doStopAction) {
         [self.camera stopFocus];
+        [self stopTimer];
         return;
     }
     NSInteger tag = button.tag;
@@ -439,7 +518,8 @@ typedef enum {
         case PSMOutPlus:
             [self.camera startFocusNearWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
             break;
-   }
+    }
+    [self startTimer];
 }
 
 - (IBAction)doHome:(id)sender {
@@ -452,7 +532,11 @@ typedef enum {
             self.lastRecalledItem = item;
         }
     }*/
-    [self.camera pantiltHome:nil];
+    [self.camera pantiltHome:^(BOOL gotCam) {
+        if (gotCam) {
+            [self fetchStaticSnapshot];
+        }
+    }];
 }
 
 - (IBAction)doHomeOrRecallLast:(id)sender {
@@ -552,7 +636,7 @@ typedef enum {
     }
     item.image = [self.prefCamera snapshotAtIndex:index];
     if (item.image == nil) {
-        item.image = [NSImage imageNamed:@"Placeholder"];
+        item.image = [NSImage imageNamed:@"Placeholder16_9"];
     }
     item.sceneNumber = index;
     item.camera = self.camera;
