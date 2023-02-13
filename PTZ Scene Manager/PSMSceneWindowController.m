@@ -120,17 +120,33 @@ typedef enum {
             }
         }];
     }
+    [self manageObservers:YES];
+    [super awakeFromNib];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self manageObservers:NO];
+}
+
+- (void)manageObservers:(BOOL)add {
     NSArray *keys = @[@"prefCamera.maxColumnCount",
                       @"prefCamera.firstVisibleScene",
                       @"prefCamera.lastVisibleScene",
                       @"lastRecalledItem"];
-    for (NSString *key in keys) {
-        [self addObserver:self
-               forKeyPath:key
-                  options:0
-                  context:&selfType];
+    if (add) {
+        for (NSString *key in keys) {
+            [self addObserver:self
+                   forKeyPath:key
+                      options:0
+                      context:&selfType];
+        }
+    } else {
+        for (NSString *key in keys) {
+            [self removeObserver:self
+                      forKeyPath:key];
+        }
     }
-    [super awakeFromNib];
 }
 
 - (void)windowDidLoad {
@@ -166,7 +182,6 @@ typedef enum {
     if (toolbarConfig) {
         [self.prefCamera setPrefValue:toolbarConfig forKey:@"Toolbar"];
     }
-
 }
 
 - (void)onOBSSceneChange:(NSNotification *)note {
@@ -255,10 +270,18 @@ typedef enum {
     [self.prefCamera setPrefValue:@(self.window.isResizable) forKey:@"resizable"];
 }
 
+- (void)observeWindowClose:(NSWindow *)inWindow {
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:inWindow queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSWindow *window = (NSWindow *)note.object;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowWillCloseNotification object:window];
+        self.cameraStateWindowController = nil;
+    }];
+}
+
 - (IBAction)showCameraStateWindow:(id)sender {
-    // TODO: add window notification stuff - windowDidClose etc, so we can dispose of the window when not needed.
     if (self.cameraStateWindowController == nil) {
         self.cameraStateWindowController = [[PSMCameraStateWindowController alloc] initWithPrefCamera:self.prefCamera];
+        [self observeWindowClose:self.cameraStateWindowController.window];
     }
     [self.cameraStateWindowController.window makeKeyAndOrderFront:nil];
 }
@@ -371,12 +394,17 @@ typedef enum {
     [self startTimer];
 }
 
-// Do the cameras recognize the magic speed? Does it need a "stop"? We'll find out!
+// Do the cameras recognize the magic speed?
 - (IBAction)doMenuPanTilt:(id)sender {
-    NSButton *button = (NSButton *)sender;
+    PTZStartStopButton *button = (PTZStartStopButton *)sender;
+    if (button.doStopAction) {
+        [self.camera stopPantiltDirection];
+        [self stopTimer];
+        return;
+    }
     NSInteger tag = button.tag;
     [self doPanTiltForTag:tag withBaseSpeed:0x0E];
-    [self.camera stopPantiltDirection];
+    [self startTimer];
 }
 
 - (void)doPanTiltForTag:(NSInteger)tag withBaseSpeed:(NSInteger)baseSpeed {

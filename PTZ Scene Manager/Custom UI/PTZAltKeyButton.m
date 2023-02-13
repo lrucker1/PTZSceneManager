@@ -19,21 +19,19 @@
 
 @implementation PTZAltKeyButton
 
-+ (Class)cellClass
-{
++ (Class)cellClass {
    return [PTZAltKeyButtonCell class];
 }
 
-- (void)dealloc
-{
-   if (_eventMonitor) {
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (_eventMonitor) {
       [NSEvent removeMonitor:_eventMonitor];
        _eventMonitor = nil;
    }
 }
 
-- (void)windowDidBecomeKey:(NSNotification *)note
-{
+- (void)windowDidBecomeKey:(NSNotification *)note {
    if (self.eventMonitor) {
       return;
    }
@@ -49,8 +47,7 @@
      }];
 }
 
-- (void)windowDidResignKey:(NSNotification *)note
-{
+- (void)windowDidResignKey:(NSNotification *)note {
    if (self.eventMonitor) {
       [NSEvent removeMonitor:self.eventMonitor];
       self.eventMonitor = nil;
@@ -61,8 +58,7 @@
    }
 }
 
-- (void)viewDidMoveToWindow
-{
+- (void)viewDidMoveToWindow {
    NSWindow *window = [self window];
    if (window) {
       [[NSNotificationCenter defaultCenter]
@@ -95,8 +91,7 @@
 
 @implementation PTZAltKeyButtonCell
 
-- (NSSize)cellSizeForBounds:(NSRect)aRect
-{
+- (NSSize)cellSizeForBounds:(NSRect)aRect {
     /*
      * Note that if the button is set to a style that would draw the alt text,
      * super will already have accounted for it and this will be too wide.

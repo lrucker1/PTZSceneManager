@@ -21,7 +21,7 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 @property NSString *name;
 @property NSString *shortDescription;
 @property NSString *longDescription;
-@property NSDictionary *sceneRangeDictionary; /* <cameraname,PTZCameraSceneRange> */
+@property NSDictionary *sceneRangeDictionary; /* <camerakey,PTZCameraSceneRange> */
 @property BOOL expanded;
 
 @end
@@ -72,6 +72,19 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     [self reloadCollectionData];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self
+                                            forKeyPath:PSMSceneCollectionKey];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self
+                                            forKeyPath:PSMOBSAutoConnect];
+}
+
+//- (BOOL)windowShouldClose:(NSWindow *)sender {
+//    // Release when closed, however, is ignored for windows owned by window controllers. Another strategy for releasing an NSWindow object is to have its delegate autorelease it on receiving a windowShouldClose: message.
+//    return YES;
+//}
+
 - (AppDelegate *)appDelegate {
     return (AppDelegate *)[NSApp delegate];
 }
@@ -103,11 +116,11 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
 /*
  In Prefs:
-  Dictionary<collectionName, Dictionary<cameraname,encodedData> >
+  Dictionary<collectionName, Dictionary<camerakey,encodedData> >
  In array controller:
  Array of PSMRangeCollectionInfo
     name = collectionName
-    sceneRangeDictionary = Dictionary<cameraname,PTZCameraSceneRange>
+    sceneRangeDictionary = Dictionary<camerakey,PTZCameraSceneRange>
 
  */
 - (void)reloadCollectionData {
@@ -141,10 +154,28 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     self.collectionsArray = array;
 }
 
+- (void)observeWindowClose:(NSWindow *)inWindow {
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:inWindow queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSWindow *window = (NSWindow *)note.object;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowWillCloseNotification object:window];
+        self.rangeCollectionWindowController = nil;
+    }];
+}
+
 - (IBAction)addSceneCollection:(id)sender {
-    // TODO: Observe the window so we can dispose of the WC on close
     if (self.rangeCollectionWindowController == nil) {
         self.rangeCollectionWindowController = [[PSMRangeCollectionWindowController alloc] init];
+        [self observeWindowClose:self.rangeCollectionWindowController.window];
+    }
+    [[self.rangeCollectionWindowController window] makeKeyAndOrderFront:nil];
+}
+
+- (IBAction)editSceneCollection:(id)sender {
+    if (self.rangeCollectionWindowController == nil) {
+        PSMRangeCollectionInfo *info = [[self.collectionsArrayController selectedObjects] firstObject];
+        self.rangeCollectionWindowController = [[PSMRangeCollectionWindowController alloc] init];
+        [self.rangeCollectionWindowController editCollectionNamed:info.name info:info.sceneRangeDictionary];
+        [self observeWindowClose:self.rangeCollectionWindowController.window];
     }
     [[self.rangeCollectionWindowController window] makeKeyAndOrderFront:nil];
 }

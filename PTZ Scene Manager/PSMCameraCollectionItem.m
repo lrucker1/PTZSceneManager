@@ -6,10 +6,14 @@
 //
 
 #import "PSMCameraCollectionItem.h"
+#import "PSMCameraCollectionWindowController.h"
+
+static PSMCameraCollectionItem *selfType;
 
 @interface PSMCameraCollectionItem ()
 
 @property IBOutlet NSBox *box;
+@property BOOL enableUSBPopup;
 
 @end
 
@@ -17,9 +21,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self updateUSBDevices];
+    [self addObserver:self
+           forKeyPath:@"dataSource.usbCameraNames"
+              options:0
+              context:&selfType];
+}
+
+- (void)dealloc {
+    [self removeObserver:self
+              forKeyPath:@"dataSource.usbCameraNames"];
+    _dataSource = nil;
+}
+
+- (void)updateUSBDevices {
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[[self dataSource] usbCameraNames]];
+    //  Disable if no attached devices, even if we have a cached device.
+    self.enableUSBPopup = [array count] > 0;
     if (self.isSerial && self.devicename != nil) {
-        self.usbDevices = @[self.devicename];
+        if (![array containsObject:self.devicename]) {
+            [array addObject:self.devicename];
+        }
+        self.selectedUSBDevice = [array indexOfObject:self.devicename];
     }
+    if ([array count] == 0) {
+        [array addObject:NSLocalizedString(@"[No connected devices]", @"No devices on USB Device selection popup")];
+    }
+    self.usbDevices = array;
 }
 
 - (void)controlTextDidBeginEditing:(NSNotification *)note {
@@ -66,5 +94,20 @@
     }
 }
 
+- (void)observeValueForKeyPath:(NSString*)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id>*)change
+                       context:(void*)context
+{
+    if (context != &selfType) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    } else {
+        [self updateUSBDevices];
+    }
+}
 
 @end

@@ -33,7 +33,7 @@ const NSString *PTZProgressEndKey = @"PTZProgressEnd";
 #define BOOL_TO_ONOFF(b) ((b) ? VISCA_FOCUS_AUTO_ON : VISCA_FOCUS_AUTO_OFF)
 #define ONOFF_TO_BOOL(b) ((b) == VISCA_FOCUS_AUTO_ON)
 
-void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOffset, uint32_t delaySecs, bool isBackup, PTZCamera *ptzCamera, PTZDoneBlock doneBlock);
+void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t fromOffset, uint32_t toOffset, uint32_t length, uint32_t delaySecs, PTZCamera *ptzCamera, PTZDoneBlock doneBlock);
 
 @interface NSDictionary (PTZ_Sim_Extras)
 - (NSInteger)ptz_numberForKey:(NSString *)key ifNil:(NSInteger)value;
@@ -135,6 +135,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (_cameraIsOpen) {
         VISCA_close(&_iface);
         _cameraIsOpen = NO;
@@ -239,8 +240,9 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
             BOOL success = NO;
             if (VISCA_set_pantilt(&self->_iface, &self->_camera, params.panSpeed, params.tiltSpeed, params.horiz, params.vert) == VISCA_SUCCESS) {
                 success = YES;
-                // To cancel a command when VISCA PAN-TILT Drive (page 17) is being executed, wait at least 200 msec after executing. Then send a cancel command to ensure that PAN-TILT Drive stops effectively.
-                self.pantilt_stop_time = dispatch_time(DISPATCH_TIME_NOW, 200 * NSEC_PER_MSEC);
+                // Sony doc: To cancel a command when VISCA PAN-TILT Drive (page 17) is being executed, wait at least 200 msec after executing. Then send a cancel command to ensure that PAN-TILT Drive stops effectively.
+                // TODO: Find out if this number is camera-specific. Monoprice cam needs 500 msec for OSD navigation to register.
+                self.pantilt_stop_time = dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC);
             }
             [self callDoneBlock:doneBlock success:success recallBusy:NO];
         });
@@ -878,7 +880,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     };
 }
 
-- (void)backupRestoreWithParent:(PTZProgressGroup *)parent delay:(NSInteger)batchDelay isBackup:(BOOL)isBackup onDone:( PTZDoneBlock)inDoneBlock {
+- (void)backupRestoreWithParent:(PTZProgressGroup *)parent delay:(NSInteger)batchDelay batchMode:(PTZMode)batchMode onDone:( PTZDoneBlock)inDoneBlock {
     NSAssert(self.progress != nil, @"Missing Progress object");
     [parent addChild:self.progress];
     PTZDoneBlock doneBlock = ^(BOOL success) {
@@ -886,7 +888,21 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         self.progress.completedUnitCount = self.progress.totalUnitCount;
         self.progress = nil;
     };
-    NSInteger rangeOffset = [self.progress.userInfo[PTZProgressStartKey] integerValue];
+    uint32_t rangeOffset = (uint32_t)[self.progress.userInfo[PTZProgressStartKey] integerValue];
+    uint32_t rangeEnd = (uint32_t)[self.progress.userInfo[PTZProgressEndKey] integerValue];
+    uint32_t length = rangeEnd - rangeOffset + 1;
+    uint32_t fromOffset = 0, toOffset = 0;
+    switch (batchMode) {
+        case PTZBackup:
+            toOffset = rangeOffset;
+            break;
+        case PTZRestore:
+            fromOffset = rangeOffset;
+            break;
+        case PTZCheck:
+            // Update mode, from == to
+            break;
+    }
     self.progress.cancellable = NO;
     self.progress.localizedAdditionalDescription = [NSString stringWithFormat:@"Connecting to camera %@…", self.deviceName];
     [self loadCameraWithCompletionHandler:^() {
@@ -898,7 +914,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            backupRestore(&self->_iface, &self->_camera, (uint32_t)rangeOffset, (uint32_t)batchDelay, isBackup, self, doneBlock);
+            backupRestore(&self->_iface, &self->_camera, (uint32_t)fromOffset, (uint32_t)toOffset, (uint32_t)length, (uint32_t)batchDelay, self, doneBlock);
         });
     }];
 }
@@ -1370,10 +1386,8 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 @end
 
-void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOffset, uint32_t delaySecs, bool isBackup, PTZCamera *ptzCamera, PTZDoneBlock doneBlock)
+void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t fromOffset, uint32_t toOffset, uint32_t length, uint32_t delaySecs, PTZCamera *ptzCamera, PTZDoneBlock doneBlock)
 {
-    uint32_t fromOffset = isBackup ? 0 : inOffset;
-    uint32_t toOffset = isBackup ? inOffset : 0;
     NSString *log = @"";
 
     uint32_t sceneIndex;
@@ -1384,7 +1398,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t inOf
     // Set preset recall speed to max, just in case it got changed.
     VISCA_set_pantilt_preset_speed(iface, camera, 24);
     __block BOOL cancel = NO;
-    for (sceneIndex = 1; sceneIndex < 10; sceneIndex++) {
+    for (sceneIndex = 1; sceneIndex < length; sceneIndex++) {
         if ([log length] > 0) {
             // For "continue" log statements.
             fprintf(stdout, "%s", [log UTF8String]);

@@ -131,7 +131,6 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 
 - (void)observeAndRestore:(NSWindow *)inWindow {
     inWindow.restorationClass = [self class];
-#if 0 // This causes crashes! Hi Mark!
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:inWindow queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         NSWindow *window = (NSWindow *)note.object;
         NSString *windowID = window.identifier;
@@ -142,7 +141,6 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
             self.cameraCollectionController = nil;
         }
     }];
-#endif
 }
 
 - (IBAction)showPrefs:(id)sender {
@@ -185,7 +183,7 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     PTZWindowsMenuItem *item = [[PTZWindowsMenuItem alloc] initWithTitle:wc.window.title action:@selector(makeKeyAndOrderFront:) keyEquivalent:(shortcut > 0 && shortcut < 10) ? [@(shortcut) stringValue] : @""];
     item.target = wc.window;
     if (lastIndex > 0) {
-        [windowsMenu insertItem:item atIndex:lastIndex];
+        [windowsMenu insertItem:item atIndex:lastIndex-1];
     } else {
         [windowsMenu addItem:item];
     }
@@ -202,7 +200,19 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
         self.mutablePrefCameras = [NSMutableDictionary dictionary];
     }
 
-    for (NSDictionary *cameraInfo in cameraList) {
+    NSArray *menuArray = [cameraList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        NSInteger index1 = [obj1[@"menuIndex"] integerValue];
+        NSInteger index2 = [obj2[@"menuIndex"] integerValue];
+        if (index1 > index2) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+     
+        if (index2 < index1) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    for (NSDictionary *cameraInfo in menuArray) {
         PTZPrefCamera *prefCamera = [[PTZPrefCamera alloc] initWithDictionary:cameraInfo];
         self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
         [self createWindowForCamera:prefCamera menuShortcut:prefCamera.menuIndex];
@@ -220,7 +230,22 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     if (self.mutablePrefCameras == nil) {
         self.mutablePrefCameras = [NSMutableDictionary dictionary];
     }
-    for (PTZPrefCamera *prefCamera in importedPrefCameras) {
+    // TODO: make sure the menuIndexes of the new cameras don't overlap.
+    // This is why we have the empty NSMenuItem subclass - we can spot our own. Why yes, that *is* why the normal Window items have a custom class.
+    // That also requires smarter duplicate checks; we only check camerakey, but if it's a PTZOptics import they used devicename as the key.
+    NSArray *menuArray = [importedPrefCameras sortedArrayUsingComparator:^NSComparisonResult(PTZPrefCamera *obj1, PTZPrefCamera *obj2) {
+        NSInteger index1 = obj1.menuIndex;
+        NSInteger index2 = obj2.menuIndex;
+        if (index1 > index2) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+     
+        if (index2 < index1) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    for (PTZPrefCamera *prefCamera in menuArray) {
         if (self.mutablePrefCameras[prefCamera.camerakey] == nil) {
             self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
             [self createWindowForCamera:prefCamera menuShortcut:prefCamera.menuIndex];

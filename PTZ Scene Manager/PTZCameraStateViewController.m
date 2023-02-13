@@ -110,15 +110,30 @@ typedef enum _ExposureModes {
     self.firstVisibleScene = self.prefCamera.firstVisibleScene;
     self.lastVisibleScene = self.prefCamera.lastVisibleScene;
     self.sceneRangeTableView.doubleAction = @selector(applySceneRange:);
-    NSArray *keyPaths = @[@"cameraState.exposureMode",
-                          @"sceneRangeController.arrangedObjects",
-                          @"prefCamera.firstVisibleScene",
-                          @"prefCamera.lastVisibleScene"];
-    for (NSString *key in keyPaths) {
-        [self addObserver:self
-               forKeyPath:key
-                  options:0
-                  context:&selfType];
+    [self manageObservers:YES];
+}
+
+- (void)dealloc {
+    [self manageObservers:NO];
+}
+
+- (void)manageObservers:(BOOL)add {
+    NSArray *keys = @[@"cameraState.exposureMode",
+                      @"sceneRangeController.arrangedObjects",
+                      @"prefCamera.firstVisibleScene",
+                      @"prefCamera.lastVisibleScene"];
+    if (add) {
+        for (NSString *key in keys) {
+            [self addObserver:self
+                   forKeyPath:key
+                      options:0
+                      context:&selfType];
+        }
+    } else {
+        for (NSString *key in keys) {
+            [self removeObserver:self
+                      forKeyPath:key];
+        }
     }
 }
 

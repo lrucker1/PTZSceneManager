@@ -25,6 +25,7 @@
 @property IBOutlet NSTableView *tableView;
 @property IBOutlet NSArrayController *arrayController;
 @property NSString *collectionName;
+@property BOOL isEditing;
 
 @end
 
@@ -53,11 +54,56 @@
     }
 }
 
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[NSApp delegate];
+}
+
+- (void)editCollectionNamed:(NSString *)name info:(NSDictionary<NSString *,PTZCameraSceneRange *> *)sceneRangeDictionary {
+    self.collectionName = name;
+    self.isEditing = YES;
+    for (PSMRangeInfo *info in self.arrayController.arrangedObjects) {
+        PTZCameraSceneRange *csRange = sceneRangeDictionary[info.camerakey];
+        NSInteger index = [info.sceneRangeArray indexOfObjectPassingTest:^BOOL(PTZCameraSceneRange * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            return NSEqualRanges(obj.range, csRange.range);
+        }];
+        if (index == -1) {
+            info.sceneRangeArray = [info.sceneRangeArray arrayByAddingObject:csRange];
+            info.selectedIndex = [info.sceneRangeArray count] - 1;
+        } else {
+            info.selectedIndex = index;
+        }
+    }
+}
+
 - (IBAction)saveCollection:(id)sender {
     if ([self.collectionName length] == 0) {
         NSBeep();
         return;
     }
+    if (!self.isEditing) {
+        NSDictionary *collections = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
+        NSArray *keys = [collections allKeys];
+        if ([keys containsObject:self.collectionName]) {
+            NSString *fmt = NSLocalizedString(@"A collection named \"%@\" already exists.", @"Collection name already exists alert message");
+            
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:[NSString localizedStringWithFormat:fmt, self.collectionName]];
+            [alert setInformativeText:NSLocalizedString(@"Do you want to replace it?", @"Collection already exists alert info text")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Replace", @"Replace button")];
+            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
+            
+            [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+                if (returnCode == NSAlertFirstButtonReturn) {
+                    [self saveSelectedCollection];
+                }
+            }];
+            return;
+        }
+    }
+    [self saveSelectedCollection];
+}
+
+- (void)saveSelectedCollection {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     for (PSMRangeInfo *info in self.arrayController.arrangedObjects) {
         NSInteger index = info.selectedIndex;
@@ -68,6 +114,12 @@
     NSMutableDictionary *newPrefs = (oldPrefs != nil) ? [NSMutableDictionary dictionaryWithDictionary:oldPrefs] : [NSMutableDictionary dictionary];
     newPrefs[self.collectionName] = dict;
     [[NSUserDefaults standardUserDefaults] setObject:newPrefs forKey:PSMSceneCollectionKey];
+    [self.view.window.windowController close];
 }
+
+- (IBAction)cancel:(id)sender {
+    [self.view.window.windowController close];
+}
+
 
 @end

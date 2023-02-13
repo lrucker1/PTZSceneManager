@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class PTZPrefCamera;
+@class PSMCameraCollectionWindowController;
 
 @interface PSMCameraCollectionItem : NSCollectionViewItem <NSControlTextEditingDelegate>
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSInteger selectedUSBDevice;
 
 @property IBOutlet NSPopUpButton *usbDeviceButton;
+@property PSMCameraCollectionWindowController *dataSource;
 
 @end
 

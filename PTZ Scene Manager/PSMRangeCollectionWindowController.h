@@ -9,7 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class PTZCameraSceneRange;
+
 @interface PSMRangeCollectionWindowController : NSWindowController
+
+- (void)editCollectionNamed:(NSString *)name info:(NSDictionary<NSString *,PTZCameraSceneRange *> *)sceneRangeDictionary;
 
 @end
 

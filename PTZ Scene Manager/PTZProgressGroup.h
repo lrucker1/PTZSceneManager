@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(copy, nullable) NSString *localizedDescription;
 @property(copy, nullable) NSString *localizedAdditionalDescription;
 @property(readonly, getter=isIndeterminate) BOOL indeterminate;
+@property(copy, nullable) NSString *title;
 
 - (instancetype)initWithUserInfo:(nullable NSDictionary *)userInfoOrNil;
 - (void)cancel;

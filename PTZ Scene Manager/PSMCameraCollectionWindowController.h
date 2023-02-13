@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PSMCameraCollectionWindowController : NSWindowController <NSCollectionViewDataSource, NSOpenSavePanelDelegate>
 
+- (NSArray *)usbCameraNames;
+
 @end
 
 NS_ASSUME_NONNULL_END

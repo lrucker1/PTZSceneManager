@@ -4,6 +4,7 @@
 //
 //  Created by Lee Ann Rucker on 1/17/23.
 //
+// Manages attributes specific to camera model/brands.
 
 #import <Foundation/Foundation.h>
 

@@ -6,9 +6,14 @@
 //
 
 #import "PSMRangeCollectionWindowController.h"
+#import "PSMRangeCollectionViewController.h"
 
 @interface PSMRangeCollectionWindowController ()
 
+@property IBOutlet PSMRangeCollectionViewController *rangeViewController;
+
+@property NSString *collectionName;
+@property NSDictionary *initialSelection;
 @end
 
 @implementation PSMRangeCollectionWindowController
@@ -18,10 +23,20 @@
     return self;
 }
 
+- (void)editCollectionNamed:(NSString *)name info:(NSDictionary<NSString *,PTZCameraSceneRange *> *)sceneRangeDictionary {
+    if (self.rangeViewController != nil) {
+        [self.rangeViewController editCollectionNamed:name info:sceneRangeDictionary];
+    } else {
+        self.collectionName = name;
+        self.initialSelection = sceneRangeDictionary;
+    }
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    if (self.initialSelection != nil) {
+       [self.rangeViewController editCollectionNamed:self.collectionName info:self.initialSelection];
+    }
 }
 
 @end

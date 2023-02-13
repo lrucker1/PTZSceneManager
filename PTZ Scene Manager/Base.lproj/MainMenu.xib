@@ -38,7 +38,7 @@
                                     <action selector="showCameraStateWindow:" target="-1" id="30c-yX-TS7"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Camera " id="Ff3-5z-P3o" userLabel="Cameras">
+                            <menuItem title="Camera List" id="Ff3-5z-P3o">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showCameraCollection:" target="-1" id="ol6-an-Zrn"/>

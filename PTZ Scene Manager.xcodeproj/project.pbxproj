@@ -53,6 +53,8 @@
 		94890E3C298275ED006EAB75 /* PSMOBSWebSocketController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 94890E3B298275ED006EAB75 /* PSMOBSWebSocketController.mm */; };
 		94890E4029827619006EAB75 /* easywsclient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94890E3F29827619006EAB75 /* easywsclient.cpp */; };
 		94A09648299624F700F32385 /* LARPrefWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A09647299624F700F32385 /* LARPrefWindow.m */; };
+		94A09652299961F900F32385 /* PTZProgressWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A09650299961F900F32385 /* PTZProgressWindowController.m */; };
+		94A09653299961F900F32385 /* PTZProgressWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94A09651299961F900F32385 /* PTZProgressWindowController.xib */; };
 		94C55AB7297CE96700D8C1DB /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = 94C55AB6297CE96700D8C1DB /* Notes */; };
 		94C55ABA297D04B300D8C1DB /* LARClickableImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */; };
 		94CEBAEE2983494A00D3C8DC /* LARContextualActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAED2983494A00D3C8DC /* LARContextualActionButton.m */; };
@@ -153,6 +155,10 @@
 		94890E3F29827619006EAB75 /* easywsclient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = easywsclient.cpp; sourceTree = "<group>"; };
 		94A09646299624F700F32385 /* LARPrefWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARPrefWindow.h; sourceTree = "<group>"; };
 		94A09647299624F700F32385 /* LARPrefWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARPrefWindow.m; sourceTree = "<group>"; };
+		94A0964C2997EE8900F32385 /* PTZ Scene ManagerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PTZ Scene ManagerRelease.entitlements"; sourceTree = "<group>"; };
+		94A0964F299961F900F32385 /* PTZProgressWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZProgressWindowController.h; sourceTree = "<group>"; };
+		94A09650299961F900F32385 /* PTZProgressWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTZProgressWindowController.m; sourceTree = "<group>"; };
+		94A09651299961F900F32385 /* PTZProgressWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PTZProgressWindowController.xib; sourceTree = "<group>"; };
 		94C55AB6297CE96700D8C1DB /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		94C55AB8297D04B300D8C1DB /* LARClickableImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LARClickableImageButton.h; sourceTree = "<group>"; };
 		94C55AB9297D04B300D8C1DB /* LARClickableImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LARClickableImageButton.m; sourceTree = "<group>"; };
@@ -224,6 +230,7 @@
 		94747E1F297B94F800309752 /* PTZ Scene Manager */ = {
 			isa = PBXGroup;
 			children = (
+				94A0964C2997EE8900F32385 /* PTZ Scene ManagerRelease.entitlements */,
 				94C55AB6297CE96700D8C1DB /* Notes */,
 				94747E20297B94F800309752 /* AppDelegate.h */,
 				94747E21297B94F800309752 /* AppDelegate.m */,
@@ -267,6 +274,9 @@
 				940FCC582992F0A3008FD02F /* PSMCameraCollectionItem.xib */,
 				94747E5F297B971100309752 /* PTZProgressGroup.h */,
 				94747E60297B971100309752 /* PTZProgressGroup.m */,
+				94A0964F299961F900F32385 /* PTZProgressWindowController.h */,
+				94A09650299961F900F32385 /* PTZProgressWindowController.m */,
+				94A09651299961F900F32385 /* PTZProgressWindowController.xib */,
 				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
 				94747E25297B94F900309752 /* MainMenu.xib */,
 				94C55AB2297CB6A800D8C1DB /* Custom UI */,
@@ -431,6 +441,7 @@
 				94747E27297B94F900309752 /* MainMenu.xib in Resources */,
 				940FCC552992EDE5008FD02F /* PSMCameraCollectionWindowController.xib in Resources */,
 				94CEBAFC2984934200D3C8DC /* PSMAppPreferencesWindowController.xib in Resources */,
+				94A09653299961F900F32385 /* PTZProgressWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +467,7 @@
 				94CEBB292989B8CE00D3C8DC /* PTZAltKeyButton.m in Sources */,
 				940FCB23298E0D83008FD02F /* LARUpDownStepper.m in Sources */,
 				94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */,
+				94A09652299961F900F32385 /* PTZProgressWindowController.m in Sources */,
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
 				94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */,
 				940FCC592992F0A3008FD02F /* PSMCameraCollectionItem.m in Sources */,
@@ -658,7 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "PTZ Scene Manager/PTZ_Scene_Manager.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "PTZ Scene Manager/PTZ Scene ManagerRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

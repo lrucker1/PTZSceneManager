@@ -20,6 +20,7 @@ Prefs:
    has website, ditto.
       PTZOptics [ipaddress]:8080
    any other notable divergence from Sony, like OSD toggle.
+   delay needed between start move and stop, esp for OSD.
 
 Configure cameras
  - make the setters work.
@@ -33,13 +34,15 @@ Add Export to PacketSender to this app.
 
 Lock scene name editing - part of the whole UI lock?
 
-Get the camera's actual aspect ratio for the live view constraint?
+Get the camera's actual aspect ratio for the live view constraint? 16:9 is the current default.
 snapshot.jpg resolution options: 1920x1080 (16:9, 1.777) 960x600 (8:5, 1.6) 480x300 (1.6)
 
 Pluggable controls:
-Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles"
+Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles".
+Also transition effects, like "relative zoom in"
 Auto sharpness?
 Preset speed?
+ - Scene-specific local saves for presetRecall & anything else with no inq.
 PTZ Advanced View:
  Pan/Tilt Speed Lock (?)
  Exposure mode dependent:
@@ -52,10 +55,6 @@ PTZ Advanced View:
 
 Camera controls: Pan/Tilt limit?
 
-Edit button in the scene range collection.
-Confirm giving one a name that already exists (if not edit mode)
-"Save" should close the window. 
-
 Undo on collection item removal.
 
 Refresh the "Add/Edit" window
@@ -66,13 +65,10 @@ menu item to bring up osd
 Export the settings to something readable. Even if that turns out to be settings.ini.
 
 Range copy (recall/set) in Camera Scenes. Also range overlap check - intersectsIndexesInRange
+Progress dialog for snapshot import... actually it's pretty fast. Keep it around for when we do range copy.
 
-Write up the Mark bug - cleaning up the WindowControllers causes crash.
+Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams, it's very optional.
 
-Observe USB device add/remove - only if we have one.
+Show current range in a different color, stripy (colorWithPatternImage:) on overlaps.
 
-Where is the initial window size coming from?
 
-Disable "connect to obs" if it's connected.
-
-Show current range in a different color, stripy (or other indicator) on overlaps.

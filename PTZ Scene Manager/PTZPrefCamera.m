@@ -156,7 +156,7 @@ PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
     PTZCameraSceneRange *csRange = [PTZCameraSceneRange new];
     csRange.name = NSLocalizedString(@"Default", @"name for default scene range");
     NSInteger len = self.defaultLastVisibleScene - self.defaultFirstVisibleScene + 1;
-    csRange.range = NSMakeRange(self.firstVisibleScene, len);
+    csRange.range = NSMakeRange(self.defaultFirstVisibleScene, len);
     return csRange;
 }
 

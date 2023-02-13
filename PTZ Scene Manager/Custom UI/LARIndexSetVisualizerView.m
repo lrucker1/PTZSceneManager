@@ -44,22 +44,16 @@ static LARIndexSetVisualizerView *selfType;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self addObserver:self
-           forKeyPath:@"reservedSet"
-              options:0
-              context:&selfType];
-    [self addObserver:self
-           forKeyPath:@"activeSet"
-              options:0
-              context:&selfType];
-    [self addObserver:self
-           forKeyPath:@"currentSet"
-              options:0
-              context:&selfType];
-    [self addObserver:self
-           forKeyPath:@"popover.shown"
-              options:0
-              context:&selfType];
+    NSArray *keys = @[@"reservedSet",
+                      @"activeSet",
+                      @"currentSet",
+                      @"popover.shown"];
+    for (NSString *key in keys) {
+        [self addObserver:self
+               forKeyPath:key
+                  options:0
+                  context:&selfType];
+    }
     self.window.acceptsMouseMovedEvents = YES;
     if (self.trackingArea == nil) {
         NSTrackingAreaOptions trackingOptions =
@@ -70,6 +64,17 @@ static LARIndexSetVisualizerView *selfType;
                                        owner:self
                                     userInfo:nil];
         [self addTrackingArea:self.trackingArea];
+    }
+}
+
+- (void)dealloc {
+    NSArray *keys = @[@"reservedSet",
+                      @"activeSet",
+                      @"currentSet",
+                      @"popover.shown"];
+    for (NSString *key in keys) {
+        [self removeObserver:self
+                  forKeyPath:key];
     }
 }
 
