@@ -11,6 +11,7 @@
 @class PTZPrefCamera;
 
 extern NSString *PSMSceneCollectionKey;
+extern NSString *PSMPrefCameraListDidChangeNotification;
 
 void PTZLog(NSString *format, ...);
 

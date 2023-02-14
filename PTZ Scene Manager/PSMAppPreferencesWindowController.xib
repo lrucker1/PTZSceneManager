@@ -16,19 +16,18 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window identifier="prefswindow" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="AppPreferences" animationBehavior="default" toolbarStyle="preference" id="F0z-JX-Cv5" customClass="LARPrefWindow">
+        <window identifier="prefswindow" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="AppPreferences" animationBehavior="default" toolbarStyle="preference" id="F0z-JX-Cv5" customClass="PSMAppPreferencesWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="562" height="263"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
             <view key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="542" height="291"/>
+                <rect key="frame" x="0.0" y="0.0" width="542" height="292"/>
                 <subviews>
                     <tabView horizontalHuggingPriority="750" verticalHuggingPriority="1000" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="SDw-NS-CPr">
-                        <rect key="frame" x="0.0" y="0.0" width="542" height="291"/>
+                        <rect key="frame" x="0.0" y="0.0" width="542" height="292"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="291" id="knc-YP-GWp"/>
-                            <constraint firstAttribute="height" constant="291" placeholder="YES" id="rHc-eY-d7Q"/>
                         </constraints>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
@@ -203,11 +202,11 @@
                             </tabViewItem>
                             <tabViewItem label="Scenes" identifier="Scenes" id="der-Jg-cem">
                                 <view key="view" id="5jp-jJ-aXp">
-                                    <rect key="frame" x="0.0" y="0.0" width="542" height="291"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="542" height="292"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxH-UO-6bh">
-                                            <rect key="frame" x="20" y="39" width="502" height="195"/>
+                                            <rect key="frame" x="20" y="40" width="502" height="195"/>
                                             <clipView key="contentView" id="893-CZ-ZtZ">
                                                 <rect key="frame" x="1" y="1" width="500" height="193"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,8 +383,8 @@
                                                 </subviews>
                                             </clipView>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="195" id="fNg-GH-V10"/>
                                                 <constraint firstAttribute="width" constant="502" placeholder="YES" id="u86-iV-u2g"/>
+                                                <constraint firstAttribute="height" constant="195" placeholder="YES" id="zc6-th-Qha"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="3Gc-CP-MDb">
                                                 <rect key="frame" x="1" y="179" width="500" height="15"/>
@@ -400,8 +399,11 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
-                                        <gridView fixedFrame="YES" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="h1L-Me-RmO">
+                                        <gridView xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="h1L-Me-RmO">
                                             <rect key="frame" x="20" y="22" width="90" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="EIy-tV-g3t"/>
+                                            </constraints>
                                             <rows>
                                                 <gridRow id="MsH-3W-ocK"/>
                                             </rows>
@@ -415,7 +417,6 @@
                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QAu-cw-zSA" userLabel="+ Square">
                                                         <rect key="frame" x="0.0" y="-1" width="20" height="20"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="kYZ-YC-ltl"/>
                                                             <constraint firstAttribute="width" constant="20" id="ux6-mU-WCg"/>
                                                         </constraints>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tdx-o0-GjE">
@@ -431,7 +432,6 @@
                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g0c-rC-Geu" userLabel="- Square">
                                                         <rect key="frame" x="20" y="-1" width="20" height="20"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="BBd-lo-3Yq"/>
                                                             <constraint firstAttribute="width" constant="20" id="kYZ-Yk-RjS"/>
                                                         </constraints>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q32-eN-vLX">
@@ -447,7 +447,6 @@
                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GhM-9D-kB5">
                                                         <rect key="frame" x="40" y="-1" width="50" height="20"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="VK9-8f-p36"/>
                                                             <constraint firstAttribute="width" constant="20" id="ykb-Gb-YdR"/>
                                                         </constraints>
                                                         <buttonCell key="cell" type="smallSquare" title="Edit" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Acc-Qj-iHt">
@@ -462,11 +461,11 @@
                                             </gridCells>
                                         </gridView>
                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3xC-xq-PgX">
-                                            <rect key="frame" x="18" y="238" width="506" height="33"/>
+                                            <rect key="frame" x="18" y="239" width="506" height="33"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="33" id="nS0-VR-3Ni"/>
                                             </constraints>
-                                            <textFieldCell key="cell" selectable="YES" title="Manage collections of camera scene ranges. Press Apply to update the scene ranges on all cameras." id="NcH-1C-bt6">
+                                            <textFieldCell key="cell" selectable="YES" title="Manage collections of camera scene ranges. Press Apply to set the scene ranges on all cameras." id="NcH-1C-bt6">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -478,10 +477,14 @@
                                         <constraint firstItem="pxH-UO-6bh" firstAttribute="trailing" secondItem="3xC-xq-PgX" secondAttribute="trailing" id="BEG-Rr-Qq0"/>
                                         <constraint firstAttribute="trailing" secondItem="3xC-xq-PgX" secondAttribute="trailing" constant="20" symbolic="YES" id="CrR-Dm-g3k"/>
                                         <constraint firstItem="pxH-UO-6bh" firstAttribute="leading" secondItem="5jp-jJ-aXp" secondAttribute="leading" constant="20" symbolic="YES" id="UpE-O9-Prs"/>
+                                        <constraint firstItem="h1L-Me-RmO" firstAttribute="top" secondItem="pxH-UO-6bh" secondAttribute="bottom" id="Wxt-gw-kaN"/>
                                         <constraint firstItem="3xC-xq-PgX" firstAttribute="leading" secondItem="5jp-jJ-aXp" secondAttribute="leading" constant="20" symbolic="YES" id="cAH-tS-lte"/>
+                                        <constraint firstItem="h1L-Me-RmO" firstAttribute="leading" secondItem="pxH-UO-6bh" secondAttribute="leading" id="cBe-aM-L07"/>
                                         <constraint firstItem="pxH-UO-6bh" firstAttribute="leading" secondItem="3xC-xq-PgX" secondAttribute="leading" id="gde-pa-vly"/>
                                         <constraint firstItem="3xC-xq-PgX" firstAttribute="top" secondItem="5jp-jJ-aXp" secondAttribute="top" constant="20" symbolic="YES" id="hZn-nR-xYT"/>
                                         <constraint firstAttribute="trailing" secondItem="pxH-UO-6bh" secondAttribute="trailing" constant="20" symbolic="YES" id="j9M-hU-Nvm"/>
+                                        <constraint firstAttribute="bottom" secondItem="h1L-Me-RmO" secondAttribute="bottom" constant="22" id="xtN-J8-NtE"/>
+                                        <constraint firstItem="h1L-Me-RmO" firstAttribute="top" secondItem="rqL-ne-hTJ" secondAttribute="bottom" id="yMQ-lC-SVQ"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>

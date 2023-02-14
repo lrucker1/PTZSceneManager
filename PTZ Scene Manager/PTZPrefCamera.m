@@ -17,7 +17,6 @@ static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
 static NSString *PSM_SceneNamesKey = @"sceneNames";
 
 @interface PTZPrefCamera ()
-@property BOOL isSerial;
 @property NSString *camerakey;
 @end
 
@@ -78,6 +77,8 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
 - (NSDictionary *)dictionaryValue {
     return @{@"cameraname":_cameraname, @"camerakey":_camerakey, @"devicename":_devicename, @"original":_originalDeviceName, @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex)};
 }
+
+// TODO: observe PSMPrefCameraListDidChangeNotification object:self and deal with device type/name changes. Consider having everything own a prefCamera and get to the PTZCamera through it.
 
 - (PTZCamera *)loadCameraIfNeeded {
     if (!self.camera) {

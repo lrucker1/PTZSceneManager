@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *PTZ_LocalCamerasKey;
+extern NSString *PTZRangeCollectionUpdateNotification;
 
 @interface PSMAppPreferencesWindowController : NSWindowController <NSOpenSavePanelDelegate, NSTableViewDelegate>
 

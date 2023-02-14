@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *cameraname;
 @property NSString *devicename;
 @property NSString *originalDeviceName;
-@property (readonly) BOOL isSerial;
+@property BOOL isSerial;
 @property (readonly) NSString *camerakey;
 @property (strong) PTZCamera *camera;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;

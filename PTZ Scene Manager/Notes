@@ -69,6 +69,4 @@ Progress dialog for snapshot import... actually it's pretty fast. Keep it around
 
 Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams, it's very optional.
 
-Show current range in a different color, stripy (colorWithPatternImage:) on overlaps.
-
 

@@ -907,6 +907,7 @@
                 </defaultToolbarItems>
             </toolbar>
             <connections>
+                <binding destination="-2" name="title" keyPath="prefCamera.cameraname" id="ylS-Mr-NUj"/>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
             <point key="canvasLocation" x="-64" y="-65"/>

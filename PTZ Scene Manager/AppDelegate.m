@@ -21,6 +21,7 @@
 #import "PSMAppPreferencesWindowController.h"
 
 NSString *PSMSceneCollectionKey = @"SceneCollections";
+NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeNotification";
 
 static NSString *PSMAutosavePrefsWindowID = @"prefswindow";
 static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow";
@@ -83,6 +84,9 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     if ([[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
         [[PSMOBSWebSocketController defaultController] connectToServer];
     }
+    [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self savePrefCameras];
+    }];
 }
 
 

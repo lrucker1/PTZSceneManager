@@ -7,6 +7,8 @@
 
 #import "PSMCameraCollectionItem.h"
 #import "PSMCameraCollectionWindowController.h"
+#import "PTZPrefCamera.h"
+#import "AppDelegate.h"
 
 static PSMCameraCollectionItem *selfType;
 
@@ -50,12 +52,37 @@ static PSMCameraCollectionItem *selfType;
     self.usbDevices = array;
 }
 
-- (void)controlTextDidBeginEditing:(NSNotification *)note {
-    
+- (IBAction)changeConnectionType:(id)sender {
+    // TODO: stop overloading devicename.A
 }
 
-- (void)controlTextDidEndEditing:(NSNotification *)notification {
+- (IBAction)changeUSBDevice:(id)sender {
+    NSString *oldValue = self.prefCamera.devicename;
+    self.devicename = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
+    self.prefCamera.devicename = self.devicename;
+    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"usbdevicename", @"value":self.devicename, @"oldValue":oldValue}];
+}
+
+- (IBAction)changeCameraName:(NSTextField *)sender {
+    // KVO has already changed cameraname
+    NSString *oldValue = self.prefCamera.cameraname;
+    self.prefCamera.cameraname = self.cameraname;
+    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"cameraname", @"value":self.cameraname, @"oldValue":oldValue}];
+}
+
+- (IBAction)changeCameraIPAddress:(NSTextField *)sender {
+    NSString *oldValue = self.prefCamera.devicename;
+    self.prefCamera.devicename = self.ipaddress;
+    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"ipaddress", @"value":self.ipaddress, @"oldValue":oldValue}];
+}
+
+
+- (void)controlTextDidBeginEditing:(NSNotification *)note {
+}
+
+- (void)controlTextDidEndEditing:(NSNotification *)note {
 //    [self.prefCamera set ...];
+    NSLog(@"note %@ %@", note.object, note.userInfo);
 }
 
 - (IBAction)cancelEditing:(id)sender {

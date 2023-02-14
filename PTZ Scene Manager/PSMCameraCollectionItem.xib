@@ -24,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="316" height="148"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ekK-KR-xRm" userLabel="Name Field">
+                            <textField identifier="cameraname" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ekK-KR-xRm" userLabel="Name Field">
                                 <rect key="frame" x="110" y="103" width="189" height="28"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="YOf-fX-CKy">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -32,7 +32,9 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <action selector="changeCameraName:" target="-2" id="wZ6-tE-eAe"/>
                                     <binding destination="-2" name="value" keyPath="cameraname" id="Ymj-v1-qfa"/>
+                                    <outlet property="delegate" destination="-2" id="meI-2M-Xhz"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Voj-qs-LDQ">
@@ -79,7 +81,6 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="-2" name="contentValues" keyPath="usbDevices" id="Yl9-Hr-m79"/>
                                     <binding destination="-2" name="enabled" keyPath="enableUSBPopup" id="W30-hw-aHJ"/>
                                     <binding destination="-2" name="hidden" keyPath="isSerial" previousBinding="W30-hw-aHJ" id="9rX-sj-F0i">
                                         <dictionary key="options">
@@ -87,9 +88,10 @@
                                         </dictionary>
                                     </binding>
                                     <binding destination="-2" name="selectedIndex" keyPath="selectedUSBDevice" previousBinding="Yl9-Hr-m79" id="9dv-WG-Y8W"/>
+                                    <binding destination="-2" name="contentValues" keyPath="usbDevices" id="Yl9-Hr-m79"/>
                                 </connections>
                             </popUpButton>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dc2-9t-FKQ" userLabel="IP Address field">
+                            <textField identifier="ipaddress" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dc2-9t-FKQ" userLabel="IP Address field">
                                 <rect key="frame" x="110" y="71" width="189" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="taQ-3g-o0l">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -97,8 +99,10 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="-2" name="hidden" keyPath="isSerial" id="5U6-QX-mpv"/>
+                                    <action selector="changeCameraIPAddress:" target="-2" id="cBX-7M-wDB"/>
                                     <binding destination="-2" name="value" keyPath="ipaddress" id="ihT-O0-zC1"/>
+                                    <binding destination="-2" name="hidden" keyPath="isSerial" id="5U6-QX-mpv"/>
+                                    <outlet property="delegate" destination="-2" id="fce-Ee-fsN"/>
                                 </connections>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6q1-io-Zht">

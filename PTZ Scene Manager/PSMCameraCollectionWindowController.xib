@@ -66,7 +66,7 @@
                             <action selector="importFromPTZOptics:" target="-2" id="ehV-Gi-Ece"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XSq-m0-c1N">
+                    <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XSq-m0-c1N">
                         <rect key="frame" x="238" y="250" width="136" height="32"/>
                         <buttonCell key="cell" type="push" title="Import from OBS" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q3T-WH-k65">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

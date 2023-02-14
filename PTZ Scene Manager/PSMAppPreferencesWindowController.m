@@ -12,10 +12,12 @@
 #import "PTZCameraSceneRange.h"
 #import "PTZSettingsFile.h"
 #import "PSMRangeCollectionWindowController.h"
+#import "LARPrefWindow.h"
 
 static PSMAppPreferencesWindowController *selfType;
 
 NSString *PTZ_LocalCamerasKey = @"LocalCameras";
+NSString *PTZRangeCollectionUpdateNotification = @"PTZRangeCollectionUpdateNotification";
 
 @interface PSMRangeCollectionInfo : NSObject
 @property NSString *name;
@@ -37,6 +39,7 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 @property NSMutableArray *collectionsArray;
 @property IBOutlet NSArrayController *collectionsArrayController;
 @property (strong) PSMRangeCollectionWindowController *rangeCollectionWindowController;
+@property NSUndoManager *undoManager;
 
 @end
 
@@ -49,6 +52,7 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    self.undoManager = [NSUndoManager new];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     NSString *path = [(AppDelegate *)[NSApp delegate] ptzopticsSettingsFilePath];
@@ -69,6 +73,15 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
                                             forKeyPath:PSMOBSAutoConnect
                                                options:NSKeyValueObservingOptionNew
                                                context:&selfType];
+    [[NSNotificationCenter defaultCenter] addObserverForName:PTZRangeCollectionUpdateNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSDictionary *newItems = note.userInfo[@"Items"];
+        if (newItems) {
+            [self registerPrefItemsForUndo:newItems];
+        } else {
+            // OldValue/NewValue
+            [self registerSwapItemsForUndo:note.userInfo];
+        }
+    }];
     [self reloadCollectionData];
 }
 
@@ -115,7 +128,7 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 #pragma mark scene collections
 
 /*
- In Prefs:
+ In Prefs and Undo items:
   Dictionary<collectionName, Dictionary<camerakey,encodedData> >
  In array controller:
  Array of PSMRangeCollectionInfo
@@ -140,7 +153,7 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
                 NSString *cameraname = [[self.appDelegate prefCameraForKey:camerakey] cameraname];
                 [csRangeDescriptions addObject:[csRange prettyRangeWithName:cameraname]];
                 csRangeDict[camerakey] = csRange;
-           }
+            }
         }
         NSString *csString = [csRangeDescriptions componentsJoinedByString:@"\n"];
         PSMRangeCollectionInfo *info = [PSMRangeCollectionInfo new];
@@ -153,6 +166,25 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
     }
     self.collectionsArray = array;
 }
+
+- (IBAction)undo:(id)sender {
+    [self.undoManager undo];
+}
+
+- (IBAction)redo:(id)sender {
+    [self.undoManager redo];
+}
+
+- (BOOL)validateUndoItem:(NSMenuItem *)menuItem {
+    SEL action = menuItem.action;
+    
+    if (action == @selector(undo:)) {
+        return self.undoManager.canUndo;
+    } else if (action == @selector(redo:)) {
+        return self.undoManager.canRedo;
+    }
+    return YES;
+ }
 
 - (void)observeWindowClose:(NSWindow *)inWindow {
     [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification object:inWindow queue:nil usingBlock:^(NSNotification * _Nonnull note) {
@@ -181,14 +213,73 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
 }
 
 - (IBAction)removeSceneCollection:(id)sender {
-    // Get the keys (collectionName) for the selected objects, remove them from defaults, save defaults, and reload.
+    [self removeSceneCollectionItems:[self.collectionsArrayController selectedObjects]];
+}
+
+- (void)removeSceneCollectionItems:(NSArray *)items {
+    // Get the keys (collectionName) for the selected objects, remove them from defaults, save defaults. Reload happens via KVO.
+    NSMutableArray *keysForUndo = [NSMutableArray array];
+    for (PSMRangeCollectionInfo *info in [self.collectionsArrayController selectedObjects]) {
+        [keysForUndo addObject:info.name];
+    }
+    [self removePrefItemsWithKeys:keysForUndo];
+}
+
+- (void)removePrefItemsWithKeys:(NSArray *)keys {
     NSDictionary *oldPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
     NSMutableDictionary *newPrefs = [NSMutableDictionary dictionaryWithDictionary:oldPrefs];
-    for (PSMRangeCollectionInfo *info in [self.collectionsArrayController selectedObjects]) {
-        [newPrefs removeObjectForKey:info.name];
+    NSMutableDictionary *itemsForUndo = [NSMutableDictionary dictionary];
+    for (NSString *key in keys) {
+        itemsForUndo[key] = oldPrefs[key];
+        [newPrefs removeObjectForKey:key];
     }
     [[NSUserDefaults standardUserDefaults] setObject:newPrefs forKey:PSMSceneCollectionKey];
-    [self reloadCollectionData];
+    [self.undoManager registerUndoWithTarget:self selector:@selector(addPrefItems:) object:itemsForUndo];
+    if (![self.undoManager isUndoing]) {
+        if ([itemsForUndo count] == 1) {
+            [self.undoManager setActionName:NSLocalizedString(@"Remove Item", @"Remove Item")];
+        } else {
+            [self.undoManager setActionName:NSLocalizedString(@"Remove Items", @"Remove Items")];
+        }
+    }
+}
+
+- (void)swapPrefItems:(NSDictionary *)items {
+    NSString *collectionName = items[@"CollectionName"];
+    NSDictionary *oldValue = items[@"OldValue"];
+    NSDictionary *newValue = items[@"NewValue"];
+    NSDictionary *oldPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
+    NSMutableDictionary *newPrefs = [NSMutableDictionary dictionaryWithDictionary:oldPrefs];
+    newPrefs[collectionName] = oldValue;
+    [[NSUserDefaults standardUserDefaults] setObject:newPrefs forKey:PSMSceneCollectionKey];
+    [self registerSwapItemsForUndo:@{@"CollectionName":collectionName,
+                                     @"OldValue":newValue,
+                                     @"NewValue":oldValue}];
+}
+
+- (void)registerSwapItemsForUndo:(NSDictionary *)items {
+    [self.undoManager
+     registerUndoWithTarget:self
+     selector:@selector(swapPrefItems:)
+     object:items];
+    if (![self.undoManager isUndoing]) {
+        [self.undoManager setActionName:NSLocalizedString(@"Change", @"Undo/Redo Change")];
+    }
+}
+
+- (void)addPrefItems:(NSDictionary *)items {
+    NSDictionary *oldPrefs = [[NSUserDefaults standardUserDefaults] dictionaryForKey:PSMSceneCollectionKey];
+    NSMutableDictionary *newPrefs = [NSMutableDictionary dictionaryWithDictionary:oldPrefs];
+    [newPrefs addEntriesFromDictionary:items];
+    [[NSUserDefaults standardUserDefaults] setObject:newPrefs forKey:PSMSceneCollectionKey];
+    [self registerPrefItemsForUndo:items];
+}
+
+- (void)registerPrefItemsForUndo:(NSDictionary *)items {
+    [self.undoManager registerUndoWithTarget:self selector:@selector(removePrefItemsWithKeys:) object:[items allKeys]];
+    if (![self.undoManager isUndoing]) {
+        [self.undoManager setActionName:NSLocalizedString(@"Add Item", @"Add Item")];
+    }
 }
 
 - (IBAction)applySceneRangeCollection:(id)sender {
@@ -224,6 +315,30 @@ NSString *PTZ_LocalCamerasKey = @"LocalCameras";
            [[PSMOBSWebSocketController defaultController] connectToServer];
        }
    }
+}
+
+@end
+
+@interface PSMAppPreferencesWindow : LARPrefWindow
+@end
+@implementation PSMAppPreferencesWindow
+
+- (PSMAppPreferencesWindowController *)wc {
+    return (PSMAppPreferencesWindowController *)self.windowController;
+}
+- (BOOL)validateUserInterfaceItem:(NSObject <NSValidatedUserInterfaceItem> *)item {
+    if (item.action == @selector(undo:) || item.action == @selector(redo:)) {
+        return [self.wc validateUndoItem:(NSMenuItem *)item];
+    }
+    return [super validateUserInterfaceItem:item];
+}
+
+- (IBAction)undo:(id)sender {
+    [self.wc undo:sender];
+}
+
+- (IBAction)redo:(id)sender {
+    [self.wc redo:sender];
 }
 
 @end

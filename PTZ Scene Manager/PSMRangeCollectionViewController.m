@@ -6,6 +6,8 @@
 //
 
 #import "PSMRangeCollectionViewController.h"
+#import "PSMRangeCollectionWindowController.h"
+#import "PSMAppPreferencesWindowController.h"
 #import "AppDelegate.h"
 #import "PTZCameraSceneRange.h"
 #import "PTZPrefCamera.h"
@@ -18,6 +20,9 @@
 @end
 
 @implementation PSMRangeInfo
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"%@: %@", [super debugDescription], self.sceneRangeArray];
+}
 @end
 
 @interface PSMRangeCollectionViewController ()
@@ -114,6 +119,16 @@
     NSMutableDictionary *newPrefs = (oldPrefs != nil) ? [NSMutableDictionary dictionaryWithDictionary:oldPrefs] : [NSMutableDictionary dictionary];
     newPrefs[self.collectionName] = dict;
     [[NSUserDefaults standardUserDefaults] setObject:newPrefs forKey:PSMSceneCollectionKey];
+    if (self.isEditing) {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:PTZRangeCollectionUpdateNotification
+         object:nil
+         userInfo:@{@"CollectionName":self.collectionName,
+                    @"OldValue":oldPrefs[self.collectionName],
+                    @"NewValue":newPrefs[self.collectionName]}];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:PTZRangeCollectionUpdateNotification object:nil userInfo:@{@"Items":@{self.collectionName:dict}}];
+    }
     [self.view.window.windowController close];
 }
 

@@ -90,6 +90,55 @@ static LARIndexSetVisualizerView *selfType;
     self.cellIndex = x + (y * _columnCount);
     
 }
+
+- (NSColor *)patternColorWithSize:(NSSize)size {
+    NSBitmapImageRep *bmpImageRep =
+        [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+                                             pixelsWide:size.width
+                                             pixelsHigh:size.height
+                                          bitsPerSample:8
+                                        samplesPerPixel:4
+                                               hasAlpha:YES
+                                               isPlanar:NO
+                                         colorSpaceName:NSCalibratedRGBColorSpace
+                                           bitmapFormat:0
+                                            bytesPerRow:0
+                                           bitsPerPixel:32];
+    // Setting the user size communicates the dpi.
+    [bmpImageRep setSize:size];
+    NSRect bounds = NSZeroRect;
+    bounds.size = size;
+    NSRect rect = NSInsetRect(bounds, -3, -3); // so the lines end outside the rect
+
+    [NSGraphicsContext saveGraphicsState];
+    NSGraphicsContext *bitmapContext =
+       [NSGraphicsContext graphicsContextWithBitmapImageRep:bmpImageRep];
+    [NSGraphicsContext setCurrentContext:bitmapContext];
+    [[NSColor controlAccentColor] set];
+    NSRectFill(rect);
+    [[NSColor tertiaryLabelColor] set];
+    CGFloat T = 2; // desired thickness of lines
+    CGFloat G = 2; // desired gap between lines
+    CGFloat W = rect.size.width;
+    CGFloat H = rect.size.height;
+    CGFloat p = -(W > H ? W : H) - T;
+    CGContextRef c = [bitmapContext CGContext];
+    CGContextScaleCTM(c, 1, -1);
+    // because it insists on connecting the paths on the left edge.
+    CGContextTranslateCTM(c, -2, -rect.size.height);
+    while (p <= W) {
+        CGContextMoveToPoint(c, p-T, -T);
+        CGContextAddLineToPoint(c, p+T+H, T+H);
+        CGContextStrokePath(c);
+        CGContextClosePath(c);
+        p += G+T+T;
+    }
+    [NSGraphicsContext restoreGraphicsState];
+    NSData *pngData = [bmpImageRep representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
+    NSImage *img = [[NSImage alloc] initWithData:pngData];
+    return [NSColor colorWithPatternImage:img];
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     // Drawing code here.
@@ -104,6 +153,7 @@ static LARIndexSetVisualizerView *selfType;
     NSRect rect = NSMakeRect(0, 0, stepX, stepY);
     [[NSColor systemRedColor] set];
     NSRectFill(rect);
+    NSColor *patternColor = nil;
 
     if (_activeSet != nil || _reservedSet != nil) {
         for (NSInteger i = 1; i <= _rangeMax; i++) {
@@ -114,18 +164,19 @@ static LARIndexSetVisualizerView *selfType;
                 NSInteger y = i / _columnCount;
                 NSInteger x = i - (y * _columnCount);
                 NSRect rect = NSMakeRect(x * stepX, y * stepY, stepX, stepY);
-                // TODO: overlaps.
                 if (isCurrent) {
-                    [[NSColor selectedControlColor] set];
+                    [[NSColor controlAccentColor] set];
                     NSRectFill(rect);
                 }
                 if (isReserved) {
                     [[NSColor systemRedColor] set];
                     NSRectFill(rect);
                } else if (isInSet) {
-                   // I want stripes!
-                   NSColor *altColor = [[NSColor selectedControlColor] blendedColorWithFraction:0.25 ofColor:[NSColor blackColor]];
-                   [(isCurrent ? altColor : [NSColor blackColor]) set];
+                   if (patternColor == nil && isCurrent) {
+                       // Lazy init.
+                       patternColor = [self patternColorWithSize:bounds.size];
+                   }
+                   [(isCurrent ? patternColor : [NSColor labelColor]) set];
                    NSRectFill(rect);
                 }
             }
