@@ -7,16 +7,17 @@
 // PTZPrefCamera manages camera-specific NSUserDefaults.
 
 #import <Foundation/Foundation.h>
+#import "PTZPrefObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class PTZCamera;
 @class PTZCameraSceneRange;
 
-@interface PTZPrefCamera : NSObject
+@interface PTZPrefCamera : PTZPrefObject
 @property NSString *cameraname;
-@property NSString *devicename;
-@property NSString *originalDeviceName;
+@property NSString *ipAddress;
+@property NSString *usbdevicename;
 @property BOOL isSerial;
 @property (readonly) NSString *camerakey;
 @property (strong) PTZCamera *camera;
@@ -45,10 +46,6 @@ PREF_VALUE_NSINT_PROPERTIES(maxColumnCount, MaxColumnCount)
 - (NSDictionary *)dictionaryValue;
 
 - (PTZCamera *)loadCameraIfNeeded;
-
-- (id)prefValueForKey:(NSString *)key;
-- (void)setPrefValue:(id)obj forKey:(NSString *)key;
-- (void)removePrefValueForKey:(NSString *)key;
 
 - (NSString *)sceneNameAtIndex:(NSInteger)index;
 - (void)setSceneName:(NSString *)name atIndex:(NSInteger)index;

@@ -8,6 +8,7 @@
 // Icon <a href="https://www.flaticon.com/free-icons/ptz-camera" title="ptz camera icons">Ptz camera icons created by Freepik - Flaticon</a>
 // https://www.svgrepo.com/svg/51316/camera-viewfinder?edit=true
 // https://www.flaticon.com/free-icon/remote-control_1865152
+// https://www.flaticon.com/free-icon/crossroads_120836
 //
 // TCP version of visca: https://github.com/norihiro/libvisca-ip
 // iniparser: https://github.com/ndevilla/iniparser
@@ -66,7 +67,12 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
         window = delegate.cameraCollectionController.window;
     }
     [window makeKeyAndOrderFront:nil];
-    completionHandler(window, nil);
+    if (window == nil) {
+        NSError *error = [NSError errorWithDomain:0 code:0 userInfo: @{ NSLocalizedFailureReasonErrorKey : @"Autolayout" }];
+        completionHandler(window, error);
+    } else {
+        completionHandler(window, nil);
+    }
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification {
@@ -276,7 +282,6 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 #pragma mark OBS connection
 
 - (IBAction)connectToOBS:(id)sender {
-    // TODO: make it a toggle item connect/disconnect?
     if (![[NSUserDefaults standardUserDefaults] boolForKey:PSMOBSAutoConnect]) {
         [self showPrefs:nil];
         [self.prefsController selectTabViewItemWithIdentifier:@"OBS"];
@@ -287,9 +292,15 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 
 - (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock {
     NSAlert *alert = [[NSAlert alloc] init];
-    // TODO: Use the authType to customize the message/informative text:
     // prompt attempt (no previous errors), keychain attempt failed, previous prompt failed.
-    [alert setMessageText:NSLocalizedString(@"Enter your OBS WebSockets password", @"OBS password alert prompt")];
+    if (authType == OBSAuthTypeKeychainFailed) {
+        [alert setMessageText:NSLocalizedString(@"The Keychain password was not accepted", @"OBS password alert prompt")];
+    } else if (authType == OBSAuthTypePromptFailed) {
+        [alert setMessageText:NSLocalizedString(@"The password was not accepted", @"OBS password password failed alert message text")];
+    } else {
+        [alert setMessageText:NSLocalizedString(@"Enter your OBS WebSockets password", @"OBS password alert prompt")];
+    }
+    [alert setInformativeText:NSLocalizedString(@"The password can be found in OBS Tools > WebSocket Server Settings", @"OBS password dialog info text")];
     [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK button")];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
 

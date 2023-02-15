@@ -6,12 +6,11 @@
 //
 
 #import "PTZCameraConfig.h"
+#import "PTZPrefObjectInt.h"
 #import "libvisca.h"
 
-static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
-
 @interface PTZCameraConfig ()
-@property NSRange reservedRange;
+@property NSIndexSet *reservedSet;
 @property NSString *brandname;
 @end
 
@@ -20,9 +19,7 @@ static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
 + (void)initialize {
     [super initialize];
     [[NSUserDefaults standardUserDefaults] registerDefaults:
-     @{@"PTZOptics.MaxSceneIndex":@(254),
-       @"Sony.MaxSceneIndex":@(254),
-     }];
+     @{@"maxSceneIndex":@(254)}];
 }
 
 + (instancetype)ptzOpticsConfig {
@@ -33,6 +30,7 @@ static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
     PTZCameraConfig *result = [PTZCameraConfig new];
     result.cameratype = VISCA_IFACE_CAM_SONY;
     result.brandname = @"Sony";
+    result.reservedSet = nil;
     return result;
 }
 
@@ -42,7 +40,7 @@ static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
         _port = 5678;
         _cameratype = VISCA_IFACE_CAM_PTZOPTICS;
         _protocol = VISCA_PROTOCOL_TCP;
-        _reservedRange = NSMakeRange(90, 10);
+        _reservedSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(90, 10)];
         _brandname = @"PTZOptics";
     }
     return self;
@@ -53,47 +51,29 @@ static NSString *PTZ_MaxSceneIndexKey = @"MaxSceneIndex";
 }
 
 - (NSString *)prefKeyForKey:(NSString *)key {
-    return [NSString stringWithFormat:@"%@.%@", self.brandname, key];
+    return [NSString stringWithFormat:@"CameraConfig[%@].%@", self.brandname, key];
 }
 
-
-- (NSInteger)maxSceneIndex {
-    NSString *camKey = [self prefKeyForKey:PTZ_MaxSceneIndexKey];
-    return [[NSUserDefaults standardUserDefaults] integerForKey:camKey];
-}
-
-- (void)setMaxSceneIndex:(NSInteger)value {
-    NSString *camKey = [self prefKeyForKey:PTZ_MaxSceneIndexKey];
-    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:camKey];
-}
+PREF_VALUE_NSINT_ACCESSORS(maxSceneIndex, MaxSceneIndex)
 
 - (BOOL)isValidSceneIndex:(NSInteger)index {
     // 0 is reserved for Home.
     if (index < 1 || index > self.maxSceneIndex) {
         return NO;
     }
-    if (self.isPTZOptics) {
-        if (NSLocationInRange(index, self.reservedRange)) {
-            return NO;
-        }
+    NSIndexSet *set = self.reservedSet;
+    if (set && [set containsIndex:index]) {
+        return NO;
     }
     return YES;
 }
 
 - (NSInteger)validateRangeOffset:(NSInteger)offset {
-    if (self.isPTZOptics) {
-        if (offset >= 81 && offset <= 99) {
-            offset = 100;
-        }
+    NSIndexSet *set = self.reservedSet;
+    if (set && [set containsIndex:offset]) {
+        return set.lastIndex + 1;
     }
     return offset;
-}
-
-- (NSIndexSet *)reservedSet {
-    if (self.isPTZOptics) {
-        return [NSIndexSet indexSetWithIndexesInRange:self.reservedRange];
-    }
-    return nil;
 }
 
 @end

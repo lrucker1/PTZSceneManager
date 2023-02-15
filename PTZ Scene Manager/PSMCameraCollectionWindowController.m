@@ -24,6 +24,10 @@
 
 @end
 
+@interface PTZPrefCamera ()
+@property NSString *devicename;
+@end
+
 @implementation PSMCameraCollectionWindowController
 
 - (NSNibName)windowNibName {
@@ -129,8 +133,13 @@
 
 - (void)importFromSettingsFolder:(NSString *)path {
     NSString *filePath = [path stringByAppendingPathComponent:@"settings.ini"];
-    // TODO: validate the file and warn on failure.
-    //[PTZSettingsFile validateFileWithPath:filePath error:outError]
+    NSError *error;
+    if (![PTZSettingsFile validateFileWithPath:filePath error:&error]) {
+        NSAlert *alert = [NSAlert alertWithError:error];
+        
+        [alert beginSheetModalForWindow:self.window completionHandler:nil];
+        return;
+    }
 
     PTZSettingsFile *sourceSettings = [[PTZSettingsFile alloc] initWithPath:filePath];
     NSString *downloadsDir = [path stringByAppendingPathComponent:@"downloads"];

@@ -24,6 +24,7 @@
 }
 
 - (void)editCollectionNamed:(NSString *)name info:(NSDictionary<NSString *,PTZCameraSceneRange *> *)sceneRangeDictionary {
+    // This can come in before we have a viewcontroller.
     if (self.rangeViewController != nil) {
         [self.rangeViewController editCollectionNamed:name info:sceneRangeDictionary];
     } else {
@@ -35,7 +36,8 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     if (self.initialSelection != nil) {
-       [self.rangeViewController editCollectionNamed:self.collectionName info:self.initialSelection];
+        self.window.title = NSLocalizedString(@"Edit Range Collection", @"Window title for editing mode");
+        [self.rangeViewController editCollectionNamed:self.collectionName info:self.initialSelection];
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 #import "PTZPrefCamera.h"
+#import "PTZPrefObjectInt.h"
 #import "PTZCamera.h"
 #import "PTZCameraSceneRange.h"
 #import "AppDelegate.h"
@@ -18,6 +19,7 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
 
 @interface PTZPrefCamera ()
 @property NSString *camerakey;
+@property NSString *devicename;
 @end
 
 @implementation PTZPrefCamera
@@ -49,13 +51,12 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
     self = [super init];
     if (self) {
         _cameraname = @"Camera";
-        _devicename = @"0.0.0.0";
         _camerakey = [self.class generateKey];
-        _originalDeviceName = _devicename;
     }
     return self;
 
 }
+
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     self = [super init];
     if (self) {
@@ -68,14 +69,18 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
             _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
         }
         _devicename = dict[@"devicename"];
-        _originalDeviceName = dict[@"original"] ?: _devicename;
         _isSerial = [dict[@"cameratype"] boolValue];
+        if (_isSerial) {
+            _usbdevicename = _devicename;
+        } else {
+            _ipAddress = _devicename;
+        }
     }
     return self;
 }
 
 - (NSDictionary *)dictionaryValue {
-    return @{@"cameraname":_cameraname, @"camerakey":_camerakey, @"devicename":_devicename, @"original":_originalDeviceName, @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex)};
+    return @{@"cameraname":_cameraname, @"camerakey":_camerakey, @"devicename":(_isSerial ? _usbdevicename : _ipAddress), @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex)};
 }
 
 // TODO: observe PSMPrefCameraListDidChangeNotification object:self and deal with device type/name changes. Consider having everything own a prefCamera and get to the PTZCamera through it.
@@ -90,19 +95,6 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
 
 #pragma mark defaults
 
-// Macros go through the KeyWithSelector variants because we know they have prefixes, and "remove" is not a special word like "set" is.
-
-#define PREF_VALUE_NSINT_ACCESSORS(_prop, _Prop) \
-- (NSInteger)_prop {  \
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue]; \
-} \
-- (void)set##_Prop:(NSInteger)value { \
-    [self setPrefValue:@(value) forKeyWithSelector:NSStringFromSelector(_cmd)]; \
-} \
-- (void)remove##_Prop { \
-    [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
-}
-
 PREF_VALUE_NSINT_ACCESSORS(panPlusSpeed, PanPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(tiltPlusSpeed, TiltPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(zoomPlusSpeed, ZoomPlusSpeed)
@@ -112,24 +104,9 @@ PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 
-#undef PREF_VALUE_NSINT_ACCESSORS
-
-#define PREF_VALUE_BOOL_ACCESSORS(_prop, _Prop) \
-- (BOOL)_prop {  \
-    return [[self prefValueForKey:NSStringFromSelector(_cmd)] integerValue]; \
-} \
-- (void)set##_Prop:(BOOL)value { \
-    [self setPrefValue:@(value) forKeyWithSelector:NSStringFromSelector(_cmd)]; \
-} \
-- (void)remove##_Prop { \
-    [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
-}
-
 PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
 PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
 PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
-
-#undef PREF_VALUE_BOOL_ACCESSORS
 
 - (NSArray<PTZCameraSceneRange *> *)sceneRangeArray {
     NSData *data = [self prefValueForKey:@"SceneRangeArray"];
@@ -205,55 +182,6 @@ PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
 
 - (NSString *)prefKeyForKey:(NSString *)key {
     return [NSString stringWithFormat:@"[%@].%@", self.camerakey, key];
-}
-
-- (id)prefValueForKey:(NSString *)key {
-    NSString *camKey = [self prefKeyForKey:key];
-    return [[NSUserDefaults standardUserDefaults] objectForKey:camKey] ?: [[NSUserDefaults standardUserDefaults] objectForKey:key];
-}
-
-// Convert prefixFoo/prefixFoo: to foo. foo: is returned unchanged.
-- (NSString *)removePrefix:(NSString *)basePrefix fromKey:(NSString *)key {
-    NSInteger len = [basePrefix length];
-    BOOL hasPrefix = [key hasPrefix:basePrefix];
-    if (!hasPrefix) {
-        return key;
-    }
-    BOOL hasColon = [key hasSuffix:@":"];
-    NSInteger testLength = len + 1 + (hasColon ? 1 : 0);
-    // Take off the "setF" and ":", convert the F to f.
-    NSString *prefix = [key substringToIndex:len+1];
-    NSString *firstChar = [prefix substringFromIndex:len];
-    NSString *suffix = [key substringWithRange:NSMakeRange(len+1, [key length] - testLength)];
-    key = [NSString stringWithFormat:@"%@%@", [firstChar lowercaseString], suffix];
-    return key;
-}
-
-- (void)setPrefValue:(id)obj forKeyWithSelector:(NSString *)key {
-    // Convert setFoo: to foo
-    key = [self removePrefix:@"set" fromKey:key];
-    [self setPrefValue:obj forKey:key];
-}
-
-- (void)setPrefValue:(id)obj forKey:(NSString *)key {
-     NSString *camKey = [self prefKeyForKey:key];
-    [self willChangeValueForKey:key];
-    [[NSUserDefaults standardUserDefaults] setObject:obj forKey:camKey];
-    [self didChangeValueForKey:key];
-}
-
-- (void)removePrefValueForKeyWithSelector:(NSString *)key {
-    // Convert removeFoo to foo
-    key = [self removePrefix:@"remove" fromKey:key];
-    [self removePrefValueForKey:key];
-}
-
-- (void)removePrefValueForKey:(NSString *)key {
-    NSString *camKey = [self prefKeyForKey:key];
-    // camKey has the camera-specific prefix. key is what KVO is watching.
-    [self willChangeValueForKey:key];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:camKey];
-    [self didChangeValueForKey:key];
 }
 
 - (NSString *)sceneNameAtIndex:(NSInteger)index {

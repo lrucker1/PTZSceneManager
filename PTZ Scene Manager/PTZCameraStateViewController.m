@@ -546,7 +546,7 @@ MAKE_CAN_SET_MODE_CHECK_METHOD(Hue)
 }
 
 - (BOOL)isPTZOptics {
-    return self.cameraState.cameraConfig.cameratype == VISCA_IFACE_CAM_PTZOPTICS;
+    return self.cameraState.cameraConfig.isPTZOptics;
 }
     
 // CAM_Iris

@@ -349,7 +349,6 @@ typedef enum {
     }
 }
 
-// TODO: Run GetVersion to make sure we can get a jpg.
 - (NSString *)jsonGetSourceScreenshot:(NSString *)sourceName requestID:(NSString *)requestID imageWidth:(NSInteger)imageWidth {
     // options: 1920x1080 (1.777) 960x600 (1.6) 480x300 (1.6)
     // imageWidth: ">= 8, <= 4096"

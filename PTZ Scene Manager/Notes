@@ -5,10 +5,7 @@ https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-
 
  rtsp://[ipaddress]:554/1
  
- Import settings.ini and transfer to not using their data.
-  - export our data as settings.ini?
- 
- Sandbox?
+ Export the settings to something readable. Even if that turns out to be settings.ini.
 
 Yes! obs-websocket to find out which camera is hot. And works with the plugin in 2.7.
 
@@ -23,16 +20,12 @@ Prefs:
    delay needed between start move and stop, esp for OSD.
 
 Configure cameras
- - make the setters work.
- - update Windows menu on name change. changeWindowsItem:title:filename:
  - set PTZOptics brand or not.
- 
-Should localhost be saved as an "Internet" password?
-  It looks like it's not propagated to other Macs, so yes?
 
 Add Export to PacketSender to this app.
 
-Lock scene name editing - part of the whole UI lock?
+Lock scene name editing - part of the whole UI lock? "Lock UI" menu item?
+ only if someone wants it in beta
 
 Get the camera's actual aspect ratio for the live view constraint? 16:9 is the current default.
 snapshot.jpg resolution options: 1920x1080 (16:9, 1.777) 960x600 (8:5, 1.6) 480x300 (1.6)
@@ -40,6 +33,7 @@ snapshot.jpg resolution options: 1920x1080 (16:9, 1.777) 960x600 (8:5, 1.6) 480x
 Pluggable controls:
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles".
 Also transition effects, like "relative zoom in"
+  - a "record mode", that computes the difference between two scenes and saves just that change
 Auto sharpness?
 Preset speed?
  - Scene-specific local saves for presetRecall & anything else with no inq.
@@ -53,20 +47,14 @@ PTZ Advanced View:
     and show meaningful values, sheesh.
  Image flip & mirror
 
-Camera controls: Pan/Tilt limit?
+Camera controls: Pan/Tilt limit? It's in the other app, what does it do?
 
-Undo on collection item removal.
-
-Refresh the "Add/Edit" window
-
-menu item to bring up osd
-"Lock UI" menu item.
-
-Export the settings to something readable. Even if that turns out to be settings.ini.
+menu item w/shortcut to bring up osd
 
 Range copy (recall/set) in Camera Scenes. Also range overlap check - intersectsIndexesInRange
 Progress dialog for snapshot import... actually it's pretty fast. Keep it around for when we do range copy.
 
 Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams, it's very optional.
 
-
+Add cameras in Cam Collection.
+Update after IP/Device change.

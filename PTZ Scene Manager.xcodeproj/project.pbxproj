@@ -35,6 +35,7 @@
 		9463828129807F360015BA8F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463828029807F360015BA8F /* libz.tbd */; };
 		9463828229807F360015BA8F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827F29807F360015BA8F /* libiconv.tbd */; };
 		9463828329807F360015BA8F /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827E29807F360015BA8F /* libbz2.tbd */; };
+		946CA6B3299C251A00ACC947 /* PTZPrefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 946CA6B2299C251A00ACC947 /* PTZPrefObject.m */; };
 		94747E22297B94F800309752 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E21297B94F800309752 /* AppDelegate.m */; };
 		94747E24297B94F900309752 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94747E23297B94F900309752 /* Assets.xcassets */; };
 		94747E27297B94F900309752 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94747E25297B94F900309752 /* MainMenu.xib */; };
@@ -115,6 +116,9 @@
 		9463827E29807F360015BA8F /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libbz2.tbd; sourceTree = DEVELOPER_DIR; };
 		9463827F29807F360015BA8F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		9463828029807F360015BA8F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		946CA6B1299C251A00ACC947 /* PTZPrefObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZPrefObject.h; sourceTree = "<group>"; };
+		946CA6B2299C251A00ACC947 /* PTZPrefObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTZPrefObject.m; sourceTree = "<group>"; };
+		946CA6B4299C26F100ACC947 /* PTZPrefObjectInt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZPrefObjectInt.h; sourceTree = "<group>"; };
 		94747E1D297B94F800309752 /* PTZ Scene Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PTZ Scene Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94747E20297B94F800309752 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94747E21297B94F800309752 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -239,6 +243,9 @@
 				94747E59297B96F900309752 /* PTZCamera.m */,
 				940FCC4929918A1A008FD02F /* PTZCameraOpener.h */,
 				940FCC4829918A1A008FD02F /* PTZCameraOpener.m */,
+				946CA6B1299C251A00ACC947 /* PTZPrefObject.h */,
+				946CA6B4299C26F100ACC947 /* PTZPrefObjectInt.h */,
+				946CA6B2299C251A00ACC947 /* PTZPrefObject.m */,
 				94747E5D297B970100309752 /* PTZCameraConfig.h */,
 				94747E5C297B970100309752 /* PTZCameraConfig.m */,
 				94747E79297B9D5A00309752 /* PTZPrefCamera.h */,
@@ -480,6 +487,7 @@
 				94747E77297B9C5F00309752 /* ObjCUtils.m in Sources */,
 				94CEBB38298A0CCE00D3C8DC /* DraggingStackView.swift in Sources */,
 				94747E29297B94F900309752 /* main.m in Sources */,
+				946CA6B3299C251A00ACC947 /* PTZPrefObject.m in Sources */,
 				94747E75297B9C5F00309752 /* PTZIniParser.m in Sources */,
 				94747E5E297B970200309752 /* PTZCameraConfig.m in Sources */,
 				94CEBB242986B73900D3C8DC /* LARIndexSetVisualizerView.m in Sources */,

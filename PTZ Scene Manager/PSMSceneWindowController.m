@@ -654,7 +654,6 @@ typedef enum {
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView
      itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = [self.sceneIndexes[indexPath.item] integerValue];
-    NSString *devicename = self.prefCamera.devicename;
 
     PSMSceneCollectionItem *item = [PSMSceneCollectionItem new];
     item.sceneName = [self.prefCamera sceneNameAtIndex:index];
@@ -668,7 +667,6 @@ typedef enum {
     }
     item.sceneNumber = index;
     item.camera = self.camera;
-    item.devicename = devicename;
     item.prefCamera = self.prefCamera;
     return item;
 }

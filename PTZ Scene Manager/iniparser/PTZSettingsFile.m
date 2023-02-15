@@ -32,7 +32,7 @@ static NSCharacterSet *PTZSettings_iniKeyCharacterSet;
     PTZSettingsFile *testFile = [[PTZSettingsFile alloc] initWithPath:path];
     if (testFile == nil) {
         if (error != nil) {
-            *error = OCUtilErrorWithDescription(NSLocalizedString(@"Failed to open or parse file", @"failed to open file"), NSLocalizedString(@"See Log window for details", @"See Log window"), @"PTZSettingsFile", 100);
+            *error = OCUtilErrorWithDescription(NSLocalizedString(@"The settings file could not be opened", @"failed to open file"), NSLocalizedString(@"Make sure the directory contains a valid PTZOptics settings.ini file", @"File not found alert message"), @"PTZSettingsFile", 100);
         }
         return NO;
     }

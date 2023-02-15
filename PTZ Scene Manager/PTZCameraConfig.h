@@ -7,11 +7,12 @@
 // Manages attributes specific to camera model/brands.
 
 #import <Foundation/Foundation.h>
+#import "PTZPrefObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 
-@interface PTZCameraConfig : NSObject
+@interface PTZCameraConfig : PTZPrefObject
 
 + (instancetype)ptzOpticsConfig;
 + (instancetype)sonyConfig;

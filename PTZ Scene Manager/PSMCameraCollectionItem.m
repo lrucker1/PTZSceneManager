@@ -57,9 +57,9 @@ static PSMCameraCollectionItem *selfType;
 }
 
 - (IBAction)changeUSBDevice:(id)sender {
-    NSString *oldValue = self.prefCamera.devicename;
+    NSString *oldValue = self.prefCamera.usbdevicename;
     self.devicename = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
-    self.prefCamera.devicename = self.devicename;
+    self.prefCamera.usbdevicename = self.devicename;
     [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"usbdevicename", @"value":self.devicename, @"oldValue":oldValue}];
 }
 
@@ -71,8 +71,8 @@ static PSMCameraCollectionItem *selfType;
 }
 
 - (IBAction)changeCameraIPAddress:(NSTextField *)sender {
-    NSString *oldValue = self.prefCamera.devicename;
-    self.prefCamera.devicename = self.ipaddress;
+    NSString *oldValue = self.prefCamera.ipAddress;
+    self.prefCamera.ipAddress = self.ipaddress;
     [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"ipaddress", @"value":self.ipaddress, @"oldValue":oldValue}];
 }
 
