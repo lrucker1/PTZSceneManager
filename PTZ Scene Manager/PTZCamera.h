@@ -124,6 +124,8 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSIntege
 - (BOOL)isSerial;
 
 - (void)closeCamera;
+- (void)changeIPAddress:(NSString *)ipAddress;
+- (void)changeUSBDevice:(NSString *)devicename;
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock;
 
 - (void)applyPantiltPresetSpeed:(PTZDoneBlock _Nullable)doneBlock;

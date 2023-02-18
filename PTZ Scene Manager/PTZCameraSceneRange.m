@@ -32,7 +32,10 @@
 }
 
 - (NSString *)prettyRangeWithName:(NSString *)name {
-    return [NSString stringWithFormat:@"%@: %@", name, self.prettyRange];
+    if ([name length] > 0) {
+        return [NSString stringWithFormat:@"%@: %@", name, self.prettyRange];
+    }
+    return self.prettyRange;
 }
 
 - (NSString *)description {

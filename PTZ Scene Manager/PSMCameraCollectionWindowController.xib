@@ -33,8 +33,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="248"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="4" maximumNumberOfColumns="4" id="gLe-5K-AEx">
-                                        <size key="minimumItemSize" width="322" height="156"/>
-                                        <size key="maximumItemSize" width="330" height="156"/>
+                                        <size key="minimumItemSize" width="322" height="191"/>
+                                        <size key="maximumItemSize" width="330" height="191"/>
                                     </collectionViewGridLayout>
                                     <color key="primaryBackgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <connections>

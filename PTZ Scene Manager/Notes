@@ -3,7 +3,6 @@ https://help.ptzoptics.com/support/solutions/articles/13000066852-ptzoptics-cont
 
 https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-rtsp-feed-of-a-ptzoptics-camera
 
- rtsp://[ipaddress]:554/1
  
  Export the settings to something readable. Even if that turns out to be settings.ini.
 
@@ -12,14 +11,17 @@ Yes! obs-websocket to find out which camera is hot. And works with the plugin in
 Prefs:
    Brand/Model specific stuff:
    max preset, reserved presets
-   has livestream, livestream URL
+   has livestream, livestream URL, URL format
+      PTZOptics rtsp://[ipaddress]:554/1 (and a /2 for hdmi?)
       and if it's html?
    has website, ditto.
       PTZOptics [ipaddress]:8080
+   snapshot URL
+      PTZOptics [ipaddress]:80/snapshot.jpg
    any other notable divergence from Sony, like OSD toggle.
    delay needed between start move and stop, esp for OSD.
 
-Configure cameras
+Configure cameras: should this all be part of the Camera List UI? Advantage: you can see all the names, because they're the OBS key.
  - set PTZOptics brand or not.
 
 Add Export to PacketSender to this app.
@@ -33,28 +35,27 @@ snapshot.jpg resolution options: 1920x1080 (16:9, 1.777) 960x600 (8:5, 1.6) 480x
 Pluggable controls:
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles".
 Also transition effects, like "relative zoom in"
-  - a "record mode", that computes the difference between two scenes and saves just that change
+  - a "record mode", that computes the difference between two scenes and saves just that change? Future.
 Auto sharpness?
 Preset speed?
  - Scene-specific local saves for presetRecall & anything else with no inq.
+Focus lock/unlock - not in Sony?
 PTZ Advanced View:
- Pan/Tilt Speed Lock (?)
  Exposure mode dependent:
     Shutter speed up/down
     Iris brighter/darker
     Brightness up/down
  Image Color: Luminance Contrast Hue
     and show meaningful values, sheesh.
- Image flip & mirror
-
-Camera controls: Pan/Tilt limit? It's in the other app, what does it do?
 
 menu item w/shortcut to bring up osd
 
 Range copy (recall/set) in Camera Scenes. Also range overlap check - intersectsIndexesInRange
 Progress dialog for snapshot import... actually it's pretty fast. Keep it around for when we do range copy.
 
-Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams, it's very optional.
+Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams, it's very optional. OTOH - disconnecting and reconnecting IP is fast. USB takes some time between power on and it actually being available.
 
 Add cameras in Cam Collection.
-Update after IP/Device change.
+Update after IP/USB change.
+
+Test importing a second different/overlapping set of cameras.

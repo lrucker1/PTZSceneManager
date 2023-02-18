@@ -47,8 +47,11 @@ extern NSString *PSMOBSSnapshotIndexKey;
 + (PSMOBSWebSocketController *)defaultController;
 
 - (void)requestNotificationsForCamera:(PTZPrefCamera *)camera;
+- (void)cancelNotificationsForCameraName:(NSString *)cameraname;
+
 // Posts PSMOBSGetSourceSnapshotNotification on success.
 - (BOOL)requestSnapshotForCameraName:(NSString *)cameraName index:(NSInteger)index preferredWidth:(NSInteger)width;
+
 - (void)connectToServer;
 - (void)deleteKeychainPasswords;
 

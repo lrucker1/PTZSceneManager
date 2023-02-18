@@ -150,8 +150,11 @@
         snapshotsQueue = dispatch_queue_create("import_snapshots", NULL);
     }
     
-    NSArray *cameraList = sourceSettings.cameraInfo;
+    // If zero, these are all new and we use menuIndex. If non-zero, we use nextMenuIndex and increment it, in case this is a mix of existing and new cameras.
+    NSInteger nextMenuIndex = [self.appDelegate.prefCameras count];
+    NSArray *cameraList = [sourceSettings cameraInfo];
     if ([cameraList count] > 4) {
+        // Don't show the progress unless there are enough cameras to make it worth it.
         self.parentProgress = [PTZProgressGroup new];
         self.progressWindowController = [[PTZProgressWindowController alloc] initWithProgressGroup:self.parentProgress];
         [self.window beginSheet:self.progressWindowController.window completionHandler:nil];
@@ -160,7 +163,16 @@
     for (NSDictionary *cameraInfo in cameraList) {
         PTZPrefCamera *prefCamera = [self cameraWithName:cameraInfo[@"devicename"]];
         if (prefCamera == nil) {
-            prefCamera = [[PTZPrefCamera alloc] initWithDictionary:cameraInfo];
+            NSDictionary *newDict = cameraInfo; // Because we can't touch cameraInfo in fast enumeration.
+            if (nextMenuIndex > 0 && nextMenuIndex < 10) {
+                // Adjust menuIndex by the number of items we already have.
+                NSMutableDictionary *infoDict = [NSMutableDictionary dictionaryWithDictionary:cameraInfo];
+                infoDict[@"menuIndex"] = @(nextMenuIndex);
+                nextMenuIndex++;
+                newDict = infoDict;
+            }
+            
+            prefCamera = [[PTZPrefCamera alloc] initWithDictionary:newDict];
             [self.prefCameras addObject:prefCamera];
         }
         NSString *devicename = prefCamera.devicename;
@@ -185,8 +197,8 @@
         dispatch_async(snapshotsQueue, block);
     }
 
-    [self.collectionView reloadData];
     [self.appDelegate syncPrefCameras:self.prefCameras];
+    [self.collectionView reloadData];
 }
 
 - (void)copySnapshotFilesFromDirectory:(NSString *)oldDir toDirectory:(NSString *)newDir fromKey:(NSString *)deviceName toKey:(NSString *)cameraKey withProgress:(PTZProgress *)progress {
@@ -246,6 +258,7 @@
     item.prefCamera = prefCamera;
     item.cameraname = prefCamera.cameraname;
     item.isSerial = prefCamera.isSerial;
+    item.menuIndex = prefCamera.menuIndex;
     if (item.isSerial) {
         item.devicename = prefCamera.devicename;
     } else {

@@ -14,13 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTZCamera;
 @class PTZCameraSceneRange;
 
+extern NSString *PSMPrefCameraListDidChangeNotification;
+
 @interface PTZPrefCamera : PTZPrefObject
 @property NSString *cameraname;
 @property NSString *ipAddress;
 @property NSString *usbdevicename;
 @property BOOL isSerial;
 @property (readonly) NSString *camerakey;
-@property (strong) PTZCamera *camera;
+@property (readonly, strong) PTZCamera *camera;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
 @property NSInteger menuIndex;
 

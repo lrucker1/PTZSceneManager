@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithCamera:(PTZCamera *)camera hostname:(NSString *)cameraIP port:(int)port;
 
+- (void)setCameraIP:(NSString *)cameraIP defaultPort:(int)port;
+
 @end
 
 @interface PTZCameraOpener_Serial : PTZCameraOpener

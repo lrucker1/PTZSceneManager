@@ -5,6 +5,7 @@
 //  Created by Lee Ann Rucker on 2/4/23.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/IOKitLib.h>
 #include <IOKit/IOCFPlugIn.h>
@@ -94,10 +95,21 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
 - (instancetype)initWithCamera:(PTZCamera *)camera hostname:(NSString *)cameraIP port:(int)port {
     self = [super initWithCamera:camera];
     if (self) {
+        [self setCameraIP:cameraIP defaultPort:port];
+    }
+    return self;
+}
+
+- (void)setCameraIP:(NSString *)cameraIP defaultPort:(int)port {
+    if ([cameraIP containsString:@":"]) {
+        // format should be host:port.
+        NSArray *parts = [cameraIP componentsSeparatedByString:@":"];
+        _cameraIP = [parts firstObject];
+        _port = [[parts lastObject] intValue];
+    } else {
         _cameraIP = cameraIP;
         _port = port;
     }
-    return self;
 }
 
 - (void)loadCameraWithCompletionHandler:(PTZDoneBlock)handler {
@@ -108,9 +120,9 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
             self->_pIface->broadcast = 0;
             self->_pCamera->address = 1; // Because we are using IP
             self->_pIface->cameratype = VISCA_IFACE_CAM_PTZOPTICS;
-//            if (VISCA_get_camera_info(self->_pIface, self->_pCamera) != VISCA_SUCCESS) {
-//                fprintf(stderr, "visca: unable to get camera info\n");
-//            }
+            if (VISCA_get_camera_info(self->_pIface, self->_pCamera) != VISCA_SUCCESS) {
+                fprintf(stderr, "visca: unable to get camera info\n");
+            }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             handler(success);
@@ -150,15 +162,18 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
         BOOL success = (VISCA_open_serial(self->_pIface, [self.ttydev UTF8String]) == VISCA_SUCCESS);
         if (success) {
             self->_pIface->broadcast = 0;
-//            int camera_num;
-//            if (VISCA_set_address(self->_pIface, &camera_num) != VISCA_SUCCESS) {
-//                fprintf(stderr, "visca: unable to set address\n");
-//            }
+            int camera_num;
             self->_pCamera->address = 1;
+            if (VISCA_set_address(self->_pIface, &camera_num) != VISCA_SUCCESS) {
+                fprintf(stderr, "visca: unable to set address\n");
+                self->_pCamera->address = 1;
+            } else {
+                self->_pCamera->address = camera_num;
+            }
             self->_pIface->cameratype = VISCA_IFACE_CAM_SONY;
-//            if (VISCA_get_camera_info(self->_pIface, self->_pCamera) != VISCA_SUCCESS) {
-//                fprintf(stderr, "visca: unable to get camera info\n");
-//            }
+            if (VISCA_get_camera_info(self->_pIface, self->_pCamera) != VISCA_SUCCESS) {
+                fprintf(stderr, "visca: unable to get camera info\n");
+            }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             handler(success);

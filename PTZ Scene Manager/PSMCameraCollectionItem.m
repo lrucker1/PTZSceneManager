@@ -9,12 +9,14 @@
 #import "PSMCameraCollectionWindowController.h"
 #import "PTZPrefCamera.h"
 #import "AppDelegate.h"
+#import "NSWindowAdditions.h"
 
 static PSMCameraCollectionItem *selfType;
 
 @interface PSMCameraCollectionItem ()
 
 @property IBOutlet NSBox *box;
+@property NSArray *menuShortcuts;
 @property BOOL enableUSBPopup;
 
 @end
@@ -23,6 +25,15 @@ static PSMCameraCollectionItem *selfType;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObject:NSLocalizedString(@"None", @"No menu shortcut")];
+    for (NSInteger i = 1; i < 10; i++) {
+        [array addObject:[NSString stringWithFormat:@"⌘%ld", i]];
+    }
+    if (self.menuIndex < 0 || self.menuIndex > 9) {
+        self.menuIndex = 0;
+    }
+    self.menuShortcuts = [NSArray arrayWithArray:array];
     [self updateUSBDevices];
     [self addObserver:self
            forKeyPath:@"dataSource.usbCameraNames"
@@ -52,37 +63,54 @@ static PSMCameraCollectionItem *selfType;
     self.usbDevices = array;
 }
 
-- (IBAction)changeConnectionType:(id)sender {
-    // TODO: stop overloading devicename.A
-}
+- (IBAction)applyChanges:(id)sender {
+    // Seriously, why are we still using 30 year old hacks to force a textfield to stop editing and update KV?
+    NSView *view = (NSView *)sender;
+    NSWindow *window = view.window;
+    NSView *first = [window ptz_currentEditingView];
+    if (first != nil) {
+        [window makeFirstResponder:window.contentView];
+    }
+    if (first != nil) {
+        [window makeFirstResponder:first];
+    }
 
-- (IBAction)changeUSBDevice:(id)sender {
-    NSString *oldValue = self.prefCamera.usbdevicename;
-    self.devicename = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
-    self.prefCamera.usbdevicename = self.devicename;
-    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"usbdevicename", @"value":self.devicename, @"oldValue":oldValue}];
+    NSMutableDictionary *oldValues = [NSMutableDictionary dictionary];
+    NSMutableDictionary *newValues = [NSMutableDictionary dictionary];
+    if (![self.prefCamera.cameraname isEqualToString:self.cameraname]) {
+        oldValues[@"cameraname"] = self.prefCamera.cameraname;
+        newValues[@"cameraname"] = self.cameraname;
+        self.prefCamera.cameraname = self.cameraname;
+    };
+    if (![self.prefCamera.ipAddress isEqualToString:self.ipaddress]) {
+        oldValues[@"ipAddress"] = self.prefCamera.ipAddress;
+        newValues[@"ipAddress"] = self.ipaddress;
+        self.prefCamera.ipAddress = self.ipaddress;
+    };
+    if (![self.prefCamera.usbdevicename isEqualToString:self.devicename]) {
+        oldValues[@"usbdevicename"] = self.prefCamera.usbdevicename;
+        newValues[@"usbdevicename"] = self.devicename;
+        self.prefCamera.usbdevicename = self.devicename;
+    };
+    if (self.prefCamera.isSerial != self.isSerial) {
+        self.prefCamera.isSerial = self.isSerial;
+        oldValues[@"isSerial"] = @(self.prefCamera.isSerial);
+        newValues[@"isSerial"] = @(self.isSerial);
+    };
+    if (self.prefCamera.menuIndex != self.menuIndex) {
+        self.prefCamera.menuIndex = self.menuIndex;
+        oldValues[@"menuIndex"] = @(self.prefCamera.menuIndex);
+        newValues[@"menuIndex"] = @(self.menuIndex);
+    };
+    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{NSKeyValueChangeNewKey:newValues, NSKeyValueChangeOldKey:oldValues}];
 }
-
-- (IBAction)changeCameraName:(NSTextField *)sender {
-    // KVO has already changed cameraname
-    NSString *oldValue = self.prefCamera.cameraname;
-    self.prefCamera.cameraname = self.cameraname;
-    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"cameraname", @"value":self.cameraname, @"oldValue":oldValue}];
-}
-
-- (IBAction)changeCameraIPAddress:(NSTextField *)sender {
-    NSString *oldValue = self.prefCamera.ipAddress;
-    self.prefCamera.ipAddress = self.ipaddress;
-    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{@"valueDescription":@"ipaddress", @"value":self.ipaddress, @"oldValue":oldValue}];
-}
-
 
 - (void)controlTextDidBeginEditing:(NSNotification *)note {
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)note {
 //    [self.prefCamera set ...];
-    NSLog(@"note %@ %@", note.object, note.userInfo);
+//    NSLog(@"note %@ %@", note.object, note.userInfo);
 }
 
 - (IBAction)cancelEditing:(id)sender {

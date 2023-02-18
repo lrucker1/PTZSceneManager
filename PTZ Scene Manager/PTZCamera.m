@@ -166,6 +166,26 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     }];
 }
 
+- (void)changeIPAddress:(NSString *)ipAddress {
+    if ([self.cameraOpener isKindOfClass:PTZCameraOpener_TCP.class]) {
+        PTZCameraOpener_TCP *tcpOpener = (PTZCameraOpener_TCP *)self.cameraOpener;
+        [tcpOpener setCameraIP:ipAddress defaultPort:_cameraConfig.port];
+        [self closeAndReload:nil];
+    } else {
+        NSLog(@"Attempt to set ipAddress on camera using %@", self.cameraOpener.class.className);
+    }
+}
+
+- (void)changeUSBDevice:(NSString *)devicename {
+    if ([self.cameraOpener isKindOfClass:PTZCameraOpener_Serial.class]) {
+        PTZCameraOpener_Serial *tcpOpener = (PTZCameraOpener_Serial *)self.cameraOpener;
+        tcpOpener.devicename = devicename;
+        [self closeAndReload:nil];
+    } else {
+        NSLog(@"Attempt to set ipAddress on camera using %@", self.cameraOpener.class.className);
+    }
+}
+
 - (void)loadCameraWithCompletionHandler:(PTZCommandBlock)handler {
     if (self.cameraIsOpen) {
         handler();

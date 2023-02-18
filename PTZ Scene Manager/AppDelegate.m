@@ -22,7 +22,6 @@
 #import "PSMAppPreferencesWindowController.h"
 
 NSString *PSMSceneCollectionKey = @"SceneCollections";
-NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeNotification";
 
 static NSString *PSMAutosavePrefsWindowID = @"prefswindow";
 static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow";
@@ -68,8 +67,9 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     }
     [window makeKeyAndOrderFront:nil];
     if (window == nil) {
-        NSError *error = [NSError errorWithDomain:0 code:0 userInfo: @{ NSLocalizedFailureReasonErrorKey : @"Autolayout" }];
-        completionHandler(window, error);
+        // Most likely cause is autolayout.
+        NSError *error = [NSError errorWithDomain:@"PTZCameraWindow" code:100 userInfo: @{ NSLocalizedFailureReasonErrorKey : @"Window creation failed."}];
+        completionHandler(nil, error);
     } else {
         completionHandler(window, nil);
     }
@@ -171,9 +171,24 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 
 #pragma mark cameras
 
+- (void)changeWindowsItem:(NSWindow *)win
+                    title:(NSString *)string
+             menuShortcut:(NSInteger)shortcut {
+    // PTZWindowsMenuItem
+    NSMenu *windowsMenu = [NSApp windowsMenu];
+    for (NSMenuItem *item in [windowsMenu itemArray]) {
+        if ([item isKindOfClass:PTZWindowsMenuItem.class] && item.target == win) {
+            // If it's any other class, do not touch! The menu extends the same courtesy to us.
+            item.title = string;
+            item.keyEquivalent = (shortcut > 0 && shortcut < 10) ? [@(shortcut) stringValue] : @"";
+            break;
+        }
+    }
+}
+
 - (void)createWindowForCamera:(PTZPrefCamera *)prefCamera menuShortcut:(NSInteger)shortcut {
     self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
-    prefCamera.camera = [prefCamera loadCameraIfNeeded];
+    [prefCamera loadCameraIfNeeded];
     PSMSceneWindowController *wc = [[PSMSceneWindowController alloc] initWithPrefCamera:prefCamera];
     wc.window.excludedFromWindowsMenu = YES;
     [wc.window makeKeyAndOrderFront:nil];
@@ -234,15 +249,13 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 // Sync with the prefs from Camera Collection, which may include cameras that already exist.
 - (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras {
     if (self.windowControllers == nil) {
-        [self loadAllCameras];
+        self.windowControllers = [NSMutableSet set];
         return;
     }
     if (self.mutablePrefCameras == nil) {
         self.mutablePrefCameras = [NSMutableDictionary dictionary];
     }
-    // TODO: make sure the menuIndexes of the new cameras don't overlap.
-    // This is why we have the empty NSMenuItem subclass - we can spot our own. Why yes, that *is* why the normal Window items have a custom class.
-    // That also requires smarter duplicate checks; we only check camerakey, but if it's a PTZOptics import they used devicename as the key.
+    // Import should have adjusted the menuIndex for any existing cameras.
     NSArray *menuArray = [importedPrefCameras sortedArrayUsingComparator:^NSComparisonResult(PTZPrefCamera *obj1, PTZPrefCamera *obj2) {
         NSInteger index1 = obj1.menuIndex;
         NSInteger index2 = obj2.menuIndex;

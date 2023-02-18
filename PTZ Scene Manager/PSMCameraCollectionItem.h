@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *ipaddress;
 @property NSString *devicename;
 @property BOOL isSerial;
+@property NSInteger menuIndex;
 @property NSArray<NSString *> *usbDevices;
 @property NSInteger selectedUSBDevice;
 

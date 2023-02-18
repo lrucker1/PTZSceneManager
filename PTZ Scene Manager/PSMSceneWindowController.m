@@ -133,6 +133,8 @@ typedef enum {
     NSArray *keys = @[@"prefCamera.maxColumnCount",
                       @"prefCamera.firstVisibleScene",
                       @"prefCamera.lastVisibleScene",
+                      @"prefCamera.cameraname",
+                      @"prefCamera.menuIndex",
                       @"lastRecalledItem"];
     if (add) {
         for (NSString *key in keys) {
@@ -311,6 +313,8 @@ typedef enum {
             BOOL oldValue = [[self.prefCamera prefValueForKey:key] boolValue];
             menu.state = oldValue ? NSControlStateValueOn : NSControlStateValueOff;
             return YES;
+        }  else if (menu.action == @selector(reopenCamera:)) {
+            return self.prefCamera.camera.connectingBusy == NO;
         }
     }
     return YES;
@@ -792,6 +796,8 @@ typedef enum {
         if (self.showStaticSnapshot && self.lastRecalledItem.image != nil) {
             [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
         }
+    } else if ([keyPath isEqualToString:@"prefCamera.cameraname"] || [keyPath isEqualToString:@"prefCamera.menuIndex"]) {
+        [self.appDelegate changeWindowsItem:self.window title:self.prefCamera.cameraname menuShortcut:self.prefCamera.menuIndex];
     }
 }
 

@@ -34,6 +34,19 @@
     return result;
 }
 
+/*
+ Monoprice (Huawei?) camera.
+ Max presets:64
+ Special recalls are wrong:
+  90: Toggle "Dome Menu"
+  93: Power/Full Reset? I think that's where I lost LR Flip
+      you have to reconnect after that
+  94: Toggle "Lens Menu"
+  96, 98: Pans back and forth - 96 fast, 98 slow
+ LR Flip/Mirror seems to be remote only
+ and if you play with the presets too much, you lose connection to the camera and have to restart the app
+ */
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -54,7 +67,39 @@
     return [NSString stringWithFormat:@"CameraConfig[%@].%@", self.brandname, key];
 }
 
+#pragma mark wrappers
+
 PREF_VALUE_NSINT_ACCESSORS(maxSceneIndex, MaxSceneIndex)
+PREF_VALUE_NSSTRING_ACCESSORS(reservedRangeString, ReservedRangeString)
+
+// NSStringFromRange: A string of the form “{loc, len}”,
+// NSRangeFromString is not picky about format
+- (NSRange)reservedRange {
+    return NSRangeFromString(self.reservedRangeString);
+}
+
+- (void)setReservedRange:(NSRange)range {
+    self.reservedRangeString = NSStringFromRange(range);
+}
+
+- (void)removeReservedRange {
+    [self removeReservedRangeString];
+}
+
+- (NSIndexSet *)prefReservedSet {
+    NSString *rangeString = self.reservedRangeString;
+    if (rangeString) {
+        NSRange range = NSRangeFromString(rangeString);
+        // Guard against bad strings.
+        if (range.length == 0 && range.location == 0) {
+            return nil;
+        }
+        return [NSIndexSet indexSetWithIndexesInRange:range];
+    }
+    return nil;
+}
+
+#pragma mark validation
 
 - (BOOL)isValidSceneIndex:(NSInteger)index {
     // 0 is reserved for Home.

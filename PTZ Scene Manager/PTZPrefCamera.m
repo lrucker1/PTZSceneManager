@@ -16,10 +16,12 @@ static NSString *PSM_TiltPlusSpeed = @"tiltPlusSpeed";
 static NSString *PSM_ZoomPlusSpeed = @"zoomPlusSpeed";
 static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
 static NSString *PSM_SceneNamesKey = @"sceneNames";
+NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeNotification";
 
 @interface PTZPrefCamera ()
 @property NSString *camerakey;
 @property NSString *devicename;
+@property (strong) PTZCamera *camera;
 @end
 
 @implementation PTZPrefCamera
@@ -42,8 +44,8 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
 }
 
 + (NSString *)generateKey {
-    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"PTZPrefCameraNextKeyIndex"];
-    [[NSUserDefaults standardUserDefaults] setInteger:index+1 forKey:@"PTZPrefCameraNextKeyIndex"];
+    NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey:@"PTZPrefCameraNextKeyIndex"] + 1;
+    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"PTZPrefCameraNextKeyIndex"];
     return [NSString stringWithFormat:@"CameraKey%ld", index];
 }
 
@@ -63,12 +65,11 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
         _cameraname = dict[@"cameraname"];
         if (dict[@"menuIndex"]) {
             _menuIndex = [dict[@"menuIndex"] integerValue];
-            _camerakey = dict[@"camerakey"] ?: [NSString stringWithFormat:@"CameraKey%ld", _menuIndex];
         } else {
-            _menuIndex = -1;
-            _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
+            _menuIndex = 0;
         }
-        _devicename = dict[@"devicename"];
+        _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
+       _devicename = dict[@"devicename"];
         _isSerial = [dict[@"cameratype"] boolValue];
         if (_isSerial) {
             _usbdevicename = _devicename;
@@ -79,16 +80,42 @@ static NSString *PSM_SceneNamesKey = @"sceneNames";
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (NSDictionary *)dictionaryValue {
     return @{@"cameraname":_cameraname, @"camerakey":_camerakey, @"devicename":(_isSerial ? _usbdevicename : _ipAddress), @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex)};
 }
-
-// TODO: observe PSMPrefCameraListDidChangeNotification object:self and deal with device type/name changes. Consider having everything own a prefCamera and get to the PTZCamera through it.
 
 - (PTZCamera *)loadCameraIfNeeded {
     if (!self.camera) {
         self.camera = [PTZCamera cameraWithDeviceName:self.devicename isSerial:self.isSerial];
         self.camera.obsSourceName = self.cameraname;
+        [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:self queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+            NSDictionary *dict = note.userInfo;
+            NSDictionary *newValues = dict[NSKeyValueChangeNewKey];
+            NSDictionary *oldValues = dict[NSKeyValueChangeOldKey];
+            // cameraname affects OSB connection.
+            // isSerial changes cameraOpener
+            // usbdevicename or ipAddress without isSerial just needs a reopen
+            NSArray *changedKeys = [newValues allKeys];
+            if ([changedKeys containsObject:@"cameraname"]) {
+                self.camera.obsSourceName = self.cameraname;
+                NSString *oldName = oldValues[@"cameraname"];
+                [[PSMOBSWebSocketController defaultController] cancelNotificationsForCameraName:oldName];
+                [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self];
+            }
+            if ([changedKeys containsObject:@"isSerial"]) {
+                NSLog(@"Changing device type not supported yet.");
+            } else if ([changedKeys firstObjectCommonWithArray:@[@"ipAddress", @"usbdevicename"]] != nil) {
+                if (self.isSerial && [changedKeys containsObject:@"usbdevicename"]) {
+                    [self.camera changeUSBDevice:self.usbdevicename];
+                } else if (!self.isSerial && [changedKeys containsObject:@"ipAddress"]) {
+                    [self.camera changeIPAddress:self.ipAddress];
+                }
+            }
+        }];
     }
     return self.camera;
 }

@@ -22,10 +22,10 @@
             <rect key="contentRect" x="196" y="240" width="562" height="263"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
             <view key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="562" height="222"/>
+                <rect key="frame" x="0.0" y="0.0" width="562" height="297"/>
                 <subviews>
                     <tabView horizontalHuggingPriority="750" verticalHuggingPriority="1000" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="SDw-NS-CPr">
-                        <rect key="frame" x="0.0" y="0.0" width="562" height="222"/>
+                        <rect key="frame" x="0.0" y="0.0" width="562" height="297"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Cameras" identifier="Cameras" id="vOK-8v-NrF">

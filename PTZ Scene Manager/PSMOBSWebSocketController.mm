@@ -387,6 +387,12 @@ typedef enum {
     [self getSourceActive];
 }
 
+- (void)cancelNotificationsForCameraName:(NSString *)cameraname {
+    if (self.obsInputs != nil) {
+        [self.obsInputs removeObjectForKey:cameraname];
+    }
+}
+
 - (BOOL)requestSnapshotForCameraName:(NSString *)cameraName index:(NSInteger)index preferredWidth:(NSInteger)width {
     if (!self.isReady) {
         return NO;

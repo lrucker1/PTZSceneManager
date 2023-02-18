@@ -130,7 +130,6 @@ static LARIndexSetVisualizerView *selfType;
         CGContextMoveToPoint(c, p-T, -T);
         CGContextAddLineToPoint(c, p+T+H, T+H);
         CGContextStrokePath(c);
-        CGContextClosePath(c);
         p += G+T+T;
     }
     [NSGraphicsContext restoreGraphicsState];

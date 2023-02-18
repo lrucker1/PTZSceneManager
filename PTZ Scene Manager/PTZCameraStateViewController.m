@@ -92,6 +92,9 @@ typedef enum _ExposureModes {
         || [key isEqualToString:@"enableAWBSens"]) {
         [keyPaths addObject:@"cameraState.wbMode"];
     }
+    if (   [key isEqualToString:@"cameraState"]) {
+        [keyPaths addObject:@"prefCamera"];
+    }
     return keyPaths;
 }
 
@@ -168,6 +171,9 @@ typedef enum _ExposureModes {
 
 #pragma mark camera
 
+- (PTZCamera *)cameraState {
+    return self.prefCamera.camera;
+}
 
 - (IBAction)applyRecallSpeed:(id)sender {
     // Force an active textfield to end editing so we get the current value, then put it back when we're done.

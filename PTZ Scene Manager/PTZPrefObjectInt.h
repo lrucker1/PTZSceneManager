@@ -32,4 +32,15 @@
     [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
 }
 
+#define PREF_VALUE_NSSTRING_ACCESSORS(_prop, _Prop) \
+- (NSString *)_prop {  \
+    return [self prefValueForKey:NSStringFromSelector(_cmd)]; \
+} \
+- (void)set##_Prop:(NSString *)value { \
+    [self setPrefValue:value forKeyWithSelector:NSStringFromSelector(_cmd)]; \
+} \
+- (void)remove##_Prop { \
+    [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
+}
+
 #endif /* PTZPrefObjectInt_h */

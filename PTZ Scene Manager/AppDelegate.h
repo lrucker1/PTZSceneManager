@@ -11,7 +11,6 @@
 @class PTZPrefCamera;
 
 extern NSString *PSMSceneCollectionKey;
-extern NSString *PSMPrefCameraListDidChangeNotification;
 
 void PTZLog(NSString *format, ...);
 
@@ -28,5 +27,8 @@ void PTZLog(NSString *format, ...);
 
 - (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras;
 
+- (void)changeWindowsItem:(NSWindow *)win
+                    title:(NSString *)string
+             menuShortcut:(NSInteger)shortcut;
 @end
 

@@ -29,7 +29,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.cameraStateViewController.cameraState = self.prefCamera.camera;
     self.cameraStateViewController.prefCamera = self.prefCamera;
     self.prefCamera.camera.delegate = self.cameraStateViewController;
     self.window.frameAutosaveName = [NSString stringWithFormat:@"[%@] state", self.prefCamera.camerakey];
