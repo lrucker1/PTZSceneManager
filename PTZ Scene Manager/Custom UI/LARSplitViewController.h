@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LARSplitViewController : NSSplitViewController
 
+// If this changes, "NSSplitView Subview Frames [camerakey]" have to be cleared.
+@property BOOL sidebarOnRight;
+
 - (IBAction)lar_toggleSidebar:(id)sender;
 
 @end

@@ -33,6 +33,7 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
        PSM_TiltPlusSpeed:@(5),
        PSM_ZoomPlusSpeed:@(3),
        PSM_FocusPlusSpeed:@(3),
+       @"panTiltStep":@(2),
        @"firstVisibleScene":@(1),
        @"lastVisibleScene":@(9),
        @"maxColumnCount":@(3),
@@ -49,6 +50,22 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
     return [NSString stringWithFormat:@"CameraKey%ld", index];
 }
 
++ (NSArray<PTZPrefCamera *> *)sortedByMenuIndex:(NSArray<PTZPrefCamera *> *)inArray {
+    NSArray *menuArray = [inArray sortedArrayUsingComparator:^NSComparisonResult(PTZPrefCamera *obj1, PTZPrefCamera *obj2) {
+        NSInteger index1 = obj1.menuIndex;
+        NSInteger index2 = obj2.menuIndex;
+        if (index1 > index2) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+     
+        if (index2 < index1) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    return menuArray;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -62,19 +79,23 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     self = [super init];
     if (self) {
+        _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
         _cameraname = dict[@"cameraname"];
         if (dict[@"menuIndex"]) {
             _menuIndex = [dict[@"menuIndex"] integerValue];
         } else {
             _menuIndex = 0;
         }
-        _camerakey = dict[@"camerakey"] ?: [self.class generateKey];
        _devicename = dict[@"devicename"];
         _isSerial = [dict[@"cameratype"] boolValue];
         if (_isSerial) {
             _usbdevicename = _devicename;
         } else {
             _ipAddress = _devicename;
+        }
+        // This is a pref value, not dictionary.
+        if (self.obsSourceName == nil) {
+            self.obsSourceName = _cameraname;
         }
     }
     return self;
@@ -95,16 +116,12 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
         [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:self queue:nil usingBlock:^(NSNotification * _Nonnull note) {
             NSDictionary *dict = note.userInfo;
             NSDictionary *newValues = dict[NSKeyValueChangeNewKey];
-            NSDictionary *oldValues = dict[NSKeyValueChangeOldKey];
-            // cameraname affects OSB connection.
+            // obsSourceName affects OSB connection.
             // isSerial changes cameraOpener
             // usbdevicename or ipAddress without isSerial just needs a reopen
             NSArray *changedKeys = [newValues allKeys];
-            if ([changedKeys containsObject:@"cameraname"]) {
-                self.camera.obsSourceName = self.cameraname;
-                NSString *oldName = oldValues[@"cameraname"];
-                [[PSMOBSWebSocketController defaultController] cancelNotificationsForCameraName:oldName];
-                [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self];
+            if ([changedKeys containsObject:@"obsSourceName"]) {
+                self.camera.obsSourceName = self.obsSourceName;
             }
             if ([changedKeys containsObject:@"isSerial"]) {
                 NSLog(@"Changing device type not supported yet.");
@@ -126,6 +143,7 @@ PREF_VALUE_NSINT_ACCESSORS(panPlusSpeed, PanPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(tiltPlusSpeed, TiltPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(zoomPlusSpeed, ZoomPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(focusPlusSpeed, FocusPlusSpeed)
+PREF_VALUE_NSINT_ACCESSORS(panTiltStep, PanTiltStep)
 PREF_VALUE_NSINT_ACCESSORS(firstVisibleScene, FirstVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(selectedSceneRange, SelectedSceneRange)
@@ -134,6 +152,8 @@ PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
 PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
 PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
+
+PREF_VALUE_NSSTRING_ACCESSORS(obsSourceName, ObsSourceName)
 
 - (NSArray<PTZCameraSceneRange *> *)sceneRangeArray {
     NSData *data = [self prefValueForKey:@"SceneRangeArray"];

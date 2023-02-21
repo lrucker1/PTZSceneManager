@@ -7,6 +7,7 @@
 
 #import "PSMCameraCollectionItem.h"
 #import "PSMCameraCollectionWindowController.h"
+#import "PSMOBSWebSocketController.h"
 #import "PTZPrefCamera.h"
 #import "AppDelegate.h"
 #import "NSWindowAdditions.h"
@@ -17,6 +18,7 @@ static PSMCameraCollectionItem *selfType;
 
 @property IBOutlet NSBox *box;
 @property NSArray *menuShortcuts;
+@property NSArray *videoSourceNames;
 @property BOOL enableUSBPopup;
 
 @end
@@ -34,6 +36,7 @@ static PSMCameraCollectionItem *selfType;
         self.menuIndex = 0;
     }
     self.menuShortcuts = [NSArray arrayWithArray:array];
+    self.videoSourceNames = [[PSMOBSWebSocketController defaultController] videoSourceNames];
     [self updateUSBDevices];
     [self addObserver:self
            forKeyPath:@"dataSource.usbCameraNames"
@@ -101,6 +104,11 @@ static PSMCameraCollectionItem *selfType;
         self.prefCamera.menuIndex = self.menuIndex;
         oldValues[@"menuIndex"] = @(self.prefCamera.menuIndex);
         newValues[@"menuIndex"] = @(self.menuIndex);
+    };
+    if (![self.prefCamera.obsSourceName isEqualToString:self.obsSourceName]) {
+        oldValues[@"obsSourceName"] = self.prefCamera.obsSourceName;
+        newValues[@"obsSourceName"] = self.obsSourceName;
+        self.prefCamera.obsSourceName = self.obsSourceName;
     };
     [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{NSKeyValueChangeNewKey:newValues, NSKeyValueChangeOldKey:oldValues}];
 }

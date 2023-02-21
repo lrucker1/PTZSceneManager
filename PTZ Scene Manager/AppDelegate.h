@@ -16,13 +16,13 @@ void PTZLog(NSString *format, ...);
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate, NSWindowRestoration>
 
-@property NSString *ptzopticsSettingsFilePath;
 @property BOOL canEditSceneNames;
 
 - (NSString *)applicationSupportDirectory;
 - (NSString *)snapshotsDirectory;
 
 - (NSArray<PTZPrefCamera *> *)prefCameras;
+- (NSArray<PTZPrefCamera *> *)sortedPrefCameras;
 - (PTZPrefCamera *)prefCameraForKey:(NSString *)camerakey;
 
 - (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras;

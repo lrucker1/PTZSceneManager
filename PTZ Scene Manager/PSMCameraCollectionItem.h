@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSInteger menuIndex;
 @property NSArray<NSString *> *usbDevices;
 @property NSInteger selectedUSBDevice;
+@property NSString *obsSourceName;
 
 @property IBOutlet NSPopUpButton *usbDeviceButton;
 @property PSMCameraCollectionWindowController *dataSource;

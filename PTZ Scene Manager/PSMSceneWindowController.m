@@ -66,6 +66,7 @@ typedef enum {
 @property IBOutlet NSPopover *remoteControlPopover;
 @property IBOutlet DraggingStackView *controlStackView;
 @property IBOutlet NSSplitViewController *splitViewController;
+@property IBOutlet NSGridView *panTiltGridView;
 @property NSTimer *timer;
 @property dispatch_queue_t timerQueue;
 
@@ -177,6 +178,25 @@ typedef enum {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidBegin:) name:PSMOBSSessionIsReady object:nil];
     }
     [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
+    [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:self.prefCamera queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        NSDictionary *dict = note.userInfo;
+        NSDictionary *oldValues = dict[NSKeyValueChangeOldKey];
+        // obsSourceName affects OSB connection.
+        NSArray *changedKeys = [oldValues allKeys];
+        if ([changedKeys containsObject:@"obsSourceName"]) {
+            NSString *oldName = oldValues[@"obsSourceName"];
+            [[PSMOBSWebSocketController defaultController] cancelNotificationsForCameraSource:oldName];
+            [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
+        }
+    }];
+    NSArray *buttons = [self.panTiltGridView subviews];
+    for (NSButton *button in buttons) {
+        if (button.action == @selector(doRelativePanTiltStep:)) {
+            // It's an accelerator. Fire the first action immediately (PTZInstantActionButton), then wait, then repeat slightly faster.
+            button.continuous = YES;
+            [button setPeriodicDelay:0.5 interval:0.25];
+        }
+    }
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
@@ -201,8 +221,9 @@ typedef enum {
     } else if (videoShowing) {
         // Showing: Program or Preview
         self.cameraBox.borderColor = [NSColor systemGreenColor];
-        self.sceneCollectionBox.borderColor = self.boxColor;
-        self.collectionView.backgroundColors = self.collectionColors;
+        self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
+        NSColor *bgGreen = [[NSColor systemGreenColor] blendedColorWithFraction:0.75 ofColor:[NSColor whiteColor]];
+        self.collectionView.backgroundColors = @[bgGreen];
         self.camera.videoMode = PTZVideoPreview;
     } else {
         self.cameraBox.borderColor = self.boxColor;
@@ -394,8 +415,17 @@ typedef enum {
         return;
     }
     NSInteger tag = button.tag;
-    [self doPanTiltForTag:tag withBaseSpeed:1];
+    [self doPanTiltForTag:tag forMenu:NO];
     [self startTimer];
+}
+
+- (IBAction)doRelativePanTiltStep:(id)sender {
+    PTZStartStopButton *button = (PTZStartStopButton *)sender;
+    if (button.doStopAction) {
+        return;
+    }
+    NSInteger tag = button.tag;
+    [self doRelativePanTiltForTag:tag];
 }
 
 // Do the cameras recognize the magic speed?
@@ -407,12 +437,15 @@ typedef enum {
         return;
     }
     NSInteger tag = button.tag;
-    [self doPanTiltForTag:tag withBaseSpeed:0x0E];
+    [self doPanTiltForTag:tag forMenu:YES];
     [self startTimer];
 }
 
-- (void)doPanTiltForTag:(NSInteger)tag withBaseSpeed:(NSInteger)baseSpeed {
+// The OSD menu buttons use the standard (non-plus) options
+- (void)doPanTiltForTag:(NSInteger)tag forMenu:(BOOL)forMenu  {
     PTZCameraPanTiltParams params;
+    NSInteger baseSpeed = forMenu ? 0x0E : 1;
+    params.forMenu = forMenu;
     params.panSpeed = baseSpeed;
     params.tiltSpeed = baseSpeed;
     params.horiz = VISCA_PT_DRIVE_HORIZ_STOP;
@@ -502,6 +535,50 @@ typedef enum {
             break;
     }
     [self.camera startPantiltDirection:params onDone:nil];
+}
+
+- (void)doRelativePanTiltForTag:(NSInteger)tag  {
+    PTZCameraPanTiltRelativeParams params;
+    params.panSpeed = 0x14;
+    params.tiltSpeed = 0x14;
+    params.pan = 0;
+    params.tilt = 0;
+    int32_t panTiltStep = (int32_t)self.prefCamera.panTiltStep;
+    switch (tag) {
+        case PSMUpLeft:
+            params.pan = -panTiltStep;
+            params.tilt = panTiltStep;
+           break;
+        case PSMUp:
+            params.tilt = panTiltStep;
+            break;
+        case PSMUpRight:
+            params.pan = panTiltStep;
+            params.tilt = panTiltStep;
+            break;
+        case PSMLeft:
+            params.pan = -panTiltStep;
+            break;
+        case PSMRight:
+            params.pan = panTiltStep;
+            break;
+        case PSMDownLeft:
+            params.pan = -panTiltStep;
+            params.tilt = -panTiltStep;
+            break;
+        case PSMDown:
+            params.tilt = -panTiltStep;
+            break;
+        case PSMDownRight:
+            params.pan = panTiltStep;
+            params.tilt = -panTiltStep;
+            break;
+    }
+    [self.camera applyPanTiltRelativePosition:params onDone:^(BOOL success) {
+        if (success) {
+            [self fetchStaticSnapshot];
+        }
+    }];
 }
 
 - (IBAction)doCameraZoom:(id)sender {

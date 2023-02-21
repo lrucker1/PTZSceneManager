@@ -23,8 +23,13 @@
     NSSplitViewItem* bodyItem = [NSSplitViewItem splitViewItemWithViewController:self.bodyViewController];
     bodyItem.minimumThickness = 120;
 
-    [self insertSplitViewItem:bodyItem atIndex:0];
-    [self insertSplitViewItem:self.sidebarItem atIndex:1];
+    if (self.sidebarOnRight) {
+        [self insertSplitViewItem:bodyItem atIndex:0];
+        [self insertSplitViewItem:self.sidebarItem atIndex:1];
+    } else {
+        [self insertSplitViewItem:self.sidebarItem atIndex:0];
+        [self insertSplitViewItem:bodyItem atIndex:1];
+    }
 }
 
 // There's a bug in the superclass; it doesn't check the splitViewItems count and so it'll crash if autolayout happens before viewDidLoad. This could happen if your window has a toolbar.

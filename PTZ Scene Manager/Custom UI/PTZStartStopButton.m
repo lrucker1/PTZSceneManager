@@ -30,3 +30,16 @@
 }
 
 @end
+
+
+@implementation PTZInstantActionButton
+
+// continuous accelerator buttons send the first event *after* the initial delay. We want an immediate action, and then a delay before starting to repeat.
+- (void)mouseDown:(NSEvent *)event {
+    if (self.continuous) {
+        [self sendAction:self.action to:self.target];
+    }
+    [super mouseDown:event];
+}
+
+@end

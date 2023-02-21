@@ -37,7 +37,7 @@
 - (instancetype)init {
     self = [super initWithWindow:nil];
     if (self) {
-        _prefCameras = [NSMutableArray arrayWithArray:[(AppDelegate *)[NSApp delegate] prefCameras]];
+        _prefCameras = [NSMutableArray arrayWithArray:[(AppDelegate *)[NSApp delegate] sortedPrefCameras]];
     }
     return self;
 }
@@ -259,6 +259,7 @@
     item.cameraname = prefCamera.cameraname;
     item.isSerial = prefCamera.isSerial;
     item.menuIndex = prefCamera.menuIndex;
+    item.obsSourceName = prefCamera.obsSourceName;
     if (item.isSerial) {
         item.devicename = prefCamera.devicename;
     } else {

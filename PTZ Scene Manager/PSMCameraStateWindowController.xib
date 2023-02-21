@@ -216,14 +216,14 @@
                                         </gridView>
                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="LCP-hU-E8a">
                                             <rect key="frame" x="30" y="178" width="347" height="32"/>
-                                            <textFieldCell key="cell" selectable="YES" title="Set the speeds which will be used by the alternative pan/tilt, zoom, and focus buttons." id="pS3-5l-yyb">
+                                            <textFieldCell key="cell" selectable="YES" title="The speeds to use for the outer pan/tilt, zoom, and focus continuous action buttons. " id="pS3-5l-yyb">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iwM-28-mTD">
-                                            <rect key="frame" x="227" y="227" width="89" height="89"/>
+                                            <rect key="frame" x="291" y="227" width="89" height="89"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="89" id="E5Q-w8-syn"/>
                                                 <constraint firstAttribute="width" constant="89" id="eRw-n6-s1a"/>
@@ -234,21 +234,84 @@
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="WqD-5Y-KPT">
                                             <rect key="frame" x="20" y="167" width="360" height="5"/>
                                         </box>
+                                        <gridView xPlacement="fill" yPlacement="fill" rowAlignment="firstBaseline" rowSpacing="0.0" columnSpacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="VW8-XC-677">
+                                            <rect key="frame" x="20" y="140" width="147" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="flv-QN-2iq"/>
+                                            </constraints>
+                                            <rows>
+                                                <gridRow id="QYx-T4-xOY"/>
+                                            </rows>
+                                            <columns>
+                                                <gridColumn id="bCZ-SQ-rb7"/>
+                                                <gridColumn width="60" id="Y5Q-bH-RXH"/>
+                                            </columns>
+                                            <gridCells>
+                                                <gridCell row="QYx-T4-xOY" column="bCZ-SQ-rb7" id="TRr-Zr-CGo">
+                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z0z-Ut-jSS">
+                                                        <rect key="frame" x="-2" y="3" width="82" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Pan/Tilt Step" id="9gL-Tz-iJR">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </gridCell>
+                                                <gridCell row="QYx-T4-xOY" column="Y5Q-bH-RXH" id="gNW-ty-W4D">
+                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vXn-Ad-6Vf">
+                                                        <rect key="frame" x="87" y="0.0" width="60" height="21"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ik1-bd-2RG">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                        <connections>
+                                                            <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.panTiltStep" id="9ax-FU-Ytz"/>
+                                                        </connections>
+                                                    </textField>
+                                                </gridCell>
+                                            </gridCells>
+                                        </gridView>
+                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="X5w-HT-bMl">
+                                            <rect key="frame" x="30" y="100" width="255" height="32"/>
+                                            <textFieldCell key="cell" selectable="YES" title="The distance the camera will move when using the one-step pan/tilt buttons." id="O4q-r7-yuH">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cgf-pS-bnE">
+                                            <rect key="frame" x="291" y="72" width="89" height="89"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="89" id="5RZ-bn-yMm"/>
+                                                <constraint firstAttribute="width" constant="89" id="n60-yC-5gy"/>
+                                            </constraints>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="InnerArrowGrid" id="d7w-c0-w9n"/>
+                                            <accessibility description="Image showing the arrow buttons from the pan tilt pane that will use the alternative speeds"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="mkZ-UM-Mc3" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="1zl-bZ-YYw"/>
                                         <constraint firstItem="WqD-5Y-KPT" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="54c-Az-Dnb"/>
                                         <constraint firstItem="TTm-rc-JTh" firstAttribute="top" secondItem="mkZ-UM-Mc3" secondAttribute="bottom" constant="8" symbolic="YES" id="GOq-HY-XY4"/>
+                                        <constraint firstItem="X5w-HT-bMl" firstAttribute="top" secondItem="VW8-XC-677" secondAttribute="bottom" constant="8" symbolic="YES" id="HBV-KB-qsB"/>
                                         <constraint firstAttribute="bottom" secondItem="cPT-sh-aez" secondAttribute="bottom" constant="20" symbolic="YES" id="MUd-t0-N9n"/>
                                         <constraint firstAttribute="trailing" secondItem="LCP-hU-E8a" secondAttribute="trailing" constant="25" id="N4g-zU-NmH"/>
-                                        <constraint firstAttribute="trailing" secondItem="iwM-28-mTD" secondAttribute="trailing" constant="84" id="NRf-UY-5Bb"/>
+                                        <constraint firstItem="Cgf-pS-bnE" firstAttribute="leading" secondItem="X5w-HT-bMl" secondAttribute="trailing" constant="8" symbolic="YES" id="NPz-it-X6t"/>
+                                        <constraint firstAttribute="trailing" secondItem="iwM-28-mTD" secondAttribute="trailing" constant="20" symbolic="YES" id="NRf-UY-5Bb"/>
                                         <constraint firstAttribute="trailing" secondItem="cPT-sh-aez" secondAttribute="trailing" constant="20" symbolic="YES" id="OIb-gm-aqt"/>
+                                        <constraint firstItem="Cgf-pS-bnE" firstAttribute="top" secondItem="WqD-5Y-KPT" secondAttribute="bottom" constant="8" symbolic="YES" id="OXe-aY-eNJ"/>
                                         <constraint firstItem="cPT-sh-aez" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="PXc-W9-Vel"/>
+                                        <constraint firstItem="VW8-XC-677" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="PkG-z6-d21"/>
                                         <constraint firstItem="LCP-hU-E8a" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="32" id="cT2-nI-M0x"/>
                                         <constraint firstItem="TTm-rc-JTh" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="32" id="iCV-xR-NXx"/>
                                         <constraint firstItem="LCP-hU-E8a" firstAttribute="top" secondItem="TTm-rc-JTh" secondAttribute="bottom" constant="8" symbolic="YES" id="joT-Ac-dSs"/>
                                         <constraint firstItem="iwM-28-mTD" firstAttribute="top" secondItem="JL9-I4-rTD" secondAttribute="top" constant="44" id="l0K-Uf-ySD"/>
                                         <constraint firstItem="WqD-5Y-KPT" firstAttribute="top" secondItem="LCP-hU-E8a" secondAttribute="bottom" constant="8" symbolic="YES" id="mqF-1I-JFD"/>
+                                        <constraint firstItem="X5w-HT-bMl" firstAttribute="leading" secondItem="LCP-hU-E8a" secondAttribute="leading" id="tot-p3-JIB"/>
+                                        <constraint firstAttribute="trailing" secondItem="Cgf-pS-bnE" secondAttribute="trailing" constant="20" symbolic="YES" id="tqs-3V-F66"/>
+                                        <constraint firstItem="VW8-XC-677" firstAttribute="top" secondItem="WqD-5Y-KPT" secondAttribute="bottom" constant="8" symbolic="YES" id="ut0-e6-e2D"/>
+                                        <constraint firstItem="LCP-hU-E8a" firstAttribute="top" secondItem="TTm-rc-JTh" secondAttribute="bottom" constant="8" symbolic="YES" id="xVc-w8-2fW"/>
                                         <constraint firstAttribute="trailing" secondItem="WqD-5Y-KPT" secondAttribute="trailing" constant="20" symbolic="YES" id="y8Q-fI-6gk"/>
                                         <constraint firstItem="mkZ-UM-Mc3" firstAttribute="top" secondItem="JL9-I4-rTD" secondAttribute="top" constant="20" symbolic="YES" id="yGD-Hq-V7x"/>
                                     </constraints>
@@ -2283,6 +2346,7 @@
     </objects>
     <resources>
         <image name="FastArrows" width="202" height="200"/>
+        <image name="InnerArrowGrid" width="101" height="99"/>
         <image name="NSAddTemplate" width="18" height="17"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="camera-screenshot" width="512" height="512"/>

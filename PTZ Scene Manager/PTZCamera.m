@@ -238,12 +238,37 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     }];
 }
 
+- (void)applyPanTiltRelativePosition:(PTZCameraPanTiltRelativeParams)params onDone:(PTZDoneBlock)doneBlock {
+    if (self.recallBusy) {
+        return;
+    }
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraIsOpen) {
+            [self callDoneBlock:doneBlock success:NO];
+            return;
+        }
+        self.recallBusy = YES;
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = NO;
+            if (VISCA_set_pantilt_relative_position(&self->_iface, &self->_camera, (uint32_t)params.panSpeed, (uint32_t)params.tiltSpeed, (int)params.pan, (int)params.tilt) == VISCA_SUCCESS) {
+                success = YES;
+            }
+            [self callDoneBlock:doneBlock success:success recallBusy:NO];
+        });
+    }];
+}
+
 - (void)stopPantiltDirection {
     // I think an unexpected stop should be fine?
-    if (self.cameraIsOpen /*&& self.pantilt_stop_time > 0*/) {
-        dispatch_after(self.pantilt_stop_time, self.cameraQueue, ^{
+    dispatch_block_t block = ^{
+        if (self.cameraIsOpen) {
             VISCA_set_pantilt_stop(&self->_iface, &self->_camera, (uint32_t)self.panSpeed, (uint32_t)self.tiltSpeed);
-        });
+        }
+    };
+    if (self.pantilt_stop_time > 0) {
+        dispatch_after(self.pantilt_stop_time, self.cameraQueue, block);
+    } else {
+        dispatch_async(self.cameraQueue, block);
     }
     self.pantilt_stop_time = 0;
 }
@@ -262,7 +287,9 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
                 success = YES;
                 // Sony doc: To cancel a command when VISCA PAN-TILT Drive (page 17) is being executed, wait at least 200 msec after executing. Then send a cancel command to ensure that PAN-TILT Drive stops effectively.
                 // TODO: Find out if this number is camera-specific. Monoprice cam needs 500 msec for OSD navigation to register.
-                self.pantilt_stop_time = dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC);
+                // PTZOptics App is obviously not waiting that long. Experiment time.
+                int64_t msec = params.forMenu ? 500 : 1;
+                self.pantilt_stop_time = dispatch_time(DISPATCH_TIME_NOW, msec * NSEC_PER_MSEC);
             }
             [self callDoneBlock:doneBlock success:success recallBusy:NO];
         });
@@ -987,7 +1014,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     }
     self.obsSnapshotDoneBlock = doneBlock;
     // This silently fails if OBS isn't connected. That's fine. Snapshots are optional.
-    [[PSMOBSWebSocketController defaultController] requestSnapshotForCameraName:self.obsSourceName index:index preferredWidth:480];
+    [[PSMOBSWebSocketController defaultController] requestSnapshotForCameraSource:self.obsSourceName index:index preferredWidth:480];
 }
 
 // IP Camera does not need to be open; this doesn't use sockets.

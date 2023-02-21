@@ -15,4 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+// Sends the action immediately on mouse down, even if it's a continuous accelerator. By default they don't do that.
+@interface PTZInstantActionButton : PTZStartStopButton
+
+@end
+
 NS_ASSUME_NONNULL_END

@@ -63,7 +63,13 @@ typedef enum {
 
 typedef struct  {
     uint8_t panSpeed, tiltSpeed;
+    int32_t pan, tilt;
+} PTZCameraPanTiltRelativeParams;
+
+typedef struct  {
+    uint8_t panSpeed, tiltSpeed;
     uint8_t horiz, vert;
+    BOOL forMenu;
 } PTZCameraPanTiltParams;
 
 typedef void (^PTZDoneBlock )(BOOL success);
@@ -130,6 +136,7 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSIntege
 
 - (void)applyPantiltPresetSpeed:(PTZDoneBlock _Nullable)doneBlock;
 - (void)applyPantiltAbsolutePosition:(PTZDoneBlock _Nullable)doneBlock;
+- (void)applyPanTiltRelativePosition:(PTZCameraPanTiltRelativeParams)params onDone:(PTZDoneBlock _Nullable)doneBlock;
 - (void)startPantiltDirection:(PTZCameraPanTiltParams)params onDone:(PTZDoneBlock _Nullable)doneBlock;
 - (void)stopPantiltDirection;
 - (void)applyZoom:(PTZDoneBlock _Nullable)doneBlock;

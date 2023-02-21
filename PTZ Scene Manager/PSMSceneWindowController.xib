@@ -14,6 +14,7 @@
                 <outlet property="cameraBox" destination="8yC-Mi-aW4" id="cty-VE-WuM"/>
                 <outlet property="collectionView" destination="6Fy-kw-0Au" id="00C-K8-HzR"/>
                 <outlet property="controlStackView" destination="6XE-2j-qG2" id="OK8-O8-ff8"/>
+                <outlet property="panTiltGridView" destination="zuV-8a-7PM" id="9zW-1b-XUN"/>
                 <outlet property="remoteControlPopover" destination="dzC-IL-mBm" id="lKM-Ik-7x5"/>
                 <outlet property="rtspViewController" destination="ce5-QP-mKm" id="wQM-nt-8Aw"/>
                 <outlet property="sceneCollectionBox" destination="Gws-GK-es2" id="bq2-qR-ALw"/>
@@ -265,53 +266,53 @@
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="zqt-E8-w4S" id="WnR-Cu-m7r"/>
                                             <gridCell row="wmH-NH-T29" column="xam-tK-zOO" id="3Cn-mS-Z7P">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="11" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-q7-uEC" userLabel="UpLeft" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="11" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-q7-uEC" userLabel="UpLeft" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="20" y="60" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="A5z-3R-v8G"/>
                                                         <constraint firstAttribute="height" constant="20" id="rQB-R5-lzs"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="iQu-x0-ZZR">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="yLR-BL-cNa"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="EtH-2C-wla"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="a8A-c1-pBp" id="6BN-bE-HE1">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-Bp-hW7" userLabel="Up" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-Bp-hW7" userLabel="Up" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="40" y="60" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="PaV-0f-tDS"/>
                                                         <constraint firstAttribute="width" constant="20" id="Sur-GW-pXa"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oXL-7r-L3V">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="EYA-cH-uEh"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="oi7-xr-awm"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="VnH-Mb-U4o" id="hp1-kd-IOu">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="13" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-4q-GB3" userLabel="UpRight" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="13" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-4q-GB3" userLabel="UpRight" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="60" y="60" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="Pjv-st-il5"/>
                                                         <constraint firstAttribute="height" constant="20" id="dxU-FL-dec"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="43C-6Y-kst">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="Up4-yi-LsK"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="nUB-wy-wnX"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>
@@ -334,19 +335,19 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="xam-tK-zOO" id="MzB-76-ZXt">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="tuK-2E-7TQ" userLabel="Left" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="tuK-2E-7TQ" userLabel="Left" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="20" y="40" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Vhy-jF-rTT"/>
                                                         <constraint firstAttribute="width" constant="20" id="aG9-fx-fZm"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.left" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5TH-YS-16p">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="lWy-r7-gi0"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="9LQ-OF-Xp1"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>
@@ -367,19 +368,19 @@
                                                 </button>
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="VnH-Mb-U4o" id="Yuu-5p-FwA">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vn4-IM-qVp" userLabel="Right" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vn4-IM-qVp" userLabel="Right" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="60" y="40" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="8gp-Gz-DH3"/>
                                                         <constraint firstAttribute="height" constant="20" id="otF-3G-GuT"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.right" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tRx-lh-h8Y">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="GIx-p7-5Tp"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="lvE-ev-N00"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>
@@ -402,53 +403,53 @@
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="zqt-E8-w4S" id="QVP-lf-Jn1"/>
                                             <gridCell row="0je-1p-PPu" column="xam-tK-zOO" id="Iuh-xC-R9c">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="31" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-Fv-pvF" userLabel="DownLeft" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="31" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-Fv-pvF" userLabel="DownLeft" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="20" y="20" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="0Oh-3t-qKQ"/>
                                                         <constraint firstAttribute="width" constant="20" id="ctr-dq-sMq"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.backward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="yw0-BI-tLD">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="kCe-aX-03K"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="ZDe-yd-oIx"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="a8A-c1-pBp" id="1lG-RV-9Fa">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="Wbd-qI-fPh" userLabel="Down" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="Wbd-qI-fPh" userLabel="Down" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="40" y="20" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Gmb-OF-yxX"/>
                                                         <constraint firstAttribute="width" constant="20" id="feK-60-Mxi"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dee-VE-vdT">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="cDY-k6-Db4"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="dQu-zi-h9E"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="VnH-Mb-U4o" id="0Wy-84-bXz">
-                                                <button key="contentView" verticalHuggingPriority="750" tag="33" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-fA-Jhy" userLabel="DownRight" customClass="PTZStartStopButton">
+                                                <button key="contentView" verticalHuggingPriority="750" tag="33" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-fA-Jhy" userLabel="DownRight" customClass="PTZInstantActionButton">
                                                     <rect key="frame" x="60" y="20" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="bWO-sy-CxC"/>
                                                         <constraint firstAttribute="height" constant="20" id="tUU-yR-n9x"/>
                                                     </constraints>
                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.down.forward" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="8FO-09-J2b">
-                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" accelerator="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                                     <connections>
-                                                        <action selector="doPanTilt:" target="-2" id="jV5-7Z-Jy2"/>
+                                                        <action selector="doRelativePanTiltStep:" target="-2" id="w4h-1M-tN9"/>
                                                     </connections>
                                                 </button>
                                             </gridCell>

@@ -256,18 +256,7 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
         self.mutablePrefCameras = [NSMutableDictionary dictionary];
     }
     // Import should have adjusted the menuIndex for any existing cameras.
-    NSArray *menuArray = [importedPrefCameras sortedArrayUsingComparator:^NSComparisonResult(PTZPrefCamera *obj1, PTZPrefCamera *obj2) {
-        NSInteger index1 = obj1.menuIndex;
-        NSInteger index2 = obj2.menuIndex;
-        if (index1 > index2) {
-            return (NSComparisonResult)NSOrderedDescending;
-        }
-     
-        if (index2 < index1) {
-            return (NSComparisonResult)NSOrderedAscending;
-        }
-        return (NSComparisonResult)NSOrderedSame;
-    }];
+    NSArray *menuArray = [PTZPrefCamera sortedByMenuIndex:importedPrefCameras];
     for (PTZPrefCamera *prefCamera in menuArray) {
         if (self.mutablePrefCameras[prefCamera.camerakey] == nil) {
             self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
@@ -287,6 +276,10 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 
 - (NSArray<PTZPrefCamera *> *)prefCameras {
     return [self.mutablePrefCameras allValues];
+}
+
+- (NSArray<PTZPrefCamera *> *)sortedPrefCameras {
+    return [PTZPrefCamera sortedByMenuIndex:[self.mutablePrefCameras allValues]];
 }
 
 - (PTZPrefCamera *)prefCameraForKey:(NSString *)camerakey {

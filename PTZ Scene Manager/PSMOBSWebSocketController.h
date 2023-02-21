@@ -37,20 +37,23 @@ extern NSString *PSMOBSGetSourceSnapshotNotification;
 extern NSString *PSMOBSImageDataKey;
 extern NSString *PSMOBSSourceNameKey;
 extern NSString *PSMOBSSnapshotIndexKey;
+extern NSString *PSMOBSGetVideoSourceNamesNotification;
+extern NSString *PSMOBSVideoSourcesKey;
 
 @interface PSMOBSWebSocketController : NSObject
 
 @property (readonly) BOOL connected;
 @property (readonly) BOOL isReady;
 @property (weak) NSObject<PSMOBSWebSocketDelegate> *delegate;
+@property (readonly) NSArray *videoSourceNames;
 
 + (PSMOBSWebSocketController *)defaultController;
 
 - (void)requestNotificationsForCamera:(PTZPrefCamera *)camera;
-- (void)cancelNotificationsForCameraName:(NSString *)cameraname;
+- (void)cancelNotificationsForCameraSource:(NSString *)obsSourceName;
 
 // Posts PSMOBSGetSourceSnapshotNotification on success.
-- (BOOL)requestSnapshotForCameraName:(NSString *)cameraName index:(NSInteger)index preferredWidth:(NSInteger)width;
+- (BOOL)requestSnapshotForCameraSource:(NSString *)obsSourceName index:(NSInteger)index preferredWidth:(NSInteger)width;
 
 - (void)connectToServer;
 - (void)deleteKeychainPasswords;

@@ -59,3 +59,7 @@ Add cameras in Cam Collection.
 Update after IP/USB change.
 
 Test importing a second different/overlapping set of cameras.
+
+Experiment with the accellerator type buttons. Seems weird the initial delay applies before the first action. Maybe another custom button.
+
+Sorting options in the camera list: standard (menuindex), name, obsname

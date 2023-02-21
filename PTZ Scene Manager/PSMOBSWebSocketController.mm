@@ -31,6 +31,8 @@ NSString *PSMOBSGetSourceSnapshotNotification = @"PSMOBSGetSourceSnapshotNotific
 NSString *PSMOBSImageDataKey = @"PSMOBSImageDataKey";
 NSString *PSMOBSSourceNameKey = @"PSMOBSSourceNameKey";
 NSString *PSMOBSSnapshotIndexKey = @"PSMOBSSnapshotIndexKey";
+NSString *PSMOBSGetVideoSourceNamesNotification = @"PSMOBSGetVideoSourceNamesNotification";
+NSString *PSMOBSVideoSourcesKey = @"PSMOBSVideoSourcesKey";
 
 static NSString *PSMOBSBundleID = @"com.obsproject.obs-studio";
 
@@ -145,6 +147,7 @@ typedef enum {
 @property NSURL *obsURL;
 @property NSString *obsAccount;
 @property NSData *obsPasswordData;
+@property NSArray *videoSourceNames;
 
 @end
 
@@ -307,6 +310,7 @@ typedef enum {
 
 - (void)handleIdentified:(NSDictionary *)dict {
     self.obsState = OBSStateIdentified;
+    [self sendString:[self jsonGetInputList]];
     if ([self.obsInputs count] > 0) {
         [self getSourceActive];
     }
@@ -383,28 +387,42 @@ typedef enum {
     if (self.obsInputs == nil) {
         self.obsInputs = [NSMutableDictionary dictionary];
     }
-    [self.obsInputs setObject:camera forKey:camera.cameraname];
+    [self.obsInputs setObject:camera forKey:camera.obsSourceName];
     [self getSourceActive];
 }
 
-- (void)cancelNotificationsForCameraName:(NSString *)cameraname {
+- (void)cancelNotificationsForCameraSource:(NSString *)cameraname {
     if (self.obsInputs != nil) {
         [self.obsInputs removeObjectForKey:cameraname];
     }
 }
 
-- (BOOL)requestSnapshotForCameraName:(NSString *)cameraName index:(NSInteger)index preferredWidth:(NSInteger)width {
+- (BOOL)requestSnapshotForCameraSource:(NSString *)obsSourceName index:(NSInteger)index preferredWidth:(NSInteger)width {
     if (!self.isReady) {
         return NO;
     }
-    NSString *requestID = [NSString stringWithFormat:@"%ld,%@", index, cameraName];
-    NSString *json = [self jsonGetSourceScreenshot:cameraName requestID:requestID imageWidth:width];
+    NSString *requestID = [NSString stringWithFormat:@"%ld,%@", index, obsSourceName];
+    NSString *json = [self jsonGetSourceScreenshot:obsSourceName requestID:requestID imageWidth:width];
     [self sendString:json];
     return YES;
 }
 
 - (void)handleInputList:(NSDictionary *)dict {
-    [self getSourceActive];
+    NSMutableArray *array = [NSMutableArray array];
+    NSArray *inputs = dict[@"inputs"];
+    for (NSDictionary *input in inputs) {
+        NSString *name = input[@"inputName"];
+        NSString *kind = input[@"inputKind"];
+        if (name && [kind hasPrefix:@"av_capture_input"]) {
+            [array addObject:name];
+        }
+    }
+    [array sortUsingSelector:@selector(caseInsensitiveCompare:)];
+    self.videoSourceNames = [NSArray arrayWithArray:array];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:PSMOBSGetVideoSourceNamesNotification
+     object:nil
+     userInfo:@{PSMOBSVideoSourcesKey : self.videoSourceNames}];
 }
 
 - (void)handleSourceActive:(NSDictionary *)dict {

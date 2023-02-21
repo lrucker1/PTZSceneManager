@@ -25,6 +25,9 @@ extern NSString *PSMPrefCameraListDidChangeNotification;
 @property (readonly, strong) PTZCamera *camera;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
 @property NSInteger menuIndex;
+@property NSString *obsSourceName;
+
++ (NSArray<PTZPrefCamera *> *)sortedByMenuIndex:(NSArray<PTZPrefCamera *> *)inArray;
 
 - (PTZCameraSceneRange*)defaultRange;
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange;
@@ -37,6 +40,7 @@ PREF_VALUE_NSINT_PROPERTIES(panPlusSpeed, PanPlusSpeed)
 PREF_VALUE_NSINT_PROPERTIES(tiltPlusSpeed, TiltPlusSpeed)
 PREF_VALUE_NSINT_PROPERTIES(zoomPlusSpeed, ZoomPlusSpeed)
 PREF_VALUE_NSINT_PROPERTIES(focusPlusSpeed, FocusPlusSpeed)
+PREF_VALUE_NSINT_PROPERTIES(panTiltStep, PanTiltStep)
 PREF_VALUE_NSINT_PROPERTIES(firstVisibleScene, FirstVisibleScene)
 PREF_VALUE_NSINT_PROPERTIES(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_PROPERTIES(selectedSceneRange, SelectedSceneRange)

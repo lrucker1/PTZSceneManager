@@ -34,7 +34,6 @@ NSString *PTZRangeCollectionUpdateNotification = @"PTZRangeCollectionUpdateNotif
 
 @property IBOutlet NSTabView *tabView;
 @property IBOutlet NSTableView *rangeCollectionTableView;
-@property IBOutlet NSPathControl *iniFilePathControl;
 @property NSMutableArray *cameras;
 @property NSMutableArray *collectionsArray;
 @property IBOutlet NSArrayController *collectionsArrayController;
@@ -55,10 +54,6 @@ NSString *PTZRangeCollectionUpdateNotification = @"PTZRangeCollectionUpdateNotif
     self.undoManager = [NSUndoManager new];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    NSString *path = [(AppDelegate *)[NSApp delegate] ptzopticsSettingsFilePath];
-    if (path) {
-        self.iniFilePathControl.URL = [NSURL fileURLWithPath:path];
-    }
     NSMutableArray *prefCams = [NSMutableArray array];
     NSArray *defCams = [[NSUserDefaults standardUserDefaults] objectForKey:PTZ_LocalCamerasKey];
     for (NSDictionary *cam in defCams) {
