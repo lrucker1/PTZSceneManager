@@ -154,11 +154,9 @@ typedef enum {
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    // Yes, this does need L10N. Because France.
-//    NSString *fmt = NSLocalizedString(@"%@ - %@", @"Window title showing [cameraname - devicename]");
-    self.window.title = self.prefCamera.cameraname;
-    // This will update the window frame.
-    self.splitViewController.splitView.autosaveName = self.prefCamera.camerakey;
+    // window.title is set via bindings.
+    // This will update the window frame. Future: L and R suffixes to indicate which side the sidebar is on, because autosave gets really confused if it's different from the last time.
+    self.splitViewController.splitView.autosaveName = [NSString stringWithFormat:@"%@-L", self.prefCamera.camerakey];
 #if 0
     // Disabled until new UI is added.
     BOOL isResizable = self.window.resizable;
@@ -170,8 +168,11 @@ typedef enum {
     [self loadCamera:NO];
     self.boxColor = self.cameraBox.borderColor;
     self.collectionColors = self.collectionView.backgroundColors;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSSceneInputDidChange object:self.prefCamera];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSGetSourceActiveNotification object:self.prefCamera];
+    [[NSNotificationCenter defaultCenter] addObserverForName:PSMOBSCurrentSourceDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self updateActiveIndicators];
+    }];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
     if ([[PSMOBSWebSocketController defaultController] connected]) {
         [self onOBSSessionDidBegin:nil];
     } else {
@@ -206,31 +207,41 @@ typedef enum {
     }
 }
 
-- (void)onOBSSceneChange:(NSNotification *)note {
-    NSDictionary *dict = note.userInfo;
-    NSDictionary *responseData = dict[@"responseData"];
-    BOOL videoActive = [responseData[@"videoActive"] boolValue];
-    BOOL videoShowing = [responseData[@"videoShowing"] boolValue];
-    if (videoActive) {
-        // Active: Program
+//- (void)onOBSSceneChange:(NSNotification *)note {
+//    NSDictionary *dict = note.userInfo;
+//    NSDictionary *responseData = dict[@"responseData"];
+//    // Active: Program
+//    self.camera.videoActive = [responseData[@"videoActive"] boolValue];
+//    // Showing: Program or Preview
+//    self.camera.videoShowing = [responseData[@"videoShowing"] boolValue];
+//    [self updateActiveIndicators];
+//}
+
+- (void)updateActiveIndicators {
+    PTZVideoMode mode = PTZVideoOff;
+    PSMOBSWebSocketController *obs = [PSMOBSWebSocketController defaultController];
+    // Exact match means this camera is frontmost and covers the screen. It can be both Program and Preview; Program takes precedence.
+    if ([obs.currentProgramSourceNames containsObject:self.prefCamera.obsSourceName]) {
+        mode = PTZVideoProgram;
+    } else if ([obs.currentPreviewSourceNames containsObject:self.prefCamera.obsSourceName]) {
+        mode = PTZVideoPreview;
+    }
+    if (mode == PTZVideoProgram) {
         self.cameraBox.borderColor = [NSColor systemRedColor];
         self.sceneCollectionBox.borderColor = [NSColor systemRedColor];
         NSColor *bgRed = [[NSColor systemPinkColor] blendedColorWithFraction:0.75 ofColor:[NSColor whiteColor]];
         self.collectionView.backgroundColors = @[bgRed];
-        self.camera.videoMode = PTZVideoProgram;
-    } else if (videoShowing) {
-        // Showing: Program or Preview
+    } else if (mode == PTZVideoPreview) {
         self.cameraBox.borderColor = [NSColor systemGreenColor];
         self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
         NSColor *bgGreen = [[NSColor systemGreenColor] blendedColorWithFraction:0.75 ofColor:[NSColor whiteColor]];
         self.collectionView.backgroundColors = @[bgGreen];
-        self.camera.videoMode = PTZVideoPreview;
     } else {
         self.cameraBox.borderColor = self.boxColor;
         self.sceneCollectionBox.borderColor = self.boxColor;
         self.collectionView.backgroundColors = self.collectionColors;
-        self.camera.videoMode = PTZVideoOff;
     }
+    self.camera.videoMode = mode;
 }
 
 - (void)onOBSSessionDidBegin:(NSNotification *)note {
@@ -319,12 +330,6 @@ typedef enum {
         NSMenuItem *menu = (NSMenuItem *)item;
         if ([menu action] == @selector(togglePaused:)) {
             return [self.rtspViewController validateTogglePaused:menu];
-        } else if (menu.action == @selector(lar_toggleSidebar:)) {
-            NSMenuItem *temp = [[NSMenuItem alloc] initWithTitle:menu.title action:@selector(toggleSidebar:) keyEquivalent:menu.keyEquivalent];
-            // This will get the right string.
-            [self.splitViewController validateUserInterfaceItem:temp];
-            menu.title = temp.title;
-            return YES;
         } else if ([menu action] == @selector(toggleControlVisibilityFromKey:)) {
             NSString *key = [menu representedObject];
             if (key == nil) {
@@ -339,11 +344,6 @@ typedef enum {
         }
     }
     return YES;
-}
-
-// No, I do not know why I can't just bind to toggleSidebar.
-- (IBAction)lar_toggleSidebar:(id)sender {
-    [self.splitViewController toggleSidebar:sender];
 }
 
 #pragma mark static snapshot
@@ -804,23 +804,39 @@ typedef enum {
     NSRectEdge edge = NSMaxYEdge;
     NSRect bounds = NSZeroRect;
     if ([sender isKindOfClass:NSMenuItem.class]) {
-        view = self.window.contentView;
-        bounds = view.bounds;
-        // I assume a menu item in the menubar will have a parent.
-        if ([(NSMenuItem *)sender parentItem] == nil) {
-            // Rough guess at where the toolbar is.
-            if (view.userInterfaceLayoutDirection == NSUserInterfaceLayoutDirectionRightToLeft) {
-                bounds.origin.x = NSMinX(bounds) + 30;
-            } else {
-                bounds.origin.x = NSMaxX(bounds) - 30;
+        view = nil;
+        if (self.window.toolbar.visible) {
+            NSArray *items = self.window.toolbar.visibleItems;
+            for (NSToolbarItem *item in items) {
+                if ([item.itemIdentifier isEqualToString:@"OSDRemote"]) {
+                    view = item.view;
+                    bounds = view.bounds;
+                    break;
+                }
             }
-        } else {
-            bounds.origin.x = NSMidX(bounds) - 10;
         }
-        bounds.size.width = 20;
-        bounds.origin.y = NSMaxY(bounds) - 2;
-        bounds.size.height = 2;
-        edge = NSMaxYEdge;
+        if (view == nil) {
+            // No visible toolbar, so show it near the edge where the toolbar would be.
+            // Use superview so we can show it above the content view.
+            view = self.window.contentView.superview;
+            NSRect contentBounds = self.window.contentView.bounds;
+            NSRect superBounds = view.bounds;
+            bounds = contentBounds;
+            if (self.window.toolbar.visible) {
+                if (view.userInterfaceLayoutDirection == NSUserInterfaceLayoutDirectionRightToLeft) {
+                    bounds.origin.x = NSMinX(bounds) + 30;
+                } else {
+                    bounds.origin.x = NSMaxX(bounds) - 30;
+                }
+            } else {
+                bounds.origin.x = NSMidX(bounds) - 10;
+            }
+            bounds.size.width = 20;
+            CGFloat yDelta = NSMaxY(superBounds) - NSMaxY(contentBounds);
+            bounds.origin.y = NSMaxY(contentBounds) + (yDelta * 0.25);
+            bounds.size.height = 2;
+            edge = NSMinYEdge;
+        }
     } else {
         bounds = view.bounds;
     }

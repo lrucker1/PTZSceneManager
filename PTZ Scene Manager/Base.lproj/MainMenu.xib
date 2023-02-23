@@ -394,13 +394,13 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="mbL-60-Yyn"/>
-                            <menuItem title="Show Sidebar" keyEquivalent="s" id="sR4-wU-dcA">
+                            <menuItem title="Show OSD Remote" keyEquivalent="r" id="sR4-wU-dcA">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="representedObject" value="showAutofocusControls"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="lar_toggleSidebar:" target="-1" id="pHg-Vt-p7a"/>
+                                    <action selector="remoteOpen:" target="-1" id="TOK-Qb-c1l"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="gW6-Nk-ZNL"/>

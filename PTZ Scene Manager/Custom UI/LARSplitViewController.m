@@ -40,10 +40,5 @@
     return [super splitView:splitView shouldHideDividerAtIndex:dividerIndex];
 }
 
-// No, I do not know why I can't just bind to super's implementation.
-- (IBAction)lar_toggleSidebar:(id)sender {
-    [super toggleSidebar:sender];
-}
-
 
 @end

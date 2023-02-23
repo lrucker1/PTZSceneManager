@@ -42,9 +42,13 @@ static PSMCameraCollectionItem *selfType;
            forKeyPath:@"dataSource.usbCameraNames"
               options:0
               context:&selfType];
+    [[NSNotificationCenter defaultCenter] addObserverForName:PSMOBSGetVideoSourceNamesNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        self.videoSourceNames = [[PSMOBSWebSocketController defaultController] videoSourceNames];
+    }];
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeObserver:self
               forKeyPath:@"dataSource.usbCameraNames"];
     _dataSource = nil;

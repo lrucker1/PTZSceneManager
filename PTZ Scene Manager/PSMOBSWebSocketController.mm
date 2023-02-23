@@ -20,7 +20,8 @@
 #include <atomic>
 #import <PTZ_Scene_Manager-Swift.h>
 
-NSString *PSMOBSSceneInputDidChange = @"PSMOBSSceneInputDidChange";
+NSString *PSMOBSGetSourceActiveNotification = @"PSMOBSGetSourceActiveNotification";
+NSString *PSMOBSCurrentSourceDidChangeNotification = @"PSMOBSCurrentSourceDidChangeNotification";
 NSString *PSMOBSSessionIsReady = @"PSMOBSSessionDidBegin";
 NSString *PSMOBSSessionDidEnd = @"PSMOBSSessionDidEnd";
 NSString *PSMOBSSessionAuthorizationFailedKey = @"PSMOBSSessionAuthorizationFailedKey";
@@ -133,6 +134,10 @@ typedef enum {
 }
 @property (readwrite) BOOL connected;
 @property (readwrite) BOOL isReady;
+@property (readwrite) NSString *currentProgramScene, *currentPreviewScene;
+@property (readwrite) NSString *currentProgramSource, *currentPreviewSource;
+@property (readwrite) NSArray *currentProgramSourceNames, *currentPreviewSourceNames;
+
 @property NSString *command;
 @property BOOL running;
 @property BOOL isObservingAppLaunch;
@@ -255,20 +260,39 @@ typedef enum {
     }
 }
 
+- (NSNumber *)eventSubscriptions {
+    return @(ES_General | ES_Scenes | ES_SceneItems);
+}
+
+- (NSString *)jsonGetRequestType:(NSString *)requestType {
+    NSDictionary *dict = @{@"op":@(6),
+                           @"d": @{@"requestType": requestType,
+                                   @"requestId": self.requestId,
+                                   @"requestData": @{}}};
+    return [self convertToJSON:dict];
+}
+
+#define JSON_GET_REQUEST_TYPE(_request) \
+- (NSString *)json##_request {  \
+    return [self jsonGetRequestType:@#_request]; \
+}
+
+JSON_GET_REQUEST_TYPE(GetInputList)
+JSON_GET_REQUEST_TYPE(GetCurrentProgramScene)
+JSON_GET_REQUEST_TYPE(GetCurrentPreviewScene)
+
 - (NSString *)jsonHelloReply {
-    // This is a simple app; it only listens to scene changes.
     NSDictionary *dict = @{@"op":@(1),
                            @"d":@{@"rpcVersion":@(1),
-                                  @"eventSubscriptions":@(ES_General | ES_Scenes)}};
+                                  @"eventSubscriptions":self.eventSubscriptions}};
     return [self convertToJSON:dict];
 }
 
 - (NSString *)jsonHelloReplyWithAuth:(NSString *)auth {
-    // This is a simple app; it only listens to scene changes.
     NSDictionary *dict = @{@"op":@(1),
                            @"d":@{@"rpcVersion":@(1),
                                   @"authentication":auth,
-                                  @"eventSubscriptions":@(ES_General | ES_Scenes)}};
+                                  @"eventSubscriptions":self.eventSubscriptions}};
     return [self convertToJSON:dict];
 }
 
@@ -311,9 +335,8 @@ typedef enum {
 - (void)handleIdentified:(NSDictionary *)dict {
     self.obsState = OBSStateIdentified;
     [self sendString:[self jsonGetInputList]];
-    if ([self.obsInputs count] > 0) {
-        [self getSourceActive];
-    }
+    [self sendString:[self jsonGetCurrentProgramScene]];
+    [self sendString:[self jsonGetCurrentPreviewScene]];
     if (self.obsPasswordData != nil) {
         [self.delegate requestOBSWebSocketKeychainPermission:^(BOOL allowed) {
             if (!allowed) {
@@ -375,11 +398,12 @@ typedef enum {
     return [self convertToJSON:dict];
 }
 
-- (NSString *)jsonGetInputList {
+- (NSString *)jsonGetSceneItemList:(NSString *)sceneName {
     NSDictionary *dict = @{@"op":@(6),
-                           @"d": @{@"requestType": @"GetInputList",
-                                   @"requestId": self.requestId,
-                                   @"requestData": @{}}};
+                           @"d": @{@"requestType": @"GetSceneItemList",
+                                   @"requestId": sceneName,
+                                   @"requestData": @{
+                                       @"sceneName": sceneName}}};
     return [self convertToJSON:dict];
 }
 
@@ -388,7 +412,6 @@ typedef enum {
         self.obsInputs = [NSMutableDictionary dictionary];
     }
     [self.obsInputs setObject:camera forKey:camera.obsSourceName];
-    [self getSourceActive];
 }
 
 - (void)cancelNotificationsForCameraSource:(NSString *)cameraname {
@@ -407,9 +430,9 @@ typedef enum {
     return YES;
 }
 
-- (void)handleInputList:(NSDictionary *)dict {
+- (void)handleInputList:(NSDictionary *)responseData {
     NSMutableArray *array = [NSMutableArray array];
-    NSArray *inputs = dict[@"inputs"];
+    NSArray *inputs = responseData[@"inputs"];
     for (NSDictionary *input in inputs) {
         NSString *name = input[@"inputName"];
         NSString *kind = input[@"inputKind"];
@@ -425,10 +448,40 @@ typedef enum {
      userInfo:@{PSMOBSVideoSourcesKey : self.videoSourceNames}];
 }
 
+- (void)handleProgramSceneChanged:(NSDictionary *)dict {
+    // GetSceneItemList
+    self.currentProgramScene = dict[@"sceneName"];
+    [self sendString:[self jsonGetSceneItemList:self.currentProgramScene]];
+}
+
+- (void)handlePreviewSceneChanged:(NSDictionary *)dict {
+    // GetSceneItemList
+    self.currentPreviewScene = dict[@"sceneName"];
+    [self sendString:[self jsonGetSceneItemList:self.currentPreviewScene]];
+}
+
+- (void)handleGetCurrentProgramScene:(NSDictionary *)dict {
+    // GetSceneItemList
+    self.currentProgramScene = dict[@"currentProgramSceneName"];
+    [self sendString:[self jsonGetSceneItemList:self.currentProgramScene]];
+}
+
+- (void)handleGetCurrentPreviewScene:(NSDictionary *)dict {
+    // GetSceneItemList
+    self.currentPreviewScene = dict[@"currentPreviewSceneName"];
+    [self sendString:[self jsonGetSceneItemList:self.currentPreviewScene]];
+}
+
+- (void)handleGetSceneItemList:(NSDictionary *)dict {
+    NSDictionary *responseData = dict[@"responseData"];
+    NSString *sceneName = dict[@"requestId"];
+    [self scene:sceneName didChangeItems:responseData[@"sceneItems"]];
+}
+
 - (void)handleSourceActive:(NSDictionary *)dict {
     NSString *sourceName = dict[@"requestId"];
     PTZCamera *camera = self.obsInputs[sourceName];
-    [[NSNotificationCenter defaultCenter] postNotificationName:PSMOBSSceneInputDidChange
+    [[NSNotificationCenter defaultCenter] postNotificationName:PSMOBSGetSourceActiveNotification
                                     object:camera
                                   userInfo:dict];
 }
@@ -441,12 +494,19 @@ typedef enum {
     } else if ([type isEqualToString:@"GetSourceActive"]) {
         [self handleSourceActive:data];
     } else if ([type isEqualToString:@"GetVersion"]) {
-        // supportedImageFormats
+        // supportedImageFormats. We use jpg, it's not going anywhere.
     } else if ([type isEqualToString:@"GetSourceScreenshot"]) {
         [self handleSourceScreenshot:data];
+    } else if ([type isEqualToString:@"GetSceneItemList"]) {
+        [self handleGetSceneItemList:data];
+    } else if ([type isEqualToString:@"GetCurrentProgramScene"]) {
+        [self handleGetCurrentProgramScene:data[@"responseData"]];
+    } else if ([type isEqualToString:@"GetCurrentPreviewScene"]) {
+        [self handleGetCurrentPreviewScene:data[@"responseData"]];
     }
 }
 
+// When the scene has no sources, videoActive/Showing doesn't appear to get updated. We need the source list anyway, so this is off for now.
 - (void)getSourceActive {
     if (self.isReady) {
         for (NSString *input in self.obsInputs) {
@@ -463,19 +523,24 @@ typedef enum {
         return;
     }
     NSInteger intent = [intentObj integerValue];
+    NSString *eventType = data[@"eventType"];
     if (intent == ES_Scenes) {
         // Ignore SceneCreated, SceneRemoved, and SceneListChanged
-        NSString *eventType = data[@"eventType"];
-        if ([eventType isEqualToString:@"CurrentProgramSceneChanged"] ||
-            [eventType isEqualToString:@"CurrentPreviewSceneChanged"]) {
-            [self getSourceActive];
+        if ([eventType isEqualToString:@"CurrentProgramSceneChanged"]) {
+            [self handleProgramSceneChanged:data[@"eventData"]];
+        } else if ([eventType isEqualToString:@"CurrentPreviewSceneChanged"]) {
+            [self handlePreviewSceneChanged:data[@"eventData"]];
         }
     } else if (intent == ES_General) {
         // Ignore Vendor and Custom events.
-        NSString *eventType = data[@"eventType"];
         if ([eventType isEqualToString:@"ExitStarted"]) {
             self.running = NO;
         }
+    } else if (intent == ES_SceneItems) {
+        // SceneItemListReindexed does not contain an array of full SceneItems, it's just the sceneID and index. Not what we need.
+        NSDictionary *eventData = data[@"eventData"];
+        NSString *sceneName = eventData[@"sceneName"];
+        [self sendString:[self jsonGetSceneItemList:sceneName]];
     }
 }
 
@@ -507,6 +572,48 @@ typedef enum {
         default:
             break;
     }
+}
+
+#pragma mark data parsing
+
+- (NSArray *)visibleSourceItemNames:(NSArray *)sceneItems {
+    NSMutableArray *array = [NSMutableArray array];
+    // Item 0 is at the bottom of the visiblity stack.
+    for (NSDictionary *dict in [sceneItems reverseObjectEnumerator]) {
+        if (![dict[@"inputKind"] hasPrefix:@"av_capture_input"]) {
+            continue;
+        }
+        if ([dict[@"sceneItemEnabled"] boolValue] == NO) {
+            continue;
+        }
+        NSDictionary *xform = dict[@"sceneItemTransform"];
+        // doesFill = doesFill = (positionX == positionY == 0) && (sourceHeight * scaleY == height)
+        CGFloat positionX = [xform[@"positionX"] floatValue];
+        CGFloat positionY = [xform[@"positionY"] floatValue];
+        CGFloat sourceHeight = [xform[@"sourceHeight"] floatValue];
+        CGFloat height = [xform[@"height"] floatValue];
+        CGFloat scaleY = [xform[@"scaleY"] floatValue];
+        BOOL doesFill = (positionX == 0) && (positionY == 0) && (sourceHeight * scaleY == height);
+        [array addObject:dict[@"sourceName"]];
+        if (doesFill) {
+            // Anything below a source that covers the screen is not visible.
+            return array;
+        }
+    }
+    return array;
+}
+
+
+- (void)scene:(NSString *)sceneName didChangeItems:(NSArray *)sceneItems {
+    if ([sceneName isEqualToString:self.currentProgramScene]) {
+        self.currentProgramSourceNames = [self visibleSourceItemNames:sceneItems];
+    } else if ([sceneName isEqualToString:self.currentPreviewScene]) {
+        self.currentPreviewSourceNames = [self visibleSourceItemNames:sceneItems];
+    }
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:PSMOBSCurrentSourceDidChangeNotification
+     object:nil
+     userInfo:nil];
 }
 
 #pragma mark WebSocket thread

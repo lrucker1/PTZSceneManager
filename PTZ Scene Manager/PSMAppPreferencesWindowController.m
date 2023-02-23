@@ -99,7 +99,7 @@ NSString *PTZRangeCollectionUpdateNotification = @"PTZRangeCollectionUpdateNotif
 
 - (IBAction)switchToTab:(id)sender {
     NSToolbarItem *item = (NSToolbarItem *)sender;
-    [self.tabView selectTabViewItemAtIndex:item.tag];
+    [self.tabView selectTabViewItemWithIdentifier:item.itemIdentifier];
 }
 
 - (void)selectTabViewItemWithIdentifier:(id)identifier {

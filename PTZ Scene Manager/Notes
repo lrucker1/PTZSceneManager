@@ -34,7 +34,8 @@ snapshot.jpg resolution options: 1920x1080 (16:9, 1.777) 960x600 (8:5, 1.6) 480x
 
 Pluggable controls:
 Instead of the "Low light/sports day/night", have user-definable light settings. Like "Candles".
-Also transition effects, like "relative zoom in"
+Also transition effects, like "relative zoom in".
+  - alas, even the slowest zoom speed is way too fast.
   - a "record mode", that computes the difference between two scenes and saves just that change? Future.
 Auto sharpness?
 Preset speed?
@@ -48,18 +49,13 @@ PTZ Advanced View:
  Image Color: Luminance Contrast Hue
     and show meaningful values, sheesh.
 
-menu item w/shortcut to bring up osd
-
 Range copy (recall/set) in Camera Scenes. Also range overlap check - intersectsIndexesInRange
 Progress dialog for snapshot import... actually it's pretty fast. Keep it around for when we do range copy.
 
-Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams, it's very optional. OTOH - disconnecting and reconnecting IP is fast. USB takes some time between power on and it actually being available.
+Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams (actually, we could, but more research is needed), it's very optional. OTOH - disconnecting and reconnecting IP is fast. USB takes some time between power on and it actually being available.
 
 Add cameras in Cam Collection.
 Update after IP/USB change.
 
 Test importing a second different/overlapping set of cameras.
 
-Experiment with the accellerator type buttons. Seems weird the initial delay applies before the first action. Maybe another custom button.
-
-Sorting options in the camera list: standard (menuindex), name, obsname

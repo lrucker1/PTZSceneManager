@@ -32,7 +32,7 @@
                         </constraints>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Controls" identifier="Controls" id="hMA-Mv-zhY">
+                            <tabViewItem label="Controls" identifier="tabControls" id="hMA-Mv-zhY">
                                 <view key="view" id="JL9-I4-rTD">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="360"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -317,7 +317,7 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Color" identifier="2" id="yQw-c5-EKc">
+                            <tabViewItem label="Color" identifier="tabColor" id="yQw-c5-EKc">
                                 <view key="view" id="gbA-pC-TNe">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="360"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -804,7 +804,7 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Exposure" identifier="3" id="zaQ-yN-dcI">
+                            <tabViewItem label="Exposure" identifier="tabExposure" id="zaQ-yN-dcI">
                                 <view key="view" id="qIW-Jk-DVd">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="360"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -880,7 +880,7 @@
                                             <rect key="frame" x="26" y="171" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
@@ -988,7 +988,7 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Image" identifier="" id="ISb-0U-urv">
+                            <tabViewItem label="Image" identifier="tabImage" id="ISb-0U-urv">
                                 <view key="view" id="Xzz-8D-TM1">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="360"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1340,7 +1340,7 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Scenes" identifier="" id="rko-we-5Yc">
+                            <tabViewItem label="Scenes" identifier="tabScenes" id="rko-we-5Yc">
                                 <view key="view" id="IVK-cZ-A2N">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="360"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1693,7 +1693,7 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Position" identifier="Position" id="kdH-no-c3X">
+                            <tabViewItem label="Position" identifier="tabPosition" id="kdH-no-c3X">
                                 <view key="view" id="iQg-Iw-qS1">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="360"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1893,8 +1893,9 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="9pA-kD-I6b" column="Rzo-Ng-azi" id="oJh-mh-L97">
-                                                                    <textField key="contentView" verticalHuggingPriority="751" ambiguous="YES" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="W48-RC-qxN" userLabel="zoom">
+                                                                    <textField key="contentView" verticalHuggingPriority="751" ambiguous="YES" preferredMaxLayoutWidth="31" id="W48-RC-qxN" userLabel="zoom">
                                                                         <rect key="frame" x="56" y="0.0" width="60" height="21"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="00" drawsBackground="YES" id="uP9-Uq-VvU">
                                                                             <font key="font" metaFont="system"/>
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1918,8 +1919,9 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="9pA-kD-I6b" column="j71-uD-UzU" id="8D0-n3-yB5">
-                                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgm-fF-QWx">
+                                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="zgm-fF-QWx">
                                                                         <rect key="frame" x="213" y="-2" width="64" height="23"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="dPJ-uI-yQm">
                                                                             <font key="font" metaFont="system"/>
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2223,32 +2225,32 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="81EA62CC-D469-4A65-8925-FF65A93B3E5A" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="fXb-VO-H4a">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="5937EAE2-6962-471F-BEDC-DD796A80605A" label="Controls" paletteLabel="Controls" image="crossroads" bordered="YES" sizingBehavior="auto" id="Xey-43-FjT">
+                    <toolbarItem implicitItemIdentifier="5937EAE2-6962-471F-BEDC-DD796A80605A" explicitItemIdentifier="tabControls" label="Controls" paletteLabel="Controls" image="crossroads" bordered="YES" sizingBehavior="auto" id="Xey-43-FjT">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="mif-ke-DnC"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="90E866F0-1045-4432-B5C5-CB0CF7B3BB4A" label="Scenes" paletteLabel="Scenes" tag="4" image="camera-viewfinder" bordered="YES" sizingBehavior="auto" id="mSs-F9-Mky">
+                    <toolbarItem implicitItemIdentifier="90E866F0-1045-4432-B5C5-CB0CF7B3BB4A" explicitItemIdentifier="tabScenes" label="Scenes" paletteLabel="Scenes" tag="4" image="camera-viewfinder" bordered="YES" sizingBehavior="auto" id="mSs-F9-Mky">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="hmt-hF-Eca"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C67226CA-1003-4D2F-84E5-882A5E0C9B5A" label="Position" paletteLabel="Position" tag="5" image="camera-toolbar" bordered="YES" sizingBehavior="auto" id="LxN-6h-i5y">
+                    <toolbarItem implicitItemIdentifier="C67226CA-1003-4D2F-84E5-882A5E0C9B5A" explicitItemIdentifier="tabPosition" label="Position" paletteLabel="Position" tag="5" image="camera-toolbar" bordered="YES" sizingBehavior="auto" id="LxN-6h-i5y">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="2AF-Ry-FXt"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="FB39A447-6BC6-4B16-8761-00FDB5983584" label="Color" paletteLabel="Color" tag="1" image="colortemp" bordered="YES" sizingBehavior="auto" id="rUT-pn-n6X">
+                    <toolbarItem implicitItemIdentifier="FB39A447-6BC6-4B16-8761-00FDB5983584" explicitItemIdentifier="tabColor" label="Color" paletteLabel="Color" tag="1" image="colortemp" bordered="YES" sizingBehavior="auto" id="rUT-pn-n6X">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="O2a-e9-Ntn"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="FEBA3B9A-AD77-4FFA-A51D-D3C01C4E5DE1" label="Exposure" paletteLabel="Exposure" tag="2" image="lens" bordered="YES" sizingBehavior="auto" id="iHH-4K-ZNs">
+                    <toolbarItem implicitItemIdentifier="FEBA3B9A-AD77-4FFA-A51D-D3C01C4E5DE1" explicitItemIdentifier="tabExposure" label="Exposure" paletteLabel="Exposure" tag="2" image="lens" bordered="YES" sizingBehavior="auto" id="iHH-4K-ZNs">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="W7e-Rf-q0B"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A0F2AA05-F960-4CCB-8054-03F38CB00D16" label="Image" paletteLabel="Image" tag="3" image="camera-screenshot" bordered="YES" sizingBehavior="auto" id="L7k-zU-Qfu">
+                    <toolbarItem implicitItemIdentifier="A0F2AA05-F960-4CCB-8054-03F38CB00D16" explicitItemIdentifier="tabImage" label="Image" paletteLabel="Image" tag="3" image="camera-screenshot" bordered="YES" sizingBehavior="auto" id="L7k-zU-Qfu">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="7H5-MF-DQq"/>
                         </connections>

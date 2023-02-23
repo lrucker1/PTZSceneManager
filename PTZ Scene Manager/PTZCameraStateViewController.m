@@ -468,7 +468,7 @@ MAKE_CAN_SET_MODE_CHECK_METHOD(Hue)
 
 - (IBAction)switchToTab:(id)sender {
     NSToolbarItem *item = (NSToolbarItem *)sender;
-    [self.tabView selectTabViewItemAtIndex:item.tag];
+    [self.tabView selectTabViewItemWithIdentifier:item.itemIdentifier];
 }
 
 - (BOOL)validateUserInterfaceItem:(NSMenuItem *)menuItem {

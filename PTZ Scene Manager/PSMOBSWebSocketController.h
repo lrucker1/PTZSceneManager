@@ -27,7 +27,8 @@ typedef enum {
 
 @end
 
-extern NSString *PSMOBSSceneInputDidChange;
+extern NSString *PSMOBSGetSourceActiveNotification;
+extern NSString *PSMOBSCurrentSourceDidChangeNotification;
 extern NSString *PSMOBSSessionIsReady;
 extern NSString *PSMOBSSessionDidEnd;
 extern NSString *PSMOBSSessionAuthorizationFailedKey;
@@ -44,6 +45,8 @@ extern NSString *PSMOBSVideoSourcesKey;
 
 @property (readonly) BOOL connected;
 @property (readonly) BOOL isReady;
+@property (readonly) NSString *currentProgramScene, *currentPreviewScene;
+@property (readonly) NSArray *currentProgramSourceNames, *currentPreviewSourceNames;
 @property (weak) NSObject<PSMOBSWebSocketDelegate> *delegate;
 @property (readonly) NSArray *videoSourceNames;
 

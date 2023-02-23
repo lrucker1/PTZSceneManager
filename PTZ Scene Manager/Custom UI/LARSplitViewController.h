@@ -11,10 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LARSplitViewController : NSSplitViewController
 
-// If this changes, "NSSplitView Subview Frames [camerakey]" have to be cleared.
+// Note that changing sidebar position means the autosave values are bogus. Using different autosave names should work.
 @property BOOL sidebarOnRight;
-
-- (IBAction)lar_toggleSidebar:(id)sender;
 
 @end
 
