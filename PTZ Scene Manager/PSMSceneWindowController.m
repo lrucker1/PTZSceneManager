@@ -168,7 +168,6 @@ typedef enum {
     [self loadCamera:NO];
     self.boxColor = self.cameraBox.borderColor;
     self.collectionColors = self.collectionView.backgroundColors;
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSceneChange:) name:PSMOBSGetSourceActiveNotification object:self.prefCamera];
     [[NSNotificationCenter defaultCenter] addObserverForName:PSMOBSCurrentSourceDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         [self updateActiveIndicators];
     }];
@@ -178,18 +177,6 @@ typedef enum {
     } else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidBegin:) name:PSMOBSSessionIsReady object:nil];
     }
-    [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
-    [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:self.prefCamera queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        NSDictionary *dict = note.userInfo;
-        NSDictionary *oldValues = dict[NSKeyValueChangeOldKey];
-        // obsSourceName affects OSB connection.
-        NSArray *changedKeys = [oldValues allKeys];
-        if ([changedKeys containsObject:@"obsSourceName"]) {
-            NSString *oldName = oldValues[@"obsSourceName"];
-            [[PSMOBSWebSocketController defaultController] cancelNotificationsForCameraSource:oldName];
-            [[PSMOBSWebSocketController defaultController] requestNotificationsForCamera:self.prefCamera];
-        }
-    }];
     NSArray *buttons = [self.panTiltGridView subviews];
     for (NSButton *button in buttons) {
         if (button.action == @selector(doRelativePanTiltStep:)) {
@@ -207,15 +194,6 @@ typedef enum {
     }
 }
 
-//- (void)onOBSSceneChange:(NSNotification *)note {
-//    NSDictionary *dict = note.userInfo;
-//    NSDictionary *responseData = dict[@"responseData"];
-//    // Active: Program
-//    self.camera.videoActive = [responseData[@"videoActive"] boolValue];
-//    // Showing: Program or Preview
-//    self.camera.videoShowing = [responseData[@"videoShowing"] boolValue];
-//    [self updateActiveIndicators];
-//}
 
 - (void)updateActiveIndicators {
     PTZVideoMode mode = PTZVideoOff;

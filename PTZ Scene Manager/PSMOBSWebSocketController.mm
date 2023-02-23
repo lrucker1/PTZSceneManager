@@ -20,7 +20,6 @@
 #include <atomic>
 #import <PTZ_Scene_Manager-Swift.h>
 
-NSString *PSMOBSGetSourceActiveNotification = @"PSMOBSGetSourceActiveNotification";
 NSString *PSMOBSCurrentSourceDidChangeNotification = @"PSMOBSCurrentSourceDidChangeNotification";
 NSString *PSMOBSSessionIsReady = @"PSMOBSSessionDidBegin";
 NSString *PSMOBSSessionDidEnd = @"PSMOBSSessionDidEnd";
@@ -60,6 +59,9 @@ public:
     }
 };
 }
+
+/* Don't use GetSourceActive. The Multiview counts as a "dialog" in "When an input is showing, [videoShowing] means it's being shown by the preview or a dialog.", making it pretty much useless.
+ */
 
 /*
  Hello (OpCode 0)
@@ -146,7 +148,6 @@ typedef enum {
 @property OBSState obsState;
 // Let the delegate know which kind of attempt failed
 @property BOOL authorizingWithKeychain;
-@property NSMutableDictionary *obsInputs;
 @property NSString *requestId;
 @property NSString *obsURLString;
 @property NSURL *obsURL;
@@ -390,14 +391,6 @@ JSON_GET_REQUEST_TYPE(GetCurrentPreviewScene)
     return [self convertToJSON:dict];
 }
 
-- (NSString *)jsonGetSourceActive:(NSString *)sourceName {
-    NSDictionary *dict = @{@"op":@(6),
-                           @"d": @{@"requestType": @"GetSourceActive",
-                                   @"requestId": sourceName,
-                                   @"requestData": @{@"sourceName": sourceName}}};
-    return [self convertToJSON:dict];
-}
-
 - (NSString *)jsonGetSceneItemList:(NSString *)sceneName {
     NSDictionary *dict = @{@"op":@(6),
                            @"d": @{@"requestType": @"GetSceneItemList",
@@ -405,19 +398,6 @@ JSON_GET_REQUEST_TYPE(GetCurrentPreviewScene)
                                    @"requestData": @{
                                        @"sceneName": sceneName}}};
     return [self convertToJSON:dict];
-}
-
-- (void)requestNotificationsForCamera:(PTZPrefCamera *)camera {
-    if (self.obsInputs == nil) {
-        self.obsInputs = [NSMutableDictionary dictionary];
-    }
-    [self.obsInputs setObject:camera forKey:camera.obsSourceName];
-}
-
-- (void)cancelNotificationsForCameraSource:(NSString *)cameraname {
-    if (self.obsInputs != nil) {
-        [self.obsInputs removeObjectForKey:cameraname];
-    }
 }
 
 - (BOOL)requestSnapshotForCameraSource:(NSString *)obsSourceName index:(NSInteger)index preferredWidth:(NSInteger)width {
@@ -478,21 +458,11 @@ JSON_GET_REQUEST_TYPE(GetCurrentPreviewScene)
     [self scene:sceneName didChangeItems:responseData[@"sceneItems"]];
 }
 
-- (void)handleSourceActive:(NSDictionary *)dict {
-    NSString *sourceName = dict[@"requestId"];
-    PTZCamera *camera = self.obsInputs[sourceName];
-    [[NSNotificationCenter defaultCenter] postNotificationName:PSMOBSGetSourceActiveNotification
-                                    object:camera
-                                  userInfo:dict];
-}
-
 - (void)handleRequestResponse:(NSDictionary *)dict {
     NSDictionary *data = dict[@"d"];
     NSString *type = data[@"requestType"];
     if ([type isEqualToString:@"GetInputList"]) {
         [self handleInputList:data[@"responseData"]];
-    } else if ([type isEqualToString:@"GetSourceActive"]) {
-        [self handleSourceActive:data];
     } else if ([type isEqualToString:@"GetVersion"]) {
         // supportedImageFormats. We use jpg, it's not going anywhere.
     } else if ([type isEqualToString:@"GetSourceScreenshot"]) {
@@ -503,16 +473,6 @@ JSON_GET_REQUEST_TYPE(GetCurrentPreviewScene)
         [self handleGetCurrentProgramScene:data[@"responseData"]];
     } else if ([type isEqualToString:@"GetCurrentPreviewScene"]) {
         [self handleGetCurrentPreviewScene:data[@"responseData"]];
-    }
-}
-
-// When the scene has no sources, videoActive/Showing doesn't appear to get updated. We need the source list anyway, so this is off for now.
-- (void)getSourceActive {
-    if (self.isReady) {
-        for (NSString *input in self.obsInputs) {
-            NSString *json = [self jsonGetSourceActive:input];
-            [self sendString:json];
-        }
     }
 }
 

@@ -27,7 +27,6 @@ typedef enum {
 
 @end
 
-extern NSString *PSMOBSGetSourceActiveNotification;
 extern NSString *PSMOBSCurrentSourceDidChangeNotification;
 extern NSString *PSMOBSSessionIsReady;
 extern NSString *PSMOBSSessionDidEnd;
@@ -51,9 +50,6 @@ extern NSString *PSMOBSVideoSourcesKey;
 @property (readonly) NSArray *videoSourceNames;
 
 + (PSMOBSWebSocketController *)defaultController;
-
-- (void)requestNotificationsForCamera:(PTZPrefCamera *)camera;
-- (void)cancelNotificationsForCameraSource:(NSString *)obsSourceName;
 
 // Posts PSMOBSGetSourceSnapshotNotification on success.
 - (BOOL)requestSnapshotForCameraSource:(NSString *)obsSourceName index:(NSInteger)index preferredWidth:(NSInteger)width;
