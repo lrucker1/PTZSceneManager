@@ -17,10 +17,12 @@
 @interface PSMCameraCollectionWindowController ()
 
 @property NSMutableArray<PTZPrefCamera *> *prefCameras;
+@property NSMutableArray<PSMCameraItem *> *cameraItems;
 @property IBOutlet NSCollectionView *collectionView;
 @property NSArray *usbCameraNameArray;
 @property PTZProgressGroup *parentProgress;
 @property PTZProgressWindowController *progressWindowController;
+@property NSUndoManager *undoManager;
 
 @end
 
@@ -48,6 +50,8 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    self.undoManager = [NSUndoManager new];
+    [self refreshCameraItems];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
      [[NSNotificationCenter defaultCenter] addObserverForName:AVCaptureDeviceWasConnectedNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         [self updateUSBCameras];
@@ -57,15 +61,17 @@
     }];
 }
 
-//- (BOOL)windowShouldClose:(NSWindow *)sender {
-//    // Release when closed, however, is ignored for windows owned by window controllers. Another strategy for releasing an NSWindow object is to have its delegate autorelease it on receiving a windowShouldClose: message.
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceWasConnectedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceWasDisconnectedNotification object:nil];
-//   return YES;
-//}
-
 - (AppDelegate *)appDelegate {
     return (AppDelegate *)[NSApp delegate];
+}
+
+- (void)refreshCameraItems {
+    self.cameraItems = [NSMutableArray array];
+    for (PTZPrefCamera *prefCamera in [self.appDelegate sortedPrefCameras]) {
+        PSMCameraItem *item = [[PSMCameraItem alloc] initWithPrefCamera:prefCamera];
+        [self.cameraItems addObject:item];
+    }
+    [self.collectionView reloadData];
 }
 
 - (void)updateUSBCameras  {
@@ -159,16 +165,18 @@
         self.progressWindowController = [[PTZProgressWindowController alloc] initWithProgressGroup:self.parentProgress];
         [self.window beginSheet:self.progressWindowController.window completionHandler:nil];
     }
+    // We are making prefCameras here because it's a full import, including values that a new camera won't have like scene names.
+    // But then we'll rebuild the cameraItems list for the collectionView.
     NSMutableArray *snapshotBlocks = [NSMutableArray array];
     for (NSDictionary *cameraInfo in cameraList) {
         PTZPrefCamera *prefCamera = [self cameraWithName:cameraInfo[@"devicename"]];
         if (prefCamera == nil) {
-            NSDictionary *newDict = cameraInfo; // Because we can't touch cameraInfo in fast enumeration.
-            if (nextMenuIndex > 0 && nextMenuIndex < 10) {
+            NSDictionary *newDict = cameraInfo; // Because we can't assign cameraInfo in fast enumeration.
+            if (nextMenuIndex > 0 && nextMenuIndex < 9) {
                 // Adjust menuIndex by the number of items we already have.
                 NSMutableDictionary *infoDict = [NSMutableDictionary dictionaryWithDictionary:cameraInfo];
-                infoDict[@"menuIndex"] = @(nextMenuIndex);
                 nextMenuIndex++;
+                infoDict[@"menuIndex"] = @(nextMenuIndex);
                 newDict = infoDict;
             }
             
@@ -197,8 +205,9 @@
         dispatch_async(snapshotsQueue, block);
     }
 
+    // Add our prefCameras to the canonical set.
     [self.appDelegate syncPrefCameras:self.prefCameras];
-    [self.collectionView reloadData];
+    [self refreshCameraItems];
 }
 
 - (void)copySnapshotFilesFromDirectory:(NSString *)oldDir toDirectory:(NSString *)newDir fromKey:(NSString *)deviceName toKey:(NSString *)cameraKey withProgress:(PTZProgress *)progress {
@@ -230,8 +239,60 @@
     });
 }
 
-
 #pragma mark camera collection
+
+- (void)cancelAddCameraItem:(PSMCameraItem *)item {
+    [self.undoManager registerUndoWithTarget:self selector:@selector(addCameraItem:) object:item];
+    [self.cameraItems removeObject:item];
+    [self.collectionView reloadData];
+}
+
+- (void)addCameraItem:(PSMCameraItem *)item {
+    [self.undoManager registerUndoWithTarget:self selector:@selector(removeCameraItems:) object:@[item]];
+    [self.cameraItems addObject:item];
+    [self.collectionView reloadData];
+}
+
+// Add items that were removed.
+- (void)restoreCameraItems:(NSDictionary *)restoreData {
+    NSArray *items = restoreData[@"CameraItems"];
+    NSArray *prefCameras = restoreData[@"PrefCameras"];
+    [self.cameraItems addObjectsFromArray:items];
+    [self.appDelegate addPrefCameras:prefCameras];
+    [self.undoManager registerUndoWithTarget:self selector:@selector(removeCameraItems:) object:items];
+    [self.collectionView reloadData];
+}
+
+- (void)removeCameraItems:(NSArray *)itemsToRemove {
+    NSMutableArray *array = [NSMutableArray array];
+    for (PSMCameraItem *item in itemsToRemove) {
+        if (item.prefCamera != nil) {
+            [array addObject:item.prefCamera];
+        }
+    }
+    [self.undoManager registerUndoWithTarget:self selector:@selector(restoreCameraItems:) object:@{@"CameraItems":itemsToRemove, @"PrefCameras":array}];
+    if ([array count]) {
+        [self.appDelegate removePrefCameras:array];
+    }
+    [self.cameraItems removeObjectsInArray:itemsToRemove];
+    [self.collectionView reloadData];
+}
+
+- (IBAction)doAddItem:(id)sender {
+    PSMCameraItem *newCamera = [PSMCameraItem new];
+    newCamera.cameraname = @"Camera";
+    newCamera.menuIndex = [self.cameraItems count] + 1;
+    [self addCameraItem:newCamera];
+}
+
+- (IBAction)doRemoveSelectedItems:(id)sender {
+    NSIndexSet *set = [self.collectionView selectionIndexes];
+    if ([set count] == 0) {
+        return;
+    }
+    NSArray *itemsToRemove = [self.cameraItems objectsAtIndexes:set];
+    [self removeCameraItems:itemsToRemove];
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(NSCollectionView *)collectionView {
     return 1;
@@ -239,7 +300,7 @@
 
 - (NSInteger)collectionView:(NSCollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return (section == 0) ? [self.prefCameras count] : 0;
+    return (section == 0) ? [self.cameraItems count] : 0;
 }
 
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView
@@ -247,25 +308,63 @@
 
     NSInteger index = indexPath.item;
     
-    if (index >= [self.prefCameras count]) {
+    if (index >= [self.cameraItems count]) {
         return nil;
     }
-    PTZPrefCamera *prefCamera = self.prefCameras[index];
-
+    PSMCameraItem *cameraItem = self.cameraItems[index];
     PSMCameraCollectionItem *item = [PSMCameraCollectionItem new];
     // item.collectionView never gets set, and it's read-only.
+    item.cameraItem = cameraItem;
     item.dataSource = self;
-    item.prefCamera = prefCamera;
-    item.cameraname = prefCamera.cameraname;
-    item.isSerial = prefCamera.isSerial;
-    item.menuIndex = prefCamera.menuIndex;
-    item.obsSourceName = prefCamera.obsSourceName;
-    if (item.isSerial) {
-        item.devicename = prefCamera.devicename;
-    } else {
-        item.ipaddress = prefCamera.devicename;
-    }
     return item;
+}
+
+#pragma mark undo
+
+- (IBAction)undo:(id)sender {
+    [self.undoManager undo];
+}
+
+- (IBAction)redo:(id)sender {
+    [self.undoManager redo];
+}
+
+- (BOOL)validateUndoItem:(NSMenuItem *)menuItem {
+    SEL action = menuItem.action;
+    
+    if (action == @selector(undo:)) {
+        return self.undoManager.canUndo;
+    } else if (action == @selector(redo:)) {
+        return self.undoManager.canRedo;
+    }
+    return YES;
+ }
+
+@end
+
+
+@interface PSMCameraCollectionWindow : NSWindow
+@end
+@implementation PSMCameraCollectionWindow
+
+- (PSMCameraCollectionWindowController *)wc {
+    return (PSMCameraCollectionWindowController *)self.windowController;
+}
+- (BOOL)validateUserInterfaceItem:(NSObject <NSValidatedUserInterfaceItem> *)item {
+    if (item.action == @selector(undo:) || item.action == @selector(redo:)) {
+        if ([self.wc validateUndoItem:(NSMenuItem *)item]) {
+            return YES;
+        }
+    }
+    return [super validateUserInterfaceItem:item];
+}
+
+- (IBAction)undo:(id)sender {
+    [self.wc undo:sender];
+}
+
+- (IBAction)redo:(id)sender {
+    [self.wc redo:sender];
 }
 
 @end

@@ -266,6 +266,43 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     [self savePrefCameras];
 }
 
+- (void)addPrefCameras:(NSArray<PTZPrefCamera*> *)prefCameras {
+    for (PTZPrefCamera *prefCamera in prefCameras) {
+        self.mutablePrefCameras[prefCamera.camerakey] = prefCamera;
+        [self createWindowForCamera:prefCamera menuShortcut:prefCamera.menuIndex];
+    }
+    [self savePrefCameras];
+}
+
+- (PSMSceneWindowController *)windowControllerWithKey:(NSString *)camerakey {
+    for (PSMSceneWindowController *wc in self.windowControllers) {
+        if ([wc.camerakey isEqualToString:camerakey]) {
+            return wc;
+        }
+    }
+    return nil;
+}
+
+- (void)removePrefCameras:(NSArray<PTZPrefCamera *> *)prefCamerasToRemove {
+    for (PTZPrefCamera *prefCamera in prefCamerasToRemove) {
+        PSMSceneWindowController *wc = [self windowControllerWithKey:prefCamera.camerakey];
+        NSWindow *win = wc.window;
+        if (win != nil) {
+            NSMenu *windowsMenu = [NSApp windowsMenu];
+            for (NSMenuItem *item in [windowsMenu itemArray]) {
+                if ([item isKindOfClass:PTZWindowsMenuItem.class] && item.target == win) {
+                    [windowsMenu removeItem:item];
+                    break;
+                }
+            }
+            [win close];
+            [self.windowControllers removeObject:wc];
+        }
+        [self.mutablePrefCameras removeObjectForKey:prefCamera.camerakey];
+    }
+    [self savePrefCameras];
+}
+
 - (void)savePrefCameras {
     NSMutableArray *prefCams = [NSMutableArray array];
     for (PTZPrefCamera *cam in self.prefCameras) {

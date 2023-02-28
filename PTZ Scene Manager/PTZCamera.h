@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTZCameraConfig;
 @class PTZProgressGroup;
 @class PTZProgress;
+@class PTZPrefCamera;
 
 typedef enum {
     PTZRestore = 0,
@@ -75,9 +76,17 @@ typedef struct  {
 typedef void (^PTZDoneBlock )(BOOL success);
 typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSInteger index);
 
+@interface PTZDeviceInfo : NSObject
+@property BOOL isSerial;
+@property NSString *usbdevicename;
+@property NSString *ttydev;
+@property NSString *ipaddress;
+@end
+
 @interface PTZCamera : NSObject
 
 @property (weak) NSObject<PTZCameraWBModeDelegate> *delegate;
+@property (weak) PTZPrefCamera *prefCameras;
 
 // Video
 @property PTZVideoMode videoMode;
@@ -125,7 +134,7 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSIntege
 @property VISCAInterface_t iface;
 @property (readonly) int port;
 
-+ (instancetype)cameraWithDeviceName:(NSString *)devicename isSerial:(BOOL)isSerial;
++ (instancetype)cameraWithDeviceInfo:(PTZDeviceInfo *)deviceInfo;
 
 - (BOOL)isSerial;
 

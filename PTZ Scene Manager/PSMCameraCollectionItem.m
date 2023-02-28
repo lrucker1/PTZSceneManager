@@ -20,10 +20,95 @@ static PSMCameraCollectionItem *selfType;
 @property NSArray *menuShortcuts;
 @property NSArray *videoSourceNames;
 @property BOOL enableUSBPopup;
+@property BOOL hasEdited;
+
+@end
+
+@implementation PSMCameraItem
+
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
+{
+    NSMutableSet *keyPaths = [NSMutableSet set];
+
+    if (   [key isEqualToString:@"canAdd"]
+        || [key isEqualToString:@"hasChanges"]) {
+        [keyPaths addObject:@"cameraname"];
+        [keyPaths addObject:@"usbdevicename"];
+        [keyPaths addObject:@"ipaddress"];
+    }
+    if ([key isEqualToString:@"hasChanges"]) {
+        [keyPaths addObject:@"obsSourceName"];
+        [keyPaths addObject:@"isSerial"];
+        [keyPaths addObject:@"menuIndex"];
+   }
+   return keyPaths;
+}
+
+- (instancetype)initWithPrefCamera:(PTZPrefCamera *)prefCamera {
+    self = [self init];
+    if (self) {
+        _prefCamera = prefCamera;
+        [self loadValuesFromPrefCamera];
+    }
+    return self;
+}
+
+- (void)loadValuesFromPrefCamera {
+    self.cameraname = _prefCamera.cameraname;
+    self.isSerial = _prefCamera.isSerial;
+    self.menuIndex = _prefCamera.menuIndex;
+    self.obsSourceName = _prefCamera.obsSourceName;
+    self.usbdevicename = _prefCamera.usbdevicename;
+    self.ipaddress = _prefCamera.ipAddress;
+}
+
+- (BOOL)canAdd {
+    return self.cameraname != nil &&
+        (   (self.isSerial && self.usbdevicename != nil )
+         || (!self.isSerial && self.ipaddress != nil));
+}
+
+#define STRING_EQUAL(_str1, _str2) \
+(((_str1) == nil && (_str2) == nil) || [(_str1) isEqualToString:(_str2)])
+
+- (BOOL)hasStringChanges {
+    if (self.prefCamera == nil) {
+        return NO;
+    }
+    return    STRING_EQUAL(self.cameraname, self.prefCamera.cameraname) == NO
+           || STRING_EQUAL(self.usbdevicename, self.prefCamera.usbdevicename) == NO
+           || STRING_EQUAL(self.ipaddress, self.prefCamera.ipAddress) == NO
+           || STRING_EQUAL(self.obsSourceName, self.prefCamera.obsSourceName) == NO;
+}
+
+- (BOOL)hasChanges {
+    if (self.prefCamera == nil) {
+        return NO;
+    }
+    return    [self hasStringChanges]
+           || (self.isSerial != self.prefCamera.isSerial)
+           || (self.menuIndex != self.prefCamera.menuIndex);
+}
+
+- (NSDictionary *)dictionaryValue {
+    NSString *devicename = _isSerial ? _usbdevicename : _ipaddress;
+    return @{@"cameraname":_cameraname, @"devicename":devicename ?: @"", @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex), @"obsSourceName":_obsSourceName ?: @""};
+}
 
 @end
 
 @implementation PSMCameraCollectionItem
+
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
+{
+    NSMutableSet *keyPaths = [NSMutableSet set];
+
+    if ([key isEqualToString:@"hasChanges"]) {
+        [keyPaths addObject:@"cameraItem.hasChanges"];
+        [keyPaths addObject:@"hasEdited"];
+   }
+   return keyPaths;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,8 +117,8 @@ static PSMCameraCollectionItem *selfType;
     for (NSInteger i = 1; i < 10; i++) {
         [array addObject:[NSString stringWithFormat:@"⌘%ld", i]];
     }
-    if (self.menuIndex < 0 || self.menuIndex > 9) {
-        self.menuIndex = 0;
+    if (self.cameraItem.menuIndex < 0 || self.cameraItem.menuIndex > 9) {
+        self.cameraItem.menuIndex = 0;
     }
     self.menuShortcuts = [NSArray arrayWithArray:array];
     self.videoSourceNames = [[PSMOBSWebSocketController defaultController] videoSourceNames];
@@ -58,11 +143,11 @@ static PSMCameraCollectionItem *selfType;
     NSMutableArray *array = [NSMutableArray arrayWithArray:[[self dataSource] usbCameraNames]];
     //  Disable if no attached devices, even if we have a cached device.
     self.enableUSBPopup = [array count] > 0;
-    if (self.isSerial && self.devicename != nil) {
-        if (![array containsObject:self.devicename]) {
-            [array addObject:self.devicename];
+    if (self.cameraItem.isSerial && self.cameraItem.usbdevicename != nil) {
+        if (![array containsObject:self.cameraItem.usbdevicename]) {
+            [array addObject:self.cameraItem.usbdevicename];
         }
-        self.selectedUSBDevice = [array indexOfObject:self.devicename];
+        self.selectedUSBDevice = [array indexOfObject:self.cameraItem.usbdevicename];
     }
     if ([array count] == 0) {
         [array addObject:NSLocalizedString(@"[No connected devices]", @"No devices on USB Device selection popup")];
@@ -70,7 +155,7 @@ static PSMCameraCollectionItem *selfType;
     self.usbDevices = array;
 }
 
-- (IBAction)applyChanges:(id)sender {
+- (void)forceEndEditing:(id)sender {
     // Seriously, why are we still using 30 year old hacks to force a textfield to stop editing and update KV?
     NSView *view = (NSView *)sender;
     NSWindow *window = view.window;
@@ -81,53 +166,84 @@ static PSMCameraCollectionItem *selfType;
     if (first != nil) {
         [window makeFirstResponder:first];
     }
+}
+
+- (IBAction)revertChanges:(id)sender {
+    [self discardEditing];
+    self.hasEdited = NO;
+    [self.cameraItem loadValuesFromPrefCamera];
+}
+
+- (IBAction)applyChanges:(id)sender {
+    [self forceEndEditing:sender];
+    PTZPrefCamera *prefCamera = self.cameraItem.prefCamera;
+    if (prefCamera == nil) {
+        // Should not have gotten here, but handle it.
+        [self addCamera:sender];
+        return;
+    }
+    self.cameraItem.usbdevicename = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
 
     NSMutableDictionary *oldValues = [NSMutableDictionary dictionary];
     NSMutableDictionary *newValues = [NSMutableDictionary dictionary];
-    if (![self.prefCamera.cameraname isEqualToString:self.cameraname]) {
-        oldValues[@"cameraname"] = self.prefCamera.cameraname;
-        newValues[@"cameraname"] = self.cameraname;
-        self.prefCamera.cameraname = self.cameraname;
+    if (![prefCamera.cameraname isEqualToString:self.cameraItem.cameraname]) {
+        oldValues[@"cameraname"] = prefCamera.cameraname;
+        newValues[@"cameraname"] = self.cameraItem.cameraname;
+        prefCamera.cameraname = self.cameraItem.cameraname;
     };
-    if (![self.prefCamera.ipAddress isEqualToString:self.ipaddress]) {
-        oldValues[@"ipAddress"] = self.prefCamera.ipAddress;
-        newValues[@"ipAddress"] = self.ipaddress;
-        self.prefCamera.ipAddress = self.ipaddress;
+    if (![prefCamera.ipAddress isEqualToString:self.cameraItem.ipaddress]) {
+        oldValues[@"ipAddress"] = prefCamera.ipAddress;
+        newValues[@"ipAddress"] = self.cameraItem.ipaddress;
+        prefCamera.ipAddress = self.cameraItem.ipaddress;
     };
-    if (![self.prefCamera.usbdevicename isEqualToString:self.devicename]) {
-        oldValues[@"usbdevicename"] = self.prefCamera.usbdevicename;
-        newValues[@"usbdevicename"] = self.devicename;
-        self.prefCamera.usbdevicename = self.devicename;
+    if (![prefCamera.usbdevicename isEqualToString:self.cameraItem.usbdevicename]) {
+        oldValues[@"usbdevicename"] = prefCamera.usbdevicename;
+        newValues[@"usbdevicename"] = self.cameraItem.usbdevicename;
+        prefCamera.usbdevicename = self.cameraItem.usbdevicename;
     };
-    if (self.prefCamera.isSerial != self.isSerial) {
-        self.prefCamera.isSerial = self.isSerial;
-        oldValues[@"isSerial"] = @(self.prefCamera.isSerial);
-        newValues[@"isSerial"] = @(self.isSerial);
+    if (prefCamera.isSerial != self.cameraItem.isSerial) {
+        prefCamera.isSerial = self.cameraItem.isSerial;
+        oldValues[@"isSerial"] = @(prefCamera.isSerial);
+        newValues[@"isSerial"] = @(self.cameraItem.isSerial);
     };
-    if (self.prefCamera.menuIndex != self.menuIndex) {
-        self.prefCamera.menuIndex = self.menuIndex;
-        oldValues[@"menuIndex"] = @(self.prefCamera.menuIndex);
-        newValues[@"menuIndex"] = @(self.menuIndex);
+    if (prefCamera.menuIndex != self.cameraItem.menuIndex) {
+        prefCamera.menuIndex = self.cameraItem.menuIndex;
+        oldValues[@"menuIndex"] = @(prefCamera.menuIndex);
+        newValues[@"menuIndex"] = @(self.cameraItem.menuIndex);
     };
-    if (![self.prefCamera.obsSourceName isEqualToString:self.obsSourceName]) {
-        oldValues[@"obsSourceName"] = self.prefCamera.obsSourceName;
-        newValues[@"obsSourceName"] = self.obsSourceName;
-        self.prefCamera.obsSourceName = self.obsSourceName;
+    if (![prefCamera.obsSourceName isEqualToString:self.cameraItem.obsSourceName]) {
+        oldValues[@"obsSourceName"] = prefCamera.obsSourceName;
+        newValues[@"obsSourceName"] = self.cameraItem.obsSourceName;
+        prefCamera.obsSourceName = self.cameraItem.obsSourceName;
     };
-    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:self.prefCamera userInfo:@{NSKeyValueChangeNewKey:newValues, NSKeyValueChangeOldKey:oldValues}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PSMPrefCameraListDidChangeNotification object:prefCamera userInfo:@{NSKeyValueChangeNewKey:newValues, NSKeyValueChangeOldKey:oldValues}];
+    self.hasEdited = NO;
+}
+
+- (IBAction)addCamera:(id)sender {
+    [self forceEndEditing:sender];
+    NSDictionary *dict = [self.cameraItem dictionaryValue];
+    self.cameraItem.prefCamera = [[PTZPrefCamera alloc] initWithDictionary:dict];
+    [(AppDelegate *)[NSApp delegate] addPrefCameras:@[self.cameraItem.prefCamera]];
+}
+
+- (IBAction)cancelAddCamera:(id)sender {
+    [self.dataSource cancelAddCameraItem:self.cameraItem];
+}
+
+- (BOOL)hasChanges {
+    return self.hasEdited || self.cameraItem.hasChanges;
 }
 
 - (void)controlTextDidBeginEditing:(NSNotification *)note {
+    self.hasEdited = YES;
 }
 
 - (void)controlTextDidEndEditing:(NSNotification *)note {
-//    [self.prefCamera set ...];
-//    NSLog(@"note %@ %@", note.object, note.userInfo);
+    self.hasEdited = self.cameraItem.hasChanges;
 }
 
 - (IBAction)cancelEditing:(id)sender {
-//    [self.textField abortEditing];
-//    self.whatever = [self.prefCamera ...];
 }
 
 - (void)setSelected:(BOOL)selected {

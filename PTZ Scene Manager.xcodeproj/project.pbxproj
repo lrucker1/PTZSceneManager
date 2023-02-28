@@ -15,6 +15,8 @@
 		940FCC552992EDE5008FD02F /* PSMCameraCollectionWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 940FCC532992EDE5008FD02F /* PSMCameraCollectionWindowController.xib */; };
 		940FCC592992F0A3008FD02F /* PSMCameraCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC572992F0A3008FD02F /* PSMCameraCollectionItem.m */; };
 		940FCC5A2992F0A3008FD02F /* PSMCameraCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 940FCC582992F0A3008FD02F /* PSMCameraCollectionItem.xib */; };
+		941BFE5729ADE67300ECEC23 /* pixman-utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 941BFE5229ADE67200ECEC23 /* pixman-utils.c */; };
+		941BFE5829ADE67300ECEC23 /* pixman-region32.c in Sources */ = {isa = PBXBuildFile; fileRef = 941BFE5429ADE67300ECEC23 /* pixman-region32.c */; };
 		946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */; };
 		946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */; };
 		946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */; };
@@ -87,6 +89,11 @@
 		940FCC562992F0A3008FD02F /* PSMCameraCollectionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraCollectionItem.h; sourceTree = "<group>"; };
 		940FCC572992F0A3008FD02F /* PSMCameraCollectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraCollectionItem.m; sourceTree = "<group>"; };
 		940FCC582992F0A3008FD02F /* PSMCameraCollectionItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PSMCameraCollectionItem.xib; sourceTree = "<group>"; };
+		941BFE5029ADE67200ECEC23 /* pixman-region.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "pixman-region.c"; sourceTree = "<group>"; };
+		941BFE5229ADE67200ECEC23 /* pixman-utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "pixman-utils.c"; sourceTree = "<group>"; };
+		941BFE5329ADE67300ECEC23 /* pixman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pixman.h; sourceTree = "<group>"; };
+		941BFE5429ADE67300ECEC23 /* pixman-region32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "pixman-region32.c"; sourceTree = "<group>"; };
+		941BFE5529ADE67300ECEC23 /* pixman-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "pixman-private.h"; sourceTree = "<group>"; };
 		946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PSMCameraStateWindowController.xib; sourceTree = "<group>"; };
 		946346BC297F5CBF0015BA8F /* PSMCameraStateWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMCameraStateWindowController.h; sourceTree = "<group>"; };
 		946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMCameraStateWindowController.m; sourceTree = "<group>"; };
@@ -212,6 +219,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		941BFE4F29ADE63900ECEC23 /* regions */ = {
+			isa = PBXGroup;
+			children = (
+				941BFE5529ADE67300ECEC23 /* pixman-private.h */,
+				941BFE5029ADE67200ECEC23 /* pixman-region.c */,
+				941BFE5429ADE67300ECEC23 /* pixman-region32.c */,
+				941BFE5229ADE67200ECEC23 /* pixman-utils.c */,
+				941BFE5329ADE67300ECEC23 /* pixman.h */,
+			);
+			path = regions;
+			sourceTree = "<group>";
+		};
 		94747E14297B94F800309752 = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +305,7 @@
 				94A09651299961F900F32385 /* PTZProgressWindowController.xib */,
 				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
 				94747E25297B94F900309752 /* MainMenu.xib */,
+				941BFE4F29ADE63900ECEC23 /* regions */,
 				94C55AB2297CB6A800D8C1DB /* Custom UI */,
 				9463826A29807D8D0015BA8F /* liblibRTSPClient.a */,
 				94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */,
@@ -459,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941BFE5729ADE67300ECEC23 /* pixman-utils.c in Sources */,
 				946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */,
 				94CEBAFB2984934200D3C8DC /* PSMAppPreferencesWindowController.m in Sources */,
 				94747E7A297B9D5A00309752 /* PTZPrefCamera.m in Sources */,
@@ -469,6 +490,7 @@
 				946346CC297F5DE70015BA8F /* NSWindowAdditions.m in Sources */,
 				946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */,
 				94747E61297B971100309752 /* PTZProgressGroup.m in Sources */,
+				941BFE5829ADE67300ECEC23 /* pixman-region32.c in Sources */,
 				946346D0297F60740015BA8F /* PTZStarButtonCell.m in Sources */,
 				940FCB42298F079F008FD02F /* LARSplitViewController.m in Sources */,
 				94CEBB292989B8CE00D3C8DC /* PTZAltKeyButton.m in Sources */,

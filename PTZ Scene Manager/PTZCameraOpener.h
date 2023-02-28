@@ -15,9 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
     VISCACamera_t *_pCamera;
     VISCAInterface_t *_pIface;
 }
-@property dispatch_queue_t cameraQueue;
 
-+ (NSString *)serialPortForDevice:(NSString *)devName;
+@property dispatch_queue_t cameraQueue;
 
 - (void)loadCameraWithCompletionHandler:(PTZDoneBlock)handler;
 - (BOOL)isSerial;
@@ -29,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *cameraIP;
 @property int port;
 
-- (instancetype)initWithCamera:(PTZCamera *)camera hostname:(NSString *)cameraIP port:(int)port;
+- (instancetype)initWithCamera:(PTZCamera *)camera hostname:(NSString *)cameraIP defaultPort:(int)port;
 
 - (void)setCameraIP:(NSString *)cameraIP defaultPort:(int)port;
 

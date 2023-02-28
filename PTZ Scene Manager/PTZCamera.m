@@ -59,8 +59,12 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 @property VISCACamera_t camera;
 
 // Continuous PT has a minimum time it should be allowed to run.
+// This may only apply to registering OSD "buttons".
 @property dispatch_time_t pantilt_stop_time;
 
+@end
+
+@implementation PTZDeviceInfo
 @end
 
 @implementation PTZCamera
@@ -85,11 +89,11 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     return keyPaths;
 }
 
-+ (instancetype)cameraWithDeviceName:(NSString *)devicename isSerial:(BOOL)isSerial {
-    if (isSerial) {
-        return [[self alloc] initWithDeviceName:devicename];
++ (instancetype)cameraWithDeviceInfo:(PTZDeviceInfo *)deviceInfo {
+    if (deviceInfo.isSerial) {
+        return [[self alloc] initWithDeviceName:deviceInfo.usbdevicename];
     } else {
-        return [[self alloc] initWithIP:devicename];
+        return [[self alloc] initWithIP:deviceInfo.ipaddress];
     }
     return nil;
 }
@@ -119,7 +123,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     self = [self init];
     if (self) {
         _deviceName = ipAddr;
-        _cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddr port:_cameraConfig.port];
+        _cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddr defaultPort:_cameraConfig.port];
     }
     return self;
 }
@@ -155,8 +159,17 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 }
 
 - (void)configUSBSnapshot {
-    _useOBSSnapshot = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSnapshot:) name:PSMOBSGetSourceSnapshotNotification object:nil];
+    if (self.useOBSSnapshot == NO) {
+        self.useOBSSnapshot = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSnapshot:) name:PSMOBSGetSourceSnapshotNotification object:nil];
+    }
+}
+
+- (void)cancelUSBSnapshot {
+    if (self.useOBSSnapshot) {
+        self.useOBSSnapshot = NO;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:PSMOBSGetSourceSnapshotNotification object:nil];
+    }
 }
 
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock {
@@ -172,7 +185,12 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         [tcpOpener setCameraIP:ipAddress defaultPort:_cameraConfig.port];
         [self closeAndReload:nil];
     } else {
-        NSLog(@"Attempt to set ipAddress on camera using %@", self.cameraOpener.class.className);
+        [self closeCamera];
+        [self cancelUSBSnapshot];
+        self.cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddress defaultPort:_cameraConfig.port];
+        [self loadCameraWithCompletionHandler:^() {
+            [self callDoneBlock:nil success:self.cameraIsOpen];
+        }];
     }
 }
 
@@ -182,7 +200,12 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         tcpOpener.devicename = devicename;
         [self closeAndReload:nil];
     } else {
-        NSLog(@"Attempt to set ipAddress on camera using %@", self.cameraOpener.class.className);
+        [self closeCamera];
+        self.cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename];
+        [self configUSBSnapshot];
+        [self loadCameraWithCompletionHandler:^() {
+            [self callDoneBlock:nil success:self.cameraIsOpen];
+        }];
     }
 }
 

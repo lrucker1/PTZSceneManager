@@ -21,7 +21,7 @@ Prefs:
    any other notable divergence from Sony, like OSD toggle.
    delay needed between start move and stop, esp for OSD.
 
-Configure cameras: should this all be part of the Camera List UI? Advantage: you can see all the names, because they're the OBS key.
+Configure cameras:
  - set PTZOptics brand or not.
 
 Add Export to PacketSender to this app.
@@ -54,8 +54,16 @@ Progress dialog for snapshot import... actually it's pretty fast. Keep it around
 
 Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams (actually, we could, but more research is needed), it's very optional. OTOH - disconnecting and reconnecting IP is fast. USB takes some time between power on and it actually being available.
 
-Add cameras in Cam Collection.
-Update after IP/USB change.
+ArrayController in CameraList. It's so close. OTOH, it does work.
+Check whether the NSViewController commitEditing actually does work, given that discard works. Also Apply/Revert should turn on once changes happen.
 
 Test importing a second different/overlapping set of cameras.
 
+camlist & prefs window restoration
+
+Clean up delete pref values (after undo is no longer possible)
+
+OBS is paying attention to the USB port address (or tty?), which matters if there are multiple cameras with the same name.
+ Weak link from Camera to PrefCamera
+ Save the tty to prefs, if it can't be opened and there's only one USB device assume it's the same one and update.
+ UI update: OBS obviously is just going to pop up a list of "USB Dev Name", going by what happened when I plugged it into a different port: it showed one grayed-out "USB Dev" and one non-gray. We can probably do better.

@@ -5,6 +5,16 @@
 //  Created by Lee Ann Rucker on 12/30/22.
 //
 
+#import <AVFoundation/AVFoundation.h>
+#include <CoreFoundation/CoreFoundation.h>
+#include <IOKit/IOKitLib.h>
+#include <IOKit/IOCFPlugIn.h>
+#include <IOKit/usb/IOUSBLib.h>
+#include <IOKit/usb/USBSpec.h>
+#include <IOKit/serial/IOSerialKeys.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #import "PTZPrefCamera.h"
 #import "PTZPrefObjectInt.h"
 #import "PTZCamera.h"
@@ -17,6 +27,8 @@ static NSString *PSM_ZoomPlusSpeed = @"zoomPlusSpeed";
 static NSString *PSM_FocusPlusSpeed = @"focusPlusSpeed";
 static NSString *PSM_SceneNamesKey = @"sceneNames";
 NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeNotification";
+
+static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *siblingName);
 
 @interface PTZPrefCamera ()
 @property NSString *camerakey;
@@ -42,6 +54,65 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
        @"showMotionSyncControls":@(YES),
        @"showSharpnessControls":@(YES),
     }];
+}
+
+// Returns the address of the serial port device associated with the given camera device. We assume it is a sibling on the camera's built-in hub.
++ (NSString *)serialPortForDevice:(NSString *)devName {
+    // TODO: Deal with multiple devices.
+    return [[self serialPortsForDeviceName:devName] firstObject];
+}
+
++ (NSArray *)serialPortsForDeviceName:(NSString *)devName {
+    if (devName == nil) {
+        return nil;
+    }
+    // Oh, someone found it for us already.
+    if ([devName hasPrefix:@"/dev/tty"]) {
+       return @[devName];
+    }
+
+    CFMutableDictionaryRef matchingDictionary = NULL;
+    io_iterator_t iterator = 0;
+    NSMutableArray *siblingAddresses = [NSMutableArray array];
+    
+    matchingDictionary = IOServiceNameMatching([devName UTF8String]);
+    // IOServiceGetMatchingServices consumes matchingDictionary
+    if (@available(macOS 12.0, *)) {
+        IOServiceGetMatchingServices(kIOMainPortDefault,
+                                     matchingDictionary, &iterator);
+    } else {
+        // Fallback on earlier versions
+        IOServiceGetMatchingServices(kIOMasterPortDefault,
+                                     matchingDictionary, &iterator);
+    }
+    io_service_t device;
+    while ((device = IOIteratorNext(iterator))) {
+        NSString *siblingAddress = nil;
+        NSMutableArray<NSDictionary *> *array = [NSMutableArray array];
+        io_object_t parent = 0;
+        io_object_t parents = device;
+        CFMutableDictionaryRef dict = NULL;
+        while (siblingAddress == nil && IORegistryEntryGetParentEntry(parents, kIOServicePlane, &parent) == 0)
+        {
+            kern_return_t result = IORegistryEntryCreateCFProperties(parent, &dict, kCFAllocatorDefault, 0);
+            if (!result) {
+                [array addObject:CFBridgingRelease(dict)];
+            }
+            
+            if (parents != device) {
+                IOObjectRelease(parents);
+            }
+            siblingAddress = searchChildrenForSerialAddress(parent, devName);
+            parents = parent;
+        }
+        if (siblingAddress) {
+            [siblingAddresses addObject:siblingAddress];
+        }
+    }
+    
+    IOObjectRelease(iterator);
+    
+    return siblingAddresses;
 }
 
 + (NSString *)generateKey {
@@ -93,9 +164,10 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
         } else {
             _ipAddress = _devicename;
         }
-        // This is a pref value, not dictionary.
+        // This is a dictionary value for new cameras but is stored in prefs.
         if (self.obsSourceName == nil) {
-            self.obsSourceName = _cameraname;
+            NSString *obsSourceName = dict[@"obsSourceName"];
+            self.obsSourceName = obsSourceName ?: _cameraname;
         }
     }
     return self;
@@ -111,7 +183,23 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
 
 - (PTZCamera *)loadCameraIfNeeded {
     if (!self.camera) {
-        self.camera = [PTZCamera cameraWithDeviceName:self.devicename isSerial:self.isSerial];
+//        @interface PTZDeviceInfo : NSObject
+//        @property BOOL isSerial;
+//        @property NSString *usbdevicename;
+//        @property NSString *ttydev;
+//        @property NSString *ipaddress;
+//        @end
+        PTZDeviceInfo *deviceInfo = [PTZDeviceInfo new];
+        deviceInfo.isSerial = self.isSerial;
+        deviceInfo.usbdevicename = self.usbdevicename;
+        deviceInfo.ipaddress = self.ipAddress;
+        if (self.isSerial) {
+            if (self.ttydev == nil) {
+                self.ttydev = [PTZPrefCamera serialPortForDevice:self.usbdevicename];
+            }
+            deviceInfo.ttydev = self.ttydev;
+        }
+        self.camera = [PTZCamera cameraWithDeviceInfo:deviceInfo];
         self.camera.obsSourceName = self.cameraname;
         [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:self queue:nil usingBlock:^(NSNotification * _Nonnull note) {
             NSDictionary *dict = note.userInfo;
@@ -123,12 +211,10 @@ NSString *PSMPrefCameraListDidChangeNotification = @"PSMPrefCameraListDidChangeN
             if ([changedKeys containsObject:@"obsSourceName"]) {
                 self.camera.obsSourceName = self.obsSourceName;
             }
-            if ([changedKeys containsObject:@"isSerial"]) {
-                NSLog(@"Changing device type not supported yet.");
-            } else if ([changedKeys firstObjectCommonWithArray:@[@"ipAddress", @"usbdevicename"]] != nil) {
-                if (self.isSerial && [changedKeys containsObject:@"usbdevicename"]) {
+            if ([changedKeys containsObject:@"isSerial"] || [changedKeys firstObjectCommonWithArray:@[@"ipAddress", @"usbdevicename"]] != nil) {
+                if ([changedKeys containsObject:@"usbdevicename"]) {
                     [self.camera changeUSBDevice:self.usbdevicename];
-                } else if (!self.isSerial && [changedKeys containsObject:@"ipAddress"]) {
+                } else if ([changedKeys containsObject:@"ipAddress"]) {
                     [self.camera changeIPAddress:self.ipAddress];
                 }
             }
@@ -154,6 +240,7 @@ PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
 PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
 
 PREF_VALUE_NSSTRING_ACCESSORS(obsSourceName, ObsSourceName)
+PREF_VALUE_NSSTRING_ACCESSORS(ttydev, Ttydev)
 
 - (NSArray<PTZCameraSceneRange *> *)sceneRangeArray {
     NSData *data = [self prefValueForKey:@"SceneRangeArray"];
@@ -264,3 +351,38 @@ PREF_VALUE_NSSTRING_ACCESSORS(obsSourceName, ObsSourceName)
 }
 
 @end
+
+static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *siblingName) {
+    NSString *result = nil;
+    kern_return_t krc;
+    /*
+     * Children.
+     */
+    io_iterator_t children;
+    krc = IORegistryEntryGetChildIterator(object, kIOServicePlane, &children);
+    BOOL matchedSibling = NO;
+    if (krc == KERN_SUCCESS) {
+        io_object_t child;
+        while (/*result == nil && */(child = IOIteratorNext(children)) != IO_OBJECT_NULL) {
+            CFStringRef bsdName = (CFStringRef)IORegistryEntrySearchCFProperty(child,
+                                                                   kIOServicePlane,
+                                                                   CFSTR( kIODialinDeviceKey ),
+                                                                   kCFAllocatorDefault,
+                                                                   kIORegistryIterateRecursively );
+            if (bsdName != nil) {
+                result = [(NSString *)CFBridgingRelease(bsdName) copy];
+            }
+            CFStringRef productName = (CFStringRef)IORegistryEntrySearchCFProperty(child,
+                                                                   kIOServicePlane,
+                                                                   CFSTR( kUSBProductString ),
+                                                                   kCFAllocatorDefault,
+                                                                   kIORegistryIterateRecursively );
+            if ([siblingName isEqualToString:(__bridge NSString *)productName]) {
+                matchedSibling = YES;
+            }
+            IOObjectRelease(child);
+        }
+        IOObjectRelease(children);
+    }
+    return matchedSibling ? result : nil;
+}

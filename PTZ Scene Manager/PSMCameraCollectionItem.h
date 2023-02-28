@@ -12,17 +12,25 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTZPrefCamera;
 @class PSMCameraCollectionWindowController;
 
-@interface PSMCameraCollectionItem : NSCollectionViewItem <NSControlTextEditingDelegate>
+@interface PSMCameraItem : NSObject
 
 @property PTZPrefCamera *prefCamera;
 @property NSString *cameraname;
 @property NSString *ipaddress;
-@property NSString *devicename;
+@property NSString *usbdevicename;
 @property BOOL isSerial;
 @property NSInteger menuIndex;
+@property NSString *obsSourceName;
+
+- (instancetype)initWithPrefCamera:(PTZPrefCamera *)prefCamera;
+
+@end
+
+@interface PSMCameraCollectionItem : NSCollectionViewItem <NSControlTextEditingDelegate>
+
+@property PSMCameraItem *cameraItem;
 @property NSArray<NSString *> *usbDevices;
 @property NSInteger selectedUSBDevice;
-@property NSString *obsSourceName;
 
 @property IBOutlet NSPopUpButton *usbDeviceButton;
 @property PSMCameraCollectionWindowController *dataSource;

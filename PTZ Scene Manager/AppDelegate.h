@@ -26,6 +26,8 @@ void PTZLog(NSString *format, ...);
 - (PTZPrefCamera *)prefCameraForKey:(NSString *)camerakey;
 
 - (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras;
+- (void)addPrefCameras:(NSArray<PTZPrefCamera*> *)prefCameras;
+- (void)removePrefCameras:(NSArray<PTZPrefCamera *> *)prefCameras;
 
 - (void)changeWindowsItem:(NSWindow *)win
                     title:(NSString *)string

@@ -237,6 +237,10 @@ typedef enum {
     self.sceneCollectionBox.borderColor = [NSColor magentaColor];
 }
 
+- (NSString *)camerakey {
+    return self.prefCamera.camerakey;
+}
+
 - (PTZCamera *)camera {
     return self.prefCamera.camera;
 }

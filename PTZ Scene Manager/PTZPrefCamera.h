@@ -26,8 +26,11 @@ extern NSString *PSMPrefCameraListDidChangeNotification;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
 @property NSInteger menuIndex;
 @property NSString *obsSourceName;
+@property NSString *ttydev;
 
 + (NSArray<PTZPrefCamera *> *)sortedByMenuIndex:(NSArray<PTZPrefCamera *> *)inArray;
+
++ (NSString *)serialPortForDevice:(NSString *)devName;
 
 - (PTZCameraSceneRange*)defaultRange;
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange;

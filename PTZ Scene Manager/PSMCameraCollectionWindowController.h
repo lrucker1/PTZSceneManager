@@ -9,9 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class PSMCameraItem;
+
 @interface PSMCameraCollectionWindowController : NSWindowController <NSCollectionViewDataSource, NSOpenSavePanelDelegate>
 
 - (NSArray *)usbCameraNames;
+- (void)cancelAddCameraItem:(PSMCameraItem *)item;
 
 @end
 

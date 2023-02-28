@@ -48,6 +48,7 @@ extern NSString *PSMOBSVideoSourcesKey;
 @property (readonly) NSArray *currentProgramSourceNames, *currentPreviewSourceNames;
 @property (weak) NSObject<PSMOBSWebSocketDelegate> *delegate;
 @property (readonly) NSArray *videoSourceNames;
+@property (readonly) CGFloat baseWidth, baseHeight;
 
 + (PSMOBSWebSocketController *)defaultController;
 

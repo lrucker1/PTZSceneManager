@@ -323,7 +323,9 @@ NSString *PTZRangeCollectionUpdateNotification = @"PTZRangeCollectionUpdateNotif
 }
 - (BOOL)validateUserInterfaceItem:(NSObject <NSValidatedUserInterfaceItem> *)item {
     if (item.action == @selector(undo:) || item.action == @selector(redo:)) {
-        return [self.wc validateUndoItem:(NSMenuItem *)item];
+        if ([self.wc validateUndoItem:(NSMenuItem *)item]) {
+            return YES;
+        }
     }
     return [super validateUserInterfaceItem:item];
 }
