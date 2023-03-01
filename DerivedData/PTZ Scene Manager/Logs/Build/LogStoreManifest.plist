@@ -1706,6 +1706,40 @@
 			<key>uniqueIdentifier</key>
 			<string>3841623A-0E17-437D-B120-5C5366E9043B</string>
 		</dict>
+		<key>39A48128-74A3-4B11-B922-7829A6EBED77</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>39A48128-74A3-4B11-B922-7829A6EBED77.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>699394182.60727406</real>
+			<key>timeStoppedRecording</key>
+			<real>699394183.35787702</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>39A48128-74A3-4B11-B922-7829A6EBED77</string>
+		</dict>
 		<key>3AB61945-9B49-4CBA-B193-EB93A15A3B18</key>
 		<dict>
 			<key>className</key>
@@ -2283,6 +2317,40 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>6117C17E-D08E-4241-A24C-E4137A8EB83F</string>
+		</dict>
+		<key>611B0D07-B405-4DEE-B6DB-6B22DC26E9DD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>611B0D07-B405-4DEE-B6DB-6B22DC26E9DD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>699394160.56595802</real>
+			<key>timeStoppedRecording</key>
+			<real>699394160.67648995</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>611B0D07-B405-4DEE-B6DB-6B22DC26E9DD</string>
 		</dict>
 		<key>612F8681-48FC-4CCC-AA9E-D23337EC456D</key>
 		<dict>
@@ -2963,6 +3031,40 @@
 			<string>Build PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
 			<string>85E419CD-3412-49CB-A6D2-C75B70A3AC16</string>
+		</dict>
+		<key>89DF820C-9858-441E-94E1-48F729D9B509</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>89DF820C-9858-441E-94E1-48F729D9B509.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>699394153.11254895</real>
+			<key>timeStoppedRecording</key>
+			<real>699394154.21803296</real>
+			<key>title</key>
+			<string>Build PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>89DF820C-9858-441E-94E1-48F729D9B509</string>
 		</dict>
 		<key>8B2FF57F-AB97-403E-A1F1-D669E41C2DA8</key>
 		<dict>

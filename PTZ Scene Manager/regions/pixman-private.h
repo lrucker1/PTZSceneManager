@@ -645,8 +645,6 @@ _pixman_compute_composite_region32 (pixman_region32_t * region,
 				    int32_t             dest_y,
 				    int32_t             width,
 				    int32_t             height);
-uint32_t *
-_pixman_iter_get_scanline_noop (pixman_iter_t *iter, const uint32_t *mask);
 
 /* These "formats" all have depth 0, so they
  * will never clash with any real ones
@@ -774,33 +772,6 @@ PIXMAN_EXPORT pixman_implementation_t *
 _pixman_internal_only_get_implementation (void);
 #endif
 
-/* Memory allocation helpers */
-void *
-pixman_malloc_ab (unsigned int n, unsigned int b);
-
-void *
-pixman_malloc_abc (unsigned int a, unsigned int b, unsigned int c);
-
-pixman_bool_t
-_pixman_multiply_overflows_size (size_t a, size_t b);
-
-pixman_bool_t
-_pixman_multiply_overflows_int (unsigned int a, unsigned int b);
-
-pixman_bool_t
-_pixman_addition_overflows_int (unsigned int a, unsigned int b);
-
-/* Compositing utilities */
-void
-pixman_expand_to_float (argb_t               *dst,
-			const uint32_t       *src,
-			pixman_format_code_t  format,
-			int                   width);
-
-void
-pixman_contract_from_float (uint32_t     *dst,
-			    const argb_t *src,
-			    int           width);
 
 /* Region Helpers */
 pixman_bool_t
@@ -899,9 +870,6 @@ struct pixman_list_t
 #   define SCREEN_SHIFT_RIGHT(x,n)	((x) << (n))
 #endif
 
-
-uint16_t pixman_float_to_unorm (float f, int n_bits);
-float pixman_unorm_to_float (uint16_t u, int n_bits);
 
 /*
  * Various debugging code

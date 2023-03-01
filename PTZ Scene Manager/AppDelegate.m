@@ -12,6 +12,7 @@
 //
 // TCP version of visca: https://github.com/norihiro/libvisca-ip
 // iniparser: https://github.com/ndevilla/iniparser
+// pixman regions: https://github.com/servo/pixman/blob/master/pixman/pixman-region.c
 
 #import "AppDelegate.h"
 #import "PSMSceneWindowController.h"
