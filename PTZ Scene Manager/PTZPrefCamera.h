@@ -16,6 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *PSMPrefCameraListDidChangeNotification;
 
+typedef enum {
+    // See radio button tags.
+    PTZThumbnail_RTSP = 101,
+    PTZThumbnail_OBS = 102,
+    PTZThumbnail_Snapshot = 103
+} PTZThumbnailOptions;
+
 @interface PTZPrefCamera : PTZPrefObject
 @property NSString *cameraname;
 @property NSString *ipAddress;
@@ -30,6 +37,7 @@ extern NSString *PSMPrefCameraListDidChangeNotification;
 
 + (NSArray<PTZPrefCamera *> *)sortedByMenuIndex:(NSArray<PTZPrefCamera *> *)inArray;
 
++ (NSArray *)serialPortsForDeviceName:(NSString *)devName;
 + (NSString *)serialPortForDevice:(NSString *)devName;
 
 - (PTZCameraSceneRange*)defaultRange;
@@ -48,8 +56,11 @@ PREF_VALUE_NSINT_PROPERTIES(firstVisibleScene, FirstVisibleScene)
 PREF_VALUE_NSINT_PROPERTIES(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_PROPERTIES(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_PROPERTIES(maxColumnCount, MaxColumnCount)
+PREF_VALUE_NSINT_PROPERTIES(thumbnailOption, ThumbnailOption)
 
 #undef PREF_VALUE_NSINT_PROPERTIES
+
+- (void)removeTtydev;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryValue;

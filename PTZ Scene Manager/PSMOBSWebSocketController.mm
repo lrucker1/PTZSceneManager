@@ -8,6 +8,7 @@
 // Credit: https://stackoverflow.com/questions/69051106/c-or-c-websocket-client-working-example
 
 #import "PSMOBSWebSocketController.h"
+#import "AppDelegate.h"
 #import "PTZPrefCamera.h"
 #include "easywsclient.hpp"
 #include <iostream>
@@ -24,6 +25,12 @@
 
 #define EPSILON (1.0f)
 #define isCloseEnough(x,y)     (fabs((x) - (y)) <= EPSILON)
+
+#define OBS_ALIGN_CENTER (0)
+#define OBS_ALIGN_LEFT (1 << 0)
+#define OBS_ALIGN_RIGHT (1 << 1)
+#define OBS_ALIGN_TOP (1 << 2)
+#define OBS_ALIGN_BOTTOM (1 << 3)
 
 NSString *PSMOBSCurrentSourceDidChangeNotification = @"PSMOBSCurrentSourceDidChangeNotification";
 NSString *PSMOBSSessionIsReady = @"PSMOBSSessionDidBegin";
@@ -274,7 +281,7 @@ typedef enum {
 }
 
 - (NSString *)jsonGetRequestType:(NSString *)requestType {
-    NSDictionary *dict = @{@"op":@(6),
+    NSDictionary *dict = @{@"op":@(Op_Request),
                            @"d": @{@"requestType": requestType,
                                    @"requestId": self.requestId,
                                    @"requestData": @{}}};
@@ -292,14 +299,14 @@ JSON_GET_REQUEST_TYPE(GetCurrentPreviewScene)
 JSON_GET_REQUEST_TYPE(GetVideoSettings)
 
 - (NSString *)jsonHelloReply {
-    NSDictionary *dict = @{@"op":@(1),
+    NSDictionary *dict = @{@"op":@(Op_Identify),
                            @"d":@{@"rpcVersion":@(1),
                                   @"eventSubscriptions":self.eventSubscriptions}};
     return [self convertToJSON:dict];
 }
 
 - (NSString *)jsonHelloReplyWithAuth:(NSString *)auth {
-    NSDictionary *dict = @{@"op":@(1),
+    NSDictionary *dict = @{@"op":@(Op_Identify),
                            @"d":@{@"rpcVersion":@(1),
                                   @"authentication":auth,
                                   @"eventSubscriptions":self.eventSubscriptions}};
@@ -396,7 +403,7 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
     // options: 1920x1080 (1.777) 960x600 (1.6) 480x300 (1.6)
     // imageWidth: ">= 8, <= 4096"
     imageWidth = MAX(8, MIN(imageWidth, 4096));
-    NSDictionary *dict = @{@"op":@(6),
+    NSDictionary *dict = @{@"op":@(Op_Request),
                            @"d": @{@"requestType": @"GetSourceScreenshot",
                                    @"requestId": requestID,
                                    @"requestData": @{
@@ -407,7 +414,7 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
 }
 
 - (NSString *)jsonGetSceneItemList:(NSString *)sceneName {
-    NSDictionary *dict = @{@"op":@(6),
+    NSDictionary *dict = @{@"op":@(Op_Request),
                            @"d": @{@"requestType": @"GetSceneItemList",
                                    @"requestId": sceneName,
                                    @"requestData": @{
@@ -428,10 +435,10 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
 - (void)handleInputList:(NSDictionary *)responseData {
     NSMutableArray *array = [NSMutableArray array];
     NSArray *inputs = responseData[@"inputs"];
+    // There is no way to tell what's a video source. Just show them all.
     for (NSDictionary *input in inputs) {
         NSString *name = input[@"inputName"];
-        NSString *kind = input[@"inputKind"];
-        if (name && [kind hasPrefix:@"av_capture_input"]) {
+        if (name) {
             [array addObject:name];
         }
     }
@@ -447,25 +454,33 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
 - (void)handleProgramSceneChanged:(NSDictionary *)dict {
     // GetSceneItemList
     self.currentProgramScene = dict[@"sceneName"];
-    [self sendString:[self jsonGetSceneItemList:self.currentProgramScene]];
+    if (self.currentProgramScene != nil) {
+        [self sendString:[self jsonGetSceneItemList:self.currentProgramScene]];
+    }
 }
 
 - (void)handlePreviewSceneChanged:(NSDictionary *)dict {
     // GetSceneItemList
     self.currentPreviewScene = dict[@"sceneName"];
-    [self sendString:[self jsonGetSceneItemList:self.currentPreviewScene]];
+    if (self.currentPreviewScene != nil) {
+        [self sendString:[self jsonGetSceneItemList:self.currentPreviewScene]];
+    }
 }
 
 - (void)handleGetCurrentProgramScene:(NSDictionary *)dict {
     // GetSceneItemList
     self.currentProgramScene = dict[@"currentProgramSceneName"];
-    [self sendString:[self jsonGetSceneItemList:self.currentProgramScene]];
+    if (self.currentProgramScene != nil) {
+        [self sendString:[self jsonGetSceneItemList:self.currentProgramScene]];
+    }
 }
 
 - (void)handleGetCurrentPreviewScene:(NSDictionary *)dict {
     // GetSceneItemList
     self.currentPreviewScene = dict[@"currentPreviewSceneName"];
-    [self sendString:[self jsonGetSceneItemList:self.currentPreviewScene]];
+    if (self.currentPreviewScene != nil) {
+        [self sendString:[self jsonGetSceneItemList:self.currentPreviewScene]];
+    }
 }
 
 - (void)handleGetSceneItemList:(NSDictionary *)dict {
@@ -553,6 +568,53 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
 }
 
 #pragma mark data parsing
+/*
+ {OBS_ALIGN_TOP | OBS_ALIGN_LEFT,
+                        OBS_ALIGN_TOP,
+                        OBS_ALIGN_TOP | OBS_ALIGN_RIGHT,
+                        OBS_ALIGN_LEFT,
+                        OBS_ALIGN_CENTER,
+                        OBS_ALIGN_RIGHT,
+                        OBS_ALIGN_BOTTOM | OBS_ALIGN_LEFT,
+                        OBS_ALIGN_BOTTOM,
+                        OBS_ALIGN_BOTTOM | OBS_ALIGN_RIGHT};
+ */
+
+- (NSRect)adjustRect:(NSRect)rect forAlignment:(NSInteger)alignment {
+    // Top-Left is standard alignment, no offsets.
+    if (alignment == (OBS_ALIGN_TOP | OBS_ALIGN_LEFT)) {
+        return rect;
+    }
+    CGFloat width = NSWidth(rect);
+    CGFloat height = NSHeight(rect);
+    switch (alignment) {
+        case OBS_ALIGN_TOP: // Center Top
+            rect.origin.x -= (width / 2.0);
+            break;
+        case OBS_ALIGN_RIGHT | OBS_ALIGN_TOP:
+            rect.origin.x -= width;
+            break;
+        case OBS_ALIGN_LEFT: // Left Center
+            rect.origin.y -= (height / 2.0);
+            break;
+        case OBS_ALIGN_CENTER:
+            rect.origin.x -= (width / 2.0);
+            rect.origin.y -= (height / 2.0);
+            break;
+        case OBS_ALIGN_RIGHT: // Right Center
+            rect.origin.x -= width;
+            rect.origin.y -= (height / 2.0);
+            break;
+        case OBS_ALIGN_LEFT | OBS_ALIGN_BOTTOM:
+            rect.origin.y -= height;
+            break;
+        case OBS_ALIGN_RIGHT | OBS_ALIGN_BOTTOM:
+            rect.origin.x -= width;
+            rect.origin.y -= height;
+            break;
+    }
+    return rect;
+}
 
 - (NSArray *)visibleSourceItemNames:(NSArray *)sceneItems {
     NSMutableArray *array = [NSMutableArray array];
@@ -562,53 +624,75 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
     pixman_region32_init(&diffRegion);
     pixman_region32_init_rect(&screenRegion, 0, 0, self.baseWidth, self.baseHeight);
 
+    NSArray *sourceNames = [(AppDelegate *)[NSApp delegate] obsSourceNames];
     // Item 0 is at the bottom of the visiblity stack.
     for (NSDictionary *dict in [sceneItems reverseObjectEnumerator]) {
-        if (![dict[@"inputKind"] hasPrefix:@"av_capture_input"]) {
+        NSString *sourceName = dict[@"sourceName"];
+        // Only the cameras we know about. We don't know what inputKinds correspond to cameras.
+        if (![sourceNames containsObject:sourceName]) {
             continue;
         }
         if ([dict[@"sceneItemEnabled"] boolValue] == NO) {
             continue;
         }
         BOOL doesFill = YES;
-        NSDictionary *xform = dict[@"sceneItemTransform"];
-
-        CGFloat height = [xform[@"height"] floatValue];
-        CGFloat width = [xform[@"width"] floatValue];
-        // If we can't test it, assume it fills.
-        if (height > 0 && width > 0 && self.baseWidth > 0 && self.baseHeight > 0) {
-            CGRect testRect = CGRectZero;
-            CGFloat sourceWidth = [xform[@"sourceWidth"] floatValue];
-            CGFloat sourceHeight = [xform[@"sourceHeight"] floatValue];
-            CGFloat positionX = [xform[@"positionX"] floatValue];
-            CGFloat positionY = [xform[@"positionY"] floatValue];
-            if ([xform[@"boundsType"] isEqualToString:@"OBS_BOUNDS_NONE"]) {
-                testRect = CGRectMake(positionX, positionY, width, height);
-            } else {
-                // TODO: This only works with topLeft origin.
-                CGFloat boundsWidth = [xform[@"boundsWidth"] floatValue];
-                CGFloat boundsHeight = [xform[@"boundsHeight"] floatValue];
-                testRect = CGRectMake(positionX, positionY, boundsWidth, boundsHeight);
-            }
-            testRect = NSIntegralRect(testRect);
-            CGFloat testHeight = MIN(sourceHeight, testRect.size.height);
-            CGFloat testWidth = MIN(sourceWidth, testRect.size.width);
-            // Do a simple fill check. If it's wider, it fills
-            doesFill = (testRect.origin.x == 0) && (testRect.origin.x == 0) && isCloseEnough(sourceHeight, testHeight) && isCloseEnough(sourceWidth, testWidth);
-            pixman_region32_union_rect(&region, &region, testRect.origin.x, testRect.origin.y, testRect.size.width, testRect.size.height);
-            pixman_region32_subtract(&diffRegion, &screenRegion, &region);
-            int rects = pixman_region32_n_rects(&diffRegion);
-            if (rects == 0) {
-                // Nothing left after subtracting region from screen.
-                doesFill = YES;
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"CheckCoverage"]) {
+            NSDictionary *xform = dict[@"sceneItemTransform"];
+            
+            // Zero width/height means use the whole screen.
+            CGFloat width = [xform[@"width"] floatValue] ?: self.baseWidth;
+            CGFloat height = [xform[@"height"] floatValue] ?: self.baseHeight;
+            // If we can't test it, assume it fills.
+            if (height > 0 && width > 0) {
+                CGRect testRect = CGRectZero;
+                CGFloat sourceWidth = [xform[@"sourceWidth"] floatValue] ?: self.baseWidth;
+                CGFloat sourceHeight = [xform[@"sourceHeight"] floatValue] ?: self.baseHeight;
+                // PositionXY - absolute position on the screen.
+                CGFloat positionX = [xform[@"positionX"] floatValue];
+                CGFloat positionY = [xform[@"positionY"] floatValue];
+                CGFloat cropLeft = [xform[@"cropLeft"] floatValue];
+                CGFloat cropRight = [xform[@"cropRight"] floatValue];
+                CGFloat cropTop = [xform[@"cropTop"] floatValue];
+                CGFloat cropBottom = [xform[@"cropBottom"] floatValue];
+                if ([xform[@"boundsType"] isEqualToString:@"OBS_BOUNDS_NONE"]) {
+                    testRect = CGRectMake(positionX, positionY, width, height);
+                } else {
+                    // boundsAlignment does not affect the geometry we care about
+                    CGFloat boundsWidth = [xform[@"boundsWidth"] floatValue];
+                    CGFloat boundsHeight = [xform[@"boundsHeight"] floatValue];
+                    testRect = CGRectMake(positionX, positionY, boundsWidth, boundsHeight);
+                }
+                NSInteger alignment = [xform[@"alignment"] intValue];
+                testRect = [self adjustRect:testRect forAlignment:alignment];
+                // crop values only matter in that they change the width/height of what's visible.
+                testRect.size.width -= (cropLeft + cropRight);
+                testRect.size.height -= (cropTop + cropBottom);
+                testRect = NSIntegralRect(testRect);
+                CGFloat testHeight = MIN(sourceHeight, testRect.size.height);
+                CGFloat testWidth = MIN(sourceWidth, testRect.size.width);
+                // Do a simple fill check. If it's wider, it fills
+                doesFill = (testRect.origin.x == 0) && (testRect.origin.x == 0) && isCloseEnough(sourceHeight, testHeight) && isCloseEnough(sourceWidth, testWidth);
+                // OK, now play with regions.
+                if (!doesFill) {
+                    pixman_region32_union_rect(&region, &region, testRect.origin.x, testRect.origin.y, testRect.size.width, testRect.size.height);
+                    pixman_region32_subtract(&diffRegion, &screenRegion, &region);
+                    int rects = pixman_region32_n_rects(&diffRegion);
+                    if (rects == 0) {
+                        // Nothing left after subtracting region from screen.
+                        doesFill = YES;
+                    }
+                }
             }
         }
-        [array addObject:dict[@"sourceName"]];
+        [array addObject:sourceName];
         if (doesFill) {
             // Anything below a source collection that covers the screen is not visible.
-            return array;
+            break;
         }
     }
+    pixman_region32_fini(&diffRegion);
+    pixman_region32_fini(&region);
+    pixman_region32_fini(&screenRegion);
     return array;
 }
 

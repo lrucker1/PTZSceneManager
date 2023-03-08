@@ -44,7 +44,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FMF-dB-8Hv" userLabel="IP Address">
+                            <popUpButton toolTip="Test" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FMF-dB-8Hv" userLabel="IP Address">
                                 <rect key="frame" x="48" y="108" width="66" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="12o-Wz-SIV"/>
@@ -77,14 +77,15 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="-2" name="enabled" keyPath="enableUSBPopup" id="W30-hw-aHJ"/>
                                     <binding destination="-2" name="hidden" keyPath="cameraItem.isSerial" previousBinding="W30-hw-aHJ" id="j5j-eJ-CA1">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="-2" name="selectedIndex" keyPath="selectedUSBDevice" previousBinding="Yl9-Hr-m79" id="9dv-WG-Y8W"/>
-                                    <binding destination="-2" name="contentValues" keyPath="usbDevices" id="Yl9-Hr-m79"/>
+                                    <binding destination="-2" name="contentValues" keyPath="usbDeviceNames" id="ovg-0j-N04"/>
+                                    <binding destination="-2" name="enabled" keyPath="enableUSBPopup" id="W30-hw-aHJ"/>
+                                    <binding destination="-2" name="selectedIndex" keyPath="selectedUSBDevice" id="PIf-dv-wde"/>
+                                    <binding destination="-2" name="toolTip" keyPath="ttyTooltip" id="OBU-7h-i8y"/>
                                 </connections>
                             </popUpButton>
                             <textField identifier="ipaddress" toolTip="'host' or 'host:port'" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dc2-9t-FKQ" userLabel="IP Address field">
@@ -95,12 +96,12 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="-2" name="hidden" keyPath="cameraItem.isSerial" id="1bw-E7-eyh"/>
                                     <binding destination="-2" name="value" keyPath="cameraItem.ipaddress" id="3Sd-kV-f0A">
                                         <dictionary key="options">
                                             <string key="NSNullPlaceholder">0.0.0.0</string>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="-2" name="hidden" keyPath="cameraItem.isSerial" id="1bw-E7-eyh"/>
                                     <outlet property="delegate" destination="-2" id="fce-Ee-fsN"/>
                                 </connections>
                             </textField>
@@ -128,12 +129,12 @@
                                             <integer key="NSNullPlaceholder" value="-1"/>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="-2" name="enabled" keyPath="hasChanges" id="SxF-3M-cYY"/>
                                     <binding destination="-2" name="hidden" keyPath="cameraItem.prefCamera" previousBinding="urg-8e-nSp" id="Qbh-Ak-N9l">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNil</string>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="-2" name="enabled" keyPath="hasChanges" id="SxF-3M-cYY"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QvA-BQ-EDM">
@@ -158,8 +159,8 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="-2" name="contentValues" keyPath="menuShortcuts" id="d8e-xa-qVk"/>
                                     <binding destination="-2" name="selectedIndex" keyPath="cameraItem.menuIndex" previousBinding="d8e-xa-qVk" id="Nr2-ZU-lMN"/>
+                                    <binding destination="-2" name="contentValues" keyPath="menuShortcuts" id="d8e-xa-qVk"/>
                                 </connections>
                             </popUpButton>
                             <comboBox translatesAutoresizingMaskIntoConstraints="NO" id="QQ0-do-42a" userLabel="OBS Source Combo">
@@ -175,8 +176,8 @@
                                     </objectValues>
                                 </comboBoxCell>
                                 <connections>
-                                    <binding destination="-2" name="contentValues" keyPath="videoSourceNames" id="ACz-7p-NpG"/>
                                     <binding destination="-2" name="value" keyPath="cameraItem.obsSourceName" previousBinding="ACz-7p-NpG" id="fav-Uk-49r"/>
+                                    <binding destination="-2" name="contentValues" keyPath="videoSourceNames" id="ACz-7p-NpG"/>
                                 </connections>
                             </comboBox>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BIr-2q-2fZ">
@@ -205,12 +206,12 @@ Gw
                                 </buttonCell>
                                 <connections>
                                     <action selector="revertChanges:" target="-2" id="rTO-cW-t5v"/>
-                                    <binding destination="-2" name="enabled" keyPath="hasChanges" id="ZGo-nf-Qup"/>
                                     <binding destination="-2" name="hidden" keyPath="cameraItem.prefCamera" previousBinding="ZGo-nf-Qup" id="bXW-V7-2qV">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNil</string>
                                         </dictionary>
                                     </binding>
+                                    <binding destination="-2" name="enabled" keyPath="hasChanges" id="ZGo-nf-Qup"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b15-Aw-5WY">
@@ -229,6 +230,31 @@ Gw
                                     </binding>
                                 </connections>
                             </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIw-el-Ssd">
+                                <rect key="frame" x="301" y="105" width="15" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="KFN-qm-WJ0"/>
+                                    <constraint firstAttribute="height" constant="34" id="bni-l1-ejy"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="info.circle" catalog="system" id="L0X-Q8-tU5"/>
+                                <connections>
+                                    <binding destination="-2" name="hidden2" keyPath="ttyTooltip" previousBinding="Zgm-qB-0SV" id="Ybh-xY-w2V">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                            <string key="NSValueTransformerName">NSIsNil</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="-2" name="hidden" keyPath="cameraItem.isSerial" id="Zgm-qB-0SV">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="-2" name="toolTip" keyPath="ttyTooltip" id="o2O-xr-7zi"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dc2-9t-FKQ" firstAttribute="top" secondItem="ekK-KR-xRm" secondAttribute="bottom" constant="10" symbolic="YES" id="0Tl-Gp-qME"/>
@@ -236,11 +262,13 @@ Gw
                             <constraint firstItem="FMF-dB-8Hv" firstAttribute="trailing" secondItem="VYZ-l5-c9F" secondAttribute="trailing" id="1Ud-EA-kvg"/>
                             <constraint firstItem="VYZ-l5-c9F" firstAttribute="trailing" secondItem="Voj-qs-LDQ" secondAttribute="trailing" id="2BO-SB-Hb7"/>
                             <constraint firstItem="BIr-2q-2fZ" firstAttribute="leading" secondItem="Ufn-50-5Op" secondAttribute="leading" constant="20" symbolic="YES" id="4qH-Mz-PXT"/>
+                            <constraint firstAttribute="trailing" secondItem="lIw-el-Ssd" secondAttribute="trailing" id="6Lh-ZY-3R8"/>
                             <constraint firstItem="QQ0-do-42a" firstAttribute="firstBaseline" secondItem="VYZ-l5-c9F" secondAttribute="firstBaseline" id="7yZ-Zu-IEF"/>
                             <constraint firstItem="dc2-9t-FKQ" firstAttribute="trailing" secondItem="ekK-KR-xRm" secondAttribute="trailing" id="8Ko-ge-LVi"/>
                             <constraint firstItem="dc2-9t-FKQ" firstAttribute="leading" secondItem="ekK-KR-xRm" secondAttribute="leading" id="9QK-Q8-mxW"/>
                             <constraint firstItem="QvA-BQ-EDM" firstAttribute="leading" secondItem="VYZ-l5-c9F" secondAttribute="leading" id="AdQ-0o-jam"/>
                             <constraint firstItem="Voj-qs-LDQ" firstAttribute="top" secondItem="Ufn-50-5Op" secondAttribute="top" constant="20" id="Ajp-aQ-lBG"/>
+                            <constraint firstItem="lIw-el-Ssd" firstAttribute="leading" secondItem="lgN-6d-viV" secondAttribute="trailing" constant="2" id="BH5-JF-0jn"/>
                             <constraint firstAttribute="bottom" secondItem="qf7-2z-IKK" secondAttribute="bottom" constant="20" symbolic="YES" id="Bf7-Tj-azd"/>
                             <constraint firstItem="qf7-2z-IKK" firstAttribute="leading" secondItem="YKV-au-eHY" secondAttribute="trailing" constant="12" symbolic="YES" id="DJx-aM-QEM"/>
                             <constraint firstItem="dc2-9t-FKQ" firstAttribute="centerY" secondItem="FMF-dB-8Hv" secondAttribute="centerY" id="F2v-kO-Bbl"/>
@@ -262,6 +290,7 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="ekK-KR-xRm" secondAttribute="trailing" constant="17" id="ens-Oc-p51"/>
                             <constraint firstItem="QQ0-do-42a" firstAttribute="leading" secondItem="VYZ-l5-c9F" secondAttribute="trailing" constant="10" id="fHo-Xd-3Iz"/>
                             <constraint firstItem="b15-Aw-5WY" firstAttribute="top" secondItem="g4X-EH-Db2" secondAttribute="bottom" constant="16" id="gSM-bo-9Me"/>
+                            <constraint firstItem="lIw-el-Ssd" firstAttribute="centerY" secondItem="lgN-6d-viV" secondAttribute="centerY" id="hEp-Lc-gY7"/>
                             <constraint firstItem="VYZ-l5-c9F" firstAttribute="top" secondItem="FMF-dB-8Hv" secondAttribute="bottom" constant="8" symbolic="YES" id="i6c-62-Lvh"/>
                             <constraint firstAttribute="bottom" secondItem="YKV-au-eHY" secondAttribute="bottom" constant="20" symbolic="YES" id="kf6-n2-O30"/>
                             <constraint firstItem="g4X-EH-Db2" firstAttribute="top" secondItem="QQ0-do-42a" secondAttribute="bottom" constant="10" id="lvl-4M-DTc"/>
@@ -289,5 +318,9 @@ Gw
             </constraints>
             <point key="canvasLocation" x="-50" y="89.5"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="6n2-7Y-1IQ"/>
     </objects>
+    <resources>
+        <image name="info.circle" catalog="system" width="15" height="15"/>
+    </resources>
 </document>

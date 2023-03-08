@@ -38,7 +38,7 @@ Also transition effects, like "relative zoom in".
   - alas, even the slowest zoom speed is way too fast.
   - a "record mode", that computes the difference between two scenes and saves just that change? Future.
 Auto sharpness?
-Preset speed?
+Preset speed? Maybe with a "Set" button, so it doesn't override preset.
  - Scene-specific local saves for presetRecall & anything else with no inq.
 Focus lock/unlock - not in Sony?
 PTZ Advanced View:
@@ -52,18 +52,19 @@ PTZ Advanced View:
 Range copy (recall/set) in Camera Scenes. Also range overlap check - intersectsIndexesInRange
 Progress dialog for snapshot import... actually it's pretty fast. Keep it around for when we do range copy.
 
-Observe USB device add/remove for camera scene windows- only if we have one. Although given that we can't do that at all for IP cams (actually, we could, but more research is needed), it's very optional. OTOH - disconnecting and reconnecting IP is fast. USB takes some time between power on and it actually being available.
-
 ArrayController in CameraList. It's so close. OTOH, it does work.
-Check whether the NSViewController commitEditing actually does work, given that discard works. Also Apply/Revert should turn on once changes happen.
+Check whether the NSViewController commitEditing actually does work, given that discard works.
 
 Test importing a second different/overlapping set of cameras.
 
 camlist & prefs window restoration
 
-Clean up delete pref values (after undo is no longer possible)
+Clean up delete pref values on launch? (after undo is no longer possible)
 
-OBS is paying attention to the USB port address (or tty?), which matters if there are multiple cameras with the same name.
- Weak link from Camera to PrefCamera
- Save the tty to prefs, if it can't be opened and there's only one USB device assume it's the same one and update.
- UI update: OBS obviously is just going to pop up a list of "USB Dev Name", going by what happened when I plugged it into a different port: it showed one grayed-out "USB Dev" and one non-gray. We can probably do better.
+Test changing ttydev
+
+Apply All in Camera List. Also normal Add button, and should it be Delete menu item or Remove button?
+
+TODO when I have a real IP cam: optimize the ping timeout.
+
+UI for absolutely disconnected, failed ping, where's my camera. Notification? Overlay window?

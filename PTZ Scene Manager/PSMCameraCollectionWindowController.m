@@ -19,7 +19,7 @@
 @property NSMutableArray<PTZPrefCamera *> *prefCameras;
 @property NSMutableArray<PSMCameraItem *> *cameraItems;
 @property IBOutlet NSCollectionView *collectionView;
-@property NSArray *usbCameraNameArray;
+@property NSArray *usbCameraInfoArray;
 @property PTZProgressGroup *parentProgress;
 @property PTZProgressWindowController *progressWindowController;
 @property NSUndoManager *undoManager;
@@ -28,6 +28,9 @@
 
 @interface PTZPrefCamera ()
 @property NSString *devicename;
+@end
+
+@implementation PSMUSBDeviceItem
 @end
 
 @implementation PSMCameraCollectionWindowController
@@ -76,25 +79,40 @@
 
 - (void)updateUSBCameras  {
     NSMutableArray *array = [NSMutableArray array];
+    NSMutableArray *names = [NSMutableArray array];
     AVCaptureDeviceDiscoverySession *video_discovery = [AVCaptureDeviceDiscoverySession
         discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeExternalUnknown]
                       mediaType:AVMediaTypeVideo
                        position:AVCaptureDevicePositionUnspecified];
     for (AVCaptureDevice *dev in [video_discovery devices]) {
         if (dev.transportType == 'usb ') {
-            [array addObject:dev.localizedName];
+            NSString *name = dev.localizedName;
+            if ([names containsObject:name]) {
+                continue;
+            }
+            [names addObject:name];
+            // Debugging: @[@"/dev/tty.usbserial-130", @"/dev/tty.usbserial-1130"]; //
+            NSArray *ttydevs = [PTZPrefCamera serialPortsForDeviceName:name];
+            NSInteger matchCount = [ttydevs count];
+            for (NSString *ttydev in ttydevs) {
+                PSMUSBDeviceItem *item = [PSMUSBDeviceItem new];
+                item.name = name;
+                item.ttydev = ttydev;
+                item.matchCount = matchCount;
+                [array addObject:item];
+            }
         }
     }
-    [self willChangeValueForKey:@"usbCameraNames"];
-    _usbCameraNameArray = array;
-    [self didChangeValueForKey:@"usbCameraNames"];
+    [self willChangeValueForKey:@"usbCameraInfo"];
+    _usbCameraInfoArray = array;
+    [self didChangeValueForKey:@"usbCameraInfo"];
 }
 
-- (NSArray *)usbCameraNames {
-    if (_usbCameraNameArray == nil) {
+- (NSArray *)usbCameraInfo {
+    if (_usbCameraInfoArray == nil) {
         [self updateUSBCameras];
     }
-    return _usbCameraNameArray;
+    return _usbCameraInfoArray;
 }
 
 #pragma mark import

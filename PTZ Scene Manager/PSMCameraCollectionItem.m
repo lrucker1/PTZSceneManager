@@ -21,6 +21,7 @@ static PSMCameraCollectionItem *selfType;
 @property NSArray *videoSourceNames;
 @property BOOL enableUSBPopup;
 @property BOOL hasEdited;
+@property NSInteger originalUSBDevice;
 
 @end
 
@@ -40,6 +41,7 @@ static PSMCameraCollectionItem *selfType;
         [keyPaths addObject:@"obsSourceName"];
         [keyPaths addObject:@"isSerial"];
         [keyPaths addObject:@"menuIndex"];
+        [keyPaths addObject:@"ttydev"];
    }
    return keyPaths;
 }
@@ -60,6 +62,7 @@ static PSMCameraCollectionItem *selfType;
     self.obsSourceName = _prefCamera.obsSourceName;
     self.usbdevicename = _prefCamera.usbdevicename;
     self.ipaddress = _prefCamera.ipAddress;
+    self.ttydev = _prefCamera.ttydev;
 }
 
 - (BOOL)canAdd {
@@ -78,7 +81,8 @@ static PSMCameraCollectionItem *selfType;
     return    STRING_EQUAL(self.cameraname, self.prefCamera.cameraname) == NO
            || STRING_EQUAL(self.usbdevicename, self.prefCamera.usbdevicename) == NO
            || STRING_EQUAL(self.ipaddress, self.prefCamera.ipAddress) == NO
-           || STRING_EQUAL(self.obsSourceName, self.prefCamera.obsSourceName) == NO;
+           || STRING_EQUAL(self.obsSourceName, self.prefCamera.obsSourceName) == NO
+           || STRING_EQUAL(self.ttydev, self.prefCamera.ttydev) == NO;
 }
 
 - (BOOL)hasChanges {
@@ -92,7 +96,7 @@ static PSMCameraCollectionItem *selfType;
 
 - (NSDictionary *)dictionaryValue {
     NSString *devicename = _isSerial ? _usbdevicename : _ipaddress;
-    return @{@"cameraname":_cameraname, @"devicename":devicename ?: @"", @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex), @"obsSourceName":_obsSourceName ?: @""};
+    return @{@"cameraname":_cameraname, @"devicename":devicename ?: @"", @"cameratype":@(_isSerial), @"menuIndex":@(_menuIndex), @"obsSourceName":_obsSourceName ?: @"", @"ttydev":_ttydev ?: @""};
 }
 
 @end
@@ -106,8 +110,13 @@ static PSMCameraCollectionItem *selfType;
     if ([key isEqualToString:@"hasChanges"]) {
         [keyPaths addObject:@"cameraItem.hasChanges"];
         [keyPaths addObject:@"hasEdited"];
-   }
-   return keyPaths;
+        [keyPaths addObject:@"selectedUSBDevice"];
+    }
+    if ([key isEqualToString:@"ttyTooltip"]) {
+        [keyPaths addObject:@"selectedUSBDevice"];
+        [keyPaths addObject:@"usbDevices"];
+    }
+    return keyPaths;
 }
 
 - (void)viewDidLoad {
@@ -124,7 +133,7 @@ static PSMCameraCollectionItem *selfType;
     self.videoSourceNames = [[PSMOBSWebSocketController defaultController] videoSourceNames];
     [self updateUSBDevices];
     [self addObserver:self
-           forKeyPath:@"dataSource.usbCameraNames"
+           forKeyPath:@"dataSource.usbCameraInfo"
               options:0
               context:&selfType];
     [[NSNotificationCenter defaultCenter] addObserverForName:PSMOBSGetVideoSourceNamesNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
@@ -135,24 +144,46 @@ static PSMCameraCollectionItem *selfType;
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeObserver:self
-              forKeyPath:@"dataSource.usbCameraNames"];
+              forKeyPath:@"dataSource.usbCameraInfo"];
     _dataSource = nil;
 }
 
 - (void)updateUSBDevices {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[[self dataSource] usbCameraNames]];
+    NSMutableArray *cameraInfo = [NSMutableArray arrayWithArray:[[self dataSource] usbCameraInfo]];
+    NSArray *names = [cameraInfo valueForKey:@"name"];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:names];
     //  Disable if no attached devices, even if we have a cached device.
-    self.enableUSBPopup = [array count] > 0;
+    self.enableUSBPopup = [names count] > 0;
     if (self.cameraItem.isSerial && self.cameraItem.usbdevicename != nil) {
-        if (![array containsObject:self.cameraItem.usbdevicename]) {
+        BOOL itemInList = YES;
+        if (![names containsObject:self.cameraItem.usbdevicename]) {
             [array addObject:self.cameraItem.usbdevicename];
+            PSMUSBDeviceItem *item = [PSMUSBDeviceItem new];
+            item.name = self.cameraItem.usbdevicename;
+            item.ttydev = @"";
+            [cameraInfo addObject:item];
+            itemInList = NO; // Don't need to check for dups.
         }
-        self.selectedUSBDevice = [array indexOfObject:self.cameraItem.usbdevicename];
+        NSInteger index = [names indexOfObject:self.cameraItem.usbdevicename];
+        self.originalUSBDevice = (index >= 0) ? index : 0;
+        if (itemInList) {
+            PSMUSBDeviceItem *item = cameraInfo[self.originalUSBDevice];
+            // Multiple devices match the name and we don't have the right one.
+            if (item.matchCount > 1 && [item.ttydev length] > 0 && [self.cameraItem.ttydev length] > 0 && ![item.ttydev isEqualToString:self.cameraItem.ttydev]) {
+                NSArray *ttydevs = [cameraInfo valueForKey:@"ttydev"];
+                index = [ttydevs indexOfObject:self.cameraItem.ttydev];
+                if (index >= 0) {
+                    self.originalUSBDevice = index;
+                }
+            }
+        }
     }
     if ([array count] == 0) {
         [array addObject:NSLocalizedString(@"[No connected devices]", @"No devices on USB Device selection popup")];
     }
-    self.usbDevices = array;
+    self.usbDevices = cameraInfo;
+    self.usbDeviceNames = array;
+    self.selectedUSBDevice = self.originalUSBDevice;
 }
 
 - (void)forceEndEditing:(id)sender {
@@ -182,7 +213,10 @@ static PSMCameraCollectionItem *selfType;
         [self addCamera:sender];
         return;
     }
-    self.cameraItem.usbdevicename = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
+    PSMUSBDeviceItem *item = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
+    self.cameraItem.usbdevicename = item.name;
+    self.cameraItem.ttydev = item.matchCount > 1 ? item.ttydev : @"";
+    self.originalUSBDevice = self.selectedUSBDevice;
 
     NSMutableDictionary *oldValues = [NSMutableDictionary dictionary];
     NSMutableDictionary *newValues = [NSMutableDictionary dictionary];
@@ -200,6 +234,11 @@ static PSMCameraCollectionItem *selfType;
         oldValues[@"usbdevicename"] = prefCamera.usbdevicename;
         newValues[@"usbdevicename"] = self.cameraItem.usbdevicename;
         prefCamera.usbdevicename = self.cameraItem.usbdevicename;
+    };
+    if (![prefCamera.ttydev isEqualToString:self.cameraItem.ttydev]) {
+        oldValues[@"ttydev"] = prefCamera.ttydev;
+        newValues[@"ttydev"] = self.cameraItem.ttydev;
+        prefCamera.ttydev = self.cameraItem.ttydev;
     };
     if (prefCamera.isSerial != self.cameraItem.isSerial) {
         prefCamera.isSerial = self.cameraItem.isSerial;
@@ -231,8 +270,19 @@ static PSMCameraCollectionItem *selfType;
     [self.dataSource cancelAddCameraItem:self.cameraItem];
 }
 
+- (NSString *)ttyTooltip {
+    NSInteger index = self.selectedUSBDevice;
+    if (index >= 0 && index < [self.usbDevices count]) {
+        PSMUSBDeviceItem *item = [self.usbDevices objectAtIndex:index];
+        if (item.matchCount > 1) {
+            return [item ttydev];
+        }
+    }
+    return nil;
+}
+
 - (BOOL)hasChanges {
-    return self.hasEdited || self.cameraItem.hasChanges;
+    return self.hasEdited || self.cameraItem.hasChanges || (self.selectedUSBDevice != self.originalUSBDevice);
 }
 
 - (void)controlTextDidBeginEditing:(NSNotification *)note {
@@ -288,7 +338,7 @@ static PSMCameraCollectionItem *selfType;
                                change:change
                               context:context];
         return;
-    } else {
+    } else if ([keyPath isEqualToString:@"dataSource.usbCameraInfo"]) {
         [self updateUSBDevices];
     }
 }

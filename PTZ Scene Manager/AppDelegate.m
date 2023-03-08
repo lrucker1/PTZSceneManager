@@ -39,6 +39,7 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 @property (strong) PSMAppPreferencesWindowController *prefsController;
 @property (strong) PSMCameraCollectionWindowController *cameraCollectionController;
 @property (strong) NSMutableDictionary<NSString *, PTZPrefCamera *> *mutablePrefCameras;
+@property (readwrite) NSArray *obsSourceNames;
 
 @end
 
@@ -80,6 +81,7 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     // Insert code here to initialize your application
     // Must happen before window restoration.
     [self loadAllCameras];
+    [self syncVideoSources];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -92,6 +94,7 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
         [[PSMOBSWebSocketController defaultController] connectToServer];
     }
     [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self syncVideoSources];
         [self savePrefCameras];
     }];
 }
@@ -302,6 +305,16 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
         [self.mutablePrefCameras removeObjectForKey:prefCamera.camerakey];
     }
     [self savePrefCameras];
+}
+
+- (void)syncVideoSources {
+    NSMutableArray *array = [NSMutableArray array];
+    for (PTZPrefCamera *cam in self.prefCameras) {
+        if (cam.obsSourceName) {
+            [array addObject:cam.obsSourceName];
+        }
+    }
+    self.obsSourceNames = [NSArray arrayWithArray:array];
 }
 
 - (void)savePrefCameras {

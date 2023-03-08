@@ -23,6 +23,8 @@
 @property IBOutlet NSImageView *imageView;
 @property RTSPPlayer *video;
 @property NSTimer *timer;
+@property NSString *videoURLString;
+@property BOOL ended;
 @property BOOL paused;
 @property BOOL hidden;
 @property dispatch_queue_t videoQueue;
@@ -44,10 +46,16 @@
     // DEBUG urlString = @"rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4";
     NSString *name = [NSString stringWithFormat:@"cameraQueue_0x%p", self];
     _videoQueue = dispatch_queue_create([name UTF8String], NULL);
+    self.videoURLString = urlString;
+    [self startVideo:doneBlock];
+}
+
+- (void)startVideo:(void (^)(BOOL))doneBlock {
     NSSize size = self.imageView.frame.size;
     dispatch_async(_videoQueue, ^{
-        self.video = [[RTSPPlayer alloc] initWithVideo:urlString usesTcp:YES];
+        self.video = [[RTSPPlayer alloc] initWithVideo:self.videoURLString usesTcp:YES];
         if (self.video != nil) {
+            self.ended = NO;
             self.video.outputWidth = size.width;
             self.video.outputHeight = size.height;
             [self.video seekTime:0.0];
@@ -63,6 +71,10 @@
     });
 }
 
+- (BOOL)hasVideo {
+    return self.video != nil;
+}
+
 - (void)timerUpdate:(NSTimer *)timer {
     NSSize size = self.imageView.frame.size;
     dispatch_async(self.videoQueue, ^{
@@ -72,7 +84,7 @@
         if (![self.video stepFrame]) {
             [timer invalidate];
             self.timer = nil;
-            self.paused = YES;
+            self.ended = YES;
             return;
         }
         if (!self.paused) {
@@ -109,7 +121,9 @@
 }
 
 - (void)toggleVideoPaused {
-    if (self.paused) {
+    if (self.ended) {
+        [self startVideo:nil];
+    } else if (self.paused) {
         [self resumeVideo];
     } else {
         [self pauseVideo];
@@ -128,10 +142,12 @@
 
 - (BOOL)validateTogglePaused:(NSMenuItem *)menu {
     BOOL hasVideo = (self.video != nil);
-    if (self.paused && hasVideo) {
+    if (self.ended) {
+        menu.title = NSLocalizedString(@"Restart Video", @"Restart video menu item");
+    } else if (self.paused && hasVideo) {
         menu.title = NSLocalizedString(@"Resume Video", @"Resume video menu item");
     } else {
-        menu.title = NSLocalizedString(@"Pause Video", @"Resume video menu item");
+        menu.title = NSLocalizedString(@"Pause Video", @"Pause video menu item");
     }
     return hasVideo;
 }

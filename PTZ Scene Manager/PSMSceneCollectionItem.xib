@@ -36,7 +36,7 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystem"/>
                             </buttonCell>
-                            <color key="bezelColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="bezelColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <connections>
                                 <action selector="sceneRecall:" target="-2" id="HnM-WQ-46G"/>
                                 <binding destination="-2" name="image" keyPath="image" id="0sE-nL-mb2"/>

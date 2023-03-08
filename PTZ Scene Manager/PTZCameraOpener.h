@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *ttydev;
 @property NSString *devicename;
 
-- (instancetype)initWithCamera:(PTZCamera *)camera devicename:(NSString *)devicename;
+- (instancetype)initWithCamera:(PTZCamera *)camera devicename:(NSString *)devicename ttydev:(NSString *)ttydev;
 
 @end
 

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pauseVideo;
 - (void)resumeVideo;
 - (void)toggleVideoPaused;
+- (BOOL)hasVideo;
 
 - (BOOL)validateTogglePaused:(NSMenuItem *)menu;
 

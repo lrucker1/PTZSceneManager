@@ -16,7 +16,7 @@
 		940FCC592992F0A3008FD02F /* PSMCameraCollectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 940FCC572992F0A3008FD02F /* PSMCameraCollectionItem.m */; };
 		940FCC5A2992F0A3008FD02F /* PSMCameraCollectionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 940FCC582992F0A3008FD02F /* PSMCameraCollectionItem.xib */; };
 		941BFE5729ADE67300ECEC23 /* pixman-utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 941BFE5229ADE67200ECEC23 /* pixman-utils.c */; };
-		941BFE5829ADE67300ECEC23 /* pixman-region32.c in Sources */ = {isa = PBXBuildFile; fileRef = 941BFE5429ADE67300ECEC23 /* pixman-region32.c */; };
+		941BFE5829ADE67300ECEC23 /* pixman-region32.c in Sources */ = {isa = PBXBuildFile; fileRef = 941BFE5429ADE67300ECEC23 /* pixman-region32.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
 		946346BB297F5C860015BA8F /* PSMCameraStateWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946346BA297F5C860015BA8F /* PSMCameraStateWindowController.xib */; };
 		946346BE297F5CBF0015BA8F /* PSMCameraStateWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BD297F5CBF0015BA8F /* PSMCameraStateWindowController.m */; };
 		946346C1297F5D000015BA8F /* PTZCameraStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 946346BF297F5D000015BA8F /* PTZCameraStateViewController.m */; };
@@ -234,11 +234,11 @@
 		94747E14297B94F800309752 = {
 			isa = PBXGroup;
 			children = (
-				94747E57297B96A000309752 /* libvisca.h */,
 				94890D5E29809BE0006EAB75 /* .gitignore */,
 				94747E1F297B94F800309752 /* PTZ Scene Manager */,
-				94747E1E297B94F800309752 /* Products */,
 				94747E35297B952A00309752 /* Frameworks */,
+				94747E57297B96A000309752 /* libvisca.h */,
+				94747E1E297B94F800309752 /* Products */,
 			);
 			sourceTree = "<group>";
 		};

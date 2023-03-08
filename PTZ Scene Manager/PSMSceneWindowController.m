@@ -56,6 +56,7 @@ typedef enum {
 @property (strong) PSMCameraStateWindowController *cameraStateWindowController;
 @property IBOutlet RTSPViewController *rtspViewController;
 @property BOOL showStaticSnapshot;
+@property BOOL showSceneSnapshotOnly;
 @property IBOutlet NSBox *cameraBox;
 @property IBOutlet NSBox *sceneCollectionBox;
 @property NSColor *boxColor;
@@ -108,19 +109,7 @@ typedef enum {
         [self.window.toolbar setConfigurationFromDictionary: toolbarConfig];
     }
 
-    // Don't show static snapshots until we know whether we'll have a video.
-    if (self.camera.isSerial) {
-        // No live view, but we can get snapshots from OBS and save them.
-        self.showStaticSnapshot = YES;
-    } else {
-        [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.deviceName] onDone:^(BOOL success) {
-            self.showStaticSnapshot = (success == NO);
-            if (self.showStaticSnapshot && self.lastRecalledItem != nil) {
-                // Picked up anything we missed.
-                [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
-            }
-        }];
-    }
+    [self updateThumbnailContent];
     [self manageObservers:YES];
     [super awakeFromNib];
 }
@@ -136,6 +125,7 @@ typedef enum {
                       @"prefCamera.lastVisibleScene",
                       @"prefCamera.cameraname",
                       @"prefCamera.menuIndex",
+                      @"prefCamera.thumbnailOption",
                       @"lastRecalledItem"];
     if (add) {
         for (NSString *key in keys) {
@@ -168,10 +158,13 @@ typedef enum {
     [self loadCamera:NO];
     self.boxColor = self.cameraBox.borderColor;
     self.collectionColors = self.collectionView.backgroundColors;
+    [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [self updateActiveIndicators];
+    }];
     [[NSNotificationCenter defaultCenter] addObserverForName:PSMOBSCurrentSourceDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         [self updateActiveIndicators];
     }];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSessionDidEnd:) name:PSMOBSSessionDidEnd object:nil];
     if ([[PSMOBSWebSocketController defaultController] connected]) {
         [self onOBSSessionDidBegin:nil];
     } else {
@@ -194,6 +187,37 @@ typedef enum {
     }
 }
 
+- (void)updateThumbnailContent {
+    // Don't show static snapshots until we know whether we'll have a video.
+    NSInteger option = self.prefCamera.thumbnailOption;
+    if (self.camera.isSerial || option != PTZThumbnail_RTSP) {
+        // Turn it off if it was on.
+        [self.rtspViewController pauseVideo];
+        // No live view, but we can get snapshots from OBS and save them.
+        self.showStaticSnapshot = YES;
+        self.showSceneSnapshotOnly = (option == PTZThumbnail_Snapshot);
+        if (self.showSceneSnapshotOnly) {
+            [self stopTimer];
+        }
+        [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
+    } else {
+        [self stopTimer];
+        if ([self.rtspViewController hasVideo]) {
+            [self.rtspViewController resumeVideo];
+        } else {
+            // Try RTSP. If it fails we show snapshots.
+            [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.deviceName] onDone:^(BOOL success) {
+                self.showStaticSnapshot = (success == NO);
+                if (self.showStaticSnapshot && self.lastRecalledItem != nil) {
+                    // Assume they want updates if they want video.
+                    self.showSceneSnapshotOnly = NO;
+                    // Pick up anything we missed.
+                    [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
+                }
+            }];
+        }
+    }
+}
 
 - (void)updateActiveIndicators {
     PTZVideoMode mode = PTZVideoOff;
@@ -205,14 +229,14 @@ typedef enum {
         mode = PTZVideoPreview;
     }
     if (mode == PTZVideoProgram) {
-        self.cameraBox.borderColor = [NSColor systemRedColor];
-        self.sceneCollectionBox.borderColor = [NSColor systemRedColor];
-        NSColor *bgRed = [[NSColor systemPinkColor] blendedColorWithFraction:0.75 ofColor:[NSColor whiteColor]];
+        self.cameraBox.borderColor = [NSColor systemPinkColor];
+        self.sceneCollectionBox.borderColor = [NSColor systemPinkColor];
+        NSColor *bgRed = [[NSColor systemPinkColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
         self.collectionView.backgroundColors = @[bgRed];
     } else if (mode == PTZVideoPreview) {
         self.cameraBox.borderColor = [NSColor systemGreenColor];
         self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
-        NSColor *bgGreen = [[NSColor systemGreenColor] blendedColorWithFraction:0.75 ofColor:[NSColor whiteColor]];
+        NSColor *bgGreen = [[NSColor systemGreenColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
         self.collectionView.backgroundColors = @[bgGreen];
     } else {
         self.cameraBox.borderColor = self.boxColor;
@@ -336,7 +360,7 @@ typedef enum {
 }
 
 - (void)startTimer {
-    if (self.showStaticSnapshot && self.timer == nil) {
+    if (self.showStaticSnapshot && self.timer == nil && !self.showSceneSnapshotOnly) {
         if (self.timerQueue == nil) {
             NSString *name = [NSString stringWithFormat:@"timerQueue_0x%p", self];
             self.timerQueue = dispatch_queue_create([name UTF8String], NULL);
@@ -557,7 +581,7 @@ typedef enum {
             break;
     }
     [self.camera applyPanTiltRelativePosition:params onDone:^(BOOL success) {
-        if (success) {
+        if (success && self.timer != nil) {
             [self fetchStaticSnapshot];
         }
     }];
@@ -873,6 +897,8 @@ typedef enum {
         }
     } else if ([keyPath isEqualToString:@"prefCamera.cameraname"] || [keyPath isEqualToString:@"prefCamera.menuIndex"]) {
         [self.appDelegate changeWindowsItem:self.window title:self.prefCamera.cameraname menuShortcut:self.prefCamera.menuIndex];
+    } else if ([keyPath isEqualToString:@"prefCamera.thumbnailOption"]) {
+        [self updateThumbnailContent];
     }
 }
 

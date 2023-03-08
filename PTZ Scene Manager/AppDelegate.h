@@ -17,6 +17,7 @@ void PTZLog(NSString *format, ...);
 @interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate, NSWindowRestoration>
 
 @property BOOL canEditSceneNames;
+@property (readonly) NSArray *obsSourceNames;
 
 - (NSString *)applicationSupportDirectory;
 - (NSString *)snapshotsDirectory;

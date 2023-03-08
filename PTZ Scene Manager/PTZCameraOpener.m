@@ -9,9 +9,13 @@
 #import "PTZCameraInt.h"
 #import "PTZPrefCamera.h"
 
+@interface PTZCameraOpener ()
+
+@property PTZPrefCamera *prefCamera;
+
+@end
 
 @implementation PTZCameraOpener
-
 
 - (instancetype)initWithCamera:(PTZCamera *)camera {
     self = [super init];
@@ -19,6 +23,7 @@
         _pCamera = [camera pCamera];
         _pIface = [camera pIface];
         _cameraQueue = camera.cameraQueue;
+        _prefCamera = camera.prefCamera;
     }
     return self;
 }
@@ -76,10 +81,11 @@
 
 @implementation PTZCameraOpener_Serial
 
-- (instancetype)initWithCamera:(PTZCamera *)camera devicename:(NSString *)devicename {
+- (instancetype)initWithCamera:(PTZCamera *)camera devicename:(NSString *)devicename ttydev:(NSString *)ttydev {
     self = [super initWithCamera:camera];
     if (self) {
         _devicename = devicename;
+        _ttydev = ttydev;
     }
     return self;
 }
@@ -89,8 +95,10 @@
 }
 
 - (void)loadCameraWithCompletionHandler:(PTZDoneBlock)handler {
-    if (self.ttydev == nil) {
+    BOOL didLookup = NO;
+    if ([self.ttydev length] == 0) {
         self.ttydev = [PTZPrefCamera serialPortForDevice:self.devicename];
+        didLookup = YES;
     }
     if (self.ttydev == nil) {
         if (handler) {
@@ -102,6 +110,23 @@
     }
     dispatch_async(self.cameraQueue, ^{
         BOOL success = (VISCA_open_serial(self->_pIface, [self.ttydev UTF8String]) == VISCA_SUCCESS);
+        if (!success && !didLookup) {
+            // Maybe it changed.
+            // Clear the prefs because it's wrong. If there's only one, this will make us do a lookup every time, which is the right thing to do. If there are multiple the user has to fix it.
+            [self.prefCamera removeTtydev];
+            NSArray *ttydevs = [PTZPrefCamera serialPortsForDeviceName:self.devicename];
+            if ([ttydevs count] == 1) {
+                // If there are multiple matches the user has to fix it. This is for the more common case of having one camera and not caring about which port it's in.
+                NSString *ttydev = [ttydevs firstObject];
+                if (![ttydev isEqualToString:self.ttydev]) {
+                    BOOL retry = (VISCA_open_serial(self->_pIface, [self.ttydev UTF8String]) == VISCA_SUCCESS);
+                    if (retry) {
+                        success = YES;
+                        self.ttydev = ttydev;
+                    }
+                }
+            }
+        }
         if (success) {
             int camera_num;
             self->_pIface->broadcast = 0;

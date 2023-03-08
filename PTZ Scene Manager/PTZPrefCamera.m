@@ -53,6 +53,7 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
        @"showAutofocusControls":@(YES),
        @"showMotionSyncControls":@(YES),
        @"showSharpnessControls":@(YES),
+       @"thumbnailOption":@(PTZThumbnail_RTSP)
     }];
 }
 
@@ -73,7 +74,7 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
 
     CFMutableDictionaryRef matchingDictionary = NULL;
     io_iterator_t iterator = 0;
-    NSMutableArray *siblingAddresses = [NSMutableArray array];
+    NSMutableSet *siblingAddresses = [NSMutableSet set];
     
     matchingDictionary = IOServiceNameMatching([devName UTF8String]);
     // IOServiceGetMatchingServices consumes matchingDictionary
@@ -112,7 +113,7 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
     
     IOObjectRelease(iterator);
     
-    return siblingAddresses;
+    return [siblingAddresses allObjects];
 }
 
 + (NSString *)generateKey {
@@ -161,6 +162,10 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
         _isSerial = [dict[@"cameratype"] boolValue];
         if (_isSerial) {
             _usbdevicename = _devicename;
+            // Dictionary value in CameraCollection, pref value otherwise.
+            if (dict[@"ttydev"]) {
+                self.ttydev = dict[@"ttydev"];
+            }
         } else {
             _ipAddress = _devicename;
         }
@@ -199,21 +204,21 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
             }
             deviceInfo.ttydev = self.ttydev;
         }
-        self.camera = [PTZCamera cameraWithDeviceInfo:deviceInfo];
+        self.camera = [PTZCamera cameraWithDeviceInfo:deviceInfo prefCamera:self];
         self.camera.obsSourceName = self.cameraname;
         [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:self queue:nil usingBlock:^(NSNotification * _Nonnull note) {
             NSDictionary *dict = note.userInfo;
             NSDictionary *newValues = dict[NSKeyValueChangeNewKey];
-            // obsSourceName affects OSB connection.
+            // obsSourceName affects OSB connection and hot camera indicators.
             // isSerial changes cameraOpener
-            // usbdevicename or ipAddress without isSerial just needs a reopen
+            // usbdevicename, ttydev or ipAddress without isSerial just needs a reopen
             NSArray *changedKeys = [newValues allKeys];
             if ([changedKeys containsObject:@"obsSourceName"]) {
                 self.camera.obsSourceName = self.obsSourceName;
             }
-            if ([changedKeys containsObject:@"isSerial"] || [changedKeys firstObjectCommonWithArray:@[@"ipAddress", @"usbdevicename"]] != nil) {
-                if ([changedKeys containsObject:@"usbdevicename"]) {
-                    [self.camera changeUSBDevice:self.usbdevicename];
+            if ([changedKeys containsObject:@"isSerial"] || [changedKeys firstObjectCommonWithArray:@[@"ipAddress", @"usbdevicename", @"ttydev"]] != nil) {
+                if ([changedKeys containsObject:@"usbdevicename"] || [changedKeys containsObject:@"ttydev"]) {
+                    [self.camera changeUSBDevice:self.usbdevicename ttydev:self.ttydev];
                 } else if ([changedKeys containsObject:@"ipAddress"]) {
                     [self.camera changeIPAddress:self.ipAddress];
                 }
@@ -234,6 +239,7 @@ PREF_VALUE_NSINT_ACCESSORS(firstVisibleScene, FirstVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
+PREF_VALUE_NSINT_ACCESSORS(thumbnailOption, ThumbnailOption)
 
 PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
 PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)

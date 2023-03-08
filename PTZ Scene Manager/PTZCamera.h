@@ -86,7 +86,7 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSIntege
 @interface PTZCamera : NSObject
 
 @property (weak) NSObject<PTZCameraWBModeDelegate> *delegate;
-@property (weak) PTZPrefCamera *prefCameras;
+@property (weak) PTZPrefCamera *prefCamera;
 
 // Video
 @property PTZVideoMode videoMode;
@@ -134,13 +134,13 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSIntege
 @property VISCAInterface_t iface;
 @property (readonly) int port;
 
-+ (instancetype)cameraWithDeviceInfo:(PTZDeviceInfo *)deviceInfo;
++ (instancetype)cameraWithDeviceInfo:(PTZDeviceInfo *)deviceInfo prefCamera:(PTZPrefCamera *)prefCamera;
 
 - (BOOL)isSerial;
 
 - (void)closeCamera;
 - (void)changeIPAddress:(NSString *)ipAddress;
-- (void)changeUSBDevice:(NSString *)devicename;
+- (void)changeUSBDevice:(NSString *)devicename ttydev:(NSString *)ttydev ;
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock;
 
 - (void)applyPantiltPresetSpeed:(PTZDoneBlock _Nullable)doneBlock;

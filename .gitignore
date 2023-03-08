@@ -25,6 +25,7 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+LogStoreManifest.plist
 
 ### Xcode Patch ###
 *.xcodeproj/*

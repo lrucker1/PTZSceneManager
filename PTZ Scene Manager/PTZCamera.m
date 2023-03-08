@@ -9,6 +9,7 @@
 #import "PTZCamera.h"
 #import "PTZCameraInt.h"
 #import "PTZCameraConfig.h"
+#import "PTZPrefCamera.h"
 #import "PTZProgressGroup.h"
 #import "PTZCameraOpener.h"
 #import "PSMOBSWebSocketController.h"
@@ -62,6 +63,8 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 // This may only apply to registering OSD "buttons".
 @property dispatch_time_t pantilt_stop_time;
 
+@property NSTimer *pingTimer;
+
 @end
 
 @implementation PTZDeviceInfo
@@ -89,11 +92,11 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     return keyPaths;
 }
 
-+ (instancetype)cameraWithDeviceInfo:(PTZDeviceInfo *)deviceInfo {
++ (instancetype)cameraWithDeviceInfo:(PTZDeviceInfo *)deviceInfo prefCamera:(PTZPrefCamera *)prefCamera {
     if (deviceInfo.isSerial) {
-        return [[self alloc] initWithDeviceName:deviceInfo.usbdevicename];
+        return [[self alloc] initWithPrefCamera:(PTZPrefCamera *)prefCamera deviceName:deviceInfo.usbdevicename ttydev:deviceInfo.ttydev];
     } else {
-        return [[self alloc] initWithIP:deviceInfo.ipaddress];
+        return [[self alloc] initWithPrefCamera:(PTZPrefCamera *)prefCamera IP:deviceInfo.ipaddress];
     }
     return nil;
 }
@@ -119,20 +122,22 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     return self;
 }
 
-- (instancetype)initWithIP:(NSString *)ipAddr {
+- (instancetype)initWithPrefCamera:(PTZPrefCamera *)prefCamera IP:(NSString *)ipAddr {
     self = [self init];
     if (self) {
+        _prefCamera = prefCamera;
         _deviceName = ipAddr;
         _cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddr defaultPort:_cameraConfig.port];
     }
     return self;
 }
 
-- (instancetype)initWithDeviceName:(NSString *)devicename {
+- (instancetype)initWithPrefCamera:(PTZPrefCamera *)prefCamera deviceName:(NSString *)devicename ttydev:(NSString *)ttydev {
     self = [self init];
     if (self) {
+        _prefCamera = prefCamera;
         _deviceName = devicename;
-        _cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename];
+        _cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename ttydev:ttydev];
         [self configUSBSnapshot];
     }
     return self;
@@ -175,7 +180,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock {
     [self closeCamera];
     [self loadCameraWithCompletionHandler:^() {
-        [self callDoneBlock:doneBlock success:self.cameraIsOpen];
+        [self cameraConnected:doneBlock success:self.cameraIsOpen];
     }];
 }
 
@@ -189,22 +194,23 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         [self cancelUSBSnapshot];
         self.cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddress defaultPort:_cameraConfig.port];
         [self loadCameraWithCompletionHandler:^() {
-            [self callDoneBlock:nil success:self.cameraIsOpen];
+            [self cameraConnected:nil success:self.cameraIsOpen];
         }];
     }
 }
 
-- (void)changeUSBDevice:(NSString *)devicename {
+- (void)changeUSBDevice:(NSString *)devicename ttydev:(NSString *)ttydev {
     if ([self.cameraOpener isKindOfClass:PTZCameraOpener_Serial.class]) {
-        PTZCameraOpener_Serial *tcpOpener = (PTZCameraOpener_Serial *)self.cameraOpener;
-        tcpOpener.devicename = devicename;
+        PTZCameraOpener_Serial *serialOpener = (PTZCameraOpener_Serial *)self.cameraOpener;
+        serialOpener.devicename = devicename;
+        serialOpener.ttydev = ttydev;
         [self closeAndReload:nil];
     } else {
         [self closeCamera];
-        self.cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename];
+        self.cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename ttydev:ttydev];
         [self configUSBSnapshot];
         [self loadCameraWithCompletionHandler:^() {
-            [self callDoneBlock:nil success:self.cameraIsOpen];
+            [self cameraConnected:nil success:self.cameraIsOpen];
         }];
     }
 }
@@ -219,6 +225,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         self.connectingBusy = NO;
         if (success) {
             self.cameraIsOpen = YES;
+            [self pingCamera];
         }
         handler();
     }];
@@ -234,7 +241,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)applyPantiltPresetSpeed:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -247,7 +254,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)applyPantiltAbsolutePosition:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         self.recallBusy = YES;
@@ -267,7 +274,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     }
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         self.recallBusy = YES;
@@ -300,7 +307,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         self.recallBusy = YES;
@@ -323,7 +330,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)applyZoom:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -348,7 +355,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startZoomIn:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -364,7 +371,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startZoomOut:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -380,7 +387,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startZoomInWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -396,7 +403,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startZoomOutWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -433,7 +440,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startFocusFar:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -450,7 +457,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startFocusNear:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -467,7 +474,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startFocusFarWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -484,7 +491,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)startFocusNearWithSpeed:(NSInteger)speed onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -501,7 +508,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)applyFocusMode:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -521,7 +528,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)_selector:(PTZDoneBlock _Nullable)doneBlock {   \
     [self loadCameraWithCompletionHandler:^() {         \
         if (!self.cameraIsOpen) {                       \
-            [self callDoneBlock:doneBlock success:NO];  \
+            [self connectionFailed:doneBlock];          \
             return;                                     \
         }                                               \
         dispatch_async(self.cameraQueue, ^{             \
@@ -546,7 +553,7 @@ SIMPLE_VISCA_FN_CALL(osdMenuReturn, VISCA_set_datascreen_return)
 - (void)applyFocusValue:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -783,7 +790,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)applyWBModeValues:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -797,7 +804,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)applyExposureModeValues:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -807,7 +814,34 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     }];
 }
 
+- (void)connectionFailed:(PTZDoneBlock)doneBlock {
+    if (doneBlock) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            doneBlock(NO);
+        });
+    }
+}
+
+- (void)cameraConnected:(PTZDoneBlock)doneBlock success:(BOOL)success {
+    if (success) {
+        [self pingCamera];
+    }
+    if (doneBlock) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            doneBlock(success);
+        });
+    }
+}
+
 - (void)callDoneBlock:(PTZDoneBlock)doneBlock success:(BOOL)success {
+    if (success == NO) {
+        if (_iface.errortype == VISCA_READ_FAILURE) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.cameraIsOpen = NO;
+            });
+        }
+    }
+    [self pingCamera];
     if (doneBlock) {
         dispatch_async(dispatch_get_main_queue(), ^{
             doneBlock(success);
@@ -818,16 +852,14 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)callDoneBlock:(PTZDoneBlock)doneBlock success:(BOOL)success recallBusy:(BOOL)recallBusy {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.recallBusy = recallBusy;
-        if (doneBlock) {
-            doneBlock(success);
-        }
     });
+    [self callDoneBlock:doneBlock success:success];
 }
 
 - (void)memoryRecall:(NSInteger)scene onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         self.recallBusy = YES;
@@ -857,7 +889,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)memorySet:(NSInteger)scene onDone:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -897,7 +929,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)toggleOSDMenu:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -913,7 +945,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)closeOSDMenu:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -980,7 +1012,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         self.progress.cancellable = YES;
         self.progress.completedUnitCount = 1;
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -1090,7 +1122,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)updateAutofocusState:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -1109,7 +1141,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)updateCameraState:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -1240,7 +1272,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)updateExposureModeValues:(BOOL)applyToAll onDone:(PTZDoneBlock _Nullable)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
@@ -1444,12 +1476,64 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)applyImageCameraValues:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
-            [self callDoneBlock:doneBlock success:NO];
+            [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
             BOOL success = [self unchecked_visca_set_image_values];
             [self callDoneBlock:doneBlock success:success];
+        });
+    }];
+}
+
+#pragma mark ping
+
+- (void)pingCamera {
+    // Timer has to run on main.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self reallyPingCamera];
+    });
+}
+
+- (void)reloadCameraOnFailedPing {
+    // Main queue for the cameraIsOpen setter, because it may show in UI.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"Reloading camera %@ after failed ping", self.prefCamera.cameraname);
+        self.cameraIsOpen = NO;
+        [self loadCameraWithCompletionHandler:^() {
+            if (self.cameraIsOpen) {
+                [self pingCamera];
+            } else {
+                NSLog(@"Lost camera connection");
+            };
+        }];
+    });
+}
+
+// We want a ping timeout low enough that the camera never times out, so we never try to send a command that will fail. Alternately we could rewrite the whole thing to retry commands sent to dead sockets.
+#define PING_TIMEOUT 60
+
+- (void)reallyPingCamera {
+    if (self.isSerial) {
+        // Serial devices don't timeout.
+        return;
+    }
+    if (!self.cameraIsOpen) {
+        [self reloadCameraOnFailedPing];
+        return;
+    }
+    // pingCamera resets every time it's called, so the timer will only fire after we've been idle for longer than the timeout.
+    if (self.pingTimer) {
+        [self.pingTimer invalidate];
+    }
+    self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:PING_TIMEOUT repeats:NO block:^(NSTimer * _Nonnull timer) {
+        dispatch_async(self.cameraQueue, ^{
+            uint8_t exposureMode;
+            if (VISCA_get_auto_exp_mode(&self->_iface, &self->_camera, &exposureMode) == VISCA_SUCCESS) {
+                [self pingCamera];
+            } else if (self->_iface.errortype == VISCA_READ_FAILURE) {
+                [self reloadCameraOnFailedPing];
+            }
         });
     }];
 }

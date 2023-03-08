@@ -76,6 +76,7 @@ typedef enum _ExposureModes {
 @property IBOutlet NSButton *sceneRangeMapButton;
 @property IBOutlet LARIndexSetVisualizerView *sceneRangeMapView;
 @property IBOutlet NSPopover *sceneRangeMapPopover;
+@property IBOutlet NSView *thumbnailRadioGroupView;
 
 @end
 
@@ -104,6 +105,7 @@ typedef enum _ExposureModes {
     [self loadLocalWBPrefs];
     [self loadLocalExposurePrefs];
     [self loadSceneRangeFromPrefs];
+    [self updateThumbnailRadioButtons];
     self.outlineData = [[PTZOutlineViewDictionary alloc]
                         initWithDictionary:@{}
                                      target:self
@@ -949,6 +951,7 @@ MAKE_CAN_SET_METHOD(FlipH)
 MAKE_CAN_SET_METHOD(FlipV)
 MAKE_CAN_SET_METHOD(BWMode)
 
+// TODO: Go through PrefCamera. Or rewrite. Or both.
 - (IBAction)saveLocalImagePrefs:(id)sender {
     // This may be a menu item.
     NSWindow *window = self.view.window;
@@ -1091,6 +1094,26 @@ MAKE_CAN_SET_METHOD(BWMode)
                              ofView:sender
                       preferredEdge:NSMaxYEdge];
     }
+}
+
+#pragma mark camera thumbnail
+
+- (void)updateThumbnailRadioButtons {
+    NSInteger option = self.prefCamera.thumbnailOption;
+    if (option < PTZThumbnail_OBS || option > PTZThumbnail_Snapshot) {
+        // Not set.
+        return;
+    }
+    NSView *tagView = [self.thumbnailRadioGroupView viewWithTag:option];
+    if (tagView.tag == option) {
+        NSButton *button = (NSButton *)tagView;
+        button.state = NSControlStateValueOn;
+    }
+}
+
+- (IBAction)doChooseThumbnailSource:(id)sender {
+    NSButton *button = (NSButton *)sender;
+    self.prefCamera.thumbnailOption = button.tag;
 }
 
 #pragma mark KVO
