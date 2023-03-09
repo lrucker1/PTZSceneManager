@@ -17,23 +17,31 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *PSMPrefCameraListDidChangeNotification;
 
 typedef enum {
-    // See radio button tags.
+    // See radio button tags. We might have HTML in the future.
     PTZThumbnail_RTSP = 101,
-    PTZThumbnail_OBS = 102,
-    PTZThumbnail_Snapshot = 103
+    PTZThumbnail_Snapshot = 102,
 } PTZThumbnailOptions;
+
+typedef enum {
+    // See radio button tags. Gets turned into useOBSSnapshot.
+    PTZSnapshot_Camera = 101,
+    PTZSnapshot_OBS = 102,
+} PTZSnapshotOptions;
 
 @interface PTZPrefCamera : PTZPrefObject
 @property NSString *cameraname;
 @property NSString *ipAddress;
 @property NSString *usbdevicename;
 @property BOOL isSerial;
+@property BOOL useOBSSnapshot;
 @property (readonly) NSString *camerakey;
 @property (readonly, strong) PTZCamera *camera;
 @property NSArray<PTZCameraSceneRange *> *sceneRangeArray;
 @property NSInteger menuIndex;
 @property NSString *obsSourceName;
 @property NSString *ttydev;
+@property NSString *rtspURL;
+@property NSString *snapshotURL;
 
 + (NSArray<PTZPrefCamera *> *)sortedByMenuIndex:(NSArray<PTZPrefCamera *> *)inArray;
 

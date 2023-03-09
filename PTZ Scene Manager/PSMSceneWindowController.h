@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchStaticSnapshot;
 - (void)updateStaticSnapshot:(NSImage *)image;
+- (void)updateVisibleValues;
 
 @end
 

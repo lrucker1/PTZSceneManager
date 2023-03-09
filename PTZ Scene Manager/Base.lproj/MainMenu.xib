@@ -387,6 +387,15 @@
                                     <action selector="toggleControlVisibilityFromKey:" target="-1" id="ZVo-If-PoL"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Show Preset Recall Controls" id="XhZ-Xa-cYm">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="representedObject" value="showPresetRecallControls"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="toggleControlVisibilityFromKey:" target="-1" id="44x-cX-LYn"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="BpZ-Bq-1XP"/>
                             <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>

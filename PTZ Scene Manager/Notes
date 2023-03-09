@@ -68,3 +68,5 @@ Apply All in Camera List. Also normal Add button, and should it be Delete menu i
 TODO when I have a real IP cam: optimize the ping timeout.
 
 UI for absolutely disconnected, failed ping, where's my camera. Notification? Overlay window?
+
+Camera name on pulled-off OSDremote

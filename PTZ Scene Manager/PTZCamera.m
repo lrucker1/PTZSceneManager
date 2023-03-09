@@ -16,6 +16,8 @@
 #import "AppDelegate.h"
 #import "libvisca.h"
 
+static PTZCamera *selfType;
+
 const NSString *PTZProgressStartKey = @"PTZProgressStart";
 const NSString *PTZProgressEndKey = @"PTZProgressEnd";
 
@@ -128,6 +130,8 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         _prefCamera = prefCamera;
         _deviceName = ipAddr;
         _cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddr defaultPort:_cameraConfig.port];
+        [self manageObservers:YES];
+        [self configSnapshotOptions:NO];
     }
     return self;
 }
@@ -138,16 +142,35 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         _prefCamera = prefCamera;
         _deviceName = devicename;
         _cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename ttydev:ttydev];
-        [self configUSBSnapshot];
+        [self manageObservers:YES];
+        [self configSnapshotOptions:YES];
     }
     return self;
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self manageObservers:NO];
     if (_cameraIsOpen) {
         VISCA_close(&_iface);
         _cameraIsOpen = NO;
+    }
+}
+
+- (void)manageObservers:(BOOL)add {
+    NSArray *keys = @[@"prefCamera.useOBSSnapshot"];
+    if (add) {
+        for (NSString *key in keys) {
+            [self addObserver:self
+                   forKeyPath:key
+                      options:0
+                      context:&selfType];
+        }
+    } else {
+        for (NSString *key in keys) {
+            [self removeObserver:self
+                      forKeyPath:key];
+        }
     }
 }
 
@@ -163,15 +186,13 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     return self.cameraOpener.isSerial;
 }
 
-- (void)configUSBSnapshot {
-    if (self.useOBSSnapshot == NO) {
-        self.useOBSSnapshot = YES;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSnapshot:) name:PSMOBSGetSourceSnapshotNotification object:nil];
-    }
-}
-
-- (void)cancelUSBSnapshot {
-    if (self.useOBSSnapshot) {
+- (void)configSnapshotOptions:(BOOL)forceOn {
+    if (forceOn || self.prefCamera.useOBSSnapshot) {
+        if (self.useOBSSnapshot == NO) {
+            self.useOBSSnapshot = YES;
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onOBSSnapshot:) name:PSMOBSGetSourceSnapshotNotification object:nil];
+        }
+    } else if (self.useOBSSnapshot) {
         self.useOBSSnapshot = NO;
         [[NSNotificationCenter defaultCenter] removeObserver:self name:PSMOBSGetSourceSnapshotNotification object:nil];
     }
@@ -191,7 +212,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         [self closeAndReload:nil];
     } else {
         [self closeCamera];
-        [self cancelUSBSnapshot];
+        [self configSnapshotOptions:NO];
         self.cameraOpener = [[PTZCameraOpener_TCP alloc] initWithCamera:self hostname:ipAddress defaultPort:_cameraConfig.port];
         [self loadCameraWithCompletionHandler:^() {
             [self cameraConnected:nil success:self.cameraIsOpen];
@@ -208,7 +229,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     } else {
         [self closeCamera];
         self.cameraOpener = [[PTZCameraOpener_Serial alloc] initWithCamera:self devicename:devicename ttydev:ttydev];
-        [self configUSBSnapshot];
+        [self configSnapshotOptions:YES];
         [self loadCameraWithCompletionHandler:^() {
             [self cameraConnected:nil success:self.cameraIsOpen];
         }];
@@ -836,7 +857,8 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)callDoneBlock:(PTZDoneBlock)doneBlock success:(BOOL)success {
     if (success == NO) {
         if (_iface.errortype == VISCA_READ_FAILURE) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{\
+                NSLog(@"Camera %@ disconnected", self.prefCamera.cameraname);
                 self.cameraIsOpen = NO;
             });
         }
@@ -1054,7 +1076,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 }
 
 - (void)fetchSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
-    // If IP fails we switch to OBS and retry. If OBS fails that's the end.
+    // If IP fails we retry with OBS. If OBS fails that's the end.
     // Never retry an OBS failure with IP, that way lies infinite loops.
     if (self.useOBSSnapshot) {
         [self fetchOBSSnapshotAtIndex:index onDone:doneBlock];
@@ -1092,10 +1114,11 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
                     doneBlock(data, index);
                 });
             }
-        } else {
+        } else if (index >= 0) {
             NSLog(@"Failed to get snapshot: trying OBS %@", error);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self configUSBSnapshot];
+                // Go directly to OBS, do not make a permanent change. http can be slow.
+                // Only do it for preset snapshots; slightly stale navigation snapshots are OK.
                 [self fetchOBSSnapshotAtIndex:index onDone:doneBlock];
             });
         }
@@ -1538,7 +1561,26 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     }];
 }
 
+#pragma mark KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+   if (context != &selfType) {
+      [super observeValueForKeyPath:keyPath
+                           ofObject:object
+                             change:change
+                            context:context];
+   } else if ([keyPath isEqualToString:@"prefCamera.useOBSSnapshot"]) {
+       [self configSnapshotOptions:self.isSerial];
+   }
+}
+
 @end
+
+#pragma mark backup restore
 
 void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t fromOffset, uint32_t toOffset, uint32_t length, uint32_t delaySecs, PTZCamera *ptzCamera, PTZDoneBlock doneBlock)
 {

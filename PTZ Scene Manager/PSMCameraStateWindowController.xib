@@ -1500,9 +1500,8 @@
                                                                         <rect key="frame" x="8" y="0.0" width="148" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
                                                                                 <rect key="frame" x="0.0" y="4" width="148" height="16"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="dSX-MG-wNY">
                                                                                     <font key="font" usesAppearanceFont="YES"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1514,6 +1513,11 @@
                                                                                 </connections>
                                                                             </textField>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="nms-GU-rPm" firstAttribute="centerX" secondItem="ptq-5l-6nG" secondAttribute="centerX" id="IN8-cb-MbB"/>
+                                                                            <constraint firstItem="nms-GU-rPm" firstAttribute="centerY" secondItem="ptq-5l-6nG" secondAttribute="centerY" id="Oz5-xu-1Fl"/>
+                                                                            <constraint firstItem="nms-GU-rPm" firstAttribute="leading" secondItem="ptq-5l-6nG" secondAttribute="leading" constant="2" id="bAn-0k-FAr"/>
+                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="textField" destination="nms-GU-rPm" id="lrg-og-wsQ"/>
                                                                         </connections>
@@ -1539,9 +1543,8 @@
                                                                         <rect key="frame" x="173" y="0.0" width="80" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
                                                                                 <rect key="frame" x="0.0" y="4" width="80" height="16"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="rzz-ma-CM2">
                                                                                     <font key="font" usesAppearanceFont="YES"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1552,6 +1555,11 @@
                                                                                 </connections>
                                                                             </textField>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="XgV-4t-owk" firstAttribute="centerY" secondItem="9pH-cA-Dad" secondAttribute="centerY" id="HgI-MN-z3A"/>
+                                                                            <constraint firstItem="XgV-4t-owk" firstAttribute="leading" secondItem="9pH-cA-Dad" secondAttribute="leading" constant="2" id="Lt8-5D-vtk"/>
+                                                                            <constraint firstItem="XgV-4t-owk" firstAttribute="centerX" secondItem="9pH-cA-Dad" secondAttribute="centerX" id="iq0-ex-S3k"/>
+                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="textField" destination="XgV-4t-owk" id="l7w-bz-WQl"/>
                                                                         </connections>
@@ -2217,36 +2225,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="390"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T0K-MA-PCR">
-                                            <rect key="frame" x="18" y="110" width="208" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Static scene snapshot image URL" id="KhD-3P-eQs">
-                                                <font key="font" usesAppearanceFont="YES"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="135-0s-9QB">
-                                            <rect key="frame" x="32" y="81" width="348" height="21"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="S0x-hg-Jwn">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-Ni-W5j">
-                                            <rect key="frame" x="18" y="354" width="166" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Camera preview content:" id="Urj-cz-SfF">
+                                            <rect key="frame" x="18" y="354" width="159" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Camera preview images" id="Urj-cz-SfF">
                                                 <font key="font" metaFont="systemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="M8B-4P-3hL" userLabel="Thumbnail Group View">
-                                            <rect key="frame" x="34" y="143" width="346" height="115"/>
+                                            <rect key="frame" x="34" y="203" width="346" height="93"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" tag="102" translatesAutoresizingMaskIntoConstraints="NO" id="Ixa-IV-ZaJ">
-                                                    <rect key="frame" x="-2" y="21" width="206" height="18"/>
-                                                    <buttonCell key="cell" type="radio" title="Fetch static images from OBS" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C74-yO-AEQ">
+                                                    <rect key="frame" x="-2" y="-1" width="166" height="18"/>
+                                                    <buttonCell key="cell" type="radio" title="Show snapshot images" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C74-yO-AEQ">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
@@ -2254,18 +2246,8 @@
                                                         <action selector="doChooseThumbnailSource:" target="MdI-N0-20y" id="9i2-fK-esG"/>
                                                     </connections>
                                                 </button>
-                                                <button verticalHuggingPriority="750" tag="103" translatesAutoresizingMaskIntoConstraints="NO" id="twz-pq-ur0">
-                                                    <rect key="frame" x="-2" y="-1" width="203" height="18"/>
-                                                    <buttonCell key="cell" type="radio" title="Always show scene snapshot" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="spj-Qw-8FB">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="doChooseThumbnailSource:" target="MdI-N0-20y" id="4kC-gO-0hU"/>
-                                                    </connections>
-                                                </button>
-                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBH-u3-oo6">
-                                                    <rect key="frame" x="33" y="46" width="313" height="21"/>
+                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBH-u3-oo6" userLabel="RTSP URL Field">
+                                                    <rect key="frame" x="33" y="24" width="313" height="21"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="s0m-fz-RpF">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2277,25 +2259,30 @@
                                                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                             </dictionary>
                                                         </binding>
+                                                        <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.rtspURL" id="abg-rW-yrG">
+                                                            <dictionary key="options">
+                                                                <string key="NSNullPlaceholder">rtsp://[ipaddress]:554/1</string>
+                                                            </dictionary>
+                                                        </binding>
                                                     </connections>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nx6-BL-AuQ">
-                                                    <rect key="frame" x="19" y="75" width="103" height="16"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="RTSP video URL" id="Vh3-ap-kri">
+                                                    <rect key="frame" x="19" y="53" width="107" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="RTSP video URL:" id="Vh3-ap-kri">
                                                         <font key="font" usesAppearanceFont="YES"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                     <connections>
-                                                        <binding destination="MdI-N0-20y" name="enabled" keyPath="prefCamera.isSerial" id="BOQ-am-AoH">
+                                                        <binding destination="MdI-N0-20y" name="textColor" keyPath="prefCamera.isSerial" id="BQv-bM-S3e">
                                                             <dictionary key="options">
-                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                <string key="NSValueTransformerName">NSColorFromNegatedEnabledState</string>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
                                                 </textField>
                                                 <button verticalHuggingPriority="750" tag="101" translatesAutoresizingMaskIntoConstraints="NO" id="UHf-Mr-T9R">
-                                                    <rect key="frame" x="-2" y="98" width="214" height="18"/>
+                                                    <rect key="frame" x="-2" y="76" width="214" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Show RTSP live camera stream" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="fJb-Ln-ziP">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -2314,50 +2301,124 @@
                                                 <constraint firstItem="Ixa-IV-ZaJ" firstAttribute="top" secondItem="MBH-u3-oo6" secondAttribute="bottom" constant="8" symbolic="YES" id="5aB-mA-r8M"/>
                                                 <constraint firstItem="Nx6-BL-AuQ" firstAttribute="top" secondItem="UHf-Mr-T9R" secondAttribute="bottom" constant="8" symbolic="YES" id="7PZ-Yi-RHV"/>
                                                 <constraint firstItem="UHf-Mr-T9R" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" id="CFr-Xr-6eo"/>
-                                                <constraint firstAttribute="bottom" secondItem="twz-pq-ur0" secondAttribute="bottom" id="Fwc-tA-wue"/>
                                                 <constraint firstItem="MBH-u3-oo6" firstAttribute="top" secondItem="Nx6-BL-AuQ" secondAttribute="bottom" constant="8" symbolic="YES" id="KUW-A7-lq8"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ixa-IV-ZaJ" secondAttribute="bottom" id="LLl-Di-nT1"/>
                                                 <constraint firstAttribute="trailing" secondItem="MBH-u3-oo6" secondAttribute="trailing" id="MMa-7a-BI6"/>
                                                 <constraint firstItem="MBH-u3-oo6" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" constant="33" id="To9-rG-ZPP"/>
-                                                <constraint firstItem="twz-pq-ur0" firstAttribute="top" secondItem="Ixa-IV-ZaJ" secondAttribute="bottom" constant="6" symbolic="YES" id="ZRt-jD-2xh"/>
                                                 <constraint firstItem="Ixa-IV-ZaJ" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" id="jNK-vT-mtg"/>
-                                                <constraint firstItem="twz-pq-ur0" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" id="oii-rK-upc"/>
                                                 <constraint firstItem="UHf-Mr-T9R" firstAttribute="top" secondItem="M8B-4P-3hL" secondAttribute="top" id="piO-4u-7ie"/>
                                                 <constraint firstItem="Nx6-BL-AuQ" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" constant="21" id="uC6-JY-TkJ"/>
                                             </constraints>
                                         </customView>
-                                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Syc-CA-49F">
-                                            <rect key="frame" x="20" y="132" width="360" height="5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="4B3-tk-20i"/>
-                                            </constraints>
-                                        </box>
                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZWb-TB-yAQ">
-                                            <rect key="frame" x="32" y="266" width="350" height="80"/>
-                                            <textFieldCell key="cell" selectable="YES" id="bLt-m4-wjE">
-                                                <font key="font" metaFont="system"/>
-                                                <string key="title">Choose the contents for the camera preview in the navigation panel. The preview can show a live RTSP stream if your camera supports it, fetch static images from OBS that are updated when controlling the camera, or always show the static scene snapshot.</string>
+                                            <rect key="frame" x="32" y="304" width="350" height="42"/>
+                                            <textFieldCell key="cell" controlSize="small" selectable="YES" id="bLt-m4-wjE">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <string key="title">Choose the contents for the camera preview in the navigation panel. The preview can show a live RTSP stream if your camera supports it, or fetch static images from OBS or your camera.</string>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="ozz-RQ-OUd">
+                                            <rect key="frame" x="34" y="89" width="346" height="93"/>
+                                            <subviews>
+                                                <button verticalHuggingPriority="750" tag="101" translatesAutoresizingMaskIntoConstraints="NO" id="twz-pq-ur0">
+                                                    <rect key="frame" x="-2" y="76" width="205" height="18"/>
+                                                    <buttonCell key="cell" type="radio" title="Use camera snapshot images" bezelStyle="regularSquare" imagePosition="left" inset="2" id="spj-Qw-8FB">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="doChooseSnapshotSource:" target="MdI-N0-20y" id="VhQ-WD-lim"/>
+                                                        <binding destination="MdI-N0-20y" name="enabled" keyPath="prefCamera.isSerial" id="VA6-A0-HEj">
+                                                            <dictionary key="options">
+                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </button>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B7n-Kq-6Q2">
+                                                    <rect key="frame" x="19" y="53" width="143" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Camera snapshot URL:" id="hL2-Gy-wsd">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="MdI-N0-20y" name="textColor" keyPath="prefCamera.isSerial" id="Zuj-P8-dWf">
+                                                            <dictionary key="options">
+                                                                <string key="NSValueTransformerName">NSColorFromNegatedEnabledState</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </textField>
+                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="135-0s-9QB" userLabel="Snapshot URL Field">
+                                                    <rect key="frame" x="33" y="24" width="313" height="21"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="S0x-hg-Jwn">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <connections>
+                                                        <binding destination="MdI-N0-20y" name="enabled" keyPath="prefCamera.isSerial" id="O18-Eu-ARQ">
+                                                            <dictionary key="options">
+                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                        <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.snapshotURL" id="W5d-0N-9YO">
+                                                            <dictionary key="options">
+                                                                <string key="NSNullPlaceholder">http://[ipaddress]:80/snapshot.jpg</string>
+                                                            </dictionary>
+                                                        </binding>
+                                                    </connections>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" tag="102" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-JT-mvI">
+                                                    <rect key="frame" x="-2" y="-1" width="187" height="18"/>
+                                                    <buttonCell key="cell" type="radio" title="Use OBS snapshot images" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Vr7-UF-z2k">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="doChooseSnapshotSource:" target="MdI-N0-20y" id="4D2-HF-U6e"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="B7n-Kq-6Q2" firstAttribute="leading" secondItem="ozz-RQ-OUd" secondAttribute="leading" constant="21" id="34C-D0-HLu"/>
+                                                <constraint firstItem="135-0s-9QB" firstAttribute="top" secondItem="B7n-Kq-6Q2" secondAttribute="bottom" constant="8" symbolic="YES" id="3ex-2j-ZnS"/>
+                                                <constraint firstItem="aSL-JT-mvI" firstAttribute="top" secondItem="135-0s-9QB" secondAttribute="bottom" constant="8" symbolic="YES" id="9P9-Cw-ByN"/>
+                                                <constraint firstAttribute="trailing" secondItem="135-0s-9QB" secondAttribute="trailing" id="9iB-qx-Lfc"/>
+                                                <constraint firstItem="twz-pq-ur0" firstAttribute="leading" secondItem="ozz-RQ-OUd" secondAttribute="leading" id="B9a-Eb-Iuw"/>
+                                                <constraint firstItem="B7n-Kq-6Q2" firstAttribute="top" secondItem="twz-pq-ur0" secondAttribute="bottom" constant="8" symbolic="YES" id="IfA-U5-fGZ"/>
+                                                <constraint firstItem="135-0s-9QB" firstAttribute="leading" secondItem="ozz-RQ-OUd" secondAttribute="leading" constant="33" id="Kmv-HD-QXV"/>
+                                                <constraint firstAttribute="bottom" secondItem="aSL-JT-mvI" secondAttribute="bottom" id="Pf3-IO-b0V"/>
+                                                <constraint firstItem="aSL-JT-mvI" firstAttribute="leading" secondItem="ozz-RQ-OUd" secondAttribute="leading" id="jfm-kB-5LR"/>
+                                                <constraint firstItem="twz-pq-ur0" firstAttribute="top" secondItem="ozz-RQ-OUd" secondAttribute="top" id="nmk-7I-rWG"/>
+                                                <constraint firstItem="135-0s-9QB" firstAttribute="top" secondItem="B7n-Kq-6Q2" secondAttribute="bottom" constant="8" symbolic="YES" id="re3-us-csJ"/>
+                                            </constraints>
+                                        </customView>
+                                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="V4s-G8-eZb">
+                                            <rect key="frame" x="20" y="190" width="360" height="5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="xA6-I9-M7F"/>
+                                            </constraints>
+                                        </box>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Syc-CA-49F" firstAttribute="top" secondItem="M8B-4P-3hL" secondAttribute="bottom" constant="8" symbolic="YES" id="4Zf-Xx-91k"/>
+                                        <constraint firstItem="V4s-G8-eZb" firstAttribute="top" secondItem="M8B-4P-3hL" secondAttribute="bottom" constant="10" id="6OI-zh-Uuc"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="trailing" secondItem="ZWb-TB-yAQ" secondAttribute="trailing" id="DHm-hM-MTH"/>
-                                        <constraint firstAttribute="trailing" secondItem="135-0s-9QB" secondAttribute="trailing" constant="20" symbolic="YES" id="EaB-gZ-O60"/>
-                                        <constraint firstItem="135-0s-9QB" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="32" id="G5X-zV-bIu"/>
-                                        <constraint firstItem="T0K-MA-PCR" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="20" symbolic="YES" id="Gj9-vj-Try"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="leading" secondItem="ZWb-TB-yAQ" secondAttribute="leading" id="Icw-kD-C8S"/>
-                                        <constraint firstItem="T0K-MA-PCR" firstAttribute="top" secondItem="Syc-CA-49F" secondAttribute="bottom" constant="8" symbolic="YES" id="OYl-96-x6P"/>
+                                        <constraint firstItem="V4s-G8-eZb" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="20" symbolic="YES" id="LPc-U0-tRS"/>
                                         <constraint firstAttribute="trailing" secondItem="M8B-4P-3hL" secondAttribute="trailing" constant="20" symbolic="YES" id="POB-5x-Y2q"/>
-                                        <constraint firstAttribute="trailing" secondItem="Syc-CA-49F" secondAttribute="trailing" constant="20" symbolic="YES" id="UrC-6A-dEg"/>
+                                        <constraint firstItem="ozz-RQ-OUd" firstAttribute="trailing" secondItem="M8B-4P-3hL" secondAttribute="trailing" id="Q2R-6Z-HD2"/>
+                                        <constraint firstAttribute="trailing" secondItem="V4s-G8-eZb" secondAttribute="trailing" constant="20" symbolic="YES" id="RqB-aM-MBz"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="top" secondItem="ZWb-TB-yAQ" secondAttribute="bottom" constant="8" symbolic="YES" id="cOh-1r-oXj"/>
-                                        <constraint firstItem="Syc-CA-49F" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="20" symbolic="YES" id="gC0-vX-vRd"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="34" id="iUs-Bw-0kA"/>
                                         <constraint firstItem="qaQ-Ni-W5j" firstAttribute="top" secondItem="HZ1-c5-V6S" secondAttribute="top" constant="20" symbolic="YES" id="nsn-8c-9Hw"/>
                                         <constraint firstItem="qaQ-Ni-W5j" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="20" symbolic="YES" id="ohP-zp-yS5"/>
                                         <constraint firstItem="ZWb-TB-yAQ" firstAttribute="top" secondItem="qaQ-Ni-W5j" secondAttribute="bottom" constant="8" symbolic="YES" id="sjD-QE-59d"/>
-                                        <constraint firstItem="135-0s-9QB" firstAttribute="top" secondItem="T0K-MA-PCR" secondAttribute="bottom" constant="8" symbolic="YES" id="xIq-Mp-CRn"/>
+                                        <constraint firstItem="ozz-RQ-OUd" firstAttribute="top" secondItem="V4s-G8-eZb" secondAttribute="bottom" constant="10" id="v5y-bv-CuQ"/>
+                                        <constraint firstItem="ozz-RQ-OUd" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" id="xoe-WF-73j"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -2406,9 +2467,7 @@
                             <action selector="switchToTab:" target="MdI-N0-20y" id="7H5-MF-DQq"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C4A7C0FA-86C2-4989-B806-247F5CE9D7FE" explicitItemIdentifier="tabVideo" label="Video" paletteLabel="Video" tag="-1" bordered="YES" id="8yp-ZG-ZeQ">
-                        <size key="minSize" width="24" height="25"/>
-                        <size key="maxSize" width="24" height="25"/>
+                    <toolbarItem implicitItemIdentifier="C4A7C0FA-86C2-4989-B806-247F5CE9D7FE" explicitItemIdentifier="tabVideo" label="Video" paletteLabel="Video" tag="-1" image="film" bordered="YES" sizingBehavior="auto" id="8yp-ZG-ZeQ">
                         <connections>
                             <action selector="switchToTab:" target="MdI-N0-20y" id="5Lf-Bs-jrx"/>
                         </connections>
@@ -2444,6 +2503,7 @@
                 <outlet property="sceneRangeMapPopover" destination="GTB-AQ-Lnv" id="Cwf-af-CGc"/>
                 <outlet property="sceneRangeMapView" destination="GSb-50-KSc" id="fwa-cp-lsV"/>
                 <outlet property="sceneRangeTableView" destination="lXZ-xj-42m" id="q8K-5y-FWo"/>
+                <outlet property="snapshotRadioGroupView" destination="ozz-RQ-OUd" id="Tvn-N3-bza"/>
                 <outlet property="tabView" destination="41s-gU-oQx" id="cKt-Xv-hYj"/>
                 <outlet property="thumbnailRadioGroupView" destination="M8B-4P-3hL" id="36z-yw-VsQ"/>
                 <outlet property="view" destination="I7c-h6-brQ" id="qqA-Nd-6eo"/>
@@ -2519,6 +2579,7 @@
         <image name="checkmark.circle.fill" catalog="system" width="20" height="20"/>
         <image name="colortemp" width="64" height="64"/>
         <image name="crossroads" width="512" height="512"/>
+        <image name="film" width="256" height="256"/>
         <image name="lens" width="512" height="512"/>
     </resources>
 </document>

@@ -9,6 +9,7 @@
 // https://www.svgrepo.com/svg/51316/camera-viewfinder?edit=true
 // https://www.flaticon.com/free-icon/remote-control_1865152
 // https://www.flaticon.com/free-icon/crossroads_120836
+// <a href="https://www.flaticon.com/free-icons/movie" title="movie icons">Movie icons created by Freepik - Flaticon</a>
 //
 // TCP version of visca: https://github.com/norihiro/libvisca-ip
 // iniparser: https://github.com/ndevilla/iniparser

@@ -53,7 +53,9 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
        @"showAutofocusControls":@(YES),
        @"showMotionSyncControls":@(YES),
        @"showSharpnessControls":@(YES),
-       @"thumbnailOption":@(PTZThumbnail_RTSP)
+       @"showPresetRecallControls":@(YES),
+       @"thumbnailOption":@(PTZThumbnail_RTSP),
+       @"useOBSSnapshot":@(NO),
     }];
 }
 
@@ -244,9 +246,13 @@ PREF_VALUE_NSINT_ACCESSORS(thumbnailOption, ThumbnailOption)
 PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
 PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
 PREF_VALUE_BOOL_ACCESSORS(showSharpnessControls, ShowSharpnessControls)
+PREF_VALUE_BOOL_ACCESSORS(showPresetRecallControls, ShowPresetRecallControls)
+PREF_VALUE_BOOL_ACCESSORS(useOBSSnapshot, UseOBSSnapshot)
 
 PREF_VALUE_NSSTRING_ACCESSORS(obsSourceName, ObsSourceName)
 PREF_VALUE_NSSTRING_ACCESSORS(ttydev, Ttydev)
+PREF_VALUE_NSSTRING_ACCESSORS(snapshotURL, SnapshotURL)
+PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
 
 - (NSArray<PTZCameraSceneRange *> *)sceneRangeArray {
     NSData *data = [self prefValueForKey:@"SceneRangeArray"];

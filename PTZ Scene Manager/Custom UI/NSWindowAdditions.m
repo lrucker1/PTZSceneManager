@@ -74,6 +74,30 @@
 }
 @end
 
+
+@implementation NSColorFromNegatedEnabledState
++ (Class)transformedValueClass
+{
+   return [NSColor class];
+}
+
++ (BOOL)allowsReverseTransformation
+{
+   return NO;
+}
+
+- (id)transformedValue:(id)beforeObject
+{
+   BOOL enabled = [beforeObject boolValue];
+   
+   if (enabled) {
+      return [NSColor disabledControlTextColor];
+   } else {
+      return [NSColor controlTextColor];
+   }
+}
+@end
+
 @implementation PTZPercentFromFraction
 + (Class)transformedValueClass
 {
@@ -96,4 +120,24 @@
     CGFloat percent = [value floatValue];
     return @(percent / 100);
 }
+@end
+
+@implementation NSArray (PTZAdditions)
+
++ (instancetype)ptz_arrayFrom:(NSInteger)from to:(NSInteger)to {
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSInteger i = from; i <= to; i++) {
+        [array addObject:@(i)];
+    }
+    return [NSArray arrayWithArray:array];
+}
+
++ (instancetype)ptz_arrayFrom:(NSInteger)from downTo:(NSInteger)to {
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSInteger i = from; i >= to; i--) {
+        [array addObject:@(i)];
+    }
+    return [NSArray arrayWithArray:array];
+}
+
 @end

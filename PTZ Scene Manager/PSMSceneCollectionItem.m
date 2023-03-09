@@ -56,6 +56,7 @@ static PSMSceneCollectionItem *selfType;
         // This only applies to cameras that don't provide live feeds, like USB camera. Which happens to return immediately and keep moving.
         // What this means for a recall/set cycle on IP cams, I don't know. I thought I'd confirmed they don't return until done.
         [wc performSelector:@selector(fetchStaticSnapshot) withObject:nil afterDelay:3];
+        [wc updateVisibleValues];
     }];
 }
 

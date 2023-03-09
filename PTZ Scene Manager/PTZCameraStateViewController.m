@@ -77,6 +77,7 @@ typedef enum _ExposureModes {
 @property IBOutlet LARIndexSetVisualizerView *sceneRangeMapView;
 @property IBOutlet NSPopover *sceneRangeMapPopover;
 @property IBOutlet NSView *thumbnailRadioGroupView;
+@property IBOutlet NSView *snapshotRadioGroupView;
 
 @end
 
@@ -142,33 +143,17 @@ typedef enum _ExposureModes {
     }
 }
 
-- (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger i = from; i <= to; i++) {
-        [array addObject:@(i)];
-    }
-    return [NSArray arrayWithArray:array];
-}
-
-- (NSArray *)arrayFrom:(NSInteger)from downTo:(NSInteger)to {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger i = from; i >= to; i--) {
-        [array addObject:@(i)];
-    }
-    return [NSArray arrayWithArray:array];
-}
-
 - (void)generateArrays {
     // VV: Pan speed 0x01 (low speed) to 0x18 (high speed)
     // WW: Tilt speed 0x01 (low speed) to 0x14 (high speed)
     // Preset: Max of pan & tilt
     // Zoom: p = 0(low) - 7(high)
     // Focus: p = 0(low) - 7(high)
-    self.panValues = [self arrayFrom:1 to:0x18];
-    self.tiltValues = [self arrayFrom:1 to:0x14];
-    self.zoomValues = [self arrayFrom:0 to:7];
-    self.focusValues = [self arrayFrom:0 to:7];
-    self.presetSpeedValues = [self arrayFrom:0x18 downTo:1];
+    self.panValues = [NSArray ptz_arrayFrom:1 to:0x18];
+    self.tiltValues = [NSArray ptz_arrayFrom:1 to:0x14];
+    self.zoomValues = [NSArray ptz_arrayFrom:0 to:7];
+    self.focusValues = [NSArray ptz_arrayFrom:0 to:7];
+    self.presetSpeedValues = [NSArray ptz_arrayFrom:0x18 downTo:1];
 }
 
 #pragma mark camera
@@ -923,6 +908,10 @@ MAKE_CAN_SET_MODE_CHECK_METHOD(Flicker)
     [self loadLocalExposurePrefs];
 }
 #pragma mark Image
+/*
+ IMAGE : LUMINANCE CONTRAST SHARPNESS FLIP-H FLIP-V B&W-MODE GAMMA STYLE
+ */
+
 
 /*
  IMAGE :
@@ -1100,14 +1089,19 @@ MAKE_CAN_SET_METHOD(BWMode)
 
 - (void)updateThumbnailRadioButtons {
     NSInteger option = self.prefCamera.thumbnailOption;
-    if (option < PTZThumbnail_OBS || option > PTZThumbnail_Snapshot) {
+    if (option < PTZThumbnail_RTSP || option > PTZThumbnail_Snapshot) {
         // Not set.
         return;
     }
-    NSView *tagView = [self.thumbnailRadioGroupView viewWithTag:option];
-    if (tagView.tag == option) {
-        NSButton *button = (NSButton *)tagView;
-        button.state = NSControlStateValueOn;
+    NSButton *tagView = [self.thumbnailRadioGroupView viewWithTag:option];
+    if (tagView) {
+        tagView.state = NSControlStateValueOn;
+    }
+    
+    option = self.prefCamera.useOBSSnapshot ? PTZSnapshot_OBS : PTZSnapshot_Camera;
+    tagView = [self.snapshotRadioGroupView viewWithTag:option];
+    if (tagView) {
+        tagView.state = NSControlStateValueOn;
     }
 }
 
@@ -1116,11 +1110,12 @@ MAKE_CAN_SET_METHOD(BWMode)
     self.prefCamera.thumbnailOption = button.tag;
 }
 
-#pragma mark KVO
+- (IBAction)doChooseSnapshotSource:(id)sender {
+    NSButton *button = (NSButton *)sender;
+    self.prefCamera.useOBSSnapshot = button.tag == PTZSnapshot_OBS;
+}
 
-/*
- IMAGE : LUMINANCE CONTRAST SHARPNESS FLIP-H FLIP-V B&W-MODE GAMMA STYLE
- */
+#pragma mark KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object

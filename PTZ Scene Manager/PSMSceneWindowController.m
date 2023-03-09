@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "DraggingStackView.h"
 #import "LARSplitViewController.h"
+#import "NSWindowAdditions.h"
 
 static PSMSceneWindowController *selfType;
 static NSString *PTZControlStackOrderKey = @"ControlStackOrder";
@@ -56,7 +57,6 @@ typedef enum {
 @property (strong) PSMCameraStateWindowController *cameraStateWindowController;
 @property IBOutlet RTSPViewController *rtspViewController;
 @property BOOL showStaticSnapshot;
-@property BOOL showSceneSnapshotOnly;
 @property IBOutlet NSBox *cameraBox;
 @property IBOutlet NSBox *sceneCollectionBox;
 @property NSColor *boxColor;
@@ -70,6 +70,7 @@ typedef enum {
 @property IBOutlet NSGridView *panTiltGridView;
 @property NSTimer *timer;
 @property dispatch_queue_t timerQueue;
+@property NSArray *presetSpeedValues;
 
 @end
 
@@ -111,6 +112,7 @@ typedef enum {
 
     [self updateThumbnailContent];
     [self manageObservers:YES];
+    self.presetSpeedValues = [NSArray ptz_arrayFrom:0x18 downTo:1];
     [super awakeFromNib];
 }
 
@@ -126,7 +128,8 @@ typedef enum {
                       @"prefCamera.cameraname",
                       @"prefCamera.menuIndex",
                       @"prefCamera.thumbnailOption",
-                      @"lastRecalledItem"];
+                      @"lastRecalledItem",
+                      @"prefCamera.camera.cameraIsOpen"];
     if (add) {
         for (NSString *key in keys) {
             [self addObserver:self
@@ -193,12 +196,8 @@ typedef enum {
     if (self.camera.isSerial || option != PTZThumbnail_RTSP) {
         // Turn it off if it was on.
         [self.rtspViewController pauseVideo];
-        // No live view, but we can get snapshots from OBS and save them.
+        // No live view, but we can get snapshots from OBS/camera and save them.
         self.showStaticSnapshot = YES;
-        self.showSceneSnapshotOnly = (option == PTZThumbnail_Snapshot);
-        if (self.showSceneSnapshotOnly) {
-            [self stopTimer];
-        }
         [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
     } else {
         [self stopTimer];
@@ -209,8 +208,6 @@ typedef enum {
             [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.deviceName] onDone:^(BOOL success) {
                 self.showStaticSnapshot = (success == NO);
                 if (self.showStaticSnapshot && self.lastRecalledItem != nil) {
-                    // Assume they want updates if they want video.
-                    self.showSceneSnapshotOnly = NO;
                     // Pick up anything we missed.
                     [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
                 }
@@ -228,20 +225,29 @@ typedef enum {
     } else if ([obs.currentPreviewSourceNames containsObject:self.prefCamera.obsSourceName]) {
         mode = PTZVideoPreview;
     }
-    if (mode == PTZVideoProgram) {
+    if (self.prefCamera.camera.cameraIsOpen == NO) {
+        self.cameraBox.borderColor = [NSColor systemOrangeColor];
+        self.sceneCollectionBox.borderColor = [NSColor systemOrangeColor];
+        //NSColor *bgOrange = [[NSColor systemOrangeColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
+        self.collectionView.backgroundColors = @[[NSColor systemOrangeColor]];
+        self.window.subtitle = NSLocalizedString(@"Disconnected", @"Disconnected camera window subtitle");
+    } else if (mode == PTZVideoProgram) {
         self.cameraBox.borderColor = [NSColor systemPinkColor];
         self.sceneCollectionBox.borderColor = [NSColor systemPinkColor];
         NSColor *bgRed = [[NSColor systemPinkColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
         self.collectionView.backgroundColors = @[bgRed];
+        self.window.subtitle = NSLocalizedString(@"Program", @"OBS Program camera window subtitle");
     } else if (mode == PTZVideoPreview) {
         self.cameraBox.borderColor = [NSColor systemGreenColor];
         self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
         NSColor *bgGreen = [[NSColor systemGreenColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
         self.collectionView.backgroundColors = @[bgGreen];
+        self.window.subtitle = NSLocalizedString(@"Preview", @"OBS Preview camera window subtitle");
     } else {
         self.cameraBox.borderColor = self.boxColor;
         self.sceneCollectionBox.borderColor = self.boxColor;
         self.collectionView.backgroundColors = self.collectionColors;
+        self.window.subtitle = @"";
     }
     self.camera.videoMode = mode;
 }
@@ -257,8 +263,11 @@ typedef enum {
     // Orange is too close to red. Grays don't stand out enough.
     // Magenta stands out nicely while being distinct.
     // The first thing we do on reconnection is ask for scene input state.
-    self.cameraBox.borderColor = [NSColor magentaColor];
-    self.sceneCollectionBox.borderColor = [NSColor magentaColor];
+    if (self.prefCamera.camera.cameraIsOpen) {
+        self.cameraBox.borderColor = [NSColor magentaColor];
+        self.sceneCollectionBox.borderColor = [NSColor magentaColor];
+        self.window.subtitle = NSLocalizedString(@"Lost OBS Connection", @"Lost OBS Connection window subtitle");
+    }
 }
 
 - (NSString *)camerakey {
@@ -276,9 +285,7 @@ typedef enum {
         // Update any values that are displayed in this window. Don't spam the camera; users can hit Fetch in Camera State.
         // There is no Inq for MotionState.
         if (gotCam) {
-            if ([self.prefCamera prefValueForKey:@"showAutoFocusControls"]) {
-                [camera updateAutofocusState:nil];
-            }
+            [self updateVisibleValues];
         } else if (interactive) {
             NSAlert *alert = [NSAlert new];
 
@@ -288,6 +295,12 @@ typedef enum {
                           completionHandler:nil];
         }
     }];
+}
+
+- (void)updateVisibleValues {
+    if ([self.prefCamera prefValueForKey:@"showAutofocusControls"]) {
+        [self.prefCamera.camera updateAutofocusState:nil];
+    }
 }
 
 - (IBAction)reopenCamera:(id)sender {
@@ -360,7 +373,7 @@ typedef enum {
 }
 
 - (void)startTimer {
-    if (self.showStaticSnapshot && self.timer == nil && !self.showSceneSnapshotOnly) {
+    if (self.showStaticSnapshot && self.timer == nil) {
         if (self.timerQueue == nil) {
             NSString *name = [NSString stringWithFormat:@"timerQueue_0x%p", self];
             self.timerQueue = dispatch_queue_create([name UTF8String], NULL);
@@ -395,23 +408,6 @@ typedef enum {
 }
 
 #pragma mark camera
-
-- (NSArray *)arrayFrom:(NSInteger)from to:(NSInteger)to {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger i = from; i <= to; i++) {
-        [array addObject:@(i)];
-    }
-    return [NSArray arrayWithArray:array];
-}
-
-- (NSInteger)presetSpeed {
-    return self.camera.presetSpeed;
-}
-
-- (void)setPresetSpeed:(NSInteger)value {
-    self.camera.presetSpeed = value;
-    [self.camera applyPantiltPresetSpeed:nil];
-}
 
 - (IBAction)doPanTilt:(id)sender {
     PTZStartStopButton *button = (PTZStartStopButton *)sender;
@@ -688,6 +684,10 @@ typedef enum {
     }
 }
 
+- (IBAction)applyPresetRecall:(id)sender {
+    [self.camera applyPantiltPresetSpeed:nil];
+}
+
 - (IBAction)sceneRecall:(id)sender {
     [self.lastRecalledItem sceneRecall:sender];
 }
@@ -899,7 +899,9 @@ typedef enum {
         [self.appDelegate changeWindowsItem:self.window title:self.prefCamera.cameraname menuShortcut:self.prefCamera.menuIndex];
     } else if ([keyPath isEqualToString:@"prefCamera.thumbnailOption"]) {
         [self updateThumbnailContent];
-    }
+    } else if ([keyPath isEqualToString:@"prefCamera.camera.cameraIsOpen"]) {
+        [self updateActiveIndicators];
+   }
 }
 
 @end
