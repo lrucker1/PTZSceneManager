@@ -150,13 +150,12 @@ static PSMCameraCollectionItem *selfType;
 
 - (void)updateUSBDevices {
     NSMutableArray *cameraInfo = [NSMutableArray arrayWithArray:[[self dataSource] usbCameraInfo]];
-    NSArray *names = [cameraInfo valueForKey:@"name"];
-    NSMutableArray *array = [NSMutableArray arrayWithArray:names];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[cameraInfo valueForKey:@"name"]];
     //  Disable if no attached devices, even if we have a cached device.
-    self.enableUSBPopup = [names count] > 0;
+    self.enableUSBPopup = [array count] > 0;
     if (self.cameraItem.isSerial && self.cameraItem.usbdevicename != nil) {
         BOOL itemInList = YES;
-        if (![names containsObject:self.cameraItem.usbdevicename]) {
+        if (![array containsObject:self.cameraItem.usbdevicename]) {
             [array addObject:self.cameraItem.usbdevicename];
             PSMUSBDeviceItem *item = [PSMUSBDeviceItem new];
             item.name = self.cameraItem.usbdevicename;
@@ -164,7 +163,7 @@ static PSMCameraCollectionItem *selfType;
             [cameraInfo addObject:item];
             itemInList = NO; // Don't need to check for dups.
         }
-        NSInteger index = [names indexOfObject:self.cameraItem.usbdevicename];
+        NSInteger index = [array indexOfObject:self.cameraItem.usbdevicename];
         self.originalUSBDevice = (index >= 0) ? index : 0;
         if (itemInList) {
             PSMUSBDeviceItem *item = cameraInfo[self.originalUSBDevice];

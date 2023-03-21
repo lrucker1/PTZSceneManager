@@ -65,6 +65,7 @@ PREF_VALUE_NSINT_PROPERTIES(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_PROPERTIES(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_PROPERTIES(maxColumnCount, MaxColumnCount)
 PREF_VALUE_NSINT_PROPERTIES(thumbnailOption, ThumbnailOption)
+PREF_VALUE_NSINT_PROPERTIES(pingTimeout, PingTimeout)
 
 #undef PREF_VALUE_NSINT_PROPERTIES
 
@@ -81,6 +82,9 @@ PREF_VALUE_NSINT_PROPERTIES(thumbnailOption, ThumbnailOption)
 
 - (NSImage *)snapshotAtIndex:(NSInteger)index;
 - (void)saveSnapshotAtIndex:(NSInteger)index withData:(NSData *)imgData;
+
+- (NSString *)snapshotURLWithAddress;
+- (NSString *)rtspURLWithAddress;
 
 @end
 

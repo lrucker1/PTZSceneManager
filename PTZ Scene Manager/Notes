@@ -21,7 +21,7 @@ Prefs:
    any other notable divergence from Sony, like OSD toggle.
    delay needed between start move and stop, esp for OSD.
 
-Configure cameras:
+Configure cameras: Other Settings icon button in Camera List.
  - set PTZOptics brand or not.
 
 Add Export to PacketSender to this app.
@@ -29,7 +29,7 @@ Add Export to PacketSender to this app.
 Lock scene name editing - part of the whole UI lock? "Lock UI" menu item?
  only if someone wants it in beta
 
-Get the camera's actual aspect ratio for the live view constraint? 16:9 is the current default.
+Get the camera (or OBS output) actual aspect ratio for the live view constraint? 16:9 is the current default.
 snapshot.jpg resolution options: 1920x1080 (16:9, 1.777) 960x600 (8:5, 1.6) 480x300 (1.6)
 
 Pluggable controls:
@@ -38,7 +38,7 @@ Also transition effects, like "relative zoom in".
   - alas, even the slowest zoom speed is way too fast.
   - a "record mode", that computes the difference between two scenes and saves just that change? Future.
 Auto sharpness?
-Preset speed? Maybe with a "Set" button, so it doesn't override preset.
+Preset speed with a "Set" button, so it doesn't override preset. (done)
  - Scene-specific local saves for presetRecall & anything else with no inq.
 Focus lock/unlock - not in Sony?
 PTZ Advanced View:
@@ -61,12 +61,9 @@ camlist & prefs window restoration
 
 Clean up delete pref values on launch? (after undo is no longer possible)
 
-Test changing ttydev
+NSTabViewController with the .toolbar tab style
 
-Apply All in Camera List. Also normal Add button, and should it be Delete menu item or Remove button?
+Advanced prefs:
+ - ping timeout (although we determine it with binary search)
+ - recall/set batch delay
 
-TODO when I have a real IP cam: optimize the ping timeout.
-
-UI for absolutely disconnected, failed ping, where's my camera. Notification? Overlay window?
-
-Camera name on pulled-off OSDremote

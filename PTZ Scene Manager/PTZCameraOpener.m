@@ -119,7 +119,7 @@
                 // If there are multiple matches the user has to fix it. This is for the more common case of having one camera and not caring about which port it's in.
                 NSString *ttydev = [ttydevs firstObject];
                 if (![ttydev isEqualToString:self.ttydev]) {
-                    BOOL retry = (VISCA_open_serial(self->_pIface, [self.ttydev UTF8String]) == VISCA_SUCCESS);
+                    BOOL retry = (VISCA_open_serial(self->_pIface, [ttydev UTF8String]) == VISCA_SUCCESS);
                     if (retry) {
                         success = YES;
                         self.ttydev = ttydev;

@@ -23,7 +23,9 @@
     NSSplitViewItem* bodyItem = [NSSplitViewItem splitViewItemWithViewController:self.bodyViewController];
     bodyItem.minimumThickness = 120;
 
-    if (self.sidebarOnRight) {
+    if (self.sidebarTrailing) {
+        // If we do this, also update the toolbar item icon to "trailing"
+        // Yes, this does handle RTL languages correctly.
         [self insertSplitViewItem:bodyItem atIndex:0];
         [self insertSplitViewItem:self.sidebarItem atIndex:1];
     } else {

@@ -71,6 +71,7 @@ typedef enum {
 @property NSTimer *timer;
 @property dispatch_queue_t timerQueue;
 @property NSArray *presetSpeedValues;
+@property BOOL showOSDRemoteTitle;
 
 @end
 
@@ -107,7 +108,7 @@ typedef enum {
     self.window.toolbar.autosavesConfiguration = NO;
     NSDictionary *toolbarConfig = [self.prefCamera prefValueForKey:@"Toolbar"];
     if (toolbarConfig) {
-        [self.window.toolbar setConfigurationFromDictionary: toolbarConfig];
+        [self.window.toolbar setConfigurationFromDictionary:toolbarConfig];
     }
 
     [self updateThumbnailContent];
@@ -161,6 +162,7 @@ typedef enum {
     [self loadCamera:NO];
     self.boxColor = self.cameraBox.borderColor;
     self.collectionColors = self.collectionView.backgroundColors;
+    [self updateActiveIndicators];
     [[NSNotificationCenter defaultCenter] addObserverForName:PSMPrefCameraListDidChangeNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         [self updateActiveIndicators];
     }];
@@ -192,28 +194,43 @@ typedef enum {
 
 - (void)updateThumbnailContent {
     // Don't show static snapshots until we know whether we'll have a video.
+    BOOL waitingForVideo = NO;
     NSInteger option = self.prefCamera.thumbnailOption;
     if (self.camera.isSerial || option != PTZThumbnail_RTSP) {
         // Turn it off if it was on.
         [self.rtspViewController pauseVideo];
         // No live view, but we can get snapshots from OBS/camera and save them.
         self.showStaticSnapshot = YES;
-        [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
     } else {
         [self stopTimer];
         if ([self.rtspViewController hasVideo]) {
             [self.rtspViewController resumeVideo];
         } else {
             // Try RTSP. If it fails we show snapshots.
-            [self.rtspViewController openRTSPURL:[NSString stringWithFormat:@"rtsp://%@:554/1", self.camera.deviceName] onDone:^(BOOL success) {
-                self.showStaticSnapshot = (success == NO);
-                if (self.showStaticSnapshot && self.lastRecalledItem != nil) {
-                    // Pick up anything we missed.
-                    [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
-                }
-            }];
+            NSString *rtspURL = self.prefCamera.rtspURLWithAddress;
+            if ([rtspURL length] == 0) {
+                self.showStaticSnapshot = YES;
+            } else {
+                waitingForVideo = YES;
+                [self.rtspViewController openRTSPURL:rtspURL onDone:^(BOOL success) {
+                    self.showStaticSnapshot = (success == NO);
+                    if (self.showStaticSnapshot) {
+                        // Pick up anything we missed.
+                        [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
+                    }
+                }];
+            }
         }
     }
+    if (self.showStaticSnapshot && !waitingForVideo) {    [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
+    }
+}
+
+- (void)updateColors:(NSColor *)color solidBackground:(BOOL)solidBG {
+    self.cameraBox.borderColor = color;
+    self.sceneCollectionBox.borderColor = color;
+    NSColor *bgColor = solidBG ? color : [color colorWithSystemEffect:NSColorSystemEffectDisabled];
+    self.collectionView.backgroundColors = @[bgColor];
 }
 
 - (void)updateActiveIndicators {
@@ -226,22 +243,13 @@ typedef enum {
         mode = PTZVideoPreview;
     }
     if (self.prefCamera.camera.cameraIsOpen == NO) {
-        self.cameraBox.borderColor = [NSColor systemOrangeColor];
-        self.sceneCollectionBox.borderColor = [NSColor systemOrangeColor];
-        //NSColor *bgOrange = [[NSColor systemOrangeColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
-        self.collectionView.backgroundColors = @[[NSColor systemOrangeColor]];
+        [self updateColors:[NSColor systemOrangeColor] solidBackground:YES];
         self.window.subtitle = NSLocalizedString(@"Disconnected", @"Disconnected camera window subtitle");
     } else if (mode == PTZVideoProgram) {
-        self.cameraBox.borderColor = [NSColor systemPinkColor];
-        self.sceneCollectionBox.borderColor = [NSColor systemPinkColor];
-        NSColor *bgRed = [[NSColor systemPinkColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
-        self.collectionView.backgroundColors = @[bgRed];
+        [self updateColors:[NSColor systemPinkColor] solidBackground:NO];
         self.window.subtitle = NSLocalizedString(@"Program", @"OBS Program camera window subtitle");
     } else if (mode == PTZVideoPreview) {
-        self.cameraBox.borderColor = [NSColor systemGreenColor];
-        self.sceneCollectionBox.borderColor = [NSColor systemGreenColor];
-        NSColor *bgGreen = [[NSColor systemGreenColor] colorWithSystemEffect:NSColorSystemEffectDisabled];
-        self.collectionView.backgroundColors = @[bgGreen];
+        [self updateColors:[NSColor systemGreenColor] solidBackground:NO];
         self.window.subtitle = NSLocalizedString(@"Preview", @"OBS Preview camera window subtitle");
     } else {
         self.cameraBox.borderColor = self.boxColor;
@@ -290,7 +298,11 @@ typedef enum {
             NSAlert *alert = [NSAlert new];
 
             alert.messageText = NSLocalizedString(@"Could not connect to camera", @"Camera connection failed alert message");
-            alert.informativeText = NSLocalizedString(@"Check your camera and try again", @"Camera connection failed alert info");
+            if (self.prefCamera.isSerial) {
+                alert.informativeText = NSLocalizedString(@"Check your camera and try again. If you have multiple USB cameras with the same name, use the Camera List to select the correct camera.", @"USB Camera connection failed alert info");
+            } else {
+                alert.informativeText = NSLocalizedString(@"Check your camera and try again.", @"Camera connection failed alert info");
+            }
             [alert beginSheetModalForWindow:self.window
                           completionHandler:nil];
         }
@@ -847,6 +859,7 @@ typedef enum {
         bounds = view.bounds;
     }
     [self.camera toggleOSDMenu:nil];
+    self.showOSDRemoteTitle = NO;
     [self.remoteControlPopover showRelativeToRect:bounds
                                            ofView:view
                                     preferredEdge:edge];
@@ -869,9 +882,43 @@ typedef enum {
     return YES;
 }
 
+- (void)popoverDidDetach:(NSPopover *)popover {
+    self.showOSDRemoteTitle = YES;
+}
+
 - (void)popoverWillClose:(NSNotification *)notification {
     [self.camera closeOSDMenu:nil];
 }
+
+#pragma mark toolbar
+
+#if 0
+// The splitter item is inserted to the right of the text, which means most of the time it won't be anywhere near the sidebar. Either there's some flag I'm missing, or it assumes you always do it with full-height content, which means layout changes. :P
+// No, I am not even considering rolling my own title widget with a label.
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar {
+   NSMutableArray *identifiers = [NSMutableArray arrayWithObjects:
+         NSToolbarFlexibleSpaceItemIdentifier,
+         NSToolbarSpaceItemIdentifier,
+                                  NSToolbarSidebarTrackingSeparatorItemIdentifier,
+                                  @"SceneSettings", @"OSDRemote", @"SceneSidebar",
+         nil];
+   return identifiers;
+}
+
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
+    return [self toolbarAllowedItemIdentifiers:toolbar];
+}
+
+- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar
+     itemForItemIdentifier:(NSString *)itemIdentifier
+ willBeInsertedIntoToolbar:(BOOL)willBeInserted {
+    // Delegate will only be asked for items that aren't in the nib.
+    if ([itemIdentifier isEqualToString:NSToolbarSidebarTrackingSeparatorItemIdentifier]) {
+        return [NSTrackingSeparatorToolbarItem trackingSeparatorToolbarItemWithIdentifier:NSToolbarSidebarTrackingSeparatorItemIdentifier splitView:self.splitViewController.splitView dividerIndex:0];
+   }
+    return nil;
+}
+#endif
 
 #pragma mark observation
 

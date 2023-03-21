@@ -235,10 +235,10 @@
 			isa = PBXGroup;
 			children = (
 				94890D5E29809BE0006EAB75 /* .gitignore */,
-				94747E1F297B94F800309752 /* PTZ Scene Manager */,
 				94747E35297B952A00309752 /* Frameworks */,
 				94747E57297B96A000309752 /* libvisca.h */,
 				94747E1E297B94F800309752 /* Products */,
+				94747E1F297B94F800309752 /* PTZ Scene Manager */,
 			);
 			sourceTree = "<group>";
 		};

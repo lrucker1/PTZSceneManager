@@ -82,10 +82,10 @@
                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="-2" name="contentValues" keyPath="usbDeviceNames" id="ovg-0j-N04"/>
                                     <binding destination="-2" name="enabled" keyPath="enableUSBPopup" id="W30-hw-aHJ"/>
                                     <binding destination="-2" name="selectedIndex" keyPath="selectedUSBDevice" id="PIf-dv-wde"/>
                                     <binding destination="-2" name="toolTip" keyPath="ttyTooltip" id="OBU-7h-i8y"/>
+                                    <binding destination="-2" name="contentValues" keyPath="usbDeviceNames" id="ovg-0j-N04"/>
                                 </connections>
                             </popUpButton>
                             <textField identifier="ipaddress" toolTip="'host' or 'host:port'" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dc2-9t-FKQ" userLabel="IP Address field">
@@ -238,6 +238,11 @@ Gw
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="info.circle" catalog="system" id="L0X-Q8-tU5"/>
                                 <connections>
+                                    <binding destination="-2" name="hidden" keyPath="cameraItem.isSerial" id="Zgm-qB-0SV">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
                                     <binding destination="-2" name="hidden2" keyPath="ttyTooltip" previousBinding="Zgm-qB-0SV" id="Ybh-xY-w2V">
                                         <dictionary key="options">
                                             <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -245,11 +250,6 @@ Gw
                                             <integer key="NSNotApplicablePlaceholder" value="-1"/>
                                             <integer key="NSNullPlaceholder" value="-1"/>
                                             <string key="NSValueTransformerName">NSIsNil</string>
-                                        </dictionary>
-                                    </binding>
-                                    <binding destination="-2" name="hidden" keyPath="cameraItem.isSerial" id="Zgm-qB-0SV">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
                                         </dictionary>
                                     </binding>
                                     <binding destination="-2" name="toolTip" keyPath="ttyTooltip" id="o2O-xr-7zi"/>

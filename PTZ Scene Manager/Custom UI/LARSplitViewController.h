@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LARSplitViewController : NSSplitViewController
 
 // Note that changing sidebar position means the autosave values are bogus. Using different autosave names should work.
-@property BOOL sidebarOnRight;
+@property BOOL sidebarTrailing;
 
 @end
 

@@ -747,8 +747,8 @@
                                                                     <menu key="menu" id="HPr-rQ-iZ7"/>
                                                                 </popUpButtonCell>
                                                                 <connections>
-                                                                    <binding destination="-2" name="contentValues" keyPath="presetSpeedValues" id="ERq-G0-Jwy"/>
                                                                     <binding destination="-2" name="selectedValue" keyPath="prefCamera.camera.presetSpeed" previousBinding="ERq-G0-Jwy" id="kXM-ze-4kH"/>
+                                                                    <binding destination="-2" name="contentValues" keyPath="presetSpeedValues" id="ERq-G0-Jwy"/>
                                                                 </connections>
                                                             </popUpButton>
                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="exa-pZ-K4B">
@@ -926,7 +926,7 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="560AA1A6-329F-4C3C-8EB7-44291735BED4" explicitIdentifier="SceneWindow" displayMode="iconAndLabel" sizeMode="regular" id="BbF-lh-Vza">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="0FA33EB7-EF4C-4D5C-A956-3B64BAAF711A" label="Settings" paletteLabel="Settings" tag="-1" bordered="YES" sizingBehavior="auto" id="IMg-8c-5TN">
+                    <toolbarItem implicitItemIdentifier="0FA33EB7-EF4C-4D5C-A956-3B64BAAF711A" explicitItemIdentifier="SceneSettings" label="Settings" paletteLabel="Settings" tag="-1" bordered="YES" sizingBehavior="auto" id="IMg-8c-5TN">
                         <imageReference key="image" image="camera-toolbar" symbolScale="large"/>
                         <connections>
                             <action selector="showCameraStateWindow:" target="-2" id="DVX-zu-Cas"/>
@@ -947,8 +947,8 @@
                             <action selector="remoteOpen:" target="-2" id="1x8-w2-IKR"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="EC130710-B420-4F41-A2F3-D162C803E434" label="Sidebar" paletteLabel="Sidebar" tag="-1" bordered="YES" visibilityPriority="4" sizingBehavior="auto" id="d8u-t8-nAF">
-                        <imageReference key="image" image="sidebar.squares.right" catalog="system" symbolScale="medium"/>
+                    <toolbarItem implicitItemIdentifier="EC130710-B420-4F41-A2F3-D162C803E434" explicitItemIdentifier="SceneSidebar" label="Sidebar" paletteLabel="Sidebar" tag="-1" visibilityPriority="4" sizingBehavior="auto" navigational="YES" id="d8u-t8-nAF">
+                        <imageReference key="image" image="sidebar.squares.leading" catalog="system" symbolScale="large"/>
                         <connections>
                             <action selector="toggleSidebar:" target="-1" id="ne2-8U-YeM"/>
                         </connections>
@@ -1021,7 +1021,7 @@
             <point key="canvasLocation" x="-183" y="204"/>
         </menu>
         <customView id="1Kv-TT-M85" userLabel="Remote Control Popover View">
-            <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
+            <rect key="frame" x="0.0" y="0.0" width="135" height="138"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="10" columnSpacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="W18-lW-37A" userLabel="PanTilt Grid View">
@@ -1138,11 +1138,30 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </gridView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yJw-Cw-Y27">
+                    <rect key="frame" x="23" y="119" width="89" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="left" title="Title" id="Q0q-iC-Pem">
+                        <font key="font" metaFont="smallSystemBold"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="prefCamera.cameraname" id="hzr-QY-PZu"/>
+                        <binding destination="-2" name="hidden" keyPath="showOSDRemoteTitle" id="wkj-2T-cIt">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </textField>
             </subviews>
             <constraints>
+                <constraint firstItem="yJw-Cw-Y27" firstAttribute="top" secondItem="1Kv-TT-M85" secondAttribute="top" constant="5" id="0cp-3G-77D"/>
+                <constraint firstItem="W18-lW-37A" firstAttribute="top" secondItem="yJw-Cw-Y27" secondAttribute="bottom" constant="4" id="DwY-K7-548"/>
                 <constraint firstItem="W18-lW-37A" firstAttribute="leading" secondItem="1Kv-TT-M85" secondAttribute="leading" constant="20" symbolic="YES" id="J5u-p5-Rkf"/>
                 <constraint firstAttribute="bottom" secondItem="W18-lW-37A" secondAttribute="bottom" constant="20" symbolic="YES" id="PhP-3C-EHC"/>
-                <constraint firstItem="W18-lW-37A" firstAttribute="top" secondItem="1Kv-TT-M85" secondAttribute="top" constant="20" symbolic="YES" id="l4S-mb-PVC"/>
+                <constraint firstAttribute="trailing" secondItem="yJw-Cw-Y27" secondAttribute="trailing" constant="25" id="YQ4-7p-ZIQ"/>
+                <constraint firstItem="yJw-Cw-Y27" firstAttribute="leading" secondItem="1Kv-TT-M85" secondAttribute="leading" constant="25" id="pvy-JN-vac"/>
                 <constraint firstAttribute="trailing" secondItem="W18-lW-37A" secondAttribute="trailing" constant="20" symbolic="YES" id="ui2-4t-j7t"/>
             </constraints>
             <point key="canvasLocation" x="19.5" y="345.5"/>
@@ -1172,6 +1191,6 @@
         <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="rectangle.fill" catalog="system" width="18" height="14"/>
         <image name="remote-control" width="32" height="32"/>
-        <image name="sidebar.squares.right" catalog="system" width="18" height="14"/>
+        <image name="sidebar.squares.leading" catalog="system" width="24" height="18"/>
     </resources>
 </document>

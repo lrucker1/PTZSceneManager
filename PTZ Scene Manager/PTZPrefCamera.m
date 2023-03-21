@@ -20,6 +20,7 @@
 #import "PTZCamera.h"
 #import "PTZCameraSceneRange.h"
 #import "AppDelegate.h"
+#import "ObjCUtils.h"
 
 static NSString *PSM_PanPlusSpeed = @"panPlusSpeed";
 static NSString *PSM_TiltPlusSpeed = @"tiltPlusSpeed";
@@ -242,6 +243,7 @@ PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 PREF_VALUE_NSINT_ACCESSORS(thumbnailOption, ThumbnailOption)
+PREF_VALUE_NSINT_ACCESSORS(pingTimeout, PingTimeout)
 
 PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
 PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
@@ -322,6 +324,84 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
         NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
         [imgData writeToFile:path atomically:YES];
     });
+}
+
+#pragma mark URLs
+
+- (BOOL)isValidURL:(NSString *)urlStr error:(NSError * _Nullable *)error {
+    NSString *address = self.ipAddress;
+    if ([address length] == 0) {
+        address = @"localhost";
+    }
+    NSString *customURL = [self customizedURL:urlStr withAddress:address];
+    NSURL *url = [NSURL URLWithString:customURL];
+    // Bare minimum URL validation. It might still be the wrong format. Users will have to figure that out on their own.
+    if (url == nil) {
+        if (error != nil) {
+            NSString *fmt = NSLocalizedString(@"'%@' is not a valid URL", @"Bad URL");
+            NSString *errStr = [NSString localizedStringWithFormat:fmt, urlStr];
+           *error = OCUtilErrorWithDescription(errStr, nil, @"PTZPrefCamera", 100);
+        }
+        return NO;
+    }
+
+    return YES;
+}
+
+- (BOOL)validateRtspURL:(id  _Nullable *)value error:(NSError * _Nullable *)error {
+    NSString *urlStr = (NSString *)*value;
+    if ([urlStr length] == 0) {
+        return YES;
+    }
+    urlStr = [urlStr lowercaseString];
+    if (![urlStr hasPrefix:@"rtsp"]) {
+        if (error != nil) {
+            *error = OCUtilErrorWithDescription(NSLocalizedString(@"The URL must start with 'rtsp'", @"Not an RTSP url"), nil, @"PTZPrefCamera", 101);
+        }
+        return NO;
+    }
+    return [self isValidURL:urlStr error:error];
+}
+
+- (BOOL)validateSnapshotURL:(id  _Nullable *)value error:(NSError * _Nullable *)error {
+    NSString *urlStr = (NSString *)*value;
+    if ([urlStr length] == 0) {
+        return YES;
+    }
+    urlStr = [urlStr lowercaseString];
+    if (![urlStr hasPrefix:@"http"]) {
+        if (error != nil) {
+            *error = OCUtilErrorWithDescription(NSLocalizedString(@"The URL must start with 'http'", @"Not an HTTP url"), nil, @"PTZPrefCamera", 102);
+        }
+        return NO;
+    }
+    return [self isValidURL:urlStr error:error];
+}
+
+- (NSString *)customizedURL:(NSString *)customURL withAddress:(NSString *)address {
+    customURL = [customURL lowercaseString];
+    if ([customURL containsString:@"\%@"]) {
+        return [NSString stringWithFormat:customURL, address];
+    } else if ([customURL containsString:@"[ipaddress]"]) {
+        return [customURL stringByReplacingOccurrencesOfString:@"[ipaddress]" withString:address];
+    }
+    return customURL;
+}
+
+- (NSString *)snapshotURLWithAddress {
+    NSString *customURL = self.snapshotURL;
+    if ([customURL length]) {
+        return [self customizedURL:self.snapshotURL withAddress:self.ipAddress];
+    }
+    return [NSString stringWithFormat:@"http://%@:80/snapshot.jpg", self.ipAddress];
+}
+
+- (NSString *)rtspURLWithAddress {
+    NSString *customURL = self.rtspURL;
+    if ([customURL length]) {
+        return [self customizedURL:self.snapshotURL withAddress:self.ipAddress];
+    }
+    return [NSString stringWithFormat:@"rtsp://%@:554/1", self.ipAddress];
 }
 
 #pragma mark wrappers

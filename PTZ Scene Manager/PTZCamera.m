@@ -55,9 +55,12 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 @property BOOL batchOperationInProgress;
 @property BOOL ptzStateValid;
 @property PTZCameraOpener *cameraOpener;
-// Note: Properly, this should be an array.
+// TODO: Properly, PTZSnapshotFetchDoneBlock should be an array.
 @property PTZSnapshotFetchDoneBlock obsSnapshotDoneBlock;
 @property BOOL useOBSSnapshot;
+@property NSTimeInterval pingTimeout;
+@property NSTimeInterval goodTimeout, badTimeout;
+@property BOOL findingBestTimeout;
 
 @property VISCACamera_t camera;
 
@@ -1044,8 +1047,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 }
 
 - (NSString *)snapshotURL {
-    // I do know this is not the recommended way to make an URL! :)
-    return [NSString stringWithFormat:@"http://%@:80/snapshot.jpg", [self deviceName]];
+    return self.prefCamera.snapshotURLWithAddress;
 }
 
 - (AppDelegate *)appDelegate {
@@ -1521,7 +1523,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)reloadCameraOnFailedPing {
     // Main queue for the cameraIsOpen setter, because it may show in UI.
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Reloading camera %@ after failed ping", self.prefCamera.cameraname);
+        NSLog(@"Reloading camera %@ after failed ping, timeout %f", self.prefCamera.cameraname, self.pingTimeout);
         self.cameraIsOpen = NO;
         [self loadCameraWithCompletionHandler:^() {
             if (self.cameraIsOpen) {
@@ -1533,13 +1535,26 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     });
 }
 
-// We want a ping timeout low enough that the camera never times out, so we never try to send a command that will fail. Alternately we could rewrite the whole thing to retry commands sent to dead sockets.
-#define PING_TIMEOUT 60
+// Find a best timeout and cache it.
+#define MAX_PING_TIMEOUT (60 * 5)
+#define PING_TIMEOUT_MARGIN 5
 
 - (void)reallyPingCamera {
     if (self.isSerial) {
         // Serial devices don't timeout.
         return;
+    }
+    if (self.pingTimeout == 0) {
+        self.pingTimeout = self.prefCamera.pingTimeout;
+        if (self.pingTimeout == 0) {
+            self.goodTimeout = PING_TIMEOUT_MARGIN;
+            self.badTimeout = MAX_PING_TIMEOUT;
+            self.pingTimeout = round(self.badTimeout / 2);
+            self.findingBestTimeout = YES;
+            NSLog(@"First timeout is %f", self.pingTimeout);
+        } else {
+            self.findingBestTimeout = NO;
+        }
     }
     if (!self.cameraIsOpen) {
         [self reloadCameraOnFailedPing];
@@ -1549,13 +1564,49 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     if (self.pingTimer) {
         [self.pingTimer invalidate];
     }
-    self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:PING_TIMEOUT repeats:NO block:^(NSTimer * _Nonnull timer) {
+    self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:self.pingTimeout repeats:NO block:^(NSTimer * _Nonnull timer) {
         dispatch_async(self.cameraQueue, ^{
             uint8_t exposureMode;
             if (VISCA_get_auto_exp_mode(&self->_iface, &self->_camera, &exposureMode) == VISCA_SUCCESS) {
                 [self pingCamera];
+                if (self.findingBestTimeout) {
+                    NSTimeInterval last = self.pingTimeout;
+                    self.pingTimeout = round(last + ((self.badTimeout - last) / 2));
+                    if (fabs(last - self.pingTimeout) < PING_TIMEOUT_MARGIN) {
+                        // Close enough. Stop now.
+                        NSLog(@"Best timeout is %f", self.pingTimeout);
+                        self.prefCamera.pingTimeout = (NSInteger)self.pingTimeout;
+                        self.findingBestTimeout = NO;
+                    } else {
+                        self.goodTimeout = last;
+                    }
+                }
             } else if (self->_iface.errortype == VISCA_READ_FAILURE) {
                 [self reloadCameraOnFailedPing];
+                if (!self.findingBestTimeout) {
+                    // We thought we had a good one. Reset the binary search.
+                    NSTimeInterval last = self.pingTimeout;
+                    self.goodTimeout = PING_TIMEOUT_MARGIN;
+                    self.badTimeout = self.pingTimeout;
+                    self.findingBestTimeout = YES;
+                    NSLog(@"Timeout failed at %f, restarting search", self.pingTimeout);
+                }
+                if (self.findingBestTimeout) {
+                    NSTimeInterval last = self.pingTimeout;
+                    self.pingTimeout = round(self.goodTimeout + ((last - self.goodTimeout) / 2));
+                    if (fabs(last - self.pingTimeout) < PING_TIMEOUT_MARGIN) {
+                        self.findingBestTimeout = NO;
+                        // Allow some margin of error.
+                        self.pingTimeout = MAX(self.goodTimeout - PING_TIMEOUT_MARGIN, PING_TIMEOUT_MARGIN);
+                        NSLog(@"Best timeout is %f", self.pingTimeout);
+                        self.prefCamera.pingTimeout = (NSInteger)self.pingTimeout;
+                    } else {
+                        self.badTimeout = last;
+                    }
+                }
+            }
+            if (self.findingBestTimeout) {
+                NSLog(@"Ping timeout is %f", self.pingTimeout);
             }
         });
     }];

@@ -879,7 +879,7 @@
                                             <rect key="frame" x="26" y="201" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
@@ -1475,7 +1475,7 @@
                                             <rect key="frame" x="20" y="132" width="360" height="145"/>
                                             <clipView key="contentView" ambiguous="YES" id="UaS-pQ-7gM">
                                                 <rect key="frame" x="1" y="1" width="358" height="143"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="B1C-5d-bJL" viewBased="YES" id="lXZ-xj-42m">
                                                         <rect key="frame" x="0.0" y="0.0" width="358" height="115"/>
@@ -1497,7 +1497,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="ptq-5l-6nG">
-                                                                        <rect key="frame" x="8" y="0.0" width="148" height="24"/>
+                                                                        <rect key="frame" x="18" y="0.0" width="148" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
@@ -1540,7 +1540,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="9pH-cA-Dad">
-                                                                        <rect key="frame" x="173" y="0.0" width="80" height="24"/>
+                                                                        <rect key="frame" x="183" y="0.0" width="80" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
@@ -1586,7 +1586,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="53k-sB-Drl">
-                                                                        <rect key="frame" x="270" y="0.0" width="77" height="17"/>
+                                                                        <rect key="frame" x="280" y="0.0" width="77" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-8N-VUE">
@@ -1621,7 +1621,7 @@
                                                 <constraint firstAttribute="width" constant="360" id="sOy-go-cDZ"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="kC5-TW-Ruf">
-                                                <rect key="frame" x="1" y="119" width="358" height="15"/>
+                                                <rect key="frame" x="1" y="129" width="358" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cbE-Yc-nV5">
@@ -1645,9 +1645,8 @@
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="dd8-87-ge4" column="tyJ-Wg-pyh" id="ybm-au-avr">
-                                                    <button key="contentView" verticalHuggingPriority="750" id="5xH-Pt-plH" userLabel="+ Square">
+                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5xH-Pt-plH" userLabel="+ Square">
                                                         <rect key="frame" x="0.0" y="-1" width="16" height="20"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mzq-c8-dz8">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -1658,9 +1657,8 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="dd8-87-ge4" column="4EC-W8-Zwz" id="wLp-pd-Hum">
-                                                    <button key="contentView" verticalHuggingPriority="750" id="hMy-2H-0Wa" userLabel="- Square">
+                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hMy-2H-0Wa" userLabel="- Square">
                                                         <rect key="frame" x="16" y="-1" width="16" height="20"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="59L-Zh-xF9">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -1671,9 +1669,8 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="dd8-87-ge4" column="0kJ-NF-5rU" id="dID-1w-VgI">
-                                                    <button key="contentView" verticalHuggingPriority="750" id="YpR-Jo-c4S" userLabel="- Square">
+                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YpR-Jo-c4S" userLabel="- Square">
                                                         <rect key="frame" x="32" y="-1" width="108" height="20"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="smallSquare" title="Show range map" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kFQ-DE-unr">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -1903,9 +1900,8 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="9pA-kD-I6b" column="Rzo-Ng-azi" id="oJh-mh-L97">
-                                                                    <textField key="contentView" verticalHuggingPriority="751" ambiguous="YES" preferredMaxLayoutWidth="31" id="W48-RC-qxN" userLabel="zoom">
+                                                                    <textField key="contentView" verticalHuggingPriority="751" ambiguous="YES" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="W48-RC-qxN" userLabel="zoom">
                                                                         <rect key="frame" x="56" y="0.0" width="60" height="21"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="00" drawsBackground="YES" id="uP9-Uq-VvU">
                                                                             <font key="font" metaFont="system"/>
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1929,9 +1925,8 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="9pA-kD-I6b" column="j71-uD-UzU" id="8D0-n3-yB5">
-                                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" id="zgm-fF-QWx">
+                                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgm-fF-QWx">
                                                                         <rect key="frame" x="213" y="-2" width="64" height="23"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="dPJ-uI-yQm">
                                                                             <font key="font" metaFont="system"/>
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2226,15 +2221,15 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-Ni-W5j">
-                                            <rect key="frame" x="18" y="354" width="159" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Camera preview images" id="Urj-cz-SfF">
+                                            <rect key="frame" x="18" y="354" width="297" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Camera Preview and Preset Snapshot Images" id="Urj-cz-SfF">
                                                 <font key="font" metaFont="systemBold"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="M8B-4P-3hL" userLabel="Thumbnail Group View">
-                                            <rect key="frame" x="34" y="203" width="346" height="93"/>
+                                            <rect key="frame" x="34" y="175" width="346" height="93"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" tag="102" translatesAutoresizingMaskIntoConstraints="NO" id="Ixa-IV-ZaJ">
                                                     <rect key="frame" x="-2" y="-1" width="166" height="18"/>
@@ -2259,9 +2254,10 @@
                                                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                             </dictionary>
                                                         </binding>
-                                                        <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.rtspURL" id="abg-rW-yrG">
+                                                        <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.rtspURL" id="7Kl-cX-Kr1">
                                                             <dictionary key="options">
                                                                 <string key="NSNullPlaceholder">rtsp://[ipaddress]:554/1</string>
+                                                                <bool key="NSValidatesImmediately" value="YES"/>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
@@ -2311,16 +2307,18 @@
                                             </constraints>
                                         </customView>
                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZWb-TB-yAQ">
-                                            <rect key="frame" x="32" y="304" width="350" height="42"/>
+                                            <rect key="frame" x="32" y="276" width="350" height="70"/>
                                             <textFieldCell key="cell" controlSize="small" selectable="YES" id="bLt-m4-wjE">
                                                 <font key="font" metaFont="smallSystem"/>
-                                                <string key="title">Choose the contents for the camera preview in the navigation panel. The preview can show a live RTSP stream if your camera supports it, or fetch static images from OBS or your camera.</string>
+                                                <string key="title">Choose the source for IP camera preview in the navigation panel. The preview can show a live RTSP stream if the camera supports it, or read snapshot images from OBS or the camera.
+
+USB cameras can only show OBS snapshots.</string>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ozz-RQ-OUd">
-                                            <rect key="frame" x="34" y="89" width="346" height="93"/>
+                                            <rect key="frame" x="34" y="41" width="346" height="93"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" tag="101" translatesAutoresizingMaskIntoConstraints="NO" id="twz-pq-ur0">
                                                     <rect key="frame" x="-2" y="76" width="205" height="18"/>
@@ -2365,9 +2363,10 @@
                                                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                             </dictionary>
                                                         </binding>
-                                                        <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.snapshotURL" id="W5d-0N-9YO">
+                                                        <binding destination="MdI-N0-20y" name="value" keyPath="prefCamera.snapshotURL" id="acS-HU-bpU">
                                                             <dictionary key="options">
                                                                 <string key="NSNullPlaceholder">http://[ipaddress]:80/snapshot.jpg</string>
+                                                                <bool key="NSValidatesImmediately" value="YES"/>
                                                             </dictionary>
                                                         </binding>
                                                     </connections>
@@ -2398,13 +2397,23 @@
                                             </constraints>
                                         </customView>
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="V4s-G8-eZb">
-                                            <rect key="frame" x="20" y="190" width="360" height="5"/>
+                                            <rect key="frame" x="20" y="162" width="360" height="5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="xA6-I9-M7F"/>
                                             </constraints>
                                         </box>
+                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="e8P-RR-Mcx">
+                                            <rect key="frame" x="32" y="142" width="350" height="14"/>
+                                            <textFieldCell key="cell" controlSize="small" selectable="YES" title="Choose the source for snapshot images:" id="nhQ-uW-72u">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="e8P-RR-Mcx" firstAttribute="top" secondItem="V4s-G8-eZb" secondAttribute="bottom" constant="8" symbolic="YES" id="5B1-oE-7wc"/>
+                                        <constraint firstItem="ozz-RQ-OUd" firstAttribute="top" secondItem="e8P-RR-Mcx" secondAttribute="bottom" constant="8" symbolic="YES" id="5ML-uh-v2K"/>
                                         <constraint firstItem="V4s-G8-eZb" firstAttribute="top" secondItem="M8B-4P-3hL" secondAttribute="bottom" constant="10" id="6OI-zh-Uuc"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="trailing" secondItem="ZWb-TB-yAQ" secondAttribute="trailing" id="DHm-hM-MTH"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="leading" secondItem="ZWb-TB-yAQ" secondAttribute="leading" id="Icw-kD-C8S"/>
@@ -2412,12 +2421,13 @@
                                         <constraint firstAttribute="trailing" secondItem="M8B-4P-3hL" secondAttribute="trailing" constant="20" symbolic="YES" id="POB-5x-Y2q"/>
                                         <constraint firstItem="ozz-RQ-OUd" firstAttribute="trailing" secondItem="M8B-4P-3hL" secondAttribute="trailing" id="Q2R-6Z-HD2"/>
                                         <constraint firstAttribute="trailing" secondItem="V4s-G8-eZb" secondAttribute="trailing" constant="20" symbolic="YES" id="RqB-aM-MBz"/>
+                                        <constraint firstItem="e8P-RR-Mcx" firstAttribute="leading" secondItem="ZWb-TB-yAQ" secondAttribute="leading" id="YC0-zU-rgP"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="top" secondItem="ZWb-TB-yAQ" secondAttribute="bottom" constant="8" symbolic="YES" id="cOh-1r-oXj"/>
                                         <constraint firstItem="M8B-4P-3hL" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="34" id="iUs-Bw-0kA"/>
                                         <constraint firstItem="qaQ-Ni-W5j" firstAttribute="top" secondItem="HZ1-c5-V6S" secondAttribute="top" constant="20" symbolic="YES" id="nsn-8c-9Hw"/>
                                         <constraint firstItem="qaQ-Ni-W5j" firstAttribute="leading" secondItem="HZ1-c5-V6S" secondAttribute="leading" constant="20" symbolic="YES" id="ohP-zp-yS5"/>
                                         <constraint firstItem="ZWb-TB-yAQ" firstAttribute="top" secondItem="qaQ-Ni-W5j" secondAttribute="bottom" constant="8" symbolic="YES" id="sjD-QE-59d"/>
-                                        <constraint firstItem="ozz-RQ-OUd" firstAttribute="top" secondItem="V4s-G8-eZb" secondAttribute="bottom" constant="10" id="v5y-bv-CuQ"/>
+                                        <constraint firstItem="e8P-RR-Mcx" firstAttribute="trailing" secondItem="ZWb-TB-yAQ" secondAttribute="trailing" id="uO8-nW-rOi"/>
                                         <constraint firstItem="ozz-RQ-OUd" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" id="xoe-WF-73j"/>
                                     </constraints>
                                 </view>
