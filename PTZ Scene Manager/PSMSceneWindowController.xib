@@ -34,26 +34,26 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <splitView dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PtN-SX-hVF">
-                        <rect key="frame" x="0.0" y="0.0" width="664" height="636"/>
+                        <rect key="frame" x="0.0" y="-1" width="664" height="637"/>
                         <subviews>
                             <customView id="Y3c-Ay-dYM" userLabel="Body View">
-                                <rect key="frame" x="0.0" y="0.0" width="380" height="636"/>
+                                <rect key="frame" x="0.0" y="0.0" width="380" height="637"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <box boxType="custom" borderType="line" borderWidth="2" cornerRadius="2" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Gws-GK-es2">
-                                        <rect key="frame" x="0.0" y="0.0" width="380" height="636"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="380" height="637"/>
                                         <view key="contentView" id="Ykz-oX-6gR">
-                                            <rect key="frame" x="2" y="2" width="376" height="632"/>
+                                            <rect key="frame" x="2" y="2" width="376" height="633"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView identifier="Scenes" wantsLayer="YES" borderType="groove" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERX-r8-LRb">
-                                                    <rect key="frame" x="-3" y="-1" width="381" height="633"/>
+                                                    <rect key="frame" x="-3" y="-1" width="381" height="634"/>
                                                     <clipView key="contentView" drawsBackground="NO" id="O1a-J2-dIf">
-                                                        <rect key="frame" x="2" y="2" width="377" height="629"/>
+                                                        <rect key="frame" x="2" y="2" width="377" height="630"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <collectionView id="6Fy-kw-0Au">
-                                                                <rect key="frame" x="0.0" y="0.0" width="377" height="629"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="377" height="630"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                 <collectionViewGridLayout key="collectionViewLayout" maximumNumberOfRows="100" maximumNumberOfColumns="3" id="kp8-LB-dax">
                                                                     <size key="minimumItemSize" width="75" height="75"/>
@@ -80,7 +80,7 @@
                                                     </scroller>
                                                 </scrollView>
                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PBu-5q-5op">
-                                                    <rect key="frame" x="142" y="292" width="92" height="48"/>
+                                                    <rect key="frame" x="142" y="293" width="92" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="88" id="ULz-Ze-29t"/>
                                                         <constraint firstAttribute="height" constant="48" id="lOB-GK-Lv5"/>
@@ -117,11 +117,11 @@
                                 </constraints>
                             </customView>
                             <customView identifier="Controls" id="aqd-Mf-Y30" userLabel="Sidebar View">
-                                <rect key="frame" x="390" y="0.0" width="274" height="636"/>
+                                <rect key="frame" x="390" y="0.0" width="274" height="637"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="pQm-I7-fbP" userLabel="Live Cam View" customClass="RTSPView">
-                                        <rect key="frame" x="0.0" y="460" width="274" height="176"/>
+                                        <rect key="frame" x="0.0" y="461" width="274" height="176"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QDe-sc-c7e">
                                                 <rect key="frame" x="228" y="-7" width="46" height="27"/>
@@ -195,7 +195,7 @@
                                         </connections>
                                     </customView>
                                     <gridView horizontalHuggingPriority="750" verticalHuggingPriority="750" xPlacement="fill" yPlacement="fill" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-8a-7PM" userLabel="PanTilt Grid View">
-                                        <rect key="frame" x="87" y="345" width="100" height="100"/>
+                                        <rect key="frame" x="87" y="346" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="P2s-sA-zQu"/>
                                             <constraint firstAttribute="width" constant="100" id="XNi-Fi-QDb"/>
@@ -515,7 +515,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </gridView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="YGQ-XG-efI" userLabel="Zoom View">
-                                        <rect key="frame" x="85" y="308" width="104" height="25"/>
+                                        <rect key="frame" x="85" y="309" width="104" height="25"/>
                                         <subviews>
                                             <gridView verticalHuggingPriority="750" xPlacement="leading" yPlacement="top" rowAlignment="none" rowSpacing="0.0" columnSpacing="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qR6-cn-b6Q" userLabel="Zoom Grid View">
                                                 <rect key="frame" x="0.0" y="0.0" width="104" height="25"/>
@@ -609,7 +609,7 @@
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="aUA-lC-s2h" userLabel="More View">
-                                        <rect key="frame" x="85" y="109" width="104" height="187"/>
+                                        <rect key="frame" x="85" y="110" width="104" height="187"/>
                                         <subviews>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-2j-qG2" userLabel="More Controls View" customClass="DraggingStackView" customModule="PTZ_Scene_Manager" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="2" width="104" height="183"/>
@@ -732,8 +732,8 @@
                                                         <rect key="frame" x="0.0" y="66" width="104" height="34"/>
                                                         <subviews>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bi2-qO-ost">
-                                                                <rect key="frame" x="-2" y="20" width="73" height="14"/>
-                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Preset Recall" id="PyM-jg-Kcs">
+                                                                <rect key="frame" x="-2" y="20" width="109" height="14"/>
+                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Preset Recall Speed" id="PyM-jg-Kcs">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -921,13 +921,13 @@
                     <constraint firstItem="PtN-SX-hVF" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Jn6-EP-gOB"/>
                     <constraint firstAttribute="trailing" secondItem="PtN-SX-hVF" secondAttribute="trailing" id="MyS-Zz-wne"/>
                     <constraint firstItem="PtN-SX-hVF" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="Voh-RP-ZAp"/>
-                    <constraint firstAttribute="bottom" secondItem="PtN-SX-hVF" secondAttribute="bottom" id="sX3-CH-mHh"/>
+                    <constraint firstAttribute="bottom" secondItem="PtN-SX-hVF" secondAttribute="bottom" constant="-1" id="sX3-CH-mHh"/>
                 </constraints>
             </view>
             <toolbar key="toolbar" implicitIdentifier="560AA1A6-329F-4C3C-8EB7-44291735BED4" explicitIdentifier="SceneWindow" displayMode="iconAndLabel" sizeMode="regular" id="BbF-lh-Vza">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="0FA33EB7-EF4C-4D5C-A956-3B64BAAF711A" explicitItemIdentifier="SceneSettings" label="Settings" paletteLabel="Settings" tag="-1" bordered="YES" sizingBehavior="auto" id="IMg-8c-5TN">
-                        <imageReference key="image" image="camera-toolbar" symbolScale="large"/>
+                        <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
                         <connections>
                             <action selector="showCameraStateWindow:" target="-2" id="DVX-zu-Cas"/>
                         </connections>
@@ -1182,8 +1182,8 @@
         <image name="arrowtriangle.left.fill" catalog="system" width="14" height="13"/>
         <image name="arrowtriangle.right.fill" catalog="system" width="14" height="13"/>
         <image name="arrowtriangle.up.fill" catalog="system" width="14" height="13"/>
-        <image name="camera-toolbar" width="512" height="512"/>
         <image name="filemenu.and.selection" catalog="system" width="18" height="14"/>
+        <image name="gear" catalog="system" width="22" height="22"/>
         <image name="house.fill" catalog="system" width="19" height="16"/>
         <image name="minus" catalog="system" width="14" height="4"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>

@@ -335,8 +335,13 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
         if (self.authType == OBSAuthTypeKeychainAttempt || self.authType == OBSAuthTypePromptFailed) {
             self.authType = OBSAuthTypePromptAttempt;
         }
-        [self.delegate requestOBSWebSocketPasswordWithPrompt:self.authType onDone:^(NSString *password) {
-            if ([password length] == 0) {
+        [self.delegate requestOBSWebSocketPasswordWithPrompt:self.authType onDone:^(NSModalResponse button, NSString *password) {
+            if (button != NSAlertFirstButtonReturn || [password length] == 0) {
+                // Reset so they can try again.
+                self.authType = OBSAuthTypeUnknown;
+                self.obsState = OBSStateWaitingToConnect;
+                self.connected = NO;
+                self.running = NO;
                 return;
             }
             NSString *authResponse = [OBSAuth.shared obsSecret:auth password:password];
@@ -636,51 +641,51 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
             continue;
         }
         BOOL doesFill = YES;
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"CheckCoverage"]) {
-            NSDictionary *xform = dict[@"sceneItemTransform"];
-            
-            // Zero width/height means use the whole screen.
-            CGFloat width = [xform[@"width"] floatValue] ?: self.baseWidth;
-            CGFloat height = [xform[@"height"] floatValue] ?: self.baseHeight;
-            // If we can't test it, assume it fills.
-            if (height > 0 && width > 0) {
-                CGRect testRect = CGRectZero;
-                CGFloat sourceWidth = [xform[@"sourceWidth"] floatValue] ?: self.baseWidth;
-                CGFloat sourceHeight = [xform[@"sourceHeight"] floatValue] ?: self.baseHeight;
-                // PositionXY - absolute position on the screen.
-                CGFloat positionX = [xform[@"positionX"] floatValue];
-                CGFloat positionY = [xform[@"positionY"] floatValue];
-                CGFloat cropLeft = [xform[@"cropLeft"] floatValue];
-                CGFloat cropRight = [xform[@"cropRight"] floatValue];
-                CGFloat cropTop = [xform[@"cropTop"] floatValue];
-                CGFloat cropBottom = [xform[@"cropBottom"] floatValue];
-                if ([xform[@"boundsType"] isEqualToString:@"OBS_BOUNDS_NONE"]) {
-                    testRect = CGRectMake(positionX, positionY, width, height);
-                } else {
-                    // boundsAlignment does not affect the geometry we care about
-                    CGFloat boundsWidth = [xform[@"boundsWidth"] floatValue];
-                    CGFloat boundsHeight = [xform[@"boundsHeight"] floatValue];
-                    testRect = CGRectMake(positionX, positionY, boundsWidth, boundsHeight);
-                }
-                NSInteger alignment = [xform[@"alignment"] intValue];
-                testRect = [self adjustRect:testRect forAlignment:alignment];
-                // crop values only matter in that they change the width/height of what's visible.
-                testRect.size.width -= (cropLeft + cropRight);
-                testRect.size.height -= (cropTop + cropBottom);
-                testRect = NSIntegralRect(testRect);
-                CGFloat testHeight = MIN(sourceHeight, testRect.size.height);
-                CGFloat testWidth = MIN(sourceWidth, testRect.size.width);
-                // Do a simple fill check. If it's wider, it fills
-                doesFill = (testRect.origin.x == 0) && (testRect.origin.x == 0) && isCloseEnough(sourceHeight, testHeight) && isCloseEnough(sourceWidth, testWidth);
-                // OK, now play with regions.
-                if (!doesFill) {
-                    pixman_region32_union_rect(&region, &region, testRect.origin.x, testRect.origin.y, testRect.size.width, testRect.size.height);
-                    pixman_region32_subtract(&diffRegion, &screenRegion, &region);
-                    int rects = pixman_region32_n_rects(&diffRegion);
-                    if (rects == 0) {
-                        // Nothing left after subtracting region from screen.
-                        doesFill = YES;
-                    }
+        // From github: width and height are computed values using respectively sourceWidth * scaleX and sourceHeight * scaleY
+        NSDictionary *xform = dict[@"sceneItemTransform"];
+        
+        // Zero width/height means use the whole screen.
+        CGFloat width = [xform[@"width"] floatValue] ?: self.baseWidth;
+        CGFloat height = [xform[@"height"] floatValue] ?: self.baseHeight;
+        // If we can't test it, assume it fills.
+        if (height > 0 && width > 0) {
+            CGRect testRect = CGRectZero;
+            CGFloat sourceWidth = [xform[@"sourceWidth"] floatValue] ?: self.baseWidth;
+            CGFloat sourceHeight = [xform[@"sourceHeight"] floatValue] ?: self.baseHeight;
+            // PositionXY - absolute position on the screen.
+            CGFloat positionX = [xform[@"positionX"] floatValue];
+            CGFloat positionY = [xform[@"positionY"] floatValue];
+            CGFloat cropLeft = [xform[@"cropLeft"] floatValue];
+            CGFloat cropRight = [xform[@"cropRight"] floatValue];
+            CGFloat cropTop = [xform[@"cropTop"] floatValue];
+            CGFloat cropBottom = [xform[@"cropBottom"] floatValue];
+            if ([xform[@"boundsType"] isEqualToString:@"OBS_BOUNDS_NONE"]) {
+                testRect = CGRectMake(positionX, positionY, width, height);
+            } else {
+                // boundsAlignment does not affect the geometry we care about
+                CGFloat boundsWidth = [xform[@"boundsWidth"] floatValue];
+                CGFloat boundsHeight = [xform[@"boundsHeight"] floatValue];
+                testRect = CGRectMake(positionX, positionY, boundsWidth, boundsHeight);
+            }
+            NSInteger alignment = [xform[@"alignment"] intValue];
+            testRect = [self adjustRect:testRect forAlignment:alignment];
+            // crop values only matter in that they change the width/height of what's visible.
+            testRect.size.width -= (cropLeft + cropRight);
+            testRect.size.height -= (cropTop + cropBottom);
+            testRect = NSIntegralRect(testRect);
+            CGFloat testHeight = MIN(sourceHeight, testRect.size.height);
+            CGFloat testWidth = MIN(sourceWidth, testRect.size.width);
+            // Do a simple fill check. If it's wider, it fills
+            doesFill = (testRect.origin.x == 0) && (testRect.origin.x == 0) && isCloseEnough(sourceHeight, testHeight) && isCloseEnough(sourceWidth, testWidth);
+            // OK, now play with regions.
+            if (!doesFill) {
+                // Add this rect to the accumulated 'region'.
+                pixman_region32_union_rect(&region, &region, testRect.origin.x, testRect.origin.y, testRect.size.width, testRect.size.height);
+                pixman_region32_subtract(&diffRegion, &screenRegion, &region);
+                int rects = pixman_region32_n_rects(&diffRegion);
+                if (rects == 0) {
+                    // Nothing left after subtracting region from screen.
+                    doesFill = YES;
                 }
             }
         }
@@ -698,15 +703,25 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
 
 
 - (void)scene:(NSString *)sceneName didChangeItems:(NSArray *)sceneItems {
-    if ([sceneName isEqualToString:self.currentProgramScene]) {
-        self.currentProgramSourceNames = [self visibleSourceItemNames:sceneItems];
-    } else if ([sceneName isEqualToString:self.currentPreviewScene]) {
-        self.currentPreviewSourceNames = [self visibleSourceItemNames:sceneItems];
+    NSLog(@"sceneName '%@' program '%@' preview '%@'", sceneName, self.currentProgramScene, self.currentPreviewScene);
+    // Same scene can be preview and program. Don't cache; a scene's active cameras can change at any time, which we are also tracking.
+    BOOL isProgram = [sceneName isEqualToString:self.currentProgramScene];
+    BOOL isPreview = [sceneName isEqualToString:self.currentPreviewScene];
+    if (isProgram || isPreview) {
+        NSArray *names = [self visibleSourceItemNames:sceneItems];
+        if (isProgram) {
+            self.currentProgramSourceNames = names;
+            NSLog(@"program %@", [self.currentProgramSourceNames description]);
+        }
+        if (isPreview ){
+            self.currentPreviewSourceNames = names;
+            NSLog(@"preview %@", [self.currentPreviewSourceNames description]);
+        }
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:PSMOBSCurrentSourceDidChangeNotification
+         object:nil
+         userInfo:nil];
     }
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:PSMOBSCurrentSourceDidChangeNotification
-     object:nil
-     userInfo:nil];
 }
 
 #pragma mark WebSocket thread

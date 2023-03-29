@@ -4,6 +4,7 @@
 //
 //  Created by Lee Ann Rucker on 1/20/23.
 //
+// Note: This should only use Aqua, dark mode is not appropriate since the image is always the same. It should be set in the nib. High Contrast Aqua works fine.
 
 #import "AppDelegate.h"
 #import "PSMSceneCollectionItem.h"

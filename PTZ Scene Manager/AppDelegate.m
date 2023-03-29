@@ -14,6 +14,7 @@
 // TCP version of visca: https://github.com/norihiro/libvisca-ip
 // iniparser: https://github.com/ndevilla/iniparser
 // pixman regions: https://github.com/servo/pixman/blob/master/pixman/pixman-region.c
+// Prefs window: https://github.com/GenjiApp/PrefWindowApp2
 
 #import "AppDelegate.h"
 #import "PSMSceneWindowController.h"
@@ -348,7 +349,7 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     }
 }
 
-- (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock {
+- (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSModalResponse, NSString *))doneBlock {
     NSAlert *alert = [[NSAlert alloc] init];
     // prompt attempt (no previous errors), keychain attempt failed, previous prompt failed.
     if (authType == OBSAuthTypeKeychainFailed) {
@@ -366,10 +367,8 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     [input setStringValue:@""];
 
     [alert setAccessoryView:input];
-    NSInteger button = [alert runModal];
-    if (button == NSAlertFirstButtonReturn) {
-        doneBlock([input stringValue]);
-    }
+    NSModalResponse button = [alert runModal];
+    doneBlock(button, [input stringValue]);
 }
 
 - (void)requestOBSWebSocketKeychainPermission:(void (^)(BOOL))doneBlock {

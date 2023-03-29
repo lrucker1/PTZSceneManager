@@ -860,8 +860,8 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)callDoneBlock:(PTZDoneBlock)doneBlock success:(BOOL)success {
     if (success == NO) {
         if (_iface.errortype == VISCA_READ_FAILURE) {
-            dispatch_async(dispatch_get_main_queue(), ^{\
-                NSLog(@"Camera %@ disconnected", self.prefCamera.cameraname);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"Camera disconnected");
                 self.cameraIsOpen = NO;
             });
         }
@@ -1535,8 +1535,10 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     });
 }
 
-// Find a best timeout and cache it.
+// Find a best timeout and cache it. We don't want to spam the camera. We may take a long time to notice an actual disconnection event, but that should be obvious in OBS immediately.
+// Note that our cameras maxed out! So it's somewhere between 5 and 15, which is the longest idle time any of our cameras hit.
 #define MAX_PING_TIMEOUT (60 * 5)
+#define MIN_PING_TIMEOUT 10
 #define PING_TIMEOUT_MARGIN 5
 
 - (void)reallyPingCamera {
@@ -1547,7 +1549,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     if (self.pingTimeout == 0) {
         self.pingTimeout = self.prefCamera.pingTimeout;
         if (self.pingTimeout == 0) {
-            self.goodTimeout = PING_TIMEOUT_MARGIN;
+            self.goodTimeout = MIN_PING_TIMEOUT;
             self.badTimeout = MAX_PING_TIMEOUT;
             self.pingTimeout = round(self.badTimeout / 2);
             self.findingBestTimeout = YES;
@@ -1583,14 +1585,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
                 }
             } else if (self->_iface.errortype == VISCA_READ_FAILURE) {
                 [self reloadCameraOnFailedPing];
-                if (!self.findingBestTimeout) {
-                    // We thought we had a good one. Reset the binary search.
-                    NSTimeInterval last = self.pingTimeout;
-                    self.goodTimeout = PING_TIMEOUT_MARGIN;
-                    self.badTimeout = self.pingTimeout;
-                    self.findingBestTimeout = YES;
-                    NSLog(@"Timeout failed at %f, restarting search", self.pingTimeout);
-                }
+                // Don't change pingTimeout, this could be a real disconnect. The window will light up, user will have to reconnect.
                 if (self.findingBestTimeout) {
                     NSTimeInterval last = self.pingTimeout;
                     self.pingTimeout = round(self.goodTimeout + ((last - self.goodTimeout) / 2));

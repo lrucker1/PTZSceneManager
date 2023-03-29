@@ -3,7 +3,11 @@ https://help.ptzoptics.com/support/solutions/articles/13000066852-ptzoptics-cont
 
 https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-rtsp-feed-of-a-ptzoptics-camera
 
- 
+--- Notes for "Help"
+
+Tally (also known as the 'on-air' indication) lights are typically red, although some cameras and video switchers accept a preview tally signal, which is typically green
+
+---
  Export the settings to something readable. Even if that turns out to be settings.ini.
 
 Yes! obs-websocket to find out which camera is hot. And works with the plugin in 2.7.
@@ -15,7 +19,7 @@ Prefs:
       PTZOptics rtsp://[ipaddress]:554/1 (and a /2 for hdmi?)
       and if it's html?
    has website, ditto.
-      PTZOptics [ipaddress]:8080
+      PTZOptics http://[ipaddress]:8080
    snapshot URL
       PTZOptics [ipaddress]:80/snapshot.jpg
    any other notable divergence from Sony, like OSD toggle.
@@ -61,9 +65,10 @@ camlist & prefs window restoration
 
 Clean up delete pref values on launch? (after undo is no longer possible)
 
-NSTabViewController with the .toolbar tab style
+NSTabViewController with the .toolbar tab style - see Prefs in obs-websocket-example
 
 Advanced prefs:
  - ping timeout (although we determine it with binary search)
+  - it's > 5 minutes.
  - recall/set batch delay
 

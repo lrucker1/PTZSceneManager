@@ -63,7 +63,7 @@ RectUtil_CenterRect(NSRect rect, CGFloat width, CGFloat height)
 @implementation LARClickableImageButtonCell
 
 - (NSAttributedString *)attributedTitle {
-    NSColor *color = [NSColor whiteColor];
+    NSColor *color = [NSColor controlBackgroundColor];
     NSShadow *shadow = [[NSShadow alloc] init];
 
     [shadow setShadowColor:[NSColor blackColor]];

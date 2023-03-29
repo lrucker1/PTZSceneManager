@@ -239,23 +239,33 @@ typedef enum {
     // Exact match means this camera is frontmost and covers the screen. It can be both Program and Preview; Program takes precedence.
     if ([obs.currentProgramSourceNames containsObject:self.prefCamera.obsSourceName]) {
         mode = PTZVideoProgram;
+        self.window.subtitle = NSLocalizedString(@"Program", @"OBS Program camera window subtitle");
+        [self updateColors:[NSColor systemPinkColor] solidBackground:NO];
     } else if ([obs.currentPreviewSourceNames containsObject:self.prefCamera.obsSourceName]) {
         mode = PTZVideoPreview;
-    }
-    if (self.prefCamera.camera.cameraIsOpen == NO) {
-        [self updateColors:[NSColor systemOrangeColor] solidBackground:YES];
-        self.window.subtitle = NSLocalizedString(@"Disconnected", @"Disconnected camera window subtitle");
-    } else if (mode == PTZVideoProgram) {
-        [self updateColors:[NSColor systemPinkColor] solidBackground:NO];
-        self.window.subtitle = NSLocalizedString(@"Program", @"OBS Program camera window subtitle");
-    } else if (mode == PTZVideoPreview) {
-        [self updateColors:[NSColor systemGreenColor] solidBackground:NO];
         self.window.subtitle = NSLocalizedString(@"Preview", @"OBS Preview camera window subtitle");
+        [self updateColors:[NSColor systemGreenColor] solidBackground:NO];
     } else {
         self.cameraBox.borderColor = self.boxColor;
         self.sceneCollectionBox.borderColor = self.boxColor;
         self.collectionView.backgroundColors = self.collectionColors;
         self.window.subtitle = @"";
+    }
+    // If it's disconnected, update the subtitle.
+    if (self.prefCamera.camera.cameraIsOpen == NO) {
+        switch (mode) {
+            case PTZVideoPreview:
+                self.window.subtitle = NSLocalizedString(@"Preview (Disconnected)", @"Preview Disconnected camera window subtitle");
+                break;
+            case PTZVideoProgram:
+                self.window.subtitle = NSLocalizedString(@"Program (Disconnected)", @"Program Disconnected camera window subtitle");
+                break;
+           case PTZVideoOff:
+                // Disable the disconnected color: Real cameras rarely disconnect; fake debugging cameras often do.
+                // [self updateColors:[NSColor systemOrangeColor] solidBackground:YES];
+                self.window.subtitle = NSLocalizedString(@"Disconnected", @"Disconnected camera window subtitle");
+                break;
+        }
     }
     self.camera.videoMode = mode;
 }
@@ -688,10 +698,8 @@ typedef enum {
 - (IBAction)doSharpnessUpDown:(id)sender {
     NSStepper *stepper = (NSStepper *)sender;
     if (stepper.integerValue == 1) {
-        NSLog(@"up");
         [self.camera applyApertureUp:nil];
     } else if (stepper.integerValue == -1) {
-        NSLog(@"down");
         [self.camera applyApertureDown:nil];
     }
 }

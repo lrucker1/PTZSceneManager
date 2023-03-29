@@ -37,21 +37,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="390"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPT-sh-aez">
-                                            <rect key="frame" x="300" y="13" width="87" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Fetch All" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wxa-ce-G5Y">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="updateCameraState:" target="MdI-N0-20y" id="bJv-d9-6TI"/>
-                                                <binding destination="MdI-N0-20y" name="enabled" keyPath="cameraState.recallBusy" id="Lj8-iQ-PAS">
-                                                    <dictionary key="options">
-                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                    </dictionary>
-                                                </binding>
-                                            </connections>
-                                        </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mkZ-UM-Mc3">
                                             <rect key="frame" x="18" y="354" width="126" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Alternative speeds" id="zWB-Q4-ajg">
@@ -295,13 +280,10 @@
                                         <constraint firstItem="WqD-5Y-KPT" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="54c-Az-Dnb"/>
                                         <constraint firstItem="TTm-rc-JTh" firstAttribute="top" secondItem="mkZ-UM-Mc3" secondAttribute="bottom" constant="8" symbolic="YES" id="GOq-HY-XY4"/>
                                         <constraint firstItem="X5w-HT-bMl" firstAttribute="top" secondItem="VW8-XC-677" secondAttribute="bottom" constant="8" symbolic="YES" id="HBV-KB-qsB"/>
-                                        <constraint firstAttribute="bottom" secondItem="cPT-sh-aez" secondAttribute="bottom" constant="20" symbolic="YES" id="MUd-t0-N9n"/>
                                         <constraint firstAttribute="trailing" secondItem="LCP-hU-E8a" secondAttribute="trailing" constant="25" id="N4g-zU-NmH"/>
                                         <constraint firstItem="Cgf-pS-bnE" firstAttribute="leading" secondItem="X5w-HT-bMl" secondAttribute="trailing" constant="8" symbolic="YES" id="NPz-it-X6t"/>
                                         <constraint firstAttribute="trailing" secondItem="iwM-28-mTD" secondAttribute="trailing" constant="20" symbolic="YES" id="NRf-UY-5Bb"/>
-                                        <constraint firstAttribute="trailing" secondItem="cPT-sh-aez" secondAttribute="trailing" constant="20" symbolic="YES" id="OIb-gm-aqt"/>
                                         <constraint firstItem="Cgf-pS-bnE" firstAttribute="top" secondItem="WqD-5Y-KPT" secondAttribute="bottom" constant="8" symbolic="YES" id="OXe-aY-eNJ"/>
-                                        <constraint firstItem="cPT-sh-aez" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="PXc-W9-Vel"/>
                                         <constraint firstItem="VW8-XC-677" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="20" symbolic="YES" id="PkG-z6-d21"/>
                                         <constraint firstItem="LCP-hU-E8a" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="32" id="cT2-nI-M0x"/>
                                         <constraint firstItem="TTm-rc-JTh" firstAttribute="leading" secondItem="JL9-I4-rTD" secondAttribute="leading" constant="32" id="iCV-xR-NXx"/>
@@ -879,7 +861,7 @@
                                             <rect key="frame" x="26" y="201" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>

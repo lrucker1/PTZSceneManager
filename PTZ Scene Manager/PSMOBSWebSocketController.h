@@ -22,7 +22,7 @@ typedef enum {
 
 @protocol PSMOBSWebSocketDelegate
 
-- (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSString *))doneBlock;
+- (void)requestOBSWebSocketPasswordWithPrompt:(OBSAuthType)authType onDone:(void (^)(NSModalResponse, NSString *))doneBlock;
 - (void)requestOBSWebSocketKeychainPermission:(void (^)(BOOL))doneBlock;
 
 @end
