@@ -222,7 +222,8 @@ typedef enum {
             }
         }
     }
-    if (self.showStaticSnapshot && !waitingForVideo) {    [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
+    if (self.showStaticSnapshot && !waitingForVideo) {
+        [self.rtspViewController setStaticImage:self.lastRecalledItem.image];
     }
 }
 
@@ -453,6 +454,7 @@ typedef enum {
 }
 
 // Do the cameras recognize the magic speed?
+// Apparently they choke on it - camera stops responding to any nav buttons! So use the standard nav behavior.
 - (IBAction)doMenuPanTilt:(id)sender {
     PTZStartStopButton *button = (PTZStartStopButton *)sender;
     if (button.doStopAction) {
@@ -461,14 +463,15 @@ typedef enum {
         return;
     }
     NSInteger tag = button.tag;
-    [self doPanTiltForTag:tag forMenu:YES];
+    [self doPanTiltForTag:tag forMenu:NO];
     [self startTimer];
 }
 
-// The OSD menu buttons use the standard (non-plus) options
+// The OSD menu buttons use the outer (continuous) options
+// The current forMenu behavior is wrong. Leaving the code as-is in case we ever do need something menu-specific.
 - (void)doPanTiltForTag:(NSInteger)tag forMenu:(BOOL)forMenu  {
     PTZCameraPanTiltParams params;
-    NSInteger baseSpeed = forMenu ? 0x0E : 1;
+    NSInteger baseSpeed = forMenu ? 0 : 1;
     params.forMenu = forMenu;
     params.panSpeed = baseSpeed;
     params.tiltSpeed = baseSpeed;

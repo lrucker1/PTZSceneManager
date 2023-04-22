@@ -154,6 +154,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self manageObservers:NO];
+    [self.pingTimer invalidate];
     if (_cameraIsOpen) {
         VISCA_close(&_iface);
         _cameraIsOpen = NO;
@@ -202,8 +203,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 }
 
 - (void)closeAndReload:(PTZDoneBlock _Nullable)doneBlock {
-    [self closeCamera];
-    [self loadCameraWithCompletionHandler:^() {
+    [self reconnectWithCompletionHandler:^() {
         [self cameraConnected:doneBlock success:self.cameraIsOpen];
     }];
 }
@@ -255,8 +255,21 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     }];
 }
 
+- (void)reconnectWithCompletionHandler:(PTZCommandBlock)handler {
+    self.connectingBusy = YES;
+    [self.cameraOpener reconnectWithCompletionHandler:^(BOOL success) {
+        self.connectingBusy = NO;
+        if (success) {
+            self.cameraIsOpen = YES;
+            [self pingCamera];
+        }
+        handler();
+    }];
+}
+
 - (void)closeCamera {
     if (self.cameraIsOpen) {
+        [self.pingTimer invalidate];
         VISCA_close(&_iface);
         self.cameraIsOpen = NO;
     }
@@ -316,7 +329,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     // I think an unexpected stop should be fine?
     dispatch_block_t block = ^{
         if (self.cameraIsOpen) {
-            VISCA_set_pantilt_stop(&self->_iface, &self->_camera, (uint32_t)self.panSpeed, (uint32_t)self.tiltSpeed);
+            VISCA_set_pantilt_stop(&self->_iface, &self->_camera, 0, 0);
         }
     };
     if (self.pantilt_stop_time > 0) {
@@ -340,9 +353,8 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
             if (VISCA_set_pantilt(&self->_iface, &self->_camera, params.panSpeed, params.tiltSpeed, params.horiz, params.vert) == VISCA_SUCCESS) {
                 success = YES;
                 // Sony doc: To cancel a command when VISCA PAN-TILT Drive (page 17) is being executed, wait at least 200 msec after executing. Then send a cancel command to ensure that PAN-TILT Drive stops effectively.
-                // TODO: Find out if this number is camera-specific. Monoprice cam needs 500 msec for OSD navigation to register.
-                // PTZOptics App is obviously not waiting that long. Experiment time.
-                int64_t msec = params.forMenu ? 500 : 1;
+                // PTZOptics App doesn't appear to have any delay, it just calls "stop" on button release. So we'll try that.
+                int64_t msec = 1; // params.forMenu ? 500 : 1;
                 self.pantilt_stop_time = dispatch_time(DISPATCH_TIME_NOW, msec * NSEC_PER_MSEC);
             }
             [self callDoneBlock:doneBlock success:success recallBusy:NO];
@@ -861,7 +873,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     if (success == NO) {
         if (_iface.errortype == VISCA_READ_FAILURE) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Camera disconnected");
                 self.cameraIsOpen = NO;
             });
         }
@@ -1523,9 +1534,8 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (void)reloadCameraOnFailedPing {
     // Main queue for the cameraIsOpen setter, because it may show in UI.
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Reloading camera %@ after failed ping, timeout %f", self.prefCamera.cameraname, self.pingTimeout);
         self.cameraIsOpen = NO;
-        [self loadCameraWithCompletionHandler:^() {
+        [self reconnectWithCompletionHandler:^() {
             if (self.cameraIsOpen) {
                 [self pingCamera];
             } else {
@@ -1553,7 +1563,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
             self.badTimeout = MAX_PING_TIMEOUT;
             self.pingTimeout = round(self.badTimeout / 2);
             self.findingBestTimeout = YES;
-            NSLog(@"First timeout is %f", self.pingTimeout);
         } else {
             self.findingBestTimeout = NO;
         }
@@ -1576,7 +1585,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
                     self.pingTimeout = round(last + ((self.badTimeout - last) / 2));
                     if (fabs(last - self.pingTimeout) < PING_TIMEOUT_MARGIN) {
                         // Close enough. Stop now.
-                        NSLog(@"Best timeout is %f", self.pingTimeout);
                         self.prefCamera.pingTimeout = (NSInteger)self.pingTimeout;
                         self.findingBestTimeout = NO;
                     } else {
@@ -1585,7 +1593,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
                 }
             } else if (self->_iface.errortype == VISCA_READ_FAILURE) {
                 [self reloadCameraOnFailedPing];
-                // Don't change pingTimeout, this could be a real disconnect. The window will light up, user will have to reconnect.
+                // Don't change pingTimeout, this could be a real disconnect. User will have to reconnect.
                 if (self.findingBestTimeout) {
                     NSTimeInterval last = self.pingTimeout;
                     self.pingTimeout = round(self.goodTimeout + ((last - self.goodTimeout) / 2));
@@ -1593,15 +1601,11 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
                         self.findingBestTimeout = NO;
                         // Allow some margin of error.
                         self.pingTimeout = MAX(self.goodTimeout - PING_TIMEOUT_MARGIN, PING_TIMEOUT_MARGIN);
-                        NSLog(@"Best timeout is %f", self.pingTimeout);
                         self.prefCamera.pingTimeout = (NSInteger)self.pingTimeout;
                     } else {
                         self.badTimeout = last;
                     }
                 }
-            }
-            if (self.findingBestTimeout) {
-                NSLog(@"Ping timeout is %f", self.pingTimeout);
             }
         });
     }];

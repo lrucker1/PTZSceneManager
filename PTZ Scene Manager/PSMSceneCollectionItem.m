@@ -51,12 +51,31 @@ static PSMSceneCollectionItem *selfType;
 }
 
 - (IBAction)sceneRecall:(id)sender {
+    if (self.camera.videoMode == PTZVideoProgram) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.icon = [NSImage imageNamed:NSImageNameCaution];
+        [alert setMessageText:NSLocalizedString(@"Are you sure?\nThis camera is live.", @"Confirming recall on live camera")];
+        [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK Button")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
+        
+        [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                [self doSceneRecall];
+            }
+        }];
+    } else {
+        [self doSceneRecall];
+    }
+}
+
+- (void)doSceneRecall {
     PSMSceneWindowController *wc = (PSMSceneWindowController *)self.view.window.windowController;
     wc.lastRecalledItem = self;
     [self.camera memoryRecall:self.sceneNumber onDone:^(BOOL gotCam) {
         // This only applies to cameras that don't provide live feeds, like USB camera. Which happens to return immediately and keep moving.
-        // What this means for a recall/set cycle on IP cams, I don't know. I thought I'd confirmed they don't return until done.
-        [wc performSelector:@selector(fetchStaticSnapshot) withObject:nil afterDelay:3];
+        // NOTE: What this means for a recall/set cycle on IP cams, I don't know. I thought I'd confirmed they don't return until done.
+        // TODO: Investigate recall static snapshot; disabling because live feed is optional on serial cams now.
+        //[wc performSelector:@selector(fetchStaticSnapshot) withObject:nil afterDelay:3];
         [wc updateVisibleValues];
     }];
 }

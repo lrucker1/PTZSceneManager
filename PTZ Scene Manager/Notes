@@ -69,6 +69,10 @@ NSTabViewController with the .toolbar tab style - see Prefs in obs-websocket-exa
 
 Advanced prefs:
  - ping timeout (although we determine it with binary search)
-  - it's > 5 minutes.
+  - it's > 5 minutes
  - recall/set batch delay
+ - Option to not get nagged about recall on live camera.
 
+Move "Home" to Position pane, add a Recall Home button there too
+
+Reorder Windows menu items when @"prefCamera.menuIndex" changes.

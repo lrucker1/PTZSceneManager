@@ -37,6 +37,7 @@
 		9463828129807F360015BA8F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463828029807F360015BA8F /* libz.tbd */; };
 		9463828229807F360015BA8F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827F29807F360015BA8F /* libiconv.tbd */; };
 		9463828329807F360015BA8F /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827E29807F360015BA8F /* libbz2.tbd */; };
+		946B299D29EE468800E9C1F0 /* liblibvisca-all.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946B299C29EE468800E9C1F0 /* liblibvisca-all.a */; };
 		946CA6B3299C251A00ACC947 /* PTZPrefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 946CA6B2299C251A00ACC947 /* PTZPrefObject.m */; };
 		94747E22297B94F800309752 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E21297B94F800309752 /* AppDelegate.m */; };
 		94747E24297B94F900309752 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94747E23297B94F900309752 /* Assets.xcassets */; };
@@ -67,7 +68,6 @@
 		94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBAFE2986256C00D3C8DC /* PTZCameraSceneRange.m */; };
 		94CEBB242986B73900D3C8DC /* LARIndexSetVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB222986B73900D3C8DC /* LARIndexSetVisualizerView.m */; };
 		94CEBB292989B8CE00D3C8DC /* PTZAltKeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB282989B8CE00D3C8DC /* PTZAltKeyButton.m */; };
-		94CEBB2F2989D38400D3C8DC /* liblibvisca-all.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */; };
 		94CEBB38298A0CCE00D3C8DC /* DraggingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB37298A0CCE00D3C8DC /* DraggingStackView.swift */; };
 		94CEBB40298B58CF00D3C8DC /* PSMRangeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB3E298B58CF00D3C8DC /* PSMRangeCollectionViewController.m */; };
 		94CEBB45298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CEBB43298B5B9F00D3C8DC /* PSMRangeCollectionWindowController.m */; };
@@ -123,6 +123,7 @@
 		9463827E29807F360015BA8F /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libbz2.tbd; sourceTree = DEVELOPER_DIR; };
 		9463827F29807F360015BA8F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		9463828029807F360015BA8F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		946B299C29EE468800E9C1F0 /* liblibvisca-all.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibvisca-all.a"; sourceTree = "<group>"; };
 		946CA6B1299C251A00ACC947 /* PTZPrefObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZPrefObject.h; sourceTree = "<group>"; };
 		946CA6B2299C251A00ACC947 /* PTZPrefObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTZPrefObject.m; sourceTree = "<group>"; };
 		946CA6B4299C26F100ACC947 /* PTZPrefObjectInt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZPrefObjectInt.h; sourceTree = "<group>"; };
@@ -186,7 +187,6 @@
 		94CEBB232986B73900D3C8DC /* LARIndexSetVisualizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LARIndexSetVisualizerView.h; sourceTree = "<group>"; };
 		94CEBB272989B8CE00D3C8DC /* PTZAltKeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZAltKeyButton.h; sourceTree = "<group>"; };
 		94CEBB282989B8CE00D3C8DC /* PTZAltKeyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZAltKeyButton.m; sourceTree = "<group>"; };
-		94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibvisca-all.a"; sourceTree = "<group>"; };
 		94CEBB37298A0CCE00D3C8DC /* DraggingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggingStackView.swift; sourceTree = "<group>"; };
 		94CEBB3C298AE6DE00D3C8DC /* DraggingStackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DraggingStackView.h; sourceTree = "<group>"; };
 		94CEBB3D298B58CF00D3C8DC /* PSMRangeCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMRangeCollectionViewController.h; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 			files = (
 				9463827729807F190015BA8F /* libavformat.a in Frameworks */,
 				9463827B29807F1A0015BA8F /* libswscale.a in Frameworks */,
-				94CEBB2F2989D38400D3C8DC /* liblibvisca-all.a in Frameworks */,
+				946B299D29EE468800E9C1F0 /* liblibvisca-all.a in Frameworks */,
 				9463827929807F1A0015BA8F /* libavfilter.a in Frameworks */,
 				9463828329807F360015BA8F /* libbz2.tbd in Frameworks */,
 				9463827D29807F1A0015BA8F /* libavdevice.a in Frameworks */,
@@ -308,7 +308,7 @@
 				941BFE4F29ADE63900ECEC23 /* regions */,
 				94C55AB2297CB6A800D8C1DB /* Custom UI */,
 				9463826A29807D8D0015BA8F /* liblibRTSPClient.a */,
-				94CEBB2E2989D38400D3C8DC /* liblibvisca-all.a */,
+				946B299C29EE468800E9C1F0 /* liblibvisca-all.a */,
 				9463827129807F190015BA8F /* libavcodec.a */,
 				9463827629807F190015BA8F /* libavdevice.a */,
 				9463827229807F190015BA8F /* libavfilter.a */,
@@ -682,6 +682,7 @@
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
@@ -717,6 +718,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",
 					"$(PROJECT_DIR)/PTZ\\ Scene\\ Manager",

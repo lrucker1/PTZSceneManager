@@ -212,10 +212,12 @@ static PSMCameraCollectionItem *selfType;
         [self addCamera:sender];
         return;
     }
-    PSMUSBDeviceItem *item = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
-    self.cameraItem.usbdevicename = item.name;
-    self.cameraItem.ttydev = item.matchCount > 1 ? item.ttydev : @"";
-    self.originalUSBDevice = self.selectedUSBDevice;
+    if ([self.usbDevices count] > 0) {
+        PSMUSBDeviceItem *item = [self.usbDevices objectAtIndex:self.selectedUSBDevice];
+        self.cameraItem.usbdevicename = item.name;
+        self.cameraItem.ttydev = item.matchCount > 1 ? item.ttydev : @"";
+        self.originalUSBDevice = self.selectedUSBDevice;
+    }
 
     NSMutableDictionary *oldValues = [NSMutableDictionary dictionary];
     NSMutableDictionary *newValues = [NSMutableDictionary dictionary];

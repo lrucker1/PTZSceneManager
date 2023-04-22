@@ -36,6 +36,10 @@
     NSAssert(0, @"Subclass must implement");
 }
 
+- (void)reconnectWithCompletionHandler:(PTZDoneBlock)handler {
+    [self loadCameraWithCompletionHandler:handler];
+}
+
 @end
 
 
@@ -76,6 +80,22 @@
         });
     });
 }
+
+- (void)reconnectWithCompletionHandler:(PTZDoneBlock)handler {
+    dispatch_async(self.cameraQueue, ^{
+        const char *hostname = [self.cameraIP UTF8String];
+        BOOL success = (VISCA_reconnect_tcp(self->_pIface, hostname, self->_port) == VISCA_SUCCESS);
+        if (success) {
+            self->_pIface->broadcast = 0;
+            self->_pCamera->address = 1; // Because we are using IP
+            self->_pIface->cameratype = VISCA_IFACE_CAM_PTZOPTICS;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            handler(success);
+        });
+    });
+}
+
 
 @end
 

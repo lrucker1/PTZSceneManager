@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property dispatch_queue_t cameraQueue;
 
 - (void)loadCameraWithCompletionHandler:(PTZDoneBlock)handler;
+- (void)reconnectWithCompletionHandler:(PTZDoneBlock)handler;
 - (BOOL)isSerial;
 
 @end

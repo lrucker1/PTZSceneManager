@@ -29,6 +29,10 @@
     return [NSEvent pressedMouseButtons] == 0;
 }
 
+- (BOOL)acceptsFirstMouse:(NSEvent *)event {
+    return NO;
+}
+
 @end
 
 
