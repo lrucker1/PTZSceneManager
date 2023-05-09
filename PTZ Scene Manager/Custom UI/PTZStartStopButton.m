@@ -30,7 +30,7 @@
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event {
-    return NO;
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"NavButtonsClickToActivate"] == NO;
 }
 
 @end

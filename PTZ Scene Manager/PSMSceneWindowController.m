@@ -130,7 +130,8 @@ typedef enum {
                       @"prefCamera.menuIndex",
                       @"prefCamera.thumbnailOption",
                       @"lastRecalledItem",
-                      @"prefCamera.camera.cameraIsOpen"];
+                      @"prefCamera.camera.cameraIsOpen",
+                      @"window.tabGroup.windows"];
     if (add) {
         for (NSString *key in keys) {
             [self addObserver:self
@@ -234,6 +235,28 @@ typedef enum {
     self.collectionView.backgroundColors = @[bgColor];
 }
 
+- (void)setTabTitleWithColor:(NSColor *)color imgName:(NSString *)imgName {
+    if (color == nil || [self.window.subtitle length] == 0) {
+        self.window.tab.attributedTitle = nil;
+    } else {
+        // The label color ought to dim to secondary/tertiary. I am very certain of that.
+        // A/B test showing "program/preview"
+        NSString *title = [self.window.title stringByAppendingString:@" "];
+        NSMutableAttributedString *as = [[NSMutableAttributedString alloc] initWithString:title  attributes:@{NSFontAttributeName:[NSFont boldSystemFontOfSize:0]}];
+        NSAttributedString *st = [[NSAttributedString alloc] initWithString:self.window.subtitle attributes:@{NSForegroundColorAttributeName:color, NSFontAttributeName:[NSFont boldSystemFontOfSize:0]}];
+        [as appendAttributedString:st];
+        NSImage *img = [NSImage imageNamed:imgName];
+        NSTextAttachment *imageAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+        CGFloat textHeight = 9; // TODO real font.capHeight
+        [imageAttachment setBounds:CGRectMake(0, roundf(textHeight - img.size.height)/2.f, img.size.width, img.size.height)];
+        imageAttachment.image = img;
+           
+        [as insertAttributedString:[NSAttributedString attributedStringWithAttachment:imageAttachment] atIndex:0];
+          
+        self.window.tab.attributedTitle = as;
+    }
+}
+
 - (void)updateActiveIndicators {
     PTZVideoMode mode = PTZVideoOff;
     PSMOBSWebSocketController *obs = [PSMOBSWebSocketController defaultController];
@@ -242,15 +265,18 @@ typedef enum {
         mode = PTZVideoProgram;
         self.window.subtitle = NSLocalizedString(@"Program", @"OBS Program camera window subtitle");
         [self updateColors:[NSColor systemPinkColor] solidBackground:NO];
+        [self setTabTitleWithColor:[NSColor systemRedColor] imgName:NSImageNameStatusUnavailable];
     } else if ([obs.currentPreviewSourceNames containsObject:self.prefCamera.obsSourceName]) {
         mode = PTZVideoPreview;
         self.window.subtitle = NSLocalizedString(@"Preview", @"OBS Preview camera window subtitle");
         [self updateColors:[NSColor systemGreenColor] solidBackground:NO];
+        [self setTabTitleWithColor:[NSColor systemGreenColor] imgName:NSImageNameStatusAvailable];
     } else {
         self.cameraBox.borderColor = self.boxColor;
         self.sceneCollectionBox.borderColor = self.boxColor;
         self.collectionView.backgroundColors = self.collectionColors;
         self.window.subtitle = @"";
+        [self setTabTitleWithColor:nil imgName:nil];
     }
     // If it's disconnected, update the subtitle.
     if (self.prefCamera.camera.cameraIsOpen == NO) {
@@ -957,7 +983,8 @@ typedef enum {
         [self.appDelegate changeWindowsItem:self.window title:self.prefCamera.cameraname menuShortcut:self.prefCamera.menuIndex];
     } else if ([keyPath isEqualToString:@"prefCamera.thumbnailOption"]) {
         [self updateThumbnailContent];
-    } else if ([keyPath isEqualToString:@"prefCamera.camera.cameraIsOpen"]) {
+    } else if ([keyPath isEqualToString:@"prefCamera.camera.cameraIsOpen"]
+               || [keyPath isEqualToString:@"window.tabGroup.windows"]) {
         [self updateActiveIndicators];
    }
 }

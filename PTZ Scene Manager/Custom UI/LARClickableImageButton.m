@@ -59,7 +59,7 @@ RectUtil_CenterRect(NSRect rect, CGFloat width, CGFloat height)
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)event {
-    return NO;
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"PresetButtonsClickToActivate"] == NO;
 }
 
 @end

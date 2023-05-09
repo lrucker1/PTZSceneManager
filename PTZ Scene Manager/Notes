@@ -76,3 +76,9 @@ Advanced prefs:
 Move "Home" to Position pane, add a Recall Home button there too
 
 Reorder Windows menu items when @"prefCamera.menuIndex" changes.
+
+Profiles so we can have optional clickthrough.
+
+Restore tabbed windows into tabs. Yeah, real restoration would do that.
+
+Log & timestamp: camera scene changes, OBS state changes. Then compare to OBS logs, because they're lagging.
