@@ -8,9 +8,8 @@ https://help.ptzoptics.com/support/solutions/articles/13000074716-accessing-the-
 Tally (also known as the 'on-air' indication) lights are typically red, although some cameras and video switchers accept a preview tally signal, which is typically green
 
 ---
- Export the settings to something readable. Even if that turns out to be settings.ini.
-
-Yes! obs-websocket to find out which camera is hot. And works with the plugin in 2.7.
+ Export settings & images to ptzoptics folder/settings.ini.
+Add Export to PacketSender to this app.
 
 Prefs:
    Brand/Model specific stuff:
@@ -28,7 +27,6 @@ Prefs:
 Configure cameras: Other Settings icon button in Camera List.
  - set PTZOptics brand or not.
 
-Add Export to PacketSender to this app.
 
 Lock scene name editing - part of the whole UI lock? "Lock UI" menu item?
  only if someone wants it in beta
@@ -71,7 +69,6 @@ Advanced prefs:
  - ping timeout (although we determine it with binary search)
   - it's > 5 minutes
  - recall/set batch delay
- - Option to not get nagged about recall on live camera.
 
 Move "Home" to Position pane, add a Recall Home button there too
 
@@ -82,3 +79,13 @@ Profiles so we can have optional clickthrough.
 Restore tabbed windows into tabs. Yeah, real restoration would do that.
 
 Log & timestamp: camera scene changes, OBS state changes. Then compare to OBS logs, because they're lagging.
+
+Dynamic size adjustment on the font and grid buttons.
+
+Failure to retrieve thumbnail: don't replace original, also image size went to zero, which broke recall.
+
+Re-import from PTZOptics: show a preview of what will change.
+
+Do the controls freeze because the cameras were disconnected?
+
+Help menu "flag a problem". Also button. Also UI showing disconnected camera. It may still be in there.
