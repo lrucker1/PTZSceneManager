@@ -83,9 +83,12 @@ Log & timestamp: camera scene changes, OBS state changes. Then compare to OBS lo
 Dynamic size adjustment on the font and grid buttons.
 
 Failure to retrieve thumbnail: don't replace original, also image size went to zero, which broke recall.
+- Am I not using snapshotImage anywhere? Maybe it was for the thumbnail, which is now the RTSP view?
 
 Re-import from PTZOptics: show a preview of what will change.
 
 Do the controls freeze because the cameras were disconnected?
 
 Help menu "flag a problem". Also button. Also UI showing disconnected camera. It may still be in there.
+
+NSAppSleepDisabled?

@@ -74,7 +74,7 @@ typedef struct  {
 } PTZCameraPanTiltParams;
 
 typedef void (^PTZDoneBlock )(BOOL success);
-typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSInteger index);
+typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSImage * _Nullable image, NSInteger index);
 
 @interface PTZDeviceInfo : NSObject
 @property BOOL isSerial;

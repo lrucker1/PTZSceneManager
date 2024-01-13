@@ -84,12 +84,17 @@ static PSMSceneCollectionItem *selfType;
 - (IBAction)sceneSet:(id)sender {
     [self.camera memorySet:self.sceneNumber onDone:^(BOOL success) {
         if (success) {
-            [self.camera fetchSnapshotAtIndex:self.sceneNumber onDone:^(NSData *data, NSInteger index) {
+            [self.camera fetchSnapshotAtIndex:self.sceneNumber onDone:^(NSData *data, NSImage *image, NSInteger index) {
                 if (data != nil && index == self.sceneNumber) {
-                    self.image = [[NSImage alloc] initWithData:data];
-                    [self.prefCamera saveSnapshotAtIndex:self.sceneNumber  withData:data];
-                    PSMSceneWindowController *wc = (PSMSceneWindowController *)self.view.window.windowController;
-                    [wc updateStaticSnapshot:self.image];
+                    NSImage *testImage = image != nil ? image : [[NSImage alloc] initWithData:data];
+                    if (!NSEqualSizes(testImage.size, NSZeroSize)) {
+                        self.image = testImage;
+                        [self.prefCamera saveSnapshotAtIndex:self.sceneNumber  withData:data];
+                        PSMSceneWindowController *wc = (PSMSceneWindowController *)self.view.window.windowController;
+                        [wc updateStaticSnapshot:self.image];
+                    } else {
+                        NSLog(@"Bad scene image");
+                    }
                 }
             }];
         }

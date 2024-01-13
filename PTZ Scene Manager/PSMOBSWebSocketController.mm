@@ -811,14 +811,15 @@ JSON_GET_REQUEST_TYPE(GetVideoSettings)
             if (ws->getReadyState() == WebSocket::CLOSED)
                 break;
             std::string data;
-            if (self->outgoing.pop(data))
+            if (self->outgoing.pop(data)) {
                 ws->send(data);
+            }
             ws->poll();
             ws->dispatch([&](const std::string & message) {
                 self->incoming.push(message);
                 [self recvString];
             });
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            [NSThread sleepForTimeInterval:0.01];
         }
         ws->close();
         ws->poll();

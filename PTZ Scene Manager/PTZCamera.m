@@ -115,7 +115,9 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         _zoomSpeed = 4;
         _presetSpeed = 24; // Default, fastest
         NSString *name = [NSString stringWithFormat:@"cameraQueue_0x%p", self];
-        _cameraQueue = dispatch_queue_create([name UTF8String], NULL);
+        _cameraQueue = dispatch_queue_create([name UTF8String], DISPATCH_QUEUE_SERIAL);
+        dispatch_set_target_queue(_cameraQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
+
         // the "index" values are the ones set on the camera; they set the user-friendly values
         self.hueIndex = 0;
         self.saturationIndex = 0;
@@ -257,6 +259,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
 
 - (void)reconnectWithCompletionHandler:(PTZCommandBlock)handler {
     self.connectingBusy = YES;
+    self.recallBusy = NO;
     [self.cameraOpener reconnectWithCompletionHandler:^(BOOL success) {
         self.connectingBusy = NO;
         if (success) {
@@ -1079,9 +1082,14 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         NSData *data = userInfo[PSMOBSImageDataKey];
         if (data) {
             NSInteger index = [userInfo[PSMOBSSnapshotIndexKey] integerValue];
-            self.snapshotImage = [[NSImage alloc] initWithData:data];
+            NSImage *testImage = [[NSImage alloc] initWithData:data];
+            if (!NSEqualSizes(testImage.size, NSZeroSize)) {
+                self.snapshotImage = testImage;
+            } else {
+                NSLog(@"Bad OBS snapshot image");
+            }
             if (self.obsSnapshotDoneBlock) {
-                self.obsSnapshotDoneBlock(data, index);
+                self.obsSnapshotDoneBlock(data, testImage, index);
             }
             self.obsSnapshotDoneBlock = nil;
         }
@@ -1100,7 +1108,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 
 - (void)fetchOBSSnapshotAtIndex:(NSInteger)index onDone:(PTZSnapshotFetchDoneBlock)doneBlock {
     if (self.obsSnapshotDoneBlock) {
-        self.obsSnapshotDoneBlock(nil, -1);
+        self.obsSnapshotDoneBlock(nil, nil, -1);
     }
     self.obsSnapshotDoneBlock = doneBlock;
     // This silently fails if OBS isn't connected. That's fine. Snapshots are optional.
@@ -1119,13 +1127,19 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
 
     [[[NSURLSession sharedSession] dataTaskWithRequest:request
-                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (data != nil) {
-            self.snapshotImage = [[NSImage alloc] initWithData:data];
-            if (doneBlock) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    doneBlock(data, index);
-                });
+                                     completionHandler:^(NSData *data, NSURLResponse *inResponse, NSError *error) {
+        NSHTTPURLResponse *response = (NSHTTPURLResponse *)inResponse;
+        if (response.statusCode == 200 && data != nil) {
+            NSImage *testImage = [[NSImage alloc] initWithData:data];
+            if (!NSEqualSizes(testImage.size, NSZeroSize)) {
+                self.snapshotImage = testImage;
+                if (doneBlock) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        doneBlock(data, testImage, index);
+                    });
+                }
+           } else {
+                NSLog(@"Bad IP snapshot image %@", [NSHTTPURLResponse localizedStringForStatusCode:response.statusCode]);
             }
         } else if (index >= 0) {
             NSLog(@"Failed to get snapshot: trying OBS %@", error);

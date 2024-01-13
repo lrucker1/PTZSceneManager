@@ -280,6 +280,7 @@ typedef enum {
     }
     // If it's disconnected, update the subtitle.
     if (self.prefCamera.camera.cameraIsOpen == NO) {
+        [self updateColors:[NSColor systemOrangeColor] solidBackground:YES];
         switch (mode) {
             case PTZVideoPreview:
                 self.window.subtitle = NSLocalizedString(@"Preview (Disconnected)", @"Preview Disconnected camera window subtitle");
@@ -288,8 +289,6 @@ typedef enum {
                 self.window.subtitle = NSLocalizedString(@"Program (Disconnected)", @"Program Disconnected camera window subtitle");
                 break;
            case PTZVideoOff:
-                // Disable the disconnected color: Real cameras rarely disconnect; fake debugging cameras often do.
-                // [self updateColors:[NSColor systemOrangeColor] solidBackground:YES];
                 self.window.subtitle = NSLocalizedString(@"Disconnected", @"Disconnected camera window subtitle");
                 break;
         }
@@ -441,10 +440,17 @@ typedef enum {
 
 - (void)fetchStaticSnapshot {
     if (self.showStaticSnapshot) {
-        [self.camera fetchSnapshotAtIndex:-1 onDone:^(NSData *data, NSInteger index) {
-            if (data != nil) {
-                NSImage *image = [[NSImage alloc] initWithData:data];
-                [self.rtspViewController setStaticImage:image];
+        [self.camera fetchSnapshotAtIndex:-1 onDone:^(NSData *data, NSImage *image, NSInteger index) {
+            NSImage *testImage = image;
+            if (testImage == nil && data != nil) {
+                testImage = [[NSImage alloc] initWithData:data];
+            }
+            if (testImage != nil) {
+                if (!NSEqualSizes(testImage.size, NSZeroSize)) {
+                    [self.rtspViewController setStaticImage:testImage];
+                } else {
+                    NSLog(@"Bad static snapshot image");
+                }
             }
         }];
     }
@@ -628,7 +634,7 @@ typedef enum {
             break;
     }
     [self.camera applyPanTiltRelativePosition:params onDone:^(BOOL success) {
-        if (success && self.timer != nil) {
+        if (success && self.timer == nil) {
             [self fetchStaticSnapshot];
         }
     }];
