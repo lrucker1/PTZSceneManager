@@ -245,7 +245,7 @@
                                             <gridCell row="ycb-Z8-gEC" column="VnH-Mb-U4o" id="BbC-4R-jtu"/>
                                             <gridCell row="ycb-Z8-gEC" column="kTF-3M-NLQ" id="48L-uq-nOB">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="qJa-xH-8dG" userLabel="UpRight+" customClass="PTZStartStopButton">
-                                                    <rect key="frame" x="90" y="88" width="20" height="20"/>
+                                                    <rect key="frame" x="88" y="88" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="GRj-Vh-GOL"/>
                                                         <constraint firstAttribute="width" constant="20" id="a6F-yW-jpE"/>
@@ -263,7 +263,7 @@
                                             <gridCell row="wmH-NH-T29" column="zqt-E8-w4S" id="WnR-Cu-m7r"/>
                                             <gridCell row="wmH-NH-T29" column="xam-tK-zOO" id="3Cn-mS-Z7P">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="11" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-q7-uEC" userLabel="UpLeft" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="24" y="66" width="20" height="20"/>
+                                                    <rect key="frame" x="22" y="66" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="A5z-3R-v8G"/>
                                                         <constraint firstAttribute="height" constant="20" id="rQB-R5-lzs"/>
@@ -280,7 +280,7 @@
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="a8A-c1-pBp" id="6BN-bE-HE1">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-Bp-hW7" userLabel="Up" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="46" y="66" width="20" height="20"/>
+                                                    <rect key="frame" x="44" y="66" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="PaV-0f-tDS"/>
                                                         <constraint firstAttribute="width" constant="20" id="Sur-GW-pXa"/>
@@ -297,7 +297,7 @@
                                             </gridCell>
                                             <gridCell row="wmH-NH-T29" column="VnH-Mb-U4o" id="hp1-kd-IOu">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="13" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-4q-GB3" userLabel="UpRight" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="68" y="66" width="20" height="20"/>
+                                                    <rect key="frame" x="66" y="66" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="Pjv-st-il5"/>
                                                         <constraint firstAttribute="height" constant="20" id="dxU-FL-dec"/>
@@ -315,7 +315,7 @@
                                             <gridCell row="wmH-NH-T29" column="kTF-3M-NLQ" id="jEg-IA-rGr"/>
                                             <gridCell row="p9K-ol-UUo" column="zqt-E8-w4S" id="O5k-1W-Uwo">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="20" translatesAutoresizingMaskIntoConstraints="NO" id="v4s-hB-6Km" userLabel="Left+" customClass="PTZStartStopButton">
-                                                    <rect key="frame" x="2" y="44" width="20" height="20"/>
+                                                    <rect key="frame" x="0.0" y="44" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="bCv-3R-tml"/>
                                                         <constraint firstAttribute="height" constant="20" id="gMz-vM-aPm"/>
@@ -332,7 +332,7 @@
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="xam-tK-zOO" id="MzB-76-ZXt">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="tuK-2E-7TQ" userLabel="Left" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="24" y="44" width="20" height="20"/>
+                                                    <rect key="frame" x="22" y="44" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Vhy-jF-rTT"/>
                                                         <constraint firstAttribute="width" constant="20" id="aG9-fx-fZm"/>
@@ -349,7 +349,7 @@
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="a8A-c1-pBp" id="Zce-Pn-V9p">
                                                 <button key="contentView" toolTip="Recall last set scene. Hold down option key to recall the Home scene" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="wwa-92-BzJ" userLabel="Home Or Recall" customClass="PTZAltKeyButton">
-                                                    <rect key="frame" x="46" y="44" width="20" height="20"/>
+                                                    <rect key="frame" x="44" y="44" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="WnS-Is-GFa"/>
                                                         <constraint firstAttribute="height" constant="20" id="iPb-ft-o0J"/>
@@ -365,7 +365,7 @@
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="VnH-Mb-U4o" id="Yuu-5p-FwA">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vn4-IM-qVp" userLabel="Right" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="68" y="44" width="20" height="20"/>
+                                                    <rect key="frame" x="66" y="44" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="8gp-Gz-DH3"/>
                                                         <constraint firstAttribute="height" constant="20" id="otF-3G-GuT"/>
@@ -382,7 +382,7 @@
                                             </gridCell>
                                             <gridCell row="p9K-ol-UUo" column="kTF-3M-NLQ" id="xvT-HH-PDj">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="24" translatesAutoresizingMaskIntoConstraints="NO" id="0xh-Tc-7zp" userLabel="Right+" customClass="PTZStartStopButton">
-                                                    <rect key="frame" x="90" y="44" width="20" height="20"/>
+                                                    <rect key="frame" x="88" y="44" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="1L4-Ow-5sZ"/>
                                                         <constraint firstAttribute="width" constant="20" id="30r-XN-3el"/>
@@ -400,7 +400,7 @@
                                             <gridCell row="0je-1p-PPu" column="zqt-E8-w4S" id="QVP-lf-Jn1"/>
                                             <gridCell row="0je-1p-PPu" column="xam-tK-zOO" id="Iuh-xC-R9c">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="31" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-Fv-pvF" userLabel="DownLeft" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="24" y="22" width="20" height="20"/>
+                                                    <rect key="frame" x="22" y="22" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="0Oh-3t-qKQ"/>
                                                         <constraint firstAttribute="width" constant="20" id="ctr-dq-sMq"/>
@@ -417,7 +417,7 @@
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="a8A-c1-pBp" id="1lG-RV-9Fa">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="Wbd-qI-fPh" userLabel="Down" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="46" y="22" width="20" height="20"/>
+                                                    <rect key="frame" x="44" y="22" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Gmb-OF-yxX"/>
                                                         <constraint firstAttribute="width" constant="20" id="feK-60-Mxi"/>
@@ -434,7 +434,7 @@
                                             </gridCell>
                                             <gridCell row="0je-1p-PPu" column="VnH-Mb-U4o" id="0Wy-84-bXz">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="33" translatesAutoresizingMaskIntoConstraints="NO" id="eQB-fA-Jhy" userLabel="DownRight" customClass="PTZInstantActionButton">
-                                                    <rect key="frame" x="68" y="22" width="20" height="20"/>
+                                                    <rect key="frame" x="66" y="22" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="bWO-sy-CxC"/>
                                                         <constraint firstAttribute="height" constant="20" id="tUU-yR-n9x"/>
@@ -452,7 +452,7 @@
                                             <gridCell row="0je-1p-PPu" column="kTF-3M-NLQ" id="Y1d-W8-GvG"/>
                                             <gridCell row="oDp-RY-tan" column="zqt-E8-w4S" id="aOf-0c-3x7">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="40" translatesAutoresizingMaskIntoConstraints="NO" id="GzQ-ea-se7" userLabel="DownLeft+" customClass="PTZStartStopButton">
-                                                    <rect key="frame" x="2" y="0.0" width="20" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="vgC-vg-5Hw"/>
                                                         <constraint firstAttribute="width" constant="20" id="yqb-Kl-zLA"/>
@@ -470,7 +470,7 @@
                                             <gridCell row="oDp-RY-tan" column="xam-tK-zOO" id="NXM-eu-wNE"/>
                                             <gridCell row="oDp-RY-tan" column="a8A-c1-pBp" id="T2b-fX-rUt">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="42" translatesAutoresizingMaskIntoConstraints="NO" id="B0q-re-CZV" userLabel="Down+" customClass="PTZStartStopButton">
-                                                    <rect key="frame" x="46" y="0.0" width="20" height="20"/>
+                                                    <rect key="frame" x="44" y="0.0" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="YXe-ai-o6J"/>
                                                         <constraint firstAttribute="width" constant="20" id="uMl-q1-5ai"/>
@@ -488,7 +488,7 @@
                                             <gridCell row="oDp-RY-tan" column="VnH-Mb-U4o" id="72b-cS-rZC"/>
                                             <gridCell row="oDp-RY-tan" column="kTF-3M-NLQ" id="4YK-7o-Kvr">
                                                 <button key="contentView" verticalHuggingPriority="750" tag="44" translatesAutoresizingMaskIntoConstraints="NO" id="lK1-RF-hMz" userLabel="DownRight+" customClass="PTZStartStopButton">
-                                                    <rect key="frame" x="90" y="0.0" width="20" height="20"/>
+                                                    <rect key="frame" x="88" y="0.0" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="ciS-Gw-GFH"/>
                                                         <constraint firstAttribute="height" constant="20" id="fqg-GT-kjP"/>
