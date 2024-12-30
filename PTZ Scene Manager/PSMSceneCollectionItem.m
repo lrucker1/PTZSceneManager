@@ -51,22 +51,10 @@ static PSMSceneCollectionItem *selfType;
 }
 
 - (IBAction)sceneRecall:(id)sender {
-    if (self.camera.videoMode == PTZVideoProgram && ([NSEvent modifierFlags] & NSEventModifierFlagOption) == 0) {
-        NSAlert *alert = [[NSAlert alloc] init];
-        alert.icon = [NSImage imageNamed:NSImageNameCaution];
-        [alert setMessageText:NSLocalizedString(@"Are you sure?\nThis camera is live.", @"Confirming recall on live camera")];
-        [alert setInformativeText:NSLocalizedString(@"Hold down the Option key to skip this message on the Program camera.", @"Info message for recall on live camera")];
-        [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK Button")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
-        
-        [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode == NSAlertFirstButtonReturn) {
-                [self doSceneRecall];
-            }
-        }];
-    } else {
+    PSMSceneWindowController *wc = (PSMSceneWindowController *)self.view.window.windowController;
+    [wc confirmCameraOperation:^(){
         [self doSceneRecall];
-    }
+    }];
 }
 
 - (void)doSceneRecall {

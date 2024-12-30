@@ -34,12 +34,12 @@ static PSMCameraCollectionItem *selfType;
     if (   [key isEqualToString:@"canAdd"]
         || [key isEqualToString:@"hasChanges"]) {
         [keyPaths addObject:@"cameraname"];
+        [keyPaths addObject:@"isSerial"];
         [keyPaths addObject:@"usbdevicename"];
         [keyPaths addObject:@"ipaddress"];
     }
     if ([key isEqualToString:@"hasChanges"]) {
         [keyPaths addObject:@"obsSourceName"];
-        [keyPaths addObject:@"isSerial"];
         [keyPaths addObject:@"menuIndex"];
         [keyPaths addObject:@"ttydev"];
    }

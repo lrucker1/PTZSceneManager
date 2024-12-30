@@ -74,7 +74,7 @@ Move "Home" to Position pane, add a Recall Home button there too
 
 Reorder Windows menu items when @"prefCamera.menuIndex" changes.
 
-Profiles so we can have optional clickthrough.
+Profiles so we can have optional clickthrough and user-specific window positions.
 
 Restore tabbed windows into tabs. Yeah, real restoration would do that.
 
@@ -83,6 +83,7 @@ Log & timestamp: camera scene changes, OBS state changes. Then compare to OBS lo
 Dynamic size adjustment on the font and grid buttons.
 
 Failure to retrieve thumbnail: don't replace original, also image size went to zero, which broke recall.
+- Image size didn't go to zero, we weren't handling the error return
 - Am I not using snapshotImage anywhere? Maybe it was for the thumbnail, which is now the RTSP view?
 
 Re-import from PTZOptics: show a preview of what will change.
@@ -92,3 +93,17 @@ Do the controls freeze because the cameras were disconnected?
 Help menu "flag a problem". Also button. Also UI showing disconnected camera. It may still be in there.
 
 NSAppSleepDisabled?
+
+Image fetch needs a blocking flag; I suspect we're sending requests too frequently and they're overlapping, and that's why we get bad returns. Also check for the bad returns.
+track the persistent commands do not let them overlap.
+(actually it's the other ones that seem to trigger hangs)
+
+make it clear why you can't add the same USB cam twice
+
+Enable/disable cameras - the USB cam is not always connected.
+
+Test the exposure etc recall - does it change for every scene?
+
+UI to recall calibration shot (see webpage)
+
+ping camera causing hangs?

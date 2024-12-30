@@ -464,29 +464,57 @@ typedef enum {
 
 #pragma mark camera
 
-- (IBAction)doPanTilt:(id)sender {
-    PTZStartStopButton *button = (PTZStartStopButton *)sender;
-    if (button.doStopAction) {
-        [self.camera stopPantiltDirection];
-        [self stopTimer];
-        return;
+- (void)confirmCameraOperation:(PTZOperationBlock)operationBlock {
+    if (!operationBlock) { return; }
+    
+    if (self.camera.videoMode == PTZVideoProgram && ([NSEvent modifierFlags] & NSEventModifierFlagOption) == 0) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.icon = [NSImage imageNamed:NSImageNameCaution];
+        [alert setMessageText:NSLocalizedString(@"Are you sure?\nThis camera is live.", @"Confirming recall on live camera")];
+        [alert setInformativeText:NSLocalizedString(@"Hold down the Option key to skip this message on the Program camera.", @"Info message for recall on live camera")];
+        [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK Button")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
+        
+        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                operationBlock();
+            }
+        }];
+    } else {
+        operationBlock();
     }
-    NSInteger tag = button.tag;
-    [self doPanTiltForTag:tag forMenu:NO];
-    [self startTimer];
+}
+                                
+
+- (IBAction)doPanTilt:(id)sender {
+    [self confirmCameraOperation:^(){
+        PTZStartStopButton *button = (PTZStartStopButton *)sender;
+        if (button.doStopAction) {
+            [self.camera stopPantiltDirection];
+            [self stopTimer];
+            return;
+        }
+        NSInteger tag = button.tag;
+        [self doPanTiltForTag:tag forMenu:NO];
+        [self startTimer];
+    }];
 }
 
 - (IBAction)doRelativePanTiltStep:(id)sender {
-    PTZStartStopButton *button = (PTZStartStopButton *)sender;
-    if (button.doStopAction) {
-        return;
-    }
-    NSInteger tag = button.tag;
-    [self doRelativePanTiltForTag:tag];
+    [self confirmCameraOperation:^(){
+        PTZStartStopButton *button = (PTZStartStopButton *)sender;
+        if (button.doStopAction) {
+            return;
+        }
+        NSInteger tag = button.tag;
+        [self doRelativePanTiltForTag:tag];
+    }];
 }
 
 // Do the cameras recognize the magic speed?
 // Apparently they choke on it - camera stops responding to any nav buttons! So use the standard nav behavior.
+// Above comment is wrong - it stopped responding because PTZOptics uses a reserved preset recall command which
+// does not return a reply. Revisit using the magic speed.
 - (IBAction)doMenuPanTilt:(id)sender {
     PTZStartStopButton *button = (PTZStartStopButton *)sender;
     if (button.doStopAction) {
@@ -641,28 +669,30 @@ typedef enum {
 }
 
 - (IBAction)doCameraZoom:(id)sender {
-    PTZStartStopButton *button = (PTZStartStopButton *)sender;
-    if (button.doStopAction) {
-        [self.camera stopZoom];
-        [self stopTimer];
-        return;
-    }
-    NSInteger tag = button.tag;
-    switch (tag) {
-        case PSMInPlus:
-            [self.camera startZoomInWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
-            break;
-        case PSMIn:
-            [self.camera startZoomIn:nil];
-            break;
-        case PSMOut:
-            [self.camera startZoomOut:nil];
-            break;
-        case PSMOutPlus:
-            [self.camera startZoomOutWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
-            break;
-    }
-    [self startTimer];
+    [self confirmCameraOperation:^(){
+        PTZStartStopButton *button = (PTZStartStopButton *)sender;
+        if (button.doStopAction) {
+            [self.camera stopZoom];
+            [self stopTimer];
+            return;
+        }
+        NSInteger tag = button.tag;
+        switch (tag) {
+            case PSMInPlus:
+                [self.camera startZoomInWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
+                break;
+            case PSMIn:
+                [self.camera startZoomIn:nil];
+                break;
+            case PSMOut:
+                [self.camera startZoomOut:nil];
+                break;
+            case PSMOutPlus:
+                [self.camera startZoomOutWithSpeed:self.prefCamera.zoomPlusSpeed onDone:nil];
+                break;
+        }
+        [self startTimer];
+    }];
 }
 
 - (IBAction)doCameraFocus:(id)sender {
@@ -901,7 +931,7 @@ typedef enum {
     } else {
         bounds = view.bounds;
     }
-    [self.camera toggleOSDMenu:nil];
+    [self.camera showOSDMenu:nil];
     self.showOSDRemoteTitle = NO;
     [self.remoteControlPopover showRelativeToRect:bounds
                                            ofView:view

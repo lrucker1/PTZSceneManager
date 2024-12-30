@@ -199,6 +199,7 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSImage 
 - (void)toggleOSDMenu:(PTZDoneBlock _Nullable)doneBlock;
 - (void)osdMenuReturn:(PTZDoneBlock _Nullable)doneBlock;
 - (void)osdMenuEnter:(PTZDoneBlock _Nullable)doneBlock;
+- (void)showOSDMenu:(PTZDoneBlock _Nullable)doneBlock;
 - (void)closeOSDMenu:(PTZDoneBlock _Nullable)doneBlock;
 
 @end

@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTZPrefCamera;
 @class PSMSceneCollectionItem;
 
+typedef void (^PTZOperationBlock)(void);
+
+
 @interface PSMSceneWindowController : NSWindowController <NSCollectionViewDataSource, DraggingStackViewDelegate>
 
 @property PSMSceneCollectionItem *lastRecalledItem;
@@ -20,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPrefCamera:(PTZPrefCamera *)camera;
 
 - (NSString *)camerakey;
+
+- (void)confirmCameraOperation:(PTZOperationBlock)operationBlock;
 
 - (void)fetchStaticSnapshot;
 - (void)updateStaticSnapshot:(NSImage *)image;

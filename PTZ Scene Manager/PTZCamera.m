@@ -958,7 +958,8 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 - (BOOL)unchecked_visca_toggle_menu {
     BOOL success = YES;
     if (self.cameraConfig.isPTZOptics) {
-        success = VISCA_memory_recall(&self->_iface, &self->_camera, 95) == VISCA_SUCCESS;
+        // 95 is in the reserved scene range.
+        success = VISCA_memory_recall_noreply(&self->_iface, &self->_camera, 95) == VISCA_SUCCESS;
     } else {
         success = VISCA_set_datascreen_onoff(&self->_iface, &self->_camera);
     }
@@ -973,13 +974,39 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         }
         dispatch_async(self.cameraQueue, ^{
             BOOL success = [self unchecked_visca_toggle_menu];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self callDoneBlock:doneBlock success:success];
-            });
+            if (doneBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    doneBlock(success);
+                });
+            }
         });
     }];
 }
 
+- (void)showOSDMenu:(PTZDoneBlock)doneBlock {
+    [self loadCameraWithCompletionHandler:^() {
+        if (!self.cameraIsOpen) {
+            [self connectionFailed:doneBlock];
+            return;
+        }
+        dispatch_async(self.cameraQueue, ^{
+            BOOL success = NO;
+            if (self.cameraConfig.isPTZOptics) {
+                uint8_t status;
+                if (VISCA_get_datascreen(&self->_iface, &self->_camera, &status) == VISCA_SUCCESS) {
+                    if (status == VISCA_OFF) {
+                        success = [self unchecked_visca_toggle_menu];
+                    } else {
+                        success = YES;
+                    }
+                }
+            } else {
+                success = VISCA_set_datascreen_on(&self->_iface, &self->_camera);
+            }
+            [self callDoneBlock:doneBlock success:success];
+        });
+    }];
+}
 
 - (void)closeOSDMenu:(PTZDoneBlock)doneBlock {
     [self loadCameraWithCompletionHandler:^() {
@@ -1001,9 +1028,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
             } else {
                 success = VISCA_set_datascreen_off(&self->_iface, &self->_camera);
             }
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self callDoneBlock:doneBlock success:success];
-            });
+            [self callDoneBlock:doneBlock success:success];
         });
     }];
 }
