@@ -1040,11 +1040,12 @@
                     <gridCells>
                         <gridCell row="KKL-gX-iVk" column="278-1q-YiK" id="eun-br-R64"/>
                         <gridCell row="KKL-gX-iVk" column="3xo-Bk-nDW" id="GeT-am-Qy9">
-                            <button key="contentView" toolTip="Up" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="dDE-lm-ee8" userLabel="Up" customClass="PTZStartStopButton">
+                            <button key="contentView" toolTip="Up" verticalHuggingPriority="750" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="dDE-lm-ee8" userLabel="Up">
                                 <rect key="frame" x="35" y="70" width="25" height="25"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.up.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mzg-2e-RIq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent"></string>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
@@ -1054,11 +1055,12 @@
                         </gridCell>
                         <gridCell row="KKL-gX-iVk" column="C5n-If-4iE" id="WcA-Tp-wTz"/>
                         <gridCell row="CGi-3I-W8s" column="278-1q-YiK" id="a9x-WP-lka">
-                            <button key="contentView" toolTip="Left" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="Qlk-WH-1fR" userLabel="Left" customClass="PTZStartStopButton">
+                            <button key="contentView" toolTip="Left" verticalHuggingPriority="750" tag="21" translatesAutoresizingMaskIntoConstraints="NO" id="Qlk-WH-1fR" userLabel="Left">
                                 <rect key="frame" x="0.0" y="35" width="25" height="25"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.left.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M2c-JQ-hlH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent"></string>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
@@ -1067,11 +1069,14 @@
                             </button>
                         </gridCell>
                         <gridCell row="CGi-3I-W8s" column="3xo-Bk-nDW" id="oaD-Qk-6Zs">
-                            <button key="contentView" toolTip="Enter" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="lbJ-bC-Mcv" userLabel="Enter">
+                            <button key="contentView" toolTip="Enter (Space)" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="lbJ-bC-Mcv" userLabel="Enter">
                                 <rect key="frame" x="35" y="35" width="25" height="25"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="rectangle.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SZz-QF-QON">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+IA
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="remoteEnter:" target="-2" id="a2j-LR-ZLF"/>
@@ -1079,11 +1084,12 @@
                             </button>
                         </gridCell>
                         <gridCell row="CGi-3I-W8s" column="C5n-If-4iE" id="7Qu-dx-D0H">
-                            <button key="contentView" toolTip="Right" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="tKp-8r-h3f" userLabel="Right" customClass="PTZStartStopButton">
+                            <button key="contentView" toolTip="Right" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="tKp-8r-h3f" userLabel="Right">
                                 <rect key="frame" x="70" y="35" width="25" height="25"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.right.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LcW-Fg-A1n">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent"></string>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
@@ -1092,11 +1098,14 @@
                             </button>
                         </gridCell>
                         <gridCell row="i8i-GH-5NI" column="278-1q-YiK" id="yYE-un-Ois">
-                            <button key="contentView" toolTip="Back" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="pO7-72-Q7A" userLabel="Menu Back">
+                            <button key="contentView" toolTip="Back (Return)" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="pO7-72-Q7A" userLabel="Menu Back">
                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.uturn.left" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lUS-Lb-CQq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="remoteBack:" target="-2" id="6aH-xP-hvk"/>
@@ -1104,11 +1113,12 @@
                             </button>
                         </gridCell>
                         <gridCell row="i8i-GH-5NI" column="3xo-Bk-nDW" id="t21-eC-mYD">
-                            <button key="contentView" toolTip="Down" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="H5i-3v-THY" userLabel="Down" customClass="PTZStartStopButton">
+                            <button key="contentView" toolTip="Down" verticalHuggingPriority="750" tag="32" translatesAutoresizingMaskIntoConstraints="NO" id="H5i-3v-THY" userLabel="Down">
                                 <rect key="frame" x="35" y="0.0" width="25" height="25"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrowtriangle.down.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cGW-OI-Mhi">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent"></string>
                                 </buttonCell>
                                 <symbolConfiguration key="symbolConfiguration" weight="regular"/>
                                 <connections>
@@ -1117,11 +1127,12 @@
                             </button>
                         </gridCell>
                         <gridCell row="i8i-GH-5NI" column="C5n-If-4iE" id="wgr-Za-jdD">
-                            <button key="contentView" toolTip="Toggle OSD" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vUq-5P-edM" userLabel="Toggle OSD">
+                            <button key="contentView" toolTip="Toggle OSD (M)" verticalHuggingPriority="750" tag="23" translatesAutoresizingMaskIntoConstraints="NO" id="vUq-5P-edM" userLabel="Toggle OSD">
                                 <rect key="frame" x="70" y="0.0" width="25" height="25"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="filemenu.and.selection" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HFP-dq-RD6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent">m</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="remoteToggle:" target="-2" id="kjZ-kc-SJ8"/>

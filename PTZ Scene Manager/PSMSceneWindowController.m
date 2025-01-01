@@ -511,24 +511,25 @@ typedef enum {
     }];
 }
 
+// OSD menu buttons.
 // Do the cameras recognize the magic speed?
 // Apparently they choke on it - camera stops responding to any nav buttons! So use the standard nav behavior.
 // Above comment is wrong - it stopped responding because PTZOptics uses a reserved preset recall command which
-// does not return a reply. Revisit using the magic speed.
+// does not return a reply.
 - (IBAction)doMenuPanTilt:(id)sender {
-    PTZStartStopButton *button = (PTZStartStopButton *)sender;
-    if (button.doStopAction) {
-        [self.camera stopPantiltDirection];
-        [self stopTimer];
-        return;
-    }
+    NSButton *button = (NSButton *)sender;
     NSInteger tag = button.tag;
     [self doPanTiltForTag:tag forMenu:NO];
+    // We might not need to start a timer, but it seems harmless.
     [self startTimer];
 }
 
 // The OSD menu buttons use the outer (continuous) options
 // The current forMenu behavior is wrong. Leaving the code as-is in case we ever do need something menu-specific.
+// I think the above is referring to the comment about the PTZOptics app in startPantiltDirection.
+// We do not appear to need a "stop" action. Unlike the camera, the OSD does not autorepeat;
+// if we want to do that (the physical remote does) then turn on "continuous" on the buttons. We do get keyboard autorepeat.
+// I think we'd prefer the precise control of having to click.
 - (void)doPanTiltForTag:(NSInteger)tag forMenu:(BOOL)forMenu  {
     PTZCameraPanTiltParams params;
     NSInteger baseSpeed = forMenu ? 0 : 1;
