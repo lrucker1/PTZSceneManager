@@ -871,33 +871,43 @@
                                             <constraint firstAttribute="trailing" secondItem="qR6-cn-b6Q" secondAttribute="trailing" id="smK-0I-9uN"/>
                                         </constraints>
                                     </customView>
-                                    <imageView identifier="RecallBusyImage" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uka-8T-dbG">
-                                        <rect key="frame" x="0.0" y="437" width="28" height="24"/>
+                                    <button toolTip="Send interrupt" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wba-9D-KJq">
+                                        <rect key="frame" x="0.0" y="434" width="24" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="2mP-tD-TAz"/>
-                                            <constraint firstAttribute="width" constant="28" id="6Vz-HJ-D8c"/>
+                                            <constraint firstAttribute="height" constant="24" id="SDn-2Q-aff"/>
+                                            <constraint firstAttribute="width" constant="24" id="aU0-d2-n6N"/>
                                         </constraints>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusPartiallyAvailable" id="J1g-qg-HJV"/>
-                                        <color key="contentTintColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="8xZ-LD-bAK">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="default" renderingMode="hierarchical">
+                                                <hierarchicalColors>
+                                                    <color name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                                </hierarchicalColors>
+                                            </imageReference>
+                                        </buttonCell>
                                         <connections>
-                                            <binding destination="-2" name="hidden" keyPath="prefCamera.camera.recallBusy" id="nz3-2h-Yb6">
+                                            <action selector="cancelCameraOperation:" target="-2" id="wvF-fb-60S"/>
+                                            <binding destination="-2" name="hidden" keyPath="prefCamera.camera.recallBusy" id="CfV-KD-6s1">
                                                 <dictionary key="options">
                                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                 </dictionary>
                                             </binding>
                                         </connections>
-                                    </imageView>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="2OS-mi-coq"/>
-                                    <constraint firstItem="uka-8T-dbG" firstAttribute="leading" secondItem="aqd-Mf-Y30" secondAttribute="leading" id="8Nj-Rf-d8m"/>
                                     <constraint firstItem="aUA-lC-s2h" firstAttribute="centerX" secondItem="zuV-8a-7PM" secondAttribute="centerX" id="DtJ-GV-SzT"/>
                                     <constraint firstItem="zuV-8a-7PM" firstAttribute="centerX" secondItem="aqd-Mf-Y30" secondAttribute="centerX" id="HfU-Nu-d9f"/>
                                     <constraint firstItem="YGQ-XG-efI" firstAttribute="top" secondItem="zuV-8a-7PM" secondAttribute="bottom" constant="12" id="OEp-t6-0DB"/>
-                                    <constraint firstItem="uka-8T-dbG" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="bottom" id="PpI-PR-QK8"/>
                                     <constraint firstItem="pQm-I7-fbP" firstAttribute="top" secondItem="aqd-Mf-Y30" secondAttribute="top" id="Wz0-yJ-xUk"/>
                                     <constraint firstItem="YGQ-XG-efI" firstAttribute="centerX" secondItem="zuV-8a-7PM" secondAttribute="centerX" id="Z3n-hf-hXp"/>
                                     <constraint firstItem="pQm-I7-fbP" firstAttribute="leading" secondItem="aqd-Mf-Y30" secondAttribute="leading" id="fPH-kf-tEd"/>
+                                    <constraint firstItem="wba-9D-KJq" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="bottom" id="lLJ-qb-rEs"/>
+                                    <constraint firstAttribute="leading" secondItem="wba-9D-KJq" secondAttribute="leading" id="nzv-j9-MRS"/>
                                     <constraint firstItem="zuV-8a-7PM" firstAttribute="top" secondItem="pQm-I7-fbP" secondAttribute="bottom" constant="10" id="oGF-dy-4hb"/>
                                     <constraint firstItem="aUA-lC-s2h" firstAttribute="top" secondItem="YGQ-XG-efI" secondAttribute="bottom" constant="12" id="pKQ-Bc-ghO"/>
                                     <constraint firstAttribute="trailing" secondItem="pQm-I7-fbP" secondAttribute="trailing" id="xLu-RG-ueO"/>
@@ -1177,7 +1187,6 @@ DQ
     </objects>
     <resources>
         <image name="NSRefreshTemplate" width="18" height="21"/>
-        <image name="NSStatusPartiallyAvailable" width="16" height="16"/>
         <image name="arrow.down" catalog="system" width="13" height="14"/>
         <image name="arrow.down.backward" catalog="system" width="13" height="12"/>
         <image name="arrow.down.forward" catalog="system" width="13" height="12"/>
@@ -1201,5 +1210,6 @@ DQ
         <image name="rectangle.fill" catalog="system" width="18" height="14"/>
         <image name="remote-control" width="32" height="32"/>
         <image name="sidebar.squares.leading" catalog="system" width="24" height="18"/>
+        <image name="xmark.circle.fill" catalog="system" width="15" height="15"/>
     </resources>
 </document>

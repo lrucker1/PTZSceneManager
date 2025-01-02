@@ -485,6 +485,10 @@ typedef enum {
     }
 }
                                 
+- (IBAction)cancelCameraOperation:(id)sender {
+    // No guards, no checks, just send it.
+    [self.camera cancelCommand];
+}
 
 - (IBAction)doPanTilt:(id)sender {
     [self confirmCameraOperation:^(){
