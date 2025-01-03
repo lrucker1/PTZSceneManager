@@ -66,6 +66,7 @@ PREF_VALUE_NSINT_PROPERTIES(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_PROPERTIES(maxColumnCount, MaxColumnCount)
 PREF_VALUE_NSINT_PROPERTIES(thumbnailOption, ThumbnailOption)
 PREF_VALUE_NSINT_PROPERTIES(pingTimeout, PingTimeout)
+PREF_VALUE_NSINT_PROPERTIES(sceneCopyOffset, SceneCopyOffset)
 
 #undef PREF_VALUE_NSINT_PROPERTIES
 
@@ -79,9 +80,11 @@ PREF_VALUE_NSINT_PROPERTIES(pingTimeout, PingTimeout)
 - (NSString *)sceneNameAtIndex:(NSInteger)index;
 - (void)setSceneName:(NSString *)name atIndex:(NSInteger)index;
 - (void)setSceneNames:(NSArray *)names startingIndex:(NSInteger)index;
+- (void)copySceneNameAtIndex:(NSInteger)index toIndex:(NSInteger)toIndex;
 
 - (NSImage *)snapshotAtIndex:(NSInteger)index;
 - (void)saveSnapshotAtIndex:(NSInteger)index withData:(NSData *)imgData;
+- (void)copySnapshotAtIndex:(NSInteger)index toIndex:(NSInteger)toIndex;
 
 - (NSString *)snapshotURLWithAddress;
 - (NSString *)rtspURLWithAddress;

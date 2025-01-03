@@ -16,12 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class PTZPrefCamera;
 
 typedef enum {
-    PTZRestore = 0,
-    PTZCheck = 1,
-    PTZBackup = 2
-} PTZMode;
-
-typedef enum {
     PTZVideoOff = 0,
     PTZVideoPreview = 1,
     PTZVideoProgram = 2
@@ -182,7 +176,7 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSImage 
 - (void)updateAutofocusState:(PTZDoneBlock _Nullable)doneBlock;
 
 - (void)prepareForProgressOperationFrom:(NSInteger)start to:(NSInteger)end;
-- (void)backupRestoreWithParent:(PTZProgressGroup *)parent delay:(NSInteger)batchDelay batchMode:(PTZMode)batchMode onDone:(PTZDoneBlock _Nullable)doneBlock;
+- (void)backupRestoreWithParent:(PTZProgressGroup *)parent onDone:(PTZDoneBlock _Nullable)doneBlock;
 
 - (void)applyWBModeValues:(PTZDoneBlock _Nullable)doneBlock;
 - (void)saveLocalWBCameraPrefs;

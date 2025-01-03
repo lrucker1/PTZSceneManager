@@ -11,6 +11,7 @@
 @class PTZPrefCamera;
 
 extern NSString *PSMSceneCollectionKey;
+extern NSString *PTZ_BatchDelayKey;
 
 void PTZLog(NSString *format, ...);
 

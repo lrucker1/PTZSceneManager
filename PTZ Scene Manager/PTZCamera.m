@@ -1039,14 +1039,18 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 // Pre-calculate the totalUnitCount so all the children are ready when they get added.
 - (void)prepareForProgressOperationFrom:(NSInteger)start to:(NSInteger)end {
     self.progress = [[PTZProgress alloc] initWithUserInfo:@{PTZProgressStartKey:@(start), PTZProgressEndKey:@(end)}];
-    self.progress.totalUnitCount = (end - start) + 2;
+    self.progress.totalUnitCount = (end - start) + 1;
     PTZCamera *weakSelf = self;
     self.progress.cancelledHandler = ^() {
         [weakSelf cancelCommand];
     };
 }
 
-- (void)backupRestoreWithParent:(PTZProgressGroup *)parent delay:(NSInteger)batchDelay batchMode:(PTZMode)batchMode onDone:( PTZDoneBlock)inDoneBlock {
+- (NSInteger)batchDelay {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:PTZ_BatchDelayKey];
+}
+
+- (void)backupRestoreWithParent:(PTZProgressGroup *)parent onDone:( PTZDoneBlock)inDoneBlock {
     NSAssert(self.progress != nil, @"Missing Progress object");
     [parent addChild:self.progress];
     PTZDoneBlock doneBlock = ^(BOOL success) {
@@ -1054,21 +1058,11 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         self.progress.completedUnitCount = self.progress.totalUnitCount;
         self.progress = nil;
     };
-    uint32_t rangeOffset = (uint32_t)[self.progress.userInfo[PTZProgressStartKey] integerValue];
-    uint32_t rangeEnd = (uint32_t)[self.progress.userInfo[PTZProgressEndKey] integerValue];
+    uint32_t rangeOffset = (uint32_t)self.prefCamera.firstVisibleScene;
+    uint32_t rangeEnd = (uint32_t)self.prefCamera.lastVisibleScene;
     uint32_t length = rangeEnd - rangeOffset + 1;
-    uint32_t fromOffset = 0, toOffset = 0;
-    switch (batchMode) {
-        case PTZBackup:
-            toOffset = rangeOffset;
-            break;
-        case PTZRestore:
-            fromOffset = rangeOffset;
-            break;
-        case PTZCheck:
-            // Update mode, from == to
-            break;
-    }
+    uint32_t fromOffset = rangeOffset;
+    uint32_t toOffset = (uint32_t)self.prefCamera.sceneCopyOffset;
     self.progress.cancellable = NO;
     self.progress.localizedAdditionalDescription = [NSString stringWithFormat:@"Connecting to camera %@…", self.deviceName];
     [self loadCameraWithCompletionHandler:^() {
@@ -1080,7 +1074,7 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            backupRestore(&self->_iface, &self->_camera, (uint32_t)fromOffset, (uint32_t)toOffset, (uint32_t)length, (uint32_t)batchDelay, self, doneBlock);
+            backupRestore(&self->_iface, &self->_camera, (uint32_t)fromOffset, (uint32_t)toOffset, (uint32_t)length, (uint32_t)self.batchDelay, self, doneBlock);
         });
     }];
 }
@@ -1178,7 +1172,9 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
     }] resume];
 }
 
-- (BOOL)batchSetFinishedAtIndex:(int)index {
+- (BOOL)batchSetFinishedFromIndex:(int)fromIndex toIndex:(int)index {
+    [self.prefCamera copySceneNameAtIndex:fromIndex toIndex:index];
+    [self.prefCamera copySnapshotAtIndex:fromIndex toIndex:index];
     [self fetchSnapshotAtIndex:index];
     self.progress.completedUnitCount++;
     return self.progress.cancelled;
@@ -1683,7 +1679,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
     // Set preset recall speed to max, just in case it got changed.
     VISCA_set_pantilt_preset_speed(iface, camera, 24);
     __block BOOL cancel = NO;
-    for (sceneIndex = 1; sceneIndex < length; sceneIndex++) {
+    for (sceneIndex = 0; sceneIndex < length; sceneIndex++) {
         if ([log length] > 0) {
             // For "continue" log statements.
             fprintf(stdout, "%s", [log UTF8String]);
@@ -1708,7 +1704,7 @@ void backupRestore(VISCAInterface_t *iface, VISCACamera_t *camera, uint32_t from
         }
         log = [log stringByAppendingFormat:@" copied scene %d to %d\n", sceneIndex + fromOffset, sceneIndex + toOffset];
         dispatch_sync(dispatch_get_main_queue(), ^{
-            cancel = [ptzCamera batchSetFinishedAtIndex:sceneIndex+toOffset];
+            cancel = [ptzCamera batchSetFinishedFromIndex:sceneIndex+fromOffset toIndex:sceneIndex+toOffset];
         });
         if (cancel) {
             break;

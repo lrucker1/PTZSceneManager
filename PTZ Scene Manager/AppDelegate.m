@@ -25,6 +25,8 @@
 #import "PSMAppPreferencesWindowController.h"
 
 NSString *PSMSceneCollectionKey = @"SceneCollections";
+NSString *PTZ_BatchDelayKey = @"BatchDelay";
+
 
 static NSString *PSMAutosavePrefsWindowID = @"prefswindow";
 static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow";
@@ -51,6 +53,7 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     [super initialize];
     [[NSUserDefaults standardUserDefaults] registerDefaults:
      @{PSMOBSAutoConnect:@(NO),
+       PTZ_BatchDelayKey:@(1),
        PSMOBSURLString:@"ws://localhost:4455",
        @"WebSockets":@"WebSockets", // Prefs window textfield "Null Placeholder" key.
     }];

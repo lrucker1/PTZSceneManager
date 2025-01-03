@@ -10,6 +10,7 @@
 #import "PTZPrefCamera.h"
 #import "PTZCameraConfig.h"
 #import "PTZCameraSceneRange.h"
+#import "PTZProgressGroup.h"
 #import "NSWindowAdditions.h"
 #import "PTZOutlineViewDictionaryDataSource.h"
 #import "LARIndexSetVisualizerView.h"
@@ -70,7 +71,7 @@ typedef enum _ExposureModes {
 
 @property (strong) PTZOutlineViewDictionary *outlineData;
 @property NSArray *panValues, *tiltValues, *zoomValues, *focusValues, *presetSpeedValues;
-@property NSInteger firstVisibleScene, lastVisibleScene;
+@property NSInteger firstVisibleScene, lastVisibleScene, sceneCopyOffset;
 @property IBOutlet NSArrayController *sceneRangeController;
 @property IBOutlet NSTableView *sceneRangeTableView;
 @property IBOutlet NSButton *sceneRangeMapButton;
@@ -78,6 +79,10 @@ typedef enum _ExposureModes {
 @property IBOutlet NSPopover *sceneRangeMapPopover;
 @property IBOutlet NSView *thumbnailRadioGroupView;
 @property IBOutlet NSView *snapshotRadioGroupView;
+@property (strong) IBOutlet NSWindow *progressSheet;
+@property BOOL batchOperationInProgress;
+
+@property PTZProgressGroup *progress;
 
 @end
 
@@ -115,6 +120,7 @@ typedef enum _ExposureModes {
     [self.exposureDataOutlineView setDelegate:_outlineData];
     self.firstVisibleScene = self.prefCamera.firstVisibleScene;
     self.lastVisibleScene = self.prefCamera.lastVisibleScene;
+    self.sceneCopyOffset = self.prefCamera.sceneCopyOffset;
     self.sceneRangeTableView.doubleAction = @selector(applySceneRange:);
     [self manageObservers:YES];
 }
@@ -127,7 +133,8 @@ typedef enum _ExposureModes {
     NSArray *keys = @[@"cameraState.exposureMode",
                       @"sceneRangeController.arrangedObjects",
                       @"prefCamera.firstVisibleScene",
-                      @"prefCamera.lastVisibleScene"];
+                      @"prefCamera.lastVisibleScene",
+                      @"prefCamera.sceneCopyOffset"];
     if (add) {
         for (NSString *key in keys) {
             [self addObserver:self
@@ -1060,6 +1067,77 @@ MAKE_CAN_SET_METHOD(BWMode)
         [self.sceneRangeController addObjects:array];
         self.sceneRangeController.selectionIndex = self.prefCamera.selectedSceneRange;
     }
+}
+
+- (void)validateAndBeginSceneCopy {
+    PTZCameraConfig *config = self.cameraState.cameraConfig;
+    NSInteger min = self.sceneCopyOffset;
+    NSInteger range = self.lastVisibleScene - self.firstVisibleScene;
+    NSInteger max = min + range;
+    BOOL isBad = NO;
+    if (min < 1) {
+        min = 1;
+        isBad = YES;
+    }
+    if (range < 1) {
+        isBad = YES;
+    }
+    if (max > config.maxSceneIndex) {
+        max = config.maxSceneIndex;
+        isBad = YES;
+    }
+    if (min >= self.firstVisibleScene && min <= self.lastVisibleScene) {
+        isBad = YES;
+    }
+    if (max >= self.firstVisibleScene && max <= self.lastVisibleScene) {
+        isBad = YES;
+    }
+    if (isBad) {
+        NSBeep();
+        return;
+    }
+    self.prefCamera.sceneCopyOffset = min;
+    [self.cameraState prepareForProgressOperationFrom:min to:max];
+    [self batchRecallCamera:self.cameraState];
+}
+
+- (IBAction)beginSceneCopy:(id)sender {
+    // Force an active textfield to end editing so we get the current value, then put it back when we're done.
+    NSView *view = (NSView *)sender;
+    NSWindow *window = view.window;
+    NSView *first = [window ptz_currentEditingView];
+    if (first != nil) {
+        [window makeFirstResponder:window.contentView];
+    }
+    [self validateAndBeginSceneCopy];
+    if (first != nil) {
+        [window makeFirstResponder:first];
+    }
+}
+
+- (void)batchRecallCamera:(PTZCamera *)camera {
+    if (self.progress == nil) {
+        self.progress = [PTZProgressGroup new];
+        [self.view.window beginSheet:self.progressSheet completionHandler:nil];
+    }
+    self.batchOperationInProgress = YES;
+    [camera backupRestoreWithParent:self.progress onDone:^(BOOL success) {
+        if (self.progress.finished) {
+            self.batchOperationInProgress = NO;
+            [self progressIsFinished];
+        }
+    }];
+}
+
+- (IBAction)cancelExport:(id)sender {
+    // It might be in an uncancellable block
+    self.progress.localizedDescription = NSLocalizedString(@"Cancel Pending…", @"Cancel Pending for progress description");
+    [self.progress cancel];
+}
+
+- (void)progressIsFinished {
+    [self.progressSheet orderOut:nil];
+    self.progress = nil;
 }
 
 - (IBAction)sceneRangeNameChanged:(id)sender {

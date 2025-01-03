@@ -49,6 +49,7 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
        @"panTiltStep":@(2),
        @"firstVisibleScene":@(1),
        @"lastVisibleScene":@(9),
+       @"sceneCopyOffset":@(150),
        @"maxColumnCount":@(3),
        @"resizable":@(YES),
        @"showAutofocusControls":@(YES),
@@ -240,6 +241,7 @@ PREF_VALUE_NSINT_ACCESSORS(focusPlusSpeed, FocusPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(panTiltStep, PanTiltStep)
 PREF_VALUE_NSINT_ACCESSORS(firstVisibleScene, FirstVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
+PREF_VALUE_NSINT_ACCESSORS(sceneCopyOffset, SceneCopyOffset)
 PREF_VALUE_NSINT_ACCESSORS(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 PREF_VALUE_NSINT_ACCESSORS(thumbnailOption, ThumbnailOption)
@@ -276,6 +278,10 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
 
 - (NSInteger)defaultLastVisibleScene {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"lastVisibleScene"] integerValue];
+}
+
+- (NSInteger)defaultSceneCopyOffset {
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"sceneCopyOffset"] integerValue];
 }
 
 - (PTZCameraSceneRange*)defaultRange {
@@ -323,6 +329,27 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
         }
         NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
         [imgData writeToFile:path atomically:YES];
+    });
+}
+
+- (void)copySnapshotAtIndex:(NSInteger)index toIndex:(NSInteger)toIndex {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *rootPath = [self.appDelegate snapshotsDirectory];
+        NSString *filename = nil;
+        NSString *toFilename = nil;
+        if (index >= 0) {
+            filename = [NSString stringWithFormat:@"snapshot_%@_%ld.jpg", self.camerakey, index];
+        } else {
+            return;
+        }
+        if (toIndex >= 0) {
+            toFilename = [NSString stringWithFormat:@"snapshot_%@_%ld.jpg", self.camerakey, toIndex];
+        } else {
+            return;
+        }
+        NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
+        NSString *toPath = [NSString pathWithComponents:@[rootPath, toFilename]];
+        [[NSFileManager defaultManager] copyItemAtPath:path toPath:toPath error:nil];
     });
 }
 
@@ -424,6 +451,20 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
         mutableDict[key] = name;
     } else {
         [mutableDict removeObjectForKey:key];
+    }
+    [self setPrefValue:mutableDict forKey:PSM_SceneNamesKey];
+}
+
+- (void)copySceneNameAtIndex:(NSInteger)index toIndex:(NSInteger)toIndex {
+    NSDictionary *dict = [self prefValueForKey:PSM_SceneNamesKey];
+    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    NSString *key = [@(index) stringValue];
+    NSString *toKey = [@(toIndex) stringValue];
+    NSString *name = mutableDict[key];
+    if ([name length] > 0) {
+        mutableDict[toKey] = name;
+    } else {
+        [mutableDict removeObjectForKey:toKey];
     }
     [self setPrefValue:mutableDict forKey:PSM_SceneNamesKey];
 }
