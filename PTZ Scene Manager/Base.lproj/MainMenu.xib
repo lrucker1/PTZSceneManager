@@ -91,6 +91,12 @@
                                     <action selector="exportCamera:" target="-1" id="hHO-bz-rR7"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Export All…" keyEquivalent="E" id="yQF-x8-KLR">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="exportAllCameras:" target="-1" id="qJg-vo-XEs"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                 <connections>
@@ -569,7 +575,7 @@
             </constraints>
             <point key="canvasLocation" x="-183" y="-523"/>
         </customView>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="yXW-kT-dB3" userLabel="Progress Sheet">
+        <window title="Exporting..." allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="yXW-kT-dB3" userLabel="Progress Sheet">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="109" y="130" width="375" height="106"/>

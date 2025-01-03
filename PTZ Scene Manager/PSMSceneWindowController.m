@@ -355,6 +355,10 @@ typedef enum {
     [self loadCamera:YES];
 }
 
+- (IBAction)exportCamera:(id)sender {
+    [self.appDelegate exportPrefCamera:self.prefCamera];
+}
+
 - (AppDelegate *)appDelegate {
     return (AppDelegate *)[NSApp delegate];
 }

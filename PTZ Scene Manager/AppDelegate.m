@@ -389,7 +389,8 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
         [camera prepareForProgressOperationFrom:self.exportStartIndex to:self.exportEndIndex];
     }
     self.progress = [PTZProgressGroup new];
-    [self.window beginSheet:self.progressSheet completionHandler:nil];
+    [self.progressSheet orderFront:nil];
+    //[self.window beginSheet:self.progressSheet completionHandler:nil];
     self.batchOperationInProgress = YES;
     for (PTZPacketSenderCamera *camera in self.exportCameras) {
         [camera doBackupWithParent:self.progress onDone:^(BOOL success) {
