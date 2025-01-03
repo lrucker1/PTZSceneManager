@@ -21,6 +21,8 @@
 #import "PSMCameraCollectionWindowController.h"
 #import "PTZCameraInt.h"
 #import "PTZPrefCamera.h"
+#import "PTZPacketSenderCamera.h"
+#import "PTZProgressGroup.h"
 #import "PSMOBSWebSocketController.h"
 #import "PSMAppPreferencesWindowController.h"
 
@@ -44,6 +46,12 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 @property (strong) PSMCameraCollectionWindowController *cameraCollectionController;
 @property (strong) NSMutableDictionary<NSString *, PTZPrefCamera *> *mutablePrefCameras;
 @property (readwrite) NSArray *obsSourceNames;
+@property IBOutlet NSView *exportAccessoryView;
+@property NSInteger exportStartIndex, exportEndIndex;
+@property (strong) NSMutableArray *exportCameras;
+@property PTZProgressGroup *progress;
+@property (strong) IBOutlet NSWindow *progressSheet;
+@property BOOL batchOperationInProgress;
 
 @end
 
@@ -341,6 +349,126 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 - (PTZPrefCamera *)prefCameraForKey:(NSString *)camerakey {
     return self.mutablePrefCameras[camerakey];
 }
+#pragma mark export
+- (IBAction)cancelExport:(id)sender {
+    // It might be in an uncancellable block
+    self.progress.localizedDescription = NSLocalizedString(@"Cancel Pending…", @"Cancel Pending for progress description");
+    [self.progress cancel];
+}
+
+- (void)progressIsFinished {
+    [self.progressSheet orderOut:nil];
+    self.progress = nil;
+}
+
+// Assuming that the use case is to make frequent backups, in which case having the date in the name is useful. And since an NSOpenPanel doesn't know it's exporting and won't do an "already exists" check for us, we don't have to try to write our own.
+// Another option would be to do an existence check and generate "Foo_date (X)" names.
+- (NSString *)dateStringForFilename {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    return [dateFormatter stringFromDate:[NSDate date]];
+}
+
+- (void)exportPrefCameras:(NSArray *)prefCameras toURL:(NSURL *)inFileURL orDirectory:(NSURL *)directoryURL {
+    self.exportCameras = [NSMutableArray array];
+    NSString *dateStr = [self dateStringForFilename];
+    
+    for (PTZPrefCamera *prefCamera in prefCameras) {
+        if (prefCamera.camera.isSerial) {
+            PTZLog(@"Export is not supported for %@ (%@)", prefCamera.camera.deviceName, prefCamera.cameraname);
+            continue;
+        }
+        NSURL *fileURL = inFileURL;
+        if (inFileURL == nil) {
+            NSString *filename = [NSString stringWithFormat:@"%@_%@.ini", prefCamera.cameraname, dateStr];
+            fileURL =  [directoryURL URLByAppendingPathComponent:filename];
+        }
+        PTZPacketSenderCamera *camera = [[PTZPacketSenderCamera alloc] initWithPrefCamera:prefCamera fileURL:fileURL];
+        [self.exportCameras addObject:camera];
+        [camera prepareForProgressOperationFrom:self.exportStartIndex to:self.exportEndIndex];
+    }
+    self.progress = [PTZProgressGroup new];
+    [self.window beginSheet:self.progressSheet completionHandler:nil];
+    self.batchOperationInProgress = YES;
+    for (PTZPacketSenderCamera *camera in self.exportCameras) {
+        [camera doBackupWithParent:self.progress onDone:^(BOOL success) {
+            if (self.progress.finished) {
+                self.batchOperationInProgress = NO;
+                [self progressIsFinished];
+            }
+        }];
+    }
+}
+
+- (IBAction)exportAllCameras:(id)sender {
+    if (self.batchOperationInProgress) {
+        return;
+    }
+    self.batchOperationInProgress = YES;
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    panel.prompt = NSLocalizedString(@"Export All", @"Export All Panel button");
+    panel.title = panel.prompt;
+    panel.nameFieldLabel = NSLocalizedString(@"Export To Directory:", @"Export All Panel button");
+    panel.message = NSLocalizedString(@"Export scenes from all cameras as PacketSender import files", @"Export All Panel message");
+    panel.canChooseFiles = NO;
+    panel.canChooseDirectories = YES;
+    panel.accessoryView = self.exportAccessoryView;
+    panel.canCreateDirectories = YES;
+    panel.delegate = self;
+    panel.accessoryViewDisclosed = YES;
+    self.exportStartIndex = 1;
+    self.exportEndIndex = 9;
+    [panel beginWithCompletionHandler:^(NSInteger result){
+        if (result == NSModalResponseOK) {
+            if (self.exportEndIndex < self.exportStartIndex) {
+                self.batchOperationInProgress = NO;
+                NSBeep();
+                return;
+            }
+            NSURL *url = [panel URL];
+            dispatch_async(dispatch_get_main_queue(), ^{
+               [self exportPrefCameras:[self prefCameras] toURL:nil orDirectory:url];
+            });
+         }
+    }];
+
+}
+
+- (void)exportPrefCamera:(PTZPrefCamera *)prefCamera {
+    if (self.batchOperationInProgress) {
+        return;
+    }
+    self.batchOperationInProgress = YES;
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    panel.prompt = NSLocalizedString(@"Export", @"Export Panel button");
+    panel.title = panel.prompt;
+    panel.nameFieldLabel = NSLocalizedString(@"Export As:", @"Export Panel button");
+    panel.message = NSLocalizedString(@"Export scenes from the current camera as a PacketSender import file", @"Export Panel message");
+    [panel setNameFieldStringValue:[NSString stringWithFormat:@"%@_%@.ini", prefCamera.cameraname, [self dateStringForFilename]]];
+    panel.accessoryView = self.exportAccessoryView;
+    panel.canCreateDirectories = YES;
+    panel.delegate = self;
+    self.exportStartIndex = 1;
+    self.exportEndIndex = 9;
+    [panel beginWithCompletionHandler:^(NSInteger result){
+        if (result == NSModalResponseOK) {
+            if (self.exportEndIndex < self.exportStartIndex) {
+                self.batchOperationInProgress = NO;
+                NSBeep();
+                return;
+            }
+            NSURL *url = [panel URL];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self exportPrefCameras:@[prefCamera] toURL:url orDirectory:nil];
+            });
+        } else {
+            self.batchOperationInProgress = NO;
+        }
+    }];
+}
+
+
 #pragma mark OBS connection
 
 - (IBAction)connectToOBS:(id)sender {

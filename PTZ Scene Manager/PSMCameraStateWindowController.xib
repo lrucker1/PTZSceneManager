@@ -1646,8 +1646,8 @@
                                                 </gridCell>
                                             </gridCells>
                                         </gridView>
-                                        <gridView identifier="CopyRangeGrid" xPlacement="leading" yPlacement="bottom" rowAlignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="0xG-Pc-Ssj">
-                                            <rect key="frame" x="20" y="85" width="333" height="21"/>
+                                        <gridView identifier="CopyRangeGrid" horizontalHuggingPriority="750" xPlacement="leading" yPlacement="bottom" rowAlignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="0xG-Pc-Ssj">
+                                            <rect key="frame" x="20" y="85" width="324" height="21"/>
                                             <rows>
                                                 <gridRow id="r6A-n9-5dh"/>
                                             </rows>
@@ -1655,12 +1655,13 @@
                                                 <gridColumn id="XRn-gR-VJB"/>
                                                 <gridColumn id="hoF-r6-Flc"/>
                                                 <gridColumn id="pZk-pt-2Wp"/>
+                                                <gridColumn id="XWX-q6-7Ma"/>
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="r6A-n9-5dh" column="XRn-gR-VJB" id="GOE-RA-fzE">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NRW-uR-alV">
-                                                        <rect key="frame" x="-2" y="3" width="179" height="16"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Copy range to starting offset:" id="ncb-87-A8h">
+                                                    <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NRW-uR-alV">
+                                                        <rect key="frame" x="-2" y="3" width="91" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Copy to index:" id="ncb-87-A8h">
                                                             <font key="font" usesAppearanceFont="YES"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1668,8 +1669,11 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="r6A-n9-5dh" column="hoF-r6-Flc" id="ZLn-7V-nh3">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-3K-icX">
-                                                        <rect key="frame" x="181" y="0.0" width="100" height="21"/>
+                                                    <textField key="contentView" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-3K-icX">
+                                                        <rect key="frame" x="93" y="0.0" width="60" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="60" id="TxY-xN-f1Y"/>
+                                                        </constraints>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="oyj-zk-wee">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1682,8 +1686,8 @@
                                                 </gridCell>
                                                 <gridCell row="r6A-n9-5dh" column="pZk-pt-2Wp" id="C4f-aQ-i1r">
                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bas-uF-g8z">
-                                                        <rect key="frame" x="281" y="-5" width="58" height="27"/>
-                                                        <buttonCell key="cell" type="push" title="Begin" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HUD-9f-unO">
+                                                        <rect key="frame" x="153" y="-5" width="88" height="27"/>
+                                                        <buttonCell key="cell" type="push" title="Begin Copy" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HUD-9f-unO">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                         </buttonCell>
@@ -1692,20 +1696,42 @@
                                                         </connections>
                                                     </button>
                                                 </gridCell>
+                                                <gridCell row="r6A-n9-5dh" column="XWX-q6-7Ma" id="xRk-8F-O0v">
+                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JMc-JB-sh6">
+                                                        <rect key="frame" x="235" y="-5" width="95" height="27"/>
+                                                        <buttonCell key="cell" type="push" title="Apply Range" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zMi-ll-S2j">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <connections>
+                                                                <action selector="applyCopiedSceneRange:" target="MdI-N0-20y" id="cr5-uw-5Nz"/>
+                                                            </connections>
+                                                        </buttonCell>
+                                                    </button>
+                                                </gridCell>
                                             </gridCells>
                                         </gridView>
+                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TdW-S9-bIy">
+                                            <rect key="frame" x="28" y="49" width="354" height="28"/>
+                                            <textFieldCell key="cell" controlSize="small" selectable="YES" title="Recall scenes in the current range and set them in a new range starting at the given index." id="xuD-OC-hkr">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="eNe-iY-me3" secondAttribute="trailing" constant="20" symbolic="YES" id="311-JX-SjT"/>
+                                        <constraint firstItem="TdW-S9-bIy" firstAttribute="leading" secondItem="0xG-Pc-Ssj" secondAttribute="leading" constant="10" id="3sN-5b-HOc"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0xG-Pc-Ssj" secondAttribute="trailing" constant="20" symbolic="YES" id="JTq-gJ-HhD"/>
+                                        <constraint firstItem="TdW-S9-bIy" firstAttribute="top" secondItem="0xG-Pc-Ssj" secondAttribute="bottom" constant="8" symbolic="YES" id="Kci-NN-485"/>
                                         <constraint firstItem="0xG-Pc-Ssj" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="Neb-OP-dJd"/>
                                         <constraint firstItem="G3l-mo-tUH" firstAttribute="top" secondItem="IVK-cZ-A2N" secondAttribute="top" constant="20" symbolic="YES" id="VWh-ID-SEN"/>
                                         <constraint firstItem="G3l-mo-tUH" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="W23-XP-8f4"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G3l-mo-tUH" secondAttribute="trailing" constant="20" symbolic="YES" id="a9z-I2-M8M"/>
                                         <constraint firstItem="eNe-iY-me3" firstAttribute="top" secondItem="G3l-mo-tUH" secondAttribute="bottom" constant="18" id="d7b-Gb-4GR"/>
+                                        <constraint firstAttribute="trailing" secondItem="TdW-S9-bIy" secondAttribute="trailing" constant="20" symbolic="YES" id="e1g-wt-yAs"/>
                                         <constraint firstItem="0xG-Pc-Ssj" firstAttribute="top" secondItem="CHK-X1-xrQ" secondAttribute="bottom" constant="8" symbolic="YES" id="ehL-Lg-C8Q"/>
                                         <constraint firstItem="CHK-X1-xrQ" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="sOA-Sk-s80"/>
-                                        <constraint firstAttribute="trailing" secondItem="0xG-Pc-Ssj" secondAttribute="trailing" constant="47" id="sOv-uz-OET"/>
                                         <constraint firstItem="eNe-iY-me3" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="w2l-a5-bYl"/>
                                         <constraint firstItem="CHK-X1-xrQ" firstAttribute="top" secondItem="eNe-iY-me3" secondAttribute="bottom" id="xDA-ec-9Wb"/>
                                     </constraints>

@@ -15,6 +15,7 @@
 #import "PTZOutlineViewDictionaryDataSource.h"
 #import "LARIndexSetVisualizerView.h"
 #import "libvisca.h"
+#import "AppDelegate.h"
 
 static PTZCameraStateViewController *selfType;
 
@@ -1044,6 +1045,12 @@ MAKE_CAN_SET_METHOD(BWMode)
     [self.sceneRangeController addObject:csRange];
 }
 
+- (IBAction)applyCopiedSceneRange:(id)sender {
+    NSInteger delta = self.lastVisibleScene - self.firstVisibleScene;
+    self.prefCamera.firstVisibleScene = self.sceneCopyOffset;
+    self.prefCamera.lastVisibleScene = self.sceneCopyOffset + delta;
+}
+
 - (IBAction)applySelectedSceneRange:(id)sender {
     NSInteger row = [self.sceneRangeTableView rowForView:sender];
     if (row < 0) {
@@ -1161,6 +1168,16 @@ MAKE_CAN_SET_METHOD(BWMode)
                              ofView:sender
                       preferredEdge:NSMaxYEdge];
     }
+}
+
+#pragma mark export
+
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[NSApp delegate];
+}
+
+- (IBAction)exportCamera:(id)sender {
+    [self.appDelegate exportPrefCamera:self.prefCamera];
 }
 
 #pragma mark camera thumbnail

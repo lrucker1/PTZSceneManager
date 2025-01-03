@@ -349,6 +349,7 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
         }
         NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
         NSString *toPath = [NSString pathWithComponents:@[rootPath, toFilename]];
+        [[NSFileManager defaultManager] removeItemAtPath:toPath error:nil];
         [[NSFileManager defaultManager] copyItemAtPath:path toPath:toPath error:nil];
     });
 }

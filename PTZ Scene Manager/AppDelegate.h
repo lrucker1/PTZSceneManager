@@ -15,7 +15,7 @@ extern NSString *PTZ_BatchDelayKey;
 
 void PTZLog(NSString *format, ...);
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate, NSWindowRestoration>
+@interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate, NSWindowRestoration, NSOpenSavePanelDelegate>
 
 @property BOOL canEditSceneNames;
 @property (readonly) NSArray *obsSourceNames;
@@ -30,6 +30,7 @@ void PTZLog(NSString *format, ...);
 - (void)syncPrefCameras:(NSArray<PTZPrefCamera *> *)importedPrefCameras;
 - (void)addPrefCameras:(NSArray<PTZPrefCamera*> *)prefCameras;
 - (void)removePrefCameras:(NSArray<PTZPrefCamera *> *)prefCameras;
+- (void)exportPrefCamera:(PTZPrefCamera *)prefCamera;
 
 - (void)changeWindowsItem:(NSWindow *)win
                     title:(NSString *)string

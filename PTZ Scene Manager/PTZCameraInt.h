@@ -19,6 +19,8 @@ extern const NSString *PTZProgressEndKey;
 @property dispatch_queue_t cameraQueue;
 @property BOOL isExportingHomeScene;
 
+- (instancetype)initWithPrefCamera:(PTZPrefCamera *)prefCamera IP:(NSString *)ipAddr;
+
 - (VISCAInterface_t*)pIface;
 - (VISCACamera_t*)pCamera;
 

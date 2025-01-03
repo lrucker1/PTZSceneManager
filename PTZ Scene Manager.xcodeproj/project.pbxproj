@@ -37,6 +37,8 @@
 		9463828129807F360015BA8F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463828029807F360015BA8F /* libz.tbd */; };
 		9463828229807F360015BA8F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827F29807F360015BA8F /* libiconv.tbd */; };
 		9463828329807F360015BA8F /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9463827E29807F360015BA8F /* libbz2.tbd */; };
+		946504712D2855DA00E03E28 /* PTZPacketSenderCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 946504702D2855DA00E03E28 /* PTZPacketSenderCamera.m */; };
+		946504742D28560000E03E28 /* PTZPacketSenderFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 946504732D28560000E03E28 /* PTZPacketSenderFile.m */; };
 		946B299D29EE468800E9C1F0 /* liblibvisca-all.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 946B299C29EE468800E9C1F0 /* liblibvisca-all.a */; };
 		946CA6B3299C251A00ACC947 /* PTZPrefObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 946CA6B2299C251A00ACC947 /* PTZPrefObject.m */; };
 		94747E22297B94F800309752 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94747E21297B94F800309752 /* AppDelegate.m */; };
@@ -123,6 +125,10 @@
 		9463827E29807F360015BA8F /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libbz2.tbd; sourceTree = DEVELOPER_DIR; };
 		9463827F29807F360015BA8F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libiconv.tbd; sourceTree = DEVELOPER_DIR; };
 		9463828029807F360015BA8F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		9465046F2D2855DA00E03E28 /* PTZPacketSenderCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZPacketSenderCamera.h; sourceTree = "<group>"; };
+		946504702D2855DA00E03E28 /* PTZPacketSenderCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZPacketSenderCamera.m; sourceTree = "<group>"; };
+		946504722D2855FF00E03E28 /* PTZPacketSenderFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTZPacketSenderFile.h; sourceTree = "<group>"; };
+		946504732D28560000E03E28 /* PTZPacketSenderFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTZPacketSenderFile.m; sourceTree = "<group>"; };
 		946B299C29EE468800E9C1F0 /* liblibvisca-all.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibvisca-all.a"; sourceTree = "<group>"; };
 		946CA6B1299C251A00ACC947 /* PTZPrefObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTZPrefObject.h; sourceTree = "<group>"; };
 		946CA6B2299C251A00ACC947 /* PTZPrefObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTZPrefObject.m; sourceTree = "<group>"; };
@@ -303,6 +309,8 @@
 				94A0964F299961F900F32385 /* PTZProgressWindowController.h */,
 				94A09650299961F900F32385 /* PTZProgressWindowController.m */,
 				94A09651299961F900F32385 /* PTZProgressWindowController.xib */,
+				9465046F2D2855DA00E03E28 /* PTZPacketSenderCamera.h */,
+				946504702D2855DA00E03E28 /* PTZPacketSenderCamera.m */,
 				94CEBAF62983C2EB00D3C8DC /* OBSAuth.swift */,
 				94747E25297B94F900309752 /* MainMenu.xib */,
 				941BFE4F29ADE63900ECEC23 /* regions */,
@@ -340,6 +348,8 @@
 			children = (
 				94747E6D297B9C5F00309752 /* PTZSettingsFile.h */,
 				94747E68297B9C5F00309752 /* PTZSettingsFile.m */,
+				946504722D2855FF00E03E28 /* PTZPacketSenderFile.h */,
+				946504732D28560000E03E28 /* PTZPacketSenderFile.m */,
 				94747E71297B9C5F00309752 /* PTZIniParser.h */,
 				94747E6A297B9C5F00309752 /* PTZIniParser.m */,
 				94747E6B297B9C5F00309752 /* ObjCUtils.h */,
@@ -498,6 +508,7 @@
 				94CEBAFF2986256C00D3C8DC /* PTZCameraSceneRange.m in Sources */,
 				94A09652299961F900F32385 /* PTZProgressWindowController.m in Sources */,
 				94747E5B297B96F900309752 /* PTZCamera.m in Sources */,
+				946504742D28560000E03E28 /* PTZPacketSenderFile.m in Sources */,
 				94CEBAF72983C2EB00D3C8DC /* OBSAuth.swift in Sources */,
 				940FCC592992F0A3008FD02F /* PSMCameraCollectionItem.m in Sources */,
 				940FCC542992EDE5008FD02F /* PSMCameraCollectionWindowController.m in Sources */,
@@ -505,6 +516,7 @@
 				94890E4029827619006EAB75 /* easywsclient.cpp in Sources */,
 				94747E73297B9C5F00309752 /* PTZSettingsFile.m in Sources */,
 				94CEBB40298B58CF00D3C8DC /* PSMRangeCollectionViewController.m in Sources */,
+				946504712D2855DA00E03E28 /* PTZPacketSenderCamera.m in Sources */,
 				94747E80297BB36C00309752 /* PSMSceneCollectionItem.m in Sources */,
 				94747E77297B9C5F00309752 /* ObjCUtils.m in Sources */,
 				94CEBB38298A0CCE00D3C8DC /* DraggingStackView.swift in Sources */,
