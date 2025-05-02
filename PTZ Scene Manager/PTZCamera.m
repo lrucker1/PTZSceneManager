@@ -984,50 +984,35 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 }
 
 - (void)showOSDMenu:(PTZDoneBlock)doneBlock {
+    if (self.cameraConfig.isPTZOptics) {
+        // The camera may lie about get_datascreen. Use the toggle button instead of trying to autoshow.
+        return;
+    }
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
             [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = NO;
-            if (self.cameraConfig.isPTZOptics) {
-                uint8_t status;
-                if (VISCA_get_datascreen(&self->_iface, &self->_camera, &status) == VISCA_SUCCESS) {
-                    if (status == VISCA_OFF) {
-                        success = [self unchecked_visca_toggle_menu];
-                    } else {
-                        success = YES;
-                    }
-                }
-            } else {
-                success = VISCA_set_datascreen_on(&self->_iface, &self->_camera);
-            }
+            BOOL success = VISCA_set_datascreen_on(&self->_iface, &self->_camera);
+            
             [self callDoneBlock:doneBlock success:success];
         });
     }];
 }
 
 - (void)closeOSDMenu:(PTZDoneBlock)doneBlock {
+    if (self.cameraConfig.isPTZOptics) {
+        // The camera may lie about get_datascreen. Use the toggle button instead of trying to autohide.
+        return;
+    }
     [self loadCameraWithCompletionHandler:^() {
         if (!self.cameraIsOpen) {
             [self connectionFailed:doneBlock];
             return;
         }
         dispatch_async(self.cameraQueue, ^{
-            BOOL success = NO;
-            if (self.cameraConfig.isPTZOptics) {
-                uint8_t status;
-                if (VISCA_get_datascreen(&self->_iface, &self->_camera, &status) == VISCA_SUCCESS) {
-                    if (status == VISCA_ON) {
-                        success = [self unchecked_visca_toggle_menu];
-                    } else {
-                        success = YES;
-                    }
-                }
-            } else {
-                success = VISCA_set_datascreen_off(&self->_iface, &self->_camera);
-            }
+            BOOL success = VISCA_set_datascreen_off(&self->_iface, &self->_camera);
             [self callDoneBlock:doneBlock success:success];
         });
     }];

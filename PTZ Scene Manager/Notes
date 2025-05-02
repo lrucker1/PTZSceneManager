@@ -105,5 +105,16 @@ Enable/disable cameras - the USB cam is not always connected.
 Test the exposure etc recall - does it change for every scene?
 
 UI to recall calibration shot (see webpage)
+or not. it's an url command - pantiltreset - with no apparent visca equivalent.
 
 ping camera causing hangs?
+
+bug fixes:
+    don’t auto show OSD menu if you only have toggle; the camera lies
+    check for existing screenshot when copying
+
+discontinuous set of ranges: for instance, 1-3 as a base, 120-125 for specials. So users don't have to copy 1-3 to pick up changes the next time they use 120.
+
+ Multiple zoom clicks triggered bug? Also zoom doesn't show busy button
+
+Reset range should not be limited to 9. Or even remove it, it doesn't seem to be that useful.

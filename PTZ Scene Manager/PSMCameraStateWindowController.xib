@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -305,12 +305,9 @@
                                     <subviews>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uqb-T6-8YP">
                                             <rect key="frame" x="118" y="352" width="132" height="25"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="PyL-4q-H3e"/>
-                                            </constraints>
                                             <popUpButtonCell key="cell" type="push" title="Auto" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="sbc-mb-SKn" id="NYF-Mq-GfG">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="message"/>
                                                 <menu key="menu" id="pyI-mz-I8n">
                                                     <items>
                                                         <menuItem title="Auto" state="on" id="sbc-mb-SKn"/>
@@ -322,6 +319,9 @@
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="PyL-4q-H3e"/>
+                                            </constraints>
                                             <connections>
                                                 <accessibilityConnection property="title" destination="Nb7-z2-xU2" id="ptr-M0-0X3"/>
                                                 <binding destination="MdI-N0-20y" name="selectedTag" keyPath="cameraState.wbMode" id="d4O-xz-8fg"/>
@@ -792,12 +792,9 @@
                                     <subviews>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IAj-oL-CoE">
                                             <rect key="frame" x="93" y="352" width="132" height="25"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="VwO-Fl-A8c"/>
-                                            </constraints>
                                             <popUpButtonCell key="cell" type="push" title="Auto" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="jAG-Qa-UK3" id="DDY-xk-fOC">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="message"/>
                                                 <menu key="menu" id="ONp-3t-012">
                                                     <items>
                                                         <menuItem title="Auto" state="on" id="jAG-Qa-UK3"/>
@@ -808,6 +805,9 @@
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="VwO-Fl-A8c"/>
+                                            </constraints>
                                             <connections>
                                                 <binding destination="MdI-N0-20y" name="selectedTag" keyPath="cameraState.exposureMode" id="Jzo-L9-682"/>
                                             </connections>
@@ -1439,7 +1439,7 @@
                                             <rect key="frame" x="20" y="132" width="360" height="145"/>
                                             <clipView key="contentView" id="UaS-pQ-7gM">
                                                 <rect key="frame" x="1" y="1" width="358" height="143"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="B1C-5d-bJL" viewBased="YES" id="lXZ-xj-42m">
                                                         <rect key="frame" x="0.0" y="0.0" width="358" height="115"/>
@@ -1461,7 +1461,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="ptq-5l-6nG">
-                                                                        <rect key="frame" x="8" y="0.0" width="148" height="24"/>
+                                                                        <rect key="frame" x="18" y="0.0" width="148" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
@@ -1504,7 +1504,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="9pH-cA-Dad">
-                                                                        <rect key="frame" x="173" y="0.0" width="80" height="24"/>
+                                                                        <rect key="frame" x="183" y="0.0" width="80" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
@@ -1550,7 +1550,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="53k-sB-Drl">
-                                                                        <rect key="frame" x="270" y="0.0" width="77" height="17"/>
+                                                                        <rect key="frame" x="280" y="0.0" width="77" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-8N-VUE">
@@ -2103,7 +2103,7 @@
                                                                         <rect key="frame" x="86" y="23" width="83" height="25"/>
                                                                         <popUpButtonCell key="cell" type="push" title="Manual" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Y2O-YN-5wq" id="oPB-Uz-dwo">
                                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                            <font key="font" metaFont="menu"/>
+                                                                            <font key="font" metaFont="message"/>
                                                                             <menu key="menu" id="vyK-GA-NSA">
                                                                                 <items>
                                                                                     <menuItem title="Manual" state="on" id="Y2O-YN-5wq"/>
@@ -2268,7 +2268,7 @@
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="M8B-4P-3hL" userLabel="Thumbnail Group View">
                                             <rect key="frame" x="34" y="175" width="346" height="93"/>
                                             <subviews>
-                                                <button verticalHuggingPriority="750" tag="102" translatesAutoresizingMaskIntoConstraints="NO" id="Ixa-IV-ZaJ">
+                                                <button tag="102" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ixa-IV-ZaJ">
                                                     <rect key="frame" x="-2" y="-1" width="166" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Show snapshot images" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="C74-yO-AEQ">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -2314,7 +2314,7 @@
                                                         </binding>
                                                     </connections>
                                                 </textField>
-                                                <button verticalHuggingPriority="750" tag="101" translatesAutoresizingMaskIntoConstraints="NO" id="UHf-Mr-T9R">
+                                                <button tag="101" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UHf-Mr-T9R">
                                                     <rect key="frame" x="-2" y="76" width="214" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Show RTSP live camera stream" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="fJb-Ln-ziP">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -2357,7 +2357,7 @@ USB cameras can only show OBS snapshots.</string>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ozz-RQ-OUd">
                                             <rect key="frame" x="34" y="41" width="346" height="93"/>
                                             <subviews>
-                                                <button verticalHuggingPriority="750" tag="101" translatesAutoresizingMaskIntoConstraints="NO" id="twz-pq-ur0">
+                                                <button tag="101" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="twz-pq-ur0">
                                                     <rect key="frame" x="-2" y="76" width="205" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Use camera snapshot images" bezelStyle="regularSquare" imagePosition="left" inset="2" id="spj-Qw-8FB">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -2408,7 +2408,7 @@ USB cameras can only show OBS snapshots.</string>
                                                         </binding>
                                                     </connections>
                                                 </textField>
-                                                <button verticalHuggingPriority="750" tag="102" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-JT-mvI">
+                                                <button tag="102" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-JT-mvI">
                                                     <rect key="frame" x="-2" y="-1" width="187" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Use OBS snapshot images" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Vr7-UF-z2k">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -2661,13 +2661,13 @@ USB cameras can only show OBS snapshots.</string>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RQt-WR-Uxe">
                         <rect key="frame" x="334" y="62" width="27" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="27" id="Za7-JQ-iwh"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="RxZ-Al-7py">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="27" id="Za7-JQ-iwh"/>
+                        </constraints>
                         <connections>
                             <action selector="cancelExport:" target="MdI-N0-20y" id="sBZ-8X-za1"/>
                             <binding destination="MdI-N0-20y" name="enabled" keyPath="progress.cancelPending" id="r52-K5-72l">

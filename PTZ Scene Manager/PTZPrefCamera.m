@@ -347,10 +347,14 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
         } else {
             return;
         }
+        NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *path = [NSString pathWithComponents:@[rootPath, filename]];
         NSString *toPath = [NSString pathWithComponents:@[rootPath, toFilename]];
-        [[NSFileManager defaultManager] removeItemAtPath:toPath error:nil];
-        [[NSFileManager defaultManager] copyItemAtPath:path toPath:toPath error:nil];
+        // Don't remove toPath unless there's a file at path!
+        if ([fileManager fileExistsAtPath:path]) {
+            [fileManager removeItemAtPath:toPath error:nil];
+            [fileManager copyItemAtPath:path toPath:toPath error:nil];
+        }
     });
 }
 
@@ -462,12 +466,11 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
     NSString *key = [@(index) stringValue];
     NSString *toKey = [@(toIndex) stringValue];
     NSString *name = mutableDict[key];
+    // Only replace if name is non-zero, never remove existing toName.
     if ([name length] > 0) {
         mutableDict[toKey] = name;
-    } else {
-        [mutableDict removeObjectForKey:toKey];
+        [self setPrefValue:mutableDict forKey:PSM_SceneNamesKey];
     }
-    [self setPrefValue:mutableDict forKey:PSM_SceneNamesKey];
 }
 
 // Import utility.

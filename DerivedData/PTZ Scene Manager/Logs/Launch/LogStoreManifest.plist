@@ -3,17 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>logFormatVersion</key>
-	<integer>10</integer>
+	<integer>11</integer>
 	<key>logs</key>
 	<dict>
-		<key>A672B311-FC00-43FF-8678-8C23D23F57D2</key>
+		<key>F93C4B36-0FA8-4419-9D5A-0F126245865E</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>8440E703-633C-4E22-AA14-9ADF02DB9E34</string>
+			<string>1287C2C7-B548-4308-9A27-EF32B46277BF</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>S</string>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
 			</dict>
 			<key>className</key>
 			<string>IDESchemeActionsInvocationRecord</string>
@@ -22,7 +30,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2023.04.30_18-27-03--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_11-04-26--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -32,7 +40,15 @@
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>S</string>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>PTZ Scene Manager project</string>
@@ -43,13 +59,13 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>704597223.003883</real>
+			<real>767901866.41874099</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>A672B311-FC00-43FF-8678-8C23D23F57D2</string>
+			<string>F93C4B36-0FA8-4419-9D5A-0F126245865E</string>
 		</dict>
 	</dict>
 </dict>
