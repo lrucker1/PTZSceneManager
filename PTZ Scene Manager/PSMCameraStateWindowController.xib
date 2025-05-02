@@ -37,7 +37,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="390"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mkZ-UM-Mc3">
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mkZ-UM-Mc3">
                                             <rect key="frame" x="18" y="354" width="126" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Alternative speeds" id="zWB-Q4-ajg">
                                                 <font key="font" metaFont="systemBold"/>
@@ -62,7 +62,7 @@
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="8Pe-nT-iaX" column="x49-nI-gaw" id="ehq-nL-0zn">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9pa-3S-BDt">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9pa-3S-BDt">
                                                         <rect key="frame" x="-2" y="80" width="27" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Pan" id="Fbe-sH-419">
                                                             <font key="font" metaFont="system"/>
@@ -72,7 +72,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="8Pe-nT-iaX" column="C5H-Mm-wl8" id="nSa-v1-z3J">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPa-w3-Lkn">
+                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cPa-w3-Lkn">
                                                         <rect key="frame" x="42" y="76" width="64" height="23"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="jnb-c4-uTt">
                                                             <font key="font" metaFont="system"/>
@@ -96,7 +96,7 @@
                                                     </comboBox>
                                                 </gridCell>
                                                 <gridCell row="ijs-p3-5c1" column="x49-nI-gaw" id="1uH-m4-dc7">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r8v-P0-yCm">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r8v-P0-yCm">
                                                         <rect key="frame" x="-2" y="54" width="24" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Tilt" id="eiR-4g-xHF">
                                                             <font key="font" metaFont="system"/>
@@ -106,7 +106,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="ijs-p3-5c1" column="C5H-Mm-wl8" id="sty-TW-rC5">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-0R-K26">
+                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-0R-K26">
                                                         <rect key="frame" x="42" y="50" width="64" height="23"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="R3S-ab-qmB">
                                                             <font key="font" metaFont="system"/>
@@ -130,7 +130,7 @@
                                                     </comboBox>
                                                 </gridCell>
                                                 <gridCell row="Nhj-tH-r7X" column="x49-nI-gaw" id="g3N-XY-ESp">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sKQ-pK-YPs">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sKQ-pK-YPs">
                                                         <rect key="frame" x="-2" y="28" width="41" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Zoom" id="DtK-Hb-jiF">
                                                             <font key="font" metaFont="system"/>
@@ -140,7 +140,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="Nhj-tH-r7X" column="C5H-Mm-wl8" id="XZC-QF-wM4">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du6-Cc-cJO">
+                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du6-Cc-cJO">
                                                         <rect key="frame" x="42" y="24" width="64" height="23"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="YPj-7T-qg3">
                                                             <font key="font" metaFont="system"/>
@@ -164,7 +164,7 @@
                                                     </comboBox>
                                                 </gridCell>
                                                 <gridCell row="gP0-H8-kN4" column="x49-nI-gaw" id="dgF-44-L3e">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Df-xz-kpY">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Df-xz-kpY">
                                                         <rect key="frame" x="-2" y="2" width="41" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Focus" id="kbe-tM-Mtp">
                                                             <font key="font" metaFont="system"/>
@@ -174,7 +174,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="gP0-H8-kN4" column="C5H-Mm-wl8" id="Eol-k6-BSv">
-                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JSk-NA-UC3">
+                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JSk-NA-UC3">
                                                         <rect key="frame" x="42" y="-2" width="64" height="23"/>
                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="50o-yt-hSY">
                                                             <font key="font" metaFont="system"/>
@@ -199,7 +199,7 @@
                                                 </gridCell>
                                             </gridCells>
                                         </gridView>
-                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="LCP-hU-E8a">
+                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="LCP-hU-E8a">
                                             <rect key="frame" x="30" y="208" width="347" height="32"/>
                                             <textFieldCell key="cell" selectable="YES" title="The speeds to use for the outer pan/tilt, zoom, and focus continuous action buttons. " id="pS3-5l-yyb">
                                                 <font key="font" metaFont="system"/>
@@ -233,7 +233,7 @@
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="QYx-T4-xOY" column="bCZ-SQ-rb7" id="TRr-Zr-CGo">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z0z-Ut-jSS">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z0z-Ut-jSS">
                                                         <rect key="frame" x="-2" y="3" width="82" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Pan/Tilt Step" id="9gL-Tz-iJR">
                                                             <font key="font" metaFont="system"/>
@@ -243,7 +243,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="QYx-T4-xOY" column="Y5Q-bH-RXH" id="gNW-ty-W4D">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vXn-Ad-6Vf">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vXn-Ad-6Vf">
                                                         <rect key="frame" x="87" y="0.0" width="60" height="21"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ik1-bd-2RG">
                                                             <font key="font" metaFont="system"/>
@@ -257,7 +257,7 @@
                                                 </gridCell>
                                             </gridCells>
                                         </gridView>
-                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="X5w-HT-bMl">
+                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="X5w-HT-bMl">
                                             <rect key="frame" x="30" y="130" width="255" height="32"/>
                                             <textFieldCell key="cell" selectable="YES" title="The distance the camera will move when using the one-step pan/tilt buttons." id="O4q-r7-yuH">
                                                 <font key="font" metaFont="system"/>
@@ -327,7 +327,7 @@
                                                 <binding destination="MdI-N0-20y" name="selectedTag" keyPath="cameraState.wbMode" id="d4O-xz-8fg"/>
                                             </connections>
                                         </popUpButton>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Nb7-z2-xU2">
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Nb7-z2-xU2">
                                             <rect key="frame" x="48" y="359" width="67" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="WB Mode:" id="moZ-dH-vrU">
                                                 <font key="font" metaFont="system"/>
@@ -407,7 +407,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="h8F-jE-hhl" column="wnL-bu-Haf" id="X3k-uE-eRB">
-                                                    <textField key="contentView" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="PM5-Jr-wvI">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="PM5-Jr-wvI">
                                                         <rect key="frame" x="22" y="143" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Red Gain" id="gJ0-XF-D6H">
                                                             <font key="font" metaFont="system"/>
@@ -425,7 +425,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="h8F-jE-hhl" column="F7J-54-pW7" id="nSt-5O-Q7r">
-                                                    <textField key="contentView" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="O7t-Kv-s9F">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="O7t-Kv-s9F">
                                                         <rect key="frame" x="128" y="140" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="eno-Wo-Loq"/>
@@ -463,7 +463,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="tiV-Go-i6X" column="wnL-bu-Haf" id="ad2-RM-c4R">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="qUm-BJ-0Ze">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="qUm-BJ-0Ze">
                                                         <rect key="frame" x="22" y="114" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Blue Gain" id="EKo-U3-zwU">
                                                             <font key="font" metaFont="system"/>
@@ -480,7 +480,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="tiV-Go-i6X" column="F7J-54-pW7" id="D5q-SA-DPM">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SaR-eN-xih">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SaR-eN-xih">
                                                         <rect key="frame" x="128" y="111" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="ulu-wq-WzO"/>
@@ -515,7 +515,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="7NT-Dt-yQ5" column="wnL-bu-Haf" id="awk-9V-Pux">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="xdH-Ct-lJH">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="xdH-Ct-lJH">
                                                         <rect key="frame" x="22" y="84" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Color Temp" id="NQi-Tq-Y3R">
                                                             <font key="font" metaFont="system"/>
@@ -532,7 +532,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="7NT-Dt-yQ5" column="F7J-54-pW7" id="0AH-MH-toG">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qM5-An-lGy">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qM5-An-lGy">
                                                         <rect key="frame" x="128" y="82" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="p5V-ng-Byw"/>
@@ -592,7 +592,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="3Cv-4J-a1S" column="wnL-bu-Haf" id="cyl-Ql-nrR">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="qrt-JB-Bj0">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="qrt-JB-Bj0">
                                                         <rect key="frame" x="22" y="57" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="AWB Sens" id="lLE-Ja-DNj">
                                                             <font key="font" metaFont="system"/>
@@ -652,7 +652,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="B5a-SF-z5K" column="wnL-bu-Haf" id="jJo-0F-xGu">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="GmN-q4-jMg">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="GmN-q4-jMg">
                                                         <rect key="frame" x="22" y="30" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Saturation" id="8Su-Bi-PzL">
                                                             <font key="font" metaFont="system"/>
@@ -669,7 +669,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="B5a-SF-z5K" column="F7J-54-pW7" id="8Kp-MT-cp3">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhy-kT-kD7">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhy-kT-kD7">
                                                         <rect key="frame" x="128" y="27" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="jbf-CX-Rvw"/>
@@ -716,7 +716,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="hFh-rS-wwZ" column="wnL-bu-Haf" id="ahO-Sz-cQ3">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YMi-bt-Qmm">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YMi-bt-Qmm">
                                                         <rect key="frame" x="22" y="3" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Hue" id="YJK-5E-Qkh">
                                                             <font key="font" metaFont="system"/>
@@ -733,7 +733,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="hFh-rS-wwZ" column="F7J-54-pW7" id="ASR-pg-07b">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UZI-Jk-pWi">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UZI-Jk-pWi">
                                                         <rect key="frame" x="128" y="0.0" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="bK4-re-9kS"/>
@@ -812,7 +812,7 @@
                                                 <binding destination="MdI-N0-20y" name="selectedTag" keyPath="cameraState.exposureMode" id="Jzo-L9-682"/>
                                             </connections>
                                         </popUpButton>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="fgQ-ym-F88">
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="fgQ-ym-F88">
                                             <rect key="frame" x="48" y="359" width="42" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Mode:" id="fgu-Zw-26C">
                                                 <font key="font" metaFont="system"/>
@@ -1031,7 +1031,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="rZb-X2-r1W" column="nt0-Ig-Shl" id="ZNz-i1-SXg">
-                                                    <textField key="contentView" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="NNL-6d-ONh">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="NNL-6d-ONh">
                                                         <rect key="frame" x="24" y="140" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Luminance" id="erm-o6-N31">
                                                             <font key="font" metaFont="system"/>
@@ -1041,7 +1041,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="rZb-X2-r1W" column="fXk-ke-dS3" id="irT-Or-OHT">
-                                                    <textField key="contentView" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Kts-Ur-sZ3" userLabel="Lum Field">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Kts-Ur-sZ3" userLabel="Lum Field">
                                                         <rect key="frame" x="136" y="137" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="2LV-GL-gnu"/>
@@ -1079,7 +1079,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="ZeZ-p5-uG7" column="nt0-Ig-Shl" id="Hvp-Bj-6eO">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Rhb-EW-RVk">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Rhb-EW-RVk">
                                                         <rect key="frame" x="24" y="111" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Contrast" id="66v-fE-fQb">
                                                             <font key="font" metaFont="system"/>
@@ -1089,7 +1089,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="ZeZ-p5-uG7" column="fXk-ke-dS3" id="Hld-wD-cdK">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KlV-29-CMd" userLabel="Contrast Field">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KlV-29-CMd" userLabel="Contrast Field">
                                                         <rect key="frame" x="136" y="108" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="ifL-Dr-kJ3"/>
@@ -1124,7 +1124,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="tU8-g2-Axq" column="nt0-Ig-Shl" id="efw-d0-YO8">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="hzB-uc-eog">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="hzB-uc-eog">
                                                         <rect key="frame" x="24" y="82" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Sharpness" id="480-eD-yul">
                                                             <font key="font" metaFont="system"/>
@@ -1134,7 +1134,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="tU8-g2-Axq" column="fXk-ke-dS3" id="Dcu-CM-RJq">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b5q-Gn-OPt" userLabel="Aperture Field">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b5q-Gn-OPt" userLabel="Aperture Field">
                                                         <rect key="frame" x="136" y="79" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="KyP-Ik-2Ky"/>
@@ -1170,7 +1170,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="fjG-Lz-fZ2" column="nt0-Ig-Shl" id="v8A-Se-qBI">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8ok-8j-Mu7">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8ok-8j-Mu7">
                                                         <rect key="frame" x="24" y="54" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Flip H" id="BpL-bv-27f">
                                                             <font key="font" metaFont="system"/>
@@ -1216,7 +1216,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="b57-a0-y6a" column="nt0-Ig-Shl" id="alx-MA-NDt">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="B9Z-5x-xXb">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="B9Z-5x-xXb">
                                                         <rect key="frame" x="24" y="27" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Flip V" id="weh-S4-0Er">
                                                             <font key="font" metaFont="system"/>
@@ -1262,7 +1262,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="Iqq-Te-ztJ" column="nt0-Ig-Shl" id="il0-6x-Wbb">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="26R-Ef-aya">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="26R-Ef-aya">
                                                         <rect key="frame" x="24" y="0.0" width="104" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="B&amp;W Mode" id="MyT-mv-cNb">
                                                             <font key="font" metaFont="system"/>
@@ -1296,7 +1296,7 @@
                                                 </gridCell>
                                             </gridCells>
                                         </gridView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yk3-xw-r1X">
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yk3-xw-r1X">
                                             <rect key="frame" x="18" y="359" width="105" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Image Attributes" id="VJ4-fV-Fol">
                                                 <font key="font" usesAppearanceFont="YES"/>
@@ -1340,7 +1340,7 @@
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="pjt-yL-ONO" column="dLK-Dr-jsO" id="srd-FT-e1w">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FOm-OO-Yc7">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FOm-OO-Yc7">
                                                         <rect key="frame" x="-1" y="57" width="120" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Show scenes from:" id="fhk-US-Jd6">
                                                             <font key="font" metaFont="system"/>
@@ -1350,7 +1350,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="pjt-yL-ONO" column="g8H-Ee-g1m" id="nEF-nX-sxM">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pGx-uc-pp4">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pGx-uc-pp4">
                                                         <rect key="frame" x="123" y="54" width="60" height="21"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="4nW-sz-IdL">
                                                             <font key="font" metaFont="system"/>
@@ -1375,7 +1375,7 @@
                                                     </button>
                                                 </gridCell>
                                                 <gridCell row="5BP-v1-xGv" column="dLK-Dr-jsO" id="INc-JG-3w7">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wo6-kg-f84">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wo6-kg-f84">
                                                         <rect key="frame" x="99" y="29" width="20" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="to:" id="hfw-e5-H8t">
                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1385,7 +1385,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="5BP-v1-xGv" column="g8H-Ee-g1m" id="6T1-9Z-oLF">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="prQ-Ii-tZj">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="prQ-Ii-tZj">
                                                         <rect key="frame" x="123" y="27" width="60" height="21"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="9" drawsBackground="YES" id="FSX-mo-4nj">
                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1397,20 +1397,9 @@
                                                         </connections>
                                                     </textField>
                                                 </gridCell>
-                                                <gridCell row="5BP-v1-xGv" column="ZvZ-Mn-2NM" id="SwG-VH-8oA">
-                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zka-RX-aAO">
-                                                        <rect key="frame" x="184" y="21" width="94" height="27"/>
-                                                        <buttonCell key="cell" type="push" title="Reset Range" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jsw-Qj-4AK">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="smallSystem"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="resetSceneRange:" target="MdI-N0-20y" id="Xo8-ph-jV8"/>
-                                                        </connections>
-                                                    </button>
-                                                </gridCell>
+                                                <gridCell row="5BP-v1-xGv" column="ZvZ-Mn-2NM" id="SwG-VH-8oA"/>
                                                 <gridCell row="8yH-FF-EVa" column="dLK-Dr-jsO" id="HbK-Si-L57">
-                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GKv-TZ-Aqr">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GKv-TZ-Aqr">
                                                         <rect key="frame" x="-2" y="2" width="121" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Maximum columns:" id="hj3-Au-I4W">
                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1420,7 +1409,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="8yH-FF-EVa" column="g8H-Ee-g1m" id="T9t-i8-UcU">
-                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JP2-qX-f85">
+                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JP2-qX-f85">
                                                         <rect key="frame" x="123" y="0.0" width="60" height="21"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="3" drawsBackground="YES" id="UYb-CW-m2g">
                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1439,7 +1428,7 @@
                                             <rect key="frame" x="20" y="132" width="360" height="145"/>
                                             <clipView key="contentView" id="UaS-pQ-7gM">
                                                 <rect key="frame" x="1" y="1" width="358" height="143"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="B1C-5d-bJL" viewBased="YES" id="lXZ-xj-42m">
                                                         <rect key="frame" x="0.0" y="0.0" width="358" height="115"/>
@@ -1461,10 +1450,10 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="ptq-5l-6nG">
-                                                                        <rect key="frame" x="18" y="0.0" width="148" height="24"/>
+                                                                        <rect key="frame" x="8" y="0.0" width="148" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
+                                                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
                                                                                 <rect key="frame" x="0.0" y="4" width="148" height="16"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="dSX-MG-wNY">
                                                                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1504,10 +1493,10 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="9pH-cA-Dad">
-                                                                        <rect key="frame" x="183" y="0.0" width="80" height="24"/>
+                                                                        <rect key="frame" x="173" y="0.0" width="80" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
+                                                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
                                                                                 <rect key="frame" x="0.0" y="4" width="80" height="16"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="rzz-ma-CM2">
                                                                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1550,7 +1539,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="53k-sB-Drl">
-                                                                        <rect key="frame" x="280" y="0.0" width="77" height="17"/>
+                                                                        <rect key="frame" x="270" y="0.0" width="77" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-8N-VUE">
@@ -1659,7 +1648,7 @@
                                             </columns>
                                             <gridCells>
                                                 <gridCell row="r6A-n9-5dh" column="XRn-gR-VJB" id="GOE-RA-fzE">
-                                                    <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NRW-uR-alV">
+                                                    <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NRW-uR-alV">
                                                         <rect key="frame" x="-2" y="3" width="91" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Copy to index:" id="ncb-87-A8h">
                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1669,7 +1658,7 @@
                                                     </textField>
                                                 </gridCell>
                                                 <gridCell row="r6A-n9-5dh" column="hoF-r6-Flc" id="ZLn-7V-nh3">
-                                                    <textField key="contentView" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-3K-icX">
+                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-3K-icX">
                                                         <rect key="frame" x="93" y="0.0" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="TxY-xN-f1Y"/>
@@ -1710,7 +1699,7 @@
                                                 </gridCell>
                                             </gridCells>
                                         </gridView>
-                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TdW-S9-bIy">
+                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TdW-S9-bIy">
                                             <rect key="frame" x="28" y="49" width="354" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" selectable="YES" title="Recall scenes in the current range and set them in a new range starting at the given index." id="xuD-OC-hkr">
                                                 <font key="font" metaFont="smallSystem"/>
@@ -1766,7 +1755,7 @@
                                                             </columns>
                                                             <gridCells>
                                                                 <gridCell row="NNV-jx-bdR" column="WIe-oH-Jm0" id="CjX-XG-GSo">
-                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zPR-XZ-dxa">
+                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zPR-XZ-dxa">
                                                                         <rect key="frame" x="21" y="27" width="31" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Pan:" id="5Wa-KT-ms4">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1776,7 +1765,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="NNV-jx-bdR" column="bst-k2-dKh" id="RMf-ow-wmI">
-                                                                    <textField key="contentView" verticalHuggingPriority="750" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="6G3-aR-x7V" userLabel="pan">
+                                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="6G3-aR-x7V" userLabel="pan">
                                                                         <rect key="frame" x="56" y="27" width="60" height="21"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="00" drawsBackground="YES" id="V8K-EM-bdb">
                                                                             <font key="font" metaFont="system"/>
@@ -1791,7 +1780,7 @@
                                                                 </gridCell>
                                                                 <gridCell row="NNV-jx-bdR" column="5Cx-aL-e91" id="bdg-0f-wUY"/>
                                                                 <gridCell row="NNV-jx-bdR" column="DR1-4q-gwM" id="GqP-7O-CRh">
-                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZAw-Yn-OmA">
+                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZAw-Yn-OmA">
                                                                         <rect key="frame" x="137" y="27" width="73" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Pan Speed:" id="bsY-Nq-2Xy">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1801,7 +1790,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="NNV-jx-bdR" column="mkB-aE-1AS" id="Y4G-oH-fxr">
-                                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WeA-8a-rVN">
+                                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WeA-8a-rVN">
                                                                         <rect key="frame" x="213" y="25" width="64" height="23"/>
                                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="zsW-SF-EVE">
                                                                             <font key="font" metaFont="system"/>
@@ -1820,7 +1809,7 @@
                                                                     </comboBox>
                                                                 </gridCell>
                                                                 <gridCell row="PTz-r3-gWW" column="WIe-oH-Jm0" id="N9h-2Y-mRb">
-                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vc6-ed-rdg">
+                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vc6-ed-rdg">
                                                                         <rect key="frame" x="25" y="0.0" width="27" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Tilt:" id="Zgf-ER-WLm">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1830,7 +1819,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="PTz-r3-gWW" column="bst-k2-dKh" id="pH5-h7-ieB">
-                                                                    <textField key="contentView" verticalHuggingPriority="750" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="kyc-AN-IFb" userLabel="tilt">
+                                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="kyc-AN-IFb" userLabel="tilt">
                                                                         <rect key="frame" x="56" y="0.0" width="60" height="21"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="00" drawsBackground="YES" id="CUG-98-2yE">
                                                                             <font key="font" metaFont="system"/>
@@ -1845,7 +1834,7 @@
                                                                 </gridCell>
                                                                 <gridCell row="PTz-r3-gWW" column="5Cx-aL-e91" id="ZM1-Za-M6J"/>
                                                                 <gridCell row="PTz-r3-gWW" column="DR1-4q-gwM" id="q1b-am-qiE">
-                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="248" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9us-dB-5c6">
+                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." focusRingType="none" horizontalHuggingPriority="248" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9us-dB-5c6">
                                                                         <rect key="frame" x="140" y="0.0" width="70" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Tilt Speed:" id="Brh-m2-4Hr">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1855,7 +1844,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="PTz-r3-gWW" column="mkB-aE-1AS" id="Uad-7E-LBn">
-                                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhI-Lo-F58">
+                                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhI-Lo-F58">
                                                                         <rect key="frame" x="213" y="-2" width="64" height="23"/>
                                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="h0x-D5-dac">
                                                                             <font key="font" metaFont="system"/>
@@ -1927,7 +1916,7 @@
                                                             </columns>
                                                             <gridCells>
                                                                 <gridCell row="9pA-kD-I6b" column="0tc-wd-Q5D" id="paV-wy-Qob">
-                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Onw-py-Hal">
+                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Onw-py-Hal">
                                                                         <rect key="frame" x="9" y="0.0" width="43" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Zoom:" id="lEg-P5-S5Y">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1937,7 +1926,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="9pA-kD-I6b" column="Rzo-Ng-azi" id="oJh-mh-L97">
-                                                                    <textField key="contentView" verticalHuggingPriority="751" ambiguous="YES" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="W48-RC-qxN" userLabel="zoom">
+                                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="751" ambiguous="YES" preferredMaxLayoutWidth="31" translatesAutoresizingMaskIntoConstraints="NO" id="W48-RC-qxN" userLabel="zoom">
                                                                         <rect key="frame" x="56" y="0.0" width="60" height="21"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="00" drawsBackground="YES" id="uP9-Uq-VvU">
                                                                             <font key="font" metaFont="system"/>
@@ -1952,7 +1941,7 @@
                                                                 </gridCell>
                                                                 <gridCell row="9pA-kD-I6b" column="I78-Es-7RU" id="AhB-lR-2hf"/>
                                                                 <gridCell row="9pA-kD-I6b" column="KNe-Jp-ZD3" id="l6u-q4-9I9">
-                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="248" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cLK-Hu-dNb">
+                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." focusRingType="none" horizontalHuggingPriority="248" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cLK-Hu-dNb">
                                                                         <rect key="frame" x="126" y="0.0" width="84" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Zoom Speed:" id="SbR-9Y-tta">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1962,7 +1951,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="9pA-kD-I6b" column="j71-uD-UzU" id="8D0-n3-yB5">
-                                                                    <comboBox key="contentView" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgm-fF-QWx">
+                                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgm-fF-QWx">
                                                                         <rect key="frame" x="213" y="-2" width="64" height="23"/>
                                                                         <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="dPJ-uI-yQm">
                                                                             <font key="font" metaFont="system"/>
@@ -2015,7 +2004,7 @@
                                                             </columns>
                                                             <gridCells>
                                                                 <gridCell row="Rzr-Zu-RNy" column="cdm-dO-AKW" id="0nT-q7-2IU">
-                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yWs-rQ-gHX">
+                                                                    <textField key="contentView" toolTip="This is a write-only value; the value you see may be out of date." focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yWs-rQ-gHX">
                                                                         <rect key="frame" x="-2" y="0.0" width="124" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Preset recall speed:" id="dMw-kl-nSj">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2025,7 +2014,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="Rzr-Zu-RNy" column="XkF-Hf-Ts0" id="Poe-yd-AND">
-                                                                    <comboBox key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-TE-fLh">
+                                                                    <comboBox key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dwh-TE-fLh">
                                                                         <rect key="frame" x="125" y="-2" width="64" height="23"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="60" id="yk1-Qm-Oc4"/>
@@ -2089,7 +2078,7 @@
                                                             </columns>
                                                             <gridCells>
                                                                 <gridCell row="99x-83-fOG" column="2nA-oo-WH4" id="iM2-zb-wc5">
-                                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pzy-2T-zL0">
+                                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pzy-2T-zL0">
                                                                         <rect key="frame" x="-2" y="27" width="82" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Focus Mode:" id="ARU-dp-Rep">
                                                                             <font key="font" metaFont="system"/>
@@ -2132,7 +2121,7 @@
                                                                     </button>
                                                                 </gridCell>
                                                                 <gridCell row="ea2-yi-NR4" column="2nA-oo-WH4" id="VIG-Ve-BNH">
-                                                                    <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dnr-92-1AS">
+                                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dnr-92-1AS">
                                                                         <rect key="frame" x="-2" y="0.0" width="81" height="16"/>
                                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Focus Value:" id="ftb-5r-XVZ">
                                                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2142,7 +2131,7 @@
                                                                     </textField>
                                                                 </gridCell>
                                                                 <gridCell row="ea2-yi-NR4" column="c7Y-af-J3L" id="p2z-EW-njq">
-                                                                    <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wsQ-hi-sOK">
+                                                                    <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wsQ-hi-sOK">
                                                                         <rect key="frame" x="89" y="0.0" width="60" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="60" id="FTh-u1-v23"/>
@@ -2257,7 +2246,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="390"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-Ni-W5j">
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qaQ-Ni-W5j">
                                             <rect key="frame" x="18" y="354" width="297" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Camera Preview and Preset Snapshot Images" id="Urj-cz-SfF">
                                                 <font key="font" metaFont="systemBold"/>
@@ -2278,7 +2267,7 @@
                                                         <action selector="doChooseThumbnailSource:" target="MdI-N0-20y" id="9i2-fK-esG"/>
                                                     </connections>
                                                 </button>
-                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBH-u3-oo6" userLabel="RTSP URL Field">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MBH-u3-oo6" userLabel="RTSP URL Field">
                                                     <rect key="frame" x="33" y="24" width="313" height="21"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="s0m-fz-RpF">
                                                         <font key="font" metaFont="system"/>
@@ -2299,7 +2288,7 @@
                                                         </binding>
                                                     </connections>
                                                 </textField>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nx6-BL-AuQ">
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nx6-BL-AuQ">
                                                     <rect key="frame" x="19" y="53" width="107" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="RTSP video URL:" id="Vh3-ap-kri">
                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -2343,7 +2332,7 @@
                                                 <constraint firstItem="Nx6-BL-AuQ" firstAttribute="leading" secondItem="M8B-4P-3hL" secondAttribute="leading" constant="21" id="uC6-JY-TkJ"/>
                                             </constraints>
                                         </customView>
-                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZWb-TB-yAQ">
+                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZWb-TB-yAQ">
                                             <rect key="frame" x="32" y="276" width="350" height="70"/>
                                             <textFieldCell key="cell" controlSize="small" selectable="YES" id="bLt-m4-wjE">
                                                 <font key="font" metaFont="smallSystem"/>
@@ -2372,7 +2361,7 @@ USB cameras can only show OBS snapshots.</string>
                                                         </binding>
                                                     </connections>
                                                 </button>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B7n-Kq-6Q2">
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B7n-Kq-6Q2">
                                                     <rect key="frame" x="19" y="53" width="143" height="16"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Camera snapshot URL:" id="hL2-Gy-wsd">
                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -2387,7 +2376,7 @@ USB cameras can only show OBS snapshots.</string>
                                                         </binding>
                                                     </connections>
                                                 </textField>
-                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="135-0s-9QB" userLabel="Snapshot URL Field">
+                                                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="135-0s-9QB" userLabel="Snapshot URL Field">
                                                     <rect key="frame" x="33" y="24" width="313" height="21"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="S0x-hg-Jwn">
                                                         <font key="font" metaFont="system"/>
@@ -2439,7 +2428,7 @@ USB cameras can only show OBS snapshots.</string>
                                                 <constraint firstAttribute="height" constant="1" id="xA6-I9-M7F"/>
                                             </constraints>
                                         </box>
-                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="e8P-RR-Mcx">
+                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="e8P-RR-Mcx">
                                             <rect key="frame" x="32" y="142" width="350" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" selectable="YES" title="Choose the source for snapshot images:" id="nhQ-uW-72u">
                                                 <font key="font" metaFont="smallSystem"/>
@@ -2582,7 +2571,7 @@ USB cameras can only show OBS snapshots.</string>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="GSb-50-KSc" customClass="LARIndexSetVisualizerView">
                     <rect key="frame" x="5" y="5" width="160" height="160"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qgu-e6-Qja">
+                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qgu-e6-Qja">
                             <rect key="frame" x="125" y="0.0" width="37" height="16"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="X7h-n2-90T" customClass="VVWShadowTextFieldCell">
                                 <font key="font" metaFont="system"/>
@@ -2628,7 +2617,7 @@ USB cameras can only show OBS snapshots.</string>
                             <binding destination="MdI-N0-20y" name="value" keyPath="progress.fractionCompleted" id="KME-k4-fvT"/>
                         </connections>
                     </progressIndicator>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T22-zG-e6g" userLabel="pattern label">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T22-zG-e6g" userLabel="pattern label">
                         <rect key="frame" x="18" y="44" width="339" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="OOY-uE-tPO">
                             <font key="font" usesAppearanceFont="YES"/>
@@ -2648,7 +2637,7 @@ USB cameras can only show OBS snapshots.</string>
                             </binding>
                         </connections>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="avM-Az-nAN" userLabel="description">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="avM-Az-nAN" userLabel="description">
                         <rect key="frame" x="18" y="44" width="339" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="TFZ-5N-fJW">
                             <font key="font" usesAppearanceFont="YES"/>
@@ -2677,7 +2666,7 @@ USB cameras can only show OBS snapshots.</string>
                             </binding>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lmq-pC-VgV" userLabel="additional description">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lmq-pC-VgV" userLabel="additional description">
                         <rect key="frame" x="18" y="20" width="339" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="vVA-cO-Es9">
                             <font key="font" usesAppearanceFont="YES"/>

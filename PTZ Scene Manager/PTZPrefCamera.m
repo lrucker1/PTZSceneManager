@@ -288,7 +288,7 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
     PTZCameraSceneRange *csRange = [PTZCameraSceneRange new];
     csRange.name = NSLocalizedString(@"Default", @"name for default scene range");
     NSInteger len = self.defaultLastVisibleScene - self.defaultFirstVisibleScene + 1;
-    csRange.range = NSMakeRange(self.defaultFirstVisibleScene, len);
+    csRange.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.defaultFirstVisibleScene, len)];
     return csRange;
 }
 
@@ -300,9 +300,9 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
 }
 
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange {
-    NSInteger start = csRange.range.location;
-    self.firstVisibleScene = start;
-    self.lastVisibleScene = NSMaxRange(csRange.range) - 1;
+    NSIndexSet *set = csRange.indexSet;
+    self.firstVisibleScene = set.firstIndex;
+    self.lastVisibleScene = set.lastIndex;
 }
 
 #pragma mark images

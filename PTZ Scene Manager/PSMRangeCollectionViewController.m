@@ -69,7 +69,7 @@
     for (PSMRangeInfo *info in self.arrayController.arrangedObjects) {
         PTZCameraSceneRange *csRange = sceneRangeDictionary[info.camerakey];
         NSInteger index = [info.sceneRangeArray indexOfObjectPassingTest:^BOOL(PTZCameraSceneRange * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            return NSEqualRanges(obj.range, csRange.range);
+            return [obj matchesRange:csRange];
         }];
         if (index == -1) {
             info.sceneRangeArray = [info.sceneRangeArray arrayByAddingObject:csRange];

@@ -23,12 +23,50 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [self init];
     self.name = [coder decodeObjectForKey:@"name"];
-    self.range = NSRangeFromString([coder decodeObjectForKey:@"range"]);
+    id indexSetObj = [coder decodeObjectForKey:@"indexSet"];
+    if (indexSetObj) {
+        self.indexSet = indexSetObj;
+    } else {
+        id rangeObj = [coder decodeObjectForKey:@"range"];
+        if (rangeObj) {
+            NSRange tempRange = NSRangeFromString(rangeObj);
+            self.indexSet = [NSIndexSet indexSetWithIndexesInRange:tempRange];
+        }
+    }
     return self;
 }
 
+- (BOOL)matchesRange:(PTZCameraSceneRange *)object {
+    return [self.indexSet isEqualTo:object.indexSet];
+}
+
+- (NSString *)displayIndexSet: (BOOL)pretty {
+    // pretty has an en-dash; don't use it outside the UI unless you like seeing raw unicode.
+    NSString *sep = pretty ? @"–" : @"-";
+    if (self.indexSet) {
+        NSInteger first = self.indexSet.firstIndex;
+        NSInteger last = self.indexSet.lastIndex;
+        NSRange all = NSMakeRange(first, last-first+1);
+        NSMutableString *string = [NSMutableString new];
+        [self.indexSet enumerateRangesInRange:all options:0 usingBlock:^(NSRange range, BOOL * _Nonnull stop) {
+            if (string.length > 0) {
+                [string appendString:@", "];
+            }
+            if (range.length == 1) {
+                [string appendFormat:@"%ld", range.location];
+            } else {
+                [string appendFormat:@"%ld%@%ld", range.location, sep, range.location + range.length - 1];
+            }
+        }];
+        if (string.length > 0) {
+            return string;
+        }
+    }
+    return sep;
+}
+
 - (NSString *)prettyRange {
-    return [NSString stringWithFormat:@"%ld–%ld", self.range.location, NSMaxRange(self.range) - 1];
+    return [self displayIndexSet:YES];
 }
 
 - (NSString *)prettyRangeWithName:(NSString *)name {
@@ -43,12 +81,13 @@
 }
 
 - (NSString *)debugDescription {
-    // prettyRange has an en-dash; don't use it unless you like seeing raw unicode.
-    return [NSString stringWithFormat:@"%@ %@: %ld-%ld", [self class], self.name, self.range.location, NSMaxRange(self.range) - 1];
+    return [NSString stringWithFormat:@"%@ %@: %@", [self class], self.name, [self displayIndexSet:NO]];
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:NSStringFromRange(self.range) forKey:@"range"];
+    if (self.indexSet) {
+        [coder encodeObject:self.indexSet forKey:@"indexSet"];
+    }
     [coder encodeObject:self.name forKey:@"name"];
 }
 

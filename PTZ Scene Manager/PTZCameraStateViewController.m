@@ -1005,11 +1005,6 @@ MAKE_CAN_SET_METHOD(BWMode)
     }
 }
 
-- (IBAction)resetSceneRange:(id)sender {
-    [self.prefCamera removeFirstVisibleScene];
-    [self.prefCamera removeLastVisibleScene];
-}
-
 - (void)validateAndSetSceneRange {
     PTZCameraConfig *config = self.cameraState.cameraConfig;
     NSInteger min = self.firstVisibleScene;
@@ -1041,7 +1036,7 @@ MAKE_CAN_SET_METHOD(BWMode)
 - (IBAction)addSceneRange:(id)sender {
     PTZCameraSceneRange *csRange = [PTZCameraSceneRange new];
     NSInteger len = self.lastVisibleScene - self.firstVisibleScene + 1;
-    csRange.range = NSMakeRange(self.firstVisibleScene, len);
+    csRange.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.firstVisibleScene, len)];
     [self.sceneRangeController addObject:csRange];
 }
 
@@ -1158,7 +1153,7 @@ MAKE_CAN_SET_METHOD(BWMode)
     } else {
         NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
         for (PTZCameraSceneRange *csRange in [self.sceneRangeController arrangedObjects]) {
-            [set addIndexesInRange:csRange.range];
+            [set addIndexes:csRange.indexSet];
         }
         self.sceneRangeMapView.activeSet = set;
         self.sceneRangeMapView.reservedSet = self.cameraState.cameraConfig.reservedSet;
