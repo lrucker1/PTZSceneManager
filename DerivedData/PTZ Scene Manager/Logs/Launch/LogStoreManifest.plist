@@ -6,22 +6,22 @@
 	<integer>11</integer>
 	<key>logs</key>
 	<dict>
-		<key>16DC06E6-F772-465A-A1DA-D1C73047002C</key>
+		<key>053FD1B6-8BA3-4510-95F9-73DE30EC0A68</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>70DC7DC5-56BE-47C0-8035-5CC4052C90BB</string>
+			<string>B7827630-4256-4B80-B20F-912B28811700</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 				<key>totalNumberOfAnalyzerIssues</key>
 				<integer>0</integer>
 				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>totalNumberOfTestFailures</key>
 				<integer>0</integer>
 				<key>totalNumberOfWarnings</key>
-				<integer>1126</integer>
+				<integer>2</integer>
 			</dict>
 			<key>className</key>
 			<string>IDESchemeActionsInvocationRecord</string>
@@ -30,7 +30,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_11-54-17--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_15-16-34--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -40,15 +40,15 @@
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 				<key>totalNumberOfAnalyzerIssues</key>
 				<integer>0</integer>
 				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>totalNumberOfTestFailures</key>
 				<integer>0</integer>
 				<key>totalNumberOfWarnings</key>
-				<integer>1126</integer>
+				<integer>2</integer>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>PTZ Scene Manager project</string>
@@ -59,18 +59,18 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767904857.33850396</real>
+			<real>767916994.14372206</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>16DC06E6-F772-465A-A1DA-D1C73047002C</string>
+			<string>053FD1B6-8BA3-4510-95F9-73DE30EC0A68</string>
 		</dict>
-		<key>1A5E6564-A13A-47E2-86F7-7404B44B9CAB</key>
+		<key>07E69F12-C4B1-4F45-AC42-6521A03999BD</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>C1B5C80D-6D66-48A7-893C-11D69854CFDD</string>
+			<string>C11D431C-F960-409B-AE3A-86C9F8E4D6D4</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -91,7 +91,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_12-18-51--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-56-57--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -120,18 +120,18 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767906331.47063899</real>
+			<real>767915817.38190603</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>1A5E6564-A13A-47E2-86F7-7404B44B9CAB</string>
+			<string>07E69F12-C4B1-4F45-AC42-6521A03999BD</string>
 		</dict>
-		<key>312574CB-6459-4203-ABF6-199BF35D367B</key>
+		<key>0F61522D-9210-45E6-B44F-358E21562EC1</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>400B7624-AB6B-454F-9CE2-2F2B551B706A</string>
+			<string>B8F7EA36-5749-4BA4-B9E7-EF52E227A99C</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -152,7 +152,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_12-19-25--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-54-35--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -181,30 +181,30 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767906365.76978397</real>
+			<real>767915675.49520898</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>312574CB-6459-4203-ABF6-199BF35D367B</string>
+			<string>0F61522D-9210-45E6-B44F-358E21562EC1</string>
 		</dict>
-		<key>4275423A-BD0D-46ED-B63C-17C7DD4639A5</key>
+		<key>1110FEBE-7CC5-45ED-AADE-3FA234C23238</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>68FB5258-058E-4CC7-ACB5-2A0C256D9D1D</string>
+			<string>26990DFD-0A7D-4DF5-BF2D-A4059D8A52EE</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 				<key>totalNumberOfAnalyzerIssues</key>
 				<integer>0</integer>
 				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>totalNumberOfTestFailures</key>
 				<integer>0</integer>
 				<key>totalNumberOfWarnings</key>
-				<integer>1126</integer>
+				<integer>0</integer>
 			</dict>
 			<key>className</key>
 			<string>IDESchemeActionsInvocationRecord</string>
@@ -213,7 +213,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_12-25-04--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-53-47--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -223,15 +223,15 @@
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 				<key>totalNumberOfAnalyzerIssues</key>
 				<integer>0</integer>
 				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>totalNumberOfTestFailures</key>
 				<integer>0</integer>
 				<key>totalNumberOfWarnings</key>
-				<integer>1127</integer>
+				<integer>0</integer>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>PTZ Scene Manager project</string>
@@ -242,30 +242,30 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767906704.97547102</real>
+			<real>767915627.69536996</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>4275423A-BD0D-46ED-B63C-17C7DD4639A5</string>
+			<string>1110FEBE-7CC5-45ED-AADE-3FA234C23238</string>
 		</dict>
-		<key>43A20752-585F-4595-B0AD-33069B192E79</key>
+		<key>16D1E742-FB93-4B02-BFE5-B4156762D142</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>0021B3D8-5E2E-450C-80A3-3A7802A1B147</string>
+			<string>99EF26E9-A05E-4566-B675-F92C520B1EE4</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 				<key>totalNumberOfAnalyzerIssues</key>
 				<integer>0</integer>
 				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>totalNumberOfTestFailures</key>
 				<integer>0</integer>
 				<key>totalNumberOfWarnings</key>
-				<integer>1126</integer>
+				<integer>0</integer>
 			</dict>
 			<key>className</key>
 			<string>IDESchemeActionsInvocationRecord</string>
@@ -274,7 +274,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_12-41-23--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-52-17--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -284,15 +284,15 @@
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 				<key>totalNumberOfAnalyzerIssues</key>
 				<integer>0</integer>
 				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>totalNumberOfTestFailures</key>
 				<integer>0</integer>
 				<key>totalNumberOfWarnings</key>
-				<integer>1126</integer>
+				<integer>0</integer>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>PTZ Scene Manager project</string>
@@ -303,18 +303,18 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767907683.11325097</real>
+			<real>767915537.69584501</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>43A20752-585F-4595-B0AD-33069B192E79</string>
+			<string>16D1E742-FB93-4B02-BFE5-B4156762D142</string>
 		</dict>
-		<key>61AF096F-8BFA-4040-BC1A-12ED202FB773</key>
+		<key>3992AC8E-847B-4D8F-A48B-CCCDEE10FC4F</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>6798B183-DEB4-4D20-A3CE-91884DF2E93A</string>
+			<string>47471ACE-8FB5-4C62-AD39-D5AAE4FF7CD9</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -335,7 +335,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_11-56-38--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_13-55-36--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -364,18 +364,18 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767904998.960711</real>
+			<real>767912136.42799103</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>61AF096F-8BFA-4040-BC1A-12ED202FB773</string>
+			<string>3992AC8E-847B-4D8F-A48B-CCCDEE10FC4F</string>
 		</dict>
-		<key>63FCB30E-3104-4645-A90E-171E498782AE</key>
+		<key>4C226228-1D07-43A2-A47E-693D2C0FF7FE</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>DD4A8CF1-8F7F-42FA-83B9-40980892E536</string>
+			<string>3FF794C8-27CF-4991-90EC-777FA9460B60</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -396,7 +396,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_11-52-10--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-22-34--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -425,13 +425,135 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767904730.47408104</real>
+			<real>767913754.80706298</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>63FCB30E-3104-4645-A90E-171E498782AE</string>
+			<string>4C226228-1D07-43A2-A47E-693D2C0FF7FE</string>
+		</dict>
+		<key>4D5E1552-5C66-4B4F-86A9-7F5A359C34F1</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>4531DF9C-357B-482C-83D1-FE8AF4F43435</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-20-04--0700.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>767913604.95351899</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4D5E1552-5C66-4B4F-86A9-7F5A359C34F1</string>
+		</dict>
+		<key>4DE7FD93-B465-4660-99EF-95B8691B44A0</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>F8985324-E1C0-4F10-8B63-CE54058A26E3</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>2</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-54-17--0700.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>2</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>767915657.14758301</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>4DE7FD93-B465-4660-99EF-95B8691B44A0</string>
 		</dict>
 		<key>6FFBF8D6-3216-4DA5-9FF8-655F10FD732A</key>
 		<dict>
@@ -494,10 +616,10 @@
 			<key>uniqueIdentifier</key>
 			<string>6FFBF8D6-3216-4DA5-9FF8-655F10FD732A</string>
 		</dict>
-		<key>A2437E23-8072-4666-B761-8E771D792151</key>
+		<key>854C5058-8C2F-464E-80CD-B3627833C921</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>60427A27-9693-40A4-A397-FF7525821827</string>
+			<string>86B9AE85-9C47-4397-AA6D-7338933564BD</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -518,7 +640,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_12-01-24--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-17-33--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -547,140 +669,18 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767905284.83669102</real>
+			<real>767913453.92893398</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>A2437E23-8072-4666-B761-8E771D792151</string>
+			<string>854C5058-8C2F-464E-80CD-B3627833C921</string>
 		</dict>
-		<key>BB4801AA-22DC-4D7E-9DA6-4C92E32B83A5</key>
+		<key>8677FE82-3F44-4CAF-A0A4-AF4FC1E66C57</key>
 		<dict>
 			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>39341771-223E-409D-9FE6-F06A7205B618</string>
-			<key>auxiliaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>E</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>3</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>0</integer>
-			</dict>
-			<key>className</key>
-			<string>IDESchemeActionsInvocationRecord</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
-			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_12-39-09--0700.xcresult</string>
-			<key>hasAuxiliaryLog</key>
-			<true/>
-			<key>hasConsoleLog</key>
-			<true/>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>E</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>3</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>0</integer>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>PTZ Scene Manager project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>PTZ Scene Manager</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Run PTZ Scene Manager</string>
-			<key>timeStartedRecording</key>
-			<real>767907549.02366102</real>
-			<key>timeStoppedRecording</key>
-			<real>0.0</real>
-			<key>title</key>
-			<string>Run PTZ Scene Manager</string>
-			<key>uniqueIdentifier</key>
-			<string>BB4801AA-22DC-4D7E-9DA6-4C92E32B83A5</string>
-		</dict>
-		<key>D1C830B6-BBC9-401B-9CA0-77ECA8A5E445</key>
-		<dict>
-			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>6798199B-3F7B-4934-90FE-8B6690560A46</string>
-			<key>auxiliaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>E</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>2</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>0</integer>
-			</dict>
-			<key>className</key>
-			<string>IDESchemeActionsInvocationRecord</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
-			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_12-34-46--0700.xcresult</string>
-			<key>hasAuxiliaryLog</key>
-			<true/>
-			<key>hasConsoleLog</key>
-			<true/>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>E</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>2</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>0</integer>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>PTZ Scene Manager project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>PTZ Scene Manager</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Run PTZ Scene Manager</string>
-			<key>timeStartedRecording</key>
-			<real>767907286.11813295</real>
-			<key>timeStoppedRecording</key>
-			<real>0.0</real>
-			<key>title</key>
-			<string>Run PTZ Scene Manager</string>
-			<key>uniqueIdentifier</key>
-			<string>D1C830B6-BBC9-401B-9CA0-77ECA8A5E445</string>
-		</dict>
-		<key>F93C4B36-0FA8-4419-9D5A-0F126245865E</key>
-		<dict>
-			<key>auxiliaryLogUniqueIdentifier</key>
-			<string>1287C2C7-B548-4308-9A27-EF32B46277BF</string>
+			<string>862B38A9-F4E7-484E-B40E-FF0CBEAFA641</string>
 			<key>auxiliaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
@@ -701,7 +701,7 @@
 			<key>domainType</key>
 			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
 			<key>fileName</key>
-			<string>Run-PTZ Scene Manager-2025.05.02_11-04-26--0700.xcresult</string>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-17-02--0700.xcresult</string>
 			<key>hasAuxiliaryLog</key>
 			<true/>
 			<key>hasConsoleLog</key>
@@ -730,13 +730,257 @@
 			<key>signature</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>timeStartedRecording</key>
-			<real>767901866.41874099</real>
+			<real>767913422.87571597</real>
 			<key>timeStoppedRecording</key>
 			<real>0.0</real>
 			<key>title</key>
 			<string>Run PTZ Scene Manager</string>
 			<key>uniqueIdentifier</key>
-			<string>F93C4B36-0FA8-4419-9D5A-0F126245865E</string>
+			<string>8677FE82-3F44-4CAF-A0A4-AF4FC1E66C57</string>
+		</dict>
+		<key>9EEBA1D7-6A8E-4901-A60A-9A4CD37BF83C</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>25C93DBD-005A-46D3-B49A-403659DAF965</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PTZ Scene Manager-2025.05.02_13-41-52--0700.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>767911312.27432299</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>9EEBA1D7-6A8E-4901-A60A-9A4CD37BF83C</string>
+		</dict>
+		<key>A59067B4-BC25-4387-80B7-D771FB3C1E72</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>99A6E24F-983F-4C6E-805A-A5D0F796E017</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PTZ Scene Manager-2025.05.02_13-29-45--0700.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>767910585.07047105</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>A59067B4-BC25-4387-80B7-D771FB3C1E72</string>
+		</dict>
+		<key>BE303973-C9CA-40A0-942B-CF465AD0E8BB</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>55EC232D-2310-4CDB-9AB3-F7E040970F4C</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PTZ Scene Manager-2025.05.02_14-01-06--0700.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>767912466.79970598</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>BE303973-C9CA-40A0-942B-CF465AD0E8BB</string>
+		</dict>
+		<key>EF9760FF-C86C-4FB2-B6D1-22C55D9A2A80</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>1A6CE160-7B70-4C7A-9DE9-3E6F87CF23E6</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.IDE.LaunchSchemeAction</string>
+			<key>fileName</key>
+			<string>Run-PTZ Scene Manager-2025.05.02_13-45-51--0700.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasConsoleLog</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1126</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PTZ Scene Manager project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PTZ Scene Manager</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>timeStartedRecording</key>
+			<real>767911551.57364595</real>
+			<key>timeStoppedRecording</key>
+			<real>0.0</real>
+			<key>title</key>
+			<string>Run PTZ Scene Manager</string>
+			<key>uniqueIdentifier</key>
+			<string>EF9760FF-C86C-4FB2-B6D1-22C55D9A2A80</string>
 		</dict>
 	</dict>
 </dict>

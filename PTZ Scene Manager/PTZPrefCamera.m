@@ -178,6 +178,11 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
             NSString *obsSourceName = dict[@"obsSourceName"];
             self.obsSourceName = obsSourceName ?: _cameraname;
         }
+        if (self.indexSet == nil) {
+            NSInteger first = self.firstVisibleScene;
+            NSInteger last = self.lastVisibleScene;
+            self.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(first, last-first+1)];
+        }
     }
     return self;
 }
@@ -258,6 +263,8 @@ PREF_VALUE_NSSTRING_ACCESSORS(ttydev, Ttydev)
 PREF_VALUE_NSSTRING_ACCESSORS(snapshotURL, SnapshotURL)
 PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
 
+PREF_VALUE_NSINDEXSET_ACCESSORS(indexSet, IndexSet)
+
 - (NSArray<PTZCameraSceneRange *> *)sceneRangeArray {
     NSData *data = [self prefValueForKey:@"SceneRangeArray"];
     if (data == nil) {
@@ -300,9 +307,9 @@ PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
 }
 
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange {
-    NSIndexSet *set = csRange.indexSet;
-    self.firstVisibleScene = set.firstIndex;
-    self.lastVisibleScene = set.lastIndex;
+    self.indexSet = csRange.indexSet;
+    self.firstVisibleScene = self.indexSet.firstIndex;
+    self.lastVisibleScene = self.indexSet.lastIndex;
 }
 
 #pragma mark images

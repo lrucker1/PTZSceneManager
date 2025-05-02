@@ -43,4 +43,17 @@
     [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
 }
 
+#define PREF_VALUE_NSINDEXSET_ACCESSORS(_prop, _Prop) \
+- (NSIndexSet *)_prop {  \
+    NSData *data = [self prefValueForKey:NSStringFromSelector(_cmd)]; \
+    return [NSKeyedUnarchiver unarchivedObjectOfClass:[NSIndexSet class] fromData:data error:nil]; \
+} \
+- (void)set##_Prop:(NSIndexSet *)value { \
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:value requiringSecureCoding:true error:nil]; \
+    [self setPrefValue:data forKeyWithSelector:NSStringFromSelector(_cmd)]; \
+} \
+- (void)remove##_Prop { \
+    [self removePrefValueForKeyWithSelector:NSStringFromSelector(_cmd)]; \
+}
+
 #endif /* PTZPrefObjectInt_h */

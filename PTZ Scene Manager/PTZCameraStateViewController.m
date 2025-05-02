@@ -72,6 +72,7 @@ typedef enum _ExposureModes {
 
 @property (strong) PTZOutlineViewDictionary *outlineData;
 @property NSArray *panValues, *tiltValues, *zoomValues, *focusValues, *presetSpeedValues;
+@property NSIndexSet *sceneIndexSet;
 @property NSInteger firstVisibleScene, lastVisibleScene, sceneCopyOffset;
 @property IBOutlet NSArrayController *sceneRangeController;
 @property IBOutlet NSTableView *sceneRangeTableView;
@@ -119,6 +120,7 @@ typedef enum _ExposureModes {
                                    delegate:self];
     [self.exposureDataOutlineView setDataSource:_outlineData];
     [self.exposureDataOutlineView setDelegate:_outlineData];
+    self.sceneIndexSet = self.prefCamera.indexSet;
     self.firstVisibleScene = self.prefCamera.firstVisibleScene;
     self.lastVisibleScene = self.prefCamera.lastVisibleScene;
     self.sceneCopyOffset = self.prefCamera.sceneCopyOffset;
@@ -1006,29 +1008,12 @@ MAKE_CAN_SET_METHOD(BWMode)
 }
 
 - (void)validateAndSetSceneRange {
-    PTZCameraConfig *config = self.cameraState.cameraConfig;
     NSInteger min = self.firstVisibleScene;
     NSInteger max = self.lastVisibleScene;
-    BOOL isBad = NO;
-    if (min < 1) {
-        min = 1;
-        isBad = YES;
-    }
-    if (max < min) {
-        max = min;
-        isBad = YES;
-    }
-    if (min > max) {
-        min = max;
-        isBad = YES;
-    }
-    if (max > config.maxSceneIndex) {
-        max = config.maxSceneIndex;
-        isBad = YES;
-    }
-    if (isBad) {
+    if (![self validateRange:min last:max]) {
         NSBeep();
     }
+    self.prefCamera.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(min, max-min+1)];
     self.prefCamera.firstVisibleScene = min;
     self.prefCamera.lastVisibleScene = max;
 }
@@ -1071,30 +1056,28 @@ MAKE_CAN_SET_METHOD(BWMode)
     }
 }
 
-- (void)validateAndBeginSceneCopy {
+- (BOOL)validateRange:(NSInteger)first last:(NSInteger)last {
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(first, last-first+1)];
+    return [self validateIndexSet:indexSet];
+}
+
+- (BOOL)validateIndexSet: (NSIndexSet *)indexSet {
     PTZCameraConfig *config = self.cameraState.cameraConfig;
+    __block BOOL isGood = YES;
+    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![config isValidSceneIndex:idx]) {
+            isGood = NO;
+            *stop = YES;
+        }
+    }];
+    return isGood;
+}
+
+- (void)validateAndBeginSceneCopy {
     NSInteger min = self.sceneCopyOffset;
     NSInteger range = self.lastVisibleScene - self.firstVisibleScene;
     NSInteger max = min + range;
-    BOOL isBad = NO;
-    if (min < 1) {
-        min = 1;
-        isBad = YES;
-    }
-    if (range < 1) {
-        isBad = YES;
-    }
-    if (max > config.maxSceneIndex) {
-        max = config.maxSceneIndex;
-        isBad = YES;
-    }
-    if (min >= self.firstVisibleScene && min <= self.lastVisibleScene) {
-        isBad = YES;
-    }
-    if (max >= self.firstVisibleScene && max <= self.lastVisibleScene) {
-        isBad = YES;
-    }
-    if (isBad) {
+    if (![self validateRange:min last:max]) {
         NSBeep();
         return;
     }
@@ -1225,6 +1208,8 @@ MAKE_CAN_SET_METHOD(BWMode)
        self.firstVisibleScene = self.prefCamera.firstVisibleScene;
    } else if ([keyPath isEqualToString:@"prefCamera.lastVisibleScene"]) {
        self.lastVisibleScene = self.prefCamera.lastVisibleScene;
+   } if ([keyPath isEqualToString:@"prefCamera.indexSet"]) {
+       self.sceneIndexSet = self.prefCamera.indexSet;
    }
 }
 

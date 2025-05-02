@@ -42,6 +42,7 @@ typedef enum {
 @property NSString *ttydev;
 @property NSString *rtspURL;
 @property NSString *snapshotURL;
+@property NSIndexSet *indexSet;
 
 + (NSArray<PTZPrefCamera *> *)sortedByMenuIndex:(NSArray<PTZPrefCamera *> *)inArray;
 

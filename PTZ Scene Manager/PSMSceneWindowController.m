@@ -124,6 +124,7 @@ typedef enum {
 
 - (void)manageObservers:(BOOL)add {
     NSArray *keys = @[@"prefCamera.maxColumnCount",
+                      @"prefCamera.indexSet",
                       @"prefCamera.firstVisibleScene",
                       @"prefCamera.lastVisibleScene",
                       @"prefCamera.cameraname",
@@ -793,20 +794,14 @@ typedef enum {
 #pragma mark collection
 
 - (void)updateVisibleSceneRange {
-    NSInteger first = self.prefCamera.firstVisibleScene;
-    NSInteger last = self.prefCamera.lastVisibleScene;
-
-    if (last < first) {
-        NSLog(@"Bad scene range: %ld to %ld", first, last);
-        return;
-    }
+    NSIndexSet *indexSet = self.prefCamera.indexSet;
     NSMutableArray *array = [NSMutableArray array];
     PTZCameraConfig *config = self.camera.cameraConfig;
-    for (NSInteger i = first; i <= last; i++) {
-        if ([config isValidSceneIndex:i]) {
-            [array addObject:@(i)];
+    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([config isValidSceneIndex:idx]) {
+            [array addObject:@(idx)];
         }
-    }
+    }];
     NSInteger itemCount = [array count];
     self.sceneIndexes = [NSArray arrayWithArray:array];
     self.itemCount = itemCount;
@@ -1016,7 +1011,8 @@ typedef enum {
                               context:context];
         return;
     } else if (   [keyPath isEqualToString:@"prefCamera.firstVisibleScene"]
-               || [keyPath isEqualToString:@"prefCamera.lastVisibleScene"]) {
+               || [keyPath isEqualToString:@"prefCamera.lastVisibleScene"]
+               || [keyPath isEqualToString:@"prefCamera.indexSet"]) {
         [self updateVisibleSceneRange];
     } else if ([keyPath isEqualToString:@"prefCamera.maxColumnCount"]) {
         [self updateColumnCount];
