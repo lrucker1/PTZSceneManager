@@ -1327,8 +1327,8 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button toolTip="Allow multiple scene ranges in the format &quot;1-3, 6, 10-12&quot;" translatesAutoresizingMaskIntoConstraints="NO" id="epd-Yw-9sO">
-                                            <rect key="frame" x="19" y="344" width="168" height="27"/>
-                                            <buttonCell key="cell" type="check" title="Allow multiple scene ranges" bezelStyle="regularSquare" imagePosition="left" controlSize="small" inset="2" id="IXU-eZ-xVY">
+                                            <rect key="frame" x="19" y="344" width="244" height="27"/>
+                                            <buttonCell key="cell" type="check" title="Show advanced scene range configuration" bezelStyle="regularSquare" imagePosition="left" controlSize="small" inset="2" id="IXU-eZ-xVY">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="smallSystem"/>
                                             </buttonCell>
