@@ -121,8 +121,8 @@ typedef enum _ExposureModes {
     [self.exposureDataOutlineView setDataSource:_outlineData];
     [self.exposureDataOutlineView setDelegate:_outlineData];
     self.sceneIndexSet = self.prefCamera.indexSet;
-    self.firstVisibleScene = self.prefCamera.firstVisibleScene;
-    self.lastVisibleScene = self.prefCamera.lastVisibleScene;
+    self.firstVisibleScene = self.sceneIndexSet.firstIndex;
+    self.lastVisibleScene = self.sceneIndexSet.lastIndex;
     self.sceneCopyOffset = self.prefCamera.sceneCopyOffset;
     self.sceneRangeTableView.doubleAction = @selector(applySceneRange:);
     [self manageObservers:YES];
@@ -135,7 +135,7 @@ typedef enum _ExposureModes {
 - (void)manageObservers:(BOOL)add {
     NSArray *keys = @[@"cameraState.exposureMode",
                       @"sceneRangeController.arrangedObjects",
-                      @"prefCamera.firstVisibleScene",
+                      @"prefCamera.indexSet",
                       @"prefCamera.lastVisibleScene",
                       @"prefCamera.sceneCopyOffset"];
     if (add) {
@@ -1014,8 +1014,8 @@ MAKE_CAN_SET_METHOD(BWMode)
         NSBeep();
     }
     self.prefCamera.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(min, max-min+1)];
-    self.prefCamera.firstVisibleScene = min;
-    self.prefCamera.lastVisibleScene = max;
+//    self.prefCamera.firstVisibleScene = min;
+//    self.prefCamera.lastVisibleScene = max;
 }
 
 - (IBAction)addSceneRange:(id)sender {
@@ -1026,9 +1026,9 @@ MAKE_CAN_SET_METHOD(BWMode)
 }
 
 - (IBAction)applyCopiedSceneRange:(id)sender {
+    NSInteger first = self.sceneCopyOffset;
     NSInteger delta = self.lastVisibleScene - self.firstVisibleScene;
-    self.prefCamera.firstVisibleScene = self.sceneCopyOffset;
-    self.prefCamera.lastVisibleScene = self.sceneCopyOffset + delta;
+    self.prefCamera.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(first, delta+1)];
 }
 
 - (IBAction)applySelectedSceneRange:(id)sender {
@@ -1204,12 +1204,10 @@ MAKE_CAN_SET_METHOD(BWMode)
        [self updateExposureDictionary];
    } else if ([keyPath isEqualToString:@"sceneRangeController.arrangedObjects"]) {
                [self saveSceneRangeToPrefs];
-   } else if ([keyPath isEqualToString:@"prefCamera.firstVisibleScene"]) {
-       self.firstVisibleScene = self.prefCamera.firstVisibleScene;
-   } else if ([keyPath isEqualToString:@"prefCamera.lastVisibleScene"]) {
-       self.lastVisibleScene = self.prefCamera.lastVisibleScene;
-   } if ([keyPath isEqualToString:@"prefCamera.indexSet"]) {
+   } else if ([keyPath isEqualToString:@"prefCamera.indexSet"]) {
        self.sceneIndexSet = self.prefCamera.indexSet;
+       self.firstVisibleScene = self.sceneIndexSet.firstIndex;
+       self.lastVisibleScene = self.sceneIndexSet.lastIndex;
    }
 }
 

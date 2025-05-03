@@ -1043,8 +1043,10 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         self.progress.completedUnitCount = self.progress.totalUnitCount;
         self.progress = nil;
     };
-    uint32_t rangeOffset = (uint32_t)self.prefCamera.firstVisibleScene;
-    uint32_t rangeEnd = (uint32_t)self.prefCamera.lastVisibleScene;
+    // TODO: Use index set for copying.
+    NSIndexSet *indexSet = self.prefCamera.indexSet;
+    uint32_t rangeOffset = (uint32_t)indexSet.firstIndex;
+    uint32_t rangeEnd = (uint32_t)indexSet.lastIndex;
     uint32_t length = rangeEnd - rangeOffset + 1;
     uint32_t fromOffset = rangeOffset;
     uint32_t toOffset = (uint32_t)self.prefCamera.sceneCopyOffset;

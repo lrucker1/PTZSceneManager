@@ -65,6 +65,50 @@
     return sep;
 }
 
+- (NSIndexSet *)parseIndexSet:(NSString *)test {
+    // TODO: replace all the NSLogs with error messages.
+    NSNumberFormatter *nf = [NSNumberFormatter new];
+    NSArray *ranges = [test componentsSeparatedByString:@","];
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet new];
+    for (NSString *sub in ranges) {
+        NSArray *subrange = [sub componentsSeparatedByString:@"-"];
+        NSInteger count = [subrange count];
+        if (count == 0) {
+            continue;
+        }
+        // If only one, first and last are the same object, so no extra test needed
+        if ([nf numberFromString:[subrange firstObject]] == nil ||
+            [nf numberFromString:[subrange lastObject]] == nil) {
+            // Would also get caught by the zero check, but that's implementation specific.
+            NSLog(@"non-numerical values not allowed %@", sub);
+            return nil;
+        }
+        NSInteger first = [[subrange firstObject] intValue];
+        NSInteger last = [[subrange lastObject] intValue];
+        if (first == 0 || last == 0) {
+            NSLog(@"zero values not allowed %@", sub);
+            return nil;
+        }
+        if (count == 1) {
+            [indexSet addIndex:first];
+        } else if (count == 2) {
+            if (last < first) {
+                NSLog(@"bad range %@", sub);
+                return nil;
+            } else if (last == first) {
+                [indexSet addIndex:first];
+            } else {
+                NSRange range = NSMakeRange(first, last-first+1);
+                [indexSet addIndexesInRange:range];
+            }
+        } else {
+            NSLog(@"Too many sections %@", sub);
+            return nil;
+        }
+    }
+    // Return a non-mutable copy.
+    return [indexSet copy];
+}
 - (NSString *)prettyRange {
     return [self displayIndexSet:YES];
 }

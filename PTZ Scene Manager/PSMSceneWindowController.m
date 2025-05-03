@@ -125,8 +125,6 @@ typedef enum {
 - (void)manageObservers:(BOOL)add {
     NSArray *keys = @[@"prefCamera.maxColumnCount",
                       @"prefCamera.indexSet",
-                      @"prefCamera.firstVisibleScene",
-                      @"prefCamera.lastVisibleScene",
                       @"prefCamera.cameraname",
                       @"prefCamera.menuIndex",
                       @"prefCamera.thumbnailOption",
@@ -1010,9 +1008,7 @@ typedef enum {
                                change:change
                               context:context];
         return;
-    } else if (   [keyPath isEqualToString:@"prefCamera.firstVisibleScene"]
-               || [keyPath isEqualToString:@"prefCamera.lastVisibleScene"]
-               || [keyPath isEqualToString:@"prefCamera.indexSet"]) {
+    } else if ([keyPath isEqualToString:@"prefCamera.indexSet"]) {
         [self updateVisibleSceneRange];
     } else if ([keyPath isEqualToString:@"prefCamera.maxColumnCount"]) {
         [self updateColumnCount];

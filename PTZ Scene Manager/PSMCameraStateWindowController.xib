@@ -1701,7 +1701,7 @@
                                         </gridView>
                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TdW-S9-bIy">
                                             <rect key="frame" x="28" y="49" width="354" height="28"/>
-                                            <textFieldCell key="cell" controlSize="small" selectable="YES" title="Recall scenes in the current range and set them in a new range starting at the given index." id="xuD-OC-hkr">
+                                            <textFieldCell key="cell" controlSize="small" selectable="YES" title="Recall scenes in the current range and set them in a new consecutive range starting at the given index." id="xuD-OC-hkr">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

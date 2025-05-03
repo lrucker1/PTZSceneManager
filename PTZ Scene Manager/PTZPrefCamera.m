@@ -244,13 +244,15 @@ PREF_VALUE_NSINT_ACCESSORS(tiltPlusSpeed, TiltPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(zoomPlusSpeed, ZoomPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(focusPlusSpeed, FocusPlusSpeed)
 PREF_VALUE_NSINT_ACCESSORS(panTiltStep, PanTiltStep)
-PREF_VALUE_NSINT_ACCESSORS(firstVisibleScene, FirstVisibleScene)
-PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
 PREF_VALUE_NSINT_ACCESSORS(sceneCopyOffset, SceneCopyOffset)
 PREF_VALUE_NSINT_ACCESSORS(selectedSceneRange, SelectedSceneRange)
 PREF_VALUE_NSINT_ACCESSORS(maxColumnCount, MaxColumnCount)
 PREF_VALUE_NSINT_ACCESSORS(thumbnailOption, ThumbnailOption)
 PREF_VALUE_NSINT_ACCESSORS(pingTimeout, PingTimeout)
+
+// Backward compatiblity only. Use indexSet instead.
+PREF_VALUE_NSINT_ACCESSORS(firstVisibleScene, FirstVisibleScene)
+PREF_VALUE_NSINT_ACCESSORS(lastVisibleScene, LastVisibleScene)
 
 PREF_VALUE_BOOL_ACCESSORS(showAutofocusControls, ShowAutofocusControls)
 PREF_VALUE_BOOL_ACCESSORS(showMotionSyncControls, ShowMotionSyncControls)
@@ -308,8 +310,6 @@ PREF_VALUE_NSINDEXSET_ACCESSORS(indexSet, IndexSet)
 
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange {
     self.indexSet = csRange.indexSet;
-    self.firstVisibleScene = self.indexSet.firstIndex;
-    self.lastVisibleScene = self.indexSet.lastIndex;
 }
 
 #pragma mark images
