@@ -45,7 +45,7 @@ static LARIndexSetVisualizerView *selfType;
 - (void)awakeFromNib {
     [super awakeFromNib];
     NSArray *keys = @[@"reservedSet",
-                      @"activeSet",
+                      @"otherSets",
                       @"currentSet",
                       @"popover.shown"];
     for (NSString *key in keys) {
@@ -69,7 +69,7 @@ static LARIndexSetVisualizerView *selfType;
 
 - (void)dealloc {
     NSArray *keys = @[@"reservedSet",
-                      @"activeSet",
+                      @"otherSets",
                       @"currentSet",
                       @"popover.shown"];
     for (NSString *key in keys) {
@@ -154,11 +154,11 @@ static LARIndexSetVisualizerView *selfType;
     NSRectFill(rect);
     NSColor *patternColor = nil;
 
-    if (_activeSet != nil || _reservedSet != nil) {
+    if (_otherSets != nil || _reservedSet != nil) {
         for (NSInteger i = 1; i <= _rangeMax; i++) {
             BOOL isReserved = [_reservedSet containsIndex:i];
             BOOL isCurrent = [_currentSet containsIndex:i];
-            BOOL isInSet = [_activeSet containsIndex:i];
+            BOOL isInSet = [_otherSets containsIndex:i];
             if (isReserved || isCurrent || isInSet) {
                 NSInteger y = i / _columnCount;
                 NSInteger x = i - (y * _columnCount);

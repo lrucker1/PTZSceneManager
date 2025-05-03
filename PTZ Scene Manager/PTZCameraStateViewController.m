@@ -121,6 +121,8 @@ typedef enum _ExposureModes {
     [self.exposureDataOutlineView setDataSource:_outlineData];
     [self.exposureDataOutlineView setDelegate:_outlineData];
     self.sceneIndexSet = self.prefCamera.indexSet;
+    self.indexSetString = [PTZCameraSceneRange displayIndexSet:self.sceneIndexSet pretty:NO];
+    [self updateUseIndexSetRange];
     self.firstVisibleScene = self.sceneIndexSet.firstIndex;
     self.lastVisibleScene = self.sceneIndexSet.lastIndex;
     self.sceneCopyOffset = self.prefCamera.sceneCopyOffset;
@@ -135,6 +137,7 @@ typedef enum _ExposureModes {
 - (void)manageObservers:(BOOL)add {
     NSArray *keys = @[@"cameraState.exposureMode",
                       @"sceneRangeController.arrangedObjects",
+                      @"sceneRangeController.selectionIndex",
                       @"prefCamera.indexSet",
                       @"prefCamera.lastVisibleScene",
                       @"prefCamera.sceneCopyOffset"];
@@ -993,6 +996,25 @@ MAKE_CAN_SET_METHOD(BWMode)
 
 #pragma mark Scenes
 
+- (void)updateUseIndexSetRange {
+    __block NSInteger count = 0;
+    __block BOOL canChange = YES;
+    NSIndexSet *indexSet = self.prefCamera.indexSet;
+    NSInteger first = indexSet.firstIndex;
+    NSInteger last = indexSet.lastIndex;
+    NSRange all = NSMakeRange(first, last-first+1);
+    [indexSet enumerateRangesInRange:all options:0 usingBlock:^(NSRange range, BOOL * _Nonnull stop) {
+        count++;
+        if (count > 1) {
+            self.useIndexSetRange = YES;
+            canChange = NO;
+            *stop = YES;
+        }
+    }];
+    self.canChangeUseIndexSetRange = canChange;
+}
+
+
 - (IBAction)applySceneRange:(id)sender {
     // Force an active textfield to end editing so we get the current value, then put it back when we're done.
     NSView *view = (NSView *)sender;
@@ -1014,14 +1036,40 @@ MAKE_CAN_SET_METHOD(BWMode)
         NSBeep();
     }
     self.prefCamera.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(min, max-min+1)];
-//    self.prefCamera.firstVisibleScene = min;
-//    self.prefCamera.lastVisibleScene = max;
+}
+
+- (IBAction)applySceneIndexSet:(id)sender {
+    // Force an active textfield to end editing so we get the current value, then put it back when we're done.
+    NSView *view = (NSView *)sender;
+    NSWindow *window = view.window;
+    NSView *first = [window ptz_currentEditingView];
+    if (first != nil) {
+        [window makeFirstResponder:window.contentView];
+    }
+    [self validateAndSetSceneIndexSet];
+    if (first != nil) {
+        [window makeFirstResponder:first];
+    }
+}
+
+- (void)validateAndSetSceneIndexSet {
+    NSError *error = nil;
+    NSIndexSet *indexSet = [PTZCameraSceneRange parseIndexSet:self.indexSetString error:&error];
+    if (error != nil) {
+        NSAlert *alert = [NSAlert alertWithError:error];
+        
+        [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
+        return;
+    }
+    if (![self validateIndexSet:indexSet]) {
+        NSBeep();
+    }
+    self.prefCamera.indexSet = indexSet;
 }
 
 - (IBAction)addSceneRange:(id)sender {
     PTZCameraSceneRange *csRange = [PTZCameraSceneRange new];
-    NSInteger len = self.lastVisibleScene - self.firstVisibleScene + 1;
-    csRange.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.firstVisibleScene, len)];
+    csRange.indexSet = self.prefCamera.indexSet;
     [self.sceneRangeController addObject:csRange];
 }
 
@@ -1135,13 +1183,15 @@ MAKE_CAN_SET_METHOD(BWMode)
         [popover close];
     } else {
         NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+        NSIndexSet *currentSet = self.prefCamera.indexSet;
         for (PTZCameraSceneRange *csRange in [self.sceneRangeController arrangedObjects]) {
-            [set addIndexes:csRange.indexSet];
+            if (![csRange.indexSet isEqualToIndexSet:currentSet]) {
+                [set addIndexes:csRange.indexSet];
+            }
         }
-        self.sceneRangeMapView.activeSet = set;
+        self.sceneRangeMapView.otherSets = set;
         self.sceneRangeMapView.reservedSet = self.cameraState.cameraConfig.reservedSet;
-        NSInteger len = self.lastVisibleScene - self.firstVisibleScene + 1;
-        self.sceneRangeMapView.currentSet = [NSIndexSet indexSetWithIndexesInRange: NSMakeRange(self.firstVisibleScene, len)];
+        self.sceneRangeMapView.currentSet = currentSet;
         [popover showRelativeToRect:[sender bounds]
                              ofView:sender
                       preferredEdge:NSMaxYEdge];
@@ -1203,11 +1253,15 @@ MAKE_CAN_SET_METHOD(BWMode)
    } else if ([keyPath isEqualToString:@"cameraState.exposureMode"]) {
        [self updateExposureDictionary];
    } else if ([keyPath isEqualToString:@"sceneRangeController.arrangedObjects"]) {
-               [self saveSceneRangeToPrefs];
+       [self saveSceneRangeToPrefs];
+   } else if ([keyPath isEqualToString:@"sceneRangeController.selectionIndex"]) {
+       [self updateUseIndexSetRange];
    } else if ([keyPath isEqualToString:@"prefCamera.indexSet"]) {
        self.sceneIndexSet = self.prefCamera.indexSet;
+       self.indexSetString = [PTZCameraSceneRange displayIndexSet:self.sceneIndexSet pretty:NO];
        self.firstVisibleScene = self.sceneIndexSet.firstIndex;
        self.lastVisibleScene = self.sceneIndexSet.lastIndex;
+       [self updateUseIndexSetRange];
    }
 }
 

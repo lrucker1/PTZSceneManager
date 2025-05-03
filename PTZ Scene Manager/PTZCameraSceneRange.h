@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSIndexSet *indexSet;
 
 + (instancetype)sceneRangeFromEncodedData:(NSData *)data error:(NSError **)error;
++ (NSString *)displayIndexSet:(NSIndexSet *)indexSet pretty:(BOOL)pretty;
++ (NSIndexSet *)parseIndexSet:(NSString *)string error:(NSError * _Nullable *)error;
 
 - (NSData *)encodedData;
 - (NSString *)prettyRangeWithName:(NSString *)name;

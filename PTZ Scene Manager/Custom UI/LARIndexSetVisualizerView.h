@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LARIndexSetVisualizerView : NSView
 
-@property (nullable) NSIndexSet *activeSet;
-@property (nullable) NSIndexSet *currentSet;
+@property (nullable) NSIndexSet *otherSets; // Sets other than current
+@property (nullable) NSIndexSet *currentSet; // Currently showing
 
 // A scene range can include the reservedSet, we just skip it.
 @property (nullable) NSIndexSet *reservedSet;

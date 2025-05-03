@@ -38,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property BOOL selectFlipH, selectFlipV, selectBWMode;
 @property BOOL applyImageValuesWithPreset;
 
+// Scene pane
+@property BOOL useIndexSetRange;
+@property BOOL canChangeUseIndexSetRange;
+@property NSString *indexSetString;
+
 @end
 
 NS_ASSUME_NONNULL_END

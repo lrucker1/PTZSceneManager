@@ -6,6 +6,7 @@
 //
 
 #import "PTZCameraSceneRange.h"
+#import "ObjCUtils.h"
 
 
 @implementation PTZCameraSceneRange
@@ -18,6 +19,90 @@
         return nil;
     }
     return [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[[self class], [NSString class]]] fromData:data error:error];
+}
+
++ (NSIndexSet *)parseIndexSet:(NSString *)string error:(NSError * _Nullable *)error {
+    NSNumberFormatter *nf = [NSNumberFormatter new];
+    NSArray *ranges = [string componentsSeparatedByString:@","];
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet new];
+    for (NSString *sub in ranges) {
+        NSArray *subrange = [sub componentsSeparatedByString:@"-"];
+        NSInteger count = [subrange count];
+        if (count == 0) {
+            continue;
+        }
+        // If only one, first and last are the same object, so no extra test needed
+        if ([nf numberFromString:[subrange firstObject]] == nil ||
+            [nf numberFromString:[subrange lastObject]] == nil) {
+            // Would also get caught by the zero check, but that's implementation specific.
+            if (error != nil) {
+                NSString *fmt = NSLocalizedString(@"Values must be numeric: %@", @"Bad IndexSet String: no numbers");
+                NSString *errString = [NSString localizedStringWithFormat:fmt, sub];
+                *error = OCUtilErrorWithDescription(errString, nil, @"PTZCameraSceneRange", 101);
+            }
+            return nil;
+        }
+        NSInteger first = [[subrange firstObject] intValue];
+        NSInteger last = [[subrange lastObject] intValue];
+        if (first == 0 || last == 0) {
+            // TODO: use the actual camera range.
+            if (error != nil) {
+                NSString *fmt = NSLocalizedString(@"Zero is not allowed: %@", @"Bad IndexSet String: zero");
+                NSString *errString = [NSString localizedStringWithFormat:fmt, sub];
+                *error = OCUtilErrorWithDescription(errString, nil, @"PTZCameraSceneRange", 102);
+            }
+            return nil;
+        }
+        if (count == 1) {
+            [indexSet addIndex:first];
+        } else if (count == 2) {
+            if (last < first) {
+                if (error != nil) {
+                    NSString *fmt = NSLocalizedString(@"End of range must be greater than beginning: %@", @"Bad IndexSet String: range");
+                    NSString *errString = [NSString localizedStringWithFormat:fmt, sub];
+                    *error = OCUtilErrorWithDescription(errString, nil, @"PTZCameraSceneRange", 103);
+                }
+                return nil;
+            } else if (last == first) {
+                [indexSet addIndex:first];
+            } else {
+                NSRange range = NSMakeRange(first, last-first+1);
+                [indexSet addIndexesInRange:range];
+            }
+        } else {
+            if (error != nil) {
+                NSString *fmt = NSLocalizedString(@"Ranges must have only two values: %@", @"Bad IndexSet String: too many numbers");
+                NSString *errString = [NSString localizedStringWithFormat:fmt, sub];
+                *error = OCUtilErrorWithDescription(errString, nil, @"PTZCameraSceneRange", 104);
+            }
+            return nil;
+        }
+    }
+    // Return a non-mutable copy.
+    return [indexSet copy];
+}
+
++ (NSString *)displayIndexSet:(NSIndexSet *)indexSet pretty:(BOOL)pretty {
+    // pretty has an en-dash; don't use it outside the UI unless you like seeing raw unicode.
+    NSString *sep = pretty ? @"–" : @"-";
+    NSInteger first = indexSet.firstIndex;
+    NSInteger last = indexSet.lastIndex;
+    NSRange all = NSMakeRange(first, last-first+1);
+    NSMutableString *string = [NSMutableString new];
+    [indexSet enumerateRangesInRange:all options:0 usingBlock:^(NSRange range, BOOL * _Nonnull stop) {
+        if (string.length > 0) {
+            [string appendString:@", "];
+        }
+        if (range.length == 1) {
+            [string appendFormat:@"%ld", range.location];
+        } else {
+            [string appendFormat:@"%ld%@%ld", range.location, sep, range.location + range.length - 1];
+        }
+    }];
+    if (string.length > 0) {
+        return string;
+    }
+    return sep;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
@@ -37,78 +122,13 @@
 }
 
 - (BOOL)matchesRange:(PTZCameraSceneRange *)object {
-    return [self.indexSet isEqualTo:object.indexSet];
+    return [self.indexSet isEqualToIndexSet:object.indexSet];
 }
 
-- (NSString *)displayIndexSet: (BOOL)pretty {
-    // pretty has an en-dash; don't use it outside the UI unless you like seeing raw unicode.
-    NSString *sep = pretty ? @"–" : @"-";
-    if (self.indexSet) {
-        NSInteger first = self.indexSet.firstIndex;
-        NSInteger last = self.indexSet.lastIndex;
-        NSRange all = NSMakeRange(first, last-first+1);
-        NSMutableString *string = [NSMutableString new];
-        [self.indexSet enumerateRangesInRange:all options:0 usingBlock:^(NSRange range, BOOL * _Nonnull stop) {
-            if (string.length > 0) {
-                [string appendString:@", "];
-            }
-            if (range.length == 1) {
-                [string appendFormat:@"%ld", range.location];
-            } else {
-                [string appendFormat:@"%ld%@%ld", range.location, sep, range.location + range.length - 1];
-            }
-        }];
-        if (string.length > 0) {
-            return string;
-        }
-    }
-    return sep;
+- (NSString *)displayIndexSet:(BOOL)pretty {
+    return [PTZCameraSceneRange displayIndexSet:self.indexSet pretty:pretty];
 }
 
-- (NSIndexSet *)parseIndexSet:(NSString *)test {
-    // TODO: replace all the NSLogs with error messages.
-    NSNumberFormatter *nf = [NSNumberFormatter new];
-    NSArray *ranges = [test componentsSeparatedByString:@","];
-    NSMutableIndexSet *indexSet = [NSMutableIndexSet new];
-    for (NSString *sub in ranges) {
-        NSArray *subrange = [sub componentsSeparatedByString:@"-"];
-        NSInteger count = [subrange count];
-        if (count == 0) {
-            continue;
-        }
-        // If only one, first and last are the same object, so no extra test needed
-        if ([nf numberFromString:[subrange firstObject]] == nil ||
-            [nf numberFromString:[subrange lastObject]] == nil) {
-            // Would also get caught by the zero check, but that's implementation specific.
-            NSLog(@"non-numerical values not allowed %@", sub);
-            return nil;
-        }
-        NSInteger first = [[subrange firstObject] intValue];
-        NSInteger last = [[subrange lastObject] intValue];
-        if (first == 0 || last == 0) {
-            NSLog(@"zero values not allowed %@", sub);
-            return nil;
-        }
-        if (count == 1) {
-            [indexSet addIndex:first];
-        } else if (count == 2) {
-            if (last < first) {
-                NSLog(@"bad range %@", sub);
-                return nil;
-            } else if (last == first) {
-                [indexSet addIndex:first];
-            } else {
-                NSRange range = NSMakeRange(first, last-first+1);
-                [indexSet addIndexesInRange:range];
-            }
-        } else {
-            NSLog(@"Too many sections %@", sub);
-            return nil;
-        }
-    }
-    // Return a non-mutable copy.
-    return [indexSet copy];
-}
 - (NSString *)prettyRange {
     return [self displayIndexSet:YES];
 }
