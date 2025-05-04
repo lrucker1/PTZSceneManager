@@ -21,7 +21,7 @@
     return [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[[self class], [NSString class]]] fromData:data error:error];
 }
 
-+ (NSIndexSet *)parseIndexSet:(NSString *)string error:(NSError * _Nullable *)error {
++ (NSIndexSet *)parseIndexSet:(NSString *)string validRange:(NSRange)validRange error:(NSError * _Nullable *)error {
     NSNumberFormatter *nf = [NSNumberFormatter new];
     NSArray *ranges = [string componentsSeparatedByString:@","];
     NSMutableIndexSet *indexSet = [NSMutableIndexSet new];
@@ -44,11 +44,10 @@
         }
         NSInteger first = [[subrange firstObject] intValue];
         NSInteger last = [[subrange lastObject] intValue];
-        if (first == 0 || last == 0) {
-            // TODO: use the actual camera range.
+        if (!NSLocationInRange(first, validRange) || !NSLocationInRange(last, validRange)) {
             if (error != nil) {
-                NSString *fmt = NSLocalizedString(@"Zero is not allowed: %@", @"Bad IndexSet String: zero");
-                NSString *errString = [NSString localizedStringWithFormat:fmt, sub];
+                NSString *fmt = NSLocalizedString(@"Value %@ is outside allowed range of %ld to %ld", @"Bad IndexSet String: range");
+                NSString *errString = [NSString localizedStringWithFormat:fmt, sub, validRange.location, validRange.location+validRange.length];
                 *error = OCUtilErrorWithDescription(errString, nil, @"PTZCameraSceneRange", 102);
             }
             return nil;

@@ -1054,7 +1054,9 @@ MAKE_CAN_SET_METHOD(BWMode)
 
 - (void)validateAndSetSceneIndexSet {
     NSError *error = nil;
-    NSIndexSet *indexSet = [PTZCameraSceneRange parseIndexSet:self.indexSetString error:&error];
+    PTZCameraConfig *config = self.cameraState.cameraConfig;
+    NSRange validRange = NSMakeRange(1, config.maxSceneIndex-1);
+    NSIndexSet *indexSet = [PTZCameraSceneRange parseIndexSet:self.indexSetString validRange:validRange error:&error];
     if (error != nil) {
         NSAlert *alert = [NSAlert alertWithError:error];
         

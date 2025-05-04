@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sceneRangeFromEncodedData:(NSData *)data error:(NSError **)error;
 + (NSString *)displayIndexSet:(NSIndexSet *)indexSet pretty:(BOOL)pretty;
-+ (NSIndexSet *)parseIndexSet:(NSString *)string error:(NSError * _Nullable *)error;
++ (NSIndexSet *)parseIndexSet:(NSString *)string validRange:(NSRange)validRange error:(NSError * _Nullable *)error;
 
 - (NSData *)encodedData;
 - (NSString *)prettyRangeWithName:(NSString *)name;

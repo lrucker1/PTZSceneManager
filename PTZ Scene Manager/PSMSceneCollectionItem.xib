@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,17 +26,17 @@
                     <subviews>
                         <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="6LD-4v-c88" customClass="LARClickableImageButton">
                             <rect key="frame" x="2" y="30" width="240" height="140"/>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="1nV-fH-WiJ" customClass="LARClickableImageButtonCell">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="cellTitle"/>
+                            </buttonCell>
+                            <color key="bezelColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="6LD-4v-c88" secondAttribute="height" multiplier="480:300" constant="16" id="aLA-HD-QEd"/>
                                 <constraint firstAttribute="width" constant="240" placeholder="YES" id="aZi-HV-IvE"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="ijl-fV-h1G"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="pw2-cu-my1"/>
                             </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="1nV-fH-WiJ" customClass="LARClickableImageButtonCell">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="cellTitle"/>
-                            </buttonCell>
-                            <color key="bezelColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <connections>
                                 <action selector="sceneRecall:" target="-2" id="HnM-WQ-46G"/>
                                 <binding destination="-2" name="image" keyPath="image" id="0sE-nL-mb2"/>
@@ -50,14 +50,14 @@
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iNl-77-SBc">
                             <rect key="frame" x="106" y="11" width="33" height="19"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="wud-QA-QG6"/>
-                            </constraints>
                             <buttonCell key="cell" type="push" title="Set" bezelStyle="rounded" alignment="center" controlSize="mini" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IJF-Z1-Cb2">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="miniSystem"/>
                             </buttonCell>
                             <color key="bezelColor" name="AccentColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="wud-QA-QG6"/>
+                            </constraints>
                             <connections>
                                 <action selector="sceneSet:" target="-2" id="vcl-bq-3ts"/>
                                 <binding destination="-2" name="title" keyPath="sceneSetButtonTitle" id="bvF-JC-G0g"/>
@@ -88,7 +88,7 @@
             <rect key="frame" x="0.0" y="0.0" width="172" height="31"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JJD-0G-hX3">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JJD-0G-hX3">
                     <rect key="frame" x="5" y="5" width="145" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="145" id="Fcl-EY-UwO"/>
@@ -106,14 +106,14 @@
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xeu-zr-aIY">
                     <rect key="frame" x="151" y="5" width="16.5" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="16" id="Pzv-OI-UaK"/>
-                        <constraint firstAttribute="height" constant="16" id="SIo-OY-Flk"/>
-                    </constraints>
                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="2Vh-mJ-pgt">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="16" id="Pzv-OI-UaK"/>
+                        <constraint firstAttribute="height" constant="16" id="SIo-OY-Flk"/>
+                    </constraints>
                     <connections>
                         <action selector="cancelEditing:" target="-2" id="s4z-LR-cFS"/>
                     </connections>
