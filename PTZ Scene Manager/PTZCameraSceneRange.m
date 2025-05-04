@@ -18,7 +18,11 @@
     if (data == nil) {
         return nil;
     }
-    return [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[[self class], [NSString class]]] fromData:data error:error];
+    return [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:[PTZCameraSceneRange allowedArchiveClasses]] fromData:data error:error];
+}
+
++ (NSArray *)allowedArchiveClasses {
+    return @[[PTZCameraSceneRange class], [NSString class], [NSIndexSet class]];
 }
 
 + (NSIndexSet *)parseIndexSet:(NSString *)string validRange:(NSRange)validRange error:(NSError * _Nullable *)error {

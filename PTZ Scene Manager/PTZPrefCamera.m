@@ -273,7 +273,7 @@ PREF_VALUE_NSINDEXSET_ACCESSORS(indexSet, IndexSet)
         return nil;
     }
     if (@available(macOS 11.0, *)) {
-        return [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:[NSSet setWithArray:@[[PTZCameraSceneRange class], [NSString class], [NSIndexSet class]]] fromData:data error:nil];
+        return [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:[NSSet setWithArray:[PTZCameraSceneRange allowedArchiveClasses]] fromData:data error:nil];
     } else {
         // Fallback on earlier versions
         return nil;
