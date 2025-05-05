@@ -264,6 +264,7 @@ PREF_VALUE_NSSTRING_ACCESSORS(obsSourceName, ObsSourceName)
 PREF_VALUE_NSSTRING_ACCESSORS(ttydev, Ttydev)
 PREF_VALUE_NSSTRING_ACCESSORS(snapshotURL, SnapshotURL)
 PREF_VALUE_NSSTRING_ACCESSORS(rtspURL, RtspURL)
+PREF_VALUE_NSSTRING_ACCESSORS(sceneRangeName, SceneRangeName)
 
 PREF_VALUE_NSINDEXSET_ACCESSORS(indexSet, IndexSet)
 
@@ -310,6 +311,7 @@ PREF_VALUE_NSINDEXSET_ACCESSORS(indexSet, IndexSet)
 
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange {
     self.indexSet = csRange.indexSet;
+    self.sceneRangeName = csRange.name;
 }
 
 #pragma mark images

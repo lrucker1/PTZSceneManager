@@ -74,6 +74,7 @@ typedef enum _ExposureModes {
 @property NSArray *panValues, *tiltValues, *zoomValues, *focusValues, *presetSpeedValues;
 @property NSIndexSet *sceneIndexSet;
 @property NSInteger firstVisibleScene, lastVisibleScene, sceneCopyOffset;
+@property NSInteger firstRecallScene, lastRecallScene;
 @property IBOutlet NSArrayController *sceneRangeController;
 @property IBOutlet NSTableView *sceneRangeTableView;
 @property IBOutlet NSButton *sceneRangeMapButton;
@@ -82,6 +83,7 @@ typedef enum _ExposureModes {
 @property IBOutlet NSView *thumbnailRadioGroupView;
 @property IBOutlet NSView *snapshotRadioGroupView;
 @property (strong) IBOutlet NSWindow *progressSheet;
+@property (strong) IBOutlet NSWindow *recallConfigSheet;
 @property BOOL batchOperationInProgress;
 
 @property PTZProgressGroup *progress;
@@ -104,6 +106,11 @@ typedef enum _ExposureModes {
     if (   [key isEqualToString:@"cameraState"]) {
         [keyPaths addObject:@"prefCamera"];
     }
+    if (   [key isEqualToString:@"destinationRange"]) {
+        [keyPaths addObject:@"lastRecallScene"];
+        [keyPaths addObject:@"firstRecallScene"];
+        [keyPaths addObject:@"sceneCopyOffset"];
+    }
     return keyPaths;
 }
 
@@ -125,6 +132,8 @@ typedef enum _ExposureModes {
     [self updateUseIndexSetRange];
     self.firstVisibleScene = self.sceneIndexSet.firstIndex;
     self.lastVisibleScene = self.sceneIndexSet.lastIndex;
+    self.firstRecallScene = self.firstVisibleScene;
+    self.lastRecallScene = self.lastVisibleScene;
     self.sceneCopyOffset = self.prefCamera.sceneCopyOffset;
     self.sceneRangeTableView.doubleAction = @selector(applySceneRange:);
     [self manageObservers:YES];
@@ -1036,6 +1045,8 @@ MAKE_CAN_SET_METHOD(BWMode)
         NSBeep();
     }
     self.prefCamera.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(min, max-min+1)];
+    // Use the index set for the name since it's not explicitly from the list.
+    self.prefCamera.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.prefCamera.indexSet pretty:NO];
 }
 
 - (IBAction)applySceneIndexSet:(id)sender {
@@ -1067,18 +1078,14 @@ MAKE_CAN_SET_METHOD(BWMode)
         NSBeep();
     }
     self.prefCamera.indexSet = indexSet;
+    // Use the index set for the name since it's not explicitly from the list.
+    self.prefCamera.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.prefCamera.indexSet pretty:NO];
 }
 
 - (IBAction)addSceneRange:(id)sender {
     PTZCameraSceneRange *csRange = [PTZCameraSceneRange new];
     csRange.indexSet = self.prefCamera.indexSet;
     [self.sceneRangeController addObject:csRange];
-}
-
-- (IBAction)applyCopiedSceneRange:(id)sender {
-    NSInteger first = self.sceneCopyOffset;
-    NSInteger delta = self.lastVisibleScene - self.firstVisibleScene;
-    self.prefCamera.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(first, delta+1)];
 }
 
 - (IBAction)applySelectedSceneRange:(id)sender {
@@ -1123,16 +1130,36 @@ MAKE_CAN_SET_METHOD(BWMode)
     return isGood;
 }
 
+- (IBAction)destinationRangeToClipboard:(id)sender {
+    NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    [pboard clearContents];
+    [pboard setString:self.destinationRange forType:NSPasteboardTypeString];
+}
+
+- (NSString *)destinationRange {
+    NSInteger range = self.lastRecallScene - self.firstRecallScene + 1;
+    return [NSString stringWithFormat:@"%ld-%ld", self.sceneCopyOffset, self.sceneCopyOffset + range];
+}
+
 - (void)validateAndBeginSceneCopy {
+    // TODO: explain why it beeps.
     NSInteger min = self.sceneCopyOffset;
-    NSInteger range = self.lastVisibleScene - self.firstVisibleScene;
+    NSInteger range = self.lastRecallScene - self.firstRecallScene + 1;
     NSInteger max = min + range;
+    NSRange source = NSMakeRange(self.firstRecallScene, range);
+    NSRange dest = NSMakeRange(self.sceneCopyOffset, range);
+    NSRange intersect = NSIntersectionRange(source, dest);
+    if (intersect.length != 0) {
+        NSBeep();
+        return;
+    }
     if (![self validateRange:min last:max]) {
         NSBeep();
         return;
     }
     self.prefCamera.sceneCopyOffset = min;
     [self.cameraState prepareForProgressOperationFrom:min to:max];
+    [self.recallConfigSheet orderOut:nil];
     [self batchRecallCamera:self.cameraState];
 }
 
@@ -1148,6 +1175,14 @@ MAKE_CAN_SET_METHOD(BWMode)
     if (first != nil) {
         [window makeFirstResponder:first];
     }
+}
+
+- (IBAction)showRecallConfigSheet:(id)sender {
+    [self.view.window beginSheet:self.recallConfigSheet completionHandler:nil];
+}
+
+- (IBAction)cancelRecallConfigSheet:(id)sender {
+    [self.recallConfigSheet orderOut:nil];
 }
 
 - (void)batchRecallCamera:(PTZCamera *)camera {

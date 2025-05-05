@@ -1346,14 +1346,14 @@
                                                 <rect key="frame" x="1" y="1" width="358" height="143"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="B1C-5d-bJL" viewBased="YES" id="lXZ-xj-42m">
+                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" headerView="B1C-5d-bJL" viewBased="YES" id="lXZ-xj-42m">
                                                         <rect key="frame" x="0.0" y="0.0" width="358" height="115"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <size key="intercellSpacing" width="17" height="0.0"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
-                                                            <tableColumn identifier="SceneRangeName" width="150" minWidth="40" maxWidth="1000" id="Vzz-WT-3Gl">
+                                                            <tableColumn identifier="SceneRangeName" width="152" minWidth="40" maxWidth="1000" id="Vzz-WT-3Gl">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1363,14 +1363,15 @@
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
+                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="name"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="ptq-5l-6nG">
-                                                                        <rect key="frame" x="8" y="0.0" width="148" height="24"/>
+                                                                        <rect key="frame" x="8" y="0.0" width="150" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nms-GU-rPm">
-                                                                                <rect key="frame" x="0.0" y="4" width="148" height="16"/>
+                                                                                <rect key="frame" x="0.0" y="4" width="150" height="16"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="dSX-MG-wNY">
                                                                                     <font key="font" usesAppearanceFont="YES"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1406,10 +1407,11 @@
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
+                                                                <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="prettyRange"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="9pH-cA-Dad">
-                                                                        <rect key="frame" x="173" y="0.0" width="80" height="24"/>
+                                                                        <rect key="frame" x="175" y="0.0" width="80" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-4t-owk">
@@ -1455,7 +1457,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="53k-sB-Drl">
-                                                                        <rect key="frame" x="270" y="0.0" width="77" height="17"/>
+                                                                        <rect key="frame" x="272" y="0.0" width="77" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-8N-VUE">
@@ -1551,73 +1553,9 @@
                                                 </gridCell>
                                             </gridCells>
                                         </gridView>
-                                        <gridView identifier="CopyRangeGrid" horizontalHuggingPriority="750" xPlacement="leading" yPlacement="bottom" rowAlignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="0xG-Pc-Ssj">
-                                            <rect key="frame" x="20" y="25" width="324" height="21"/>
-                                            <rows>
-                                                <gridRow id="r6A-n9-5dh"/>
-                                            </rows>
-                                            <columns>
-                                                <gridColumn id="XRn-gR-VJB"/>
-                                                <gridColumn id="hoF-r6-Flc"/>
-                                                <gridColumn id="pZk-pt-2Wp"/>
-                                                <gridColumn id="XWX-q6-7Ma"/>
-                                            </columns>
-                                            <gridCells>
-                                                <gridCell row="r6A-n9-5dh" column="XRn-gR-VJB" id="GOE-RA-fzE">
-                                                    <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NRW-uR-alV">
-                                                        <rect key="frame" x="-2" y="3" width="91" height="16"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Copy to index:" id="ncb-87-A8h">
-                                                            <font key="font" usesAppearanceFont="YES"/>
-                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                </gridCell>
-                                                <gridCell row="r6A-n9-5dh" column="hoF-r6-Flc" id="ZLn-7V-nh3">
-                                                    <textField key="contentView" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eiz-3K-icX">
-                                                        <rect key="frame" x="93" y="0.0" width="60" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="TxY-xN-f1Y"/>
-                                                        </constraints>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="oyj-zk-wee">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                        <connections>
-                                                            <binding destination="MdI-N0-20y" name="value" keyPath="sceneCopyOffset" id="i4B-f0-hTI"/>
-                                                        </connections>
-                                                    </textField>
-                                                </gridCell>
-                                                <gridCell row="r6A-n9-5dh" column="pZk-pt-2Wp" id="C4f-aQ-i1r">
-                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bas-uF-g8z">
-                                                        <rect key="frame" x="153" y="-5" width="88" height="27"/>
-                                                        <buttonCell key="cell" type="push" title="Begin Copy" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HUD-9f-unO">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="smallSystem"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <action selector="beginSceneCopy:" target="MdI-N0-20y" id="lIW-rc-vXh"/>
-                                                        </connections>
-                                                    </button>
-                                                </gridCell>
-                                                <gridCell row="r6A-n9-5dh" column="XWX-q6-7Ma" id="xRk-8F-O0v">
-                                                    <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JMc-JB-sh6">
-                                                        <rect key="frame" x="235" y="-5" width="95" height="27"/>
-                                                        <buttonCell key="cell" type="push" title="Apply Range" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zMi-ll-S2j">
-                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="smallSystem"/>
-                                                            <connections>
-                                                                <action selector="applyCopiedSceneRange:" target="MdI-N0-20y" id="cr5-uw-5Nz"/>
-                                                            </connections>
-                                                        </buttonCell>
-                                                    </button>
-                                                </gridCell>
-                                            </gridCells>
-                                        </gridView>
                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TdW-S9-bIy">
-                                            <rect key="frame" x="28" y="-11" width="354" height="28"/>
-                                            <textFieldCell key="cell" controlSize="small" selectable="YES" title="Recall scenes in the current range and set them in a new consecutive range starting at the given index." id="xuD-OC-hkr">
+                                            <rect key="frame" x="18" y="8" width="364" height="14"/>
+                                            <textFieldCell key="cell" controlSize="small" selectable="YES" title="Use camera recall and set operations to copy camera scenes." id="xuD-OC-hkr">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1776,20 +1714,30 @@
                                                 <gridCell row="3V0-tV-SGz" column="ZvZ-Mn-2NM" id="dLE-YY-WhH"/>
                                             </gridCells>
                                         </gridView>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SNx-Yb-8DE">
+                                            <rect key="frame" x="14" y="23" width="106" height="27"/>
+                                            <buttonCell key="cell" type="push" title="Copy Scenes…" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hRf-mI-P1m">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="smallSystem"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="showRecallConfigSheet:" target="MdI-N0-20y" id="SAT-jR-ezG"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="eNe-iY-me3" secondAttribute="trailing" constant="20" symbolic="YES" id="311-JX-SjT"/>
-                                        <constraint firstItem="TdW-S9-bIy" firstAttribute="leading" secondItem="0xG-Pc-Ssj" secondAttribute="leading" constant="10" id="3sN-5b-HOc"/>
+                                        <constraint firstItem="SNx-Yb-8DE" firstAttribute="top" secondItem="CHK-X1-xrQ" secondAttribute="bottom" constant="8" symbolic="YES" id="E95-ti-Uk9"/>
                                         <constraint firstItem="epd-Yw-9sO" firstAttribute="top" secondItem="IVK-cZ-A2N" secondAttribute="top" constant="20" symbolic="YES" id="FdH-ng-4jh"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0xG-Pc-Ssj" secondAttribute="trailing" constant="20" symbolic="YES" id="JTq-gJ-HhD"/>
-                                        <constraint firstItem="TdW-S9-bIy" firstAttribute="top" secondItem="0xG-Pc-Ssj" secondAttribute="bottom" constant="8" symbolic="YES" id="Kci-NN-485"/>
-                                        <constraint firstItem="0xG-Pc-Ssj" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="Neb-OP-dJd"/>
+                                        <constraint firstItem="TdW-S9-bIy" firstAttribute="top" secondItem="SNx-Yb-8DE" secondAttribute="bottom" constant="8" symbolic="YES" id="JzF-iy-IMj"/>
+                                        <constraint firstAttribute="trailing" secondItem="TdW-S9-bIy" secondAttribute="trailing" constant="20" symbolic="YES" id="QAH-KC-cXr"/>
                                         <constraint firstItem="G3l-mo-tUH" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="W23-XP-8f4"/>
                                         <constraint firstItem="G3l-mo-tUH" firstAttribute="top" secondItem="epd-Yw-9sO" secondAttribute="bottom" constant="8" symbolic="YES" id="Xoo-hn-YkA"/>
+                                        <constraint firstItem="SNx-Yb-8DE" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="Y9A-0Z-gA1"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G3l-mo-tUH" secondAttribute="trailing" constant="20" symbolic="YES" id="a9z-I2-M8M"/>
                                         <constraint firstItem="eNe-iY-me3" firstAttribute="top" secondItem="G3l-mo-tUH" secondAttribute="bottom" constant="18" id="d7b-Gb-4GR"/>
                                         <constraint firstAttribute="trailing" secondItem="TdW-S9-bIy" secondAttribute="trailing" constant="20" symbolic="YES" id="e1g-wt-yAs"/>
-                                        <constraint firstItem="0xG-Pc-Ssj" firstAttribute="top" secondItem="CHK-X1-xrQ" secondAttribute="bottom" constant="8" symbolic="YES" id="ehL-Lg-C8Q"/>
+                                        <constraint firstItem="TdW-S9-bIy" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="kWw-o9-Vhr"/>
                                         <constraint firstItem="CHK-X1-xrQ" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="sOA-Sk-s80"/>
                                         <constraint firstItem="epd-Yw-9sO" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="vcp-uy-jfc"/>
                                         <constraint firstItem="eNe-iY-me3" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="w2l-a5-bYl"/>
@@ -2607,6 +2555,7 @@ USB cameras can only show OBS snapshots.</string>
             <connections>
                 <outlet property="exposureDataOutlineView" destination="7Ut-fL-r64" id="242-Vt-GI6"/>
                 <outlet property="progressSheet" destination="yC0-Qk-xBo" id="45m-Dd-8tu"/>
+                <outlet property="recallConfigSheet" destination="7hJ-p3-tFf" id="NfS-eS-bd1"/>
                 <outlet property="sceneRangeController" destination="CrC-WE-HaH" id="big-9a-X5P"/>
                 <outlet property="sceneRangeMapPopover" destination="GTB-AQ-Lnv" id="Cwf-af-CGc"/>
                 <outlet property="sceneRangeMapView" destination="GSb-50-KSc" id="fwa-cp-lsV"/>
@@ -2768,7 +2717,7 @@ USB cameras can only show OBS snapshots.</string>
                     <constraint firstItem="T22-zG-e6g" firstAttribute="leading" secondItem="avM-Az-nAN" secondAttribute="leading" id="tmr-Hl-AMb"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="-56.5" y="-346"/>
+            <point key="canvasLocation" x="-306" y="-750"/>
         </window>
         <textField focusRingType="none" verticalHuggingPriority="750" id="sna-lu-S0t">
             <rect key="frame" x="0.0" y="0.0" width="96" height="22"/>
@@ -2780,6 +2729,211 @@ USB cameras can only show OBS snapshots.</string>
             </textFieldCell>
             <point key="canvasLocation" x="186" y="-253"/>
         </textField>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="7hJ-p3-tFf" userLabel="Recall Copy Sheet">
+            <windowStyleMask key="styleMask" titled="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="109" y="130" width="375" height="226"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
+            <view key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMk-Fr-H8W">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="271"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AvI-tc-GNS">
+                        <rect key="frame" x="296" y="13" width="66" height="32"/>
+                        <buttonCell key="cell" type="push" title="Copy" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="G7k-7M-JjH">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="beginSceneCopy:" target="MdI-N0-20y" id="IEA-WB-oZX"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="62n-1A-GS4">
+                        <rect key="frame" x="13" y="13" width="76" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="O5R-V5-Yy2">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                            <connections>
+                                <action selector="cancelRecallConfigSheet:" target="MdI-N0-20y" id="BzN-s7-1wh"/>
+                            </connections>
+                        </buttonCell>
+                    </button>
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="uAB-MF-5XY">
+                        <rect key="frame" x="18" y="187" width="339" height="64"/>
+                        <textFieldCell key="cell" selectable="YES" id="d5L-DH-jv9">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">Recall scenes in the given range and set them in a new range starting at the destination index. This will cause the camera to change position and may take some time.</string>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button toolTip="Copy destination range to clipboard" translatesAutoresizingMaskIntoConstraints="NO" id="m2y-9J-mIW">
+                        <rect key="frame" x="250" y="62.5" width="16" height="18"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="arrow.right.page.on.clipboard" catalog="system" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="pW0-2J-sc7">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="destinationRangeToClipboard:" target="MdI-N0-20y" id="rtl-zg-6a9"/>
+                        </connections>
+                    </button>
+                    <gridView identifier="CopyRangeGrid" horizontalHuggingPriority="750" xPlacement="leading" yPlacement="bottom" rowAlignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="tba-PT-o7n">
+                        <rect key="frame" x="20" y="60" width="225" height="102"/>
+                        <rows>
+                            <gridRow id="1NA-wz-qdj"/>
+                            <gridRow id="dpP-cn-MCl"/>
+                            <gridRow id="HAT-9S-whk"/>
+                            <gridRow id="gYc-gl-zx7"/>
+                        </rows>
+                        <columns>
+                            <gridColumn xPlacement="trailing" id="ITx-GY-YDh"/>
+                            <gridColumn id="jhk-Po-s7n"/>
+                        </columns>
+                        <gridCells>
+                            <gridCell row="1NA-wz-qdj" column="ITx-GY-YDh" id="PAR-gP-cJA">
+                                <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="prm-JB-Tnj">
+                                    <rect key="frame" x="-2" y="84" width="163" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Copy range from:" id="hEv-og-pWJ">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="1NA-wz-qdj" column="jhk-Po-s7n" id="pil-nu-euo">
+                                <textField key="contentView" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T1g-oQ-ryI">
+                                    <rect key="frame" x="165" y="81" width="60" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="njg-Rd-55C"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="Ekj-Qo-gkB">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="MdI-N0-20y" name="value" keyPath="firstRecallScene" id="Hjx-Vw-adQ">
+                                            <dictionary key="options">
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                <string key="NSNullPlaceholder">0</string>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="dpP-cn-MCl" column="ITx-GY-YDh" id="plo-ep-9iY">
+                                <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SqT-mp-Euu">
+                                    <rect key="frame" x="-2" y="57" width="163" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="to:" id="SFr-tc-dxY">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="dpP-cn-MCl" column="jhk-Po-s7n" id="Uuu-6c-su1">
+                                <textField key="contentView" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Da1-dq-pbo">
+                                    <rect key="frame" x="165" y="54" width="60" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="qi0-n3-Yiw"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="RvU-6p-zEH">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="MdI-N0-20y" name="value" keyPath="lastRecallScene" id="dPv-L6-zD4">
+                                            <dictionary key="options">
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                <string key="NSNullPlaceholder">0</string>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="HAT-9S-whk" column="ITx-GY-YDh" id="Zx9-15-HWX">
+                                <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6v4-I1-0wu">
+                                    <rect key="frame" x="-2" y="30" width="163" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Destination starting index:" id="pUo-DV-LJ2">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="HAT-9S-whk" column="jhk-Po-s7n" id="gBn-cD-bGQ">
+                                <textField key="contentView" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Bn-pa-dQg">
+                                    <rect key="frame" x="165" y="27" width="60" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="1KQ-1a-G4Q"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="ms5-eI-GMC">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="MdI-N0-20y" name="value" keyPath="sceneCopyOffset" id="tjh-ty-du4">
+                                            <dictionary key="options">
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                <string key="NSNullPlaceholder">0</string>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="gYc-gl-zx7" column="ITx-GY-YDh" id="crq-VF-W20">
+                                <textField key="contentView" toolTip="Copy scenes in the current range to the given starting index" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qsi-NC-Hew">
+                                    <rect key="frame" x="-2" y="3" width="163" height="16"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Destination range:" id="1jw-lC-a2W">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </gridCell>
+                            <gridCell row="gYc-gl-zx7" column="jhk-Po-s7n" id="fAI-2Q-F1r">
+                                <textField key="contentView" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hfc-5x-Hz0">
+                                    <rect key="frame" x="165" y="0.0" width="60" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="5Tk-1b-RHw"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="1" drawsBackground="YES" id="vqt-tm-Lv4">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="MdI-N0-20y" name="value" keyPath="destinationRange" id="FyR-jt-pvo"/>
+                                    </connections>
+                                </textField>
+                            </gridCell>
+                        </gridCells>
+                    </gridView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="62n-1A-GS4" secondAttribute="bottom" constant="20" symbolic="YES" id="3NN-n9-0Cp"/>
+                    <constraint firstAttribute="bottom" secondItem="62n-1A-GS4" secondAttribute="bottom" constant="20" symbolic="YES" id="5HJ-U1-wa6"/>
+                    <constraint firstItem="m2y-9J-mIW" firstAttribute="bottom" secondItem="tba-PT-o7n" secondAttribute="bottom" constant="-7" id="7Wa-ko-wDe"/>
+                    <constraint firstAttribute="trailing" secondItem="uAB-MF-5XY" secondAttribute="trailing" constant="20" symbolic="YES" id="AhZ-oS-po9"/>
+                    <constraint firstItem="62n-1A-GS4" firstAttribute="top" secondItem="tba-PT-o7n" secondAttribute="bottom" constant="20" symbolic="YES" id="Bly-FD-QIo"/>
+                    <constraint firstAttribute="bottom" secondItem="AvI-tc-GNS" secondAttribute="bottom" constant="20" symbolic="YES" id="G6h-3y-ULk"/>
+                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="141" id="HWN-2G-gHa"/>
+                    <constraint firstItem="tba-PT-o7n" firstAttribute="top" secondItem="uAB-MF-5XY" secondAttribute="bottom" constant="25" id="LKl-PN-8ct"/>
+                    <constraint firstItem="uAB-MF-5XY" firstAttribute="top" secondItem="MMk-Fr-H8W" secondAttribute="top" constant="20" symbolic="YES" id="MiL-Yv-MIn"/>
+                    <constraint firstItem="uAB-MF-5XY" firstAttribute="leading" secondItem="MMk-Fr-H8W" secondAttribute="leading" constant="20" symbolic="YES" id="OD6-DX-TEX"/>
+                    <constraint firstItem="m2y-9J-mIW" firstAttribute="leading" secondItem="tba-PT-o7n" secondAttribute="trailing" constant="5" id="bM2-ra-Czd"/>
+                    <constraint firstItem="62n-1A-GS4" firstAttribute="leading" secondItem="MMk-Fr-H8W" secondAttribute="leading" constant="20" symbolic="YES" id="ba5-at-jZP"/>
+                    <constraint firstItem="tba-PT-o7n" firstAttribute="leading" secondItem="MMk-Fr-H8W" secondAttribute="leading" constant="20" symbolic="YES" id="ddA-Ar-Cmy"/>
+                    <constraint firstAttribute="trailing" secondItem="AvI-tc-GNS" secondAttribute="trailing" constant="20" symbolic="YES" id="hdU-a3-HXT"/>
+                    <constraint firstAttribute="width" constant="375" id="wWS-TL-OeI"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="-325.5" y="-415.5"/>
+        </window>
     </objects>
     <resources>
         <image name="FastArrows" width="202" height="200"/>
@@ -2787,6 +2941,7 @@ USB cameras can only show OBS snapshots.</string>
         <image name="NSAddTemplate" width="18" height="17"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="NSStopProgressFreestandingTemplate" width="20" height="20"/>
+        <image name="arrow.right.page.on.clipboard" catalog="system" width="16" height="18"/>
         <image name="camera-screenshot" width="512" height="512"/>
         <image name="camera-toolbar" width="512" height="512"/>
         <image name="camera-viewfinder" width="800" height="800"/>

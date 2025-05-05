@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -493,7 +493,7 @@
                         <rect key="frame" x="4" y="5" width="258" height="82"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AWP-DV-aTN">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AWP-DV-aTN">
                                 <rect key="frame" x="18" y="46" width="222" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Enter the range of scenes to export:" id="41G-bw-xa4">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -501,7 +501,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="duM-PQ-TwS">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="duM-PQ-TwS">
                                 <rect key="frame" x="177" y="17" width="50" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="UZq-6x-L2U"/>
@@ -515,7 +515,7 @@
                                     <binding destination="Voe-Tx-rLC" name="value" keyPath="exportEndIndex" id="JnW-MZ-yap"/>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dvQ-p6-kQh">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dvQ-p6-kQh">
                                 <rect key="frame" x="137" y="20" width="34" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Last:" id="ccb-ok-2H7">
                                     <font key="font" metaFont="system"/>
@@ -523,7 +523,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGR-49-CSh">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGR-49-CSh">
                                 <rect key="frame" x="69" y="17" width="50" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="PWo-5Y-iAb"/>
@@ -537,7 +537,7 @@
                                     <binding destination="Voe-Tx-rLC" name="value" keyPath="exportStartIndex" id="027-VL-dUw"/>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9vh-AO-MZG">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9vh-AO-MZG">
                                 <rect key="frame" x="28" y="20" width="35" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="First:" id="OaK-04-NUe">
                                     <font key="font" metaFont="system"/>
@@ -590,7 +590,7 @@
                             <binding destination="Voe-Tx-rLC" name="value" keyPath="progress.fractionCompleted" id="mR5-Ok-ewH"/>
                         </connections>
                     </progressIndicator>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gz-1X-XVf" userLabel="pattern label">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gz-1X-XVf" userLabel="pattern label">
                         <rect key="frame" x="18" y="44" width="339" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="jnq-th-y4z">
                             <font key="font" usesAppearanceFont="YES"/>
@@ -610,7 +610,7 @@
                             </binding>
                         </connections>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-oB-M7z" userLabel="description">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HDV-oB-M7z" userLabel="description">
                         <rect key="frame" x="18" y="44" width="339" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="wq9-ha-7qP">
                             <font key="font" usesAppearanceFont="YES"/>
@@ -623,13 +623,13 @@
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LWU-uS-DZ7">
                         <rect key="frame" x="334" y="62" width="27" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="27" id="aIU-J1-0LI"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="E4a-rh-U9J">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="27" id="aIU-J1-0LI"/>
+                        </constraints>
                         <connections>
                             <action selector="cancelExport:" target="Voe-Tx-rLC" id="mKV-mG-iNi"/>
                             <binding destination="Voe-Tx-rLC" name="enabled" keyPath="progress.cancelPending" id="ckf-fE-qYG">
@@ -639,7 +639,7 @@
                             </binding>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6at-7S-tDh" userLabel="additional description">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6at-7S-tDh" userLabel="additional description">
                         <rect key="frame" x="18" y="20" width="339" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="oiY-Ag-XvE">
                             <font key="font" usesAppearanceFont="YES"/>

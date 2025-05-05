@@ -168,14 +168,23 @@
                                                 <color key="fillColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </box>
                                             <textField focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoW-QO-NIa">
-                                                <rect key="frame" x="4" y="1" width="224" height="14"/>
-                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Label" usesSingleLineMode="YES" id="FS2-VR-Oqt">
-                                                    <font key="font" metaFont="smallSystem"/>
+                                                <rect key="frame" x="4" y="1" width="224" height="16"/>
+                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Scenes:" usesSingleLineMode="YES" id="FS2-VR-Oqt">
+                                                    <font key="font" metaFont="systemBold"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="-2" name="value" keyPath="lastRecalledItem.sceneName" id="drB-Nr-GCr"/>
+                                                    <binding destination="-2" name="displayPatternValue1" keyPath="prefCamera.sceneRangeName" id="p4B-wQ-1eI">
+                                                        <dictionary key="options">
+                                                            <string key="NSDisplayPattern">Scenes: %{value1}@</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                    <binding destination="-2" name="hidden" keyPath="prefCamera.sceneRangeName" id="BNJ-fb-leC">
+                                                        <dictionary key="options">
+                                                            <string key="NSValueTransformerName">NSIsNil</string>
+                                                        </dictionary>
+                                                    </binding>
                                                 </connections>
                                             </textField>
                                         </subviews>

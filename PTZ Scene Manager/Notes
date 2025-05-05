@@ -118,3 +118,7 @@ discontinuous set of ranges: for instance, 1-3 as a base, 120-125 for specials. 
  Multiple zoom clicks triggered bug? Also zoom doesn't show busy button
 
 Reset range should not be limited to 9. Or even remove it, it doesn't seem to be that useful. Also update the range map display
+
+Set range directly for copying, don't reuse scene data.
+Show the scene set name somewhere useful.
+Export: option for range or for all index sets.
