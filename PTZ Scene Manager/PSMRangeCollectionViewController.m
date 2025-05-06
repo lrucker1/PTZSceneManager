@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "PTZCameraSceneRange.h"
 #import "PTZPrefCamera.h"
+#import "ObjCUtils.h"
 
 @interface PSMRangeInfo : NSObject
 @property NSString *cameraname;
@@ -82,7 +83,9 @@
 
 - (IBAction)saveCollection:(id)sender {
     if ([self.collectionName length] == 0) {
-        NSBeep();
+        NSError *error = OCUtilErrorWithDescription(NSLocalizedString(@"Collection name must not be empty", @"Name missing Error"), nil, @"RangeCollectionView", 101);
+        NSAlert *alert = [NSAlert alertWithError:error];
+        [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
         return;
     }
     if (!self.isEditing) {

@@ -15,7 +15,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window identifier="camerastate" title="Camera State" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CameraStateWindow" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="preference" id="YGF-Dk-82F">
+        <window identifier="camerastate" title="Camera State" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="CameraStateWindow" animationBehavior="default" tabbingMode="disallowed" toolbarStyle="preference" id="YGF-Dk-82F">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES" fullScreenDisallowsTiling="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -861,7 +861,7 @@
                                             <rect key="frame" x="26" y="201" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
@@ -1561,7 +1561,7 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <gridView identifier="ScenesGrid" xPlacement="leading" yPlacement="bottom" rowAlignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="G3l-mo-tUH">
+                                        <gridView identifier="ScenesGrid" toolTip="Scene range overlaps reserved range. Reserved presets will be skipped, but some functions will be unavailable." xPlacement="leading" yPlacement="bottom" rowAlignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="G3l-mo-tUH">
                                             <rect key="frame" x="20" y="235" width="317" height="102"/>
                                             <rows>
                                                 <gridRow rowAlignment="firstBaseline" id="pjt-yL-ONO">
@@ -1724,12 +1724,28 @@
                                                 <action selector="showRecallConfigSheet:" target="MdI-N0-20y" id="SAT-jR-ezG"/>
                                             </connections>
                                         </button>
+                                        <imageView toolTip="Scene range overlaps reserved range. Reserved presets will be skipped, but some functions will be unavailable." horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qqm-gu-qUb">
+                                            <rect key="frame" x="345" y="316" width="20" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="INY-uy-111"/>
+                                                <constraint firstAttribute="width" constant="20" id="cvV-h7-XV0"/>
+                                            </constraints>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="6Gi-5N-uh4"/>
+                                            <connections>
+                                                <binding destination="MdI-N0-20y" name="hidden" keyPath="overlapsReservedRange" id="nrF-ar-f0j">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="eNe-iY-me3" secondAttribute="trailing" constant="20" symbolic="YES" id="311-JX-SjT"/>
                                         <constraint firstItem="SNx-Yb-8DE" firstAttribute="top" secondItem="CHK-X1-xrQ" secondAttribute="bottom" constant="8" symbolic="YES" id="E95-ti-Uk9"/>
                                         <constraint firstItem="epd-Yw-9sO" firstAttribute="top" secondItem="IVK-cZ-A2N" secondAttribute="top" constant="20" symbolic="YES" id="FdH-ng-4jh"/>
                                         <constraint firstItem="TdW-S9-bIy" firstAttribute="top" secondItem="SNx-Yb-8DE" secondAttribute="bottom" constant="8" symbolic="YES" id="JzF-iy-IMj"/>
+                                        <constraint firstItem="qqm-gu-qUb" firstAttribute="top" secondItem="G3l-mo-tUH" secondAttribute="top" id="MsN-gH-oAT"/>
                                         <constraint firstAttribute="trailing" secondItem="TdW-S9-bIy" secondAttribute="trailing" constant="20" symbolic="YES" id="QAH-KC-cXr"/>
                                         <constraint firstItem="G3l-mo-tUH" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="W23-XP-8f4"/>
                                         <constraint firstItem="G3l-mo-tUH" firstAttribute="top" secondItem="epd-Yw-9sO" secondAttribute="bottom" constant="8" symbolic="YES" id="Xoo-hn-YkA"/>
@@ -1738,6 +1754,7 @@
                                         <constraint firstItem="eNe-iY-me3" firstAttribute="top" secondItem="G3l-mo-tUH" secondAttribute="bottom" constant="18" id="d7b-Gb-4GR"/>
                                         <constraint firstAttribute="trailing" secondItem="TdW-S9-bIy" secondAttribute="trailing" constant="20" symbolic="YES" id="e1g-wt-yAs"/>
                                         <constraint firstItem="TdW-S9-bIy" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="kWw-o9-Vhr"/>
+                                        <constraint firstItem="qqm-gu-qUb" firstAttribute="leading" secondItem="G3l-mo-tUH" secondAttribute="trailing" constant="8" symbolic="YES" id="pfV-pV-RF6"/>
                                         <constraint firstItem="CHK-X1-xrQ" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="sOA-Sk-s80"/>
                                         <constraint firstItem="epd-Yw-9sO" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="vcp-uy-jfc"/>
                                         <constraint firstItem="eNe-iY-me3" firstAttribute="leading" secondItem="IVK-cZ-A2N" secondAttribute="leading" constant="20" symbolic="YES" id="w2l-a5-bYl"/>
@@ -2584,7 +2601,7 @@ USB cameras can only show OBS snapshots.</string>
                 <outlet property="contentViewController" destination="Sit-g7-A6c" id="LcW-3V-gt5"/>
             </connections>
         </popover>
-        <customView id="Reu-c8-ato">
+        <customView id="Reu-c8-ato" userLabel="Visualizer View">
             <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -2934,11 +2951,21 @@ Gw
             </view>
             <point key="canvasLocation" x="-325.5" y="-415.5"/>
         </window>
+        <button id="X6a-Xz-hor">
+            <rect key="frame" x="0.0" y="0.0" width="21" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="KpM-Y0-3cH">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+            <point key="canvasLocation" x="196.5" y="-296"/>
+        </button>
     </objects>
     <resources>
         <image name="FastArrows" width="202" height="200"/>
         <image name="InnerArrowGrid" width="101" height="99"/>
         <image name="NSAddTemplate" width="18" height="17"/>
+        <image name="NSCaution" width="32" height="32"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="NSStopProgressFreestandingTemplate" width="20" height="20"/>
         <image name="arrow.right.page.on.clipboard" catalog="system" width="16" height="18"/>

@@ -16,6 +16,7 @@
 #import "LARIndexSetVisualizerView.h"
 #import "libvisca.h"
 #import "AppDelegate.h"
+#import "ObjCUtils.h"
 
 static PTZCameraStateViewController *selfType;
 
@@ -127,6 +128,7 @@ typedef enum _ExposureModes {
                                    delegate:self];
     [self.exposureDataOutlineView setDataSource:_outlineData];
     [self.exposureDataOutlineView setDelegate:_outlineData];
+    self.overlapsReservedRange = NO;
     self.sceneIndexSet = self.prefCamera.indexSet;
     self.indexSetString = [PTZCameraSceneRange displayIndexSet:self.sceneIndexSet pretty:NO];
     [self updateUseIndexSetRange];
@@ -1039,14 +1041,15 @@ MAKE_CAN_SET_METHOD(BWMode)
 }
 
 - (void)validateAndSetSceneRange {
+    self.overlapsReservedRange = NO;
     NSInteger min = self.firstVisibleScene;
     NSInteger max = self.lastVisibleScene;
     if (![self validateRange:min last:max]) {
-        NSBeep();
+        self.overlapsReservedRange = YES;
     }
     self.prefCamera.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(min, max-min+1)];
     // Use the index set for the name since it's not explicitly from the list.
-    self.prefCamera.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.prefCamera.indexSet pretty:NO];
+    self.prefCamera.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.prefCamera.indexSet pretty:YES];
 }
 
 - (IBAction)applySceneIndexSet:(id)sender {
@@ -1064,6 +1067,7 @@ MAKE_CAN_SET_METHOD(BWMode)
 }
 
 - (void)validateAndSetSceneIndexSet {
+    self.overlapsReservedRange = NO;
     NSError *error = nil;
     PTZCameraConfig *config = self.cameraState.cameraConfig;
     NSRange validRange = NSMakeRange(1, config.maxSceneIndex-1);
@@ -1075,11 +1079,11 @@ MAKE_CAN_SET_METHOD(BWMode)
         return;
     }
     if (![self validateIndexSet:indexSet]) {
-        NSBeep();
+        self.overlapsReservedRange = YES;
     }
     self.prefCamera.indexSet = indexSet;
     // Use the index set for the name since it's not explicitly from the list.
-    self.prefCamera.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.prefCamera.indexSet pretty:NO];
+    self.prefCamera.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.prefCamera.indexSet pretty:YES];
 }
 
 - (IBAction)addSceneRange:(id)sender {
@@ -1096,6 +1100,7 @@ MAKE_CAN_SET_METHOD(BWMode)
      PTZCameraSceneRange *csRange = [self.sceneRangeController.arrangedObjects objectAtIndex:row];
 
     if (csRange) {
+        self.overlapsReservedRange = NO;
         [self.prefCamera applySceneRange:csRange];
         self.prefCamera.selectedSceneRange = self.sceneRangeController.selectionIndex;
     }
@@ -1137,28 +1142,31 @@ MAKE_CAN_SET_METHOD(BWMode)
 }
 
 - (NSString *)destinationRange {
-    NSInteger range = self.lastRecallScene - self.firstRecallScene + 1;
-    return [NSString stringWithFormat:@"%ld-%ld", self.sceneCopyOffset, self.sceneCopyOffset + range];
+    NSInteger delta = self.lastRecallScene - self.firstRecallScene;
+    return [NSString stringWithFormat:@"%ld-%ld", self.sceneCopyOffset, self.sceneCopyOffset + delta];
 }
 
 - (void)validateAndBeginSceneCopy {
-    // TODO: explain why it beeps.
     NSInteger min = self.sceneCopyOffset;
-    NSInteger range = self.lastRecallScene - self.firstRecallScene + 1;
-    NSInteger max = min + range;
-    NSRange source = NSMakeRange(self.firstRecallScene, range);
-    NSRange dest = NSMakeRange(self.sceneCopyOffset, range);
+    NSInteger delta = self.lastRecallScene - self.firstRecallScene;
+    NSInteger max = min + delta;
+    NSRange source = NSMakeRange(self.firstRecallScene, delta+1);
+    NSRange dest = NSMakeRange(self.sceneCopyOffset, delta+1);
     NSRange intersect = NSIntersectionRange(source, dest);
     if (intersect.length != 0) {
-        NSBeep();
+        NSError *error = OCUtilErrorWithDescription(NSLocalizedString(@"Ranges must not overlap", @"Range overlap Error"), nil, @"CameraState", 101);
+        NSAlert *alert = [NSAlert alertWithError:error];
+        [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
         return;
     }
     if (![self validateRange:min last:max]) {
-        NSBeep();
+        NSError *error = OCUtilErrorWithDescription(NSLocalizedString(@"Some elements of the range are restricted", @"Range restricted Error"), nil, @"CameraState", 102);
+        NSAlert *alert = [NSAlert alertWithError:error];
+        [alert beginSheetModalForWindow:self.view.window completionHandler:nil];
         return;
     }
-    self.prefCamera.sceneCopyOffset = min;
-    [self.cameraState prepareForProgressOperationFrom:min to:max];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:dest];
+    [self.cameraState prepareForProgressOperationWith:indexSet];
     [self.recallConfigSheet orderOut:nil];
     [self batchRecallCamera:self.cameraState];
 }
@@ -1226,7 +1234,7 @@ MAKE_CAN_SET_METHOD(BWMode)
                 [set addIndexes:csRange.indexSet];
             }
         }
-        self.sceneRangeMapView.otherSets = set;
+        self.sceneRangeMapView.otherSets = [set copy];
         self.sceneRangeMapView.reservedSet = self.cameraState.cameraConfig.reservedSet;
         self.sceneRangeMapView.currentSet = currentSet;
         [popover showRelativeToRect:[sender bounds]

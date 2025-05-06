@@ -11,8 +11,7 @@
 
 typedef void (^PTZCommandBlock)(void);
 
-extern const NSString *PTZProgressStartKey;
-extern const NSString *PTZProgressEndKey;
+extern const NSString *PTZProgressIndexSetKey;
 
 @interface PTZCamera ()
 

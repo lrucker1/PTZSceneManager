@@ -22,9 +22,11 @@
 #import "PTZCameraInt.h"
 #import "PTZPrefCamera.h"
 #import "PTZPacketSenderCamera.h"
+#import "PTZCameraConfig.h"
 #import "PTZProgressGroup.h"
 #import "PSMOBSWebSocketController.h"
 #import "PSMAppPreferencesWindowController.h"
+#import "ObjCUtils.h"
 
 NSString *PSMSceneCollectionKey = @"SceneCollections";
 NSString *PTZ_BatchDelayKey = @"BatchDelay";
@@ -57,11 +59,14 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
 
 @implementation AppDelegate
 
+PREF_VALUE_BOOL_ACCESSORS(exportAllRanges, ExportAllRanges)
+
 + (void)initialize {
     [super initialize];
     [[NSUserDefaults standardUserDefaults] registerDefaults:
      @{PSMOBSAutoConnect:@(NO),
        PTZ_BatchDelayKey:@(1),
+       @"exportAllRanges":@(NO),
        PSMOBSURLString:@"ws://localhost:4455",
        @"WebSockets":@"WebSockets", // Prefs window textfield "Null Placeholder" key.
     }];
@@ -168,6 +173,10 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
             self.cameraCollectionController = nil;
         }
     }];
+}
+
+- (NSString *)prefKeyForKey:(NSString *)key {
+    return [NSString stringWithFormat:@"AppDelegate.%@", key];
 }
 
 - (IBAction)showPrefs:(id)sender {
@@ -379,6 +388,10 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
             PTZLog(@"Export is not supported for %@ (%@)", prefCamera.camera.deviceName, prefCamera.cameraname);
             continue;
         }
+        if (!prefCamera.camera.cameraIsOpen) {
+            PTZLog(@"Camera not connected, skipping %@ (%@)", prefCamera.camera.deviceName, prefCamera.cameraname);
+            continue;
+        }
         NSURL *fileURL = inFileURL;
         if (inFileURL == nil) {
             NSString *filename = [NSString stringWithFormat:@"%@_%@.ini", prefCamera.cameraname, dateStr];
@@ -386,17 +399,27 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
         }
         PTZPacketSenderCamera *camera = [[PTZPacketSenderCamera alloc] initWithPrefCamera:prefCamera fileURL:fileURL];
         [self.exportCameras addObject:camera];
-        [camera prepareForProgressOperationFrom:self.exportStartIndex to:self.exportEndIndex];
+        NSIndexSet *indexSet;
+        if (self.exportAllRanges) {
+            indexSet = prefCamera.allSceneRanges;
+        } else {
+            indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.exportStartIndex, self.exportEndIndex-self.exportStartIndex+1)];
+
+        }
+        [camera prepareForProgressOperationWith:indexSet];
     }
     self.progress = [PTZProgressGroup new];
     [self.progressSheet orderFront:nil];
-    //[self.window beginSheet:self.progressSheet completionHandler:nil];
     self.batchOperationInProgress = YES;
     for (PTZPacketSenderCamera *camera in self.exportCameras) {
         [camera doBackupWithParent:self.progress onDone:^(BOOL success) {
-            if (self.progress.finished) {
+            if (success) {
+                if (self.progress.finished) {
+                    self.batchOperationInProgress = NO;
+                    [self progressIsFinished];
+                }
+            } else {
                 self.batchOperationInProgress = NO;
-                [self progressIsFinished];
             }
         }];
     }
@@ -417,27 +440,49 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     panel.accessoryView = self.exportAccessoryView;
     panel.canCreateDirectories = YES;
     panel.delegate = self;
+    // Clear to show nil placeholder.
+    self.exportRangeDisplay = nil;
     panel.accessoryViewDisclosed = YES;
-    self.exportStartIndex = 1;
-    self.exportEndIndex = 9;
+    NSArray *allCameras = [self prefCameras];
+    
+    if (allCameras.count == 0) {
+        NSError *error = OCUtilErrorWithDescription(NSLocalizedString(@"No cameras available for export", @"Range Overlap Error"), nil, @"AppDelegate", 101);
+        NSAlert *alert = [NSAlert alertWithError:error];
+        [alert beginSheetModalForWindow:panel completionHandler:nil];
+        return;
+    }
+    // TODO: If defaults, use them, else loop through cameras.
+    NSInteger min = 256;
+    NSInteger max = 1;
+    for (PTZPrefCamera *camera in allCameras) {
+        NSInteger cameraMax = camera.camera.cameraConfig.maxSceneIndex;
+        min = MIN(min, camera.indexSet.firstIndex);
+        max = MIN(cameraMax, MAX(max, camera.indexSet.lastIndex));
+    }
+    self.exportStartIndex = MAX(min, 1);
+    self.exportEndIndex = max;
     [panel beginWithCompletionHandler:^(NSInteger result){
         if (result == NSModalResponseOK) {
-            if (self.exportEndIndex < self.exportStartIndex) {
+            if (!self.exportAllRanges && self.exportEndIndex < self.exportStartIndex) {
                 self.batchOperationInProgress = NO;
-                NSBeep();
+                NSError *error = OCUtilErrorWithDescription(NSLocalizedString(@"Ranges must not overlap", @"Range Overlap Error"), nil, @"AppDelegate", 102);
+                NSAlert *alert = [NSAlert alertWithError:error];
+                [alert beginSheetModalForWindow:panel completionHandler:nil];
                 return;
             }
             NSURL *url = [panel URL];
             dispatch_async(dispatch_get_main_queue(), ^{
-               [self exportPrefCameras:[self prefCameras] toURL:nil orDirectory:url];
+               [self exportPrefCameras:allCameras toURL:nil orDirectory:url];
             });
+        } else {
+            self.batchOperationInProgress = NO;
          }
     }];
-
 }
 
 - (void)exportPrefCamera:(PTZPrefCamera *)prefCamera {
     if (self.batchOperationInProgress) {
+        NSBeep();
         return;
     }
     self.batchOperationInProgress = YES;
@@ -450,13 +495,16 @@ static NSString *PSMAutosaveCameraCollectionWindowID = @"cameracollectionwindow"
     panel.accessoryView = self.exportAccessoryView;
     panel.canCreateDirectories = YES;
     panel.delegate = self;
-    self.exportStartIndex = 1;
-    self.exportEndIndex = 9;
+    self.exportRangeDisplay = prefCamera.allSceneRangesDisplay;
+    self.exportStartIndex = prefCamera.indexSet.firstIndex;
+    self.exportEndIndex = prefCamera.indexSet.lastIndex;
     [panel beginWithCompletionHandler:^(NSInteger result){
         if (result == NSModalResponseOK) {
-            if (self.exportEndIndex < self.exportStartIndex) {
+            if (!self.exportAllRanges && self.exportEndIndex < self.exportStartIndex) {
                 self.batchOperationInProgress = NO;
-                NSBeep();
+                NSError *error = OCUtilErrorWithDescription(NSLocalizedString(@"Range end must be greater than range start", @"Range end < start Error"), nil, @"AppDelegate", 102);
+                NSAlert *alert = [NSAlert alertWithError:error];
+                [alert beginSheetModalForWindow:panel completionHandler:nil];
                 return;
             }
             NSURL *url = [panel URL];

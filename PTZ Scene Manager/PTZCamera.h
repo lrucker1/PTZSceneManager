@@ -175,7 +175,7 @@ typedef void (^PTZSnapshotFetchDoneBlock)(NSData * _Nullable imageData, NSImage 
 - (void)updateImageCameraValues:(BOOL)fetchAll onDone:(PTZDoneBlock _Nullable)doneBlock;
 - (void)updateAutofocusState:(PTZDoneBlock _Nullable)doneBlock;
 
-- (void)prepareForProgressOperationFrom:(NSInteger)start to:(NSInteger)end;
+- (void)prepareForProgressOperationWith:(NSIndexSet *)indexSet;
 - (void)backupRestoreWithParent:(PTZProgressGroup *)parent onDone:(PTZDoneBlock _Nullable)doneBlock;
 
 - (void)applyWBModeValues:(PTZDoneBlock _Nullable)doneBlock;

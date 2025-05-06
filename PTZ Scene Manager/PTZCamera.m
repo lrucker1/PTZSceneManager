@@ -18,8 +18,7 @@
 
 static PTZCamera *selfType;
 
-const NSString *PTZProgressStartKey = @"PTZProgressStart";
-const NSString *PTZProgressEndKey = @"PTZProgressEnd";
+const NSString *PTZProgressIndexSetKey = @"PTZProgressIndexSetKey";
 
 /*
  VISCA_* calls return VISCA_SUCCESS if it got an answer; pass in the BOOL result of the VISCA_ check to also see whether the camera returned an error.
@@ -1022,9 +1021,9 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
 #pragma mark batch
 
 // Pre-calculate the totalUnitCount so all the children are ready when they get added.
-- (void)prepareForProgressOperationFrom:(NSInteger)start to:(NSInteger)end {
-    self.progress = [[PTZProgress alloc] initWithUserInfo:@{PTZProgressStartKey:@(start), PTZProgressEndKey:@(end)}];
-    self.progress.totalUnitCount = (end - start) + 1;
+- (void)prepareForProgressOperationWith:(NSIndexSet *)indexSet {
+    self.progress = [[PTZProgress alloc] initWithUserInfo:@{PTZProgressIndexSetKey:indexSet}];
+    self.progress.totalUnitCount = indexSet.count;
     PTZCamera *weakSelf = self;
     self.progress.cancelledHandler = ^() {
         [weakSelf cancelCommand];
@@ -1043,7 +1042,6 @@ VALIDATE_KEY_MINMAX(Aperture, 0, 14)
         self.progress.completedUnitCount = self.progress.totalUnitCount;
         self.progress = nil;
     };
-    // TODO: Use index set for copying.
     NSIndexSet *indexSet = self.prefCamera.indexSet;
     uint32_t rangeOffset = (uint32_t)indexSet.firstIndex;
     uint32_t rangeEnd = (uint32_t)indexSet.lastIndex;

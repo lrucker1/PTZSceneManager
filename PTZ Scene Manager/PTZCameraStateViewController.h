@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property BOOL useIndexSetRange;
 @property BOOL canChangeUseIndexSetRange;
 @property NSString *indexSetString;
+@property BOOL overlapsReservedRange;
 
 @end
 

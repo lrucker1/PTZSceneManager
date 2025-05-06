@@ -182,6 +182,9 @@ static NSString *searchChildrenForSerialAddress(io_object_t object, NSString *si
             NSInteger first = self.firstVisibleScene;
             NSInteger last = self.lastVisibleScene;
             self.indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(first, last-first+1)];
+            if (self.sceneRangeName.length == 0) {
+                self.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.indexSet pretty:YES];
+            }
         }
     }
     return self;
@@ -311,9 +314,27 @@ PREF_VALUE_NSINDEXSET_ACCESSORS(indexSet, IndexSet)
 
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange {
     self.indexSet = csRange.indexSet;
-    self.sceneRangeName = csRange.name;
+    if (csRange.name.length > 0) {
+        self.sceneRangeName = csRange.name;
+    } else {
+        self.sceneRangeName = [PTZCameraSceneRange displayIndexSet:self.indexSet pretty:YES];
+    }
 }
 
+- (NSIndexSet *)allSceneRanges {
+    NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+    // Current one, which may not be in sceneRangeArray.
+    [set addIndexes:self.indexSet];
+    for (PTZCameraSceneRange *csRange in self.sceneRangeArray) {
+        [set addIndexes:csRange.indexSet];
+    }
+    return [set copy];
+}
+
+- (NSString *)allSceneRangesDisplay {
+    NSIndexSet *set = [self allSceneRanges];
+    return [PTZCameraSceneRange displayIndexSet:set pretty:YES];
+}
 #pragma mark images
 
 - (AppDelegate *)appDelegate {

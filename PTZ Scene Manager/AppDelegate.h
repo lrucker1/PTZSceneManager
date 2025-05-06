@@ -7,6 +7,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PSMOBSWebSocketController.h"
+#import "PTZPrefObjectInt.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class PTZPrefCamera;
 
@@ -15,10 +18,12 @@ extern NSString *PTZ_BatchDelayKey;
 
 void PTZLog(NSString *format, ...);
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, PSMOBSWebSocketDelegate, NSWindowRestoration, NSOpenSavePanelDelegate>
+@interface AppDelegate : PTZPrefObject <NSApplicationDelegate, PSMOBSWebSocketDelegate, NSWindowRestoration, NSOpenSavePanelDelegate>
 
 @property BOOL canEditSceneNames;
 @property (readonly) NSArray *obsSourceNames;
+@property BOOL exportAllRanges;
+@property NSString * _Nullable exportRangeDisplay;
 
 - (NSString *)applicationSupportDirectory;
 - (NSString *)snapshotsDirectory;
@@ -37,3 +42,4 @@ void PTZLog(NSString *format, ...);
              menuShortcut:(NSInteger)shortcut;
 @end
 
+NS_ASSUME_NONNULL_END

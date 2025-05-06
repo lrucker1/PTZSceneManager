@@ -54,16 +54,17 @@
 }
 
 // Even though the VISCA calls don't need to talk to a camera, they're run in the camera queue so we must treat them accordingly and wait for the done callback.
-- (void)recallAtIndex:(NSInteger)i max:(NSInteger)max onComplete:(PTZDoneBlock _Nullable)doneBlock{
+- (void)recallIndexSet:(NSIndexSet *)indexSet atIndex:(NSInteger)i onComplete:(PTZDoneBlock _Nullable)doneBlock {
  //   NSAssert([NSThread isMainThread], @"Not on main thread");
-    if (i > max || self.progress.cancelled) {
+    if (i == NSNotFound || self.progress.cancelled) {
         [self callDoneBlock:doneBlock success:YES];
         return;
     }
     PTZCameraConfig *config = self.realCamera.cameraConfig;
     if (![config isValidSceneIndex:i]) {
         self.progress.completedUnitCount++;
-        [self recallAtIndex:i+1 max:max onComplete:doneBlock];
+        NSInteger nextIndex = [indexSet indexGreaterThanIndex:i];
+        [self recallIndexSet:indexSet atIndex:nextIndex onComplete:doneBlock];
         return;
     }
     [self.realCamera memoryRecall:i onDone:^(BOOL success) {
@@ -88,7 +89,8 @@
             // memorySet applies any WB, Exposure, Image opt-in values.
             [self memorySet:i onDone:^(BOOL success) {
                 self.progress.completedUnitCount++;
-                [self recallAtIndex:i+1 max:max onComplete:doneBlock];
+                NSInteger nextIndex = [indexSet indexGreaterThanIndex:i];
+                [self recallIndexSet:indexSet atIndex:nextIndex onComplete:doneBlock];
             }];
         }];
     }];
@@ -108,13 +110,16 @@
         self.progress = nil;
     };
 
-    if (   self.progress.userInfo[PTZProgressStartKey] == nil
-        || self.progress.userInfo[PTZProgressStartKey] == nil) {
+    if (self.progress.userInfo[PTZProgressIndexSetKey] == nil) {
         [self callDoneBlock:doneBlock success:NO];
         return;
     }
-    NSInteger start = [self.progress.userInfo[PTZProgressStartKey] integerValue];
-    NSInteger end = [self.progress.userInfo[PTZProgressEndKey] integerValue];
+    NSIndexSet *indexSet = self.progress.userInfo[PTZProgressIndexSetKey];
+    if (![indexSet isKindOfClass:[NSIndexSet class]]) {
+        NSLog(@"Unexpected %@", indexSet);
+        [self callDoneBlock:doneBlock success:NO];
+        return;
+    }
 
     // This is sync and runs in the current thread.
     [self loadCameraWithCompletionHandler:^{}];
@@ -133,7 +138,7 @@
             [self callDoneBlock:doneBlock success:NO];
             return;
         }
-        [self recallAtIndex:start max:end onComplete:doneBlock];
+        [self recallIndexSet:indexSet atIndex:indexSet.firstIndex onComplete:doneBlock];
     }];
 }
 

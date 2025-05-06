@@ -52,6 +52,8 @@ typedef enum {
 
 - (PTZCameraSceneRange*)defaultRange;
 - (void)applySceneRange:(PTZCameraSceneRange *)csRange;
+- (NSIndexSet *)allSceneRanges;
+- (NSString *)allSceneRangesDisplay;
 
 #define PREF_VALUE_NSINT_PROPERTIES(_prop, _Prop) \
 @property NSInteger _prop; \
