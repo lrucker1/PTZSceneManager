@@ -647,14 +647,14 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="progress.localizedDescription" id="Rgb-QH-z9R">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">NSIsNotNil</string>
-                                </dictionary>
-                            </binding>
                             <binding destination="Voe-Tx-rLC" name="displayPatternValue1" keyPath="progress.completedUnitCount" id="m8v-od-UQp">
                                 <dictionary key="options">
                                     <string key="NSDisplayPattern">%{value1}@ of %{value2}@</string>
+                                </dictionary>
+                            </binding>
+                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="progress.localizedDescription" id="Rgb-QH-z9R">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">NSIsNotNil</string>
                                 </dictionary>
                             </binding>
                             <binding destination="Voe-Tx-rLC" name="displayPatternValue2" keyPath="progress.totalUnitCount" previousBinding="m8v-od-UQp" id="fhl-bR-uYt">

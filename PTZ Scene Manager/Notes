@@ -122,3 +122,6 @@ Reset range should not be limited to 9. Or even remove it, it doesn't seem to be
 Set range directly for copying, don't reuse scene data.
 Show the scene set name somewhere useful.
 Export: option for range or for all index sets.
+
+Drop the "Scenes:" label
+Add a way to annotate things, like "for this set, you need to move the camera"

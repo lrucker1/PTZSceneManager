@@ -861,7 +861,7 @@
                                             <rect key="frame" x="26" y="201" width="334" height="150"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dCj-dF-qt0">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" indentationPerLevel="13" autosaveExpandedItems="YES" indentationMarkerFollowsCell="NO" outlineTableColumn="GRt-a0-Ek8" id="7Ut-fL-r64" customClass="PTZOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="150"/>
@@ -1562,7 +1562,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <gridView identifier="ScenesGrid" toolTip="Scene range overlaps reserved range. Reserved presets will be skipped, but some functions will be unavailable." xPlacement="leading" yPlacement="bottom" rowAlignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="G3l-mo-tUH">
-                                            <rect key="frame" x="20" y="235" width="317" height="102"/>
+                                            <rect key="frame" x="20" y="235" width="322" height="102"/>
                                             <rows>
                                                 <gridRow rowAlignment="firstBaseline" id="pjt-yL-ONO">
                                                     <connections>
@@ -1616,7 +1616,7 @@
                                                 </gridCell>
                                                 <gridCell row="pjt-yL-ONO" column="ZvZ-Mn-2NM" id="0jh-IB-jek">
                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qxQ-Qx-1Vh">
-                                                        <rect key="frame" x="228" y="76" width="95" height="27"/>
+                                                        <rect key="frame" x="233" y="76" width="95" height="27"/>
                                                         <buttonCell key="cell" type="push" title="Apply Range" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pcl-Bj-qNG">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
@@ -1678,8 +1678,8 @@
                                                 </gridCell>
                                                 <gridCell row="8yH-FF-EVa" column="ZvZ-Mn-2NM" id="rB6-zO-L9i">
                                                     <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lR8-CU-a4D">
-                                                        <rect key="frame" x="228" y="22" width="95" height="27"/>
-                                                        <buttonCell key="cell" type="push" title="Apply Range" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rbb-mh-GCz">
+                                                        <rect key="frame" x="228" y="22" width="100" height="27"/>
+                                                        <buttonCell key="cell" type="push" title="Apply Ranges" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rbb-mh-GCz">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <connections>
@@ -1725,7 +1725,7 @@
                                             </connections>
                                         </button>
                                         <imageView toolTip="Scene range overlaps reserved range. Reserved presets will be skipped, but some functions will be unavailable." horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qqm-gu-qUb">
-                                            <rect key="frame" x="345" y="316" width="20" height="21"/>
+                                            <rect key="frame" x="350" y="316" width="20" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="INY-uy-111"/>
                                                 <constraint firstAttribute="width" constant="20" id="cvV-h7-XV0"/>
