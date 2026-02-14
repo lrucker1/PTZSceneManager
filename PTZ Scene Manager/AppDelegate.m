@@ -6,6 +6,7 @@
 //
 // Credits:
 // Icon <a href="https://www.flaticon.com/free-icons/ptz-camera" title="ptz camera icons">Ptz camera icons created by Freepik - Flaticon</a>
+// <a href="https://www.freepik.com/icon/ptz-camera_1915217">Icon by Freepik</a>
 // https://www.svgrepo.com/svg/51316/camera-viewfinder?edit=true
 // https://www.flaticon.com/free-icon/remote-control_1865152
 // https://www.flaticon.com/free-icon/crossroads_120836
